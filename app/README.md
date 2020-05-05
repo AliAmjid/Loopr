@@ -11,10 +11,13 @@ Frontend part of Loopr project
 ## Development
 start app in development mode: `yarn dev`
 
+## Testing
+- `yarn test`
+- test as much as possible
+
 ## Rules
 - Before each commit run `yarn fix` or at least before pull request 
 - Every component (`components` folder) must have storybook file
-- Test everything
 - Translate everything 
     - Every page(folder) even components must have own translation file
     - Write only into cs folder, others will be translated later
