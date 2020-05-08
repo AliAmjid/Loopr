@@ -14,7 +14,7 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
   };
 
   return (
-    <>
+    <div tour-id="loginForm" style={{ width: 'fit-content' }}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>
           {t('email')}
@@ -34,11 +34,12 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
             test-id="passwordInput"
           />
         </div>
-        <button type="submit" test-id="submitButton">
+        <button type="submit" test-id="submitButton" tour-id="button">
           {t('logIn')}
         </button>
       </form>
       <button
+        tour-id="button1"
         type="button"
         onClick={(): void => {
           i18n.changeLanguage(i18n.language === 'cs' ? 'en' : 'cs');
@@ -46,7 +47,7 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
       >
         {t('common:changeLanguage')}
       </button>
-    </>
+    </div>
   );
 };
 
