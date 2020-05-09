@@ -87,15 +87,16 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     if (defaultSubColumn) {
       const newUserResults = [];
       props.subjectData.results.forEach(result => {
-        const otherSubColumns = [];
+        const subColumns = [];
         const otherColumns = runDependencies(
           defaultSubColumn.dependencies,
           [defaultSubColumn.name],
           { [defaultSubColumn.name]: result.value },
         );
+
         for (const otherColumn in otherColumns) {
           if (otherColumns.hasOwnProperty(otherColumn))
-            otherSubColumns.push({
+            subColumns.push({
               name: otherColumn,
               value: otherColumns[otherColumn],
             });
@@ -103,12 +104,11 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
 
         newUserResults.push({
           userId: result.userId,
-          subColumns: [
-            { name: defaultSubColumn.name, value: result.value },
-            ...otherSubColumns,
-          ],
+          subColumns,
         });
       });
+
+      console.log(newUserResults);
 
       setDataInitialization(true);
       setUserResults(newUserResults);
@@ -162,10 +162,12 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
         const userResult = userResults.find(
           userResult => userResult.userId === result.userId,
         );
+        // console.log('userResult', userResult);
         if (userResult) {
           const userResultSubColumn = userResult.subColumns.find(
             userResultSubColumn => userResultSubColumn.name === subColumn.name,
           );
+          // console.log('userResultSubColumn', userResultSubColumn);
 
           if (userResultSubColumn) {
             const { value } = userResultSubColumn;
@@ -174,7 +176,7 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
               <TableCell
                 key={`user-${result.userId}-subColumn-${subColumn.id}`}
               >
-                {subColumn.inputType ? (
+                {subColumn.input ? (
                   <>
                     {subColumn.inputType === InputType.Text && (
                       <TextField
