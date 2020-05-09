@@ -7,15 +7,15 @@ import TestColumns from 'pages/subjectTest/testColumns';
 import { Display, InputType, MarkingSchema, SubjectData } from './types';
 
 const pointsFunction = function main(values) {
-  return +values.color / 10;
+  return +values.percent / 100;
 }.toString();
 
 const colorFunction = function main(values) {
-  return +values.points * 10;
+  return +values.points * 7;
 }.toString();
 
 const percentFunction = function percentFunction(values) {
-  return +values.points * 10;
+  return +values.points * 100;
 }.toString();
 
 const subjectData: SubjectData = {
@@ -48,10 +48,8 @@ const markingSchema: MarkingSchema = {
           id: 1,
           name: 'color',
           input: false,
-          inputType: InputType.Number,
           display: Display.Text,
           code: colorFunction,
-          dependencies: ['points'],
         },
         {
           id: 2,
@@ -75,7 +73,7 @@ const markingSchema: MarkingSchema = {
           inputType: InputType.Number,
           display: Display.Text,
           code: percentFunction,
-          dependencies: [],
+          dependencies: ['points'],
         },
       ],
     },
