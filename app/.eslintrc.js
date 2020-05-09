@@ -5,10 +5,9 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
     'airbnb',
-    'prettier',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
@@ -30,6 +29,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'newline-before-return': 'warn',
     'no-param-reassign': 'off',
+    'no-prototype-builtins': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -80,7 +80,7 @@ module.exports = {
     '@typescript-eslint/typedef': [
       'error',
       {
-        arrowParameter: true,
+        arrowParameter: false,
         parameter: true,
       },
     ],
