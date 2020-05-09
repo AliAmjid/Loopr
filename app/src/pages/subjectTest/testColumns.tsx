@@ -1,91 +1,249 @@
 import React, { useState } from 'react';
 
-import { Table, TableCell, TableRow, TextField } from '@material-ui/core';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TextField,
+} from '@material-ui/core';
 
-import { TestColumnsProps } from './types';
+import {
+  InputType,
+  ObjectWithStringKeys,
+  SubColumn,
+  TestColumnsProps,
+  UserResult,
+} from './types';
 
 const TestColumns = (props: TestColumnsProps): JSX.Element => {
-  const [state, setState] = useState({});
+  const [dataInitialization, setDataInitialization] = useState(false);
+  const [userResults, setUserResults] = useState<UserResult[]>([]);
 
-  const mappedHead = props.testColumns.map(column => (
-    <TableCell colSpan={column.subColumns.length}>{column.label}</TableCell>
-  ));
-  const mappedSubColumns = props.testColumns.map(column => {
-    return column.subColumns.map(subColumn => (
-      <TableCell>{subColumn.name}</TableCell>
-    ));
-  });
+  const runCode = (code: string, variables: any): any => {
+    const customFunction = eval(`(${code})`);
+    const result = customFunction(variables);
 
-  const evaluate = (stringCode: string, values: any) => {
-    const params = {};
-    for (const input of props.inputs) {
-      const value = values[input.name] || input.defaultValue;
-      params[input.name] = value;
-    }
-
-    const code = eval(`(${stringCode})`);
-
-    return code(params);
+    return result;
   };
 
-  const mappedInputs = props.testColumns.map(column => {
-    return column.subColumns.map(subColumn => {
-      const result = evaluate(subColumn.code, state);
-      const value = result[0];
-      const dependencies: string[] = result[1];
-
-      return (
-        <TableCell>
-          <TextField
-            value={value}
-            onChange={e => {
-              const newState = { ...state };
-              newState[subColumn.name] = e.target.value;
-
-              const visitedDeps = [];
-
-              const loopThroughDependencies = (deps: string[]): void => {
-                if (deps) {
-                  if (!visitedDeps.some(v => deps.some(d => d === v))) {
-                    visitedDeps.push(...deps);
-                    deps.forEach(d => {
-                      const dependencyTestColumn = props.testColumns.find(tc =>
-                        tc.subColumns.find(sc => sc.name === d),
-                      );
-                      if (dependencyTestColumn) {
-                        const dependencySubColumn = dependencyTestColumn.subColumns.find(
-                          sc => sc.name === d,
-                        );
-                        if (dependencyTestColumn) {
-                          const result = evaluate(
-                            dependencySubColumn.code,
-                            newState,
-                          );
-                          newState[d] = result[0];
-                          loopThroughDependencies(result[1]);
-                        }
-                      }
-                    });
-                  }
-                }
-              };
-
-              loopThroughDependencies(dependencies);
-
-              setState(newState);
-            }}
-          />
-        </TableCell>
-      );
+  const findSubColumnByName = (name: string): SubColumn => {
+    let wantedSubColumn: SubColumn;
+    props.markingSchema.testColumns.forEach(column => {
+      if (!wantedSubColumn) {
+        column.subColumns.forEach(subColumn => {
+          if (subColumn.name === name && !wantedSubColumn) {
+            wantedSubColumn = subColumn;
+          }
+        });
+      }
     });
+
+    return wantedSubColumn;
+  };
+
+  const runDependencies = (
+    deps: string[],
+    visitedDependencies: string[] = [],
+    defaultVariables: ObjectWithStringKeys = {},
+  ): ObjectWithStringKeys => {
+    let updatedValues: ObjectWithStringKeys;
+
+    const nest = (
+      dependencies: string[],
+      variables: ObjectWithStringKeys,
+    ): void => {
+      if (dependencies) {
+        dependencies.forEach(dependency => {
+          if (
+            !visitedDependencies.some(
+              visitedDependency => visitedDependency === dependency,
+            )
+          ) {
+            visitedDependencies.push(dependency);
+            const subColumn = findSubColumnByName(dependency);
+            if (subColumn) {
+              const result = runCode(subColumn.code, variables);
+              variables[subColumn.name] = result;
+              updatedValues = variables;
+              if (subColumn.dependencies) {
+                nest(subColumn.dependencies, variables);
+              }
+            }
+          }
+        });
+      }
+    };
+    nest(deps, defaultVariables);
+
+    return updatedValues;
+  };
+
+  if (!dataInitialization) {
+    const defaultSubColumn = findSubColumnByName(
+      props.markingSchema.defaultColumn,
+    );
+
+    if (defaultSubColumn) {
+      const newUserResults = [];
+      props.subjectData.results.forEach(result => {
+        const otherSubColumns = [];
+        const otherColumns = runDependencies(
+          defaultSubColumn.dependencies,
+          [defaultSubColumn.name],
+          { [defaultSubColumn.name]: result.value },
+        );
+        for (const otherColumn in otherColumns) {
+          if (otherColumns.hasOwnProperty(otherColumn))
+            otherSubColumns.push({
+              name: otherColumn,
+              value: otherColumns[otherColumn],
+            });
+        }
+
+        newUserResults.push({
+          userId: result.userId,
+          subColumns: [
+            { name: defaultSubColumn.name, value: result.value },
+            ...otherSubColumns,
+          ],
+        });
+      });
+
+      setDataInitialization(true);
+      setUserResults(newUserResults);
+    }
+  }
+
+  const changeHandler = (
+    value: any,
+    subColumn: SubColumn,
+    userId: number,
+  ): void => {
+    const variables = runDependencies(
+      subColumn.dependencies,
+      [subColumn.name],
+      {
+        [subColumn.name]: value,
+      },
+    );
+
+    const updatedUserResults = [...userResults];
+    const updatedUserResult = updatedUserResults.find(
+      userResult => userResult.userId === userId,
+    );
+
+    const subColumns = [];
+    for (const variable in variables) {
+      if (variables.hasOwnProperty(variable))
+        subColumns.push({ name: variable, value: variables[variable] });
+    }
+    updatedUserResult.subColumns = subColumns;
+    setUserResults(updatedUserResults);
+  };
+
+  const mappedColumns = props.markingSchema.testColumns.map(column => (
+    <TableCell key={`column${column.id}`} colSpan={column.subColumns.length}>
+      {column.label}
+    </TableCell>
+  ));
+
+  const mappedSubColumns = props.markingSchema.testColumns.map(column =>
+    column.subColumns.map(subColumn => (
+      <TableCell key={`subColumn${subColumn.id}`}>
+        {`$${subColumn.name}`}
+      </TableCell>
+    )),
+  );
+
+  const mappedUsers = props.subjectData.results.map(result => {
+    const mappedSubColumns = props.markingSchema.testColumns.map(column =>
+      column.subColumns.map(subColumn => {
+        const userResult = userResults.find(
+          userResult => userResult.userId === result.userId,
+        );
+        if (userResult) {
+          const userResultSubColumn = userResult.subColumns.find(
+            userResultSubColumn => userResultSubColumn.name === subColumn.name,
+          );
+
+          if (userResultSubColumn) {
+            const { value } = userResultSubColumn;
+
+            return (
+              <TableCell
+                key={`user-${result.userId}-subColumn-${subColumn.id}`}
+              >
+                {subColumn.inputType ? (
+                  <>
+                    {subColumn.inputType === InputType.Text && (
+                      <TextField
+                        value={value}
+                        onChange={e =>
+                          changeHandler(
+                            e.target.value,
+                            subColumn,
+                            result.userId,
+                          )
+                        }
+                      />
+                    )}
+                    {subColumn.inputType === InputType.Number && (
+                      <TextField
+                        type="number"
+                        value={value}
+                        onChange={e =>
+                          changeHandler(
+                            e.target.value,
+                            subColumn,
+                            result.userId,
+                          )
+                        }
+                      />
+                    )}
+                  </>
+                ) : (
+                  value
+                )}
+                {subColumn.inputType === InputType.Color &&
+                  'barva - in progress'}
+              </TableCell>
+            );
+          }
+        }
+
+        return (
+          <TableCell key={`user-${result.userId}-subColumn-${subColumn.id}`}>
+            Error
+          </TableCell>
+        );
+      }),
+    );
+
+    return (
+      <TableRow key={`user-${result.userId}`}>
+        <TableCell>{`user-${result.userId}`}</TableCell>
+        {mappedSubColumns}
+      </TableRow>
+    );
   });
 
   return (
-    <Table>
-      <TableRow>{mappedHead}</TableRow>
-      <TableRow>{mappedSubColumns}</TableRow>
-      <TableRow>{mappedInputs}</TableRow>
-    </Table>
+    <>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell />
+            {mappedColumns}
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            {mappedSubColumns}
+          </TableRow>
+          {mappedUsers}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 

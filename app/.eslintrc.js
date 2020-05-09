@@ -5,9 +5,9 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
@@ -30,6 +30,8 @@ module.exports = {
     'newline-before-return': 'warn',
     'no-param-reassign': 'off',
     'no-prototype-builtins': 'off',
+    'no-shadow': 'off',
+    'react/jsx-curly-newline': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
