@@ -5,6 +5,8 @@ import { Typography } from '@material-ui/core';
 import SubjectTest from 'pages/subjectTest/subjectTest';
 import Variables from 'pages/subjectTest/variables';
 
+import TestEditingIndex from 'components/markingSchema/TestEditing';
+
 import {
   Display,
   InputType,
@@ -116,8 +118,7 @@ const markingSchema: MarkingSchema = {
 const subjectTestIndex = (): JSX.Element => {
   return (
     <>
-      <Typography variant="h5">Sloupce</Typography>
-      <SubjectTest
+      <TestEditingIndex
         markingSchema={markingSchema}
         testData={testDataFromServer}
       />

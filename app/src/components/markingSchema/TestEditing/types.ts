@@ -85,3 +85,8 @@ export interface TestVariablesProps {
   variables: TestVariableData[];
   onVariableUpdate: (name: string, value: any) => void;
 }
+
+export interface TestEditingIndexProps {
+  markingSchema: MarkingSchema;
+  testData: TestData;
+}

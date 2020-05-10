@@ -11,6 +11,13 @@ import {
 
 import Variables from 'pages/subjectTest/variables';
 
+import findSubColumnByName from 'components/markingSchema/TestEditing/scripts/findColumnByName';
+import generateDefaultTestData from 'components/markingSchema/TestEditing/scripts/generateDefaultTestColumns';
+import getVariables from 'components/markingSchema/TestEditing/scripts/getVariables';
+import runCode from 'components/markingSchema/TestEditing/scripts/runcCode';
+import runDependencies from 'components/markingSchema/TestEditing/scripts/runDependencies';
+import updateDataFromDefaultColumn from 'components/markingSchema/TestEditing/scripts/updateDataFromDefaultColumn';
+
 import {
   InputType,
   ObjectWithStringKeys,
@@ -23,174 +30,13 @@ import {
 const SubjectTest = (props: SubjectTestProps): JSX.Element => {
   const [dataInitialization, setDataInitialization] = useState(false);
   const [userResults, setUserResults] = useState<UserResult[]>([]);
-
-  const generateDefaultTestData = (): TestData => {
-    const defaultTestData = { ...props.testData };
-
-    props.markingSchema.testVariables.forEach(testVariable => {
-      let defaultTestVariable = defaultTestData.testVariables.find(
-        defaultTestVariable => defaultTestVariable.name === testVariable.name,
-      );
-      if (!defaultTestVariable) {
-        defaultTestVariable = {
-          name: testVariable.name,
-          value: testVariable.defaultValue || '',
-          label: testVariable.label,
-        };
-        defaultTestData.testVariables.push(defaultTestVariable);
-      }
-    });
-
-    props.markingSchema.subjectVariables.forEach(subjectVariable => {
-      let defaultSubjectVariable = defaultTestData.subjectVariables.find(
-        defaultSubjectVariable =>
-          defaultSubjectVariable.name === subjectVariable.name,
-      );
-      if (!defaultSubjectVariable) {
-        defaultSubjectVariable = {
-          name: subjectVariable.name,
-          value: subjectVariable.defaultValue,
-          label: subjectVariable.label,
-        };
-
-        defaultTestData.subjectVariables.push(defaultSubjectVariable);
-      }
-    });
-
-    return defaultTestData;
-  };
-
-  const [testData, setTestData] = useState(generateDefaultTestData());
-
-  const runCode = (code: string, variables: any): any => {
-    const customFunction = eval(`(${code})`);
-
-    return customFunction(variables);
-  };
-
-  const findSubColumnByName = (name: string): SubColumn => {
-    let wantedSubColumn: SubColumn;
-    props.markingSchema.testColumns.forEach(column => {
-      if (!wantedSubColumn) {
-        column.subColumns.forEach(subColumn => {
-          if (subColumn.name === name && !wantedSubColumn) {
-            wantedSubColumn = subColumn;
-          }
-        });
-      }
-    });
-
-    return wantedSubColumn;
-  };
-
-  const getTestVariables = (): ObjectWithStringKeys => {
-    const testVariables = {};
-    props.testData.testVariables.forEach(testVariable => {
-      testVariables[testVariable.name] = testVariable.value;
-    });
-
-    return testVariables;
-  };
-
-  const getSubjectVariables = (): ObjectWithStringKeys => {
-    const subjectVariables = {};
-    props.testData.subjectVariables.forEach(subjectVariable => {
-      subjectVariables[subjectVariable.name] = subjectVariable.value;
-    });
-
-    return subjectVariables;
-  };
-
-  const runDependencies = (
-    deps: string[],
-    visitedDependencies: string[] = [],
-    defaultVariables: ObjectWithStringKeys = {},
-  ): ObjectWithStringKeys => {
-    let updatedValues: ObjectWithStringKeys;
-
-    const nest = (
-      dependencies: string[],
-      variables: ObjectWithStringKeys,
-    ): void => {
-      if (dependencies) {
-        dependencies.forEach(dependency => {
-          if (
-            !visitedDependencies.some(
-              visitedDependency => visitedDependency === dependency,
-            )
-          ) {
-            visitedDependencies.push(dependency);
-            const subColumn = findSubColumnByName(dependency);
-            if (subColumn) {
-              const result = runCode(subColumn.code, variables);
-              variables[subColumn.name] = result;
-              updatedValues = variables;
-              if (subColumn.dependencies) {
-                nest(subColumn.dependencies, variables);
-              }
-            }
-          }
-        });
-      }
-    };
-    nest(deps, defaultVariables);
-
-    return updatedValues;
-  };
-
-  const updateDataFromDefaultColumn = (): void => {
-    const defaultSubColumn = findSubColumnByName(
-      props.markingSchema.defaultColumn,
-    );
-
-    if (defaultSubColumn) {
-      const newUserResults = [];
-
-      const inLoopFunction = (userId: number, defaultValue: any) => {
-        const subColumns = [];
-        const otherColumns = runDependencies(
-          defaultSubColumn.dependencies,
-          [defaultSubColumn.name],
-          {
-            [defaultSubColumn.name]: defaultValue,
-            ...getTestVariables(),
-            ...getSubjectVariables(),
-          },
-        );
-
-        for (const otherColumn in otherColumns) {
-          if (otherColumns.hasOwnProperty(otherColumn))
-            subColumns.push({
-              name: otherColumn,
-              value: otherColumns[otherColumn],
-            });
-        }
-
-        newUserResults.push({
-          userId,
-          subColumns,
-        });
-      };
-      if (userResults.length > 0) {
-        userResults.forEach(result => {
-          const userDefaultConfig = result.subColumns.find(
-            subColumn => subColumn.name === defaultSubColumn.name,
-          );
-          inLoopFunction(result.userId, userDefaultConfig.value);
-        });
-      } else {
-        testData.results.forEach(result => { 
-          inLoopFunction(result.userId, result.value);
-        });
-      }
-
-      setDataInitialization(true);
-      setUserResults(newUserResults);
-    }
-  };
+  const [testData, setTestData] = useState(
+    generateDefaultTestData(props.testData, props.markingSchema),
+  );
 
   if (!dataInitialization) {
-    updateDataFromDefaultColumn();
+    updateDataFromDefaultColumn(props.markingSchema, props.testData, true);
+    setDataInitialization(true);
   }
 
   const changeHandler = (
@@ -199,12 +45,12 @@ const SubjectTest = (props: SubjectTestProps): JSX.Element => {
     userId: number,
   ): void => {
     const variables = runDependencies(
+      props.markingSchema,
       subColumn.dependencies,
       [subColumn.name],
       {
         [subColumn.name]: value,
-        ...getTestVariables(),
-        ...getSubjectVariables(),
+        ...getVariables(props.testData),
       },
     );
 
@@ -229,7 +75,12 @@ const SubjectTest = (props: SubjectTestProps): JSX.Element => {
     );
     testVariable.value = value;
     setTestData(newTestData);
-    updateDataFromDefaultColumn();
+    updateDataFromDefaultColumn(
+      props.markingSchema,
+      props.testData,
+      false,
+      userResults,
+    );
   };
 
   const subjectVariableChangeHandler = (name: string, value: any): void => {
@@ -239,7 +90,12 @@ const SubjectTest = (props: SubjectTestProps): JSX.Element => {
     );
     subjectVariable.value = value;
     setTestData(newTestData);
-    updateDataFromDefaultColumn();
+    updateDataFromDefaultColumn(
+      props.markingSchema,
+      props.testData,
+      false,
+      userResults,
+    );
   };
 
   const mappedColumns = props.markingSchema.testColumns.map(column => (
