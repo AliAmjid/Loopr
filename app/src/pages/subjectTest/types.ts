@@ -12,6 +12,7 @@ export enum Display {
 interface SubjectVariable {
   label: string;
   name: string;
+  defaultValue: any;
 }
 
 interface TestVariable {
@@ -54,9 +55,16 @@ interface TestVariableData {
   label: string;
 }
 
+interface SubjectVariableData {
+  name: string;
+  value: any;
+  label: string;
+}
+
 export interface TestData {
   results: Result[];
   testVariables: TestVariableData[];
+  subjectVariables: SubjectVariableData[];
 }
 
 export interface TestColumnsProps {
@@ -74,6 +82,6 @@ export interface ObjectWithStringKeys {
 }
 
 export interface TestVariablesProps {
-  testVariables: TestVariableData[];
-  onTestVariableUpdate: (name: string, value: any) => void;
+  variables: TestVariableData[];
+  onVariableUpdate: (name: string, value: any) => void;
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Typography } from '@material-ui/core';
 
 import TestColumns from 'pages/subjectTest/testColumns';
-import TestVariables from 'pages/subjectTest/testVariables';
+import Variables from 'pages/subjectTest/variables';
 
 import {
   Display,
@@ -17,15 +17,15 @@ const pointsFunction = function main(values) {
   return +values.maxPoints * (+values.percent / 100);
 }.toString();
 
-const colorFunction = function main(values) {
-  let color = 'krásná';
+const markFunction = function main(values) {
+  let mark = '1';
 
-  if (values.percent < 90) color = 'skoro hezká';
-  if (values.percent < 75) color = 'ok';
-  if (values.percent < 60) color = 'nehezká';
-  if (values.percent < 40) color = 'okšlivá';
+  if (values.percent < values.mark2) mark = '2';
+  if (values.percent < values.mark3) mark = '3';
+  if (values.percent < values.mark4) mark = '4';
+  if (values.percent < values.mark5) mark = '5';
 
-  return color;
+  return mark;
 }.toString();
 
 const percentFunction = function percentFunction(values) {
@@ -38,13 +38,30 @@ const testDataFromServer: TestData = {
     { userId: 2, value: 10 },
   ],
   testVariables: [],
+  subjectVariables: [],
 };
 
 const markingSchema: MarkingSchema = {
   subjectVariables: [
     {
-      label: 'Známka - 1',
-      name: 'mark1',
+      label: 'Známka - 2',
+      name: 'mark2',
+      defaultValue: 90,
+    },
+    {
+      label: 'Známka - 3',
+      name: 'mark3',
+      defaultValue: 80,
+    },
+    {
+      label: 'Známka - 4',
+      name: 'mark4',
+      defaultValue: 70,
+    },
+    {
+      label: 'Známka - 5',
+      name: 'mark5',
+      defaultValue: 60,
     },
   ],
   testVariables: [
@@ -62,10 +79,10 @@ const markingSchema: MarkingSchema = {
       subColumns: [
         {
           id: 1,
-          name: 'color',
+          name: 'mark',
           input: false,
           display: Display.Text,
-          code: colorFunction,
+          code: markFunction,
         },
         {
           id: 2,
@@ -89,7 +106,7 @@ const markingSchema: MarkingSchema = {
           inputType: InputType.Number,
           display: Display.Text,
           code: percentFunction,
-          dependencies: ['points', 'color'],
+          dependencies: ['points', 'mark'],
         },
       ],
     },

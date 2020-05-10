@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import {
+  Divider,
   Table,
   TableBody,
   TableCell,
@@ -8,7 +9,7 @@ import {
   TextField,
 } from '@material-ui/core';
 
-import TestVariables from 'pages/subjectTest/testVariables';
+import Variables from 'pages/subjectTest/variables';
 
 import {
   InputType,
@@ -37,6 +38,22 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
           label: testVariable.label,
         };
         defaultTestData.testVariables.push(defaultTestVariable);
+      }
+    });
+
+    props.markingSchema.subjectVariables.forEach(subjectVariable => {
+      let defaultSubjectVariable = defaultTestData.subjectVariables.find(
+        defaultSubjectVariable =>
+          defaultSubjectVariable.name === subjectVariable.name,
+      );
+      if (!defaultSubjectVariable) {
+        defaultSubjectVariable = {
+          name: subjectVariable.name,
+          value: subjectVariable.defaultValue,
+          label: subjectVariable.label,
+        };
+
+        defaultTestData.subjectVariables.push(defaultSubjectVariable);
       }
     });
 
@@ -73,6 +90,15 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     });
 
     return testVariables;
+  };
+
+  const getSubjectVariables = (): ObjectWithStringKeys => {
+    const subjectVariables = {};
+    props.testData.subjectVariables.forEach(subjectVariable => {
+      subjectVariables[subjectVariable.name] = subjectVariable.value;
+    });
+
+    return subjectVariables;
   };
 
   const runDependencies = (
@@ -124,7 +150,11 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
         const otherColumns = runDependencies(
           defaultSubColumn.dependencies,
           [defaultSubColumn.name],
-          { [defaultSubColumn.name]: result.value, ...getTestVariables() },
+          {
+            [defaultSubColumn.name]: result.value,
+            ...getTestVariables(),
+            ...getSubjectVariables(),
+          },
         );
 
         for (const otherColumn in otherColumns) {
@@ -161,6 +191,7 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
       {
         [subColumn.name]: value,
         ...getTestVariables(),
+        ...getSubjectVariables(),
       },
     );
 
@@ -184,6 +215,16 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
       variable => variable.name === name,
     );
     testVariable.value = value;
+    setTestData(newTestData);
+    updateDataFromDefaultColumn();
+  };
+
+  const subjectVariableChangeHandler = (name: string, value: any): void => {
+    const newTestData = { ...testData };
+    const subjectVariable = newTestData.subjectVariables.find(
+      variable => variable.name === name,
+    );
+    subjectVariable.value = value;
     setTestData(newTestData);
     updateDataFromDefaultColumn();
   };
@@ -276,10 +317,16 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
 
   return (
     <>
-      <TestVariables
-        testVariables={testData.testVariables}
-        onTestVariableUpdate={testVariableChangeHandler}
+      <Variables
+        variables={testData.subjectVariables}
+        onVariableUpdate={subjectVariableChangeHandler}
       />
+      <Divider />
+      <Variables
+        variables={testData.testVariables}
+        onVariableUpdate={testVariableChangeHandler}
+      />
+      <Divider />
       <Table>
         <TableBody>
           <TableRow>
