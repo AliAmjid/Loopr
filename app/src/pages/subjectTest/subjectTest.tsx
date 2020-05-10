@@ -15,12 +15,12 @@ import {
   InputType,
   ObjectWithStringKeys,
   SubColumn,
-  TestColumnsProps,
+  SubjectTestProps,
   TestData,
   UserResult,
 } from './types';
 
-const TestColumns = (props: TestColumnsProps): JSX.Element => {
+const SubjectTest = (props: SubjectTestProps): JSX.Element => {
   const [dataInitialization, setDataInitialization] = useState(false);
   const [userResults, setUserResults] = useState<UserResult[]>([]);
 
@@ -145,13 +145,14 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
 
     if (defaultSubColumn) {
       const newUserResults = [];
-      testData.results.forEach(result => {
+
+      const inLoopFunction = (userId: number, defaultValue: any) => {
         const subColumns = [];
         const otherColumns = runDependencies(
           defaultSubColumn.dependencies,
           [defaultSubColumn.name],
           {
-            [defaultSubColumn.name]: result.value,
+            [defaultSubColumn.name]: defaultValue,
             ...getTestVariables(),
             ...getSubjectVariables(),
           },
@@ -166,10 +167,22 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
         }
 
         newUserResults.push({
-          userId: result.userId,
+          userId,
           subColumns,
         });
-      });
+      };
+      if (userResults.length > 0) {
+        userResults.forEach(result => {
+          const userDefaultConfig = result.subColumns.find(
+            subColumn => subColumn.name === defaultSubColumn.name,
+          );
+          inLoopFunction(result.userId, userDefaultConfig.value);
+        });
+      } else {
+        testData.results.forEach(result => { 
+          inLoopFunction(result.userId, result.value);
+        });
+      }
 
       setDataInitialization(true);
       setUserResults(newUserResults);
@@ -344,4 +357,4 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
   );
 };
 
-export default TestColumns;
+export default SubjectTest;

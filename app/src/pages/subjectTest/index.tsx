@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Typography } from '@material-ui/core';
 
-import TestColumns from 'pages/subjectTest/testColumns';
+import SubjectTest from 'pages/subjectTest/subjectTest';
 import Variables from 'pages/subjectTest/variables';
 
 import {
@@ -117,7 +117,7 @@ const subjectTestIndex = (): JSX.Element => {
   return (
     <>
       <Typography variant="h5">Sloupce</Typography>
-      <TestColumns
+      <SubjectTest
         markingSchema={markingSchema}
         testData={testDataFromServer}
       />

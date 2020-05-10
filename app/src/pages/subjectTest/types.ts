@@ -67,7 +67,7 @@ export interface TestData {
   subjectVariables: SubjectVariableData[];
 }
 
-export interface TestColumnsProps {
+export interface SubjectTestProps {
   markingSchema: MarkingSchema;
   testData: TestData;
 }
