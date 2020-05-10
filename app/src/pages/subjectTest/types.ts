@@ -1,5 +1,3 @@
-import { timeInterval } from 'rxjs/operators';
-
 export enum InputType {
   Text = 'text',
   Number = 'number',
@@ -19,6 +17,7 @@ interface SubjectVariable {
 interface TestVariable {
   label: string;
   name: string;
+  defaultValue?: any;
 }
 
 export interface SubColumn {
@@ -46,16 +45,23 @@ export interface MarkingSchema {
 
 interface Result {
   userId: number;
-  value: number;
+  value: any;
 }
 
-export interface SubjectData {
+interface TestVariableData {
+  name: string;
+  value: any;
+  label: string;
+}
+
+export interface TestData {
   results: Result[];
+  testVariables: TestVariableData[];
 }
 
 export interface TestColumnsProps {
   markingSchema: MarkingSchema;
-  subjectData: SubjectData;
+  testData: TestData;
 }
 
 export interface UserResult {
@@ -65,4 +71,9 @@ export interface UserResult {
 
 export interface ObjectWithStringKeys {
   [key: string]: any;
+}
+
+export interface TestVariablesProps {
+  testVariables: TestVariableData[];
+  onTestVariableUpdate: (name: string, value: any) => void;
 }

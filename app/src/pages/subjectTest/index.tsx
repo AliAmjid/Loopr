@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Typography } from '@material-ui/core';
 
 import TestColumns from 'pages/subjectTest/testColumns';
+import TestVariables from 'pages/subjectTest/testVariables';
 
-import { Display, InputType, MarkingSchema, SubjectData } from './types';
+import {
+  Display,
+  InputType,
+  MarkingSchema,
+  ObjectWithStringKeys,
+  TestData,
+} from './types';
 
 const pointsFunction = function main(values) {
-  return +values.percent / 100;
+  return +values.maxPoints * (+values.percent / 100);
 }.toString();
 
 const colorFunction = function main(values) {
-  return +values.points * 7;
+  let color = 'krásná';
+
+  if (values.percent < 90) color = 'skoro hezká';
+  if (values.percent < 75) color = 'ok';
+  if (values.percent < 60) color = 'nehezká';
+  if (values.percent < 40) color = 'okšlivá';
+
+  return color;
 }.toString();
 
 const percentFunction = function percentFunction(values) {
-  return +values.points * 100;
+  return (+values.points / +values.maxPoints) * 100;
 }.toString();
 
-const subjectData: SubjectData = {
+const testDataFromServer: TestData = {
   results: [
     { userId: 1, value: 5 },
     { userId: 2, value: 10 },
   ],
+  testVariables: [],
 };
 
 const markingSchema: MarkingSchema = {
@@ -36,6 +51,7 @@ const markingSchema: MarkingSchema = {
     {
       label: 'Maximum bodů',
       name: 'maxPoints',
+      defaultValue: 10,
     },
   ],
   defaultColumn: 'points',
@@ -58,7 +74,7 @@ const markingSchema: MarkingSchema = {
           inputType: InputType.Number,
           display: Display.Text,
           code: pointsFunction,
-          dependencies: ['color', 'percent'],
+          dependencies: ['percent'],
         },
       ],
     },
@@ -73,7 +89,7 @@ const markingSchema: MarkingSchema = {
           inputType: InputType.Number,
           display: Display.Text,
           code: percentFunction,
-          dependencies: ['points'],
+          dependencies: ['points', 'color'],
         },
       ],
     },
@@ -81,10 +97,45 @@ const markingSchema: MarkingSchema = {
 };
 
 const subjectTestIndex = (): JSX.Element => {
+  const generateDefaultTestData = (): TestData => {
+    const defaultTestData = { ...testDataFromServer };
+
+    markingSchema.testVariables.forEach(testVariable => {
+      let defaultTestVariable = defaultTestData.testVariables.find(
+        defaultTestVariable => defaultTestVariable.name === testVariable.name,
+      );
+      if (!defaultTestVariable) {
+        defaultTestVariable = {
+          name: testVariable.name,
+          value: testVariable.defaultValue || '',
+          label: testVariable.label,
+        };
+        defaultTestData.testVariables.push(defaultTestVariable);
+      }
+    });
+
+    return defaultTestData;
+  };
+
+  const [testData, setTestData] = useState(generateDefaultTestData());
+
+  const testVariableChangeHandler = (name: string, value: any): void => {
+    const newTestData = { ...testData };
+    const testVariable = newTestData.testVariables.find(
+      variable => variable.name === name,
+    );
+    testVariable.value = value;
+    setTestData(newTestData);
+  };
+
   return (
     <>
+      <TestVariables
+        testVariables={testData.testVariables}
+        onTestVariableUpdate={testVariableChangeHandler}
+      />
       <Typography variant="h5">Sloupce</Typography>
-      <TestColumns markingSchema={markingSchema} subjectData={subjectData} />
+      <TestColumns markingSchema={markingSchema} testData={testData} />
     </>
   );
 };

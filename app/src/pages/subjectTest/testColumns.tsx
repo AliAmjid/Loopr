@@ -13,6 +13,7 @@ import {
   ObjectWithStringKeys,
   SubColumn,
   TestColumnsProps,
+  TestData,
   UserResult,
 } from './types';
 
@@ -20,11 +21,32 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
   const [dataInitialization, setDataInitialization] = useState(false);
   const [userResults, setUserResults] = useState<UserResult[]>([]);
 
+  const generateDefaultTestData = (): TestData => {
+    const defaultTestData = { ...props.testData };
+
+    props.markingSchema.testVariables.forEach(testVariable => {
+      let defaultTestVariable = defaultTestData.testVariables.find(
+        defaultTestVariable => defaultTestVariable.name === testVariable.name,
+      );
+      if (!defaultTestVariable) {
+        defaultTestVariable = {
+          name: testVariable.name,
+          value: testVariable.defaultValue || '',
+          label: testVariable.label,
+        };
+        defaultTestData.testVariables.push(defaultTestVariable);
+      }
+    });
+
+    return defaultTestData;
+  };
+
+  const [testData, setTestData] = useState(generateDefaultTestData());
+
   const runCode = (code: string, variables: any): any => {
     const customFunction = eval(`(${code})`);
-    const result = customFunction(variables);
 
-    return result;
+    return customFunction(variables);
   };
 
   const findSubColumnByName = (name: string): SubColumn => {
@@ -40,6 +62,15 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     });
 
     return wantedSubColumn;
+  };
+
+  const getTestVariables = (): ObjectWithStringKeys => {
+    const testVariables = {};
+    props.testData.testVariables.forEach(testVariable => {
+      testVariables[testVariable.name] = testVariable.value;
+    });
+
+    return testVariables;
   };
 
   const runDependencies = (
@@ -86,12 +117,12 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
 
     if (defaultSubColumn) {
       const newUserResults = [];
-      props.subjectData.results.forEach(result => {
+      props.testData.results.forEach(result => {
         const subColumns = [];
         const otherColumns = runDependencies(
           defaultSubColumn.dependencies,
           [defaultSubColumn.name],
-          { [defaultSubColumn.name]: result.value },
+          { [defaultSubColumn.name]: result.value, ...getTestVariables() },
         );
 
         for (const otherColumn in otherColumns) {
@@ -108,8 +139,6 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
         });
       });
 
-      console.log(newUserResults);
-
       setDataInitialization(true);
       setUserResults(newUserResults);
     }
@@ -125,6 +154,7 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
       [subColumn.name],
       {
         [subColumn.name]: value,
+        ...getTestVariables(),
       },
     );
 
@@ -142,6 +172,15 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     setUserResults(updatedUserResults);
   };
 
+  const testVariableChangeHandler = (name: string, value: any): void => {
+    const newTestData = { ...testData };
+    const testVariable = newTestData.testVariables.find(
+      variable => variable.name === name,
+    );
+    testVariable.value = value;
+    setTestData(newTestData);
+  };
+
   const mappedColumns = props.markingSchema.testColumns.map(column => (
     <TableCell key={`column${column.id}`} colSpan={column.subColumns.length}>
       {column.label}
@@ -156,18 +195,16 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     )),
   );
 
-  const mappedUsers = props.subjectData.results.map(result => {
+  const mappedUsers = props.testData.results.map(result => {
     const mappedSubColumns = props.markingSchema.testColumns.map(column =>
       column.subColumns.map(subColumn => {
         const userResult = userResults.find(
           userResult => userResult.userId === result.userId,
         );
-        // console.log('userResult', userResult);
         if (userResult) {
           const userResultSubColumn = userResult.subColumns.find(
             userResultSubColumn => userResultSubColumn.name === subColumn.name,
           );
-          // console.log('userResultSubColumn', userResultSubColumn);
 
           if (userResultSubColumn) {
             const { value } = userResultSubColumn;
