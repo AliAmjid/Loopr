@@ -9,25 +9,19 @@ import {
   TextField,
 } from '@material-ui/core';
 
-import Variables from 'pages/subjectTest/variables';
-
-import findSubColumnByName from 'components/markingSchema/TestEditing/scripts/findColumnByName';
 import generateDefaultTestData from 'components/markingSchema/TestEditing/scripts/generateDefaultTestColumns';
 import getVariables from 'components/markingSchema/TestEditing/scripts/getVariables';
-import runCode from 'components/markingSchema/TestEditing/scripts/runcCode';
 import runDependencies from 'components/markingSchema/TestEditing/scripts/runDependencies';
 import updateDataFromDefaultColumn from 'components/markingSchema/TestEditing/scripts/updateDataFromDefaultColumn';
-
 import {
   InputType,
-  ObjectWithStringKeys,
   SubColumn,
-  SubjectTestProps,
-  TestData,
-  UserResult,
-} from './types';
+} from 'components/markingSchema/TestEditing/types/markingSchema';
+import Variables from 'components/markingSchema/TestEditing/variables';
 
-const SubjectTest = (props: SubjectTestProps): JSX.Element => {
+import { SubjectTestProps, UserResult } from './types';
+
+const TestEditing = (props: SubjectTestProps): JSX.Element => {
   const [dataInitialization, setDataInitialization] = useState(false);
   const [userResults, setUserResults] = useState<UserResult[]>([]);
   const [testData, setTestData] = useState(
@@ -35,7 +29,9 @@ const SubjectTest = (props: SubjectTestProps): JSX.Element => {
   );
 
   if (!dataInitialization) {
-    updateDataFromDefaultColumn(props.markingSchema, props.testData, true);
+    setUserResults(
+      updateDataFromDefaultColumn(props.markingSchema, props.testData, true),
+    );
     setDataInitialization(true);
   }
 
@@ -213,4 +209,4 @@ const SubjectTest = (props: SubjectTestProps): JSX.Element => {
   );
 };
 
-export default SubjectTest;
+export default TestEditing;

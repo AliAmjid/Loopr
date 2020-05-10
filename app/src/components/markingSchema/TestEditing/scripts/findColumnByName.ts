@@ -1,4 +1,7 @@
-import { MarkingSchema, SubColumn } from '../types';
+import {
+  MarkingSchema,
+  SubColumn,
+} from 'components/markingSchema/TestEditing/types/markingSchema';
 
 const findSubColumnByName = (
   name: string,

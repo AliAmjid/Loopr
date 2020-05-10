@@ -1,4 +1,5 @@
-import { MarkingSchema, ObjectWithStringKeys } from '../types';
+import { ObjectWithStringKeys } from 'components/markingSchema/TestEditing/types';
+import { MarkingSchema } from 'components/markingSchema/TestEditing/types/markingSchema';
 
 import findSubColumnByName from './findColumnByName';
 import runCode from './runcCode';

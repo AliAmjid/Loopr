@@ -1,7 +1,6 @@
 import React from 'react';
 
-import TestEditing from 'pages/subjectTest/subjectTest';
-
+import TestEditing from './testEditing';
 import { TestEditingIndexProps } from './types';
 
 const TestEditingIndex = (props: TestEditingIndexProps): JSX.Element => {

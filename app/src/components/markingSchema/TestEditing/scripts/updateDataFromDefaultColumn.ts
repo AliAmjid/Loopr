@@ -1,4 +1,6 @@
-import { MarkingSchema, TestData, UserResult } from '../types';
+import { MarkingSchema } from 'components/markingSchema/TestEditing/types/markingSchema';
+
+import { TestData, UserResult } from '../types';
 
 import findSubColumnByName from './findColumnByName';
 import getVariables from './getVariables';
@@ -58,6 +60,8 @@ const updateDataFromDefaultColumn = (
 
     return newUserResults;
   }
+
+  return [];
 };
 
 export default updateDataFromDefaultColumn;

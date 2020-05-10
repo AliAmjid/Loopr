@@ -1,4 +1,5 @@
-import { MarkingSchema, TestData } from '../types';
+import { TestData } from '../types';
+import { MarkingSchema } from '../types/markingSchema';
 
 const generateDefaultTestData = (
   defaultTestData: TestData,

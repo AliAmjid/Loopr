@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 
-import { Typography } from '@material-ui/core';
-
-import SubjectTest from 'pages/subjectTest/subjectTest';
-import Variables from 'pages/subjectTest/variables';
-
 import TestEditingIndex from 'components/markingSchema/TestEditing';
-
+import { TestData } from 'components/markingSchema/TestEditing/types';
 import {
   Display,
   InputType,
   MarkingSchema,
-  ObjectWithStringKeys,
-  TestData,
-} from './types';
+} from 'components/markingSchema/TestEditing/types/markingSchema';
 
-const pointsFunction = function main(values) {
+const pointsFunction = function main(values: any) {
   return +values.maxPoints * (+values.percent / 100);
 }.toString();
 
-const markFunction = function main(values) {
+const markFunction = function main(values: any) {
   let mark = '1';
 
   if (values.percent < values.mark2) mark = '2';
