@@ -97,45 +97,13 @@ const markingSchema: MarkingSchema = {
 };
 
 const subjectTestIndex = (): JSX.Element => {
-  const generateDefaultTestData = (): TestData => {
-    const defaultTestData = { ...testDataFromServer };
-
-    markingSchema.testVariables.forEach(testVariable => {
-      let defaultTestVariable = defaultTestData.testVariables.find(
-        defaultTestVariable => defaultTestVariable.name === testVariable.name,
-      );
-      if (!defaultTestVariable) {
-        defaultTestVariable = {
-          name: testVariable.name,
-          value: testVariable.defaultValue || '',
-          label: testVariable.label,
-        };
-        defaultTestData.testVariables.push(defaultTestVariable);
-      }
-    });
-
-    return defaultTestData;
-  };
-
-  const [testData, setTestData] = useState(generateDefaultTestData());
-
-  const testVariableChangeHandler = (name: string, value: any): void => {
-    const newTestData = { ...testData };
-    const testVariable = newTestData.testVariables.find(
-      variable => variable.name === name,
-    );
-    testVariable.value = value;
-    setTestData(newTestData);
-  };
-
   return (
     <>
-      <TestVariables
-        testVariables={testData.testVariables}
-        onTestVariableUpdate={testVariableChangeHandler}
-      />
       <Typography variant="h5">Sloupce</Typography>
-      <TestColumns markingSchema={markingSchema} testData={testData} />
+      <TestColumns
+        markingSchema={markingSchema}
+        testData={testDataFromServer}
+      />
     </>
   );
 };

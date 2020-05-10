@@ -8,6 +8,8 @@ import {
   TextField,
 } from '@material-ui/core';
 
+import TestVariables from 'pages/subjectTest/testVariables';
+
 import {
   InputType,
   ObjectWithStringKeys,
@@ -110,14 +112,14 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     return updatedValues;
   };
 
-  if (!dataInitialization) {
+  const updateDataFromDefaultColumn = (): void => {
     const defaultSubColumn = findSubColumnByName(
       props.markingSchema.defaultColumn,
     );
 
     if (defaultSubColumn) {
       const newUserResults = [];
-      props.testData.results.forEach(result => {
+      testData.results.forEach(result => {
         const subColumns = [];
         const otherColumns = runDependencies(
           defaultSubColumn.dependencies,
@@ -142,6 +144,10 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
       setDataInitialization(true);
       setUserResults(newUserResults);
     }
+  };
+
+  if (!dataInitialization) {
+    updateDataFromDefaultColumn();
   }
 
   const changeHandler = (
@@ -179,6 +185,7 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
     );
     testVariable.value = value;
     setTestData(newTestData);
+    updateDataFromDefaultColumn();
   };
 
   const mappedColumns = props.markingSchema.testColumns.map(column => (
@@ -269,6 +276,10 @@ const TestColumns = (props: TestColumnsProps): JSX.Element => {
 
   return (
     <>
+      <TestVariables
+        testVariables={testData.testVariables}
+        onTestVariableUpdate={testVariableChangeHandler}
+      />
       <Table>
         <TableBody>
           <TableRow>
