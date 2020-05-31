@@ -14,7 +14,7 @@ import Document, {
 class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html lang="en">
+      <Html lang="en" translate="no">
         <body>
           <Main />
           <NextScript />

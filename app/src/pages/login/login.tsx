@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
 import { i18n, withTranslation } from 'lib/i18n';
@@ -18,20 +18,18 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
     <div tour-id="loginForm" style={{ width: 'fit-content' }}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>
-          {t('email')}
-          :
-          <input
+          <TextField
             name="email"
-            ref={register({ required: true })}
+            label={t('email')}
+            inputRef={register({ required: true })}
             test-id="emailInput"
           />
         </div>
         <div>
-          {t('password')}
-          :
-          <input
+          <TextField
             name="password"
-            ref={register({ required: true })}
+            label={t('password')}
+            inputRef={register({ required: true })}
             test-id="passwordInput"
           />
         </div>
