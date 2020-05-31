@@ -1,14 +1,6 @@
 import React from 'react';
 
-import {
-  IconButton,
-  List,
-  ListItem,
-  Table,
-  TableCell,
-  TableHead,
-  TableRow,
-} from '@material-ui/core';
+import { IconButton, List, ListItem } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import { TestProps } from './types';
@@ -22,11 +14,11 @@ const Test = (props: TestProps): JSX.Element => {
     <>
       <List>
         {mappedColumns}
-<ListItem>
-        <IconButton color="primary" onClick={props.onAddClick}>
-          <AddIcon />
-        </IconButton>
-</ListItem>
+        <ListItem>
+          <IconButton color="primary" onClick={props.onAddClick}>
+            <AddIcon />
+          </IconButton>
+        </ListItem>
       </List>
     </>
   );
