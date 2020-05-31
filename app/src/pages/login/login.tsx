@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Button } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
 import { i18n, withTranslation } from 'lib/i18n';
@@ -34,11 +35,17 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
             test-id="passwordInput"
           />
         </div>
-        <button type="submit" test-id="submitButton" tour-id="button">
+        <Button
+          type="submit"
+          test-id="submitButton"
+          tour-id="button"
+          color="primary"
+          variant="contained"
+        >
           {t('logIn')}
-        </button>
+        </Button>
       </form>
-      <button
+      <Button
         tour-id="button1"
         type="button"
         onClick={(): void => {
@@ -46,7 +53,7 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
         }}
       >
         {t('common:changeLanguage')}
-      </button>
+      </Button>
     </div>
   );
 };
