@@ -1,5 +1,6 @@
 import React from 'react';
 
+import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 
 import Login from 'pages/login/login';
@@ -17,10 +18,9 @@ const LoginIndex = (): JSX.Element => {
   );
 };
 
-const LoginIndexWithTour = withTour(LoginIndex, loginSteps, 'login');
-
-LoginIndexWithTour.getInitialProps = async () => ({
-  namespacesRequired: ['login', 'common'],
-});
+const LoginIndexWithTour = withNamespaces(
+  withTour(LoginIndex, loginSteps, 'login'),
+  ['login', 'common'],
+);
 
 export default LoginIndexWithTour;
