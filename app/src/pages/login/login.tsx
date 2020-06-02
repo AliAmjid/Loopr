@@ -3,16 +3,18 @@ import React from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { i18n, withTranslation } from 'lib/i18n';
+import { useTranslation } from 'lib/i18n';
 
 import { FormValues, LoginProps } from './types';
 
-const Login = ({ t, ...props }: LoginProps): JSX.Element => {
+const Login = (props: LoginProps): JSX.Element => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const submitHandler = (values: FormValues): void => {
     props.onSubmit(values.email, values.password);
   };
+
+  const { t, i18n } = useTranslation('login');
 
   return (
     <div tour-id="loginForm" style={{ width: 'fit-content' }}>
@@ -56,4 +58,4 @@ const Login = ({ t, ...props }: LoginProps): JSX.Element => {
   );
 };
 
-export default withTranslation('login')(Login);
+export default Login;

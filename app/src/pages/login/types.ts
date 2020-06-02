@@ -1,6 +1,4 @@
-import { WithTranslation } from 'next-i18next';
-
-export interface LoginProps extends WithTranslation {
+export interface LoginProps {
   onSubmit: (email: string, password: string) => void;
 }
 
