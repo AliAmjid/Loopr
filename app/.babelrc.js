@@ -16,18 +16,7 @@ module.exports = {
     development: notTest,
     production: notTest,
     test: {
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            targets: {
-              esmodules: true,
-            },
-          },
-        ],
-        '@babel/preset-react',
-        '@babel/preset-typescript',
-      ],
+      presets: ['next/babel'],
     },
   },
 };

@@ -5,10 +5,9 @@ module.exports = {
     node: true,
   },
   extends: [
+    'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'airbnb',
-    'prettier',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
@@ -30,6 +29,9 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'newline-before-return': 'warn',
     'no-param-reassign': 'off',
+    'no-prototype-builtins': 'off',
+    'no-shadow': 'off',
+    'react/jsx-curly-newline': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -46,8 +48,9 @@ module.exports = {
         groups: [
           ['^react$'],
           ['^@?\\w'],
-          ['^components'],
           ['^lib'],
+          ['^pages'],
+          ['^components'],
           ['^\\u0000'],
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
@@ -79,7 +82,7 @@ module.exports = {
     '@typescript-eslint/typedef': [
       'error',
       {
-        arrowParameter: true,
+        arrowParameter: false,
         parameter: true,
       },
     ],

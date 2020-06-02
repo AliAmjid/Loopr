@@ -6,26 +6,15 @@ import { NextRouter } from 'next/dist/next-server/lib/router/router';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import Document, {
   DocumentContext,
-  Head,
   Html,
   Main,
   NextScript,
 } from 'next/document';
 
-import theme from 'lib/material-ui/theme';
-
 class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html lang="en">
-        <Head>
-          {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
-        </Head>
+      <Html lang="en" translate="no">
         <body>
           <Main />
           <NextScript />
