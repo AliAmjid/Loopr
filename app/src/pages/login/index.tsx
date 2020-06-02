@@ -17,8 +17,10 @@ const LoginIndex = (): JSX.Element => {
   );
 };
 
-LoginIndex.getInitialProps = async () => ({
+const LoginIndexWithTour = withTour(LoginIndex, loginSteps, 'login');
+
+LoginIndexWithTour.getInitialProps = async () => ({
   namespacesRequired: ['login', 'common'],
 });
 
-export default withTour(LoginIndex, loginSteps);
+export default LoginIndexWithTour;

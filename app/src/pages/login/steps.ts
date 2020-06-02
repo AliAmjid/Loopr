@@ -1,11 +1,12 @@
+import { TFunction } from 'next-i18next';
 import { ReactourStep } from 'reactour';
 
 import tourId from 'lib/reactour/tourId';
 
-const loginSteps: ReactourStep[] = [
+const loginSteps = (t: TFunction): ReactourStep[] => [
   {
     selector: tourId('loginForm'),
-    content: 'Toto je login form',
+    content: `Toto je login form${t('password')}`,
   },
   {
     selector: tourId('button'),
