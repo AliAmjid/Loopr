@@ -8,7 +8,6 @@ import testId from 'lib/jest/testId';
 
 import Login from 'pages/login/login';
 
-// eslint-disable-next-line no-undef
 describe('<Login/>', () => {
   it('Should not fire on submit', async () => {
     const submitHandler = jest.fn(() => {});

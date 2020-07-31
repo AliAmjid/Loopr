@@ -3,10 +3,10 @@ import { ReactourStep } from 'reactour';
 
 import tourId from 'lib/reactour/tourId';
 
-const loginSteps = (t: TFunction): ReactourStep[] => [
+const loginTour = (t: TFunction): ReactourStep[] => [
   {
     selector: tourId('loginForm'),
-    content: `Toto je login form${t('password')}`,
+    content: `Toto je login form ${t('password')}`,
   },
   {
     selector: tourId('button'),
@@ -19,4 +19,4 @@ const loginSteps = (t: TFunction): ReactourStep[] => [
   { content: 'A tady neni nic' },
 ];
 
-export default loginSteps;
+export default loginTour;

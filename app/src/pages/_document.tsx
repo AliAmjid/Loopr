@@ -30,6 +30,8 @@ MyDocument.getInitialProps = async (ctx: DocumentContext): Promise<any> => {
 
   ctx.renderPage = () =>
     originalRenderPage({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       enhanceApp: (App: NextComponentType<AppContextType<NextRouter>>) => (
         props: any,
       ) => sheets.collect(<App {...props} />),
