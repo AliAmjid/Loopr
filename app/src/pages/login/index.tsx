@@ -4,7 +4,7 @@ import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 
 import Login from 'pages/login/login';
-import loginSteps from 'pages/login/steps';
+import loginTour from 'pages/login/tour';
 
 const LoginIndex = (): JSX.Element => {
   const submitHandler = (email: string, password: string): void => {
@@ -19,7 +19,8 @@ const LoginIndex = (): JSX.Element => {
 };
 
 const LoginIndexWithTour = withNamespaces(
-  withTour(LoginIndex, loginSteps, 'login'),
+  // withTour(LoginIndex, loginTour, 'login'),
+  LoginIndex,
   ['login', 'common'],
 );
 

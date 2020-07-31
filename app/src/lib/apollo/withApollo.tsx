@@ -29,6 +29,9 @@ const withApollo = <ComponentProps extends {} = any>(
     setUpdated(true);
     persistCache({
       cache,
+      // TODO fix
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       storage: window.localStorage,
       debug: true,
     }).then(() => setClient(newClient()));
