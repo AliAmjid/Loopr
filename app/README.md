@@ -15,4 +15,4 @@ Frontend part of Loopr project
 - `yarn test`
 
 ## Other
-- Do not update core-js to version 3 - next-i18next requires version 2, it would break storybook
+- Do not update `core-js` to version 3 - next-i18next requires version 2, it would break storybook
