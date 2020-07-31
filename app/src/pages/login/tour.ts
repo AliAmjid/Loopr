@@ -9,11 +9,11 @@ const loginTour = (t: TFunction): ReactourStep[] => [
     content: `Toto je login form ${t('password')}`,
   },
   {
-    selector: tourId('button'),
+    selector: tourId('submitButton'),
     content: 'To je buttón',
   },
   {
-    selector: tourId('button1'),
+    selector: tourId('languageButton'),
     content: 'To je také buttón',
   },
   { content: 'A tady neni nic' },

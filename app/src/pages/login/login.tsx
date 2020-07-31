@@ -24,7 +24,7 @@ const Login = (props: LoginProps): JSX.Element => {
             name="email"
             label={t('email')}
             inputRef={register({ required: true })}
-            test-id="emailInput"
+            inputProps={{ 'test-id': 'emailInput' }}
           />
         </div>
         <div>
@@ -32,13 +32,13 @@ const Login = (props: LoginProps): JSX.Element => {
             name="password"
             label={t('password')}
             inputRef={register({ required: true })}
-            test-id="passwordInput"
+            inputProps={{ 'test-id': 'passwordInput' }}
           />
         </div>
         <Button
           type="submit"
           test-id="submitButton"
-          tour-id="button"
+          tour-id="submitButton"
           color="primary"
           variant="contained"
         >
@@ -46,7 +46,7 @@ const Login = (props: LoginProps): JSX.Element => {
         </Button>
       </form>
       <Button
-        tour-id="button1"
+        tour-id="languageButton"
         type="button"
         onClick={(): void => {
           i18n.changeLanguage(i18n.language === 'cs' ? 'en' : 'cs');
