@@ -19,10 +19,10 @@
     "jsx": "preserve",
     "baseUrl": "src",
     "paths": {
-      "components/*": ["components/*"],
+      "config/*": ["config/*"],
+      "lib/*": ["lib/*"],
       "pages/*": ["pages/*"],
-      "redux/*": ["redux/*"],
-      "lib/*": ["lib/*"]
+      "components/*": ["components/*"]
     }
   },
   "exclude": [

@@ -49,6 +49,7 @@ module.exports = {
         groups: [
           ['^react$'],
           ['^@?\\w'],
+          ['^config'],
           ['^lib'],
           ['^pages'],
           ['^components'],
@@ -95,6 +96,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/typedef': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
     {

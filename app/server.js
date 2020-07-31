@@ -3,11 +3,12 @@ const express = require('express');
 const next = require('next');
 const nextI18NextMiddleware = require('next-i18next/middleware').default;
 
+const config = require('./src/config');
 const nextI18next = require('./src/lib/i18n');
 
 (async () => {
-  const port = process.env.PORT || 3000;
-  const app = next({ dev: process.env.NODE_ENV !== 'production' });
+  const { port } = config;
+  const app = next({ dev: config.development });
   const handle = app.getRequestHandler();
 
   await app.prepare();
