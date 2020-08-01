@@ -18,6 +18,7 @@ class User implements UserInterface {
 
 
     /** @var string email of user
+     * @Assert\Email()
      * @ORM\Column(type="string")
      * @Groups({"user:read"})
      */
@@ -93,7 +94,7 @@ class User implements UserInterface {
      * @see UserInterface
      */
     public function getSalt() {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**

@@ -182,6 +182,9 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+    "nette/utils": {
+        "version": "v3.1.2"
+    },
     "nikic/php-parser": {
         "version": "v4.4.0"
     },

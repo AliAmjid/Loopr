@@ -10,7 +10,7 @@ use App\Entity\User;
 class Token {
 
     /**
-     * @var string
+     * @var string Use token in header like this: 'Authorization: Bearer {token}'
      */
     private string $token;
     /** @var User
