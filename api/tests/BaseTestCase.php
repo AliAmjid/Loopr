@@ -18,6 +18,7 @@ abstract class BaseTestCase extends TestCase {
     protected Kernel $kernel;
     protected EntityManagerInterface $em;
     protected Registry $doctrine;
+
     use TCreateEntityHelpers;
 
 
@@ -28,6 +29,12 @@ abstract class BaseTestCase extends TestCase {
 
         $this->doctrine = $this->kernel->getContainer()->get('doctrine');
         $this->em = $this->doctrine->getManager();
+    }
+
+    protected function tearDown(): void {
+        $this->deleteAllTestingEntities();
+
+        parent::tearDown();
     }
 
     protected function getClient($token = null) {

@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 trait TCreateEntityHelpers {
 
+    protected $testingEntities = [];
+
     protected function createRandomUser($password = 'test', $roles = ['ROLE_USER']): User {
         $user = new User();
         $user->setUsername(Random::generate(4) . "@test.cz");
@@ -21,6 +23,16 @@ trait TCreateEntityHelpers {
         $user->setRoles($roles);
         $this->em->persist($user);
         $this->em->flush();
+        $this->testingEntities[] = $user;
         return $user;
+    }
+
+
+    protected function deleteAllTestingEntities() {
+        echo PHP_EOL . '[INFO] DELETING ALL CREATED ENTITIES' . PHP_EOL;
+        foreach ($this->testingEntities as $entity) {
+            $this->em->remove($entity);
+        }
+        $this->em->flush();
     }
 }
