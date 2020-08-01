@@ -34,6 +34,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	if ls -A src/Migrations/*.php > /dev/null 2>&1; then
 		bin/console doctrine:migrations:migrate --no-interaction
 	fi
+
 fi
 
 exec docker-php-entrypoint "$@"
