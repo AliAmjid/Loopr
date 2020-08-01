@@ -1,6 +1,6 @@
 App\Entity\User:
     attributes:
-        security: 'is_granted("USER")'
+        security: 'is_granted("ROLE_USER")'
     collectionOperations: {}
     itemOperations:
         get:

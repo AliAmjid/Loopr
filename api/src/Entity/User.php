@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -14,11 +16,12 @@ class User implements UserInterface {
 
     use Tid;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
+
+    /** @var string email of user
+     * @ORM\Column(type="string")
      * @Groups({"user:read"})
      */
-    private $email;
+    private $username;
 
     /**
      * @ORM\Column(type="json")
@@ -42,23 +45,18 @@ class User implements UserInterface {
         return $this->id;
     }
 
-    public function getEmail(): ?string {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self {
-        $this->email = $email;
-
-        return $this;
+    /**
+     * @return string
+     */
+    public function getUsername(): string {
+        return $this->username;
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
+     * @param string $username
      */
-    public function getUsername(): string {
-        return (string)$this->id;
+    public function setUsername(string $username): void {
+        $this->username = $username;
     }
 
     /**

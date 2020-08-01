@@ -28,10 +28,10 @@ class LoginController extends AbstractController implements QueryItemResolverInt
     public function __invoke($item, array $context) {
         $args = $context['args'];
         /** @var User $user */
-        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['email' => $args['email']]);
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['username' => $args['username']]);
 
         if ($user && $this->encored->isPasswordValid($user, $args['password'])) {
-            return new Token($this->JWTEncoder->encode(['username' => $user->getId()]), $user);
+            return new Token($this->JWTEncoder->encode(['username' => $user->getUsername()]), $user);
         } else {
             throw new \Exception("User not found");
         }
