@@ -4,6 +4,7 @@
 namespace App\Tests;
 
 
+use App\GraphqlClient\GraphQLClientBuilder;
 use App\Kernel;
 use App\Tests\Helpers\TCreateEntityHelpers;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -30,7 +31,7 @@ abstract class BaseTestCase extends TestCase {
     }
 
     protected function getClient($token = null) {
-        return ClientBuilder::build('http://api:80/graphql', $token ? [
+        return GraphQLClientBuilder::build('http://api:80/graphql', $token ? [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token
             ]
@@ -52,8 +53,6 @@ abstract class BaseTestCase extends TestCase {
     }
 
     protected function assertNoErrors(Response $response, $errors = 0) {
-        print_r($response->getErrors());
-
         $this->assertEquals($errors, count($response->getErrors()), 'There are un-expected errors');
     }
 }

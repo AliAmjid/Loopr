@@ -10,7 +10,6 @@ use PHPUnit\Util\Exception;
 class LoginControllerTestCase extends BaseTestCase {
 
     public function testGetTokenAndLogin() {
-
         $user = $this->createRandomUser();
         $client = $this->getClient();
         $response = $client->query(
