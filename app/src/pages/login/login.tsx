@@ -1,53 +1,61 @@
 import React from 'react';
 
+import { Button, TextField } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { i18n, withTranslation } from 'lib/i18n';
+import { useTranslation } from 'lib/i18n';
 
 import { FormValues, LoginProps } from './types';
 
-const Login = ({ t, ...props }: LoginProps): JSX.Element => {
+const Login = (props: LoginProps): JSX.Element => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const submitHandler = (values: FormValues): void => {
     props.onSubmit(values.email, values.password);
   };
 
+  const { t, i18n } = useTranslation('login');
+
   return (
-    <>
+    <div tour-id="loginForm" style={{ width: 'fit-content' }}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>
-          {t('email')}
-          :
-          <input
+          <TextField
             name="email"
-            ref={register({ required: true })}
-            test-id="emailInput"
+            label={t('email')}
+            inputRef={register({ required: true })}
+            inputProps={{ 'test-id': 'emailInput' }}
           />
         </div>
         <div>
-          {t('password')}
-          :
-          <input
+          <TextField
             name="password"
-            ref={register({ required: true })}
-            test-id="passwordInput"
+            label={t('password')}
+            inputRef={register({ required: true })}
+            inputProps={{ 'test-id': 'passwordInput' }}
           />
         </div>
-        <button type="submit" test-id="submitButton">
+        <Button
+          type="submit"
+          test-id="submitButton"
+          tour-id="submitButton"
+          color="primary"
+          variant="contained"
+        >
           {t('logIn')}
-        </button>
+        </Button>
       </form>
-      <button
+      <Button
+        tour-id="languageButton"
         type="button"
         onClick={(): void => {
           i18n.changeLanguage(i18n.language === 'cs' ? 'en' : 'cs');
         }}
       >
         {t('common:changeLanguage')}
-      </button>
-    </>
+      </Button>
+    </div>
   );
 };
 
-export default withTranslation('login')(Login);
+export default Login;

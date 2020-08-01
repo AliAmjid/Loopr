@@ -7,9 +7,9 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-fetch';
 
-const withApollo = <ComponentProps extends {} = any>(Component: React.FC) => (
-  props: ComponentProps,
-) => {
+const withApollo = <ComponentProps extends {} = any>(
+  Component: React.FC<ComponentProps>,
+) => (props: ComponentProps): JSX.Element => {
   const cache = new InMemoryCache();
 
   const newClient = (): ApolloClient<{}> => {
@@ -29,6 +29,9 @@ const withApollo = <ComponentProps extends {} = any>(Component: React.FC) => (
     setUpdated(true);
     persistCache({
       cache,
+      // TODO fix
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       storage: window.localStorage,
       debug: true,
     }).then(() => setClient(newClient()));

@@ -96,6 +96,18 @@ services:
         published: 7080
         protocol: tcp
 
+  app:
+    container_name: loopr_app
+    build:
+      context: ./app
+      dockerfile: ../docker/app/dev/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+      - /app/.next
+
 volumes:
   db-data: {}
   dev-certs: {}
