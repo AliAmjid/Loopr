@@ -1,0 +1,38 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+"A node, according to the Relay specification."
+interface Node {
+    "The id of this node."
+    id: ID!
+}
+
+type Query {
+    getToken(password: String!, username: String!): Token
+    meUser: User
+    node(id: ID!): Node
+}
+
+type Token implements Node {
+    id: ID!
+    token: String!
+    user: User!
+}
+
+type User implements Node {
+    _id: String!
+    id: ID!
+    name: String!
+    "The hashed password"
+    password: String!
+    roles: Iterable!
+    "email of user"
+    username: String!
+}
+
+
+"The `Iterable` scalar type represents an array or a Traversable with any kind of data."
+scalar Iterable

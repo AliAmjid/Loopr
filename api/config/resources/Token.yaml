@@ -1,0 +1,17 @@
+App\Object\Token:
+    #disable rest
+    collectionOperations: {}
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        get:
+            item_query: App\Controller\LoginController
+            args:
+                username:
+                    type: String!
+                password:
+                    type: String!

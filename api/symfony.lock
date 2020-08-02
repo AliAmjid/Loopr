@@ -134,6 +134,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "justinrainbow/json-schema": {
+        "version": "5.2.9"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -143,8 +146,29 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"
     },
+    "lcobucci/jwt": {
+        "version": "3.3.1"
+    },
     "league/html-to-markdown": {
         "version": "4.9.1"
+    },
+    "league/oauth2-client": {
+        "version": "2.4.1"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nelmio/cors-bundle": {
         "version": "1.5",
@@ -157,6 +181,9 @@
         "files": [
             "config/packages/nelmio_cors.yaml"
         ]
+    },
+    "nette/utils": {
+        "version": "v3.1.2"
     },
     "nikic/php-parser": {
         "version": "v4.4.0"
@@ -203,8 +230,17 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
+    "softonic/graphql-client": {
+        "version": "1.2.0"
+    },
+    "softonic/guzzle-oauth2-middleware": {
+        "version": "1.3"
+    },
     "symfony/asset": {
         "version": "v5.0.7"
+    },
+    "symfony/browser-kit": {
+        "version": "v5.0.8"
     },
     "symfony/cache": {
         "version": "v5.0.7"
@@ -228,11 +264,17 @@
             "config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.0.8"
+    },
     "symfony/dependency-injection": {
         "version": "v5.0.7"
     },
     "symfony/doctrine-bridge": {
         "version": "v5.0.7"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.0.8"
     },
     "symfony/dotenv": {
         "version": "v5.0.7"
@@ -332,6 +374,21 @@
     "symfony/options-resolver": {
         "version": "v5.0.7"
     },
+    "symfony/phpunit-bridge": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.15.0"
     },
@@ -403,6 +460,9 @@
     "symfony/stopwatch": {
         "version": "v5.0.7"
     },
+    "symfony/test-pack": {
+        "version": "v1.0.6"
+    },
     "symfony/translation-contracts": {
         "version": "v2.0.1"
     },
@@ -470,6 +530,9 @@
     },
     "webmozart/assert": {
         "version": "1.8.0"
+    },
+    "webonyx/graphql-php": {
+        "version": "v0.13.8"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"

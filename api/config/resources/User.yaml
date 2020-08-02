@@ -1,0 +1,14 @@
+App\Entity\User:
+    attributes:
+        security: 'is_granted("ROLE_USER")'
+    collectionOperations: {}
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        me:
+            item_query: App\Controller\GetMeController
+            args: []
