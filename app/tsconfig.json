@@ -18,11 +18,20 @@
     "jsx": "preserve",
     "baseUrl": "src",
     "paths": {
-      "config/*": ["config/*"],
-      "lib/*": ["lib/*"],
-      "pages/*": ["pages/*"],
-      "components/*": ["components/*"]
-    }
+      "config/*": [
+        "config/*"
+      ],
+      "lib/*": [
+        "lib/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ],
+      "components/*": [
+        "components/*"
+      ]
+    },
+    "isolatedModules": true
   },
   "exclude": [
     "node_modules"

@@ -4,4 +4,4 @@ const config = {
   apiURL: process.env.apiURL || 'https://smeny.krystof-rezac.cz/graphql',
 };
 
-export default config;
+module.exports = config;
