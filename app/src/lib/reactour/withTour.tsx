@@ -19,7 +19,6 @@ const withTour = <ComponentProps extends {} = any>(
   const [tour, setTour] = useState(true);
 
   const { t } = useTranslation(defaultNamespace);
-  console.log(config.disableTour);
 
   return (
     <>

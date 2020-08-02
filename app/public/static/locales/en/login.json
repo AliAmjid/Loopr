@@ -1,5 +1,8 @@
 {
-  "email": "email",
-  "password": "password",
-  "logIn": "log in"
+  "title": "Login",
+  "email": "Email",
+  "password": "Password",
+  "logIn": "Log in",
+  "forgottenPassword":"Forgotten password?",
+  "doNotHaveAccount": "Don`t have account yet?"
 }

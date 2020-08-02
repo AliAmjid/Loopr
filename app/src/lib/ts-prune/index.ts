@@ -18,3 +18,5 @@ exec(count, (err: any, stdout: any) => {
     });
   }
 });
+
+export default {};
