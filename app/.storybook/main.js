@@ -1,8 +1,3 @@
-const { withA11y } = require('@storybook/addon-a11y');
-
-const { withKnobs } = require('@storybook/addon-knobs');
-const { muiTheme: withMuiTheme } = require('storybook-addon-material-ui');
-
 const prettierConfig = require('../.prettierrc.js');
 
 module.exports = {

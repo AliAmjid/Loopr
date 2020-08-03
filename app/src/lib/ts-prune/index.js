@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { exec } = require('child_process');
 
 const command =
@@ -6,10 +5,10 @@ const command =
 
 const count = `${command} | wc -l`;
 
-exec(count, (err: any, stdout: any) => {
+exec(count, (err, stdout) => {
   if (err) throw new Error(`ts-prune - something went wrong.\n${err}`);
   if (+stdout > 0) {
-    exec(command, (err: any, stdout: any) => {
+    exec(command, (err, stdout) => {
       let message = 'Found some unused exports';
       if (!err) {
         message += `\n${stdout}`;
@@ -18,5 +17,3 @@ exec(count, (err: any, stdout: any) => {
     });
   }
 });
-
-export default {};
