@@ -1,6 +1,6 @@
 const languages = {
   cs: 'Čeština',
-  en: 'Angličtina',
+  en: 'English',
 };
 
 module.exports = languages;

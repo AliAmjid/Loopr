@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 
-import { IconButton, IconButtonProps, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
 
-import { useTranslation } from 'lib/i18n';
 import languages from 'lib/i18n/lanugages';
 
-const LanguageSelect = (props: IconButtonProps): JSX.Element => {
+import { LanguageSelectUIProps } from 'components/LanguageSelect/types';
+
+const LanguageSelectUI = ({
+  selectedLanguage,
+  onLanguageChange,
+  ...buttonProps
+}: LanguageSelectUIProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { i18n } = useTranslation('login');
 
   const clickHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -18,18 +22,13 @@ const LanguageSelect = (props: IconButtonProps): JSX.Element => {
     setAnchorEl(null);
   };
 
-  const changeHandler = (lang: string): void => {
-    i18n.changeLanguage(lang);
-  };
-
   const mappedMenuItems = Object.keys(languages).map(lang => (
     <MenuItem
       key={lang}
       onClick={() => {
-        changeHandler(lang);
-        closeHandler();
+        onLanguageChange(lang);
       }}
-      selected={i18n.language === lang}
+      selected={selectedLanguage === lang}
     >
       {
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -42,7 +41,7 @@ const LanguageSelect = (props: IconButtonProps): JSX.Element => {
   return (
     <>
       <IconButton
-        {...props}
+        {...buttonProps}
         aria-controls="languageSelectMenu"
         aria-haspopup="true"
         onClick={clickHandler}
@@ -61,4 +60,4 @@ const LanguageSelect = (props: IconButtonProps): JSX.Element => {
   );
 };
 
-export default LanguageSelect;
+export default LanguageSelectUI;

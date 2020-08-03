@@ -19,7 +19,7 @@ import Link from 'lib/next/Link';
 
 import { FormValues, LoginProps } from 'pages/login/types';
 
-import LanguageSelect from 'components/languageSelect';
+import LanguageSelect from 'components/LanguageSelect';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
