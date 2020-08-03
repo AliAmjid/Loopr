@@ -36,7 +36,7 @@ services:
       - php
     ports:
       - target: 80
-        published: 8001
+        published: 4000
 
   db:
     image: postgres:12-alpine
