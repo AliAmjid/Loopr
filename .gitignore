@@ -3,3 +3,5 @@
 /docker-compose.override.yml
 
 .idea
+
+docs/node_modules/

@@ -1,0 +1,12 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "docsify serve ./src --port 3001"
+  },
+  "dependencies": {
+    "docsify-cli": "^4.4.1"
+  }
+}
