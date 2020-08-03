@@ -1,4 +1,8 @@
+const { withA11y } = require('@storybook/addon-a11y');
+
 const { withKnobs } = require('@storybook/addon-knobs');
+const { muiTheme: withMuiTheme } = require('storybook-addon-material-ui');
+
 const prettierConfig = require('../.prettierrc.js');
 
 module.exports = {
@@ -7,6 +11,7 @@ module.exports = {
     '@storybook/addon-knobs/register',
     '@storybook/addon-a11y/register',
     '@storybook/addon-viewport/register',
+    'storybook-addon-material-ui/register',
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -16,7 +21,6 @@ module.exports = {
       },
     },
   ],
-  decorators: [withKnobs],
   webpackFinal: async config => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
