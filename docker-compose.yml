@@ -64,6 +64,17 @@ services:
       - ./app:/app
       - /app/node_modules
       - /app/.next
+  storybook:
+    container_name: loopr_storbook
+    build:
+      context: ./app
+      dockerfile: ../docker/app/dev/Dockerfile
+    ports: 
+      - 3002:3002
+    command: storybook
+    volumes:
+      - ./app:/app
+
 
 volumes:
   db-data: {}

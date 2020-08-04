@@ -13,7 +13,7 @@
     "ts": "tsc",
     "eslint": "eslint '*/**/*.{ts,tsx,js}' --fix",
     "fix": "yarn eslint && yarn ts && yarn check-exports",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook --port 3002",
     "test": "jest"
   },
   "dependencies": {
