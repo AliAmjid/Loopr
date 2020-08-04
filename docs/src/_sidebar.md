@@ -1,2 +1,0 @@
-- [Úvod](./README.md)
-- [Přihlášení](./login.md)
