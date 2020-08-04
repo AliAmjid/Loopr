@@ -8,4 +8,4 @@ const NextI18NextInstance = new NextI18Next({
   otherLanguages: Object.keys(languages),
 });
 
-module.exports = NextI18NextInstance;
+module.exports = { ...NextI18NextInstance, defaultLanguage };

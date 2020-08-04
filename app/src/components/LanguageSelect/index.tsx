@@ -3,7 +3,8 @@ import React from 'react';
 import { useTranslation } from 'lib/i18n';
 
 import LanguageSelectUI from 'components/LanguageSelect/LanguageSelectUI';
-import { LanguageSelectProps } from 'components/LanguageSelect/types';
+
+import { LanguageSelectProps } from './types';
 
 const LanguageSelect = (props: LanguageSelectProps): JSX.Element => {
   const { i18n } = useTranslation();

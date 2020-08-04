@@ -19,6 +19,7 @@ import Link from 'lib/next/Link';
 
 import { FormValues, LoginProps } from 'pages/login/types';
 
+import Help from 'components/Help';
 import LanguageSelect from 'components/LanguageSelect';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -90,9 +91,7 @@ const Login = (props: LoginProps): JSX.Element => {
               </Grid>
             </Grid>
             <Grid item xs={6}>
-              <IconButton size="small">
-                <HelpIcon />
-              </IconButton>
+              <Help path="login" size="small" />
             </Grid>
             <Grid item container xs={6} justify="flex-end">
               <LanguageSelect size="small" />

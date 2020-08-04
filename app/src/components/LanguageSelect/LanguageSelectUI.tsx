@@ -5,7 +5,7 @@ import TranslateIcon from '@material-ui/icons/Translate';
 
 import languages from 'lib/i18n/lanugages';
 
-import { LanguageSelectUIProps } from 'components/LanguageSelect/types';
+import { LanguageSelectUIProps } from './types';
 
 const LanguageSelectUI = ({
   selectedLanguage,
