@@ -2,7 +2,7 @@ version: '3.4'
 
 services:  
   app:
-    container_name: loopr_app
+    container_name: loopr_app_dev
     build:
       context: ./app
       dockerfile: ../docker/app/dev/Dockerfile
@@ -23,13 +23,3 @@ services:
     command: storybook --quiet
     volumes:
       - ./app:/app
-      
-  docs:
-    container_name: loopr_docs
-    build:
-      context: ./docs
-      dockerfile: ../docker/docs/Dockerfile
-    ports:
-      - 3001:3001
-    volumes:
-      - ./docs:/docs 

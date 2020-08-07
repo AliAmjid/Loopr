@@ -1,4 +1,4 @@
-FROM node:12.16.3
+FROM node:12.18.3
 
 RUN mkdir /app
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN yarn install
 
 COPY ./ ./
 
-RUN yarn prod:build
+RUN yarn build
 
 EXPOSE 3000
-CMD ["yarn","prod:start"]
+CMD ["yarn","start"]
