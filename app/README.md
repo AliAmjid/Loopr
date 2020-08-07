@@ -1,8 +1,8 @@
-# Loopr app
+# App
 Frontend part of Loopr project
 
 ## Requirements
-- node 12.16.3
+- node 12.18.3
 - yarn 1.x
 
 ## Setup
@@ -13,6 +13,9 @@ Frontend part of Loopr project
 
 ## Testing
 - `yarn test`
+
+## Storybook
+- `yarn storybook`
 
 ## Config
 - You can edit config by environment variables in cli or in `.env`

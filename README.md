@@ -17,16 +17,16 @@ Run `make` and appropriate command
 |prod-down|Remove bundle in **production** mode|
 
 ## Bundle parts
-### Api
+### [Api](./api)
 > Backend
 - Default port: 4000
-### App
+### [App](./app)
 > Frontend web app
 - Default port: 3000
-### Docs
+### [Docs](./docs)
 > User documentation for `app` 
 - Default port: 3001
-### Storybook
+### [Storybook](./app)
 > Showcase of components for `app`
 >
 > Runs only in docker development mode  
