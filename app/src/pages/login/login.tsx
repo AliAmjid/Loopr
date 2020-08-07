@@ -4,14 +4,12 @@ import {
   Button,
   Container,
   Grid,
-  IconButton,
   makeStyles,
   Paper,
   TextField,
   Theme,
   Typography,
 } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/HelpOutline';
 import { useForm } from 'react-hook-form';
 
 import { useTranslation } from 'lib/i18n';

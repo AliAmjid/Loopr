@@ -8,6 +8,7 @@ import loginTour from 'pages/login/tour';
 
 const LoginIndex = (): JSX.Element => {
   const submitHandler = (email: string, password: string): void => {
+    // eslint-disable-next-line no-alert
     alert(`${email} ${password}`);
   };
 

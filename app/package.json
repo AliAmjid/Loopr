@@ -12,7 +12,7 @@
     "check-exports": "node src/lib/ts-prune",
     "ts": "tsc",
     "eslint": "eslint '*/**/*.{ts,tsx,js}' --fix",
-    "fix": "yarn eslint && yarn ts && yarn check-exports",
+    "fix": "yarn eslint && yarn ts && yarn check-exports && yarn test",
     "storybook": "start-storybook --port 3002",
     "test": "jest"
   },
