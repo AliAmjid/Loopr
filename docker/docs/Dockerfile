@@ -1,13 +1,13 @@
 FROM node:12.18.3
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /docs
+WORKDIR /docs
 
 COPY ./package.json ./
 COPY ./yarn.lock ./
 
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 3001
 ENTRYPOINT ["yarn"]
-CMD ["dev"]
+CMD ["start"]

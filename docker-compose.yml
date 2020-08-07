@@ -50,18 +50,15 @@ services:
       - target: 5432
         published: 5432
         protocol: tcp
-
-  app:
-    container_name: loopr_app
+  docs:
+    container_name: loopr_docs
     build:
-      context: ./app
-      dockerfile: ../docker/app/dev/Dockerfile
+      context: ./docs
+      dockerfile: ../docker/docs/Dockerfile
     ports:
-      - 3000:3000
+      - 3001:3001
     volumes:
-      - ./app:/app
-      - /app/node_modules
-      - /app/.next
+      - ./docs:/docs
 
 volumes:
   db-data: {}

@@ -9,18 +9,13 @@ Frontend part of Loopr project
 1. `yarn install`
 
 ## Development
-start app in development mode: `yarn dev`
+-  `yarn dev`
 
 ## Testing
 - `yarn test`
-- test as much as possible
 
-## Rules
-- Use yarn
-- Before each commit run `yarn fix` or at least before pull request 
-- Every component (`components` folder) must have storybook file
-- Translate everything 
-    - Every page(folder) even components must have own translation file
-    - Write only into cs folder, others will be translated later
+## Config
+- You can edit config by environment variables in cli or in `.env`
+
 ## Other
-- Do not update core-js to version 3 - next-i18next requires version 2, it would break storybook
+- Do not update `core-js` to version 3 - next-i18next requires version 2, it would break storybook

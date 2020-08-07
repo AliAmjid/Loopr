@@ -19,8 +19,7 @@ const LoginIndex = (): JSX.Element => {
 };
 
 const LoginIndexWithTour = withNamespaces(
-  // withTour(LoginIndex, loginTour, 'login'),
-  LoginIndex,
+  withTour(LoginIndex, loginTour, 'login'),
   ['login', 'common'],
 );
 

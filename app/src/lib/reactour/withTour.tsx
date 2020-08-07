@@ -5,6 +5,8 @@ import { TFunction } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { ReactourStep } from 'reactour';
 
+import config from 'config';
+
 import { useTranslation } from 'lib/i18n';
 
 const Tour = dynamic(() => import('reactour'), { ssr: false });
@@ -20,11 +22,13 @@ const withTour = <ComponentProps extends {} = any>(
 
   return (
     <>
-      <Tour
-        steps={steps(t)}
-        isOpen={tour}
-        onRequestClose={() => setTour(false)}
-      />
+      {!config.disableTour && (
+        <Tour
+          steps={steps(t)}
+          isOpen={tour}
+          onRequestClose={() => setTour(false)}
+        />
+      )}
       <Component {...props} />
     </>
   );
