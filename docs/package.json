@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
+  "engines": {
+    "node": "12.18.3"
+  },
   "scripts": {
     "start": "docsify serve ./src --port 3001"
   },

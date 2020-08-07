@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:  
+  app:
+    container_name: loopr_app
+    build:
+      context: ./app
+      dockerfile: ../docker/app/dev/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+      - /app/.next
+      
+  storybook:
+    container_name: loopr_storbook
+    build:
+      context: ./app
+      dockerfile: ../docker/app/dev/Dockerfile
+    ports:
+      - 3002:3002
+    command: storybook --quiet
+    volumes:
+      - ./app:/app
+      
+  docs:
+    container_name: loopr_docs
+    build:
+      context: ./docs
+      dockerfile: ../docker/docs/Dockerfile
+    ports:
+      - 3001:3001
+    volumes:
+      - ./docs:/docs 
