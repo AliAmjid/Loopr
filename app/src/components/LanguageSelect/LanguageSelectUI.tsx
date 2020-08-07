@@ -29,6 +29,7 @@ const LanguageSelectUI = ({
         onLanguageChange(lang);
       }}
       selected={selectedLanguage === lang}
+      test-id="LanguageSelectUI-menuItem"
     >
       {
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -45,6 +46,7 @@ const LanguageSelectUI = ({
         aria-controls="languageSelectMenu"
         aria-haspopup="true"
         onClick={clickHandler}
+        test-id="LanguageSelectUI-languageButton"
       >
         <TranslateIcon />
       </IconButton>
