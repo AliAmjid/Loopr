@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount } from 'enzyme';
 
-import testId from 'lib/jest/testId';
+import testId from 'lib/jest/helpers/testId';
 
 import HelpUI from 'components/Help/HelpUI';
 

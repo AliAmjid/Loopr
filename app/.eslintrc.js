@@ -108,7 +108,7 @@ module.exports = {
         '.storybook/*',
         'src/lib/storybook/*',
         '*.test*',
-        'src/lib/jest/*',
+        'src/lib/jest/**',
       ],
       rules: {
         'import/no-extraneous-dependencies': [
