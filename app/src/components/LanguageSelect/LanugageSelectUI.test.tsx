@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
+import { I18nextProvider } from 'react-i18next';
 
-import { defaultLanguage, languages } from 'lib/i18n';
+import translations, { defaultLanguage, languages } from 'lib/i18n';
 import children from 'lib/jest/children';
 import testId from 'lib/jest/testId';
 
@@ -12,10 +13,12 @@ describe('LanguageSelectUI', () => {
   it('Should fire callback on language change', () => {
     const languageChangeHandler = jest.fn(() => {});
     const wrapper = mount(
-      <LanguageSelectUI
-        selectedLanguage={defaultLanguage}
-        onLanguageChange={languageChangeHandler}
-      />,
+      <I18nextProvider i18n={translations.i18n}>
+        <LanguageSelectUI
+          selectedLanguage={defaultLanguage}
+          onLanguageChange={languageChangeHandler}
+        />
+      </I18nextProvider>,
     );
 
     const changeLanguage = Object.keys(languages).find(

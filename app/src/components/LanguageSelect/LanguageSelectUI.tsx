@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
 
-import languages from 'lib/i18n/lanugages';
+import { languages } from 'lib/i18n';
 
 import { LanguageSelectUIProps } from './types';
 

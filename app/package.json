@@ -14,7 +14,8 @@
     "eslint": "eslint '*/**/*.{ts,tsx,js}' --fix",
     "fix": "yarn eslint && yarn ts && yarn check-exports && yarn test",
     "storybook": "start-storybook --port 3002",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage":"jest --coverage"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
