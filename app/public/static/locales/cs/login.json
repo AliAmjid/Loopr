@@ -1,5 +1,8 @@
 {
-  "email": "email",
-  "password": "heslo",
-  "logIn": "přihlásit se"
+  "title": "Přihlášení",
+  "email": "Email",
+  "password": "Heslo",
+  "logIn": "Přihlásit se",
+  "forgottenPassword":"Zapomenuté heslo?",
+  "doNotHaveAccount": "Ještě nemáte účet?"
 }

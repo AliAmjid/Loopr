@@ -2,13 +2,13 @@ import React from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import App, { AppContext } from 'next/app';
+import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 
 import { appWithTranslation } from 'lib/i18n';
 import theme from 'lib/material-ui/theme';
 
-const MyApp = (props: any): JSX.Element => {
+const MyApp = (props: AppProps): JSX.Element => {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {

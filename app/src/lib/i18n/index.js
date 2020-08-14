@@ -1,8 +1,16 @@
 const NextI18Next = require('next-i18next').default;
+const path = require('path');
+
+const languages = {
+  cs: 'Čeština',
+  en: 'English',
+};
+const defaultLanguage = 'cs';
 
 const NextI18NextInstance = new NextI18Next({
-  defaultLanguage: 'cs',
-  otherLanguages: ['en'],
+  defaultLanguage,
+  otherLanguages: Object.keys(languages),
+  localePath: path.resolve('./public/static/locales'),
 });
 
-module.exports = NextI18NextInstance;
+module.exports = { ...NextI18NextInstance, defaultLanguage, languages };

@@ -8,6 +8,7 @@ import loginTour from 'pages/login/tour';
 
 const LoginIndex = (): JSX.Element => {
   const submitHandler = (email: string, password: string): void => {
+    // eslint-disable-next-line no-alert
     alert(`${email} ${password}`);
   };
 
@@ -19,8 +20,7 @@ const LoginIndex = (): JSX.Element => {
 };
 
 const LoginIndexWithTour = withNamespaces(
-  // withTour(LoginIndex, loginTour, 'login'),
-  LoginIndex,
+  withTour(LoginIndex, loginTour, 'login'),
   ['login', 'common'],
 );
 

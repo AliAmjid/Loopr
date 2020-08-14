@@ -32,6 +32,8 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-prototype-builtins': 'off',
     'no-shadow': 'off',
+    'no-alert': 'error',
+    'no-console': 'error',
     'react/jsx-curly-newline': 'off',
     'import/extensions': [
       'error',
@@ -49,6 +51,7 @@ module.exports = {
         groups: [
           ['^react$'],
           ['^@?\\w'],
+          ['^config'],
           ['^lib'],
           ['^pages'],
           ['^components'],
@@ -88,6 +91,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
   },
   overrides: [
     {
@@ -95,6 +99,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/typedef': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
     {
@@ -103,7 +108,7 @@ module.exports = {
         '.storybook/*',
         'src/lib/storybook/*',
         '*.test*',
-        'src/lib/jest/*',
+        'src/lib/jest/**',
       ],
       rules: {
         'import/no-extraneous-dependencies': [

@@ -7,6 +7,8 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-fetch';
 
+import config from 'config';
+
 const withApollo = <ComponentProps extends {} = any>(
   Component: React.FC<ComponentProps>,
 ) => (props: ComponentProps): JSX.Element => {
@@ -15,7 +17,7 @@ const withApollo = <ComponentProps extends {} = any>(
   const newClient = (): ApolloClient<{}> => {
     return new ApolloClient({
       link: createHttpLink({
-        uri: 'https://smeny.krystof-rezac.cz/graphql',
+        uri: config.apiURL,
         fetch,
       }),
       cache,
@@ -29,7 +31,6 @@ const withApollo = <ComponentProps extends {} = any>(
     setUpdated(true);
     persistCache({
       cache,
-      // TODO fix
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       storage: window.localStorage,

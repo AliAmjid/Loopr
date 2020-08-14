@@ -1,60 +1,103 @@
 import React from 'react';
 
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  Container,
+  Grid,
+  makeStyles,
+  Paper,
+  TextField,
+  Theme,
+  Typography,
+} from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
 import { useTranslation } from 'lib/i18n';
+import Link from 'lib/next/Link';
 
-import { FormValues, LoginProps } from './types';
+import { FormValues, LoginProps } from 'pages/login/types';
+
+import Help from 'components/Help';
+import LanguageSelect from 'components/LanguageSelect';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  paper: {
+    padding: theme.spacing(4),
+    marginTop: theme.spacing(20),
+  },
+  form: {
+    width: '100%',
+  },
+}));
 
 const Login = (props: LoginProps): JSX.Element => {
+  const classes = useStyles();
   const { register, handleSubmit } = useForm<FormValues>();
+  const { t } = useTranslation('login');
 
   const submitHandler = (values: FormValues): void => {
     props.onSubmit(values.email, values.password);
   };
 
-  const { t, i18n } = useTranslation('login');
-
   return (
-    <div tour-id="loginForm" style={{ width: 'fit-content' }}>
-      <form onSubmit={handleSubmit(submitHandler)}>
-        <div>
-          <TextField
-            name="email"
-            label={t('email')}
-            inputRef={register({ required: true })}
-            inputProps={{ 'test-id': 'emailInput' }}
-          />
-        </div>
-        <div>
-          <TextField
-            name="password"
-            label={t('password')}
-            inputRef={register({ required: true })}
-            inputProps={{ 'test-id': 'passwordInput' }}
-          />
-        </div>
-        <Button
-          type="submit"
-          test-id="submitButton"
-          tour-id="submitButton"
-          color="primary"
-          variant="contained"
-        >
-          {t('logIn')}
-        </Button>
-      </form>
-      <Button
-        tour-id="languageButton"
-        type="button"
-        onClick={(): void => {
-          i18n.changeLanguage(i18n.language === 'cs' ? 'en' : 'cs');
-        }}
-      >
-        {t('common:changeLanguage')}
-      </Button>
-    </div>
+    <Container maxWidth="xs">
+      <Paper className={classes.paper}>
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h4" component="h1">
+                {t('title')}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="email"
+                label={t('email')}
+                fullWidth
+                inputRef={register({ required: true })}
+                inputProps={{ 'test-id': 'Login-emailInput' }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="password"
+                label={t('password')}
+                fullWidth
+                inputRef={register({ required: true })}
+                inputProps={{ 'test-id': 'Login-passwordInput' }}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                fullWidth
+                test-id="Login-submitButton"
+                tour-id="Login-submitButton"
+              >
+                {t('logIn')}
+              </Button>
+            </Grid>
+            <Grid container item xs={12}>
+              <Grid item xs={6}>
+                <Link href="/index">{t('forgottenPassword')}</Link>
+              </Grid>
+              <Grid container item xs={6} justify="flex-end">
+                <Link href="/index">{t('doNotHaveAccount')}</Link>
+              </Grid>
+            </Grid>
+            <Grid item xs={6}>
+              <Help path="login" size="small" />
+            </Grid>
+            <Grid item container xs={6} justify="flex-end">
+              <LanguageSelect size="small" />
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+    </Container>
   );
 };
 
