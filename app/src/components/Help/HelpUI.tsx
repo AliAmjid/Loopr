@@ -7,7 +7,7 @@ import { HelpUIProps } from 'components/Help/types';
 
 const HelpUI = (props: HelpUIProps): JSX.Element => {
   return (
-    <IconButton {...props}>
+    <IconButton {...props} test-id="HelpUI-button">
       <HelpIcon />
     </IconButton>
   );

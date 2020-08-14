@@ -4,14 +4,12 @@ import {
   Button,
   Container,
   Grid,
-  IconButton,
   makeStyles,
   Paper,
   TextField,
   Theme,
   Typography,
 } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/HelpOutline';
 import { useForm } from 'react-hook-form';
 
 import { useTranslation } from 'lib/i18n';
@@ -57,7 +55,7 @@ const Login = (props: LoginProps): JSX.Element => {
                 label={t('email')}
                 fullWidth
                 inputRef={register({ required: true })}
-                inputProps={{ 'test-id': 'emailInput' }}
+                inputProps={{ 'test-id': 'Login-emailInput' }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,7 +64,7 @@ const Login = (props: LoginProps): JSX.Element => {
                 label={t('password')}
                 fullWidth
                 inputRef={register({ required: true })}
-                inputProps={{ 'test-id': 'passwordInput' }}
+                inputProps={{ 'test-id': 'Login-passwordInput' }}
               />
             </Grid>
 
@@ -76,8 +74,8 @@ const Login = (props: LoginProps): JSX.Element => {
                 color="primary"
                 variant="contained"
                 fullWidth
-                test-id="submitButton"
-                tour-id="submitButton"
+                test-id="Login-submitButton"
+                tour-id="Login-submitButton"
               >
                 {t('logIn')}
               </Button>
