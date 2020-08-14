@@ -1,16 +1,28 @@
 import React from 'react';
 
+import { useLazyQuery } from '@apollo/react-hooks';
+
+import withApollo from 'lib/apollo/withApollo';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 
-import Login from 'pages/login/login';
-import loginTour from 'pages/login/tour';
+import getTokenQuery, {
+  GetTokenQuery,
+  GetTokenQueryVars,
+} from './getToken.query';
+import Login from './login';
+import loginTour from './tour';
 
 const LoginIndex = (): JSX.Element => {
+  const [getToken, { data, error, loading }] = useLazyQuery<
+    GetTokenQuery,
+    GetTokenQueryVars
+  >(getTokenQuery);
   const submitHandler = (email: string, password: string): void => {
-    // eslint-disable-next-line no-alert
-    alert(`${email} ${password}`);
+    getToken({ variables: { username: email, password } });
   };
+
+  console.log(loading, data, error);
 
   return (
     <>
@@ -24,4 +36,4 @@ const LoginIndexWithTour = withNamespaces(
   ['login', 'common'],
 );
 
-export default LoginIndexWithTour;
+export default withApollo(LoginIndexWithTour);
