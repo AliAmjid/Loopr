@@ -15,7 +15,7 @@
     "fix": "yarn eslint && yarn ts && yarn check-exports && yarn test",
     "storybook": "start-storybook --port 3002",
     "test": "jest",
-    "test:coverage":"jest --coverage"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -32,7 +32,7 @@
     "graphql": "^15.0.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "^9.3.6",
-    "next-i18next": "^4.4.1",
+    "next-i18next": "^6.0.2",
     "next-offline": "^5.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

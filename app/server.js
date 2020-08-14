@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const next = require('next');
-const nextI18NextMiddleware = require('next-i18next/middleware').default;
+
 const prefabConfig = require('./src/config/prefab');
 
 const nextI18next = require('./src/lib/i18n');
@@ -29,8 +29,6 @@ const createConfig = () => {
   // eslint-disable-next-line global-require
   const config = require('./src/config');
   const { port } = config;
-
-  server.use(nextI18NextMiddleware(nextI18next));
 
   server.get('/service-worker.js', (req, res) => {
     const filePath = path.join(__dirname, './', '.next', 'service-worker.js');
