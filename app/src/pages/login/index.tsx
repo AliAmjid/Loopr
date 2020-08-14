@@ -17,7 +17,7 @@ const LoginIndex = (): JSX.Element => {
   const [getToken, { data, error, loading }] = useLazyQuery<
     GetTokenQuery,
     GetTokenQueryVars
-  >(getTokenQuery);
+  >(getTokenQuery, { fetchPolicy: 'no-cache' });
   const submitHandler = (email: string, password: string): void => {
     getToken({ variables: { username: email, password } });
   };
