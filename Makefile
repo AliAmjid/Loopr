@@ -18,3 +18,5 @@ prod-up-build:
 	sudo docker-compose $(dockerComposeProdFiles) up --build
 prod-down:
 	sudo docker-compose $(dockerComposeProdFiles) down
+loopr:
+	docker-compose exec php bin/console
