@@ -1,6 +1,6 @@
 const notTest = {
   presets: ['next/babel'],
-  // plugins: [['react-remove-properties', { properties: ['test-id'] }]],
+  plugins: [['react-remove-properties', { properties: ['test-id'] }]],
 };
 module.exports = {
   plugins: [
