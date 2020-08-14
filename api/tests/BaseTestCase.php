@@ -4,8 +4,10 @@
 namespace App\Tests;
 
 
+use App\GraphqlClient\GraphQLClient;
 use App\GraphqlClient\GraphQLClientBuilder;
 use App\Kernel;
+use App\Tests\Helpers\TAssertsHelper;
 use App\Tests\Helpers\TCreateEntityHelpers;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,11 +18,12 @@ use Softonic\GraphQL\Response;
 abstract class BaseTestCase extends TestCase {
 
     protected Kernel $kernel;
+    /** @var EntityManagerInterface $em */
     protected EntityManagerInterface $em;
     protected Registry $doctrine;
 
     use TCreateEntityHelpers;
-
+    use TAssertsHelper;
 
     protected function setUp(): void {
         parent::setUp();
@@ -48,7 +51,7 @@ abstract class BaseTestCase extends TestCase {
     protected function createLoggedClient(
         $username,
         $password
-    ) {
+    ): GraphQLClient {
         $response = $this->getClient()->query(
         /** @lang GraphQL */
             'query Token($username : String!, $password : String!) {getToken(username: $username, password: $password ) {token}}', [
@@ -56,7 +59,7 @@ abstract class BaseTestCase extends TestCase {
             'password' => $password
         ]);
         $this->assertNoErrors($response);
-        return $this->getClient($response['getToken']['token']);
+        return $this->getClient($response->getData()['getToken']['token']);
     }
 
     protected function assertNoErrors(Response $response, $errors = 0) {

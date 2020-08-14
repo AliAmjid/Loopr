@@ -22,6 +22,7 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['api_platform.graphql.query_resolver']
+        
     jwt_token_authenticator:
         class: 'App\Security\JwtTokenAuthenticator'
         autowire: true

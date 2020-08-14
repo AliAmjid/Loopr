@@ -1,6 +1,5 @@
 App\Entity\User:
     attributes:
-        security: 'is_granted("ROLE_USER")'
     collectionOperations: {}
     itemOperations:
         get:
@@ -10,5 +9,14 @@ App\Entity\User:
             output: false
     graphql:
         me:
+            security_message: "USER_LOGGED is required"
+            security: "is_granted('USER_LOGGED')"
             item_query: App\Controller\GetMeController
             args: []
+            normalization_context:
+                groups:
+                    - user:read
+                    - aclRole:read
+        test:
+            item_query: 
+            

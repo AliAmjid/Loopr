@@ -37,7 +37,7 @@ class GraphQLClient {
         }
 
         try {
-            $this->writeInfo('[REQUEST] ' . PHP_EOL . var_export($options, true));
+            $this->writeInfo('[REQUEST] ' . PHP_EOL . json_encode($options, JSON_PRETTY_PRINT));
             $response = $this->httpClient->request('POST', '', $options);
 
         } catch (TransferException $e) {
@@ -45,7 +45,7 @@ class GraphQLClient {
         }
 
         $response = $this->responseBuilder->build($response);
-        $this->writeInfo('[RESPONSE] ' . var_export($response, true));
+        $this->writeInfo('[RESPONSE] ' . json_encode($response->getData(), JSON_PRETTY_PRINT));
         return $response;
     }
 
