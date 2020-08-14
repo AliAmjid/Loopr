@@ -1,11 +1,12 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Entity\Attributes;
 
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Tid {
     /**
@@ -14,8 +15,9 @@ trait Tid {
      * @ORM\Id()
      * @ORM\Column(type="guid")
      * @ApiProperty(identifier=true)
+     * @Groups({"read", "user:read", "id"})
      */
-    private $id;
+    private string $id;
 
     /**
      * @return string

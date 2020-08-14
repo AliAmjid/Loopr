@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,10 +26,11 @@ class User implements UserInterface {
     private $username;
 
     /**
-     * @ORM\Column(type="json")
-     * @Groups({"user:read"})
+     * @ORM\ManyToOne(targetEntity="AclRole")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"aclRole:read"})
      */
-    private $roles = [];
+    private AclRole $role;
 
     /**
      * @var string The hashed password
@@ -64,17 +66,15 @@ class User implements UserInterface {
      * @see UserInterface
      */
     public function getRoles(): array {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return ['ROLE_USER'];
     }
 
-    public function setRoles(array $roles): self {
-        $this->roles = $roles;
+    public function setRole(AclRole $role): void {
+        $this->role = $role;
+    }
 
-        return $this;
+    public function getRole(): AclRole {
+        return $this->role;
     }
 
     /**
@@ -112,5 +112,12 @@ class User implements UserInterface {
     public function setName(string $name): self {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @Groups({"user:read"})
+     */
+    public function getResources() {
+        return $this->getRoles();
     }
 }

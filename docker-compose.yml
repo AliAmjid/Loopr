@@ -27,6 +27,8 @@ services:
   api:
     build:
       context: api
+      target: api_platform_nginx
+      <<: *api-cache-from
     image: ${NGINX_IMAGE:-quay.io/api-platform/nginx}
     depends_on:
       - php
@@ -36,7 +38,7 @@ services:
       - php
     ports:
       - target: 80
-        published: 4000
+        published: 8001
 
   db:
     image: postgres:12-alpine
