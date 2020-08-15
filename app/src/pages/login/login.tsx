@@ -12,13 +12,13 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { useTranslation } from 'lib/i18n';
-import Link from 'lib/next/Link';
+import { namespaces, useTranslation } from 'lib/i18n';
 
 import { FormValues, LoginProps } from 'pages/login/types';
 
 import Help from 'components/Help';
 import LanguageSelect from 'components/LanguageSelect';
+import Link from 'components/Link';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Login = (props: LoginProps): JSX.Element => {
   const classes = useStyles();
   const { register, handleSubmit } = useForm<FormValues>();
-  const { t } = useTranslation('login');
+  const { t } = useTranslation(namespaces.pages.login);
 
   const submitHandler = (values: FormValues): void => {
     props.onSubmit(values.email, values.password);

@@ -6,6 +6,7 @@ import cookie from 'js-cookie';
 import config from 'config';
 
 import withApollo from 'lib/apollo/withApollo';
+import { namespaces } from 'lib/i18n';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 
@@ -42,6 +43,6 @@ const LoginIndex = (): JSX.Element => {
 };
 
 export default withNamespaces(
-  withApollo(withTour(LoginIndex, loginTour, 'login')),
-  ['login', 'common'],
+  withApollo(withTour(LoginIndex, loginTour, namespaces.pages.login)),
+  [namespaces.pages.login],
 );
