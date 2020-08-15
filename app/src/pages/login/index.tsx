@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
+import cookie from 'js-cookie';
+
+import config from 'config';
 
 import withApollo from 'lib/apollo/withApollo';
 import withNamespaces from 'lib/i18n/withNamespaces';
@@ -22,7 +25,14 @@ const LoginIndex = (): JSX.Element => {
     getToken({ variables: { username: email, password } });
   };
 
-  console.log(loading, data, error);
+  if (!loading) {
+    if (error) {
+      alert('error');
+    }
+    if (data) {
+      cookie.set(config.tokenCookie, data.getToken.token);
+    }
+  }
 
   return (
     <>
@@ -31,9 +41,7 @@ const LoginIndex = (): JSX.Element => {
   );
 };
 
-const LoginIndexWithTour = withNamespaces(
-  withTour(LoginIndex, loginTour, 'login'),
+export default withNamespaces(
+  withApollo(withTour(LoginIndex, loginTour, 'login')),
   ['login', 'common'],
 );
-
-export default withApollo(LoginIndexWithTour);

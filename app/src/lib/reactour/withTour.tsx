@@ -12,10 +12,12 @@ import { useTranslation } from 'lib/i18n';
 const Tour = dynamic(() => import('reactour'), { ssr: false });
 
 const withTour = <ComponentProps extends {} = any>(
-  Component: React.FC<ComponentProps>,
+  Component: React.ComponentType<ComponentProps>,
   steps: (t: TFunction) => ReactourStep[],
   defaultNamespace?: string,
-): NextPage<ComponentProps> => (props: ComponentProps): JSX.Element => {
+): React.ComponentType<ComponentProps> => (
+  props: ComponentProps,
+): JSX.Element => {
   const [tour, setTour] = useState(true);
 
   const { t } = useTranslation(defaultNamespace);

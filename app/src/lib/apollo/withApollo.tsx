@@ -1,25 +1,42 @@
 import React, { useState } from 'react';
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-boost';
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { persistCache } from 'apollo-cache-persist';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-fetch';
+import cookie from 'js-cookie';
 
 import config from 'config';
 
 const withApollo = <ComponentProps extends {} = any>(
-  Component: React.FC<ComponentProps>,
+  Component: React.ComponentType<ComponentProps>,
 ) => (props: ComponentProps): JSX.Element => {
   const cache = new InMemoryCache();
 
-  const newClient = (): ApolloClient<{}> => {
+  const newClient = (): ApolloClient<any> => {
+    const httpLink = createHttpLink({
+      uri: config.apiURL,
+      fetch,
+    });
+
+    const authLink = setContext((_, { headers }) => {
+      const token = cookie.get(config.tokenCookie);
+
+      return {
+        headers: {
+          ...headers,
+          authorization: token ? `Bearer ${token}` : '',
+        },
+      };
+    });
+
     return new ApolloClient({
-      link: createHttpLink({
-        uri: config.apiURL,
-        fetch,
-      }),
+      link: authLink.concat(httpLink),
       cache,
     });
   };
@@ -30,11 +47,13 @@ const withApollo = <ComponentProps extends {} = any>(
   if (process.browser && !updated) {
     setUpdated(true);
     persistCache({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       cache,
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       storage: window.localStorage,
-      debug: true,
+      debug: !config.production,
     }).then(() => setClient(newClient()));
   }
 
