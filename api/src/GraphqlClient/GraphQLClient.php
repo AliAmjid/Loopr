@@ -46,6 +46,10 @@ class GraphQLClient {
 
         $response = $this->responseBuilder->build($response);
         $this->writeInfo('[RESPONSE] ' . json_encode($response->getData(), JSON_PRETTY_PRINT));
+        if ($response->hasErrors()) {
+            $this->writeInfo('[RESPONSE ERRORS] ' . json_encode($response->getErrors(), JSON_PRETTY_PRINT));
+        }
+
         return $response;
     }
 

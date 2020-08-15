@@ -50,7 +50,7 @@ abstract class BaseTestCase extends TestCase {
 
     protected function createLoggedClient(
         $username,
-        $password
+        $password = 'test'
     ): GraphQLClient {
         $response = $this->getClient()->query(
         /** @lang GraphQL */
@@ -62,7 +62,12 @@ abstract class BaseTestCase extends TestCase {
         return $this->getClient($response->getData()['getToken']['token']);
     }
 
-    protected function assertNoErrors(Response $response, $errors = 0) {
+
+    protected function assertNoErrors(Response $response) {
+        $this->assertErrors($response, 0);
+    }
+
+    protected function assertErrors(Response $response, $errors) {
         $this->assertEquals($errors, count($response->getErrors()), 'There are un-expected errors');
     }
 }

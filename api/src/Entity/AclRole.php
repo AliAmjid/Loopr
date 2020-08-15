@@ -21,14 +21,17 @@ class AclRole {
 
     use Tid;
 
-    /** @var string
+    /** @var string Example format: ROLE_ADMIN.
+     * Must start with 'ROLE_' and name cant be longer than 20 letters.
+     * (regex: ^ROLE_[A-Z]{1,20}$/m)
+     *
      * @ORM\Column(type="string")
      * @Groups({"aclRole:write", "aclRole:read"})
      * @Assert\Regex(pattern="/^ROLE_[A-Z]{1,20}$/m",message="WRONG_FORMAT_REGEX_/^ROLE_[A-Z]{1,20}$/")
      */
     private string $name;
 
-    /** @var Collection|AclResource[]
+    /** @var Collection|AclResource[] Must be an array IRIs (acl_resources/<uuid>) of existing resources
      * @ORM\ManyToMany(targetEntity="AclResource")
      * @Groups({"aclResource:read", "aclResource:write"})
      */
@@ -101,7 +104,7 @@ class AclRole {
 
     public function hasResource(string $resourceName): bool {
         foreach ($this->getResources() as $resource) {
-            if ($resource->getName() == true) {
+            if ($resource->getName() == $resourceName) {
                 return true;
             }
         }
