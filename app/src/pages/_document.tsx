@@ -3,6 +3,7 @@ import React from 'react';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import Document, {
   DocumentContext,
+  Head,
   Html,
   Main,
   NextScript,
@@ -12,6 +13,7 @@ class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="en" translate="no">
+        <Head />
         <body>
           <Main />
           <NextScript />
