@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useLazyQuery } from '@apollo/client';
 import cookie from 'js-cookie';
+import { compose } from 'recompose';
 
 import config from 'config';
 
@@ -41,8 +42,8 @@ const LoginIndex = (): JSX.Element => {
     </>
   );
 };
-
-export default withNamespaces(
-  withApollo(withTour(LoginIndex, loginTour, namespaces.pages.login)),
-  [namespaces.pages.login],
-);
+export default compose(
+  withNamespaces([namespaces.pages.login]),
+  withApollo,
+  withTour(loginTour),
+)(LoginIndex);
