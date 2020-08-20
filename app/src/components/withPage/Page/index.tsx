@@ -3,12 +3,13 @@ import React, { PropsWithChildren } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import AppBar from './AppBar';
-import Drawer from './Drawer';
+import Drawer, { drawerWidth } from './Drawer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
-    paddingTop: theme.spacing(2),
+    padding: theme.spacing(2),
+    marginLeft: drawerWidth,
   },
 }));
 

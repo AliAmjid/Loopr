@@ -1,28 +1,27 @@
-import { fade } from '@material-ui/core';
 // eslint-disable-next-line import/no-unresolved
 import { Overrides } from '@material-ui/core/styles/overrides';
-import transitions from '@material-ui/core/styles/transitions';
 
-import palette from '../palette';
-import shape from '../shape';
+import spacing from 'lib/material-ui/theme/spacing';
 
+import button from './button';
 import list from './list';
 
 const overrides: Overrides = {
   ...list,
-
-  MuiIconButton: {
+  ...button,
+  MuiPaper: {
     root: {
-      transition: transitions.create('background-color'),
-      '&:hover': {
-        backgroundColor: fade(palette.common?.white || '#fff', 0.15),
-      },
+      padding: spacing * 2,
     },
-    colorInherit: {
-      transition: transitions.create('background-color'),
-      '&:hover': {
-        backgroundColor: fade(palette.common?.white || '#fff', 0.15),
-      },
+  },
+  MuiAppBar: {
+    root: {
+      padding: 0,
+    },
+  },
+  MuiDrawer: {
+    paper: {
+      padding: 0,
     },
   },
 };
