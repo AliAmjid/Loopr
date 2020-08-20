@@ -54,6 +54,7 @@ const Login = (props: LoginProps): JSX.Element => {
                 name="email"
                 label={t('email')}
                 fullWidth
+                autoComplete="email"
                 inputRef={register({ required: true })}
                 inputProps={{ 'test-id': 'Login-emailInput' }}
               />
@@ -63,6 +64,7 @@ const Login = (props: LoginProps): JSX.Element => {
                 name="password"
                 label={t('password')}
                 fullWidth
+                autoComplete="current-password"
                 inputRef={register({ required: true })}
                 inputProps={{ 'test-id': 'Login-passwordInput' }}
               />

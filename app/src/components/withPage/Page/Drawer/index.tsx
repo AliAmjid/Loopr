@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Divider,
   Drawer as DrawerPrefab,
-  fade,
   List,
   ListItem,
   ListItemIcon,
