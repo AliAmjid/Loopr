@@ -7,7 +7,7 @@ import { compose } from 'recompose';
 import config from 'config';
 
 import withApollo from 'lib/apollo/withApollo';
-import { namespaces } from 'lib/i18n';
+import { namespace, namespaces } from 'lib/i18n';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 

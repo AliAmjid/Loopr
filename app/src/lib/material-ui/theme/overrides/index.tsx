@@ -24,6 +24,11 @@ const overrides: Overrides = {
       padding: 0,
     },
   },
+  MuiPopover: {
+    paper: {
+      padding: 0,
+    },
+  },
 };
 
 export default overrides;
