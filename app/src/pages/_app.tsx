@@ -7,6 +7,7 @@ import Head from 'next/head';
 
 import { appWithTranslation } from 'lib/i18n';
 import theme from 'lib/material-ui/theme';
+import SnackbarProvider from 'lib/notistack';
 
 const MyApp = (props: AppProps): JSX.Element => {
   const { Component, pageProps } = props;
@@ -37,7 +38,9 @@ const MyApp = (props: AppProps): JSX.Element => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <SnackbarProvider onClose={() => {}}>
+          <Component {...pageProps} />
+        </SnackbarProvider>
       </ThemeProvider>
     </>
   );

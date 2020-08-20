@@ -2,12 +2,15 @@ import React from 'react';
 
 import { useLazyQuery } from '@apollo/client';
 import cookie from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import { compose } from 'recompose';
 
 import config from 'config';
+import routes from 'config/routes';
 
 import withApollo from 'lib/apollo/withApollo';
-import { namespace, namespaces } from 'lib/i18n';
+import { namespaces } from 'lib/i18n';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 
@@ -23,16 +26,23 @@ const LoginIndex = (): JSX.Element => {
     GetTokenQuery,
     GetTokenQueryVars
   >(getTokenQuery, { fetchPolicy: 'no-cache' });
+  const router = useRouter();
+
   const submitHandler = (email: string, password: string): void => {
     getToken({ variables: { username: email, password } });
   };
 
+  const { enqueueSnackbar } = useSnackbar();
+
   if (!loading) {
     if (error) {
-      alert('error');
+      enqueueSnackbar('Zadané údaje se neshodují', {
+        variant: 'error',
+      });
     }
     if (data) {
       cookie.set(config.tokenCookie, data.getToken.token);
+      router.push(routes.dashboard.index);
     }
   }
 

@@ -1,5 +1,4 @@
 import { fade } from '@material-ui/core';
-// eslint-disable-next-line import/no-unresolved
 import { Overrides } from '@material-ui/core/styles/overrides';
 import transitions from '@material-ui/core/styles/transitions';
 

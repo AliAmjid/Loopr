@@ -22,7 +22,11 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'simple-import-sort'],
   settings: {
-    'import/resolver': 'babel-module',
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
   },
   rules: {
     'no-plusplus': 'off',
