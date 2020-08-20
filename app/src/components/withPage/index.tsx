@@ -1,17 +1,11 @@
 import React from 'react';
 
-import Page from 'components/withPage/Page';
+import WithPageInternal from 'components/withPage/withPage';
 
 const withPage = <ComponentProps extends {}>() => (
   Component: React.ComponentType<ComponentProps>,
 ) => (props: ComponentProps) => {
-  return (
-    <>
-      <Page>
-        <Component {...props} />
-      </Page>
-    </>
-  );
+  return <WithPageInternal Component={Component} componentProps={props} />;
 };
 
 export default withPage;

@@ -7,11 +7,13 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { persistCache } from 'apollo-cache-persist';
+import { CachePersistor } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
 
 import config from 'config';
+
+import { cachePersistorContext } from './useCachePersistor';
 
 const withApollo = <ComponentProps extends {} = any>(
   Component: React.ComponentType<ComponentProps>,
@@ -44,22 +46,28 @@ const withApollo = <ComponentProps extends {} = any>(
   const [updated, setUpdated] = useState(false);
   const [client, setClient] = useState(newClient());
 
+  const cachePersistor: CachePersistor<any> = process.browser
+    ? new CachePersistor({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        cache,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        storage: window.localStorage,
+        debug: !config.production,
+      })
+    : ({} as CachePersistor<any>);
+
   if (process.browser && !updated) {
     setUpdated(true);
-    persistCache({
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      cache,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      storage: window.localStorage,
-      debug: !config.production,
-    }).then(() => setClient(newClient()));
+    cachePersistor.persist().then(() => setClient(newClient()));
   }
 
   return (
     <ApolloProvider client={client}>
-      <Component {...props} />
+      <cachePersistorContext.Provider value={cachePersistor}>
+        <Component {...props} />
+      </cachePersistorContext.Provider>
     </ApolloProvider>
   );
 };

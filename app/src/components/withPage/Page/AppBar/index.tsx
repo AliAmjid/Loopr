@@ -16,7 +16,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import LogOutIcon from '@material-ui/icons/PowerSettingsNew';
 import SearchIcon from '@material-ui/icons/Search';
 
-import { drawerWidth } from './Drawer';
+import { drawerWidth } from '../Drawer';
+
+import { AppBarProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const AppBar = (): JSX.Element => {
+const AppBar = (props: AppBarProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -85,7 +87,7 @@ const AppBar = (): JSX.Element => {
             <IconButton color="inherit">
               <AccountCircleIcon />
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={props.onLogOut}>
               <LogOutIcon />
             </IconButton>
           </Grid>

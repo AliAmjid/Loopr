@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
@@ -19,13 +19,20 @@ import getTokenQuery, {
   GetTokenQueryVars,
 } from './getToken.query';
 import Login from './login';
+import meUserQuery, { MeUserQuery } from './meUser.query';
 import loginTour from './tour';
 
 const LoginIndex = (): JSX.Element => {
-  const [getToken, { data, error, loading }] = useLazyQuery<
-    GetTokenQuery,
-    GetTokenQueryVars
-  >(getTokenQuery, { fetchPolicy: 'no-cache' });
+  const [
+    getToken,
+    { data: getTokenData, error: getTokenError, loading: getTokenLoading },
+  ] = useLazyQuery<GetTokenQuery, GetTokenQueryVars>(getTokenQuery, {
+    fetchPolicy: 'no-cache',
+  });
+  const { data: meUserData } = useQuery<MeUserQuery>(meUserQuery, {
+    fetchPolicy: 'no-cache',
+  });
+  const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
 
   const submitHandler = (email: string, password: string): void => {
@@ -34,14 +41,24 @@ const LoginIndex = (): JSX.Element => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  if (!loading) {
-    if (error) {
+  if (meUserData) {
+    if (!automaticallyLogged) {
+      setAutomaticallyLogged(true);
+      router.push(routes.dashboard.index);
+      enqueueSnackbar('Byli jste automaticky přihlášeni', {
+        variant: 'success',
+      });
+    }
+  }
+
+  if (!getTokenLoading) {
+    if (getTokenError) {
       enqueueSnackbar('Zadané údaje se neshodují', {
         variant: 'error',
       });
     }
-    if (data) {
-      cookie.set(config.tokenCookie, data.getToken.token);
+    if (getTokenData) {
+      cookie.set(config.tokenCookie, getTokenData.getToken.token);
       router.push(routes.dashboard.index);
     }
   }
