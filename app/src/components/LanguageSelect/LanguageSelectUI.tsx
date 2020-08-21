@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 
 import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
-import { useTranslation } from 'react-i18next';
 
-import { languages } from 'lib/i18n';
+import { languages, useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import { LanguageSelectUIProps } from './types';

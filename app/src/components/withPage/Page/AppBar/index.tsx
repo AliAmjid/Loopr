@@ -18,6 +18,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import LanguageSelect from 'components/LanguageSelect';
 import Notifications from 'components/withPage/Page/AppBar/Notifications';
 
 import { drawerWidth } from '../Drawer';
@@ -84,6 +85,7 @@ const AppBar = (props: AppBarProps): JSX.Element => {
             </div>
           </Grid>
           <Grid item container justify="flex-end" xs={6}>
+            <LanguageSelect color="inherit" />
             <Tooltip title={t<string>('appBar.account')}>
               <IconButton color="inherit">
                 <AccountCircleIcon />

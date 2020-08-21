@@ -1,5 +1,10 @@
 import namespaces from 'lib/i18n/namespaces';
 
-const withPageNamespaces = [namespaces.components.withPage];
+import languageSelectNamespaces from 'components/LanguageSelect/namespaces';
+
+const withPageNamespaces = [
+  namespaces.components.withPage,
+  ...languageSelectNamespaces,
+];
 
 export default withPageNamespaces;
