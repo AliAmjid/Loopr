@@ -1,9 +1,12 @@
 import namespaces from 'lib/i18n/namespaces';
 
+import helpNamespaces from 'components/Help/namespaces';
+import languageSelectNamespaces from 'components/LanguageSelect/namespaces';
+
 const loginNamespaces = [
   namespaces.pages.login,
-  namespaces.components.Help,
-  namespaces.components.LanguageSelect,
+  ...languageSelectNamespaces,
+  ...helpNamespaces,
 ];
 
 export default loginNamespaces;

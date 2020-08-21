@@ -10,7 +10,7 @@ import {
 
 import { ListItemProps } from './types';
 
-const ListItem = (props: ListItemProps) => {
+const ListItem = (props: ListItemProps): JSX.Element => {
   return (
     <>
       <ListItemPrefab button>

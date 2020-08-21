@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { NextPage } from 'next';
 import { TFunction } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { ReactourStep } from 'reactour';

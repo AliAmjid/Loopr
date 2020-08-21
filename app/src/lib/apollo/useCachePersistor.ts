@@ -6,7 +6,7 @@ export const cachePersistorContext = React.createContext(
   {} as CachePersistor<any>,
 );
 
-const useCachePersistor = () => {
+const useCachePersistor = (): CachePersistor<any> => {
   return React.useContext(cachePersistorContext);
 };
 

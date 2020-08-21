@@ -10,7 +10,6 @@ import config from 'config';
 import routes from 'config/routes';
 
 import withApollo from 'lib/apollo/withApollo';
-import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 

@@ -9,7 +9,7 @@ const Notifications = (): JSX.Element => {
     setAnchorEl(e.currentTarget);
   };
 
-  const closeHandler = () => {
+  const closeHandler = (): void => {
     setAnchorEl(null);
   };
 

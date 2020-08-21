@@ -38,7 +38,11 @@ const MyApp = (props: AppProps): JSX.Element => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SnackbarProvider onClose={() => {}}>
+
+        <SnackbarProvider
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          onClose={() => {}}
+        >
           <Component {...pageProps} />
         </SnackbarProvider>
       </ThemeProvider>
