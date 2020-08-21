@@ -18,6 +18,8 @@ import palette from 'lib/material-ui/theme/palette';
 
 import SVGLogo from 'components/SVGLogo';
 
+import Navigation from './Navigation';
+
 export const drawerWidth = 260;
 const useStyles = makeStyles((theme: Theme) => ({
   drawerPaper: {
@@ -41,28 +43,7 @@ const Drawer = (): JSX.Element => {
         <SVGLogo height="auto" />
       </Toolbar>
       <Divider />
-      <List>
-        <Link href="/" passHref>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText>Dashboard</ListItemText>
-          </ListItem>
-        </Link>
-        <ListItem button selected>
-          <ListItemIcon color="primary">
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText color="primary">Dashboard</ListItemText>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText>Dashboard</ListItemText>
-        </ListItem>
-      </List>
+      <Navigation />
     </DrawerPrefab>
   );
 };

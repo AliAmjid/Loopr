@@ -12,7 +12,8 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { namespaces, useTranslation } from 'lib/i18n';
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import { FormValues, LoginProps } from 'pages/login/types';
 

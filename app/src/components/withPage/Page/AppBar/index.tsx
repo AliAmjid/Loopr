@@ -9,10 +9,14 @@ import {
   makeStyles,
   Theme,
   Toolbar,
+  Tooltip,
 } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LogOutIcon from '@material-ui/icons/PowerSettingsNew';
 import SearchIcon from '@material-ui/icons/Search';
+
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import Notifications from 'components/withPage/Page/AppBar/Notifications';
 
@@ -58,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const AppBar = (props: AppBarProps): JSX.Element => {
   const classes = useStyles();
+  const { t } = useTranslation(namespaces.components.withPage);
 
   return (
     <AppBarPrefab className={classes.appBar}>
@@ -69,23 +74,27 @@ const AppBar = (props: AppBarProps): JSX.Element => {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder={`${t('appBar.search')}…`}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ 'aria-label': t('appBar.search') }}
               />
             </div>
           </Grid>
           <Grid item container justify="flex-end" xs={6}>
-            <IconButton color="inherit">
-              <AccountCircleIcon />
-            </IconButton>
+            <Tooltip title={t<string>('appBar.account')}>
+              <IconButton color="inherit">
+                <AccountCircleIcon />
+              </IconButton>
+            </Tooltip>
             <Notifications />
-            <IconButton color="inherit" onClick={props.onLogOut}>
-              <LogOutIcon />
-            </IconButton>
+            <Tooltip title={t<string>('appBar.logOut')}>
+              <IconButton color="inherit" onClick={props.onLogOut}>
+                <LogOutIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Grid>
       </Toolbar>

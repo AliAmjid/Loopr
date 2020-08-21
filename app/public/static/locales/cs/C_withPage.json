@@ -1,0 +1,8 @@
+{
+  "appBar": {
+    "search": "Vyhledadávání",
+    "account": "Účet",
+    "logOut": "Odhlásit se",
+    "notifications": "Upozornění"
+  }
+}

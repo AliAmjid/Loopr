@@ -1,6 +1,5 @@
 const NextI18Next = require('next-i18next').default;
 const path = require('path');
-const namespaces = require('./namespaces');
 
 const languages = {
   cs: 'Čeština',
@@ -18,5 +17,4 @@ module.exports = {
   ...NextI18NextInstance,
   defaultLanguage,
   languages,
-  namespaces,
 };

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
+import { useTranslation } from 'react-i18next';
 
 import { languages } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import { LanguageSelectUIProps } from './types';
 
@@ -13,6 +15,7 @@ const LanguageSelectUI = ({
   ...buttonProps
 }: LanguageSelectUIProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { t } = useTranslation(namespaces.components.LanguageSelect);
 
   const clickHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -41,15 +44,17 @@ const LanguageSelectUI = ({
 
   return (
     <>
-      <IconButton
-        {...buttonProps}
-        aria-controls="languageSelectMenu"
-        aria-haspopup="true"
-        onClick={clickHandler}
-        test-id="LanguageSelectUI-languageButton"
-      >
-        <TranslateIcon />
-      </IconButton>
+      <Tooltip title={t<string>('changeLanguage')}>
+        <IconButton
+          {...buttonProps}
+          aria-controls="languageSelectMenu"
+          aria-haspopup="true"
+          onClick={clickHandler}
+          test-id="LanguageSelectUI-languageButton"
+        >
+          <TranslateIcon />
+        </IconButton>
+      </Tooltip>
       <Menu
         id="languageSelectMenu"
         anchorEl={anchorEl}

@@ -3,44 +3,45 @@ import React from 'react';
 import {
   Badge,
   Button,
-  Divider,
   IconButton,
   List,
   ListItem as ListItemPrefab,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
   ListSubheader,
   makeStyles,
   Popover,
-  Theme,
-  Typography,
+  Tooltip,
 } from '@material-ui/core';
 import ChatBubble from '@material-ui/icons/ChatBubble';
 import GradeIcon from '@material-ui/icons/Grade';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import ListItem from './ListItem';
 import { NotificationsUIProps } from './types';
 
 const listWidth = 300;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles({
   list: {
     width: listWidth,
   },
-}));
+});
 
 const NotificationsUI = (props: NotificationsUIProps): JSX.Element => {
   const classes = useStyles();
+  const { t } = useTranslation(namespaces.components.withPage);
 
   return (
     <>
-      <IconButton color="inherit" onClick={props.onClick}>
-        <Badge badgeContent={3} color="secondary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
+      <Tooltip title={t<string>('appBar.notifications')}>
+        <IconButton color="inherit" onClick={props.onClick}>
+          <Badge badgeContent={3} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      </Tooltip>
       <Popover
         open={Boolean(props.anchorEl)}
         anchorEl={props.anchorEl}
