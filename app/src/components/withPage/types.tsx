@@ -5,6 +5,6 @@ export interface WithPageInternalProps {
   componentProps: any;
 }
 
-export interface PageProps {
+export interface PageOptions {
   namespaces?: string[];
 }
