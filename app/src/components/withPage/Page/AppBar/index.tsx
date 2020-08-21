@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   AppBar as AppBarPrefab,
-  Badge,
   fade,
   Grid,
   IconButton,
@@ -12,9 +11,10 @@ import {
   Toolbar,
 } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import LogOutIcon from '@material-ui/icons/PowerSettingsNew';
 import SearchIcon from '@material-ui/icons/Search';
+
+import Notifications from 'components/withPage/Page/AppBar/Notifications';
 
 import { drawerWidth } from '../Drawer';
 
@@ -80,13 +80,9 @@ const AppBar = (props: AppBarProps): JSX.Element => {
           </Grid>
           <Grid item container justify="flex-end" xs={6}>
             <IconButton color="inherit">
-              <Badge badgeContent={3} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton color="inherit">
               <AccountCircleIcon />
             </IconButton>
+            <Notifications />
             <IconButton color="inherit" onClick={props.onLogOut}>
               <LogOutIcon />
             </IconButton>
