@@ -5,6 +5,9 @@ const routes = {
   dashboard: {
     index: '/dashboard',
   },
+  users: {
+    index: '/users',
+  },
 };
 
 export default routes;

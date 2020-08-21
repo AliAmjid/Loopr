@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import navigationList from 'components/withPage/Page/Drawer/navigationList';
+import navigationList from './navigationList';
 
 const Navigation = (): JSX.Element => {
   const { t } = useTranslation(namespaces.other.pages);

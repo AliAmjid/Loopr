@@ -33,6 +33,7 @@
     "next": "^9.3.6",
     "next-i18next": "^6.0.2",
     "next-offline": "^5.0.2",
+    "next-with-apollo": "^5.1.0",
     "notistack": "^0.9.17",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

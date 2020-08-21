@@ -8,6 +8,6 @@ export default {
     Help: 'C_Help',
   },
   other: {
-    pages: 'pages',
+    pages: 'O_pages',
   },
 };
