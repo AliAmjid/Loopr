@@ -9,7 +9,7 @@ import config from 'config';
 import routes from 'config/routes';
 
 import useCachePersistor from 'lib/apollo/useCachePersistor';
-import withApollo, { cachePersistorContext } from 'lib/apollo/withApollo';
+import withApollo from 'lib/apollo/withApollo';
 
 import meUserQuery, { MeUserQuery } from './meUser.query';
 import Page from './Page';

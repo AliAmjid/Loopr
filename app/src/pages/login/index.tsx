@@ -14,6 +14,8 @@ import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
 
+import loginNamespaces from 'pages/login/namespaces';
+
 import getTokenQuery, {
   GetTokenQuery,
   GetTokenQueryVars,
@@ -70,7 +72,7 @@ const LoginIndex = (): JSX.Element => {
   );
 };
 export default compose(
-  withNamespaces([namespaces.pages.login]),
+  withNamespaces(loginNamespaces),
   withApollo,
   withTour(loginTour),
 )(LoginIndex);

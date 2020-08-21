@@ -4,3 +4,7 @@ export interface WithPageInternalProps {
   Component: ComponentType<any>;
   componentProps: any;
 }
+
+export interface PageProps {
+  namespaces?: string[];
+}
