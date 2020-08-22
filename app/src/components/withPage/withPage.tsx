@@ -4,10 +4,13 @@ import { useApolloClient, useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
+import { of } from 'rxjs';
 
 import config from 'config';
 import routes from 'config/routes';
 
+import recognizeError from 'lib/apollo/recognizeError';
+import errors from 'lib/apollo/recognizeError/errors';
 import useCachePersistor from 'lib/apollo/useCachePersistor';
 import withApollo from 'lib/apollo/withApollo';
 
@@ -17,7 +20,7 @@ import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
-  const { error, loading } = useQuery<MeUserQuery>(meUserQuery, {
+  const { data } = useQuery<MeUserQuery>(meUserQuery, {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });
@@ -28,13 +31,14 @@ const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
 
   const logOutHandler = async (): Promise<void> => {
     cookie.remove(config.tokenCookie);
-    await apolloClient.resetStore();
     await cachePersistor.purge();
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    await apolloClient.resetStore().catch(() => {});
     await router.push(routes.login.index);
     enqueueSnackbar('Uživatel úspěšně odhlášen', { variant: 'success' });
   };
 
-  if (error) {
+  if (!data) {
     return <Unauthorized />;
   }
 

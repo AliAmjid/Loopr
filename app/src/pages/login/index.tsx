@@ -9,6 +9,8 @@ import { compose } from 'recompose';
 import config from 'config';
 import routes from 'config/routes';
 
+import recognizeError from 'lib/apollo/recognizeError';
+import errors from 'lib/apollo/recognizeError/errors';
 import withApollo from 'lib/apollo/withApollo';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import withTour from 'lib/reactour/withTour';
@@ -30,9 +32,7 @@ const LoginIndex = (): JSX.Element => {
   ] = useLazyQuery<GetTokenQuery, GetTokenQueryVars>(getTokenQuery, {
     fetchPolicy: 'no-cache',
   });
-  const { data: meUserData } = useQuery<MeUserQuery>(meUserQuery, {
-    fetchPolicy: 'no-cache',
-  });
+  const { data: meUserData } = useQuery<MeUserQuery>(meUserQuery, {});
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
 
@@ -54,9 +54,15 @@ const LoginIndex = (): JSX.Element => {
 
   if (!getTokenLoading) {
     if (getTokenError) {
-      enqueueSnackbar('Zadané údaje se neshodují', {
-        variant: 'error',
-      });
+      if (recognizeError(getTokenError) === errors.network.failedToFetch) {
+        enqueueSnackbar('Nejste připojeni k internetu', {
+          variant: 'warning',
+        });
+      } else {
+        enqueueSnackbar('Zadané údaje se neshodují', {
+          variant: 'error',
+        });
+      }
     }
     if (getTokenData) {
       cookie.set(config.tokenCookie, getTokenData.getToken.token);
