@@ -1,11 +1,13 @@
 import React, { PropsWithChildren } from 'react';
 
-import { Link as MUILink } from '@material-ui/core';
+import { Link as MUILink, LinkBaseProps } from '@material-ui/core';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 
-const Link = (props: PropsWithChildren<NextLinkProps>): JSX.Element => (
+const Link = (
+  props: PropsWithChildren<NextLinkProps> & LinkBaseProps,
+): JSX.Element => (
   <NextLink {...props} passHref>
-    <MUILink>{props.children}</MUILink>
+    <MUILink {...props}>{props.children}</MUILink>
   </NextLink>
 );
 

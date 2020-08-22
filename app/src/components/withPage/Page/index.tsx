@@ -1,11 +1,9 @@
 import React from 'react';
 
-import {
-  Backdrop,
-  CircularProgress,
-  makeStyles,
-  Theme,
-} from '@material-ui/core';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
+
+import Breadcrumbs from 'components/Breadcrumbs';
+import Link from 'components/Link';
 
 import AppBar from './AppBar';
 import Drawer, { drawerWidth } from './Drawer';
@@ -30,7 +28,18 @@ const Page = (props: PageProps): JSX.Element => {
       <AppBar onLogOut={props.onLogOut} />
       <Drawer />
       <div className={classes.toolbar} />
-      <div className={classes.content}>{props.children}</div>
+      <div className={classes.content}>
+        <Breadcrumbs
+          breadcrumbs={[
+            { label: 'AHOJ', href: '/asdf' },
+            { label: 'ANODJ', href: '/sadf' },
+          ]}
+        />
+        <Typography variant="h5" component="h1">
+          Uživatelé
+        </Typography>
+        {props.children}
+      </div>
     </div>
   );
 };
