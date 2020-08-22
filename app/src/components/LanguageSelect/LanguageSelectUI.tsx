@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  Popover,
+  Tooltip,
+} from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
 
 import { languages, useTranslation } from 'lib/i18n';
@@ -59,6 +65,10 @@ const LanguageSelectUI = ({
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={closeHandler}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
       >
         {mappedMenuItems}
       </Menu>

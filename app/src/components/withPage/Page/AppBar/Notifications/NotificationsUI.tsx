@@ -46,6 +46,14 @@ const NotificationsUI = (props: NotificationsUIProps): JSX.Element => {
         open={Boolean(props.anchorEl)}
         anchorEl={props.anchorEl}
         onClose={props.onClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
       >
         <List
           className={classes.list}
