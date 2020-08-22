@@ -10,4 +10,7 @@ export default {
   other: {
     pages: 'O_pages',
   },
+  lib: {
+    materialTable: 'L_materialTable',
+  },
 };

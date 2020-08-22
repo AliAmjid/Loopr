@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { ApolloProvider } from '@apollo/client';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 
-import withApollo, { useApollo } from 'lib/apollo/withApollo';
+import withApollo from 'lib/apollo/withApollo';
 import { appWithTranslation } from 'lib/i18n';
 import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';

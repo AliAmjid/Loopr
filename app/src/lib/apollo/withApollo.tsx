@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import { CachePersistor } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
+import { getDisplayName } from 'recompose';
 
 import config from 'config';
 
@@ -65,6 +66,8 @@ const withApollo = <ComponentProps extends {} = any>(
     cachePersistor.restore().then(() => setClient(newClient()));
   }
   if (!client) return <>Loading</>;
+
+  Component.displayName = `${getDisplayName(Component)}-withApollo`;
 
   return (
     <ApolloProvider client={client}>

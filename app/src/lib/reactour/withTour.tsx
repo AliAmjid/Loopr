@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { TFunction } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { ReactourStep } from 'reactour';
+import { getDisplayName } from 'recompose';
 
 import config from 'config';
 
@@ -21,6 +22,7 @@ const withTour = <ComponentProps extends {} = any>(
   const [tour, setTour] = useState(true);
 
   const { t } = useTranslation(defaultNamespace);
+  Component.displayName = `${getDisplayName(Component)}-withTour`;
 
   return (
     <>
