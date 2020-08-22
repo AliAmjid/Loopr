@@ -41,7 +41,11 @@ const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
 
   return (
     <>
-      <Page onLogOut={logOutHandler}>
+      <Page
+        onLogOut={logOutHandler}
+        breadcrumbs={props.breadcrumbs}
+        title={props.title}
+      >
         <props.Component {...props.componentProps} />
       </Page>
     </>

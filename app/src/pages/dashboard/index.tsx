@@ -5,6 +5,8 @@ import { compose } from 'recompose';
 
 import withPage from 'components/withPage';
 
+import dashboardBreadcrumbs from './breadcrumbs';
+
 const DashboardIndex = (): JSX.Element => {
   return (
     <>
@@ -15,4 +17,6 @@ const DashboardIndex = (): JSX.Element => {
   );
 };
 
-export default compose(withPage())(DashboardIndex);
+export default compose(
+  withPage({ breadcrumbs: dashboardBreadcrumbs, title: 'dashboard.index' }),
+)(DashboardIndex);

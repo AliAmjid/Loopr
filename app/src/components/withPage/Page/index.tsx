@@ -2,8 +2,10 @@ import React from 'react';
 
 import { makeStyles, Theme, Typography } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import Breadcrumbs from 'components/Breadcrumbs';
-import Link from 'components/Link';
 
 import AppBar from './AppBar';
 import Drawer, { drawerWidth } from './Drawer';
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Page = (props: PageProps): JSX.Element => {
   const classes = useStyles();
+  const { t } = useTranslation(namespaces.other.pages);
 
   return (
     <div>
@@ -29,14 +32,9 @@ const Page = (props: PageProps): JSX.Element => {
       <Drawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <Breadcrumbs
-          breadcrumbs={[
-            { label: 'AHOJ', href: '/asdf' },
-            { label: 'ANODJ', href: '/sadf' },
-          ]}
-        />
+        <Breadcrumbs breadcrumbs={props.breadcrumbs} />
         <Typography variant="h5" component="h1">
-          Uživatelé
+          {t(props.title)}
         </Typography>
         {props.children}
       </div>
