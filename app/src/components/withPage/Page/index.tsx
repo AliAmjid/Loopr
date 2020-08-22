@@ -27,10 +27,6 @@ const Page = (props: PageProps): JSX.Element => {
 
   return (
     <div>
-      <Backdrop open={props.loading} className={classes.backdrop}>
-        <CircularProgress color="secondary" />
-      </Backdrop>
-
       <AppBar onLogOut={props.onLogOut} />
       <Drawer />
       <div className={classes.toolbar} />

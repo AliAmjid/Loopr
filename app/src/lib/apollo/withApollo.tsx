@@ -44,19 +44,19 @@ const withApollo = <ComponentProps extends {} = any>(
   };
 
   const [updated, setUpdated] = useState(false);
-  const [client, setClient] = useState(null);
+  const [client, setClient] = useState<ApolloClient<any> | undefined>(
+    undefined,
+  );
 
-  const cachePersistor: CachePersistor<any> = process.browser
-    ? new CachePersistor({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        cache,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        storage: window.localStorage,
-        debug: !config.production,
-      })
-    : ({} as CachePersistor<any>);
+  const cachePersistor: CachePersistor<any> = new CachePersistor({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    cache,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    storage: window.localStorage,
+    debug: !config.production,
+  });
 
   if (process.browser && !updated) {
     setUpdated(true);

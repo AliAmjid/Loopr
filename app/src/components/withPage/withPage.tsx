@@ -40,7 +40,7 @@ const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
 
   return (
     <>
-      <Page loading={loading} onLogOut={logOutHandler}>
+      <Page onLogOut={logOutHandler}>
         <props.Component {...props.componentProps} />
       </Page>
     </>
