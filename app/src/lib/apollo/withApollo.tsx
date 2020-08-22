@@ -44,7 +44,7 @@ const withApollo = <ComponentProps extends {} = any>(
   };
 
   const [updated, setUpdated] = useState(false);
-  const [client, setClient] = useState(newClient());
+  const [client, setClient] = useState(null);
 
   const cachePersistor: CachePersistor<any> = process.browser
     ? new CachePersistor({
@@ -60,8 +60,9 @@ const withApollo = <ComponentProps extends {} = any>(
 
   if (process.browser && !updated) {
     setUpdated(true);
-    cachePersistor.persist().then(() => setClient(newClient()));
+    cachePersistor.restore().then(() => setClient(newClient()));
   }
+  if (!client) return <>Loading</>;
 
   return (
     <ApolloProvider client={client}>
