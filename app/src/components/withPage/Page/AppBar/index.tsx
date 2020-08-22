@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   AppBar as AppBarPrefab,
+  Avatar,
   fade,
   Grid,
   IconButton,
@@ -18,12 +19,14 @@ import SearchIcon from '@material-ui/icons/Search';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import Help from 'components/Help';
 import LanguageSelect from 'components/LanguageSelect';
-import Notifications from 'components/withPage/Page/AppBar/Notifications';
 
 import { drawerWidth } from '../Drawer';
 
+import Notifications from './Notifications';
 import { AppBarProps } from './types';
+import User from './User';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -59,6 +62,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
   },
+  avatar: {
+    color: theme.palette.common.black,
+    backgroundColor: theme.palette.secondary.main,
+  },
+  avatarButton: {
+    padding: 0,
+  },
 }));
 
 const AppBar = (props: AppBarProps): JSX.Element => {
@@ -84,19 +94,16 @@ const AppBar = (props: AppBarProps): JSX.Element => {
               />
             </div>
           </Grid>
-          <Grid item container justify="flex-end" xs={6}>
+          <Grid item container alignItems="center" justify="flex-end" xs={6}>
+            <Help path="/" color="inherit" />
             <LanguageSelect color="inherit" />
-            <Tooltip title={t<string>('appBar.account')}>
-              <IconButton color="inherit">
-                <AccountCircleIcon />
-              </IconButton>
-            </Tooltip>
             <Notifications />
             <Tooltip title={t<string>('appBar.logOut')}>
               <IconButton color="inherit" onClick={props.onLogOut}>
                 <LogOutIcon />
               </IconButton>
             </Tooltip>
+            <User />
           </Grid>
         </Grid>
       </Toolbar>
