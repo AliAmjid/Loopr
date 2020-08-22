@@ -20,11 +20,14 @@ const MaterialTable = <RowData extends {}>(
         ...props.components,
       }}
       options={{
-        toolbar: false,
+        search: false,
+        filtering: true,
         emptyRowsWhenPaging: false,
-        ...props.options,
         pageSize: 50,
         pageSizeOptions: [50, 100, 200, 400],
+        exportAllData: true,
+
+        ...props.options,
       }}
       localization={{
         pagination: {
@@ -37,6 +40,14 @@ const MaterialTable = <RowData extends {}>(
         },
         header: {
           actions: t('actions'),
+        },
+        toolbar: {
+          exportTitle: 'ahoj',
+          exportName: 'Asd',
+          // @ts-ignore
+          exportCSVName: 'Exportovat jako CSV',
+          // @ts-ignore
+          exportPDFName: 'Exportovat jako PDF',
         },
         body: {
           emptyDataSourceMessage: t('emptyDataSourceMessage'),

@@ -8,8 +8,10 @@ const Users = (): JSX.Element => {
   return (
     <Paper>
       <MaterialTable
+        title="Seznam uživatelů"
         columns={[{ title: 'Jméno', field: 'name' }]}
         data={[{ name: 'AHOJ' }]}
+        options={{ exportButton: true }}
       />
     </Paper>
   );
