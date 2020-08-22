@@ -19,7 +19,13 @@ const MaterialTable = <RowData extends {}>(
         Container: p => p.children,
         ...props.components,
       }}
-      options={{ toolbar: false, emptyRowsWhenPaging: false, ...props.options }}
+      options={{
+        toolbar: false,
+        emptyRowsWhenPaging: false,
+        ...props.options,
+        pageSize: 50,
+        pageSizeOptions: [50, 100, 200, 400],
+      }}
       localization={{
         pagination: {
           nextTooltip: t('nextTooltip'),
