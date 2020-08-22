@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   avatarButton: {
-    padding: 0,
+    padding: theme.spacing(0.5),
   },
 }));
 
