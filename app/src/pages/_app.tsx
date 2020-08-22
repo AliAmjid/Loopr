@@ -57,4 +57,4 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   return { ...appProps };
 };
 
-export default appWithTranslation(withApollo(MyApp));
+export default appWithTranslation(MyApp);

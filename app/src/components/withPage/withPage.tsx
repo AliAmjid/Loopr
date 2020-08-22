@@ -4,13 +4,10 @@ import { useApolloClient, useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { of } from 'rxjs';
 
 import config from 'config';
 import routes from 'config/routes';
 
-import recognizeError from 'lib/apollo/recognizeError';
-import errors from 'lib/apollo/recognizeError/errors';
 import useCachePersistor from 'lib/apollo/useCachePersistor';
 import withApollo from 'lib/apollo/withApollo';
 
