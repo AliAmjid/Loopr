@@ -6,5 +6,8 @@
   "labelRowsSelect": "řádků",
   "from": "z",
   "actions": "Akce",
-  "emptyDataSourceMessage": "Žádná data k zobrazení"
+  "emptyDataSourceMessage": "Žádná data k zobrazení",
+  "exportTitle": "Exportovat",
+  "exportCSVName": "Exportovat jako CSV",
+  "exportPDFName": "Exportovat jako PDF"
 }

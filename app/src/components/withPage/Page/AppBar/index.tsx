@@ -24,6 +24,7 @@ import LanguageSelect from 'components/LanguageSelect';
 
 import { drawerWidth } from '../Drawer';
 
+import LogOut from './LogOut';
 import Notifications from './Notifications';
 import { AppBarProps } from './types';
 import User from './User';
@@ -98,11 +99,7 @@ const AppBar = (props: AppBarProps): JSX.Element => {
             {props.helpPath && <Help path={props.helpPath} color="inherit" />}
             <LanguageSelect color="inherit" />
             <Notifications />
-            <Tooltip title={t<string>('appBar.logOut')}>
-              <IconButton color="inherit" onClick={props.onLogOut}>
-                <LogOutIcon />
-              </IconButton>
-            </Tooltip>
+            <LogOut onLogOut={props.onLogOut} />
             <User />
           </Grid>
         </Grid>

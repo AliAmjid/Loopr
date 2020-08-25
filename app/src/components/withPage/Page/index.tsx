@@ -5,7 +5,7 @@ import { makeStyles, Theme, Typography } from '@material-ui/core';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import Breadcrumbs from 'components/Breadcrumbs';
+import Breadcrumbs from 'components/withPage/Page/AppBar/Breadcrumbs';
 
 import AppBar from './AppBar';
 import Drawer, { drawerWidth } from './Drawer';

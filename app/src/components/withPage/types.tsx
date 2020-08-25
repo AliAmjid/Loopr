@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-import { Breadcrumbs } from 'components/Breadcrumbs/types';
+import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
 
 export interface WithPageInternalProps {
   Component: ComponentType<any>;

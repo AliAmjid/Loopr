@@ -2,7 +2,7 @@ import routes from 'config/routes';
 
 import materialTableNamespaces from 'lib/material-table/namespaces';
 
-import { Breadcrumbs } from 'components/Breadcrumbs/types';
+import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
 import { PageOptions } from 'components/withPage/types';
 
 export const usersBreadcrumbs: Breadcrumbs = [
