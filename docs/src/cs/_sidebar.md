@@ -1,2 +1,5 @@
 - [Úvod](cs/)
 - [Přihlášení](cs/login.md)
+- Aplikace
+    - [Užiavtelé](cs/users.md)
+    - [Přehled](cs/dashboard.md)

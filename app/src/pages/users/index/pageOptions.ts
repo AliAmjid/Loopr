@@ -15,7 +15,7 @@ const usersPageOptions: PageOptions = {
   breadcrumbs: usersBreadcrumbs,
   namespaces: usersNamespaces,
   title: 'users.index',
-  helpPath: '/users',
+  helpPath: 'users',
 };
 
 export default usersPageOptions;
