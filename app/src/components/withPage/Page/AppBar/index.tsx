@@ -95,7 +95,7 @@ const AppBar = (props: AppBarProps): JSX.Element => {
             </div>
           </Grid>
           <Grid item container alignItems="center" justify="flex-end" xs={6}>
-            <Help path="/" color="inherit" />
+            {props.helpPath && <Help path={props.helpPath} color="inherit" />}
             <LanguageSelect color="inherit" />
             <Notifications />
             <Tooltip title={t<string>('appBar.logOut')}>

@@ -5,11 +5,11 @@ import UserUI from './UserUI';
 const User = (): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  const clickHandler = (button: HTMLButtonElement) => {
+  const clickHandler = (button: HTMLButtonElement): void => {
     setAnchorEl(button);
   };
 
-  const closeHandler = () => {
+  const closeHandler = (): void => {
     setAnchorEl(null);
   };
 

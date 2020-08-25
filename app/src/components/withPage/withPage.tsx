@@ -19,7 +19,7 @@ import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
-  const { data, error } = useQuery<MeUserQuery>(meUserQuery, {
+  const { error } = useQuery<MeUserQuery>(meUserQuery, {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });
@@ -41,14 +41,12 @@ const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
     return <Unauthorized />;
   }
 
+  const { componentProps, ...rest } = props;
+
   return (
     <>
-      <Page
-        onLogOut={logOutHandler}
-        breadcrumbs={props.breadcrumbs}
-        title={props.title}
-      >
-        <props.Component {...props.componentProps} />
+      <Page onLogOut={logOutHandler} {...rest}>
+        <props.Component {...componentProps} />
       </Page>
     </>
   );

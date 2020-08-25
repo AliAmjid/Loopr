@@ -7,10 +7,12 @@ export interface WithPageInternalProps {
   componentProps: any;
   breadcrumbs: Breadcrumbs;
   title: string;
+  helpPath?: string;
 }
 
 export interface PageOptions {
   breadcrumbs: Breadcrumbs;
   title: string;
   namespaces?: string[];
+  helpPath?: string;
 }

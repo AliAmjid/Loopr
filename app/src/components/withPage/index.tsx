@@ -9,18 +9,19 @@ import WithPageInternal from 'components/withPage/withPage';
 const withPage = <ComponentProps extends {}>(pageOptions: PageOptions) => (
   Component: React.ComponentType<ComponentProps>,
 ) => {
+  const { namespaces, ...rest } = pageOptions;
+
   const EndComponent = (props: ComponentProps): JSX.Element => {
     return (
       <WithPageInternal
+        {...rest}
         Component={Component}
         componentProps={props}
-        breadcrumbs={pageOptions.breadcrumbs}
-        title={pageOptions.title}
       />
     );
   };
 
-  const pageNamespaces = pageOptions.namespaces || [];
+  const pageNamespaces = namespaces || [];
 
   return withNamespaces([...withPageNamespaces, ...pageNamespaces])(
     EndComponent,

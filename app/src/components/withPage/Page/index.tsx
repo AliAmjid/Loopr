@@ -26,17 +26,19 @@ const Page = (props: PageProps): JSX.Element => {
   const classes = useStyles();
   const { t } = useTranslation(namespaces.other.pages);
 
+  const { breadcrumbs, title, children, ...rest } = props;
+
   return (
     <div>
-      <AppBar onLogOut={props.onLogOut} />
+      <AppBar {...rest} />
       <Drawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <Breadcrumbs breadcrumbs={props.breadcrumbs} />
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         <Typography variant="h5" component="h1">
-          {t(props.title)}
+          {t(title)}
         </Typography>
-        {props.children}
+        {children}
       </div>
     </div>
   );
