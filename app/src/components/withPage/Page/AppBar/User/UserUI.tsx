@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   Avatar,
+  Box,
   Button,
   Grid,
   IconButton,
@@ -17,8 +18,6 @@ import namespaces from 'lib/i18n/namespaces';
 
 import { UserUIProps } from './types';
 
-const popoverWidth = 250;
-
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
     color: theme.palette.common.black,
@@ -30,12 +29,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   popoverAvatar: {
     color: theme.palette.common.black,
     backgroundColor: theme.palette.secondary.main,
-    width: theme.spacing(15),
-    height: theme.spacing(15),
+    width: theme.spacing(11),
+    height: theme.spacing(11),
   },
   popover: {
     padding: theme.spacing(1),
-    width: popoverWidth,
   },
 }));
 
@@ -75,26 +73,21 @@ const UserUI = (props: UserUIProps): JSX.Element => {
           horizontal: 'right',
         }}
       >
-        <Grid container spacing={1}>
-          <Grid container justify="center" item xs={12}>
-            <Avatar className={classes.popoverAvatar} variant="rounded">
-              AJ
-            </Avatar>
-          </Grid>
-          <Grid item container>
-            <Grid item container justify="center" xs={12}>
-              <Typography variant="h5">Adam Janov</Typography>
-            </Grid>
-            <Grid item container justify="center" xs={12}>
-              <Typography>Student</Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Button fullWidth color="primary" variant="contained">
-              Profil
-            </Button>
-          </Grid>
-        </Grid>
+        <Box display="flex" alignItems="center">
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            marginRight={1}
+          >
+            <Typography variant="h5">Adam Janov</Typography>
+            <Typography>Student</Typography>
+            <Button color="primary">Nastavení profilu</Button>
+          </Box>
+          <Avatar className={classes.popoverAvatar} variant="rounded">
+            AJ
+          </Avatar>
+        </Box>
       </Popover>
     </>
   );
