@@ -32,17 +32,26 @@ const LoginIndex = (): JSX.Element => {
   ] = useLazyQuery<GetTokenQuery, GetTokenQueryVars>(getTokenQuery, {
     fetchPolicy: 'no-cache',
   });
-  const { data: meUserData } = useQuery<MeUserQuery>(meUserQuery, {});
+  const { data: meUserData, error: meUserDataError } = useQuery<MeUserQuery>(
+    meUserQuery,
+    {
+      fetchPolicy: 'no-cache',
+    },
+  );
+  const { data: meUserDataCached } = useQuery<MeUserQuery>(meUserQuery, {
+    fetchPolicy: 'cache-first',
+  });
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
 
   const submitHandler = (email: string, password: string): void => {
+    cookie.remove(config.tokenCookie);
     getToken({ variables: { username: email, password } });
   };
 
   const { enqueueSnackbar } = useSnackbar();
 
-  if (meUserData) {
+  const automaticallyLogIn = () => {
     if (!automaticallyLogged) {
       setAutomaticallyLogged(true);
       router.push(routes.dashboard.index);
@@ -50,6 +59,17 @@ const LoginIndex = (): JSX.Element => {
         variant: 'success',
       });
     }
+  };
+
+  if (meUserData) {
+    if (!automaticallyLogged) {
+      automaticallyLogIn();
+    }
+  } else if (
+    recognizeError(meUserDataError) === errors.network.failedToFetch &&
+    meUserDataCached
+  ) {
+    automaticallyLogIn();
   }
 
   if (!getTokenLoading) {

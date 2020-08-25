@@ -8,6 +8,8 @@ import { useSnackbar } from 'notistack';
 import config from 'config';
 import routes from 'config/routes';
 
+import recognizeError from 'lib/apollo/recognizeError';
+import errors from 'lib/apollo/recognizeError/errors';
 import useCachePersistor from 'lib/apollo/useCachePersistor';
 import withApollo from 'lib/apollo/withApollo';
 
@@ -17,7 +19,7 @@ import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
-  const { data } = useQuery<MeUserQuery>(meUserQuery, {
+  const { data, error } = useQuery<MeUserQuery>(meUserQuery, {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });
@@ -35,7 +37,7 @@ const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
     enqueueSnackbar('Uživatel úspěšně odhlášen', { variant: 'success' });
   };
 
-  if (!data) {
+  if (error && recognizeError(error) !== errors.network.failedToFetch) {
     return <Unauthorized />;
   }
 
