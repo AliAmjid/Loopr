@@ -44,7 +44,7 @@ const ColumnFiltering = (props: ColumnFilteringDialogProps): JSX.Element => {
             <MenuItem
               key={column.field?.toString()}
               value={column.field?.toString()}
-              selected={selected.some(s => s === column.field)}
+              selected={selected.some((s: string) => s === column.field)}
             >
               {column.title}
             </MenuItem>

@@ -16,12 +16,12 @@ const MaterialTable = <RowData extends {}>(
   props: MaterialTableCustomProps<RowData>,
 ): JSX.Element => {
   const { t } = useTranslation(namespaces.lib.materialTable);
-  const columnFilteringState = useColumnFilteringState();
+  const selected = useColumnFilteringState(state => state.selected);
 
   let { columns } = props;
   if (props.defaultActions?.columnFiltering?.active) {
     columns = props.defaultActions.columnFiltering.columns.filter(c =>
-      columnFilteringState.selected.some(s => s === c.field),
+      selected.some((s: string) => s === c.field),
     );
   }
 

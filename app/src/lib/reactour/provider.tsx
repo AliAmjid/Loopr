@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic';
-import { useTranslation } from 'react-i18next';
 import { ReactourStep } from 'reactour';
 
 import config from 'config';
+
+import { useTranslation } from 'lib/i18n';
 
 import loginTour from 'pages/login/tour';
 
