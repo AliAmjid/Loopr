@@ -8,6 +8,7 @@ import Head from 'next/head';
 import { appWithTranslation } from 'lib/i18n';
 import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';
+import ReactourProvider from 'lib/reactour/provider';
 
 const MyApp = (props: AppProps): JSX.Element => {
   const { Component, pageProps } = props;
@@ -43,7 +44,9 @@ const MyApp = (props: AppProps): JSX.Element => {
           // eslint-disable-next-line @typescript-eslint/no-empty-function
           onClose={() => {}}
         >
-          <Component {...pageProps} />
+          <ReactourProvider>
+            <Component {...pageProps} />
+          </ReactourProvider>
         </SnackbarProvider>
       </ThemeProvider>
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useLazyQuery, useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
@@ -12,8 +12,9 @@ import routes from 'config/routes';
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
 import withApollo from 'lib/apollo/withApollo';
+import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
-import withTour from 'lib/reactour/withTour';
+import useTour from 'lib/reactour';
 
 import loginNamespaces from 'pages/login/namespaces';
 
@@ -48,6 +49,11 @@ const LoginIndex = (): JSX.Element => {
   );
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
+  const tour = useTour();
+
+  useEffect(() => {
+    tour.start({ steps: loginTour, defaultNamespace: namespaces.pages.login });
+  }, []);
 
   const submitHandler = (email: string, password: string): void => {
     cookie.remove(config.tokenCookie);
@@ -101,8 +107,4 @@ const LoginIndex = (): JSX.Element => {
     </>
   );
 };
-export default compose(
-  withNamespaces(loginNamespaces),
-  withApollo,
-  withTour(loginTour),
-)(LoginIndex);
+export default compose(withNamespaces(loginNamespaces), withApollo)(LoginIndex);
