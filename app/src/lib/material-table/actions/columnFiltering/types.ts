@@ -6,9 +6,6 @@ export interface ColumnFilteringProps {
 }
 
 export interface ColumnFilteringDialogProps {
-  open: boolean;
-  onClose: () => void;
-  selected: string[];
   columns: Column<any>[];
-  onChange: SelectInputProps['onChange'];
+  defaultColumns: string[];
 }
