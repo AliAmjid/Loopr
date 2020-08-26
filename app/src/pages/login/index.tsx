@@ -17,30 +17,35 @@ import withTour from 'lib/reactour/withTour';
 
 import loginNamespaces from 'pages/login/namespaces';
 
-import getTokenQuery, {
+import {
+  AlreadyLoggedUserQuery,
   GetTokenQuery,
-  GetTokenQueryVars,
-} from './getToken.query';
+  GetTokenQueryVariables,
+} from 'types/graphql';
+
+import GET_TOKEN_QUERY from './queries/getToken';
+import ALREADY_LOGGED_USER_QUERY from './queries/meUser';
 import Login from './login';
-import meUserQuery, { MeUserQuery } from './meUser.query';
 import loginTour from './tour';
 
 const LoginIndex = (): JSX.Element => {
   const [
     getToken,
     { data: getTokenData, error: getTokenError, loading: getTokenLoading },
-  ] = useLazyQuery<GetTokenQuery, GetTokenQueryVars>(getTokenQuery, {
+  ] = useLazyQuery<GetTokenQuery, GetTokenQueryVariables>(GET_TOKEN_QUERY, {
     fetchPolicy: 'no-cache',
   });
-  const { data: meUserData, error: meUserDataError } = useQuery<MeUserQuery>(
-    meUserQuery,
+  const { data: meUserData, error: meUserDataError } = useQuery<
+    AlreadyLoggedUserQuery
+  >(ALREADY_LOGGED_USER_QUERY, {
+    fetchPolicy: 'no-cache',
+  });
+  const { data: meUserDataCached } = useQuery<AlreadyLoggedUserQuery>(
+    ALREADY_LOGGED_USER_QUERY,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-first',
     },
   );
-  const { data: meUserDataCached } = useQuery<MeUserQuery>(meUserQuery, {
-    fetchPolicy: 'cache-first',
-  });
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
 

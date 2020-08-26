@@ -13,13 +13,15 @@ import errors from 'lib/apollo/recognizeError/errors';
 import useCachePersistor from 'lib/apollo/useCachePersistor';
 import withApollo from 'lib/apollo/withApollo';
 
-import meUserQuery, { MeUserQuery } from './meUser.query';
+import { LoggedUserQuery } from 'types/graphql';
+
+import LOGGED_USER_QUERY from './queries/meUser';
 import Page from './Page';
 import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
-  const { error } = useQuery<MeUserQuery>(meUserQuery, {
+  const { error } = useQuery<LoggedUserQuery>(LOGGED_USER_QUERY, {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });

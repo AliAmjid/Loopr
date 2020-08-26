@@ -32,6 +32,9 @@
       ],
       "components/*": [
         "src/components/*"
+      ],
+      "types/*": [
+        "src/types/*"
       ]
     },
     "isolatedModules": true

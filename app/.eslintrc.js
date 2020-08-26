@@ -58,6 +58,7 @@ module.exports = {
           ['^config'],
           ['^lib'],
           ['^pages'],
+          ['^types'],
           ['^components'],
           ['^\\u0000'],
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
