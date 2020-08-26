@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import BreadcrumbsPrefab from '@material-ui/core/Breadcrumbs';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import Link from 'components/Link';

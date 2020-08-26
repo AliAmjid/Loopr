@@ -13,6 +13,8 @@ const recognizeError = (error: ApolloError | undefined): string | undefined => {
         return undefined;
     }
   }
+
+  return undefined;
 };
 
 export default recognizeError;

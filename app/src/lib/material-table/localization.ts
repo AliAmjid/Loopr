@@ -15,8 +15,11 @@ const materialTableLocalization = (t: TFunction): Localization => ({
   },
   toolbar: {
     exportTitle: t('exportTitle'),
+    // TODO wait for update
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     exportCSVName: t('exportCSVName'),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     exportPDFName: t('exportPDFName'),
   },

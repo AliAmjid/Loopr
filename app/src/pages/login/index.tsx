@@ -56,7 +56,7 @@ const LoginIndex = (): JSX.Element => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const automaticallyLogIn = () => {
+  const automaticallyLogIn = (): void => {
     if (!automaticallyLogged) {
       setAutomaticallyLogged(true);
       router.push(routes.dashboard.index);
@@ -89,7 +89,7 @@ const LoginIndex = (): JSX.Element => {
         });
       }
     }
-    if (getTokenData) {
+    if (getTokenData?.getToken) {
       cookie.set(config.tokenCookie, getTokenData.getToken.token);
       router.push(routes.dashboard.index);
     }

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 
-import {
-  IconButton,
-  Menu,
-  MenuItem,
-  Popover,
-  Tooltip,
-} from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
 
 import { languages, useTranslation } from 'lib/i18n';

@@ -2,18 +2,13 @@ import React from 'react';
 
 import {
   AppBar as AppBarPrefab,
-  Avatar,
   fade,
   Grid,
-  IconButton,
   InputBase,
   makeStyles,
   Theme,
   Toolbar,
-  Tooltip,
 } from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import LogOutIcon from '@material-ui/icons/PowerSettingsNew';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { useTranslation } from 'lib/i18n';
