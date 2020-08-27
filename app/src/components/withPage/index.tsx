@@ -11,7 +11,7 @@ const withPage = <ComponentProps extends {}>(pageOptions: PageOptions) => (
 ) => {
   const { namespaces, ...rest } = pageOptions;
 
-  const EndComponent = (props: ComponentProps): JSX.Element => {
+  const EndComponent: React.FC<ComponentProps> = props => {
     return (
       <WithPageInternal
         {...rest}

@@ -29,7 +29,7 @@ import ALREADY_LOGGED_USER_QUERY from './queries/meUser';
 import Login from './login';
 import loginTour from './tour';
 
-const LoginIndex = (): JSX.Element => {
+const LoginIndex: React.FC = () => {
   const [
     getToken,
     { data: getTokenData, error: getTokenError, loading: getTokenLoading },

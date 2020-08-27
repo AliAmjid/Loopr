@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Drawer = (): JSX.Element => {
+const Drawer: React.FC = () => {
   const classes = useStyles();
 
   return (

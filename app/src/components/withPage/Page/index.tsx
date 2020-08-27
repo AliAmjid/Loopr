@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Page = (props: PageProps): JSX.Element => {
+const Page: React.FC<PageProps> = props => {
   const classes = useStyles();
   const { t } = useTranslation(namespaces.other.pages);
 

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Unauthorized = (): JSX.Element => {
+const Unauthorized: React.FC = () => {
   const classes = useStyles();
   const router = useRouter();
 

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const UserUI = (props: UserUIProps): JSX.Element => {
+const UserUI: React.FC<UserUIProps> = props => {
   const classes = useStyles();
 
   const { t } = useTranslation(namespaces.components.withPage);

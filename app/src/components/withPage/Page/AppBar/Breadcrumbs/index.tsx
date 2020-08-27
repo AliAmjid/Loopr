@@ -10,7 +10,7 @@ import Link from 'components/Link';
 
 import { BreadcrumbsProps } from './types';
 
-const Breadcrumbs = (props: BreadcrumbsProps): JSX.Element => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = props => {
   const { t } = useTranslation(namespaces.other.pages);
   const mappedItems = props.breadcrumbs.map((item, index) => {
     if (!item.href || index === props.breadcrumbs.length - 1)

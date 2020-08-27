@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Login = (props: LoginProps): JSX.Element => {
+const Login: React.FC<LoginProps> = props => {
   const classes = useStyles();
   const { register, handleSubmit } = useForm<FormValues>();
   const { t } = useTranslation(namespaces.pages.login);

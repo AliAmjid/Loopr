@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import UserUI from './UserUI';
 
-const User = (): JSX.Element => {
+const User: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const clickHandler = (button: HTMLButtonElement): void => {

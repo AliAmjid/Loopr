@@ -14,9 +14,7 @@ import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/
 
 import { ColumnFilteringDialogProps } from './types';
 
-const ColumnFilteringDialog = (
-  props: ColumnFilteringDialogProps,
-): JSX.Element => {
+const ColumnFilteringDialog: React.FC<ColumnFilteringDialogProps> = props => {
   const { open, setOpen, selected, setSelected } = useColumnFilteringState();
   useEffect(() => {
     setSelected(props.defaultColumns || []);

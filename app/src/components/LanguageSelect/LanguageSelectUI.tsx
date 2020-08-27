@@ -8,11 +8,11 @@ import namespaces from 'lib/i18n/namespaces';
 
 import { LanguageSelectUIProps } from './types';
 
-const LanguageSelectUI = ({
+const LanguageSelectUI: React.FC<LanguageSelectUIProps> = ({
   selectedLanguage,
   onLanguageChange,
   ...buttonProps
-}: LanguageSelectUIProps): JSX.Element => {
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { t } = useTranslation(namespaces.components.LanguageSelect);
 

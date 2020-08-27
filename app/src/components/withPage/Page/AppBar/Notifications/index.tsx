@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import NotificationsUI from 'components/withPage/Page/AppBar/Notifications/NotificationsUI';
 
-const Notifications = (): JSX.Element => {
+const Notifications: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {

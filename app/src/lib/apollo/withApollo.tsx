@@ -18,7 +18,7 @@ import { cachePersistorContext } from './useCachePersistor';
 
 const withApollo = <ComponentProps extends {} = any>(
   Component: React.ComponentType<ComponentProps>,
-) => (props: ComponentProps): JSX.Element => {
+): React.FC<ComponentProps> => props => {
   const cache = new InMemoryCache();
 
   const newClient = (): ApolloClient<any> => {

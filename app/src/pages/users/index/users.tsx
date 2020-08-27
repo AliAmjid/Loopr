@@ -12,7 +12,7 @@ import {
 
 import MaterialTable from 'lib/material-table';
 
-const Users = (): JSX.Element => {
+const Users: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   const columns = [

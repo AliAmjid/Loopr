@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-const NotificationsUI = (props: NotificationsUIProps): JSX.Element => {
+const NotificationsUI: React.FC<NotificationsUIProps> = props => {
   const classes = useStyles();
   const { t } = useTranslation(namespaces.components.withPage);
 

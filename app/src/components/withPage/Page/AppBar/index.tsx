@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const AppBar = (props: AppBarProps): JSX.Element => {
+const AppBar: React.FC<AppBarProps> = props => {
   const classes = useStyles();
   const { t } = useTranslation(namespaces.components.withPage);
 

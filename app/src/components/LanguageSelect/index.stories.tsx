@@ -10,7 +10,7 @@ export default withDecorators({
   title: 'LanguageSelect',
 });
 
-export const Basic = (): JSX.Element => (
+export const Basic: React.FC = () => (
   <LanguageSelect
     size={select('size', { medium: 'medium', small: 'small' }, 'medium')}
   />

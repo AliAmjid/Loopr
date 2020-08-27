@@ -9,7 +9,7 @@ const onClickDismiss = (key: React.ReactText) => () => {
   notistackRef.current.closeSnackbar(key);
 };
 
-const SnackbarProvider = (props: any): JSX.Element => (
+const SnackbarProvider: React.FC<any> = props => (
   <SnackbarProviderPrefab
     maxSnack={2}
     autoHideDuration={5000}

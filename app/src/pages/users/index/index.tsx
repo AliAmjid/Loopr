@@ -7,7 +7,7 @@ import withPage from 'components/withPage';
 import usersPageOptions from './pageOptions';
 import Users from './users';
 
-const UsersIndex = (): JSX.Element => {
+const UsersIndex: React.FC = () => {
   return <Users />;
 };
 

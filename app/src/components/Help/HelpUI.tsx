@@ -8,7 +8,7 @@ import namespaces from 'lib/i18n/namespaces';
 
 import { HelpUIProps } from 'components/Help/types';
 
-const HelpUI = (props: HelpUIProps): JSX.Element => {
+const HelpUI: React.FC<HelpUIProps> = props => {
   const { t } = useTranslation(namespaces.components.Help);
 
   return (

@@ -8,7 +8,7 @@ import namespaces from 'lib/i18n/namespaces';
 
 import { LogOutProps } from './types';
 
-const LogOut = (props: LogOutProps): JSX.Element => {
+const LogOut: React.FC<LogOutProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
 
   return (

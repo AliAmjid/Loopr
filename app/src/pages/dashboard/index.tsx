@@ -7,7 +7,7 @@ import withPage from 'components/withPage';
 
 import dashboardPageOptions from './pageOptions';
 
-const DashboardIndex = (): JSX.Element => {
+const DashboardIndex: React.FC = () => {
   return (
     <>
       <Paper>

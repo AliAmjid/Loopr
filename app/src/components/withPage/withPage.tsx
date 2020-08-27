@@ -20,7 +20,7 @@ import Page from './Page';
 import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
-const WithPageInternal = (props: WithPageInternalProps): JSX.Element => {
+const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   const { error } = useQuery<LoggedUserQuery>(LOGGED_USER_QUERY, {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,

@@ -9,7 +9,7 @@ import namespaces from 'lib/i18n/namespaces';
 
 import navigationList from './navigationList';
 
-const Navigation = (): JSX.Element => {
+const Navigation: React.FC = () => {
   const { t } = useTranslation(namespaces.other.pages);
   const router = useRouter();
 
