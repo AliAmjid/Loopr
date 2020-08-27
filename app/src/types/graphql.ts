@@ -23,6 +23,38 @@ export interface WithPageMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: AclTableQuery
+// ====================================================
+
+export interface AclTableQuery_aclResources {
+  __typename: "AclResourceCollection";
+  id: string;
+  name: string;
+}
+
+export interface AclTableQuery_aclRoles_resources {
+  __typename: "AclResourceCollection";
+  id: string;
+}
+
+export interface AclTableQuery_aclRoles {
+  __typename: "AclRoleCollection";
+  id: string;
+  name: string;
+  resources: (AclTableQuery_aclRoles_resources | null)[] | null;
+}
+
+export interface AclTableQuery {
+  aclResources: (AclTableQuery_aclResources | null)[] | null;
+  aclRoles: (AclTableQuery_aclRoles | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: LoginGetTokenQuery
 // ====================================================
 

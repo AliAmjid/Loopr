@@ -17,14 +17,6 @@ import MaterialTable from 'lib/material-table';
 const Users: React.FC = () => {
   const [open, setOpen] = useState(false);
 
-  const columns = [
-    { section: 'Osobní údaje' },
-    { title: 'Jméno', field: 'name' },
-    { title: 'Email', field: 'email' },
-    { section: 'Zařazení' },
-    { title: 'Třída', field: 'class' },
-  ];
-
   return (
     <Paper>
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -41,7 +33,7 @@ const Users: React.FC = () => {
       </Dialog>
       <MaterialTable
         title="Seznam uživatelů"
-        columns={columns}
+        columns={[]}
         data={[
           { name: 'Igor Hnízdo', class: '3B', email: 'ahoj@ahoj.cz' },
           { name: 'Pavel Laško', class: '3B', email: 'ahoj@ahoj.cz' },
@@ -49,8 +41,26 @@ const Users: React.FC = () => {
         ]}
         options={{ exportButton: true }}
         defaultActions={{
-          columnFiltering: { active: true, columns, defaultColumns: ['name'] },
+          columnFiltering: {
+            active: true,
+            defaultColumns: ['name'],
+            columns: [
+              { section: 'Osobní údaje' },
+              { title: 'Jméno', field: 'name' },
+              { title: 'Email', field: 'email' },
+              { section: 'Zařazení' },
+              { title: 'Třída', field: 'class' },
+            ],
+          },
           grouping: { active: true },
+        }}
+        cellEditable={{
+          onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+            return new Promise((resolve, reject) => {
+              console.log(`newValue: ${newValue}`);
+              setTimeout(resolve, 1000);
+            });
+          },
         }}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>

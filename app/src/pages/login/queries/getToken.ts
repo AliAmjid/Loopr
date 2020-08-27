@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
 const LOGIN_GET_TOKEN_QUERY = gql`
   query LoginGetTokenQuery($username: String!, $password: String!) {
