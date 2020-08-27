@@ -17,16 +17,21 @@ const Acl: React.FC<AclProps> = props => {
         title={t('tableTitle')}
         columns={props.columns}
         data={props.rows}
-        defaultActions={{
-          columnFiltering: {
-            active: false,
-            columns: undefined,
-            defaultColumns: undefined,
+        cellEditable={{
+          onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+            return new Promise((resolve, reject) => {
+              props
+                .onResourceChange({
+                  roleId: columnDef.field as string,
+                  resourceId: rowData.resourceId,
+                  value: newValue,
+                })
+                .then(() => resolve())
+                .catch(() => reject());
+            });
           },
         }}
-      >
-        aho
-      </MaterialTable>
+      />
     </Paper>
   );
 };

@@ -1,6 +1,18 @@
 import { Column } from 'material-table';
 
-export interface AclProps<RowData> {
+export interface OnResourceChangeProps {
+  roleId: string;
+  resourceId: string;
+  value: boolean;
+}
+
+export interface AclProps<
+  RowData extends { name: string; resourceId: string } = {
+    name: string;
+    resourceId: string;
+  }
+> {
   columns: Column<RowData>[];
-  rows: RowData;
+  rows: RowData[];
+  onResourceChange: (props: OnResourceChangeProps) => Promise<boolean>;
 }

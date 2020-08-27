@@ -23,6 +23,43 @@ export interface WithPageMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AclUpdateAcl
+// ====================================================
+
+export interface AclUpdateAcl_updateAclRole_aclRole_resources {
+  __typename: "AclResourceItem";
+  id: string;
+}
+
+export interface AclUpdateAcl_updateAclRole_aclRole {
+  __typename: "AclRoleItem";
+  id: string;
+  resources: (AclUpdateAcl_updateAclRole_aclRole_resources | null)[] | null;
+}
+
+export interface AclUpdateAcl_updateAclRole {
+  __typename: "updateAclRolePayload";
+  aclRole: AclUpdateAcl_updateAclRole_aclRole | null;
+}
+
+export interface AclUpdateAcl {
+  /**
+   * Updates a AclRole.
+   */
+  updateAclRole: AclUpdateAcl_updateAclRole | null;
+}
+
+export interface AclUpdateAclVariables {
+  id: string;
+  resources: string[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: AclTableQuery
 // ====================================================
 

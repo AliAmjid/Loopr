@@ -1,21 +1,32 @@
 import React from 'react';
 
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Column } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import { AclTableQuery } from 'types/graphql';
+import {
+  AclTableQuery,
+  AclUpdateAcl,
+  AclUpdateAclVariables,
+} from 'types/graphql';
 
 import withPage from 'components/withPage';
 
+import ACL_UPDATE_ACL from './mutations/aclUpdate';
 import ACL_TABLE_QUERY from './queries/aclTable';
 import Acl from './Acl';
 import aclPageOptions from './pageOptions';
+import { OnResourceChangeProps } from './types';
 
 const AclIndex: React.FC = () => {
-  const { data } = useQuery<AclTableQuery>(ACL_TABLE_QUERY);
+  const { data } = useQuery<AclTableQuery>(ACL_TABLE_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  });
+  const [updateAcl] = useMutation<AclUpdateAcl, AclUpdateAclVariables>(
+    ACL_UPDATE_ACL,
+  );
   const { t } = useTranslation(namespaces.pages.acl.index);
 
   const columns: Column<any>[] = [
@@ -28,7 +39,7 @@ const AclIndex: React.FC = () => {
       sorting: false,
     })) || []),
   ];
-  const rows =
+  const rows: any & { name: string; resourceId: string } =
     data?.aclResources?.map(resource => {
       const row: Record<string, any> = {};
       data?.aclRoles?.forEach(role => {
@@ -38,10 +49,26 @@ const AclIndex: React.FC = () => {
         row[role?.id ?? ''] = Boolean(roleResource);
       });
 
-      return { ...row, name: resource?.name };
+      return { ...row, name: resource?.name, resourceId: resource?.id };
     }) || [];
 
-  return <Acl columns={columns} rows={rows} />;
+  const resourceChangeHandler = (
+    props: OnResourceChangeProps,
+  ): Promise<boolean> => {
+    return updateAcl({
+      variables: { id: props.roleId, resources: [props.resourceId] },
+    })
+      .then(() => true)
+      .catch(() => false);
+  };
+
+  return (
+    <Acl
+      columns={columns}
+      rows={rows}
+      onResourceChange={resourceChangeHandler}
+    />
+  );
 };
 
 export default withPage(aclPageOptions)(AclIndex);
