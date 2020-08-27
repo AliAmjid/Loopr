@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import {
+  Box,
+  Button,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -51,6 +53,11 @@ const Users: React.FC = () => {
           grouping: { active: true },
         }}
       />
+      <Box display="flex" justifyContent="flex-end" mt={2}>
+        <Button color="primary" variant="contained">
+          Přidat uživatele
+        </Button>
+      </Box>
     </Paper>
   );
 };

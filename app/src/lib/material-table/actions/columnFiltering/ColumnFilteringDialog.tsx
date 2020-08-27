@@ -41,7 +41,11 @@ const ColumnFilteringDialog: React.FC<ColumnFilteringDialogProps> = props => {
         >
           {props.columns?.map(column => {
             if ('section' in column)
-              return <ListSubheader>{column.section}</ListSubheader>;
+              return (
+                <ListSubheader key={column.section}>
+                  {column.section}
+                </ListSubheader>
+              );
             if ('field' in column)
               return (
                 <MenuItem

@@ -1,6 +1,9 @@
 import React from 'react';
 
-import MaterialTablePrefab, { Column } from 'material-table';
+import { fade, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import { palette } from '@material-ui/system';
+import MaterialTablePrefab, { Column, MTableGroupbar } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -14,9 +17,24 @@ import groupingAction from './actions/grouping';
 import materialTableIcons from './icons';
 import { MaterialTableCustomProps } from './types';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  groupbar: {
+    backgroundColor: fade(theme.palette.common.black, 0.01),
+    borderRadius: theme.shape.borderRadius,
+    border: 'none',
+    '& div': {
+      '& div': {
+        border: 'none !important',
+        borderRadius: theme.shape.borderRadius,
+      },
+    },
+  },
+}));
+
 const MaterialTable = <RowData extends {}>(
   props: MaterialTableCustomProps<RowData>,
 ): JSX.Element => {
+  const classes = useStyles();
   const { t } = useTranslation(namespaces.lib.materialTable);
   const selected = useColumnFilteringState(state => state.selected);
   const groupingActive = useGroupingState(state => state.active);
@@ -52,6 +70,16 @@ const MaterialTable = <RowData extends {}>(
         localization={materialTableLocalization(t)}
         components={{
           Container: p => p.children,
+          Groupbar: p => {
+            console.log(p);
+
+            return (
+              <div className={classes.groupbar}>
+                {' '}
+                <MTableGroupbar {...p} />
+              </div>
+            );
+          },
           ...props.components,
         }}
         options={{
