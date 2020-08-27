@@ -16,9 +16,11 @@ const Users: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   const columns = [
+    { section: 'Osobní údaje' },
     { title: 'Jméno', field: 'name' },
-    { title: 'Třída', field: 'class' },
     { title: 'Email', field: 'email' },
+    { section: 'Zařazení' },
+    { title: 'Třída', field: 'class' },
   ];
 
   return (
@@ -38,10 +40,15 @@ const Users: React.FC = () => {
       <MaterialTable
         title="Seznam uživatelů"
         columns={columns}
-        data={[{ name: 'AHOJ', class: '3B', email: 'ahoj@ahoj.cz' }]}
+        data={[
+          { name: 'Igor Hnízdo', class: '3B', email: 'ahoj@ahoj.cz' },
+          { name: 'Pavel Laško', class: '3B', email: 'ahoj@ahoj.cz' },
+          { name: 'Lucie Černá', class: '4B', email: 'ahoj@ahoj.cz' },
+        ]}
         options={{ exportButton: true }}
         defaultActions={{
           columnFiltering: { active: true, columns, defaultColumns: ['name'] },
+          grouping: { active: true },
         }}
       />
     </Paper>

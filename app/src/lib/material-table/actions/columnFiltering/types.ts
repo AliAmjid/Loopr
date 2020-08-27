@@ -1,7 +1,7 @@
-import { Column } from 'material-table';
+import { ColumnFilteringColumns } from 'lib/material-table/types';
 
 export interface ColumnFilteringDialogProps {
-  columns: Column<any>[];
+  columns: ColumnFilteringColumns;
   defaultColumns: string[];
 }
 

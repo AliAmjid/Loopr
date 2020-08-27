@@ -13,6 +13,10 @@ const materialTableLocalization = (t: TFunction): Localization => ({
   header: {
     actions: t('actions'),
   },
+  grouping: {
+    placeholder: t('groupingPlaceholder'),
+    groupedBy: `${t('groupedBy')}:`,
+  },
   toolbar: {
     exportTitle: t('exportTitle'),
     // TODO wait for update

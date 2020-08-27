@@ -9,20 +9,27 @@ import {
   MenuItem,
   Select,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
+import namespaces from 'lib/i18n/namespaces';
 import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/state';
 
 import { ColumnFilteringDialogProps } from './types';
 
 const ColumnFilteringDialog: React.FC<ColumnFilteringDialogProps> = props => {
   const { open, setOpen, selected, setSelected } = useColumnFilteringState();
+  const { t } = useTranslation(namespaces.lib.materialTable);
   useEffect(() => {
+    console.log('effect', props.defaultColumns);
     setSelected(props.defaultColumns || []);
   }, [props.defaultColumns]);
+  console.log('selected', selected);
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>Vyberte data, které chcete v tabulce zobrazovat</DialogTitle>
+      <DialogTitle>
+        {t('defaultActions.columnFiltering.dialogTitle')}
+      </DialogTitle>
       <DialogContent>
         <InputLabel htmlFor="data-select">Data</InputLabel>
         <Select
@@ -32,17 +39,22 @@ const ColumnFilteringDialog: React.FC<ColumnFilteringDialogProps> = props => {
           fullWidth
           multiple
         >
-          <ListSubheader>Osobní informace</ListSubheader>
-          {props.columns?.map(column => (
-            <MenuItem
-              key={column.field?.toString()}
-              value={column.field?.toString()}
-              selected={selected.some((s: string) => s === column.field)}
-            >
-              {column.title}
-            </MenuItem>
-          ))}
-          <ListSubheader>Třída</ListSubheader>
+          {props.columns?.map(column => {
+            if ('section' in column)
+              return <ListSubheader>{column.section}</ListSubheader>;
+            if ('field' in column)
+              return (
+                <MenuItem
+                  key={column.field?.toString()}
+                  value={column.field?.toString()}
+                  selected={selected.some((s: string) => s === column.field)}
+                >
+                  {column.title}
+                </MenuItem>
+              );
+
+            return undefined;
+          })}
         </Select>
       </DialogContent>
     </Dialog>

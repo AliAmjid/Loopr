@@ -2,16 +2,17 @@ import React from 'react';
 
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Action } from 'material-table';
+import { TFunction } from 'next-i18next';
 
-import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/state';
+import useColumnFilteringState from './state';
 
 const VisibilityIconWithDisplayName = (): JSX.Element => <VisibilityIcon />;
 
-const columnFilteringAction: Action<any> = {
+const columnFilteringAction = (t: TFunction): Action<any> => ({
   icon: VisibilityIconWithDisplayName,
   onClick: () => useColumnFilteringState.setState({ open: true }),
-  tooltip: 'Zobrazit',
+  tooltip: t('defaultActions.columnFiltering.tooltip'),
   isFreeAction: true,
-};
+});
 
 export default columnFilteringAction;

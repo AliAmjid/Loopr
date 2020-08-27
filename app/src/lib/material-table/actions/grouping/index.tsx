@@ -2,15 +2,17 @@ import React from 'react';
 
 import GroupIcon from '@material-ui/icons/GroupWork';
 import { Action } from 'material-table';
+import { TFunction } from 'next-i18next';
 
-import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/state';
+import useGroupingState from './state';
 
 const GroupIconWithDisplayName = (): JSX.Element => <GroupIcon />;
-const groupingAction: Action<any> = {
+const groupingAction = (t: TFunction): Action<any> => ({
   icon: GroupIconWithDisplayName,
-  onClick: () => useColumnFilteringState.setState({ open: true }),
-  tooltip: 'Seskupit',
+  onClick: () =>
+    useGroupingState.setState(state => ({ active: !state.active })),
+  tooltip: t('defaultActions.grouping.tooltip'),
   isFreeAction: true,
-};
+});
 
 export default groupingAction;
