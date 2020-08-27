@@ -71,8 +71,6 @@ const MaterialTable = <RowData extends {}>(
         components={{
           Container: p => p.children,
           Groupbar: p => {
-            console.log(p);
-
             return (
               <div className={classes.groupbar}>
                 {' '}

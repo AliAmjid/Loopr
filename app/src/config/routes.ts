@@ -8,6 +8,9 @@ const routes = {
   users: {
     index: '/users',
   },
+  acl: {
+    index: '/acl',
+  },
 };
 
 export default routes;

@@ -2,6 +2,7 @@ import React from 'react';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import GroupIcon from '@material-ui/icons/Group';
+import AclIcon from '@material-ui/icons/HowToReg';
 
 import routes from 'config/routes';
 
@@ -14,6 +15,7 @@ const navigationList: NavigationList = [
     href: routes.dashboard.index,
   },
   { label: 'users.index', icon: <GroupIcon />, href: routes.users.index },
+  { label: 'acl.index', icon: <AclIcon />, href: routes.acl.index },
 ];
 
 export default navigationList;

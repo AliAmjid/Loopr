@@ -17,13 +17,18 @@ import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/
 import { ColumnFilteringDialogProps } from './types';
 
 const ColumnFilteringDialog: React.FC<ColumnFilteringDialogProps> = props => {
-  const { open, setOpen, selected, setSelected } = useColumnFilteringState();
+  const { open, setOpen, selected, setSelected } = useColumnFilteringState(
+    state => ({
+      open: state.open,
+      setOpen: state.setOpen,
+      selected: state.selected,
+      setSelected: state.setSelected,
+    }),
+  );
   const { t } = useTranslation(namespaces.lib.materialTable);
   useEffect(() => {
-    console.log('effect', props.defaultColumns);
-    setSelected(props.defaultColumns || []);
-  }, [props.defaultColumns]);
-  console.log('selected', selected);
+    setSelected(props.defaultColumns);
+  }, []);
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
