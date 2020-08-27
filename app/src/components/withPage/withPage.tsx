@@ -13,15 +13,15 @@ import errors from 'lib/apollo/recognizeError/errors';
 import useCachePersistor from 'lib/apollo/useCachePersistor';
 import withApollo from 'lib/apollo/withApollo';
 
-import { LoggedUserQuery } from 'types/graphql';
+import { WithPageMeUserQuery } from 'types/graphql';
 
-import LOGGED_USER_QUERY from './queries/meUser';
+import WITH_PAGE_ME_USER_QUERY from './queries/meUser';
 import Page from './Page';
 import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal: React.FC<WithPageInternalProps> = props => {
-  const { error } = useQuery<LoggedUserQuery>(LOGGED_USER_QUERY, {
+  const { error } = useQuery<WithPageMeUserQuery>(WITH_PAGE_ME_USER_QUERY, {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });

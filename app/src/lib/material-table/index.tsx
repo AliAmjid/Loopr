@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MaterialTablePrefab from 'material-table';
+import MaterialTablePrefab, { Column } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -23,8 +23,9 @@ const MaterialTable = <RowData extends {}>(
 
   let { columns } = props;
   if (props.defaultActions?.columnFiltering?.active) {
-    columns = props.defaultActions.columnFiltering.columns.filter(c =>
-      selected.some((s: string) => s === c.field),
+    columns = props.defaultActions.columnFiltering.columns.filter(
+      (c): c is Column<RowData> =>
+        'field' in c && selected.some((s: string) => s === c.field),
     );
   }
 

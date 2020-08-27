@@ -4,17 +4,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: LoggedUserQuery
+// GraphQL query operation: WithPageMeUserQuery
 // ====================================================
 
-export interface LoggedUserQuery_meUser {
+export interface WithPageMeUserQuery_meUser {
   __typename: "User";
   id: string;
   name: string;
 }
 
-export interface LoggedUserQuery {
-  meUser: LoggedUserQuery_meUser | null;
+export interface WithPageMeUserQuery {
+  meUser: WithPageMeUserQuery_meUser | null;
 }
 
 /* tslint:disable */
@@ -23,10 +23,10 @@ export interface LoggedUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetTokenQuery
+// GraphQL query operation: LoginGetTokenQuery
 // ====================================================
 
-export interface GetTokenQuery_getToken {
+export interface LoginGetTokenQuery_getToken {
   __typename: "Token";
   /**
    * Use token in header like this: 'Authorization: Bearer {token}'
@@ -34,11 +34,11 @@ export interface GetTokenQuery_getToken {
   token: string;
 }
 
-export interface GetTokenQuery {
-  getToken: GetTokenQuery_getToken | null;
+export interface LoginGetTokenQuery {
+  getToken: LoginGetTokenQuery_getToken | null;
 }
 
-export interface GetTokenQueryVariables {
+export interface LoginGetTokenQueryVariables {
   username: string;
   password: string;
 }
@@ -49,17 +49,17 @@ export interface GetTokenQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: AlreadyLoggedUserQuery
+// GraphQL query operation: LoginMeUserQuery
 // ====================================================
 
-export interface AlreadyLoggedUserQuery_meUser {
+export interface LoginMeUserQuery_meUser {
   __typename: "User";
   id: string;
   name: string;
 }
 
-export interface AlreadyLoggedUserQuery {
-  meUser: AlreadyLoggedUserQuery_meUser | null;
+export interface LoginMeUserQuery {
+  meUser: LoginMeUserQuery_meUser | null;
 }
 
 /* tslint:disable */

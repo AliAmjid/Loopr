@@ -1,11 +1,11 @@
 import { gql } from 'apollo-boost';
 
-const GET_TOKEN_QUERY = gql`
-  query GetTokenQuery($username: String!, $password: String!) {
+const LOGIN_GET_TOKEN_QUERY = gql`
+  query LoginGetTokenQuery($username: String!, $password: String!) {
     getToken(username: $username, password: $password) {
       token
     }
   }
 `;
 
-export default GET_TOKEN_QUERY;
+export default LOGIN_GET_TOKEN_QUERY;

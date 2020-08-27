@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
-const ALREADY_LOGGED_USER_QUERY = gql`
-  query AlreadyLoggedUserQuery {
+const LOGIN_ME_USER_QUERY = gql`
+  query LoginMeUserQuery {
     meUser {
       id
       name
@@ -9,4 +9,4 @@ const ALREADY_LOGGED_USER_QUERY = gql`
   }
 `;
 
-export default ALREADY_LOGGED_USER_QUERY;
+export default LOGIN_ME_USER_QUERY;
