@@ -1,0 +1,24 @@
+{
+  "nextTooltip": "Další stránka",
+  "previousTooltip": "Předchozí stránka",
+  "lastTooltip": "Poslední stránka",
+  "firstTooltip": "První stránka,",
+  "labelRowsSelect": "řádků",
+  "from": "z",
+  "actions": "Akce",
+  "emptyDataSourceMessage": "Žádná data k zobrazení",
+  "exportTitle": "Exportovat",
+  "exportCSVName": "Exportovat jako CSV",
+  "exportPDFName": "Exportovat jako PDF",
+  "groupingPlaceholder": "Pro seksupení přetáhněte položku ze záhlaví",
+  "groupedBy": "Seskupeno podle",
+  "defaultActions": {
+    "grouping": {
+      "tooltip":"Seskupit"
+    },
+    "columnFiltering": {
+      "tooltip":"Sloupce",
+      "dialogTitle": "Vyberte sloupce, které chcete zobrazovat"
+    }
+  }
+}

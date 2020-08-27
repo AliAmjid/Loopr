@@ -1,16 +1,105 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { useLazyQuery, useQuery } from '@apollo/client';
+import cookie from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
+import { compose } from 'recompose';
+
+import config from 'config';
+import routes from 'config/routes';
+
+import recognizeError from 'lib/apollo/recognizeError';
+import errors from 'lib/apollo/recognizeError/errors';
+import withApollo from 'lib/apollo/withApollo';
+import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
-import withTour from 'lib/reactour/withTour';
+import useTour from 'lib/reactour';
 
-import Login from 'pages/login/login';
-import loginTour from 'pages/login/tour';
+import loginNamespaces from 'pages/login/namespaces';
 
-const LoginIndex = (): JSX.Element => {
+import {
+  AlreadyLoggedUserQuery,
+  GetTokenQuery,
+  GetTokenQueryVariables,
+} from 'types/graphql';
+
+import GET_TOKEN_QUERY from './queries/getToken';
+import ALREADY_LOGGED_USER_QUERY from './queries/meUser';
+import Login from './login';
+import loginTour from './tour';
+
+const LoginIndex: React.FC = () => {
+  const [
+    getToken,
+    { data: getTokenData, error: getTokenError, loading: getTokenLoading },
+  ] = useLazyQuery<GetTokenQuery, GetTokenQueryVariables>(GET_TOKEN_QUERY, {
+    fetchPolicy: 'no-cache',
+  });
+  const { data: meUserData, error: meUserDataError } = useQuery<
+    AlreadyLoggedUserQuery
+  >(ALREADY_LOGGED_USER_QUERY, {
+    fetchPolicy: 'no-cache',
+  });
+  const { data: meUserDataCached } = useQuery<AlreadyLoggedUserQuery>(
+    ALREADY_LOGGED_USER_QUERY,
+    {
+      fetchPolicy: 'cache-first',
+    },
+  );
+  const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
+  const router = useRouter();
+  const tour = useTour();
+
+  useEffect(() => {
+    tour.start({ steps: loginTour, defaultNamespace: namespaces.pages.login });
+  }, []);
+
   const submitHandler = (email: string, password: string): void => {
-    // eslint-disable-next-line no-alert
-    alert(`${email} ${password}`);
+    cookie.remove(config.tokenCookie);
+    getToken({ variables: { username: email, password } });
   };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const automaticallyLogIn = (): void => {
+    if (!automaticallyLogged) {
+      setAutomaticallyLogged(true);
+      router.push(routes.dashboard.index);
+      enqueueSnackbar('Byli jste automaticky přihlášeni', {
+        variant: 'success',
+      });
+    }
+  };
+
+  if (meUserData) {
+    if (!automaticallyLogged) {
+      automaticallyLogIn();
+    }
+  } else if (
+    recognizeError(meUserDataError) === errors.network.failedToFetch &&
+    meUserDataCached
+  ) {
+    automaticallyLogIn();
+  }
+
+  if (!getTokenLoading) {
+    if (getTokenError) {
+      if (recognizeError(getTokenError) === errors.network.failedToFetch) {
+        enqueueSnackbar('Nejste připojeni k internetu', {
+          variant: 'warning',
+        });
+      } else {
+        enqueueSnackbar('Zadané údaje se neshodují', {
+          variant: 'error',
+        });
+      }
+    }
+    if (getTokenData?.getToken) {
+      cookie.set(config.tokenCookie, getTokenData.getToken.token);
+      router.push(routes.dashboard.index);
+    }
+  }
 
   return (
     <>
@@ -18,10 +107,4 @@ const LoginIndex = (): JSX.Element => {
     </>
   );
 };
-
-const LoginIndexWithTour = withNamespaces(
-  withTour(LoginIndex, loginTour, 'login'),
-  ['login', 'common'],
-);
-
-export default LoginIndexWithTour;
+export default compose(withNamespaces(loginNamespaces), withApollo)(LoginIndex);

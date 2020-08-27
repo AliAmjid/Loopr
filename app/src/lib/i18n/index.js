@@ -13,4 +13,8 @@ const NextI18NextInstance = new NextI18Next({
   localePath: path.resolve('./public/static/locales'),
 });
 
-module.exports = { ...NextI18NextInstance, defaultLanguage, languages };
+module.exports = {
+  ...NextI18NextInstance,
+  defaultLanguage,
+  languages,
+};
