@@ -54,14 +54,6 @@ const Users: React.FC = () => {
           },
           grouping: { active: true },
         }}
-        cellEditable={{
-          onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
-            return new Promise((resolve, reject) => {
-              console.log(`newValue: ${newValue}`);
-              setTimeout(resolve, 1000);
-            });
-          },
-        }}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <Button color="primary" variant="contained">

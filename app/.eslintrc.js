@@ -38,6 +38,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-alert': 'error',
     'no-console': 'error',
+    'no-unused-expressions': 'off',
     'react/jsx-curly-newline': 'off',
     'import/extensions': [
       'error',
@@ -97,6 +98,7 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-expressions': ['error'],
   },
   overrides: [
     {
