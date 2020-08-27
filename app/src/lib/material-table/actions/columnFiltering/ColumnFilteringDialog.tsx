@@ -14,16 +14,11 @@ import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/
 
 import { ColumnFilteringDialogProps } from './types';
 
-const ColumnFiltering = (props: ColumnFilteringDialogProps): JSX.Element => {
-  const {
-    open,
-    setOpen,
-    selected,
-    setSelected,
-    setDefaultColumns,
-  } = useColumnFilteringState();
+const ColumnFilteringDialog = (
+  props: ColumnFilteringDialogProps,
+): JSX.Element => {
+  const { open, setOpen, selected, setSelected } = useColumnFilteringState();
   useEffect(() => {
-    setDefaultColumns(props.defaultColumns || []);
     setSelected(props.defaultColumns || []);
   }, [props.defaultColumns]);
 
@@ -56,4 +51,4 @@ const ColumnFiltering = (props: ColumnFilteringDialogProps): JSX.Element => {
   );
 };
 
-export default ColumnFiltering;
+export default ColumnFilteringDialog;

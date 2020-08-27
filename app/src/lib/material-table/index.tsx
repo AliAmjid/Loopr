@@ -7,7 +7,7 @@ import namespaces from 'lib/i18n/namespaces';
 import materialTableLocalization from 'lib/material-table/localization';
 
 import columnFilteringAction from './actions/columnFiltering';
-import ColumnFiltering from './actions/columnFiltering/ColumnFiltering';
+import ColumnFilteringDialog from './actions/columnFiltering/ColumnFilteringDialog';
 import useColumnFilteringState from './actions/columnFiltering/state';
 import materialTableIcons from './icons';
 import { MaterialTableCustomProps } from './types';
@@ -27,7 +27,7 @@ const MaterialTable = <RowData extends {}>(
 
   return (
     <>
-      <ColumnFiltering
+      <ColumnFilteringDialog
         columns={props.defaultActions?.columnFiltering?.columns || []}
         defaultColumns={
           props.defaultActions?.columnFiltering?.defaultColumns || []

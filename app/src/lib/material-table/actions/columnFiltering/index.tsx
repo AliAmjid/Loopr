@@ -7,11 +7,11 @@ import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/
 
 const VisibilityIconWithDisplayName = (): JSX.Element => <VisibilityIcon />;
 
-const columnFiltering: Action<any> = {
+const columnFilteringAction: Action<any> = {
   icon: VisibilityIconWithDisplayName,
   onClick: () => useColumnFilteringState.setState({ open: true }),
   tooltip: 'Zobrazit',
   isFreeAction: true,
 };
 
-export default columnFiltering;
+export default columnFilteringAction;
