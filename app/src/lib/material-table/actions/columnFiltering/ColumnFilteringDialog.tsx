@@ -12,8 +12,8 @@ import {
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
-import useColumnFilteringState from 'lib/material-table/actions/columnFiltering/state';
 
+import useColumnFilteringState from './state';
 import { ColumnFilteringDialogProps } from './types';
 
 const ColumnFilteringDialog: React.FC<ColumnFilteringDialogProps> = props => {

@@ -12,6 +12,8 @@
   "exportPDFName": "Exportovat jako PDF",
   "groupingPlaceholder": "Pro seksupení přetáhněte položku ze záhlaví",
   "groupedBy": "Seskupeno podle",
+  "save": "Uložit",
+  "cancel": "Zrušit",
   "defaultActions": {
     "grouping": {
       "tooltip":"Seskupit"
