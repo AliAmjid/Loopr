@@ -9,7 +9,7 @@ import MaterialTable from 'lib/material-table';
 
 import { AclProps } from './types';
 
-const AddIconWithDisplayName = () => <AddIcon />;
+const AddIconWithDisplayName = (): JSX.Element => <AddIcon />;
 
 const Acl: React.FC<AclProps> = props => {
   const { t } = useTranslation(namespaces.pages.acl.index);
@@ -42,7 +42,7 @@ const Acl: React.FC<AclProps> = props => {
         actions={[
           {
             tooltip: 'addRole',
-            icon: AddIcon,
+            icon: AddIconWithDisplayName,
             onClick: () => {},
             isFreeAction: true,
           },
