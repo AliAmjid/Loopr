@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { fade, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { palette } from '@material-ui/system';
+import { fade, makeStyles, Theme } from '@material-ui/core';
 import MaterialTablePrefab, { Column, MTableGroupbar } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -70,14 +68,16 @@ const MaterialTable = <RowData extends {}>(
         localization={materialTableLocalization(t)}
         components={{
           Container: p => p.children,
+          // eslint-disable-next-line react/display-name
           Groupbar: p => {
             return (
               <div className={classes.groupbar}>
-                {' '}
                 <MTableGroupbar {...p} />
               </div>
             );
           },
+          // eslint-disable-next-line react/display-name
+          ...(props.hidePagination && { Pagination: () => <div /> }),
           ...props.components,
         }}
         options={{

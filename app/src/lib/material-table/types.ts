@@ -7,6 +7,7 @@ export type ColumnFilteringColumns<RowData extends {} = any> = (
 
 export interface MaterialTableCustomProps<RowData extends {}>
   extends MaterialTableProps<RowData> {
+  hidePagination?: boolean;
   defaultActions?: {
     columnFiltering?: {
       active: boolean;
