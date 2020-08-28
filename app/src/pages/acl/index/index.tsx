@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { Column } from 'material-table';
+import { useSnackbar } from 'notistack';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -28,9 +29,10 @@ const AclIndex: React.FC = () => {
     ACL_UPDATE_ACL,
   );
   const { t } = useTranslation(namespaces.pages.acl.index);
+  const { enqueueSnackbar } = useSnackbar();
 
   const columns: Column<any>[] = [
-    { title: t('resources'), field: 'name' },
+    { title: t('resources'), field: 'name', editable: 'never' },
     ...(data?.aclRoles?.map(role => ({
       title: role?.name,
       type: 'boolean' as 'boolean',
@@ -59,7 +61,11 @@ const AclIndex: React.FC = () => {
       variables: { id: props.roleId, resources: [props.resourceId] },
     })
       .then(() => true)
-      .catch(() => false);
+      .catch(() => {
+        enqueueSnackbar(t('failedToUpdate'), { variant: 'error' });
+
+        return false;
+      });
   };
 
   return (

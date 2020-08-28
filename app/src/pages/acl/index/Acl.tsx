@@ -27,7 +27,7 @@ const Acl: React.FC<AclProps> = props => {
                   value: newValue,
                 })
                 .then(() => resolve())
-                .catch(() => reject());
+                .catch(reject);
             });
           },
         }}

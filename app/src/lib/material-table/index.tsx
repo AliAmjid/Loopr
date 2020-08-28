@@ -91,7 +91,7 @@ const MaterialTable = <RowData extends {}>(
           ...props.options,
           exportButton: props.options?.exportButton && !groupingActive,
         }}
-        actions={actions}
+        actions={[...actions, ...(props.actions || [])]}
       />
     </>
   );
