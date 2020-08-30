@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { fade, makeStyles, Theme } from '@material-ui/core';
 import MaterialTablePrefab, {
@@ -38,8 +38,14 @@ const MaterialTable = <RowData extends {}>(
 ): JSX.Element => {
   const classes = useStyles();
   const { t } = useTranslation(namespaces.lib.materialTable);
-  const selected = useColumnFilteringState(state => state.selected);
-  const groupingActive = useGroupingState(state => state.active);
+  const { selected, setSelected } = useColumnFilteringState(state => ({
+    selected: state.selected,
+    setSelected: state.setSelected,
+  }));
+  const { groupingActive, setGroupingActive } = useGroupingState(state => ({
+    groupingActive: state.active,
+    setGroupingActive: state.setActive,
+  }));
 
   let { columns } = props;
   if (props.defaultActions?.columnFiltering?.active) {
@@ -56,6 +62,13 @@ const MaterialTable = <RowData extends {}>(
   if (props.defaultActions?.grouping?.active) {
     actions.push(groupingAction(t));
   }
+
+  useEffect(() => {
+    if (!props.defaultActions?.grouping?.active && groupingActive === true)
+      setGroupingActive(false);
+    if (!props.defaultActions?.columnFiltering?.active && selected.length !== 0)
+      setSelected([]);
+  }, []);
 
   return (
     <>
