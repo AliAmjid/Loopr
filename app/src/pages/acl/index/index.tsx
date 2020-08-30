@@ -69,8 +69,19 @@ const AclIndex: React.FC = () => {
   const resourceChangeHandler = (
     props: OnResourceChangeProps,
   ): Promise<boolean> => {
+    let resources: string[] =
+      data?.aclRoles
+        ?.find(role => role?.id === props.roleId)
+        ?.resources?.map(resource => resource?.id || '') || [];
+
+    if (props.value) {
+      resources.push(props.resourceId);
+    } else {
+      resources = resources?.filter(resource => resource !== props.resourceId);
+    }
+
     return updateAcl({
-      variables: { id: props.roleId, resources: [props.resourceId] },
+      variables: { id: props.roleId, resources },
     })
       .then(() => true)
       .catch(() => {
