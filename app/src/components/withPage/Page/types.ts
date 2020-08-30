@@ -8,3 +8,8 @@ export type PageProps = PropsWithChildren<{
   title: string;
   helpPath?: string;
 }>;
+
+export interface PageState {
+  drawerOpen: boolean;
+  setDrawerOpen: (open: boolean) => void;
+}
