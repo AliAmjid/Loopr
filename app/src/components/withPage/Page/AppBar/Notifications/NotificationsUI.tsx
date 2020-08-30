@@ -35,7 +35,7 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
 
   return (
     <>
-      <Tooltip title={t<string>('appBar.notifications')}>
+      <Tooltip title={t<string>('notifications')}>
         <IconButton color="inherit" onClick={props.onClick}>
           <Badge badgeContent={3} color="secondary">
             <NotificationsIcon />

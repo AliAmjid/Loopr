@@ -101,12 +101,12 @@ const AppBar: React.FC<AppBarProps> = props => {
                   <SearchIcon />
                 </div>
                 <InputBase
-                  placeholder={`${t('appBar.search')}…`}
+                  placeholder={`${t('search')}…`}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
-                  inputProps={{ 'aria-label': t('appBar.search') }}
+                  inputProps={{ 'aria-label': t('search') }}
                 />
               </div>
             </Grid>

@@ -21,27 +21,27 @@ const LogOut: React.FC<LogOutProps> = props => {
 
   return (
     <>
-      <Tooltip title={t<string>('appBar.logOut')}>
+      <Tooltip title={t<string>('logOut')}>
         <IconButton color="inherit" onClick={() => setDialogOpen(true)}>
           <LogOutIcon />
         </IconButton>
       </Tooltip>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <DialogTitle>Opravdu se chcete odhlásit?</DialogTitle>
+        <DialogTitle>{t('logOutDialogTitle')}</DialogTitle>
         <DialogActions>
           <Button
             color="secondary"
             variant="contained"
             onClick={props.onLogOut}
           >
-            Odhlásit se
+            {t('logOut')}
           </Button>
           <Button
             color="primary"
             variant="contained"
             onClick={() => setDialogOpen(false)}
           >
-            Zpět
+            {t('back')}
           </Button>
         </DialogActions>
       </Dialog>
