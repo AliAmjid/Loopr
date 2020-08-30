@@ -1,7 +1,11 @@
 import React from 'react';
 
 import { fade, makeStyles, Theme } from '@material-ui/core';
-import MaterialTablePrefab, { Column, MTableGroupbar } from 'material-table';
+import MaterialTablePrefab, {
+  Column,
+  MTableEditRow,
+  MTableGroupbar,
+} from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -74,6 +78,20 @@ const MaterialTable = <RowData extends {}>(
               <div className={classes.groupbar}>
                 <MTableGroupbar {...p} />
               </div>
+            );
+          },
+          // TODO remove after upgrade
+          EditRow: tableProps => {
+            return (
+              <MTableEditRow
+                {...{
+                  ...tableProps,
+                  onBulkEditRowChanged:
+                    typeof tableProps.onBulkEditRowChanged === 'function'
+                      ? tableProps.onBulkEditRowChanged
+                      : () => {},
+                }}
+              />
             );
           },
           // eslint-disable-next-line react/display-name

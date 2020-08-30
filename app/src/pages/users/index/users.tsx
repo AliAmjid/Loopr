@@ -1,38 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-} from '@material-ui/core';
+import { Box, Button, Paper } from '@material-ui/core';
+import Link from 'next/link';
 
+import routes from 'config/routes';
+
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 const Users: React.FC = () => {
-  const [open, setOpen] = useState(false);
+  const { t } = useTranslation(namespaces.pages.users.index);
 
   return (
     <Paper>
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>
-          Vyberte data, které chcete v tabulce zobrazovat
-        </DialogTitle>
-        <DialogContent>
-          <InputLabel htmlFor="data-select">Data</InputLabel>
-          <Select id="data-select" value={[1, 2]} fullWidth multiple>
-            <MenuItem value={1}>AHOj</MenuItem>
-            <MenuItem value={2}>AHOj</MenuItem>
-          </Select>
-        </DialogContent>
-      </Dialog>
       <MaterialTable
-        title="Seznam uživatelů"
+        title={t('tableTitle')}
         columns={[]}
         data={[
           { name: 'Igor Hnízdo', class: '3B', email: 'ahoj@ahoj.cz' },
@@ -56,9 +39,11 @@ const Users: React.FC = () => {
         }}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>
-        <Button color="primary" variant="contained">
-          Přidat uživatele
-        </Button>
+        <Link href={routes.users.addManual} passHref>
+          <Button color="primary" variant="contained">
+            {t('addUsers')}
+          </Button>
+        </Link>
       </Box>
     </Paper>
   );
