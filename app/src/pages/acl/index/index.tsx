@@ -1,13 +1,19 @@
 import React from 'react';
 
-import { useMutation, useQuery } from '@apollo/client';
+import { ApolloCache, gql, useMutation, useQuery } from '@apollo/client';
 import { Column } from 'material-table';
 import { useSnackbar } from 'notistack';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import ACL_CREATE_ACL_ROLE, {
+  aclCreateAclRoleUpdate,
+} from 'pages/acl/index/mutations/createAclRole';
+
 import {
+  AclCreateAclRole,
+  AclCreateAclRoleVariables,
   AclTableQuery,
   AclUpdateAcl,
   AclUpdateAclVariables,
@@ -15,7 +21,7 @@ import {
 
 import withPage from 'components/withPage';
 
-import ACL_UPDATE_ACL from './mutations/aclUpdate';
+import ACL_UPDATE_ACL_MUTATION from './mutations/updateAcl';
 import ACL_TABLE_QUERY from './queries/aclTable';
 import Acl from './Acl';
 import aclPageOptions from './pageOptions';
@@ -26,8 +32,14 @@ const AclIndex: React.FC = () => {
     fetchPolicy: 'cache-and-network',
   });
   const [updateAcl] = useMutation<AclUpdateAcl, AclUpdateAclVariables>(
-    ACL_UPDATE_ACL,
+    ACL_UPDATE_ACL_MUTATION,
   );
+  const [addRole, { loading: addRoleLoading }] = useMutation<
+    AclCreateAclRole,
+    AclCreateAclRoleVariables
+  >(ACL_CREATE_ACL_ROLE, {
+    update: aclCreateAclRoleUpdate,
+  });
   const { t } = useTranslation(namespaces.pages.acl.index);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -68,11 +80,17 @@ const AclIndex: React.FC = () => {
       });
   };
 
+  const roleAddHandler = (): void => {
+    addRole({ variables: { input: { name: 'ROLE_NEW' } } });
+  };
+
   return (
     <Acl
       columns={columns}
       rows={rows}
       onResourceChange={resourceChangeHandler}
+      onRoleAdd={roleAddHandler}
+      addRoleLoading={addRoleLoading}
     />
   );
 };

@@ -43,8 +43,9 @@ const Acl: React.FC<AclProps> = props => {
           {
             tooltip: 'addRole',
             icon: AddIconWithDisplayName,
-            onClick: () => {},
+            onClick: props.onRoleAdd,
             isFreeAction: true,
+            disabled: props.addRoleLoading,
           },
         ]}
       />

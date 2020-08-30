@@ -23,33 +23,64 @@ export interface WithPageMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: AclUpdateAcl
+// GraphQL mutation operation: AclCreateAclRole
 // ====================================================
 
-export interface AclUpdateAcl_updateAclRole_aclRole_resources {
+export interface AclCreateAclRole_createAclRole_aclRole {
+  __typename: "AclRoleItem";
+  id: string;
+  name: string;
+}
+
+export interface AclCreateAclRole_createAclRole {
+  __typename: "createAclRolePayload";
+  aclRole: AclCreateAclRole_createAclRole_aclRole | null;
+}
+
+export interface AclCreateAclRole {
+  /**
+   * Creates a AclRole.
+   */
+  createAclRole: AclCreateAclRole_createAclRole | null;
+}
+
+export interface AclCreateAclRoleVariables {
+  input: createAclRoleInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: AclUpdateAclMutation
+// ====================================================
+
+export interface AclUpdateAclMutation_updateAclRole_aclRole_resources {
   __typename: "AclResourceItem";
   id: string;
 }
 
-export interface AclUpdateAcl_updateAclRole_aclRole {
+export interface AclUpdateAclMutation_updateAclRole_aclRole {
   __typename: "AclRoleItem";
   id: string;
-  resources: (AclUpdateAcl_updateAclRole_aclRole_resources | null)[] | null;
+  resources: (AclUpdateAclMutation_updateAclRole_aclRole_resources | null)[] | null;
 }
 
-export interface AclUpdateAcl_updateAclRole {
+export interface AclUpdateAclMutation_updateAclRole {
   __typename: "updateAclRolePayload";
-  aclRole: AclUpdateAcl_updateAclRole_aclRole | null;
+  aclRole: AclUpdateAclMutation_updateAclRole_aclRole | null;
 }
 
-export interface AclUpdateAcl {
+export interface AclUpdateAclMutation {
   /**
    * Updates a AclRole.
    */
-  updateAclRole: AclUpdateAcl_updateAclRole | null;
+  updateAclRole: AclUpdateAclMutation_updateAclRole | null;
 }
 
-export interface AclUpdateAclVariables {
+export interface AclUpdateAclMutationVariables {
   id: string;
   resources: string[];
 }
@@ -139,6 +170,12 @@ export interface LoginMeUserQuery {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface createAclRoleInput {
+  clientMutationId?: string | null;
+  name: string;
+  resources?: (string | null)[] | null;
+}
 
 //==============================================================
 // END Enums and Input Objects

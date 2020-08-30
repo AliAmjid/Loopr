@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const ACL_UPDATE_ACL = gql`
-  mutation AclUpdateAcl($id: ID!, $resources: [String!]!) {
+const ACL_UPDATE_ACL_MUTATION = gql`
+  mutation AclUpdateAclMutation($id: ID!, $resources: [String!]!) {
     updateAclRole(input: { id: $id, resources: $resources }) {
       aclRole {
         id
@@ -13,4 +13,4 @@ const ACL_UPDATE_ACL = gql`
   }
 `;
 
-export default ACL_UPDATE_ACL;
+export default ACL_UPDATE_ACL_MUTATION;

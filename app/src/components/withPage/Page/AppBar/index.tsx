@@ -81,7 +81,7 @@ const AppBar: React.FC<AppBarProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
   const setDrawerOpen = usePageState(state => state.setDrawerOpen);
   const theme = useTheme();
-  const mdDown = useMediaQuery(theme.breakpoints.down('md'));
+  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <AppBarPrefab className={classes.appBar}>
@@ -116,7 +116,7 @@ const AppBar: React.FC<AppBarProps> = props => {
             container
             alignItems="center"
             justify="flex-end"
-            xs={mdDown ? 11 : 6}
+            xs={smDown ? 11 : 6}
           >
             {props.helpPath && <Help path={props.helpPath} color="inherit" />}
             <LanguageSelect color="inherit" />
