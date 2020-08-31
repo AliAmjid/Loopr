@@ -27,7 +27,6 @@ describe('MaterialTable', () => {
       it('should render default column', () => {
         const wrapper = mount(
           <MaterialTable
-            title="Ahoj"
             columns={[]}
             data={data}
             defaultActions={{
