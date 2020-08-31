@@ -2,9 +2,8 @@ import React from 'react';
 
 import { Column } from 'material-table';
 
-import withDecorators from '../storybook/withDecorators';
-
-import MaterialTable from './index';
+import withDecorators from '../../storybook/withDecorators';
+import MaterialTable from '../index';
 
 export default withDecorators({ title: 'MaterialTable' });
 

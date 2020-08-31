@@ -94,6 +94,7 @@ const MaterialTable = <RowData extends {}>(
             );
           },
           // TODO remove after upgrade
+          // eslint-disable-next-line react/display-name
           EditRow: tableProps => {
             return (
               <MTableEditRow
@@ -102,7 +103,8 @@ const MaterialTable = <RowData extends {}>(
                   onBulkEditRowChanged:
                     typeof tableProps.onBulkEditRowChanged === 'function'
                       ? tableProps.onBulkEditRowChanged
-                      : () => {},
+                      : // eslint-disable-next-line @typescript-eslint/no-empty-function
+                        () => {},
                 }}
               />
             );
