@@ -16,6 +16,9 @@ class BasicResourceVoter extends Voter {
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token) {
         /** @var User $user */
         $user = $token->getUser();
-        return $user->getRole()->hasResource($attribute);
+        if ($user instanceof User) {
+            return $user->getRole()->hasResource($attribute);
+        }
+        return false;
     }
 }

@@ -1,0 +1,19 @@
+App\Entity\Invitation:
+    normalizationContext:
+        groups: [invitation:read]
+    denormalizationContext:
+        groups: [invitation:write]
+    #disable rest
+    collectionOperations: {}
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    attributes:
+        pagination_enabled: false
+    graphql:
+        collection_query:
+            pagination_enabled: false
+            normalization_context: [aclResource:read]

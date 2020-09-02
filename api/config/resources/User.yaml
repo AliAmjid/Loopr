@@ -18,5 +18,4 @@ App\Entity\User:
                     - user:read
                     - aclRole:read
         test:
-            item_query: 
-            
+            item_query:
