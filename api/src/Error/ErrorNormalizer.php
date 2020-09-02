@@ -21,8 +21,6 @@ class ErrorNormalizer implements NormalizerInterface {
     public function normalize($object, string $format = null, array $context = []): array {
         $exception = $object->getPrevious();
         $error = FormattedError::createFromException($object);
-        // Add your logic here and add your specific data in the $error array (in the 'extensions' entry to follow the GraphQL specification).
-        // $error['extensions']['yourEntry'] = ...;
         if ($exception instanceof ClientError) {
             $error['loopr-error'] = [
                 'msg' => $exception->getMessage(),
@@ -41,11 +39,21 @@ class ErrorNormalizer implements NormalizerInterface {
                         'type' => get_class($exception)
                     ]
                 ];
+                if ($exception instanceof AccessDeniedHttpException) {
+                    $msg = $exception->getMessage();
+                    if (str_contains($msg, 'r: ')) {
+                        $msg = str_replace('r: ', '', $msg);
+                        $error['loopr-error']['payload']['requiredResources'] = explode(',', $msg);
+                    }
+                }
             }
         }
 
         if (!isset($error['loopr-error'])) {
-            throw $exception;
+            if ($exception instanceof \Throwable) {
+                throw $exception;
+            }
+
         }
 
         return $error;
