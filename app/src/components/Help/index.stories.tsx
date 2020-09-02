@@ -8,7 +8,7 @@ import Help from './index';
 
 export default withDecorators({ title: 'Help' });
 
-export const Basic = (): JSX.Element => (
+export const Basic: React.FC = () => (
   <Help
     path={text('path', '')}
     size={select('size', { medium: 'medium', small: 'small' }, 'medium')}

@@ -1,46 +1,79 @@
 import React, { useState } from 'react';
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-boost';
-import { persistCache } from 'apollo-cache-persist';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { CachePersistor } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
+import cookie from 'js-cookie';
+import { getDisplayName } from 'recompose';
 
 import config from 'config';
 
+import { cachePersistorContext } from './useCachePersistor';
+
 const withApollo = <ComponentProps extends {} = any>(
-  Component: React.FC<ComponentProps>,
-) => (props: ComponentProps): JSX.Element => {
+  Component: React.ComponentType<ComponentProps>,
+): React.FC<ComponentProps> => props => {
   const cache = new InMemoryCache();
 
-  const newClient = (): ApolloClient<{}> => {
+  const newClient = (): ApolloClient<any> => {
+    const httpLink = createHttpLink({
+      uri: config.apiURL,
+      fetch,
+    });
+
+    const authLink = setContext((_, { headers }) => {
+      const token = cookie.get(config.tokenCookie);
+
+      return {
+        headers: {
+          ...headers,
+          authorization: token ? `Bearer ${token}` : '',
+        },
+      };
+    });
+
     return new ApolloClient({
-      link: createHttpLink({
-        uri: config.apiURL,
-        fetch,
-      }),
+      link: authLink.concat(httpLink),
       cache,
     });
   };
 
   const [updated, setUpdated] = useState(false);
-  const [client, setClient] = useState(newClient());
+  const [client, setClient] = useState<ApolloClient<any> | undefined>(
+    undefined,
+  );
+
+  const cachePersistor: CachePersistor<any> = process.browser
+    ? new CachePersistor({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        cache,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        storage: window.localStorage,
+        debug: !config.production,
+      })
+    : ({} as CachePersistor<any>);
 
   if (process.browser && !updated) {
     setUpdated(true);
-    persistCache({
-      cache,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      storage: window.localStorage,
-      debug: true,
-    }).then(() => setClient(newClient()));
+    cachePersistor.restore().then(() => setClient(newClient()));
   }
+  if (!client) return <>Loading</>;
+
+  Component.displayName = `${getDisplayName(Component)}-withApollo`;
 
   return (
     <ApolloProvider client={client}>
-      <Component {...props} />
+      <cachePersistorContext.Provider value={cachePersistor}>
+        <Component {...props} />
+      </cachePersistorContext.Provider>
     </ApolloProvider>
   );
 };

@@ -5,8 +5,6 @@ const next = require('next');
 
 const prefabConfig = require('./src/config/prefab');
 
-const nextI18next = require('./src/lib/i18n');
-
 const createConfig = () => {
   const configPath = `${__dirname}/src/config/index.js`;
   if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
@@ -22,7 +20,6 @@ const createConfig = () => {
   const server = express();
 
   await app.prepare();
-  await nextI18next.initPromise;
 
   createConfig();
 

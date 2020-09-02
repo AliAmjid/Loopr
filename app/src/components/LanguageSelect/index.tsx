@@ -6,7 +6,7 @@ import LanguageSelectUI from 'components/LanguageSelect/LanguageSelectUI';
 
 import { LanguageSelectProps } from './types';
 
-const LanguageSelect = (props: LanguageSelectProps): JSX.Element => {
+const LanguageSelect: React.FC<LanguageSelectProps> = props => {
   const { i18n } = useTranslation();
 
   return (

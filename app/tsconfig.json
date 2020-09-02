@@ -16,19 +16,25 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "preserve",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
+      "config": [
+        "src/config/index.js"
+      ],
       "config/*": [
-        "config/*"
+        "src/config/*"
       ],
       "lib/*": [
-        "lib/*"
+        "src/lib/*"
       ],
       "pages/*": [
-        "pages/*"
+        "src/pages/*"
       ],
       "components/*": [
-        "components/*"
+        "src/components/*"
+      ],
+      "types/*": [
+        "src/types/*"
       ]
     },
     "isolatedModules": true

@@ -2,13 +2,16 @@ import React from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import App, { AppContext, AppProps } from 'next/app';
+import App, { AppContext } from 'next/app';
+import { AppType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
 
 import { appWithTranslation } from 'lib/i18n';
 import theme from 'lib/material-ui/theme';
+import SnackbarProvider from 'lib/notistack';
+import ReactourProvider from 'lib/reactour/provider';
 
-const MyApp = (props: AppProps): JSX.Element => {
+const MyApp: AppType = props => {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
@@ -37,7 +40,15 @@ const MyApp = (props: AppProps): JSX.Element => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+
+        <SnackbarProvider
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          onClose={() => {}}
+        >
+          <ReactourProvider>
+            <Component {...pageProps} />
+          </ReactourProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </>
   );

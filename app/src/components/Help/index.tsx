@@ -8,7 +8,7 @@ import HelpUI from 'components/Help/HelpUI';
 
 import { HelpProps } from './types';
 
-const Help = ({ path, ...props }: HelpProps): JSX.Element => {
+const Help: React.FC<HelpProps> = ({ path, ...props }) => {
   const { i18n } = useTranslation();
   const clickHandler = (): void => {
     window.open(
