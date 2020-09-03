@@ -39,6 +39,7 @@ module.exports = {
     'no-alert': 'error',
     'no-console': 'error',
     'no-unused-expressions': 'off',
+    'no-underscore-dangle': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'import/extensions': [
       'error',

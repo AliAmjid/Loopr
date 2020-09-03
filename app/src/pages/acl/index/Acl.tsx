@@ -19,6 +19,7 @@ const Acl: React.FC<AclProps> = props => {
       <MaterialTable
         title={t('tableTitle')}
         columns={props.columns}
+        isLoading={props.loading}
         data={props.rows}
         cellEditable={{
           onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
@@ -45,7 +46,7 @@ const Acl: React.FC<AclProps> = props => {
             icon: AddIconWithDisplayName,
             onClick: props.onRoleAdd,
             isFreeAction: true,
-            disabled: props.addRoleLoading,
+            disabled: props.loading,
           },
         ]}
       />

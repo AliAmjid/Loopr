@@ -12,6 +12,9 @@ import namespaces from 'lib/i18n/namespaces';
 import useGroupingState from 'lib/material-table/actions/grouping/state';
 import materialTableLocalization from 'lib/material-table/localization';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+
 import columnFilteringAction from './actions/columnFiltering';
 import ColumnFilteringDialog from './actions/columnFiltering/ColumnFilteringDialog';
 import useColumnFilteringState from './actions/columnFiltering/state';
@@ -78,54 +81,59 @@ const MaterialTable = <RowData extends {}>(
           props.defaultActions?.columnFiltering?.defaultColumns || []
         }
       />
-      <MaterialTablePrefab
-        {...props}
-        columns={columns}
-        icons={materialTableIcons}
-        localization={materialTableLocalization(t)}
-        components={{
-          Container: p => p.children,
-          // eslint-disable-next-line react/display-name
-          Groupbar: p => {
-            return (
-              <div className={classes.groupbar}>
-                <MTableGroupbar {...p} />
-              </div>
-            );
-          },
-          // TODO remove after upgrade
-          // eslint-disable-next-line react/display-name
-          EditRow: tableProps => {
-            return (
-              <MTableEditRow
-                {...{
-                  ...tableProps,
-                  onBulkEditRowChanged:
-                    typeof tableProps.onBulkEditRowChanged === 'function'
-                      ? tableProps.onBulkEditRowChanged
-                      : // eslint-disable-next-line @typescript-eslint/no-empty-function
-                        () => {},
-                }}
-              />
-            );
-          },
-          // eslint-disable-next-line react/display-name
-          ...(props.hidePagination && { Pagination: () => <div /> }),
-          ...props.components,
-        }}
-        options={{
-          search: false,
-          filtering: true,
-          emptyRowsWhenPaging: false,
-          pageSize: 50,
-          pageSizeOptions: [50, 100, 200, 400],
-          exportAllData: true,
-          grouping: groupingActive,
-          ...props.options,
-          exportButton: props.options?.exportButton && !groupingActive,
-        }}
-        actions={[...actions, ...(props.actions || [])]}
-      />
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={props.isLoading ?? false} />
+        <MaterialTablePrefab
+          {...props}
+          columns={columns}
+          icons={materialTableIcons}
+          localization={materialTableLocalization(t)}
+          components={{
+            Container: p => p.children,
+            // eslint-disable-next-line react/display-name
+            Groupbar: p => {
+              return (
+                <div className={classes.groupbar}>
+                  <MTableGroupbar {...p} />
+                </div>
+              );
+            },
+            // eslint-disable-next-line react/display-name
+            OverlayLoading: () => <></>,
+            // TODO remove after upgrade
+            // eslint-disable-next-line react/display-name
+            EditRow: tableProps => {
+              return (
+                <MTableEditRow
+                  {...{
+                    ...tableProps,
+                    onBulkEditRowChanged:
+                      typeof tableProps.onBulkEditRowChanged === 'function'
+                        ? tableProps.onBulkEditRowChanged
+                        : // eslint-disable-next-line @typescript-eslint/no-empty-function
+                          () => {},
+                  }}
+                />
+              );
+            },
+            // eslint-disable-next-line react/display-name
+            ...(props.hidePagination && { Pagination: () => <div /> }),
+            ...props.components,
+          }}
+          options={{
+            search: false,
+            filtering: true,
+            emptyRowsWhenPaging: false,
+            pageSize: 50,
+            pageSizeOptions: [50, 100, 200, 400],
+            exportAllData: true,
+            grouping: groupingActive,
+            ...props.options,
+            exportButton: props.options?.exportButton && !groupingActive,
+          }}
+          actions={[...actions, ...(props.actions || [])]}
+        />
+      </OverlayLoadingContainer>
     </>
   );
 };

@@ -4,12 +4,13 @@ import {
   Box,
   Button,
   Grid,
+  makeStyles,
   Paper,
   TextField,
+  Theme,
   Typography,
 } from '@material-ui/core';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
 
 import routes from 'config/routes';
 
@@ -18,7 +19,15 @@ import { EditRoleProps } from 'pages/acl/editRole/types';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  removeButton: {
+    backgroundColor: theme.palette.error.main,
+    '&:hover': { backgroundColor: theme.palette.error.main },
+  },
+}));
+
 const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
+  const classes = useStyles();
   const [values, setValues] = useState({ name: { value: '', error: false } });
 
   useEffect(() => {
@@ -71,14 +80,25 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
             </Grid>
             <Grid item container justify="flex-end" xs={12}>
               <Box mr={2}>
+                <Button
+                  classes={{
+                    contained: classes.removeButton,
+                    root: classes.removeButton,
+                  }}
+                  variant="contained"
+                >
+                  Remove
+                </Button>
+              </Box>
+              <Box mr={2}>
                 <Button color="primary" variant="contained" type="submit">
-                  Uložit
+                  Save
                 </Button>
               </Box>
               <Grid item>
                 <Link href={routes.acl.index}>
                   <Button color="secondary" variant="contained">
-                    Zrušit
+                    Cancel
                   </Button>
                 </Link>
               </Grid>

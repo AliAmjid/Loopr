@@ -88,13 +88,12 @@ const LoginIndex: React.FC = () => {
 
   if (!getTokenLoading) {
     if (getTokenError) {
-      console.log(getTokenError);
       if (recognizeError(getTokenError) === errors.network.failedToFetch) {
-        enqueueSnackbar('Nejste připojeni k internetu', {
+        enqueueSnackbar('noInternet', {
           variant: 'warning',
         });
       } else {
-        enqueueSnackbar('Zadané údaje se neshodují', {
+        enqueueSnackbar('noMatch', {
           variant: 'error',
         });
       }

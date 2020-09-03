@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Localization } from 'material-table';
 import { TFunction } from 'next-i18next';
 
@@ -29,7 +27,6 @@ const materialTableLocalization = (t: TFunction): Localization => ({
     // @ts-ignore
     exportPDFName: t('exportPDFName'),
   },
-  saveTooltip: 'asdf',
   body: {
     emptyDataSourceMessage: t('emptyDataSourceMessage'),
     editRow: {

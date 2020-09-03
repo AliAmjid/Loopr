@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
@@ -29,7 +29,6 @@ const EditRoleIndex: React.FC = () => {
     AclEditRoleAclRoleVariables
   >(ACL_EDIT_ROLE_ACL_ROLE_QUERY, {
     variables: { id: router.query.id?.toString() || '' },
-    fetchPolicy: 'no-cache',
   });
   const [updateRole, { loading: updateRoleLoading }] = useMutation<
     AclEditRoleUpdateRole,
@@ -44,7 +43,7 @@ const EditRoleIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('succes', { variant: 'success' });
+        enqueueSnackbar('success', { variant: 'success' });
         router.push(routes.acl.index);
       })
       .catch(() => {

@@ -1,4 +1,9 @@
-import { ApolloCache, gql, MutationUpdaterFn } from '@apollo/client';
+import {
+  ApolloCache,
+  FetchResult,
+  gql,
+  MutationUpdaterFn,
+} from '@apollo/client';
 
 import { AclCreateAclRole } from 'types/graphql';
 
@@ -18,8 +23,12 @@ const ACL_CREATE_ACL_ROLE = gql`
 
 export const aclCreateAclRoleUpdate: MutationUpdaterFn<AclCreateAclRole> = (
   cache: ApolloCache<AclCreateAclRole>,
-  { data: { createAclRole } }: { data?: AclCreateAclRole },
+  { data }: FetchResult<AclCreateAclRole>,
 ) => {
+  const createAclRole = data?.createAclRole;
+  if (!createAclRole) return;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   createAclRole.__typename = 'AclRoleCollection';
   cache.modify({
     fields: {

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { ApolloCache, gql, useMutation, useQuery } from '@apollo/client';
-import { IconButton } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
+import { useMutation, useQuery } from '@apollo/client';
 import { Column } from 'material-table';
 import { useSnackbar } from 'notistack';
 
@@ -31,9 +29,12 @@ import aclPageOptions from './pageOptions';
 import { OnResourceChangeProps } from './types';
 
 const AclIndex: React.FC = () => {
-  const { data } = useQuery<AclTableQuery>(ACL_TABLE_QUERY, {
-    fetchPolicy: 'cache-and-network',
-  });
+  const { data, loading: aclTableLoading } = useQuery<AclTableQuery>(
+    ACL_TABLE_QUERY,
+    {
+      fetchPolicy: 'cache-and-network',
+    },
+  );
   const [updateAcl] = useMutation<
     AclUpdateAclMutation,
     AclUpdateAclMutationVariables
@@ -96,7 +97,11 @@ const AclIndex: React.FC = () => {
   };
 
   const roleAddHandler = (): void => {
-    addRole({ variables: { input: { name: 'ROLE_NEW' } } });
+    addRole({ variables: { input: { name: 'ROLE_NEW' } } })
+      .then(() => enqueueSnackbar('success', { variant: 'success' }))
+      .catch(() => {
+        enqueueSnackbar('error', { variant: 'error' });
+      });
   };
 
   return (
@@ -105,7 +110,7 @@ const AclIndex: React.FC = () => {
       rows={rows}
       onResourceChange={resourceChangeHandler}
       onRoleAdd={roleAddHandler}
-      addRoleLoading={addRoleLoading}
+      loading={aclTableLoading || addRoleLoading}
     />
   );
 };

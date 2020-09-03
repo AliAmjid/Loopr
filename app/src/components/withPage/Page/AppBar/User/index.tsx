@@ -60,7 +60,7 @@ const User: React.FC = () => {
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        onClose={() => setAnchorEl(false)}
+        onClose={() => setAnchorEl(null)}
         classes={{ paper: classes.popover }}
         anchorOrigin={{
           vertical: 'bottom',

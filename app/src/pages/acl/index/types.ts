@@ -16,7 +16,7 @@ export interface AclProps<
   rows: RowData[];
   onResourceChange: (props: OnResourceChangeProps) => Promise<boolean>;
   onRoleAdd: () => void;
-  addRoleLoading: boolean;
+  loading: boolean;
 }
 
 export interface HeaderCellProps {
