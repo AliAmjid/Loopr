@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { CircularProgress, fade, makeStyles, Theme } from '@material-ui/core';
+import {
+  CircularProgress,
+  fade,
+  makeStyles,
+  Theme,
+  useTheme,
+} from '@material-ui/core';
 
 import { OverlayLoadingProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  visible: {
+    opacity: 1,
+  },
+  hidden: {
+    opacity: 0,
+  },
   root: {
     position: 'absolute',
     top: 0,
@@ -13,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     zIndex: 11,
     borderRadius: 'inherit',
+    transition: theme.transitions.create('opacity'),
   },
   middle: {
     display: 'table',
@@ -32,11 +45,33 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const OverlayLoading: React.FC<OverlayLoadingProps> = ({ loading }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const [hidden, setHidden] = useState(!loading);
+  const [visible, setVisible] = useState(loading);
+  useEffect(() => {
+    if (loading) {
+      setVisible(false);
+      setHidden(false);
+      setTimeout(() => setVisible(true));
+    } else if (visible && !hidden) {
+      setVisible(false);
+      setTimeout(() => setHidden(true), theme.transitions.duration.standard);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    setVisible(visible);
+    setHidden(!visible);
+  }, []);
 
   return (
     <>
-      {loading && (
-        <div className={classes.root}>
+      {!hidden && (
+        <div
+          className={`${classes.root} ${
+            visible ? classes.visible : classes.hidden
+          }`}
+        >
           <div className={classes.middle}>
             <div className={classes.child}>
               <CircularProgress />

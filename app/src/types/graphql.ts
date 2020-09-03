@@ -23,13 +23,74 @@ export interface WithPageMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AclEditRoleUpdateRole
+// ====================================================
+
+export interface AclEditRoleUpdateRole_updateAclRole_aclRole {
+  __typename: "AclRoleItem";
+  id: string;
+  name: string;
+}
+
+export interface AclEditRoleUpdateRole_updateAclRole {
+  __typename: "updateAclRolePayload";
+  aclRole: AclEditRoleUpdateRole_updateAclRole_aclRole | null;
+}
+
+export interface AclEditRoleUpdateRole {
+  /**
+   * Updates a AclRole.
+   */
+  updateAclRole: AclEditRoleUpdateRole_updateAclRole | null;
+}
+
+export interface AclEditRoleUpdateRoleVariables {
+  id: string;
+  name?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: AclEditRoleAclRole
+// ====================================================
+
+export interface AclEditRoleAclRole_aclRole {
+  __typename: "AclRoleItem";
+  id: string;
+  name: string;
+}
+
+export interface AclEditRoleAclRole {
+  aclRole: AclEditRoleAclRole_aclRole | null;
+}
+
+export interface AclEditRoleAclRoleVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: AclCreateAclRole
 // ====================================================
+
+export interface AclCreateAclRole_createAclRole_aclRole_resources {
+  __typename: "AclResourceItem";
+  id: string;
+}
 
 export interface AclCreateAclRole_createAclRole_aclRole {
   __typename: "AclRoleItem";
   id: string;
   name: string;
+  resources: (AclCreateAclRole_createAclRole_aclRole_resources | null)[] | null;
 }
 
 export interface AclCreateAclRole_createAclRole {
@@ -160,6 +221,27 @@ export interface LoginMeUserQuery_meUser {
 
 export interface LoginMeUserQuery {
   meUser: LoginMeUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: NewRole
+// ====================================================
+
+export interface NewRole_resources {
+  __typename: "AclResourceCollection";
+  id: string;
+}
+
+export interface NewRole {
+  __typename: "AclRoleCollection";
+  id: string;
+  name: string;
+  resources: (NewRole_resources | null)[] | null;
 }
 
 /* tslint:disable */

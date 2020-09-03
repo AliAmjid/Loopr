@@ -41,6 +41,11 @@ const withApollo = <ComponentProps extends {} = any>(
     return new ApolloClient({
       link: authLink.concat(httpLink),
       cache,
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: 'cache-and-network',
+        },
+      },
     });
   };
 
