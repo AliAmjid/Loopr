@@ -14,7 +14,7 @@ const Navigation: React.FC = () => {
   const router = useRouter();
 
   const mappedNavigation = navigationList.map(item => (
-    <Link key={item.label + item.href} href={item.href} passHref>
+    <Link key={item.label + item.href} href={item.href}>
       <ListItem button selected={router.pathname === item.href}>
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText>{t(item.label)}</ListItemText>

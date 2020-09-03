@@ -18,3 +18,8 @@ export interface AclProps<
   onRoleAdd: () => void;
   addRoleLoading: boolean;
 }
+
+export interface HeaderCellProps {
+  roleName: string;
+  roleId: string;
+}

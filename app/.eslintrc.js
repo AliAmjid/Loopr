@@ -39,7 +39,7 @@ module.exports = {
     'no-alert': 'error',
     'no-console': 'error',
     'no-unused-expressions': 'off',
-    'react/jsx-curly-newline': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -76,6 +76,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/destructuring-assignment': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/jsx-curly-newline': 'off',
     'react/jsx-filename-extension': [
       'error',
       { extensions: ['.js', '.jsx', '.tsx'] },

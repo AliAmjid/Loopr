@@ -11,6 +11,7 @@ const routes = {
   },
   acl: {
     index: '/acl',
+    editRole: '/acl/editRole',
   },
 };
 

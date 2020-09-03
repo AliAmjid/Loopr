@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { ApolloCache, gql, useMutation, useQuery } from '@apollo/client';
+import { IconButton } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import { Column } from 'material-table';
 import { useSnackbar } from 'notistack';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import HeaderCell from 'pages/acl/index/headerCell';
 import ACL_CREATE_ACL_ROLE, {
   aclCreateAclRoleUpdate,
 } from 'pages/acl/index/mutations/createAclRole';
@@ -15,8 +18,8 @@ import {
   AclCreateAclRole,
   AclCreateAclRoleVariables,
   AclTableQuery,
-  AclUpdateAcl,
-  AclUpdateAclVariables,
+  AclUpdateAclMutation,
+  AclUpdateAclMutationVariables,
 } from 'types/graphql';
 
 import withPage from 'components/withPage';
@@ -31,9 +34,10 @@ const AclIndex: React.FC = () => {
   const { data } = useQuery<AclTableQuery>(ACL_TABLE_QUERY, {
     fetchPolicy: 'cache-and-network',
   });
-  const [updateAcl] = useMutation<AclUpdateAcl, AclUpdateAclVariables>(
-    ACL_UPDATE_ACL_MUTATION,
-  );
+  const [updateAcl] = useMutation<
+    AclUpdateAclMutation,
+    AclUpdateAclMutationVariables
+  >(ACL_UPDATE_ACL_MUTATION);
   const [addRole, { loading: addRoleLoading }] = useMutation<
     AclCreateAclRole,
     AclCreateAclRoleVariables
@@ -46,7 +50,7 @@ const AclIndex: React.FC = () => {
   const columns: Column<any>[] = [
     { title: t('resources'), field: 'name', editable: 'never' },
     ...(data?.aclRoles?.map(role => ({
-      title: role?.name,
+      title: <HeaderCell roleName={role!.name} roleId={role!.id} />,
       type: 'boolean' as 'boolean',
       field: role?.id,
       filtering: false,
