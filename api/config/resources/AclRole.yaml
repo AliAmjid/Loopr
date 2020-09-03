@@ -15,6 +15,7 @@ App\Entity\AclRole:
             normalization_context: [aclRole:read]
         item_query:
         update:
+            security: "is_granted('EDIT_ROLE')"
         create:
             security: "is_granted('CREATE_ROLE')"
             denormalization_context:

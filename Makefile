@@ -30,3 +30,6 @@ api-load-resources:
 
 api-encode-password:
 	sudo docker-compose exec php bin/console security:encode-password
+
+api-tests:
+	sudo docker-compose exec php bin/phpunit

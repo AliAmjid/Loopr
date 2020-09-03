@@ -26,6 +26,9 @@ services:
     jwt_token_authenticator:
         class: 'App\Security\JwtTokenAuthenticator'
         autowire: true
-
+        
+    App\Error\ErrorNormalizer:
+        tags:
+            - { name: 'serializer.normalizer', priority: 12 }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

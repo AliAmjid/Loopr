@@ -9,7 +9,7 @@ App\Entity\User:
             output: false
     graphql:
         me:
-            security_message: "USER_LOGGED is required"
+            security_message: "r: USER_LOGGED"
             security: "is_granted('USER_LOGGED')"
             item_query: App\Controller\GetMeController
             args: []
@@ -18,5 +18,4 @@ App\Entity\User:
                     - user:read
                     - aclRole:read
         test:
-            item_query: 
-            
+            item_query:

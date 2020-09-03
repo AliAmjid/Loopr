@@ -31,7 +31,7 @@ trait TAssertsHelper {
         /** @var User $user */
         foreach ($userCanAccess as $user) {
             /** @var Response $response */
-            $response = $func($user);
+            $response = $func($user, true);
             if ($response->hasErrors()) {
                 $resources = implode(', ', $user->getRole()->getResources()->toArray());
                 throw new \Exception("User with resources {$resources} should have access this endpoint but error detected");
@@ -40,7 +40,7 @@ trait TAssertsHelper {
         /** @var User $user */
         foreach ($usersCantAccess as $user) {
             /** @var Response $response */
-            $response = $func($user);
+            $response = $func($user, false);
             if (!$response->hasErrors()) {
                 $resources = implode(', ', $user->getRole()->getResources()->toArray());
                 throw new \Exception("User with resources {$resources} should NOT access this endpoint but no error detected");

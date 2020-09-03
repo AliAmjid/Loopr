@@ -75,7 +75,7 @@ class AclTest extends BaseTestCase {
     }
 
     public function testUpdateAclRole() {
-        $this->assertSecurityResources([AclResourceEnum::EDIT_ROLE], function (User $user) {
+        $this->assertSecurityResources([AclResourceEnum::EDIT_ROLE], function (User $user, bool $noError) {
             $role = $this->createRoleWithResources([]);
             $client = $this->createLoggedClient($user->getUsername());
             $query = /** @lang GraphQL */
@@ -96,11 +96,12 @@ class AclTest extends BaseTestCase {
                 'id' => 'acl_roles/' . $role->getId()
             ]);
 
-            $this->em->refresh($role);
-            $this->assertNoErrors($response);
-
-            $this->assertSame('ROLE_TESTING', $role->getName());
-            $this->assertTrue($role->hasResource(AclResourceEnum::USER_LOGGED));
+            if ($noError) {
+                $this->em->refresh($role);
+                $this->assertNoErrors($response);
+                $this->assertSame('ROLE_TESTING', $role->getName());
+                $this->assertTrue($role->hasResource(AclResourceEnum::USER_LOGGED));
+            }
 
             return $response;
         });
