@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(14),
     height: theme.spacing(14),
   },
+  popover: {
+    padding: theme.spacing(2),
+  },
 }));
 
 const User: React.FC = () => {
@@ -56,6 +59,7 @@ const User: React.FC = () => {
       </Tooltip>
       <Popover
         open={Boolean(anchorEl)}
+        classes={{ paper: classes.popover }}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
         anchorOrigin={{

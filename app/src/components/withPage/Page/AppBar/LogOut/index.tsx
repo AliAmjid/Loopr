@@ -29,16 +29,12 @@ const LogOut: React.FC<LogOutProps> = props => {
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogTitle>{t('logOutDialogTitle')}</DialogTitle>
         <DialogActions>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={props.onLogOut}
-          >
+          <Button color="primary" variant="contained" onClick={props.onLogOut}>
             {t('logOut')}
           </Button>
           <Button
             color="primary"
-            variant="contained"
+            variant="outlined"
             onClick={() => setDialogOpen(false)}
           >
             {t('back')}
