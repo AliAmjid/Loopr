@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { Box, Button, Paper } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import routes from 'config/routes';
 
@@ -9,8 +11,11 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
+const VisibilityIconWithDisplayName: React.FC = () => <VisibilityIcon />;
+
 const Users: React.FC = () => {
   const { t } = useTranslation(namespaces.pages.users.index);
+  const router = useRouter();
 
   return (
     <Paper>
@@ -37,6 +42,13 @@ const Users: React.FC = () => {
           },
           grouping: { active: true },
         }}
+        actions={[
+          {
+            tooltip: 'Detail',
+            icon: VisibilityIconWithDisplayName,
+            onClick: () => router.push(routes.users.userDetail),
+          },
+        ]}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <Link href={routes.users.addManual} passHref>

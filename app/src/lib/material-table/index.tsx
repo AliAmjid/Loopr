@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { fade, makeStyles, Theme } from '@material-ui/core';
+import { fade, makeStyles, Theme, useTheme } from '@material-ui/core';
 import MaterialTablePrefab, {
   Column,
   MTableEditRow,
@@ -40,6 +40,7 @@ const MaterialTable = <RowData extends {}>(
   props: MaterialTableCustomProps<RowData>,
 ): JSX.Element => {
   const classes = useStyles();
+  const theme = useTheme();
   const { t } = useTranslation(namespaces.lib.materialTable);
   const { selected, setSelected } = useColumnFilteringState(state => ({
     selected: state.selected,
@@ -130,6 +131,7 @@ const MaterialTable = <RowData extends {}>(
             grouping: groupingActive,
             ...props.options,
             exportButton: props.options?.exportButton && !groupingActive,
+            actionsCellStyle: { color: theme.palette.common.black },
           }}
           actions={[...actions, ...(props.actions || [])]}
         />
