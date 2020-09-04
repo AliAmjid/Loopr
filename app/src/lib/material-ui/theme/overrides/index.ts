@@ -16,9 +16,7 @@ const overrides: Overrides = {
     },
   },
   MuiPopover: {
-    paper: {
-      padding: 0,
-    },
+    paper: {},
   },
 };
 

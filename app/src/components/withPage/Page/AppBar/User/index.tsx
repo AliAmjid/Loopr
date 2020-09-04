@@ -26,11 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   popoverAvatar: {
     color: theme.palette.common.black,
     backgroundColor: theme.palette.secondary.main,
-    width: theme.spacing(11),
-    height: theme.spacing(11),
-  },
-  popover: {
-    padding: theme.spacing(1),
+    width: theme.spacing(14),
+    height: theme.spacing(14),
   },
 }));
 
@@ -61,7 +58,6 @@ const User: React.FC = () => {
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
-        classes={{ paper: classes.popover }}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -75,12 +71,16 @@ const User: React.FC = () => {
           <Box
             display="flex"
             flexDirection="column"
-            alignItems="center"
-            marginRight={1}
+            marginRight={2}
+            minWidth={200}
           >
-            <Typography variant="h5">Adam Janov</Typography>
-            <Typography>Student</Typography>
-            <Button color="primary">Nastavení profilu</Button>
+            <Box pl={1} pb={1}>
+              <Typography variant="h5">Adam Janov</Typography>
+              <Typography>Student</Typography>
+            </Box>
+            <Box display="flex">
+              <Button color="primary">Nastavení profilu</Button>
+            </Box>
           </Box>
           <Avatar className={classes.popoverAvatar} variant="rounded">
             AJ
