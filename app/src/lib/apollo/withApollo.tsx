@@ -5,6 +5,7 @@ import {
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
+  StoreObject,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { CachePersistor } from 'apollo-cache-persist';
@@ -19,7 +20,15 @@ import { cachePersistorContext } from './useCachePersistor';
 const withApollo = <ComponentProps extends {} = any>(
   Component: React.ComponentType<ComponentProps>,
 ): React.FC<ComponentProps> => props => {
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({
+    dataIdFromObject(responseObject: any) {
+      if (responseObject.id !== undefined) {
+        return responseObject.id;
+      }
+
+      return false;
+    },
+  });
 
   const newClient = (): ApolloClient<any> => {
     const httpLink = createHttpLink({

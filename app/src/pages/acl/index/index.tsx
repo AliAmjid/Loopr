@@ -8,9 +8,7 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import HeaderCell from 'pages/acl/index/headerCell';
-import ACL_CREATE_ACL_ROLE, {
-  aclCreateAclRoleUpdate,
-} from 'pages/acl/index/mutations/createAclRole';
+import ACL_CREATE_ACL_ROLE from 'pages/acl/index/mutations/createAclRole';
 
 import {
   AclCreateAclRole,
@@ -42,9 +40,7 @@ const AclIndex: React.FC = () => {
   const [addRole, { loading: addRoleLoading }] = useMutation<
     AclCreateAclRole,
     AclCreateAclRoleVariables
-  >(ACL_CREATE_ACL_ROLE, {
-    update: aclCreateAclRoleUpdate,
-  });
+  >(ACL_CREATE_ACL_ROLE);
   const { t } = useTranslation(namespaces.pages.acl.index);
   const { enqueueSnackbar } = useSnackbar();
 
