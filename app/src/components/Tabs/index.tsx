@@ -6,17 +6,14 @@ import SwipeableViews from 'react-swipeable-views';
 import { TabsProps } from './types';
 
 const Tabs: React.FC<TabsProps> = props => {
-  const theme = useTheme();
-  const [value, setValue] = useState(
-    props.defaultTabsId ?? (props.tabs[0]?.id || 0),
-  );
+  const [value, setValue] = useState(props.defaultTabsId ?? 0);
 
   const mappedTabs = props.tabs.map(tab => (
-    <Tab key={`tab${tab.id}`} value={tab.id} label={tab.label} />
+    <Tab key={tab.id} value={tab.id} label={tab.label} />
   ));
 
   const mappedPanels = props.tabs.map(tab => (
-    <Box width="100%" key={`panel${tab.id}`}>
+    <Box width="100%" key={tab.id}>
       {tab.panel}
     </Box>
   ));
@@ -33,8 +30,7 @@ const Tabs: React.FC<TabsProps> = props => {
         {mappedTabs}
       </TabsPrefab>
       <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
+        index={props.tabs.findIndex(t => t.id === value)}
         onChangeIndex={value => setValue(value)}
       >
         {mappedPanels}
