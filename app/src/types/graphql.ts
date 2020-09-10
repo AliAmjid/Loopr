@@ -7,10 +7,16 @@
 // GraphQL query operation: WithPageMeUserQuery
 // ====================================================
 
+export interface WithPageMeUserQuery_meUser_role {
+  __typename: "AclRole";
+  name: string;
+}
+
 export interface WithPageMeUserQuery_meUser {
   __typename: "User";
   id: string;
   name: string;
+  role: WithPageMeUserQuery_meUser_role;
 }
 
 export interface WithPageMeUserQuery {
@@ -221,27 +227,6 @@ export interface LoginMeUserQuery_meUser {
 
 export interface LoginMeUserQuery {
   meUser: LoginMeUserQuery_meUser | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL fragment: NewRole
-// ====================================================
-
-export interface NewRole_resources {
-  __typename: "AclResourceCollection";
-  id: string;
-}
-
-export interface NewRole {
-  __typename: "AclRoleCollection";
-  id: string;
-  name: string;
-  resources: (NewRole_resources | null)[] | null;
 }
 
 /* tslint:disable */

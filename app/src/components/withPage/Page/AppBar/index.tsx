@@ -122,7 +122,7 @@ const AppBar: React.FC<AppBarProps> = props => {
             <LanguageSelect color="inherit" />
             <Notifications />
             <LogOut onLogOut={props.onLogOut} />
-            <User />
+            <User user={props.user} />
           </Grid>
         </Grid>
       </Toolbar>

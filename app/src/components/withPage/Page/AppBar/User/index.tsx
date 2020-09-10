@@ -15,6 +15,8 @@ import {
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import { UserProps } from './types';
+
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
     color: theme.palette.common.black,
@@ -34,11 +36,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const User: React.FC = () => {
+const User: React.FC<UserProps> = props => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { t } = useTranslation(namespaces.components.withPage);
+
+  const initials = props.user?.name.slice(0, 2) || '';
 
   return (
     <>
@@ -53,7 +57,7 @@ const User: React.FC = () => {
             color="secondary"
             variant="rounded"
           >
-            AJ
+            {initials}
           </Avatar>
         </IconButton>
       </Tooltip>
@@ -79,15 +83,15 @@ const User: React.FC = () => {
             minWidth={200}
           >
             <Box pl={1} pb={1}>
-              <Typography variant="h5">Adam Janov</Typography>
-              <Typography>Student</Typography>
+              <Typography variant="h5">{props.user?.name || ''}</Typography>
+              <Typography>{props.user?.role?.name || ''}</Typography>
             </Box>
             <Box display="flex">
               <Button color="primary">Nastavení profilu</Button>
             </Box>
           </Box>
           <Avatar className={classes.popoverAvatar} variant="rounded">
-            AJ
+            {initials}
           </Avatar>
         </Box>
       </Popover>
