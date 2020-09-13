@@ -14,4 +14,9 @@ class ClientErrorType {
         'code' => 'ACCESS_DENIED',
         'msg' => 'Access was denied.'
     ];
+
+    const VALIDATION_ERROR = [
+        'code' => 'VALIDATION_ERROR',
+        'msg' => 'You have sent invalid data. See details'
+    ];
 }
