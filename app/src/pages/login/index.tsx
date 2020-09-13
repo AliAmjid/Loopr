@@ -26,7 +26,7 @@ import {
 
 import LOGIN_GET_TOKEN_QUERY from './queries/getToken';
 import LOGIN_ME_USER_QUERY from './queries/meUser';
-import Login from './login';
+import Login from './Login';
 import loginTour from './tour';
 
 const LoginIndex: React.FC = () => {
