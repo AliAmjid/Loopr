@@ -1,10 +1,10 @@
 App\Entity\Invitation:
     normalizationContext:
-        groups: [invitation:read]
+        groups: [ invitation:read ]
     denormalizationContext:
-        groups: [invitation:write]
+        groups: [ invitation:write ]
     #disable rest
-    collectionOperations: {}
+    collectionOperations: { }
     itemOperations:
         get:
             method: GET
@@ -16,4 +16,4 @@ App\Entity\Invitation:
     graphql:
         collection_query:
             pagination_enabled: false
-            normalization_context: [aclResource:read]
+            normalization_context: [ aclResource:read ]

@@ -61,7 +61,11 @@ trait TCreateEntityHelpers {
         foreach ($this->testingEntities as $entity) {
             $this->em->remove($entity);
         }
-        $this->em->flush();
+        try {
+            $this->em->flush();
+        } catch (\Throwable $e) {
+            echo 'cant delete test entites..';
+        }
     }
 
     protected function randomRoleName(): string {

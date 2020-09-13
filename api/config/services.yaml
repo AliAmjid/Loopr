@@ -26,6 +26,9 @@ services:
     jwt_token_authenticator:
         class: 'App\Security\JwtTokenAuthenticator'
         autowire: true
+    
+    App\DataPersister\UserDataPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
         
     App\Error\ErrorNormalizer:
         tags:

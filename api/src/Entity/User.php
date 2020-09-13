@@ -24,28 +24,29 @@ class User implements UserInterface {
 
     /** @var string email of user
      * @Assert\Email()
-     * @ORM\Column(type="string")
-     * @Groups({"user:read"})
+     * @ORM\Column(type="string",unique=true)
+     * @Groups({"user:read", "user:write"})
      */
     private string $username;
 
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"aclRole:read"})
+     * @Groups({"aclRole:read", "user:write"})
      */
     private AclRole $role;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"user:password"})
      */
     private string $password;
 
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read"})
+     * @Groups({"user:read", "user:write"})
      */
     private string $name;
 
@@ -98,7 +99,6 @@ class User implements UserInterface {
 
     public function setPassword(string $password): self {
         $this->password = $password;
-
         return $this;
     }
 

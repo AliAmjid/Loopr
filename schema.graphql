@@ -89,6 +89,10 @@ type InvitationCollection implements Node {
 type Mutation {
     "Creates a AclRole."
     createAclRole(input: createAclRoleInput!): createAclRolePayload
+    "Creates a User."
+    createUser(input: createUserInput!): createUserPayload
+    "Edits a User."
+    editUser(input: editUserInput!): editUserPayload
     "Updates a AclRole."
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
 }
@@ -165,9 +169,83 @@ type UserCollectionPageInfo {
     startCursor: String
 }
 
+type createAclResourceNestedPayload implements Node {
+    _id: String!
+    dependsOn: [createAclResourceNestedPayload]
+    id: ID!
+    name: String!
+}
+
+type createAclRoleNestedPayload implements Node {
+    _id: String!
+    id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
+    name: String!
+    resource: [createAclResourceNestedPayload]
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
+    resources: [createAclResourceNestedPayload]
+}
+
 type createAclRolePayload {
     aclRole: AclRoleItem
     clientMutationId: String
+}
+
+type createUserPayload {
+    clientMutationId: String
+    user: createUserPayloadData
+}
+
+type createUserPayloadData implements Node {
+    _id: String!
+    createdAt: String!
+    id: ID!
+    name: String!
+    role: createAclRoleNestedPayload!
+    "email of user"
+    username: String!
+}
+
+type editAclResourceNestedPayload implements Node {
+    _id: String!
+    dependsOn: [editAclResourceNestedPayload]
+    id: ID!
+    name: String!
+}
+
+type editAclRoleNestedPayload implements Node {
+    _id: String!
+    id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
+    name: String!
+    resource: [editAclResourceNestedPayload]
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
+    resources: [editAclResourceNestedPayload]
+}
+
+type editUserPayload {
+    clientMutationId: String
+    user: editUserPayloadData
+}
+
+type editUserPayloadData implements Node {
+    _id: String!
+    createdAt: String!
+    id: ID!
+    name: String!
+    role: editAclRoleNestedPayload!
+    "email of user"
+    username: String!
 }
 
 type updateAclRolePayload {
@@ -186,6 +264,23 @@ input createAclRoleInput {
     name: String!
     "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [String]
+}
+
+input createUserInput {
+    clientMutationId: String
+    name: String!
+    role: String!
+    "email of user"
+    username: String!
+}
+
+input editUserInput {
+    clientMutationId: String
+    id: ID!
+    name: String!
+    role: String!
+    "email of user"
+    username: String!
 }
 
 input updateAclResourceInput {
