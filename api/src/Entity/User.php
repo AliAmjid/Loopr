@@ -2,16 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact", "name": "partial", "username": "partial"})
  */
 class User implements UserInterface {
 
@@ -23,7 +27,7 @@ class User implements UserInterface {
      * @ORM\Column(type="string")
      * @Groups({"user:read"})
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
@@ -36,13 +40,21 @@ class User implements UserInterface {
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
+
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read"})
      */
     private string $name;
+
+    /** @var \DateTimeInterface
+     * @ORM\Column(type="datetime")
+     * @Groups({"user:read"})
+     */
+    private \DateTimeInterface $createdAt;
+
 
     public function getId(): ?string {
         return $this->id;
@@ -119,5 +131,16 @@ class User implements UserInterface {
      */
     public function getResources() {
         return $this->getRoles();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreatedAt(): void {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function getCreatedAt(): \DateTimeInterface {
+        return $this->createdAt;
     }
 }

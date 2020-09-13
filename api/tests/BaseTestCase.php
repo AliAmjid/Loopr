@@ -68,6 +68,6 @@ abstract class BaseTestCase extends TestCase {
     }
 
     protected function assertErrors(Response $response, $errors) {
-        $this->assertEquals($errors, count($response->getErrors()), 'There are un-expected errors');
+        $this->assertEquals($errors, count($response->getErrors()), 'There are un-expected errors ' . json_encode($response->getErrors(), JSON_PRETTY_PRINT));
     }
 }

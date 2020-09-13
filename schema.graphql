@@ -35,32 +35,60 @@ type AclResourceItem implements Node {
 type AclRole implements Node {
     _id: String!
     id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
     name: String!
-    resource: [Iterable]
+    resource: [AclResource]
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [AclResource]
 }
 
 type AclRoleCollection implements Node {
     _id: String!
     id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
     name: String!
-    resource: [Iterable]
+    resource: [AclResourceCollection]
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [AclResourceCollection]
 }
 
 type AclRoleItem implements Node {
     _id: String!
     id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
     name: String!
-    resource: [Iterable]
+    resource: [AclResourceItem]
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [AclResourceItem]
+}
+
+type InvitationCollection implements Node {
+    _id: String!
+    code: String!
+    createdAt: String!
+    id: ID!
+    used: Boolean!
+    user: UserCollection
 }
 
 type Mutation {
     "Creates a AclRole."
     createAclRole(input: createAclRoleInput!): createAclRolePayload
-    "Tests a User."
-    testUser(input: testUserInput!): testUserPayload
     "Updates a AclRole."
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
 }
@@ -70,8 +98,23 @@ type Query {
     aclRole(id: ID!): AclRoleItem
     aclRoles: [AclRoleCollection]
     getToken(password: String!, username: String!): Token
+    invitations: [InvitationCollection]
     meUser: User
     node(id: ID!): Node
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        name: String,
+        username: String
+    ): UserCollectionConnection
 }
 
 type Token implements Node {
@@ -83,6 +126,7 @@ type Token implements Node {
 
 type User implements Node {
     _id: String!
+    createdAt: String!
     id: ID!
     name: String!
     role: AclRole!
@@ -90,14 +134,40 @@ type User implements Node {
     username: String!
 }
 
+type UserCollection implements Node {
+    _id: String!
+    createdAt: String!
+    id: ID!
+    name: String!
+    role: AclRoleCollection!
+    "email of user"
+    username: String!
+}
+
+"Connection for UserCollection."
+type UserCollectionConnection {
+    edges: [UserCollectionEdge]
+    pageInfo: UserCollectionPageInfo!
+    totalCount: Int!
+}
+
+"Edge of UserCollection."
+type UserCollectionEdge {
+    cursor: String!
+    node: UserCollection
+}
+
+"Information about the current page."
+type UserCollectionPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
 type createAclRolePayload {
     aclRole: AclRoleItem
     clientMutationId: String
-}
-
-type testUserPayload {
-    clientMutationId: String
-    user: User
 }
 
 type updateAclRolePayload {
@@ -107,29 +177,36 @@ type updateAclRolePayload {
 
 input createAclRoleInput {
     clientMutationId: String
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
     name: String!
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [String]
 }
 
-input testUserInput {
+input updateAclResourceInput {
+    _id: String
     clientMutationId: String
+    dependsOn: [String]
     id: ID!
-    name: String!
-    "The hashed password"
-    password: String!
-    role: String!
-    "email of user"
-    username: String!
+    name: String
 }
 
 input updateAclRoleInput {
     clientMutationId: String
     id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
     name: String
-    resource: [Iterable]
+    resource: [updateAclResourceInput!]
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [String]
 }
-
-
-"The `Iterable` scalar type represents an array or a Traversable with any kind of data."
-scalar Iterable

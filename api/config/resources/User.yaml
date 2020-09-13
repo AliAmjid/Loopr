@@ -17,5 +17,10 @@ App\Entity\User:
                 groups:
                     - user:read
                     - aclRole:read
-        test:
-            item_query:
+        collection_query:
+            security_message: "r: LIST_ALL_USERS"
+            security: "is_granted('LIST_ALL_USERS')"
+            normalization_context:
+                groups:
+                    - user:read
+                    - aclRole:read
