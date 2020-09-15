@@ -18,6 +18,7 @@ import {
   AclUpdateAclMutationVariables,
 } from 'types/graphql';
 
+import stripRolePrefix from 'components/stripRolePrefix';
 import withPage from 'components/withPage';
 
 import ACL_UPDATE_ACL_MUTATION from './mutations/updateAcl';
@@ -47,7 +48,9 @@ const AclIndex: React.FC = () => {
   const columns: Column<any>[] = [
     { title: t('resources'), field: 'name', editable: 'never' },
     ...(data?.aclRoles?.map(role => ({
-      title: <HeaderCell roleName={role!.name} roleId={role!.id} />,
+      title: (
+        <HeaderCell roleName={stripRolePrefix(role!.name)} roleId={role!.id} />
+      ),
       type: 'boolean' as 'boolean',
       field: role?.id,
       filtering: false,

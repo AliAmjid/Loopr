@@ -9,6 +9,11 @@
 
 export interface WithPageMeUserQuery_meUser_role {
   __typename: "AclRole";
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
   name: string;
 }
 
@@ -35,6 +40,11 @@ export interface WithPageMeUserQuery {
 export interface AclEditRoleUpdateRole_updateAclRole_aclRole {
   __typename: "AclRoleItem";
   id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
   name: string;
 }
 
@@ -67,6 +77,11 @@ export interface AclEditRoleUpdateRoleVariables {
 export interface AclEditRoleAclRole_aclRole {
   __typename: "AclRoleItem";
   id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
   name: string;
 }
 
@@ -95,7 +110,15 @@ export interface AclCreateAclRole_createAclRole_aclRole_resources {
 export interface AclCreateAclRole_createAclRole_aclRole {
   __typename: "AclRoleItem";
   id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
   name: string;
+  /**
+   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
+   */
   resources: (AclCreateAclRole_createAclRole_aclRole_resources | null)[] | null;
 }
 
@@ -132,6 +155,9 @@ export interface AclUpdateAclMutation_updateAclRole_aclRole_resources {
 export interface AclUpdateAclMutation_updateAclRole_aclRole {
   __typename: "AclRoleItem";
   id: string;
+  /**
+   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
+   */
   resources: (AclUpdateAclMutation_updateAclRole_aclRole_resources | null)[] | null;
 }
 
@@ -175,7 +201,15 @@ export interface AclTableQuery_aclRoles_resources {
 export interface AclTableQuery_aclRoles {
   __typename: "AclRoleCollection";
   id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
   name: string;
+  /**
+   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
+   */
   resources: (AclTableQuery_aclRoles_resources | null)[] | null;
 }
 
@@ -227,6 +261,49 @@ export interface LoginMeUserQuery_meUser {
 
 export interface LoginMeUserQuery {
   meUser: LoginMeUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: UsersUsersQuery
+// ====================================================
+
+export interface UsersUsersQuery_users_edges_node_role {
+  __typename: "AclRoleCollection";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string;
+}
+
+export interface UsersUsersQuery_users_edges_node {
+  __typename: "UserCollection";
+  id: string;
+  name: string;
+  createdAt: string;
+  role: UsersUsersQuery_users_edges_node_role;
+}
+
+export interface UsersUsersQuery_users_edges {
+  __typename: "UserCollectionEdge";
+  node: UsersUsersQuery_users_edges_node | null;
+  cursor: string;
+}
+
+export interface UsersUsersQuery_users {
+  __typename: "UserCollectionConnection";
+  edges: (UsersUsersQuery_users_edges | null)[] | null;
+}
+
+export interface UsersUsersQuery {
+  users: UsersUsersQuery_users | null;
 }
 
 /* tslint:disable */

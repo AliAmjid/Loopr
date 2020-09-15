@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, Button, Paper } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -11,9 +12,11 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
-const VisibilityIconWithDisplayName: React.FC = () => <VisibilityIcon />;
+import { User, UsersProps } from './types';
 
-const Users: React.FC = () => {
+const VisibilityIconWithDisplayName = (): JSX.Element => <VisibilityIcon />;
+
+const Users: React.FC<UsersProps> = props => {
   const { t } = useTranslation(namespaces.pages.users.index);
   const router = useRouter();
 
@@ -22,22 +25,30 @@ const Users: React.FC = () => {
       <MaterialTable
         title={t('tableTitle')}
         columns={[]}
-        data={[
-          { name: 'Igor Hnízdo', class: '3B', email: 'ahoj@ahoj.cz' },
-          { name: 'Pavel Laško', class: '3B', email: 'ahoj@ahoj.cz' },
-          { name: 'Lucie Černá', class: '4B', email: 'ahoj@ahoj.cz' },
-        ]}
+        data={props.users}
         options={{ exportButton: true }}
         defaultActions={{
           columnFiltering: {
             active: true,
             defaultColumns: ['name'],
             columns: [
-              { section: 'Osobní údaje' },
-              { title: 'Jméno', field: 'name' },
-              { title: 'Email', field: 'email' },
-              { section: 'Zařazení' },
-              { title: 'Třída', field: 'class' },
+              { section: 'personalInfo' },
+              {
+                title: 'name',
+                field: 'name',
+              },
+              {
+                title: 'createdAt',
+                field: 'createdAt',
+                render: (data: User) =>
+                  dayjs(data.createdAt).format('DD.MM. YYYY'),
+                filtering: false,
+              },
+              { section: 'access' },
+              {
+                title: 'role',
+                field: 'role.name',
+              },
             ],
           },
           grouping: { active: true },
