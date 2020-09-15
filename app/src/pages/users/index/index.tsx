@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import withPage from 'components/withPage';
 
 import usersPageOptions from './pageOptions';
-import Users from './users';
+import Users from './Users';
 
 const UsersIndex: React.FC = () => {
   return <Users />;

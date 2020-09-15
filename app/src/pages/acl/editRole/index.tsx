@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
-import EditRole from 'pages/acl/editRole/editRole';
+import EditRole from 'pages/acl/editRole/EditRole';
 import ACL_EDIT_ROLE_UPDATE_ROLE from 'pages/acl/editRole/mutations/updateRole';
 import editRolePageOptions from 'pages/acl/editRole/pageOptions';
 
