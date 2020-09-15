@@ -1,6 +1,6 @@
 App\Entity\User:
     attributes:
-    collectionOperations: {}
+    collectionOperations: { }
     itemOperations:
         get:
             method: GET
@@ -12,10 +12,36 @@ App\Entity\User:
             security_message: "r: USER_LOGGED"
             security: "is_granted('USER_LOGGED')"
             item_query: App\Controller\GetMeController
-            args: []
+            args: [ ]
             normalization_context:
                 groups:
                     - user:read
                     - aclRole:read
-        test:
-            item_query:
+        collection_query:
+            security_message: "r: LIST_ALL_USERS"
+            security: "is_granted('LIST_ALL_USERS')"
+            normalization_context:
+                groups:
+                    - user:read
+                    - aclRole:read
+        create:
+            security: "is_granted('CREATE_USER')"
+            security_message: "r: CREATE_USER"
+            normalization_context:
+                groups:
+                    - user:read
+                    - aclRole:read
+            denormalization_context:
+                groups:
+                    - user:write
+
+        edit:
+            security: "is_granted('EDIT_USER')"
+            security_message: "r: EDIT_USER"
+            normalization_context:
+                groups:
+                    - user:read
+                    - aclRole:read
+            denormalization_context:
+                groups:
+                    - user:write

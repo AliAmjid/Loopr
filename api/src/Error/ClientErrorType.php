@@ -14,4 +14,19 @@ class ClientErrorType {
         'code' => 'ACCESS_DENIED',
         'msg' => 'Access was denied.'
     ];
+
+    const VALIDATION_ERROR = [
+        'code' => 'VALIDATION_ERROR',
+        'msg' => 'You have sent invalid data. See details'
+    ];
+
+    const UNEXPECTED_VALUE = [
+        'code' => 'UNEXPECTED_VALUE',
+        'msg' => 'check if IRI value is correct (id need to be in format <resource>/<uuid>)'
+    ];
+
+    const DUPLICATE_VALUE = [
+        'code' => 'DUPLICATE_VALUE',
+        'msg' => 'attempt of creating duplicated value.'
+    ];
 }

@@ -23,8 +23,10 @@ class GraphQLClient {
     }
 
     /**
-     * @throws \UnexpectedValueException When response body is not a valid json
-     * @throws \RuntimeException         When there are transfer errors
+     * @param string $query
+     * @param array|null $variables
+     * @return Response
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function query(string $query, array $variables = null): Response {
         $options = [

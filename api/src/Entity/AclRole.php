@@ -27,7 +27,7 @@ class AclRole {
      *
      * @ORM\Column(type="string")
      * @Groups({"aclRole:write", "aclRole:read"})
-     * @Assert\Regex(pattern="/^ROLE_[A-Z]{1,20}$/m",message="WRONG_FORMAT_REGEX_/^ROLE_[A-Z]{1,20}$/")
+     * @Assert\Regex(pattern="/^ROLE_[A-Z]{1,20}$/m",message="INVALID_ROLE_NAME")
      */
     private string $name;
 
