@@ -18,7 +18,6 @@ const UsersIndex: React.FC = () => {
 
   const users: User[] =
     usersData?.users?.edges?.map(
-      // eslint-disable-next-line @typescript-eslint/camelcase
       (user: UsersUsersQuery_users_edges | null) =>
         ({
           ...user?.node,

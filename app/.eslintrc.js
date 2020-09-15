@@ -40,7 +40,6 @@ module.exports = {
     'no-console': 'error',
     'no-unused-expressions': 'off',
     'no-underscore-dangle': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -101,6 +100,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-unused-expressions': ['error'],
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   overrides: [
     {
