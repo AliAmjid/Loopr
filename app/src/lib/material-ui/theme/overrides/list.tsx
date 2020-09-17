@@ -14,6 +14,10 @@ const list: Overrides = {
       borderRadius: shape.borderRadius,
       paddingTop: spacing / 2,
       paddingBottom: spacing / 2,
+      marginLeft: spacing / 2,
+      marginRight: spacing / 2,
+
+      marginTop: spacing / 2,
       marginBottom: spacing / 2,
     },
   },
