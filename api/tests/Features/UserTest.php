@@ -11,8 +11,10 @@ use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 use Softonic\GraphQL\Response;
 
-class UserTest extends BaseTestCase {
-    public function testListAllUsers() {
+class UserTest extends BaseTestCase
+{
+    public function testListAllUsers()
+    {
         $query = /** @lang GraphQL */
             '
             query {
@@ -28,7 +30,8 @@ class UserTest extends BaseTestCase {
         );
     }
 
-    public function testCreateAndUpdateUser() {
+    public function testCreateAndUpdateUser()
+    {
         $createQuery = /** @lang GraphQL */
             '
             mutation createUser($username: String!, $name: String!, $role: String! ){
@@ -86,6 +89,26 @@ class UserTest extends BaseTestCase {
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
 
+
+    }
+
+
+    public function testGetUser()
+    {
+        $query = 'query getUser($id: ID!) {
+  user(id: $id) {
+    roles
+    username
+    password
+  }
+}';
+        $user = $this->createRandomUser('test', [AclResourceEnum::SEE_USER]);
+        $client = $this->createLoggedClient($user->getUsername());
+        $r = $client->query($query, [
+            'id' => 'users/' . $user->getId(),
+        ]);
+
+        $this->assertNoErrors($r);
 
     }
 }
