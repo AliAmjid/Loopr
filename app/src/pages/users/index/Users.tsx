@@ -57,7 +57,13 @@ const Users: React.FC<UsersProps> = props => {
           {
             tooltip: 'Detail',
             icon: VisibilityIconWithDisplayName,
-            onClick: () => router.push(routes.users.userDetail),
+            onClick: (e, row) => {
+              row = row as User;
+              router.push({
+                pathname: routes.users.userDetail,
+                query: { id: row.id },
+              });
+            },
           },
         ]}
       />
