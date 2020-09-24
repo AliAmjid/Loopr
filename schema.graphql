@@ -77,24 +77,17 @@ type AclRoleItem implements Node {
     resources: [AclResourceItem]
 }
 
-type InvitationCollection implements Node {
-    _id: String!
-    code: String!
-    createdAt: String!
-    id: ID!
-    used: Boolean!
-    user: UserCollection
-}
-
 type Mutation {
     "Creates a AclRole."
     createAclRole(input: createAclRoleInput!): createAclRolePayload
+    "CreateBatchs a User."
+    createBatchUser(input: createBatchUserInput!): createBatchUserPayload
     "Creates a User."
     createUser(input: createUserInput!): createUserPayload
-    "Edits a User."
-    editUser(input: editUserInput!): editUserPayload
     "Updates a AclRole."
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
+    "Updates a User."
+    updateUser(input: updateUserInput!): updateUserPayload
 }
 
 type Query {
@@ -102,9 +95,9 @@ type Query {
     aclRole(id: ID!): AclRoleItem
     aclRoles: [AclRoleCollection]
     getToken(password: String!, username: String!): Token
-    invitations: [InvitationCollection]
     meUser: User
     node(id: ID!): Node
+    user(id: ID!): UserItem
     users(
         "Returns the elements in the list that come after the specified cursor."
         after: String,
@@ -169,6 +162,19 @@ type UserCollectionPageInfo {
     startCursor: String
 }
 
+type UserItem implements Node {
+    _id: String!
+    createdAt: String!
+    id: ID!
+    name: String!
+    "The hashed password"
+    password: String!
+    role: AclRoleItem!
+    roles: Iterable!
+    "email of user"
+    username: String!
+}
+
 type createAclResourceNestedPayload implements Node {
     _id: String!
     dependsOn: [createAclResourceNestedPayload]
@@ -196,6 +202,11 @@ type createAclRolePayload {
     clientMutationId: String
 }
 
+type createBatchUserPayload {
+    clientMutationId: String
+    user: UserItem
+}
+
 type createUserPayload {
     clientMutationId: String
     user: createUserPayloadData
@@ -211,15 +222,15 @@ type createUserPayloadData implements Node {
     username: String!
 }
 
-type editAclResourceNestedPayload implements Node {
-    _id: String!
-    dependsOn: [editAclResourceNestedPayload]
+type updateAclResourceNestedPayload implements Node {
+    _id: String
+    dependsOn: [updateAclResourceNestedPayload]
     id: ID!
-    name: String!
+    name: String
 }
 
-type editAclRoleNestedPayload implements Node {
-    _id: String!
+type updateAclRoleNestedPayload implements Node {
+    _id: String
     id: ID!
     """
 
@@ -227,30 +238,30 @@ type editAclRoleNestedPayload implements Node {
     Must start with 'ROLE_' and name cant be longer than 20 letters.
     (regex: ^ROLE_[A-Z]{1,20}$/m)
     """
-    name: String!
-    resource: [editAclResourceNestedPayload]
+    name: String
+    resource: [updateAclResourceNestedPayload]
     "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [editAclResourceNestedPayload]
-}
-
-type editUserPayload {
-    clientMutationId: String
-    user: editUserPayloadData
-}
-
-type editUserPayloadData implements Node {
-    _id: String!
-    createdAt: String!
-    id: ID!
-    name: String!
-    role: editAclRoleNestedPayload!
-    "email of user"
-    username: String!
+    resources: [updateAclResourceNestedPayload]
 }
 
 type updateAclRolePayload {
     aclRole: AclRoleItem
     clientMutationId: String
+}
+
+type updateUserPayload {
+    clientMutationId: String
+    user: updateUserPayloadData
+}
+
+type updateUserPayloadData implements Node {
+    _id: String
+    createdAt: String
+    id: ID!
+    name: String
+    role: updateAclRoleNestedPayload
+    "email of user"
+    username: String
 }
 
 input createAclRoleInput {
@@ -266,17 +277,13 @@ input createAclRoleInput {
     resources: [String]
 }
 
-input createUserInput {
+input createBatchUserInput {
     clientMutationId: String
-    name: String!
-    role: String!
-    "email of user"
-    username: String!
+    input: [createAclRoleInput!]
 }
 
-input editUserInput {
+input createUserInput {
     clientMutationId: String
-    id: ID!
     name: String!
     role: String!
     "email of user"
@@ -305,3 +312,16 @@ input updateAclRoleInput {
     "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [String]
 }
+
+input updateUserInput {
+    clientMutationId: String
+    id: ID!
+    name: String
+    role: String
+    "email of user"
+    username: String
+}
+
+
+"The `Iterable` scalar type represents an array or a Traversable with any kind of data."
+scalar Iterable
