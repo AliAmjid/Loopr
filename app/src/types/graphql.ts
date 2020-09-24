@@ -269,6 +269,60 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UsersAddManualCreateUserMutation
+// ====================================================
+
+export interface UsersAddManualCreateUserMutation_createUser_user {
+  __typename: "createUserPayloadData";
+  id: string;
+}
+
+export interface UsersAddManualCreateUserMutation_createUser {
+  __typename: "createUserPayload";
+  user: UsersAddManualCreateUserMutation_createUser_user | null;
+}
+
+export interface UsersAddManualCreateUserMutation {
+  /**
+   * Creates a User.
+   */
+  createUser: UsersAddManualCreateUserMutation_createUser | null;
+}
+
+export interface UsersAddManualCreateUserMutationVariables {
+  input: createUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: UsersAddManualAclRolesQuery
+// ====================================================
+
+export interface UsersAddManualAclRolesQuery_aclRoles {
+  __typename: "AclRoleCollection";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string;
+}
+
+export interface UsersAddManualAclRolesQuery {
+  aclRoles: (UsersAddManualAclRolesQuery_aclRoles | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UsersUsersQuery
 // ====================================================
 
@@ -319,6 +373,13 @@ export interface createAclRoleInput {
   clientMutationId?: string | null;
   name: string;
   resources?: (string | null)[] | null;
+}
+
+export interface createUserInput {
+  clientMutationId?: string | null;
+  name: string;
+  role: string;
+  username: string;
 }
 
 //==============================================================

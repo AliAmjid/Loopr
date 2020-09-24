@@ -83,7 +83,6 @@ const MaterialTable = <RowData extends {}>(
         }
       />
       <OverlayLoadingContainer>
-        <OverlayLoading loading={props.isLoading ?? false} />
         <MaterialTablePrefab
           {...props}
           columns={columns}
@@ -99,8 +98,6 @@ const MaterialTable = <RowData extends {}>(
                 </div>
               );
             },
-            // eslint-disable-next-line react/display-name
-            OverlayLoading: () => <></>,
             // TODO remove after upgrade
             // eslint-disable-next-line react/display-name
             EditRow: tableProps => {

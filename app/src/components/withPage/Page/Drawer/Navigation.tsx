@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   selectedItemColor: {
     color: theme.palette.common.black,
   },
+  link: {
+    color: 'inherit',
+    textDecoration: 'none',
+  },
 }));
 const Navigation: React.FC = () => {
   const classes = useStyles();
@@ -36,19 +40,21 @@ const Navigation: React.FC = () => {
 
     return (
       <Link key={item.label + item.href} href={item.href}>
-        <ListItem
-          button
-          selected={selected}
-          classes={selected ? { root: classes.selectedItem } : {}}
-          className={selected ? classes.selectedItem : ''}
-        >
-          <ListItemIcon className={selected ? classes.selectedItemColor : ''}>
-            {item.icon}
-          </ListItemIcon>
-          <ListItemText className={selected ? classes.selectedItemColor : ''}>
-            {t(item.label)}
-          </ListItemText>
-        </ListItem>
+        <a className={classes.link} href={item.href}>
+          <ListItem
+            button
+            selected={selected}
+            classes={selected ? { root: classes.selectedItem } : {}}
+            className={selected ? classes.selectedItem : ''}
+          >
+            <ListItemIcon className={selected ? classes.selectedItemColor : ''}>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText className={selected ? classes.selectedItemColor : ''}>
+              {t(item.label)}
+            </ListItemText>
+          </ListItem>
+        </a>
       </Link>
     );
   });

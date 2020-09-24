@@ -1,35 +1,47 @@
 import React, { useState } from 'react';
 
 import { Box, Button, Paper } from '@material-ui/core';
+import Link from 'next/link';
+
+import routes from 'config/routes';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
-const AddManual: React.FC = () => {
-  const [data, setData] = useState([]);
+import stripRolePrefix from 'components/stripRolePrefix';
+
+import { AddManualProps, NewUser } from './types';
+
+const AddManual: React.FC<AddManualProps> = props => {
+  const [data, setData] = useState<NewUser[]>([]);
   const { t } = useTranslation(namespaces.pages.users.addManual);
+
+  const rolesLookup: Record<string, string> = {};
+  props.roles?.forEach(role => {
+    rolesLookup[role.id] = stripRolePrefix(role.name);
+  });
 
   return (
     <Paper>
       <MaterialTable
         columns={[
-          { title: 'email', field: 'email' },
+          { title: 'username', field: 'username' },
           { title: 'name', field: 'name' },
-          { title: 'surname', field: 'surname' },
-          {
-            title: 'class',
-            field: 'class',
-            lookup: { idA: '1.B', idb: '2.B', idc: '3.B' },
-          },
+          { title: 'role', field: 'role', lookup: rolesLookup },
         ]}
         data={data}
         editable={{
-          onRowAdd: newData =>
-            new Promise(resolve => {
-              setData([...data, newData]);
-
-              resolve();
+          onRowAdd: (newData: NewUser) =>
+            new Promise((resolve, reject) => {
+              props.onAdd(newData).then((success: boolean) => {
+                if (success) {
+                  setData([...data, newData]);
+                  resolve();
+                } else {
+                  reject();
+                }
+              });
             }),
           onRowUpdate: (newData, oldData) =>
             new Promise(resolve => {
@@ -46,13 +58,11 @@ const AddManual: React.FC = () => {
         }}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>
-        <Button
-          color="primary"
-          variant="contained"
-          disabled={data.length === 0}
-        >
-          {t('add')}
-        </Button>
+        <Link href={routes.users.index} passHref>
+          <Button color="primary" variant="contained">
+            {t('finish')}
+          </Button>
+        </Link>
       </Box>
     </Paper>
   );

@@ -38,6 +38,10 @@ const Users: React.FC<UsersProps> = props => {
                 field: 'name',
               },
               {
+                title: 'username',
+                field: 'username',
+              },
+              {
                 title: 'createdAt',
                 field: 'createdAt',
                 render: (data: User) =>

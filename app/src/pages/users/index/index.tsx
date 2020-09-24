@@ -8,7 +8,7 @@ import { UsersUsersQuery, UsersUsersQuery_users_edges } from 'types/graphql';
 import stripRolePrefix from 'components/stripRolePrefix';
 import withPage from 'components/withPage';
 
-import USERS_USERS_QUERY from './queries/USERS_USERS_Query';
+import USERS_USERS_QUERY from './queries/users';
 import usersPageOptions from './pageOptions';
 import { User } from './types';
 import Users from './Users';

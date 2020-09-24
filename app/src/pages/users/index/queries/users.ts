@@ -7,6 +7,7 @@ const USERS_USERS_QUERY = gql`
         node {
           id
           name
+          username
           createdAt
           role {
             id
