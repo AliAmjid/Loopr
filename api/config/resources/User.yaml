@@ -17,6 +17,9 @@ App\Entity\User:
                 groups:
                     - user:read
                     - aclRole:read
+        item_query:
+            security_mssage: "r: SEE_USER"
+            security: "is_granted('SEE_USER')"
         collection_query:
             security_message: "r: LIST_ALL_USERS"
             security: "is_granted('LIST_ALL_USERS')"

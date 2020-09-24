@@ -4,7 +4,8 @@
 namespace App\Enum;
 
 
-class AclResourceEnum {
+class AclResourceEnum
+{
 
     //To have same uuid everytime
     const PROP_UUIDS = [
@@ -13,7 +14,8 @@ class AclResourceEnum {
         self::EDIT_ROLE => '8a146009-deca-4625-b590-e44c2283c8d3',
         self::LIST_ALL_USERS => '717f72f6-6b6c-4033-aba3-130976fa3620',
         self::CREATE_USER => 'c6e8f8e8-8f8a-4ead-a97d-8af1240c388b',
-        self::EDIT_USER => 'c1f52e13-1864-42d1-a095-dcc42eefb7a3'
+        self::EDIT_USER => 'c1f52e13-1864-42d1-a095-dcc42eefb7a3',
+        self::SEE_USER => 'c1f52e13-1864-42d1-a095-dcc42eefb7a4'
     ];
 
     const PROP_DEPENDENT_ON = [
@@ -41,7 +43,8 @@ class AclResourceEnum {
             self::EDIT_ROLE,
             self::LIST_ALL_USERS,
             self::CREATE_USER,
-            self::EDIT_USER
+            self::EDIT_USER,
+            self::SEE_USER
         ]
     ];
 
@@ -54,5 +57,6 @@ class AclResourceEnum {
     const LIST_ALL_USERS = 'LIST_ALL_USERS';
     const CREATE_USER = 'CREATE_USER';
     const EDIT_USER = 'EDIT_USER';
+    const SEE_USER = 'SEE_USER';
 
 }
