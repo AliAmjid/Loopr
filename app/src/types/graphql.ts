@@ -299,6 +299,52 @@ export interface UsersAddManualCreateUserMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UsersAddManualUpdateUser
+// ====================================================
+
+export interface UsersAddManualUpdateUser_updateUser_user_role {
+  __typename: "updateAclRoleNestedPayload";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string | null;
+}
+
+export interface UsersAddManualUpdateUser_updateUser_user {
+  __typename: "updateUserPayloadData";
+  name: string | null;
+  /**
+   * email of user
+   */
+  username: string | null;
+  role: UsersAddManualUpdateUser_updateUser_user_role | null;
+}
+
+export interface UsersAddManualUpdateUser_updateUser {
+  __typename: "updateUserPayload";
+  user: UsersAddManualUpdateUser_updateUser_user | null;
+}
+
+export interface UsersAddManualUpdateUser {
+  /**
+   * Updates a User.
+   */
+  updateUser: UsersAddManualUpdateUser_updateUser | null;
+}
+
+export interface UsersAddManualUpdateUserVariables {
+  input: updateUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UsersAddManualAclRolesQuery
 // ====================================================
 
@@ -341,6 +387,10 @@ export interface UsersUsersQuery_users_edges_node {
   __typename: "UserCollection";
   id: string;
   name: string;
+  /**
+   * email of user
+   */
+  username: string;
   createdAt: string;
   role: UsersUsersQuery_users_edges_node_role;
 }
@@ -380,6 +430,14 @@ export interface createUserInput {
   name: string;
   role: string;
   username: string;
+}
+
+export interface updateUserInput {
+  clientMutationId?: string | null;
+  id: string;
+  name?: string | null;
+  role?: string | null;
+  username?: string | null;
 }
 
 //==============================================================

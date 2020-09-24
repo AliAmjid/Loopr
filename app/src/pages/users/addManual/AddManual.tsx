@@ -16,6 +16,7 @@ import {
   AddManualData,
   AddManualDataItem,
   AddManualProps,
+  AddUser,
   NewUser,
 } from './types';
 
@@ -27,6 +28,17 @@ const AddManual: React.FC<AddManualProps> = props => {
   const rolesLookup: Record<string, string> = {};
   props.roles?.forEach(role => {
     rolesLookup[role.id] = stripRolePrefix(role.name);
+  });
+
+  const getAddProps = (user: AddManualDataItem): AddUser => ({
+    name: user.name,
+    role: user.role,
+    username: user.username,
+  });
+
+  const getUpdateProps = (user: AddManualDataItem): NewUser => ({
+    ...getAddProps(user),
+    id: user.id,
   });
 
   return (
@@ -46,29 +58,48 @@ const AddManual: React.FC<AddManualProps> = props => {
         ]}
         data={data}
         editable={{
-          onRowAdd: (newData: NewUser) =>
+          onRowAdd: (newData: AddManualDataItem) =>
             new Promise(resolve => {
-              props.onAdd(newData).then((success: boolean) => {
-                if (success) {
-                  setData([...data, { ...newData, failed: false }]);
-                } else {
-                  setData([...data, { ...newData, failed: true }]);
-                }
+              props.onAdd(getAddProps(newData)).then(({ success, id }) => {
+                newData.id = id;
+                newData.failed = !success;
+                setData([...data, { ...newData }]);
+
                 resolve();
               });
             }),
           onRowUpdate: (newData, oldData) =>
             new Promise(resolve => {
-              const dataUpdate = [...data];
+              if (newData.id === '__error__') {
+                props.onAdd(getAddProps(newData)).then(({ success, id }) => {
+                  newData.id = id;
+                  newData.failed = !success;
+                  const dataUpdate = [...data];
 
-              // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-              // @ts-ignore
-              const index = oldData?.tableData?.id || 0;
-              newData.failed = false;
-              dataUpdate[index] = newData;
-              setData([...dataUpdate]);
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                  // @ts-ignore
+                  const index = oldData?.tableData?.id || 0;
+                  newData.failed = !success;
+                  dataUpdate[index] = newData;
+                  setData([...dataUpdate]);
 
-              resolve();
+                  resolve();
+                });
+              } else
+                props
+                  .onUpdate(getUpdateProps(newData))
+                  .then((success: boolean) => {
+                    newData.failed = !success;
+                    const dataUpdate = [...data];
+
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                    // @ts-ignore
+                    const index = oldData?.tableData?.id || 0;
+                    newData.failed = false;
+                    dataUpdate[index] = newData;
+                    setData([...dataUpdate]);
+                    resolve();
+                  });
             }),
           onRowDelete: oldData =>
             new Promise(resolve => {

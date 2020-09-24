@@ -3,13 +3,21 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import USERS_ADD_MANUAL_UPDATE_USER from 'pages/users/addManual/mutations/updateUser';
 import USERS_ADD_MANUAL_ACL_ROLES_QUERY from 'pages/users/addManual/queries/roles';
-import { NewUser, Role } from 'pages/users/addManual/types';
+import {
+  AddUser,
+  HandlerReturn,
+  NewUser,
+  Role,
+} from 'pages/users/addManual/types';
 
 import {
   UsersAddManualAclRolesQuery,
   UsersAddManualCreateUserMutation,
   UsersAddManualCreateUserMutationVariables,
+  UsersAddManualUpdateUser,
+  UsersAddManualUpdateUserVariables,
 } from 'types/graphql';
 
 import withPage from 'components/withPage';
@@ -26,10 +34,27 @@ const AddManualIndex: React.FC = () => {
     UsersAddManualCreateUserMutation,
     UsersAddManualCreateUserMutationVariables
   >(USERS_ADD_MANUAL_CREATE_USER_MUTATION);
+  const [updateUser] = useMutation<
+    UsersAddManualUpdateUser,
+    UsersAddManualUpdateUserVariables
+  >(USERS_ADD_MANUAL_UPDATE_USER);
   const { enqueueSnackbar } = useSnackbar();
 
-  const addHandler = (user: NewUser): Promise<boolean> => {
+  const addHandler = (user: AddUser): Promise<HandlerReturn> => {
     return createUser({ variables: { input: user } })
+      .then(data => ({
+        id: data?.data?.createUser?.user?.id || '',
+        success: true,
+      }))
+      .catch(() => {
+        enqueueSnackbar('error', { variant: 'error' });
+
+        return { id: '__error__', success: false };
+      });
+  };
+
+  const updateHandler = (user: NewUser): Promise<boolean> => {
+    return updateUser({ variables: { input: user } })
       .then(() => true)
       .catch(() => {
         enqueueSnackbar('error', { variant: 'error' });
@@ -43,6 +68,7 @@ const AddManualIndex: React.FC = () => {
       roles={(roles?.aclRoles as Role[]) || []}
       loading={rolesLoading}
       onAdd={addHandler}
+      onUpdate={updateHandler}
     />
   );
 };
