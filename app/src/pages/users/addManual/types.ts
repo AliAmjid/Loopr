@@ -4,7 +4,7 @@ export interface NewUser {
   role: string;
 }
 
-interface Role {
+export interface Role {
   id: string;
   name: string;
 }
@@ -14,3 +14,9 @@ export interface AddManualProps {
   roles: Role[];
   loading: boolean;
 }
+
+export interface AddManualDataItem extends NewUser {
+  failed: boolean;
+}
+
+export type AddManualData = AddManualDataItem[];

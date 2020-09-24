@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
+import { useSnackbar } from 'notistack';
 
 import USERS_ADD_MANUAL_ACL_ROLES_QUERY from 'pages/users/addManual/queries/roles';
-import { NewUser } from 'pages/users/addManual/types';
+import { NewUser, Role } from 'pages/users/addManual/types';
 
 import {
   UsersAddManualAclRolesQuery,
@@ -25,16 +26,21 @@ const AddManualIndex: React.FC = () => {
     UsersAddManualCreateUserMutation,
     UsersAddManualCreateUserMutationVariables
   >(USERS_ADD_MANUAL_CREATE_USER_MUTATION);
+  const { enqueueSnackbar } = useSnackbar();
 
   const addHandler = (user: NewUser): Promise<boolean> => {
     return createUser({ variables: { input: user } })
       .then(() => true)
-      .catch(() => false);
+      .catch(() => {
+        enqueueSnackbar('error', { variant: 'error' });
+
+        return false;
+      });
   };
 
   return (
     <AddManual
-      roles={roles?.aclRoles || []}
+      roles={(roles?.aclRoles as Role[]) || []}
       loading={rolesLoading}
       onAdd={addHandler}
     />
