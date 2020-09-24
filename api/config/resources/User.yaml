@@ -37,8 +37,8 @@ App\Entity\User:
             denormalization_context:
                 groups:
                     - user:write
-
-        edit:
+t
+        update:
             security: "is_granted('EDIT_USER')"
             security_message: "r: EDIT_USER"
             normalization_context:
