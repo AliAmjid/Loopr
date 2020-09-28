@@ -7,6 +7,8 @@ const list: Overrides = {
   MuiList: {
     root: {
       padding: +spacing,
+      paddingLeft: +spacing + spacing / 2,
+      paddingRight: +spacing + spacing / 2,
     },
   },
   MuiListItem: {
@@ -14,8 +16,6 @@ const list: Overrides = {
       borderRadius: shape.borderRadius,
       paddingTop: spacing / 2,
       paddingBottom: spacing / 2,
-      marginLeft: spacing / 2,
-      marginRight: spacing / 2,
 
       marginTop: spacing / 2,
       marginBottom: spacing / 2,
