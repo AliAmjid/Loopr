@@ -21,13 +21,21 @@ const Upload: React.FC = () => {
       return;
     }
     enqueueSnackbar('Loaded', { variant: 'success' });
-    console.log(data);
     setFileData(data);
     setUploadNext(true);
   };
 
+  const removeHandler = (): void => {
+    setFileData([]);
+    setUploadNext(false);
+  };
+
   return (
-    <CSVReader onDrop={dropHandler} addRemoveButton>
+    <CSVReader
+      onDrop={dropHandler}
+      onRemoveFile={removeHandler}
+      addRemoveButton
+    >
       CSVText
     </CSVReader>
   );
