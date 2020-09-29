@@ -42,10 +42,14 @@ const AddManualIndex: React.FC = () => {
 
   const addHandler = (user: AddUser): Promise<HandlerReturn> => {
     return createUser({ variables: { input: user } })
-      .then(data => ({
-        id: data?.data?.createUser?.user?.id || '',
-        success: true,
-      }))
+      .then(data => {
+        enqueueSnackbar('add success', { variant: 'success' });
+
+        return {
+          id: data?.data?.createUser?.user?.id || '',
+          success: true,
+        };
+      })
       .catch(() => {
         enqueueSnackbar('error', { variant: 'error' });
 
@@ -55,7 +59,11 @@ const AddManualIndex: React.FC = () => {
 
   const updateHandler = (user: NewUser): Promise<boolean> => {
     return updateUser({ variables: { input: user } })
-      .then(() => true)
+      .then(() => {
+        enqueueSnackbar('update success', { variant: 'success' });
+
+        return true;
+      })
       .catch(() => {
         enqueueSnackbar('error', { variant: 'error' });
 

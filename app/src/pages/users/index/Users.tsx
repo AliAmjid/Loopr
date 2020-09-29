@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Box, Button, Paper } from '@material-ui/core';
+import { Box, Button, Menu, MenuItem, Paper } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import dayjs from 'dayjs';
 import Link from 'next/link';
@@ -19,6 +19,8 @@ const VisibilityIconWithDisplayName = (): JSX.Element => <VisibilityIcon />;
 const Users: React.FC<UsersProps> = props => {
   const { t } = useTranslation(namespaces.pages.users.index);
   const router = useRouter();
+
+  const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | null>(null);
 
   return (
     <Paper>
@@ -72,11 +74,37 @@ const Users: React.FC<UsersProps> = props => {
         ]}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>
-        <Link href={routes.users.addManual} passHref>
-          <Button color="primary" variant="contained">
-            {t('addUsers')}
-          </Button>
-        </Link>
+        <Button
+          aria-controls="users-addButton"
+          color="primary"
+          variant="contained"
+          onClick={e => setMenuAnchorEl(e.currentTarget)}
+        >
+          {t('addUsers')}
+        </Button>
+
+        <Menu
+          id="users-addButton"
+          open={Boolean(menuAnchorEl)}
+          onClose={() => setMenuAnchorEl(null)}
+          anchorEl={menuAnchorEl}
+          keepMounted
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Link href={routes.users.addManual} passHref>
+            <MenuItem>Manual</MenuItem>
+          </Link>
+          <Link href={routes.users.addCSV} passHref>
+            <MenuItem>CSV</MenuItem>
+          </Link>
+        </Menu>
       </Box>
     </Paper>
   );

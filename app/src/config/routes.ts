@@ -8,6 +8,7 @@ const routes = {
   users: {
     index: '/users',
     addManual: '/users/addManual',
+    addCSV: '/users/addCSV',
     userDetail: '/users/userDetail',
   },
   acl: {

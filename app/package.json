@@ -41,6 +41,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.6.1",
+    "react-papaparse": "^3.8.0",
     "react-swipeable-views": "^0.13.9",
     "reactour": "^1.17.0",
     "recompose": "^0.30.0",

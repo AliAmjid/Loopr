@@ -15,6 +15,8 @@ import {
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import stripRolePrefix from 'components/stripRolePrefix';
+
 import { UserProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -84,7 +86,9 @@ const User: React.FC<UserProps> = props => {
           >
             <Box pl={1} pb={1}>
               <Typography variant="h5">{props.user?.name || ''}</Typography>
-              <Typography>{props.user?.role?.name || ''}</Typography>
+              <Typography>
+                {stripRolePrefix(props.user?.role?.name || '')}
+              </Typography>
             </Box>
             <Box display="flex">
               <Button color="primary">Nastavení profilu</Button>
