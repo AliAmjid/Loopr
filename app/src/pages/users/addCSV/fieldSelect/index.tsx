@@ -13,15 +13,17 @@ import {
 import useAddCSVState from 'pages/users/addCSV/state';
 
 const FieldSelect: React.FC = () => {
-  const { fileData } = useAddCSVState(state => ({
-    fileData: state.fileData,
-  }));
-  const [fields, setField] = useState<string[]>(
-    fileData.map(() => '__nothing__'),
+  const { fileData, fields, setFields, setFieldSelectNext } = useAddCSVState(
+    state => ({
+      fileData: state.fileData,
+      fields: state.fields,
+      setFields: state.setFields,
+      setFieldSelectNext: state.setFieldSelectNext,
+    }),
   );
 
   useEffect(() => {
-    setField(fileData.map(() => '__nothing__'));
+    setFields(fileData.map(() => '__nothing__'));
   }, [fileData]);
 
   if (fileData.length === 0) {
@@ -41,7 +43,7 @@ const FieldSelect: React.FC = () => {
       onChange={e => {
         const updatedFields = { ...fields };
         updatedFields[index] = e.target.value as string;
-        setField(updatedFields);
+        setFields(updatedFields);
 
         let complete = true;
         requiredFields.forEach(field => {
@@ -57,7 +59,7 @@ const FieldSelect: React.FC = () => {
         ) {
           complete = false;
         }
-        console.log('complete', complete);
+        setFieldSelectNext(complete);
       }}
     >
       {requiredFields.map(field => {

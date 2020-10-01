@@ -2,17 +2,20 @@ import React from 'react';
 
 import { Paper } from '@material-ui/core';
 
+import UserUploadIndex from 'pages/users/addCSV/userUpload';
+
 import Stepper from 'components/Stepper';
 import withPage from 'components/withPage';
 
-import Upload from './upload/upload';
+import CSVUpload from './CSVUpload/CSVUpload';
 import FieldSelect from './fieldSelect';
 import addCSVPageOptions from './pageOptions';
 import useAddCSVState from './state';
 
 const AddCSVIndex: React.FC = () => {
-  const { uploadNext } = useAddCSVState(state => ({
-    uploadNext: state.uploadNext,
+  const { uploadCSVNext, fieldSelectNext } = useAddCSVState(state => ({
+    uploadCSVNext: state.uploadCSVNext,
+    fieldSelectNext: state.fieldSelectNext,
   }));
 
   return (
@@ -22,13 +25,19 @@ const AddCSVIndex: React.FC = () => {
           {
             index: 0,
             label: 'Upload',
-            Component: <Upload />,
-            nextActive: uploadNext,
+            Component: <CSVUpload />,
+            nextActive: uploadCSVNext,
           },
           {
             index: 1,
             label: 'Select',
             Component: <FieldSelect />,
+            nextActive: fieldSelectNext,
+          },
+          {
+            index: 2,
+            label: 'Finish',
+            Component: <UserUploadIndex />,
             nextActive: true,
           },
         ]}

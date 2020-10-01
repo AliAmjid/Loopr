@@ -6,7 +6,7 @@ import CSVReader from 'lib/react-papaparse/CSVReader';
 
 import useAddCSVState from 'pages/users/addCSV/state';
 
-const Upload: React.FC = () => {
+const CSVUpload: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { setUploadNext, setFileData } = useAddCSVState(state => ({
     setUploadNext: state.setUploadNext,
@@ -41,4 +41,4 @@ const Upload: React.FC = () => {
   );
 };
 
-export default Upload;
+export default CSVUpload;

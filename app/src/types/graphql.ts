@@ -269,6 +269,36 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UsersAddCsvCreateUserMutation
+// ====================================================
+
+export interface UsersAddCsvCreateUserMutation_createUser_user {
+  __typename: "createUserPayloadData";
+  id: string;
+}
+
+export interface UsersAddCsvCreateUserMutation_createUser {
+  __typename: "createUserPayload";
+  user: UsersAddCsvCreateUserMutation_createUser_user | null;
+}
+
+export interface UsersAddCsvCreateUserMutation {
+  /**
+   * Creates a User.
+   */
+  createUser: UsersAddCsvCreateUserMutation_createUser | null;
+}
+
+export interface UsersAddCsvCreateUserMutationVariables {
+  input: createUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UsersAddManualCreateUserMutation
 // ====================================================
 
