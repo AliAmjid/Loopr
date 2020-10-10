@@ -4,6 +4,30 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: UserImportTableAclRolesQuery
+// ====================================================
+
+export interface UserImportTableAclRolesQuery_aclRoles {
+  __typename: "AclRoleCollection";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string;
+}
+
+export interface UserImportTableAclRolesQuery {
+  aclRoles: (UserImportTableAclRolesQuery_aclRoles | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: WithPageMeUserQuery
 // ====================================================
 
