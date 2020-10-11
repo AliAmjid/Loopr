@@ -19,4 +19,4 @@ jobs:
 
     - run: docker-compose up --build -d
     - name: run tests
-      run: docker-compose exec php bin/phpunit
+      run: docker-compose exec -T php bin/phpunit
