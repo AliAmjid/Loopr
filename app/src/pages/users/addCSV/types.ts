@@ -1,6 +1,6 @@
 export type FileData = { data: string[] }[];
 
-export type FieldType = 'name' | 'email' | 'role' | '__nothing__';
+export type FieldType = 'name' | 'username' | 'role' | '__nothing__';
 
 export interface AddCSVState {
   uploadCSVNext: boolean;

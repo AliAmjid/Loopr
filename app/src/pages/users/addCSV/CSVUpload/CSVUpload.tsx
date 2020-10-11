@@ -20,7 +20,6 @@ const CSVUpload: React.FC = () => {
 
       return;
     }
-    enqueueSnackbar('Loaded', { variant: 'success' });
     setFileData(data);
     setUploadNext(true);
   };

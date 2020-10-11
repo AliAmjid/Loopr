@@ -7,6 +7,7 @@ export type Users = User[];
 
 export interface UserWithId extends User {
   id: number;
+  error?: boolean;
 }
 export type UsersWithId = UserWithId[];
 

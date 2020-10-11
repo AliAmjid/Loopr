@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, useTheme } from '@material-ui/core';
 
 import MaterialTable from 'lib/material-table';
 
@@ -17,7 +17,9 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
           { title: 'role', field: 'role', lookup: props.rolesLookup },
         ]}
         data={props.users}
-        options={{ selection: true }}
+        options={{
+          selection: true,
+        }}
         onSelectionChange={(users: UsersWithId) =>
           props.onSelectionChange(users)
         }
@@ -40,6 +42,15 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
         }}
       />
       <Box display="flex" justifyContent="flex-end" pt={2}>
+        <Box pr={2}>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={props.onSubmit}
+          >
+            Finish
+          </Button>
+        </Box>
         <Button color="primary" variant="contained" onClick={props.onSubmit}>
           Upload
         </Button>

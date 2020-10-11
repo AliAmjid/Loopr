@@ -12,6 +12,7 @@ import {
   UserImportTableCreateUserMutationVariables,
 } from 'types/graphql';
 
+import addRolePrefix from 'components/addRolePrefix';
 import stripRolePrefix from 'components/stripRolePrefix';
 
 import USER_IMPORT_TABLE_CREATE_USER_MUTATION from './mutations/createUser';
@@ -40,8 +41,18 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
 
   useEffect(() => {
     if (props.users)
-      setUsers(props.users.map((user, index) => ({ ...user, id: index })));
-  }, [props.users]);
+      setUsers(
+        props.users.map((user, index) => {
+          const role =
+            rolesData?.aclRoles?.find(
+              role => role?.name === addRolePrefix(user.role),
+            )?.id || '';
+
+          return { ...user, id: index, role };
+        }),
+      );
+    setSelecteedIds([]);
+  }, [props.users, rolesData]);
 
   const rolesLookup: RolesLookup = {};
   rolesData?.aclRoles?.forEach(role => {
@@ -65,12 +76,7 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
   };
 
   const rowDeleteHandler = (user: UserWithId): void => {
-    setUsers(prevState => {
-      const userIndex = prevState.findIndex(u => u.id === user.id);
-      prevState.splice(userIndex, 1);
-
-      return [...prevState];
-    });
+    setUsers(prevState => prevState.filter(u => u.id !== user.id));
   };
 
   const selectionChangeHandler = (users: UsersWithId): void => {
@@ -111,11 +117,20 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
           })
           .catch(() => {
             failed = true;
+            setUsers(users => {
+              const userIndex = users.findIndex(u => u.id === userId);
+              users[userIndex].error = true;
+              console.log('error', users);
+
+              return users;
+            });
             responseHandler(userId);
           });
       }
     });
   };
+
+  console.log('users', users);
 
   return (
     <UserImportTableUI

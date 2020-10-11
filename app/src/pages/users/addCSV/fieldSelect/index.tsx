@@ -32,7 +32,7 @@ const FieldSelect: React.FC = () => {
 
   const requiredFields = [
     { value: 'name', label: 'Name' },
-    { value: 'email', label: 'Email' },
+    { value: 'username', label: 'Email' },
     { value: 'role', label: 'Role' },
     { value: '__nothing__', label: '----' },
   ];

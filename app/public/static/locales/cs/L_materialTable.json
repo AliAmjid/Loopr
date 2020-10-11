@@ -14,6 +14,11 @@
   "groupedBy": "Seskupeno podle",
   "save": "Uložit",
   "cancel": "Zrušit",
+  "nRowsSelected": "řádků vybráno",
+  "deleteText": "Opravdu chcete tento řádek odstranit?",
+  "deleteTooltip": "Odstranit",
+  "editTooltip": "Upravit",
+  "addTooltip": "Přidat",
   "defaultActions": {
     "grouping": {
       "tooltip":"Seskupit"
