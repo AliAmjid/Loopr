@@ -1,6 +1,6 @@
 import create from 'zustand';
 
-import { AddCSVState, FileData } from './types';
+import { AddCSVState, FieldType, FileData } from './types';
 
 const useAddCSVState = create<AddCSVState>(set => ({
   uploadCSVNext: false,
@@ -10,7 +10,7 @@ const useAddCSVState = create<AddCSVState>(set => ({
   setUploadNext: (active: boolean) => set({ uploadCSVNext: active }),
   setFieldSelectNext: (active: boolean) => set({ fieldSelectNext: active }),
   setFileData: (data: FileData) => set({ fileData: data }),
-  setFields: (fields: string[]) => set({ fields }),
+  setFields: (fields: FieldType[]) => set({ fields }),
 }));
 
 export default useAddCSVState;

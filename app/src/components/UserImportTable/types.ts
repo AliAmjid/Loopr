@@ -22,4 +22,6 @@ export interface UserImportTableUIProps {
   onRowAdd: (user: User) => void;
   onRowUpdate: (user: UserWithId) => void;
   onRowDelete: (user: UserWithId) => void;
+  onSelectionChange: (users: UsersWithId) => void;
+  onSubmit: () => void;
 }

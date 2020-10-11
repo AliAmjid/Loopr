@@ -4,6 +4,36 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UserImportTableCreateUserMutation
+// ====================================================
+
+export interface UserImportTableCreateUserMutation_createUser_user {
+  __typename: "createUserPayloadData";
+  id: string;
+}
+
+export interface UserImportTableCreateUserMutation_createUser {
+  __typename: "createUserPayload";
+  user: UserImportTableCreateUserMutation_createUser_user | null;
+}
+
+export interface UserImportTableCreateUserMutation {
+  /**
+   * Creates a User.
+   */
+  createUser: UserImportTableCreateUserMutation_createUser | null;
+}
+
+export interface UserImportTableCreateUserMutationVariables {
+  input: createUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UserImportTableAclRolesQuery
 // ====================================================
 
