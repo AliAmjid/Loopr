@@ -36,7 +36,7 @@ const materialTableLocalization = (t: TFunction): Localization => ({
       deleteText: t('deleteText'),
     },
     deleteTooltip: t('deleteTooltip'),
-    editTooltip: t('editTooltip'),
+    editTooltip: t('editTooltipgpu'),
     addTooltip: t('addTooltip'),
   },
 });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Tab, Tabs as TabsPrefab, useTheme } from '@material-ui/core';
+import { Box, Tab, Tabs as TabsPrefab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 
 import { TabsProps } from './types';

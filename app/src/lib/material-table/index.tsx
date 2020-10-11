@@ -12,7 +12,6 @@ import namespaces from 'lib/i18n/namespaces';
 import useGroupingState from 'lib/material-table/actions/grouping/state';
 import materialTableLocalization from 'lib/material-table/localization';
 
-import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
 import columnFilteringAction from './actions/columnFiltering';

@@ -5,7 +5,6 @@ import {
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
-  StoreObject,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { CachePersistor } from 'apollo-cache-persist';

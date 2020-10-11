@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-
-import routes from 'config/routes';
 
 import {
   UserImportTableAclRolesQuery,
@@ -37,7 +34,6 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
     UserImportTableCreateUserMutationVariables
   >(USER_IMPORT_TABLE_CREATE_USER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
-  const router = useRouter();
 
   useEffect(() => {
     if (props.users)
@@ -94,7 +90,6 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
           enqueueSnackbar('ERROR', { variant: 'error' });
         } else {
           enqueueSnackbar('SUCCESS', { variant: 'success' });
-          router.push(routes.users.index);
         }
       }
     };
@@ -120,7 +115,6 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
             setUsers(users => {
               const userIndex = users.findIndex(u => u.id === userId);
               users[userIndex].error = true;
-              console.log('error', users);
 
               return users;
             });
@@ -129,8 +123,6 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
       }
     });
   };
-
-  console.log('users', users);
 
   return (
     <UserImportTableUI

@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Step,
-  StepButton,
   StepLabel,
   Stepper as StepperPrefab,
 } from '@material-ui/core';

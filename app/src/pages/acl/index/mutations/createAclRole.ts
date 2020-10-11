@@ -1,11 +1,4 @@
-import {
-  ApolloCache,
-  FetchResult,
-  gql,
-  MutationUpdaterFn,
-} from '@apollo/client';
-
-import { AclCreateAclRole } from 'types/graphql';
+import { gql } from '@apollo/client';
 
 const ACL_CREATE_ACL_ROLE = gql`
   mutation AclCreateAclRole($input: createAclRoleInput!) {

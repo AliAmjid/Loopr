@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import {
   MenuItem,
@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 
 import useAddCSVState from 'pages/users/addCSV/state';
+import { FieldType } from 'pages/users/addCSV/types';
 
 const FieldSelect: React.FC = () => {
   const { fileData, fields, setFields, setFieldSelectNext } = useAddCSVState(
@@ -42,7 +43,7 @@ const FieldSelect: React.FC = () => {
       value={fields[index] || ''}
       onChange={e => {
         const updatedFields = { ...fields };
-        updatedFields[index] = e.target.value as string;
+        updatedFields[index] = e.target.value as FieldType;
         setFields(updatedFields);
 
         let complete = true;

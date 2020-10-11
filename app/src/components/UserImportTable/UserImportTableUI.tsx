@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Box, Button, useTheme } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
+import Link from 'next/link';
+
+import routes from 'config/routes';
 
 import MaterialTable from 'lib/material-table';
 
@@ -43,13 +46,15 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
       />
       <Box display="flex" justifyContent="flex-end" pt={2}>
         <Box pr={2}>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={props.onSubmit}
-          >
-            Finish
-          </Button>
+          <Link href={routes.users.index} passHref>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={props.onSubmit}
+            >
+              Finish
+            </Button>
+          </Link>
         </Box>
         <Button color="primary" variant="contained" onClick={props.onSubmit}>
           Upload
