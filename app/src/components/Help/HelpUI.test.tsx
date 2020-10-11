@@ -7,7 +7,7 @@ import testId from 'lib/jest/helpers/testId';
 import HelpUI from 'components/Help/HelpUI';
 
 describe('HelpUI', () => {
-  it('Should fire callback on click', () => {
+  it('should fire callback on click', () => {
     const onClickHandler = jest.fn();
     const wrapper = mount(<HelpUI onClick={onClickHandler} />);
 

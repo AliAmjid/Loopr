@@ -6,9 +6,9 @@ import { act } from 'react-dom/test-utils';
 import hookFormType from 'lib/jest/helpers/hookFormType';
 import testId from 'lib/jest/helpers/testId';
 
-import Login from 'pages/login/login';
+import Login from 'pages/login/Login';
 
-describe('<Login/>', () => {
+describe('Login', () => {
   it('Should not fire without email or password', async () => {
     const submitHandler = jest.fn(() => {});
     await act(async () => {

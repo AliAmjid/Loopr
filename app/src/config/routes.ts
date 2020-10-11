@@ -7,6 +7,13 @@ const routes = {
   },
   users: {
     index: '/users',
+    addManual: '/users/addManual',
+    addCSV: '/users/addCSV',
+    userDetail: '/users/userDetail',
+  },
+  acl: {
+    index: '/acl',
+    editRole: '/acl/editRole',
   },
 };
 

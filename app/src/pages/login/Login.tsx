@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Box,
   Button,
   Container,
   Grid,
@@ -46,14 +47,17 @@ const Login: React.FC<LoginProps> = props => {
         <form onSubmit={handleSubmit(submitHandler)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography variant="h4" component="h1">
-                {t('title')}
-              </Typography>
+              <Box pb={2}>
+                <Typography variant="h4" component="h1" color="primary">
+                  {t('title')}
+                </Typography>
+              </Box>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 name="email"
                 label={t('email')}
+                variant="outlined"
                 fullWidth
                 autoComplete="email"
                 inputRef={register({ required: true })}
@@ -64,6 +68,7 @@ const Login: React.FC<LoginProps> = props => {
               <TextField
                 name="password"
                 label={t('password')}
+                variant="outlined"
                 fullWidth
                 autoComplete="current-password"
                 inputRef={register({ required: true })}

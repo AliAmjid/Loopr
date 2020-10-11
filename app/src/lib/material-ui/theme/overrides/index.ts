@@ -6,6 +6,8 @@ import button from './button';
 import list from './list';
 import navigation from './navigation';
 
+const tabHeight = '30px';
+
 const overrides: Overrides = {
   ...list,
   ...button,
@@ -18,6 +20,22 @@ const overrides: Overrides = {
   MuiPopover: {
     paper: {
       padding: 0,
+    },
+  },
+  MuiTabs: {
+    root: {
+      minHeight: tabHeight,
+      height: tabHeight,
+      minWidth: 10,
+      paddingBottom: 1,
+    },
+  },
+  MuiTab: {
+    root: {
+      minHeight: tabHeight,
+      height: tabHeight,
+      minWidth: '10px !important',
+      padding: spacing * 2,
     },
   },
 };

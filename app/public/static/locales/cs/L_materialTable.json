@@ -2,7 +2,7 @@
   "nextTooltip": "Další stránka",
   "previousTooltip": "Předchozí stránka",
   "lastTooltip": "Poslední stránka",
-  "firstTooltip": "První stránka,",
+  "firstTooltip": "První stránka",
   "labelRowsSelect": "řádků",
   "from": "z",
   "actions": "Akce",
@@ -12,6 +12,13 @@
   "exportPDFName": "Exportovat jako PDF",
   "groupingPlaceholder": "Pro seksupení přetáhněte položku ze záhlaví",
   "groupedBy": "Seskupeno podle",
+  "save": "Uložit",
+  "cancel": "Zrušit",
+  "nRowsSelected": "řádků vybráno",
+  "deleteText": "Opravdu chcete tento řádek odstranit?",
+  "deleteTooltip": "Odstranit",
+  "editTooltip": "Upravit",
+  "addTooltip": "Přidat",
   "defaultActions": {
     "grouping": {
       "tooltip":"Seskupit"

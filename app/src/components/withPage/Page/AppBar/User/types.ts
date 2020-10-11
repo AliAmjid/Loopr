@@ -1,5 +1,5 @@
-export interface UserUIProps {
-  anchorEl: HTMLButtonElement | null;
-  onClick: (anchorEl: HTMLButtonElement) => void;
-  onClose: () => void;
+import { User } from '../../types';
+
+export interface UserProps {
+  user: User;
 }

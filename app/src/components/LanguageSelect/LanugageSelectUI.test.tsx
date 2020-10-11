@@ -9,7 +9,7 @@ import testId from 'lib/jest/helpers/testId';
 import LanguageSelectUI from 'components/LanguageSelect/LanguageSelectUI';
 
 describe('LanguageSelectUI', () => {
-  it('Should fire callback on language change', () => {
+  it('should fire callback on language change', () => {
     const languageChangeHandler = jest.fn(() => {});
     const wrapper = mount(
       <LanguageSelectUI

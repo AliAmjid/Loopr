@@ -3,11 +3,14 @@ import React from 'react';
 import {
   Divider,
   Drawer as DrawerPrefab,
+  Hidden,
   makeStyles,
+  SwipeableDrawer,
   Toolbar,
 } from '@material-ui/core';
 
 import SVGLogo from 'components/SVGLogo';
+import usePageState from 'components/withPage/Page/state';
 
 import Navigation from './Navigation';
 
@@ -25,14 +28,40 @@ const useStyles = makeStyles({
 const Drawer: React.FC = () => {
   const classes = useStyles();
 
+  const { open, setOpen } = usePageState(state => ({
+    open: state.drawerOpen,
+    setOpen: state.setDrawerOpen,
+  }));
+
   return (
-    <DrawerPrefab variant="permanent" classes={{ paper: classes.drawerPaper }}>
-      <Toolbar className={classes.logoToolbar}>
-        <SVGLogo height="auto" />
-      </Toolbar>
-      <Divider />
-      <Navigation />
-    </DrawerPrefab>
+    <>
+      <Hidden smDown>
+        <DrawerPrefab
+          variant="permanent"
+          classes={{ paper: classes.drawerPaper }}
+        >
+          <Toolbar className={classes.logoToolbar}>
+            <SVGLogo height="auto" />
+          </Toolbar>
+          <Divider />
+          <Navigation />
+        </DrawerPrefab>
+      </Hidden>
+      <Hidden mdUp>
+        <SwipeableDrawer
+          classes={{ paper: classes.drawerPaper }}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+        >
+          <Toolbar>
+            <SVGLogo height="auto" />
+          </Toolbar>
+          <Divider />
+          <Navigation />
+        </SwipeableDrawer>
+      </Hidden>
+    </>
   );
 };
 

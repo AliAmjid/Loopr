@@ -19,7 +19,15 @@ import { cachePersistorContext } from './useCachePersistor';
 const withApollo = <ComponentProps extends {} = any>(
   Component: React.ComponentType<ComponentProps>,
 ): React.FC<ComponentProps> => props => {
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({
+    dataIdFromObject(responseObject: any) {
+      if (responseObject.id !== undefined) {
+        return responseObject.id;
+      }
+
+      return false;
+    },
+  });
 
   const newClient = (): ApolloClient<any> => {
     const httpLink = createHttpLink({
@@ -41,6 +49,11 @@ const withApollo = <ComponentProps extends {} = any>(
     return new ApolloClient({
       link: authLink.concat(httpLink),
       cache,
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: 'cache-and-network',
+        },
+      },
     });
   };
 

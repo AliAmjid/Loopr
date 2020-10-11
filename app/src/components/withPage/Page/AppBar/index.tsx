@@ -4,11 +4,16 @@ import {
   AppBar as AppBarPrefab,
   fade,
   Grid,
+  Hidden,
+  IconButton,
   InputBase,
   makeStyles,
   Theme,
   Toolbar,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { useTranslation } from 'lib/i18n';
@@ -16,6 +21,7 @@ import namespaces from 'lib/i18n/namespaces';
 
 import Help from 'components/Help';
 import LanguageSelect from 'components/LanguageSelect';
+import usePageState from 'components/withPage/Page/state';
 
 import { drawerWidth } from '../Drawer';
 
@@ -26,7 +32,9 @@ import User from './User';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    paddingLeft: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: drawerWidth,
+    },
   },
   search: {
     position: 'relative',
@@ -69,33 +77,52 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const AppBar: React.FC<AppBarProps> = props => {
   const classes = useStyles();
+
   const { t } = useTranslation(namespaces.components.withPage);
+  const setDrawerOpen = usePageState(state => state.setDrawerOpen);
+  const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <AppBarPrefab className={classes.appBar}>
       <Toolbar>
-        <Grid container item>
-          <Grid item container xs={6} alignItems="center">
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+        <Grid container>
+          <Hidden mdUp>
+            <Grid item xs={1}>
+              <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
+                <MenuIcon />
+              </IconButton>
+            </Grid>
+          </Hidden>
+          <Hidden smDown>
+            <Grid item container xs={6} alignItems="center">
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder={`${t('search')}…`}
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': t('search') }}
+                />
               </div>
-              <InputBase
-                placeholder={`${t('appBar.search')}…`}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': t('appBar.search') }}
-              />
-            </div>
-          </Grid>
-          <Grid item container alignItems="center" justify="flex-end" xs={6}>
+            </Grid>
+          </Hidden>
+          <Grid
+            item
+            container
+            alignItems="center"
+            justify="flex-end"
+            xs={smDown ? 11 : 6}
+          >
             {props.helpPath && <Help path={props.helpPath} color="inherit" />}
             <LanguageSelect color="inherit" />
             <Notifications />
             <LogOut onLogOut={props.onLogOut} />
-            <User />
+            <User user={props.user} />
           </Grid>
         </Grid>
       </Toolbar>

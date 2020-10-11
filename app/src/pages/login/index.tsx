@@ -19,30 +19,33 @@ import useTour from 'lib/reactour';
 import loginNamespaces from 'pages/login/namespaces';
 
 import {
-  AlreadyLoggedUserQuery,
-  GetTokenQuery,
-  GetTokenQueryVariables,
+  LoginGetTokenQuery,
+  LoginGetTokenQueryVariables,
+  LoginMeUserQuery,
 } from 'types/graphql';
 
-import GET_TOKEN_QUERY from './queries/getToken';
-import ALREADY_LOGGED_USER_QUERY from './queries/meUser';
-import Login from './login';
+import LOGIN_GET_TOKEN_QUERY from './queries/getToken';
+import LOGIN_ME_USER_QUERY from './queries/meUser';
+import Login from './Login';
 import loginTour from './tour';
 
 const LoginIndex: React.FC = () => {
   const [
     getToken,
     { data: getTokenData, error: getTokenError, loading: getTokenLoading },
-  ] = useLazyQuery<GetTokenQuery, GetTokenQueryVariables>(GET_TOKEN_QUERY, {
-    fetchPolicy: 'no-cache',
-  });
+  ] = useLazyQuery<LoginGetTokenQuery, LoginGetTokenQueryVariables>(
+    LOGIN_GET_TOKEN_QUERY,
+    {
+      fetchPolicy: 'no-cache',
+    },
+  );
   const { data: meUserData, error: meUserDataError } = useQuery<
-    AlreadyLoggedUserQuery
-  >(ALREADY_LOGGED_USER_QUERY, {
+    LoginMeUserQuery
+  >(LOGIN_ME_USER_QUERY, {
     fetchPolicy: 'no-cache',
   });
-  const { data: meUserDataCached } = useQuery<AlreadyLoggedUserQuery>(
-    ALREADY_LOGGED_USER_QUERY,
+  const { data: meUserDataCached } = useQuery<LoginMeUserQuery>(
+    LOGIN_ME_USER_QUERY,
     {
       fetchPolicy: 'cache-first',
     },
@@ -86,11 +89,11 @@ const LoginIndex: React.FC = () => {
   if (!getTokenLoading) {
     if (getTokenError) {
       if (recognizeError(getTokenError) === errors.network.failedToFetch) {
-        enqueueSnackbar('Nejste připojeni k internetu', {
+        enqueueSnackbar('noInternet', {
           variant: 'warning',
         });
       } else {
-        enqueueSnackbar('Zadané údaje se neshodují', {
+        enqueueSnackbar('noMatch', {
           variant: 'error',
         });
       }

@@ -1,12 +1,15 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
-const LOGGED_USER_QUERY = gql`
-  query LoggedUserQuery {
+const WITH_PAGE_ME_USER_QUERY = gql`
+  query WithPageMeUserQuery {
     meUser {
       id
       name
+      role {
+        name
+      }
     }
   }
 `;
 
-export default LOGGED_USER_QUERY;
+export default WITH_PAGE_ME_USER_QUERY;
