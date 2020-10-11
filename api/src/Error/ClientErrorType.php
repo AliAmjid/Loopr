@@ -10,6 +10,11 @@ class ClientErrorType {
         'msg' => 'Role configuration is incompatible or wrong.'
     ];
 
+    const USER_NOT_FOUND = [
+        'code' => 'USER_NOT_FOUND',
+        'msg' => 'User with this credentials not found'
+    ];
+
     const ACCESS_DENIED = [
         'code' => 'ACCESS_DENIED',
         'msg' => 'Access was denied.'

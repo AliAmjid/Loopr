@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Entity\User;
+use App\Error\ClientError;
+use App\Error\ClientErrorType;
 use App\Object\Token;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,8 +15,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class LoginController extends AbstractController implements QueryItemResolverInterface {
 
-    private $encored;
-    private $JWTEncoder;
+    private UserPasswordEncoderInterface $encored;
+    private JWTEncoderInterface $JWTEncoder;
 
     public function __construct(
         UserPasswordEncoderInterface $encoder,
@@ -33,7 +35,7 @@ class LoginController extends AbstractController implements QueryItemResolverInt
         if ($user && $this->encored->isPasswordValid($user, $args['password'])) {
             return new Token($this->JWTEncoder->encode(['username' => $user->getUsername()]), $user);
         } else {
-            throw new \Exception("User not found");
+            throw new ClientError(ClientErrorType::USER_NOT_FOUND);
         }
     }
 }
