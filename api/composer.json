@@ -19,9 +19,7 @@
         "symfony/test-pack": "^1.0",
         "symfony/yaml": "5.0.*",
         "webonyx/graphql-php": "^0.13.8",
-        "ext-json": "*"
-    },
-    "require-dev": {
+        "ext-json": "*",
         "api-platform/schema-generator": "^2.1",
         "justinrainbow/json-schema": "^5.2",
         "symfony/http-client": "5.0.*",
