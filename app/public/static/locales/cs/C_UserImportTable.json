@@ -1,0 +1,10 @@
+{
+  "tableTitle": "Nový uživatelé",
+  "upload": "Přidat",
+  "finish": "Dokončit",
+  "name": "Jméno",
+  "email": "Email",
+  "role": "Role",
+  "success": "Uživatelé úspěšně přidání",
+  "error": "Uživatele se nepovedlo přidat"
+}

@@ -6,13 +6,15 @@ export default {
     },
     users: {
       index: 'P_users_index',
-      addManual: 'P_users_addManual',
+      addCSV: 'P_users_addCSV',
     },
   },
   components: {
     withPage: 'C_withPage',
     LanguageSelect: 'C_LanguageSelect',
     Help: 'C_Help',
+    UserImportTable: 'C_UserImportTable',
+    Stepper: 'C_Stepper',
   },
   other: {
     pages: 'O_pages',

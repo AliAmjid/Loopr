@@ -80,7 +80,7 @@ const Users: React.FC<UsersProps> = props => {
           variant="contained"
           onClick={e => setMenuAnchorEl(e.currentTarget)}
         >
-          {t('addUsers')}
+          {t('addUsers.button')}
         </Button>
 
         <Menu
@@ -99,10 +99,10 @@ const Users: React.FC<UsersProps> = props => {
           }}
         >
           <Link href={routes.users.addManual} passHref>
-            <MenuItem>Manual</MenuItem>
+            <MenuItem>{t('addUsers.manual')}</MenuItem>
           </Link>
           <Link href={routes.users.addCSV} passHref>
-            <MenuItem>CSV</MenuItem>
+            <MenuItem>{t('addUsers.csv')}</MenuItem>
           </Link>
         </Menu>
       </Box>

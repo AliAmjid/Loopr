@@ -1,5 +1,6 @@
 import routes from 'config/routes';
 
+import namespaces from 'lib/i18n/namespaces';
 import materialTableNamespaces from 'lib/material-table/namespaces';
 
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
@@ -9,7 +10,10 @@ export const usersBreadcrumbs: Breadcrumbs = [
   { label: 'users.index', href: routes.users.index },
 ];
 
-export const usersNamespaces = [...materialTableNamespaces];
+export const usersNamespaces = [
+  namespaces.pages.users.index,
+  ...materialTableNamespaces,
+];
 
 const usersPageOptions: PageOptions = {
   breadcrumbs: usersBreadcrumbs,
