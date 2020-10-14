@@ -4,6 +4,7 @@
   },
   "users": {
     "index": "Uživatelé",
-    "addManual": "Přidat manuálně"
+    "addManual": "Přidat manuálně",
+    "addCSV": "Přidat z CSV"
   }
 }
