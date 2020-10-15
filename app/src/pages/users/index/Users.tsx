@@ -36,23 +36,22 @@ const Users: React.FC<UsersProps> = props => {
             columns: [
               { section: 'personalInfo' },
               {
-                title: 'name',
+                title: t('columns.name'),
                 field: 'name',
               },
               {
-                title: 'username',
+                title: t('columns.username'),
                 field: 'username',
               },
               {
-                title: 'createdAt',
+                title: t('columns.createdAt'),
                 field: 'createdAt',
                 render: (data: User) =>
                   dayjs(data.createdAt).format('DD.MM. YYYY'),
                 filtering: false,
               },
-              { section: 'access' },
               {
-                title: 'role',
+                title: t('columns.role'),
                 field: 'role.name',
               },
             ],

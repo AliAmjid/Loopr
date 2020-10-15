@@ -1,3 +1,4 @@
+import helpPaths from 'config/helpPaths';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -19,7 +20,7 @@ const usersPageOptions: PageOptions = {
   breadcrumbs: usersBreadcrumbs,
   namespaces: usersNamespaces,
   title: 'users.index',
-  helpPath: 'users',
+  helpPath: helpPaths.users.index,
 };
 
 export default usersPageOptions;
