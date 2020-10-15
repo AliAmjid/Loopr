@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useQuery } from '@apollo/client';
-import { compose } from 'recompose';
 
 import { UsersUsersQuery, UsersUsersQuery_users_edges } from 'types/graphql';
 
@@ -31,4 +30,4 @@ const UsersIndex: React.FC = () => {
   return <Users users={users} />;
 };
 
-export default compose(withPage(usersPageOptions))(UsersIndex);
+export default withPage(usersPageOptions)(UsersIndex);

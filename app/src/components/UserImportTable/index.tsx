@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import {
   UserImportTableAclRolesQuery,
   UserImportTableCreateUserMutation,
@@ -34,6 +37,7 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
     UserImportTableCreateUserMutationVariables
   >(USER_IMPORT_TABLE_CREATE_USER_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.components.UserImportTable);
 
   useEffect(() => {
     if (props.users)
@@ -87,9 +91,9 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
       ongoingRequests = ongoingRequests.filter(id => id !== userId);
       if (ongoingRequests.length === 0) {
         if (failed) {
-          enqueueSnackbar('ERROR', { variant: 'error' });
+          enqueueSnackbar(t('error'), { variant: 'error' });
         } else {
-          enqueueSnackbar('SUCCESS', { variant: 'success' });
+          enqueueSnackbar(t('success'), { variant: 'success' });
         }
       }
     };

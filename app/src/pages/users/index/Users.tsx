@@ -36,23 +36,22 @@ const Users: React.FC<UsersProps> = props => {
             columns: [
               { section: 'personalInfo' },
               {
-                title: 'name',
+                title: t('columns.name'),
                 field: 'name',
               },
               {
-                title: 'username',
+                title: t('columns.username'),
                 field: 'username',
               },
               {
-                title: 'createdAt',
+                title: t('columns.createdAt'),
                 field: 'createdAt',
                 render: (data: User) =>
                   dayjs(data.createdAt).format('DD.MM. YYYY'),
                 filtering: false,
               },
-              { section: 'access' },
               {
-                title: 'role',
+                title: t('columns.role'),
                 field: 'role.name',
               },
             ],
@@ -80,7 +79,7 @@ const Users: React.FC<UsersProps> = props => {
           variant="contained"
           onClick={e => setMenuAnchorEl(e.currentTarget)}
         >
-          {t('addUsers')}
+          {t('addUsers.button')}
         </Button>
 
         <Menu
@@ -99,10 +98,10 @@ const Users: React.FC<UsersProps> = props => {
           }}
         >
           <Link href={routes.users.addManual} passHref>
-            <MenuItem>Manual</MenuItem>
+            <MenuItem>{t('addUsers.manual')}</MenuItem>
           </Link>
           <Link href={routes.users.addCSV} passHref>
-            <MenuItem>CSV</MenuItem>
+            <MenuItem>{t('addUsers.csv')}</MenuItem>
           </Link>
         </Menu>
       </Box>
