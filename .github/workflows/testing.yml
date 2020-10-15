@@ -18,5 +18,7 @@ jobs:
       continue-on-error: true
 
     - run: docker-compose up --build -d
+    - name: show stuff in vendor
+      run: docker-compose exec -T php ls vendor/symfony
     - name: run tests
       run: docker-compose exec -T php bin/phpunit
