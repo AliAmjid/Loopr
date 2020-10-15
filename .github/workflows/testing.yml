@@ -12,7 +12,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: docker-compose up
-      run: docker-compose up -d
+    - run: docker-compose pull
+    - uses: satackey/action-docker-layer-caching@v0.0.8
+      # Ignore the failure of a step and avoid terminating the job.
+      continue-on-error: true
+
+    - run: docker-compose up --build -d
     - name: run tests
-      run: docker-compose php bin/phpunit
+      run: docker-compose exec -T php bin/phpunit
