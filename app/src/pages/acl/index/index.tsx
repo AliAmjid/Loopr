@@ -57,7 +57,7 @@ const AclIndex: React.FC = () => {
       sorting: false,
     })) || []),
   ];
-  const rows: any & { name: string; resourceId: string } =
+  const rows: (any & { name: string; resourceId: string }) | undefined =
     data?.aclResources?.map(resource => {
       const row: Record<string, any> = {};
       data?.aclRoles?.forEach(role => {
@@ -68,7 +68,7 @@ const AclIndex: React.FC = () => {
       });
 
       return { ...row, name: resource?.name, resourceId: resource?.id };
-    }) || [];
+    }) || undefined;
 
   const resourceChangeHandler = (
     props: OnResourceChangeProps,

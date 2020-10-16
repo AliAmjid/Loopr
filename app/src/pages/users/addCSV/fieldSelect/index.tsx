@@ -79,7 +79,6 @@ const FieldSelect: React.FC = () => {
         <TableHead>
           <TableRow>
             {fileData[0].data.map((title, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <TableCell key={index}>{HeadSelect(index)}</TableCell>
             ))}
           </TableRow>
@@ -87,10 +86,8 @@ const FieldSelect: React.FC = () => {
         <TableBody>
           {fileData.slice(0, 5).map((row, index) => {
             return row ? (
-              // eslint-disable-next-line react/no-array-index-key
               <TableRow key={index}>
                 {row.data.map((value, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
                   <TableCell key={value + index}>{value}</TableCell>
                 ))}
               </TableRow>

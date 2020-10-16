@@ -353,30 +353,6 @@ export interface UsersAddCsvCreateUserMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: UsersAddCsvAclRolesQuey
-// ====================================================
-
-export interface UsersAddCsvAclRolesQuey_aclRoles {
-  __typename: "AclRoleCollection";
-  id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
-  name: string;
-}
-
-export interface UsersAddCsvAclRolesQuey {
-  aclRoles: (UsersAddCsvAclRolesQuey_aclRoles | null)[] | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: UsersAddManualCreateUserMutation
 // ====================================================
 
@@ -516,6 +492,45 @@ export interface UsersUsersQuery_users {
 
 export interface UsersUsersQuery {
   users: UsersUsersQuery_users | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: UsersUserDetailUserQuery
+// ====================================================
+
+export interface UsersUserDetailUserQuery_user_role {
+  __typename: "AclRoleItem";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string;
+}
+
+export interface UsersUserDetailUserQuery_user {
+  __typename: "UserItem";
+  id: string;
+  name: string;
+  /**
+   * email of user
+   */
+  username: string;
+  role: UsersUserDetailUserQuery_user_role;
+}
+
+export interface UsersUserDetailUserQuery {
+  user: UsersUserDetailUserQuery_user | null;
+}
+
+export interface UsersUserDetailUserQueryVariables {
+  id: string;
 }
 
 /* tslint:disable */

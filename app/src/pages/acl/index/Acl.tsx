@@ -13,6 +13,7 @@ const AddIconWithDisplayName = (): JSX.Element => <AddIcon />;
 
 const Acl: React.FC<AclProps> = props => {
   const { t } = useTranslation(namespaces.pages.acl.index);
+  console.log(props.rows);
 
   return (
     <Paper>
@@ -20,7 +21,7 @@ const Acl: React.FC<AclProps> = props => {
         title={t('tableTitle')}
         columns={props.columns}
         isLoading={props.loading}
-        data={props.rows}
+        data={props.rows || []}
         cellEditable={{
           onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
             return new Promise((resolve, reject) => {
@@ -36,8 +37,8 @@ const Acl: React.FC<AclProps> = props => {
           },
         }}
         options={{
-          pageSize: props.rows.length,
-          pageSizeOptions: [props.rows.length],
+          pageSize: 1000000,
+          pageSizeOptions: [1000000],
         }}
         hidePagination
         actions={[

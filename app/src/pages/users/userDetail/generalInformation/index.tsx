@@ -1,76 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  Avatar,
-  Box,
-  IconButton,
-  makeStyles,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-  Theme,
-  Typography,
-} from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
+import { ListItem, ListItemText } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  avatar: {
-    width: theme.spacing(14),
-    height: theme.spacing(14),
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.common.black,
-  },
-}));
+import HorizontalList from 'components/HorizontalList';
 
-const GeneralInformationIndex: React.FC = () => {
-  const classes = useStyles();
+import { GeneralInformationProps } from './types';
 
-  const [state, setState] = useState({ editing: false });
-
+const GeneralInformation: React.FC<GeneralInformationProps> = props => {
   return (
-    <Paper>
-      <Box display="flex">
-        <Box pr={2}>
-          <Avatar className={classes.avatar} variant="rounded">
-            AJ
-          </Avatar>
-        </Box>
-        <Box display="flex" width="100%">
-          <Box flexGrow={1}>
-            {state.editing ? (
-              <div>
-                <TextField defaultValue="Adam Janov" />
-              </div>
-            ) : (
-              <Typography variant="h5">Adam Janov</Typography>
-            )}
-            {state.editing ? (
-              <div>
-                <Select defaultValue={0}>
-                  <MenuItem value={0}>Student</MenuItem>
-                </Select>
-              </div>
-            ) : (
-              <Typography>Student</Typography>
-            )}
-          </Box>
-          <Box>
-            <IconButton
-              onClick={() =>
-                setState(prevState => ({
-                  ...prevState,
-                  editing: !prevState.editing,
-                }))
-              }
-            >
-              <EditIcon />
-            </IconButton>
-          </Box>
-        </Box>
-      </Box>
-    </Paper>
+    <>
+      <HorizontalList>
+        <ListItem>
+          <ListItemText primary="Jméno" secondary={props.user?.name} />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="Příjmení"
+            secondary="ALI TO JEŠTĚ NEDODĚLAL!!!"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Email" secondary={props.user?.username} />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Role" secondary={props.user?.role.name} />
+        </ListItem>
+      </HorizontalList>
+    </>
   );
 };
 
-export default GeneralInformationIndex;
+export default GeneralInformation;
