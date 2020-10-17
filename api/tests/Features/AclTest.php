@@ -26,7 +26,7 @@ class AclTest extends BaseTestCase {
         $loggedClient = $this->getClient($response->getData()['getToken']['token']);
         $response = $loggedClient->query(
         /** @lang GraphQL */
-            'query {meUser{_id,id,email,name,role{resources{name,dependsOn{name}}}}}'
+            'query {meUser{_id,id,email,firstname,lastname,role{resources{name,dependsOn{name}}}}}'
         );
         $this->assertNoErrors($response);
         $this->assertEquals($user->getId(), $response->getData()['meUser']['_id']);

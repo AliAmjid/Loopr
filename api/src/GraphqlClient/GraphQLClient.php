@@ -5,7 +5,9 @@ namespace App\GraphqlClient;
 
 
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TransferException;
+use PHPUnit\Exception;
 use Softonic\GraphQL\Client;
 use Softonic\GraphQL\Response;
 use Softonic\GraphQL\ResponseBuilder;
@@ -42,7 +44,10 @@ class GraphQLClient {
             $this->writeInfo('[REQUEST] ' . PHP_EOL . json_encode($options, JSON_PRETTY_PRINT));
             $response = $this->httpClient->request('POST', '', $options);
 
-        } catch (TransferException $e) {
+        } catch (\Throwable $e) {
+            if($e instanceof ServerException) {
+                echo json_encode(json_decode($e->getResponse()->getBody()->__toString()), JSON_PRETTY_PRINT);
+            }
             throw new \RuntimeException('Network Error.' . $e->getMessage(), 0, $e);
         }
 

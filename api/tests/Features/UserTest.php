@@ -11,14 +11,12 @@ use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 use Softonic\GraphQL\Response;
 
-class UserTest extends BaseTestCase
-{
-    public function testListAllUsers()
-    {
+class UserTest extends BaseTestCase {
+    public function testListAllUsers() {
         $query = /** @lang GraphQL */
             '
             query {
-            users{edges{node{email,name}}}
+            users{edges{node{email,firstname, lastname}}}
             }
         ';
         $this->assertSecurityResources(
@@ -30,22 +28,23 @@ class UserTest extends BaseTestCase
         );
     }
 
-    public function testCreateAndUpdateUser()
-    {
+    public function testCreateAndUpdateUser() {
         $createQuery = /** @lang GraphQL */
             '
-            mutation createUser($email: String!, $name: String!, $role: String! ){
+            mutation createUser($email: String!, $firstname: String!, $lastname: String! $role: String! ){
               createUser(
                 input: {
                   email: $email
-                  name: $name
+                  firstname: $firstname
+                  lastname: $lastname
                   role: $role
                 }
               ) {
                 user {
                   id,
                   _id,
-                  name
+                  firstname,
+                  lastname
                 }
               }
             }
@@ -53,7 +52,8 @@ class UserTest extends BaseTestCase
         $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::CREATE_USER])->getEmail());
         $response = $client->query($createQuery, [
             'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
-            'name' => Random::generate(),
+            'firstname' => Random::generate(),
+            'lastname' => Random::generate(),
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
         $this->assertNoErrors($response);
@@ -64,12 +64,13 @@ class UserTest extends BaseTestCase
 
         $editQuery = /** @lang GraphQL */
             '
-            mutation editUser($id: ID!, $email: String!, $name: String!, $role: String! ){
+            mutation editUser($id: ID!, $lastname: String! $email: String!, $name: String!, $role: String! ){
               editUser(
                 input: {
                   id: $id
                   email: $email
-                  name: $name
+                   firstname: $name,
+                   lastname: $lastname
                   role: $role
                 }
               ) {
@@ -86,15 +87,13 @@ class UserTest extends BaseTestCase
             'id' => $iri,
             'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
             'name' => Random::generate(),
+            'lastname' => Random::generate(),
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
-
-
     }
 
 
-    public function testGetUser()
-    {
+    public function testGetUser() {
         $query = 'query getUser($id: ID!) {
   user(id: $id) {
     roles
@@ -110,5 +109,26 @@ class UserTest extends BaseTestCase
 
         $this->assertNoErrors($r);
 
+    }
+
+
+    public function testEditMySelf() {
+        $client = $this->createLoggedClient($this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getEmail());
+        $query = '
+mutation changePassword($oldPwd: String! $newPwd: String!) {
+  changePasswordUser(
+    input: { oldPassword: $oldPwd, newPassword: $newPwd }
+  ) {
+    user {
+      id
+    }
+  }
+}    ';
+        $response = $client->query($query, [
+            'oldPwd' => 'wrongpwd',
+            'newPwd' => 'test123'
+        ]);
+
+        $this->assertErrors($response, 1);
     }
 }

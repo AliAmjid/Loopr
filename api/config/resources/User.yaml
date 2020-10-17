@@ -8,6 +8,12 @@ App\Entity\User:
             read: false
             output: false
     graphql:
+        normalizationContext:
+            groups:
+                - user:read
+        denormalizationContext:
+            groups:
+                - user:write
         me:
             security_message: "r: USER_LOGGED"
             security: "is_granted('USER_LOGGED')"
@@ -37,7 +43,16 @@ App\Entity\User:
             denormalization_context:
                 groups:
                     - user:write
-
+        changePassword:
+            security: "is_granted('USER_LOGGED')"
+            security_message: "r USER_LOGGED"
+            mutation: App\Controller\ChangeUserPasswordController
+            args:
+                oldPassword:
+                    type: String!
+                newPassword:
+                    type: String!
+            
         update:
             security: "is_granted('EDIT_USER')"
             security_message: "r: EDIT_USER"

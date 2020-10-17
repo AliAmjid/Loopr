@@ -25,11 +25,12 @@ trait TCreateEntityHelpers {
     ): User {
         $user = new User();
         $user->setEmail(Random::generate(4) . "@test.cz");
-        $user->setName(Random::generate());
+        $user->setFirstname(Random::generate());
         /** @var UserPasswordEncoder $encoder */
         $encoder = $this->kernel->getContainer()->get('security.password_encoder');
         $user->setPassword($encoder->encodePassword($user, $password));
-        $user->setName(Random::generate());
+        $user->setFirstname(Random::generate());
+        $user->setLastname(Random::generate());
         $user->setRole($this->createRoleWithResources($resources));
         $this->em->persist($user);
         $this->em->flush();

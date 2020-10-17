@@ -20,6 +20,8 @@ services:
       start_period: 30s
     depends_on:
       - db
+    links:
+      - db
     volumes:
       - ./api:/srv/api:rw,cached
       - ./api/docker/php/conf.d/api-platform.dev.ini:/usr/local/etc/php/conf.d/api-platform.ini

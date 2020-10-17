@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -48,7 +49,13 @@ class User implements UserInterface {
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      */
-    private string $name;
+    private string $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "user:write"})
+     */
+    private string $lastname;
 
     /** @var \DateTimeInterface
      * @ORM\Column(type="datetime")
@@ -65,30 +72,22 @@ class User implements UserInterface {
      * @return string
      * @internal
      * @deprecated
+     * @ApiProperty(deprecationReason="uset email instead")
      */
     public function getUsername(): string {
         return $this->id;
     }
 
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email): void {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string {
         return $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array {
-        return ['ROLE_USER'];
+        return [$this->role->getName()];
     }
 
     public function setRole(AclRole $role): void {
@@ -99,9 +98,6 @@ class User implements UserInterface {
         return $this->role;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getPassword(): string {
         return (string)$this->password;
     }
@@ -111,28 +107,42 @@ class User implements UserInterface {
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getSalt() {
         return null;
     }
 
+    public function eraseCredentials() {}
+
     /**
-     * @see UserInterface
+     * @return string
      */
-    public function eraseCredentials() {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+    public function getLastname(): string {
+        return $this->lastname;
     }
 
-    public function getName(): ?string {
-        return $this->name;
-    }
-
-    public function setName(string $name): self {
-        $this->name = $name;
+    public function setLastname(string $lastname): User {
+        $this->lastname = $lastname;
         return $this;
+    }
+
+    /**
+     *@ApiProperty(deprecationReason="Replaced with firstname and lastname")
+     */
+    public function getName(): ?string {
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    public function setFirstname(string $firstname): self {
+        $this->firstname = $firstname;
+        return $this;
+    }
+
+    public function getFirstname(): string {
+        return $this->firstname;
+    }
+
+    public function getCreatedAt(): \DateTimeInterface {
+        return $this->createdAt;
     }
 
     /**
@@ -147,9 +157,5 @@ class User implements UserInterface {
      */
     public function setCreatedAt(): void {
         $this->createdAt = new \DateTime();
-    }
-
-    public function getCreatedAt(): \DateTimeInterface {
-        return $this->createdAt;
     }
 }

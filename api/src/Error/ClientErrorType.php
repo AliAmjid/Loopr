@@ -34,4 +34,9 @@ class ClientErrorType {
         'code' => 'DUPLICATE_VALUE',
         'msg' => 'attempt of creating duplicated value.'
     ];
+
+    const OLD_PASSWORD_IS_WRONG = [
+        'code' => 'OLD_PASSWORD_IS_WRONG',
+        'msg' => 'Old password is wrong'
+    ];
 }

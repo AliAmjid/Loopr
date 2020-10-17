@@ -78,12 +78,16 @@ type AclRoleItem implements Node {
 }
 
 type Mutation {
+    "ChangePasswords a User."
+    changePasswordUser(input: changePasswordUserInput!): changePasswordUserPayload
     "Creates a AclRole."
     createAclRole(input: createAclRoleInput!): createAclRolePayload
-    "CreateBatchs a User."
-    createBatchUser(input: createBatchUserInput!): createBatchUserPayload
     "Creates a User."
     createUser(input: createUserInput!): createUserPayload
+    "DenormalizationContexts a User."
+    denormalizationContextUser(input: denormalizationContextUserInput!): denormalizationContextUserPayload
+    "NormalizationContexts a User."
+    normalizationContextUser(input: normalizationContextUserInput!): normalizationContextUserPayload
     "Updates a AclRole."
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
     "Updates a User."
@@ -94,7 +98,7 @@ type Query {
     aclResources: [AclResourceCollection]
     aclRole(id: ID!): AclRoleItem
     aclRoles: [AclRoleCollection]
-    getToken(password: String!, username: String!): Token
+    getToken(email: String!, password: String!): Token
     meUser: User
     node(id: ID!): Node
     user(id: ID!): UserItem
@@ -103,13 +107,13 @@ type Query {
         after: String,
         "Returns the elements in the list that come before the specified cursor."
         before: String,
+        email: String,
         "Returns the first n elements from the list."
         first: Int,
         id: String,
         id_list: [String],
         "Returns the last n elements from the list."
-        last: Int,
-        name: String
+        last: Int
     ): UserCollectionConnection
 }
 
@@ -125,8 +129,9 @@ type User implements Node {
     createdAt: String!
     "email of user"
     email: String!
+    firstname: String!
     id: ID!
-    name: String!
+    lastname: String!
     role: AclRole!
 }
 
@@ -135,8 +140,9 @@ type UserCollection implements Node {
     createdAt: String!
     "email of user"
     email: String!
+    firstname: String!
     id: ID!
-    name: String!
+    lastname: String!
     role: AclRoleCollection!
 }
 
@@ -166,13 +172,20 @@ type UserItem implements Node {
     createdAt: String!
     "email of user"
     email: String!
+    firstname: String!
     id: ID!
-    name: String!
+    lastname: String!
+    name: String @deprecated(reason : "Replaced with firstname and lastname")
     "The hashed password"
     password: String!
     role: AclRoleItem!
     roles: Iterable!
-    username: String!
+    username: String! @deprecated(reason : "uset email instead")
+}
+
+type changePasswordUserPayload {
+    clientMutationId: String
+    user: UserItem
 }
 
 type createAclResourceNestedPayload implements Node {
@@ -202,11 +215,6 @@ type createAclRolePayload {
     clientMutationId: String
 }
 
-type createBatchUserPayload {
-    clientMutationId: String
-    user: UserItem
-}
-
 type createUserPayload {
     clientMutationId: String
     user: createUserPayloadData
@@ -217,9 +225,20 @@ type createUserPayloadData implements Node {
     createdAt: String!
     "email of user"
     email: String!
+    firstname: String!
     id: ID!
-    name: String!
+    lastname: String!
     role: createAclRoleNestedPayload!
+}
+
+type denormalizationContextUserPayload {
+    clientMutationId: String
+    user: UserItem
+}
+
+type normalizationContextUserPayload {
+    clientMutationId: String
+    user: UserItem
 }
 
 type updateAclResourceNestedPayload implements Node {
@@ -259,9 +278,16 @@ type updateUserPayloadData implements Node {
     createdAt: String
     "email of user"
     email: String
+    firstname: String
     id: ID!
-    name: String
+    lastname: String
     role: updateAclRoleNestedPayload
+}
+
+input changePasswordUserInput {
+    clientMutationId: String
+    newPassword: String!
+    oldPassword: String!
 }
 
 input createAclRoleInput {
@@ -277,16 +303,36 @@ input createAclRoleInput {
     resources: [String]
 }
 
-input createBatchUserInput {
-    clientMutationId: String
-    input: [createAclRoleInput!]
-}
-
 input createUserInput {
     clientMutationId: String
     "email of user"
     email: String!
-    name: String!
+    firstname: String!
+    lastname: String!
+    role: String!
+}
+
+input denormalizationContextUserInput {
+    clientMutationId: String
+    "email of user"
+    email: String!
+    firstname: String!
+    id: ID!
+    lastname: String!
+    "The hashed password"
+    password: String!
+    role: String!
+}
+
+input normalizationContextUserInput {
+    clientMutationId: String
+    "email of user"
+    email: String!
+    firstname: String!
+    id: ID!
+    lastname: String!
+    "The hashed password"
+    password: String!
     role: String!
 }
 
@@ -317,8 +363,9 @@ input updateUserInput {
     clientMutationId: String
     "email of user"
     email: String
+    firstname: String
     id: ID!
-    name: String
+    lastname: String
     role: String
 }
 
