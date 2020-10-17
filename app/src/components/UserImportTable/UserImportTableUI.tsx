@@ -5,19 +5,24 @@ import Link from 'next/link';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import { User, UserImportTableUIProps, UsersWithId, UserWithId } from './types';
 
 const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
+  const { t } = useTranslation(namespaces.components.UserImportTable);
+
   return (
     <>
       <MaterialTable
+        title={t('tableTitle')}
         isLoading={props.loading}
         columns={[
-          { title: 'name', field: 'name' },
-          { title: 'email', field: 'username' },
-          { title: 'role', field: 'role', lookup: props.rolesLookup },
+          { title: t('name'), field: 'name' },
+          { title: t('email'), field: 'username' },
+          { title: t('role'), field: 'role', lookup: props.rolesLookup },
         ]}
         data={props.users}
         options={{
@@ -52,12 +57,12 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
               variant="contained"
               onClick={props.onSubmit}
             >
-              Finish
+              {t('finish')}
             </Button>
           </Link>
         </Box>
         <Button color="primary" variant="contained" onClick={props.onSubmit}>
-          Upload
+          {t('upload')}
         </Button>
       </Box>
     </>

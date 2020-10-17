@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 import CSVReader from 'lib/react-papaparse/CSVReader';
 
 import useAddCSVState from 'pages/users/addCSV/state';
@@ -12,6 +14,7 @@ const CSVUpload: React.FC = () => {
     setUploadNext: state.setUploadNext,
     setFileData: state.setFileData,
   }));
+  const { t } = useTranslation(namespaces.pages.users.addCSV);
 
   const dropHandler = (data: any, file: any): void => {
     if (file.type !== 'text/csv') {
@@ -35,7 +38,7 @@ const CSVUpload: React.FC = () => {
       onRemoveFile={removeHandler}
       addRemoveButton
     >
-      CSVText
+      {t('csvDropzone')}
     </CSVReader>
   );
 };

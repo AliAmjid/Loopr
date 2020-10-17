@@ -8,10 +8,14 @@ import {
   Stepper as StepperPrefab,
 } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import { StepperProps } from './types';
 
 const Stepper: React.FC<StepperProps> = props => {
   const [activeStep, setActiveStep] = useState(0);
+  const { t } = useTranslation(namespaces.components.Stepper);
 
   const previousClickHandler = (): void => {
     if (activeStep > 0) setActiveStep(activeStep - 1);
@@ -39,7 +43,7 @@ const Stepper: React.FC<StepperProps> = props => {
           disabled={activeStep <= 0}
           onClick={previousClickHandler}
         >
-          previous
+          {t('previous')}
         </Button>
         <Box display="flex" justifyContent="flex-end" width="100%">
           <Button
@@ -52,7 +56,7 @@ const Stepper: React.FC<StepperProps> = props => {
             }
             onClick={nextClickHandler}
           >
-            next
+            {t('next')}
           </Button>
         </Box>
       </Box>

@@ -1,3 +1,4 @@
+import helpPaths from 'config/helpPaths';
 import routes from 'config/routes';
 
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
@@ -10,7 +11,7 @@ export const dashboardBreadcrumbs: Breadcrumbs = [
 const dashboardPageOptions: PageOptions = {
   breadcrumbs: dashboardBreadcrumbs,
   title: 'dashboard.index',
-  helpPath: '/dashboard',
+  helpPath: helpPaths.dashboard,
 };
 
 export default dashboardPageOptions;

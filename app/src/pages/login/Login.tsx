@@ -13,6 +13,8 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
+import helpPaths from 'config/helpPaths';
+
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -97,7 +99,7 @@ const Login: React.FC<LoginProps> = props => {
               </Grid>
             </Grid>
             <Grid item xs={6}>
-              <Help path="login" size="small" />
+              <Help path={helpPaths.login} size="small" />
             </Grid>
             <Grid item container xs={6} justify="flex-end">
               <LanguageSelect size="small" />

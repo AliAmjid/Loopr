@@ -3,6 +3,8 @@
     "index": "Přehled"
   },
   "users": {
-    "index": "Uživatelé"
+    "index": "Uživatelé",
+    "addManual": "Přidat manuálně",
+    "addCSV": "Přidat z CSV"
   }
 }
