@@ -371,6 +371,9 @@
     "symfony/options-resolver": {
         "version": "v5.0.7"
     },
+    "symfony/orm-pack": {
+        "version": "v1.0.8"
+    },
     "symfony/phpunit-bridge": {
         "version": "4.3",
         "recipe": {
@@ -459,6 +462,9 @@
     },
     "symfony/serializer": {
         "version": "v5.0.7"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.3"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"

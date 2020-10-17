@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Paper } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import UserUploadIndex from 'pages/users/addCSV/userUpload';
 
 import Stepper from 'components/Stepper';
@@ -17,6 +20,7 @@ const AddCSVIndex: React.FC = () => {
     uploadCSVNext: state.uploadCSVNext,
     fieldSelectNext: state.fieldSelectNext,
   }));
+  const { t } = useTranslation(namespaces.pages.users.addCSV);
 
   return (
     <Paper>
@@ -24,19 +28,19 @@ const AddCSVIndex: React.FC = () => {
         steps={[
           {
             index: 0,
-            label: 'Upload',
+            label: t('csv'),
             Component: <CSVUpload />,
             nextActive: uploadCSVNext,
           },
           {
             index: 1,
-            label: 'Select',
+            label: t('select'),
             Component: <FieldSelect />,
             nextActive: fieldSelectNext,
           },
           {
             index: 2,
-            label: 'Finish',
+            label: t('upload'),
             Component: <UserUploadIndex />,
             nextActive: true,
           },
