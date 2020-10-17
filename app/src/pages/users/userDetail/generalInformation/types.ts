@@ -1,4 +1,4 @@
-import { User } from '../types';
+import { Roles, User } from '../types';
 
 export interface OnChangeValues {
   name?: string;
@@ -9,8 +9,10 @@ export interface OnChangeValues {
 export interface GeneralInformationProps {
   user: User;
   onChange: (values: OnChangeValues) => Promise<boolean>;
+  rolesLookup: Record<string, string>;
 }
 
 export interface GeneralInformationIndexProps {
   user: User;
+  roles: Roles;
 }

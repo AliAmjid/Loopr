@@ -1,17 +1,10 @@
 import React from 'react';
 
-import {
-  IconButton,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-} from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
+import { ListItemText } from '@material-ui/core';
 
 import EditableListItem from 'components/EditableListItem';
 import { formatDateToMinute } from 'components/formatDate';
 import HorizontalList from 'components/HorizontalList';
-import stripRolePrefix from 'components/stripRolePrefix';
 
 import { GeneralInformationProps } from './types';
 
@@ -21,7 +14,7 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
       <HorizontalList>
         <EditableListItem
           primary="Jméno"
-          secondary={props.user?.name}
+          secondary={props.user?.name || ''}
           edit="secondary"
           onSubmit={name => props.onChange({ name })}
         />
@@ -33,16 +26,17 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
         </>
         <EditableListItem
           primary="Email"
-          secondary={props.user?.username}
+          secondary={props.user?.username || ''}
           edit="secondary"
           onSubmit={username => props.onChange({ username })}
         />
-        <>
-          <ListItemText
-            primary="Role"
-            secondary={stripRolePrefix(props.user?.role.name || '')}
-          />
-        </>
+        <EditableListItem
+          primary="Role"
+          secondary={props.user?.role.id || ''}
+          edit="secondary"
+          onSubmit={role => props.onChange({ role })}
+          lookup={props.rolesLookup}
+        />
         <>
           <ListItemText
             primary="Registrován v"

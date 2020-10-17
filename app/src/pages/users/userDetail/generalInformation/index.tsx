@@ -9,6 +9,8 @@ import {
   UsersUserDetailUpdateUserMutationVariables,
 } from 'types/graphql';
 
+import stripRolePrefix from 'components/stripRolePrefix';
+
 import GeneralInformation from './generalInformation';
 import { GeneralInformationIndexProps, OnChangeValues } from './types';
 
@@ -30,7 +32,20 @@ const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props =>
       });
   };
 
-  return <GeneralInformation user={props.user} onChange={changeHandler} />;
+  const rolesLookup: Record<string, string> = {};
+  props.roles?.forEach(role => {
+    if (role) {
+      rolesLookup[role.id] = stripRolePrefix(role.name);
+    }
+  });
+
+  return (
+    <GeneralInformation
+      user={props.user}
+      onChange={changeHandler}
+      rolesLookup={rolesLookup}
+    />
+  );
 };
 
 export default GeneralInformationIndex;

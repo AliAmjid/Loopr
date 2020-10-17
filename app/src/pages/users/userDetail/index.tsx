@@ -23,7 +23,13 @@ const UserDetailIndex: React.FC = () => {
     variables: { id: router.query.id?.toString() || '' },
   });
 
-  return <UserDetail loading={userLoading} user={userData?.user} />;
+  return (
+    <UserDetail
+      loading={userLoading}
+      user={userData?.user}
+      roles={userData?.aclRoles}
+    />
+  );
 };
 
 export default withPage(usersDetailPageOptions)(UserDetailIndex);

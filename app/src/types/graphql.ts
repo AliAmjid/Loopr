@@ -573,8 +573,20 @@ export interface UsersUserDetailUserQuery_user {
   role: UsersUserDetailUserQuery_user_role;
 }
 
+export interface UsersUserDetailUserQuery_aclRoles {
+  __typename: "AclRoleCollection";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string;
+}
+
 export interface UsersUserDetailUserQuery {
   user: UsersUserDetailUserQuery_user | null;
+  aclRoles: (UsersUserDetailUserQuery_aclRoles | null)[] | null;
 }
 
 export interface UsersUserDetailUserQueryVariables {

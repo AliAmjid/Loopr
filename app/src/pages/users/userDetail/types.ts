@@ -12,7 +12,16 @@ export type User =
   | null
   | undefined;
 
+export type Roles =
+  | ({
+      id: string;
+      name: string;
+    } | null)[]
+  | null
+  | undefined;
+
 export interface UserDetailProps {
   loading: boolean;
   user: User;
+  roles: Roles;
 }

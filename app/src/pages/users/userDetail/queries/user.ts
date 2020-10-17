@@ -12,6 +12,10 @@ const USERS_USER_DETAIL_USER_QUERY = gql`
         name
       }
     }
+    aclRoles {
+      id
+      name
+    }
   }
 `;
 
