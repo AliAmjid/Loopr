@@ -1,17 +1,35 @@
 import React from 'react';
 
-import { Grid } from '@material-ui/core';
+import { Grid, List, ListItem, makeStyles, Theme } from '@material-ui/core';
 
 import { HorizontalListProps } from './types';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  list: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  listItem: {
+    flex: '25%',
+    [theme.breakpoints.down('md')]: {
+      flex: '50%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      flex: '100%',
+    },
+  },
+}));
+
 const HorizontalList: React.FC<HorizontalListProps> = props => {
+  const classes = useStyles();
   const mappedChildren = props.children.map((ch, index) => (
-    <Grid key={index} item xs={12} sm={3}>
+    <ListItem key={index} className={classes.listItem}>
       {ch}
-    </Grid>
+    </ListItem>
   ));
 
-  return <Grid container>{mappedChildren}</Grid>;
+  return <List className={classes.list}>{mappedChildren}</List>;
 };
 
 export default HorizontalList;

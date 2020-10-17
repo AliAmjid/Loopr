@@ -1,33 +1,36 @@
 import React from 'react';
 
-import { ListItem, ListItemText } from '@material-ui/core';
+import { useMutation } from '@apollo/client';
 
-import HorizontalList from 'components/HorizontalList';
+import USERS_USER_DETAIL_UPDATE_USER_MUTATION from 'pages/users/userDetail/mutations/editUser';
 
-import { GeneralInformationProps } from './types';
+import {
+  UsersUserDetailUpdateUserMutation,
+  UsersUserDetailUpdateUserMutationVariables,
+} from 'types/graphql';
 
-const GeneralInformation: React.FC<GeneralInformationProps> = props => {
-  return (
-    <>
-      <HorizontalList>
-        <ListItem>
-          <ListItemText primary="Jméno" secondary={props.user?.name} />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary="Příjmení"
-            secondary="ALI TO JEŠTĚ NEDODĚLAL!!!"
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Email" secondary={props.user?.username} />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Role" secondary={props.user?.role.name} />
-        </ListItem>
-      </HorizontalList>
-    </>
-  );
+import GeneralInformation from './generalInformation';
+import { GeneralInformationIndexProps, OnChangeValues } from './types';
+
+const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props => {
+  const [updateUser] = useMutation<
+    UsersUserDetailUpdateUserMutation,
+    UsersUserDetailUpdateUserMutationVariables
+  >(USERS_USER_DETAIL_UPDATE_USER_MUTATION);
+
+  const changeHandler = (values: OnChangeValues): Promise<boolean> => {
+    return updateUser({
+      variables: { input: { id: props.user!.id, ...values } },
+    })
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
+  };
+
+  return <GeneralInformation user={props.user} onChange={changeHandler} />;
 };
 
-export default GeneralInformation;
+export default GeneralInformationIndex;

@@ -500,6 +500,53 @@ export interface UsersUsersQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UsersUserDetailUpdateUserMutation
+// ====================================================
+
+export interface UsersUserDetailUpdateUserMutation_updateUser_user_role {
+  __typename: "updateAclRoleNestedPayload";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string | null;
+}
+
+export interface UsersUserDetailUpdateUserMutation_updateUser_user {
+  __typename: "updateUserPayloadData";
+  id: string;
+  name: string | null;
+  /**
+   * email of user
+   */
+  username: string | null;
+  role: UsersUserDetailUpdateUserMutation_updateUser_user_role | null;
+}
+
+export interface UsersUserDetailUpdateUserMutation_updateUser {
+  __typename: "updateUserPayload";
+  user: UsersUserDetailUpdateUserMutation_updateUser_user | null;
+}
+
+export interface UsersUserDetailUpdateUserMutation {
+  /**
+   * Updates a User.
+   */
+  updateUser: UsersUserDetailUpdateUserMutation_updateUser | null;
+}
+
+export interface UsersUserDetailUpdateUserMutationVariables {
+  input: updateUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UsersUserDetailUserQuery
 // ====================================================
 
@@ -522,6 +569,7 @@ export interface UsersUserDetailUserQuery_user {
    * email of user
    */
   username: string;
+  createdAt: string;
   role: UsersUserDetailUserQuery_user_role;
 }
 

@@ -6,6 +6,7 @@ const USERS_USER_DETAIL_USER_QUERY = gql`
       id
       name
       username
+      createdAt
       role {
         id
         name

@@ -3,6 +3,7 @@ export type User =
       id: string;
       name: string;
       username: string;
+      createdAt: string;
       role: {
         id: string;
         name: string;

@@ -2,6 +2,11 @@ import React from 'react';
 
 import { Avatar, Box, makeStyles, Theme, Typography } from '@material-ui/core';
 
+import getInitials from 'components/getInitials';
+import stripRolePrefix from 'components/stripRolePrefix';
+
+import { HeaderProps } from './types';
+
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
     color: theme.palette.common.black,
@@ -11,17 +16,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = props => {
   const classes = useStyles();
 
   return (
     <Box display="flex" pb={2}>
       <Avatar className={classes.avatar} variant="rounded">
-        AJ
+        {getInitials(props.user?.name || '')}
       </Avatar>
       <Box pl={2}>
-        <Typography variant="h4">Jan Novák</Typography>
-        <Typography>Admin</Typography>
+        <Typography variant="h4">{props.user?.name || ''}</Typography>
+        <Typography>{stripRolePrefix(props.user?.role.name || '')}</Typography>
       </Box>
     </Box>
   );

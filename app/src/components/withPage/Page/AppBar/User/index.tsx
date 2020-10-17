@@ -15,6 +15,7 @@ import {
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import getInitials from 'components/getInitials';
 import stripRolePrefix from 'components/stripRolePrefix';
 
 import { UserProps } from './types';
@@ -44,7 +45,7 @@ const User: React.FC<UserProps> = props => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { t } = useTranslation(namespaces.components.withPage);
 
-  const initials = props.user?.name.slice(0, 2) || '';
+  const initials = getInitials(props.user?.name || '');
 
   return (
     <>

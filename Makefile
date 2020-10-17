@@ -30,3 +30,5 @@ api-encode-password:
 	sudo docker-compose exec php bin/console security:encode-password
 api-tests:
 	sudo docker-compose exec php bin/phpunit
+api-migrations:
+	sudo docker-compose exec php bin/console migrations:migrate

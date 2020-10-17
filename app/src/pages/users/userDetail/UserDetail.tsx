@@ -11,13 +11,11 @@ import Header from './header';
 import { UserDetailProps } from './types';
 
 const UserDetail: React.FC<UserDetailProps> = props => {
-  console.log('props1', props);
-
   return (
     <OverlayLoadingContainer>
       <OverlayLoading loading={props.loading} />
       <Paper>
-        <Header />
+        <Header user={props.user} />
         <Tabs
           tabs={[
             {
