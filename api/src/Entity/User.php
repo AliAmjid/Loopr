@@ -15,7 +15,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
- * @ApiFilter(SearchFilter::class, properties={"id": "exact", "name": "partial", "username": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact", "name": "partial", "email": "partial"})
  */
 class User implements UserInterface {
 
@@ -27,7 +27,7 @@ class User implements UserInterface {
      * @ORM\Column(type="string",unique=true)
      * @Groups({"user:read", "user:write"})
      */
-    private string $username;
+    private string $email;
 
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
@@ -63,16 +63,25 @@ class User implements UserInterface {
 
     /**
      * @return string
+     * @internal
+     * @deprecated
      */
     public function getUsername(): string {
-        return $this->username;
+        return $this->id;
     }
 
     /**
-     * @param string $username
+     * @param string $email
      */
-    public function setUsername(string $username): void {
-        $this->username = $username;
+    public function setEmail(string $email): void {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string {
+        return $this->email;
     }
 
     /**

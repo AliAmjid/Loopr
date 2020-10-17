@@ -1,6 +1,6 @@
 App\Entity\User:
     attributes:
-    collectionOperations: { }
+    collectionOperations: {}
     itemOperations:
         get:
             method: GET
@@ -48,10 +48,3 @@ App\Entity\User:
             denormalization_context:
                 groups:
                     - user:write
-        createBatch:
-            security: "is_granted('CREATE_USER')"
-            security_message: "r: CREATE_USER"
-            args:
-                input:
-                    type: '[createAclRoleInput]'
-            mutation: App\Controller\CreateBatchUsersController

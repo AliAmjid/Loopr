@@ -109,8 +109,7 @@ type Query {
         id_list: [String],
         "Returns the last n elements from the list."
         last: Int,
-        name: String,
-        username: String
+        name: String
     ): UserCollectionConnection
 }
 
@@ -124,21 +123,21 @@ type Token implements Node {
 type User implements Node {
     _id: String!
     createdAt: String!
+    "email of user"
+    email: String!
     id: ID!
     name: String!
     role: AclRole!
-    "email of user"
-    username: String!
 }
 
 type UserCollection implements Node {
     _id: String!
     createdAt: String!
+    "email of user"
+    email: String!
     id: ID!
     name: String!
     role: AclRoleCollection!
-    "email of user"
-    username: String!
 }
 
 "Connection for UserCollection."
@@ -165,13 +164,14 @@ type UserCollectionPageInfo {
 type UserItem implements Node {
     _id: String!
     createdAt: String!
+    "email of user"
+    email: String!
     id: ID!
     name: String!
     "The hashed password"
     password: String!
     role: AclRoleItem!
     roles: Iterable!
-    "email of user"
     username: String!
 }
 
@@ -215,11 +215,11 @@ type createUserPayload {
 type createUserPayloadData implements Node {
     _id: String!
     createdAt: String!
+    "email of user"
+    email: String!
     id: ID!
     name: String!
     role: createAclRoleNestedPayload!
-    "email of user"
-    username: String!
 }
 
 type updateAclResourceNestedPayload implements Node {
@@ -257,11 +257,11 @@ type updateUserPayload {
 type updateUserPayloadData implements Node {
     _id: String
     createdAt: String
+    "email of user"
+    email: String
     id: ID!
     name: String
     role: updateAclRoleNestedPayload
-    "email of user"
-    username: String
 }
 
 input createAclRoleInput {
@@ -284,10 +284,10 @@ input createBatchUserInput {
 
 input createUserInput {
     clientMutationId: String
+    "email of user"
+    email: String!
     name: String!
     role: String!
-    "email of user"
-    username: String!
 }
 
 input updateAclResourceInput {
@@ -315,11 +315,11 @@ input updateAclRoleInput {
 
 input updateUserInput {
     clientMutationId: String
+    "email of user"
+    email: String
     id: ID!
     name: String
     role: String
-    "email of user"
-    username: String
 }
 
 

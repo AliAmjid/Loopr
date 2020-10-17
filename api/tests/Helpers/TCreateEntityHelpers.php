@@ -24,7 +24,7 @@ trait TCreateEntityHelpers {
         $resources = AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER']
     ): User {
         $user = new User();
-        $user->setUsername(Random::generate(4) . "@test.cz");
+        $user->setEmail(Random::generate(4) . "@test.cz");
         $user->setName(Random::generate());
         /** @var UserPasswordEncoder $encoder */
         $encoder = $this->kernel->getContainer()->get('security.password_encoder');

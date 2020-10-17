@@ -11,7 +11,7 @@ App\Object\Token:
         get:
             item_query: App\Controller\LoginController
             args:
-                username:
+                email:
                     type: String!
                 password:
                     type: String!

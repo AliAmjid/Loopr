@@ -49,13 +49,13 @@ abstract class BaseTestCase extends TestCase {
     }
 
     protected function createLoggedClient(
-        $username,
+        $email,
         $password = 'test'
     ): GraphQLClient {
         $response = $this->getClient()->query(
         /** @lang GraphQL */
-            'query Token($username : String!, $password : String!) {getToken(username: $username, password: $password ) {token}}', [
-            'username' => $username,
+            'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}', [
+            'email' => $email,
             'password' => $password
         ]);
         $this->assertNoErrors($response);
