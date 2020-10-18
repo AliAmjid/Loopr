@@ -11,49 +11,49 @@ use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 use Softonic\GraphQL\Response;
 
-class UserTest extends BaseTestCase
-{
-    public function testListAllUsers()
-    {
+class UserTest extends BaseTestCase {
+    public function testListAllUsers() {
         $query = /** @lang GraphQL */
             '
             query {
-            users{edges{node{username,name}}}
+            users{edges{node{email,firstname, lastname}}}
             }
         ';
         $this->assertSecurityResources(
             [AclResourceEnum::LIST_ALL_USERS],
             function (User $user) use ($query) : Response {
-                $client = $this->createLoggedClient($user->getUsername());
+                $client = $this->createLoggedClient($user->getEmail());
                 return $client->query($query);
             }
         );
     }
 
-    public function testCreateAndUpdateUser()
-    {
+    public function testCreateAndUpdateUser() {
         $createQuery = /** @lang GraphQL */
             '
-            mutation createUser($username: String!, $name: String!, $role: String! ){
+            mutation createUser($email: String!, $firstname: String!, $lastname: String! $role: String! ){
               createUser(
                 input: {
-                  username: $username
-                  name: $name
+                  email: $email
+                  firstname: $firstname
+                  lastname: $lastname
                   role: $role
                 }
               ) {
                 user {
                   id,
                   _id,
-                  name
+                  firstname,
+                  lastname
                 }
               }
             }
 ';
-        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::CREATE_USER])->getUsername());
+        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::CREATE_USER])->getEmail());
         $response = $client->query($createQuery, [
-            'username' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
-            'name' => Random::generate(),
+            'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
+            'firstname' => Random::generate(),
+            'lastname' => Random::generate(),
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
         $this->assertNoErrors($response);
@@ -64,12 +64,13 @@ class UserTest extends BaseTestCase
 
         $editQuery = /** @lang GraphQL */
             '
-            mutation editUser($id: ID!, $username: String!, $name: String!, $role: String! ){
+            mutation editUser($id: ID!, $lastname: String! $email: String!, $name: String!, $role: String! ){
               editUser(
                 input: {
                   id: $id
-                  username: $username
-                  name: $name
+                  email: $email
+                   firstname: $name,
+                   lastname: $lastname
                   role: $role
                 }
               ) {
@@ -81,34 +82,53 @@ class UserTest extends BaseTestCase
             }
 ';
 
-        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::EDIT_USER])->getUsername());
+        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::EDIT_USER])->getEmail());
         $client->query($editQuery, [
             'id' => $iri,
-            'username' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
+            'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
             'name' => Random::generate(),
+            'lastname' => Random::generate(),
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
-
-
     }
 
 
-    public function testGetUser()
-    {
+    public function testGetUser() {
         $query = 'query getUser($id: ID!) {
   user(id: $id) {
     roles
-    username
+    email
     password
   }
 }';
         $user = $this->createRandomUser('test', [AclResourceEnum::SEE_USER]);
-        $client = $this->createLoggedClient($user->getUsername());
+        $client = $this->createLoggedClient($user->getEmail());
         $r = $client->query($query, [
             'id' => 'users/' . $user->getId(),
         ]);
 
         $this->assertNoErrors($r);
 
+    }
+
+
+    public function testEditMySelf() {
+        $client = $this->createLoggedClient($this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getEmail());
+        $query = '
+mutation changePassword($oldPwd: String! $newPwd: String!) {
+  changePasswordUser(
+    input: { oldPassword: $oldPwd, newPassword: $newPwd }
+  ) {
+    user {
+      id
+    }
+  }
+}    ';
+        $response = $client->query($query, [
+            'oldPwd' => 'wrongpwd',
+            'newPwd' => 'test123'
+        ]);
+
+        $this->assertErrors($response, 1);
     }
 }

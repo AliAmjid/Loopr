@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - run: docker-compose up --build -d
     - name: run tests
       run: docker-compose exec -T php bin/phpunit

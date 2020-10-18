@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +16,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
- * @ApiFilter(SearchFilter::class, properties={"id": "exact", "name": "partial", "username": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact", "name": "partial", "email": "partial"})
  */
 class User implements UserInterface {
 
@@ -27,7 +28,7 @@ class User implements UserInterface {
      * @ORM\Column(type="string",unique=true)
      * @Groups({"user:read", "user:write"})
      */
-    private string $username;
+    private string $email;
 
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
@@ -48,7 +49,13 @@ class User implements UserInterface {
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      */
-    private string $name;
+    private string $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "user:write"})
+     */
+    private string $lastname;
 
     /** @var \DateTimeInterface
      * @ORM\Column(type="datetime")
@@ -63,23 +70,24 @@ class User implements UserInterface {
 
     /**
      * @return string
+     * @internal
+     * @deprecated
+     * @ApiProperty(deprecationReason="uset email instead")
      */
     public function getUsername(): string {
-        return $this->username;
+        return $this->id;
     }
 
-    /**
-     * @param string $username
-     */
-    public function setUsername(string $username): void {
-        $this->username = $username;
+    public function setEmail(string $email): void {
+        $this->email = $email;
     }
 
-    /**
-     * @see UserInterface
-     */
+    public function getEmail(): string {
+        return $this->email;
+    }
+
     public function getRoles(): array {
-        return ['ROLE_USER'];
+        return [$this->role->getName()];
     }
 
     public function setRole(AclRole $role): void {
@@ -90,9 +98,6 @@ class User implements UserInterface {
         return $this->role;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getPassword(): string {
         return (string)$this->password;
     }
@@ -102,28 +107,42 @@ class User implements UserInterface {
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getSalt() {
         return null;
     }
 
+    public function eraseCredentials() {}
+
     /**
-     * @see UserInterface
+     * @return string
      */
-    public function eraseCredentials() {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+    public function getLastname(): string {
+        return $this->lastname;
     }
 
-    public function getName(): ?string {
-        return $this->name;
-    }
-
-    public function setName(string $name): self {
-        $this->name = $name;
+    public function setLastname(string $lastname): User {
+        $this->lastname = $lastname;
         return $this;
+    }
+
+    /**
+     *@ApiProperty(deprecationReason="Replaced with firstname and lastname")
+     */
+    public function getName(): ?string {
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    public function setFirstname(string $firstname): self {
+        $this->firstname = $firstname;
+        return $this;
+    }
+
+    public function getFirstname(): string {
+        return $this->firstname;
+    }
+
+    public function getCreatedAt(): \DateTimeInterface {
+        return $this->createdAt;
     }
 
     /**
@@ -138,9 +157,5 @@ class User implements UserInterface {
      */
     public function setCreatedAt(): void {
         $this->createdAt = new \DateTime();
-    }
-
-    public function getCreatedAt(): \DateTimeInterface {
-        return $this->createdAt;
     }
 }

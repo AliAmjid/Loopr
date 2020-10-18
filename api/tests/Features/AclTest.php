@@ -17,8 +17,8 @@ class AclTest extends BaseTestCase {
         $client = $this->getClient();
         $response = $client->query(
         /** @lang GraphQL */
-            'query Token($username : String!, $password : String!) {getToken(username: $username, password: $password ) {token}}', [
-            'username' => $user->getUsername(),
+            'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}', [
+            'email' => $user->getEmail(),
             'password' => 'test'
         ]);
 
@@ -26,7 +26,7 @@ class AclTest extends BaseTestCase {
         $loggedClient = $this->getClient($response->getData()['getToken']['token']);
         $response = $loggedClient->query(
         /** @lang GraphQL */
-            'query {meUser{_id,id,username,name,role{resources{name,dependsOn{name}}}}}'
+            'query {meUser{_id,id,email,firstname,lastname,role{resources{name,dependsOn{name}}}}}'
         );
         $this->assertNoErrors($response);
         $this->assertEquals($user->getId(), $response->getData()['meUser']['_id']);
@@ -36,7 +36,7 @@ class AclTest extends BaseTestCase {
         $this->assertSecurityResources(
             [AclResourceEnum::CREATE_ROLE],
             function (User $user): Response {
-                $client = $this->createLoggedClient($user->getUsername(), 'test');
+                $client = $this->createLoggedClient($user->getEmail(), 'test');
                 $response = $client->query(/** @lang GraphQL */ 'mutation role($name: String!, $idResources: [String]) {
         createAclRole(input: {
         name: $name,
@@ -55,7 +55,7 @@ class AclTest extends BaseTestCase {
     public function testCreateRoleWithInvalidName() {
         $user = $this->createRandomUser('test', [AclResourceEnum::CREATE_ROLE]);
 
-        $client = $this->createLoggedClient($user->getUsername());
+        $client = $this->createLoggedClient($user->getEmail());
         $query = /** @lang GraphQL */
             '
         mutation role($name: String!, $idResources: [String]) {
@@ -77,7 +77,7 @@ class AclTest extends BaseTestCase {
     public function testUpdateAclRole() {
         $this->assertSecurityResources([AclResourceEnum::EDIT_ROLE], function (User $user, bool $noError) {
             $role = $this->createRoleWithResources([]);
-            $client = $this->createLoggedClient($user->getUsername());
+            $client = $this->createLoggedClient($user->getEmail());
             $query = /** @lang GraphQL */
                 '
         mutation role($name: String!, $idResources: [String], $id: ID!) {
