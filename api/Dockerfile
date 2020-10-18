@@ -77,7 +77,7 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 WORKDIR /srv/api
 
 # build for production
-ARG APP_ENV=prod
+ARG APP_ENV=dev
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.json composer.lock symfony.lock ./
@@ -87,7 +87,8 @@ RUN set -eux; \
 
 # do not use .env files in production
 COPY .env ./
-RUN composer dump-env prod; \
+
+RUN composer dump-env ${APP_ENV}; \
 	rm .env
 
 # copy only specifically what we need

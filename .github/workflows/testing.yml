@@ -11,16 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - run: docker-compose pull
-    - uses: satackey/action-docker-layer-caching@v0.0.8
-      # Ignore the failure of a step and avoid terminating the job.
-      continue-on-error: true
-
     - run: docker-compose up --build -d
-    - name: show stuff in dir
-      run: docker-compose exec -T php ls ./
-    - name: show stuff in vendor
-      run: docker-compose exec -T php ls vendor/
     - name: run tests
       run: docker-compose exec -T php bin/phpunit
