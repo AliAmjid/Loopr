@@ -4,7 +4,8 @@ const LOGIN_ME_USER_QUERY = gql`
   query LoginMeUserQuery {
     meUser {
       id
-      name
+      firstname
+      lastname
     }
   }
 `;

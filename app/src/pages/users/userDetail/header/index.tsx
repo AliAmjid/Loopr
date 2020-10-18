@@ -22,10 +22,12 @@ const Header: React.FC<HeaderProps> = props => {
   return (
     <Box display="flex" pb={2}>
       <Avatar className={classes.avatar} variant="rounded">
-        {getInitials(props.user?.name || '')}
+        {getInitials(props.user?.firstname || '', props.user?.lastname || '')}
       </Avatar>
       <Box pl={2}>
-        <Typography variant="h4">{props.user?.name || ''}</Typography>
+        <Typography variant="h4">
+          {props.user?.firstname || `${props.user?.lastname}` || ''}
+        </Typography>
         <Typography>{stripRolePrefix(props.user?.role.name || '')}</Typography>
       </Box>
     </Box>

@@ -45,7 +45,10 @@ const User: React.FC<UserProps> = props => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { t } = useTranslation(namespaces.components.withPage);
 
-  const initials = getInitials(props.user?.name || '');
+  const initials = getInitials(
+    props.user?.firstname || '',
+    props.user?.lastname || '',
+  );
 
   return (
     <>
@@ -86,7 +89,9 @@ const User: React.FC<UserProps> = props => {
             minWidth={200}
           >
             <Box pl={1} pb={1}>
-              <Typography variant="h5">{props.user?.name || ''}</Typography>
+              <Typography variant="h5">
+                {props.user?.firstname || ''}
+              </Typography>
               <Typography>
                 {stripRolePrefix(props.user?.role?.name || '')}
               </Typography>

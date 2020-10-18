@@ -74,7 +74,8 @@ export interface WithPageMeUserQuery_meUser_role {
 export interface WithPageMeUserQuery_meUser {
   __typename: "User";
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
   role: WithPageMeUserQuery_meUser_role;
 }
 
@@ -294,7 +295,7 @@ export interface LoginGetTokenQuery {
 }
 
 export interface LoginGetTokenQueryVariables {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -310,7 +311,8 @@ export interface LoginGetTokenQueryVariables {
 export interface LoginMeUserQuery_meUser {
   __typename: "User";
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface LoginMeUserQuery {
@@ -399,11 +401,8 @@ export interface UsersAddManualUpdateUser_updateUser_user_role {
 
 export interface UsersAddManualUpdateUser_updateUser_user {
   __typename: "updateUserPayloadData";
-  name: string | null;
-  /**
-   * email of user
-   */
-  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
   role: UsersAddManualUpdateUser_updateUser_user_role | null;
 }
 
@@ -470,11 +469,12 @@ export interface UsersUsersQuery_users_edges_node_role {
 export interface UsersUsersQuery_users_edges_node {
   __typename: "UserCollection";
   id: string;
-  name: string;
   /**
    * email of user
    */
-  username: string;
+  email: string;
+  firstname: string;
+  lastname: string;
   createdAt: string;
   role: UsersUsersQuery_users_edges_node_role;
 }
@@ -517,11 +517,12 @@ export interface UsersUserDetailUpdateUserMutation_updateUser_user_role {
 export interface UsersUserDetailUpdateUserMutation_updateUser_user {
   __typename: "updateUserPayloadData";
   id: string;
-  name: string | null;
   /**
    * email of user
    */
-  username: string | null;
+  email: string | null;
+  firstname: string | null;
+  lastname: string | null;
   role: UsersUserDetailUpdateUserMutation_updateUser_user_role | null;
 }
 
@@ -564,11 +565,12 @@ export interface UsersUserDetailUserQuery_user_role {
 export interface UsersUserDetailUserQuery_user {
   __typename: "UserItem";
   id: string;
-  name: string;
   /**
    * email of user
    */
-  username: string;
+  email: string;
+  firstname: string;
+  lastname: string;
   createdAt: string;
   role: UsersUserDetailUserQuery_user_role;
 }
@@ -610,17 +612,19 @@ export interface createAclRoleInput {
 
 export interface createUserInput {
   clientMutationId?: string | null;
-  name: string;
+  email: string;
+  firstname: string;
+  lastname: string;
   role: string;
-  username: string;
 }
 
 export interface updateUserInput {
   clientMutationId?: string | null;
+  email?: string | null;
+  firstname?: string | null;
   id: string;
-  name?: string | null;
+  lastname?: string | null;
   role?: string | null;
-  username?: string | null;
 }
 
 //==============================================================

@@ -5,8 +5,9 @@ const USERS_USER_DETAIL_UPDATE_USER_MUTATION = gql`
     updateUser(input: $input) {
       user {
         id
-        name
-        username
+        email
+        firstname
+        lastname
         role {
           id
           name

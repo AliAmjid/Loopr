@@ -32,16 +32,20 @@ const Users: React.FC<UsersProps> = props => {
         defaultActions={{
           columnFiltering: {
             active: true,
-            defaultColumns: ['name'],
+            defaultColumns: ['firstname', 'lastname'],
             columns: [
               { section: 'personalInfo' },
               {
-                title: t('columns.name'),
-                field: 'name',
+                title: t('columns.firstname'),
+                field: 'firstname',
               },
               {
-                title: t('columns.username'),
-                field: 'username',
+                title: t('columns.lastname'),
+                field: 'lastname',
+              },
+              {
+                title: t('columns.email'),
+                field: 'email',
               },
               {
                 title: t('columns.createdAt'),

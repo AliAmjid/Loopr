@@ -4,8 +4,9 @@ const USERS_USER_DETAIL_USER_QUERY = gql`
   query UsersUserDetailUserQuery($id: ID!) {
     user(id: $id) {
       id
-      name
-      username
+      email
+      firstname
+      lastname
       createdAt
       role {
         id

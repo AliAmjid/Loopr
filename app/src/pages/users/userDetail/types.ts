@@ -1,8 +1,9 @@
 export type User =
   | {
       id: string;
-      name: string;
-      username: string;
+      firstname: string;
+      lastname: string;
+      email: string;
       createdAt: string;
       role: {
         id: string;

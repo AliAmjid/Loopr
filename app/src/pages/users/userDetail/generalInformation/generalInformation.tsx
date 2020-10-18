@@ -14,21 +14,21 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
       <HorizontalList>
         <EditableListItem
           primary="Jméno"
-          secondary={props.user?.name || ''}
+          secondary={props.user?.firstname || ''}
           edit="secondary"
-          onSubmit={name => props.onChange({ name })}
+          onSubmit={firstname => props.onChange({ firstname })}
         />
-        <>
-          <ListItemText
-            primary="Příjmení"
-            secondary="ALI TO JEŠTĚ NEDODĚLAL!!!"
-          />
-        </>
+        <EditableListItem
+          primary="Jméno"
+          secondary={props.user?.lastname || ''}
+          edit="secondary"
+          onSubmit={lastName => props.onChange({ lastName })}
+        />
         <EditableListItem
           primary="Email"
-          secondary={props.user?.username || ''}
+          secondary={props.user?.email || ''}
           edit="secondary"
-          onSubmit={username => props.onChange({ username })}
+          onSubmit={username => props.onChange({ email: username })}
         />
         <EditableListItem
           primary="Role"

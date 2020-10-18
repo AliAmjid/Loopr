@@ -4,7 +4,8 @@ import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
 
 export type User =
   | {
-      name: string;
+      firstname: string;
+      lastname: string;
       role: { name: string };
     }
   | null

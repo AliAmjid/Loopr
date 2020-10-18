@@ -4,8 +4,8 @@ const USERS_ADD_MANUAL_UPDATE_USER = gql`
   mutation UsersAddManualUpdateUser($input: updateUserInput!) {
     updateUser(input: $input) {
       user {
-        name
-        username
+        firstname
+        lastname
         role {
           id
           name

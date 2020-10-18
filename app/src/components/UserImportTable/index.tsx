@@ -104,8 +104,9 @@ const UserImportTable: React.FC<UserImportTableProps> = props => {
         userCreate({
           variables: {
             input: {
-              username: user.username,
-              name: user.name,
+              email: user.email,
+              firstname: user.firstname,
+              lastname: user.lastname,
               role: user.role,
             },
           },
