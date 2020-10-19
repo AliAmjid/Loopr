@@ -25,6 +25,7 @@ const Users: React.FC<UsersProps> = props => {
   return (
     <Paper>
       <MaterialTable
+        uniqueName="pages/users/index"
         title={t('tableTitle')}
         columns={[]}
         data={props.users}
