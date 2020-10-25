@@ -20,7 +20,8 @@ class UserDataPersister implements ContextAwareDataPersisterInterface {
     public function __construct(
         ContextAwareDataPersisterInterface $decorated,
         UserPasswordEncoderInterface $encoder,
-        EventDispatcherInterface $dispatcher) {
+        EventDispatcherInterface $dispatcher
+    ) {
         $this->decorated = $decorated;
         $this->encoder = $encoder;
         $this->dispatcher = $dispatcher;

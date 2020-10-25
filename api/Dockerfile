@@ -5,8 +5,8 @@
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION=7.4
-ARG OPENRESTY_VERSION=1.15.8.3
-
+ARG OPENRESTY_VERSION=1.17.8.2
+ARG VARNISH_VERSION=6.5
 
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine AS api_platform_php
@@ -20,7 +20,7 @@ RUN apk add --no-cache \
 		git \
 	;
 
-ARG APCU_VERSION=5.1.18
+ARG APCU_VERSION=5.1.19
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
@@ -77,19 +77,17 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 WORKDIR /srv/api
 
 # build for production
-ARG APP_ENV=dev
+ARG APP_ENV=prod
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.json composer.lock symfony.lock ./
 RUN set -eux; \
-	composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest; \
+	composer install --prefer-dist --no-scripts --no-progress --no-suggest; \
 	composer clear-cache
 
 # do not use .env files in production
 COPY .env ./
-
-RUN composer dump-env ${APP_ENV}; \
-	rm .env
+RUN composer dump-env dev;
 
 # copy only specifically what we need
 COPY bin bin/
@@ -114,6 +112,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
 
 # "nginx" stage
 # depends on the "php" stage above
