@@ -58,15 +58,6 @@ trait TCreateEntityHelpers {
 
 
     protected function deleteAllTestingEntities() {
-        echo PHP_EOL . '[INFO] DELETING ALL CREATED ENTITIES' . PHP_EOL;
-        foreach ($this->testingEntities as $entity) {
-            $this->em->remove($entity);
-        }
-        try {
-            $this->em->flush();
-        } catch (\Throwable $e) {
-            echo 'cant delete test entites..';
-        }
     }
 
     protected function randomRoleName(): string {

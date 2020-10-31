@@ -6,6 +6,7 @@ const USERS_ADD_MANUAL_UPDATE_USER = gql`
       user {
         firstname
         lastname
+        email
         role {
           id
           name

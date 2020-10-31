@@ -20,6 +20,13 @@ RUN apk add --no-cache \
 		git \
 	;
 
+
+
+RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
+  && pecl install xdebug \
+  && docker-php-ext-enable xdebug \
+  && apk del pcre-dev ${PHPIZE_DEPS}
+
 ARG APCU_VERSION=5.1.19
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \

@@ -403,6 +403,10 @@ export interface UsersAddManualUpdateUser_updateUser_user {
   __typename: "updateUserPayloadData";
   firstname: string | null;
   lastname: string | null;
+  /**
+   * email of user
+   */
+  email: string | null;
   role: UsersAddManualUpdateUser_updateUser_user_role | null;
 }
 

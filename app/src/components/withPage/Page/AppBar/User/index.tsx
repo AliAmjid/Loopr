@@ -90,7 +90,7 @@ const User: React.FC<UserProps> = props => {
           >
             <Box pl={1} pb={1}>
               <Typography variant="h5">
-                {props.user?.firstname || ''}
+                {`${props.user?.firstname || ''} ${props.user?.lastname || ''}`}
               </Typography>
               <Typography>
                 {stripRolePrefix(props.user?.role?.name || '')}

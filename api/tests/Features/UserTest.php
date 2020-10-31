@@ -112,7 +112,7 @@ class UserTest extends BaseTestCase {
     }
 
 
-    public function testEditMySelf() {
+    public function testChangePassword() {
         $client = $this->createLoggedClient($this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getEmail());
         $query = '
 mutation changePassword($oldPwd: String! $newPwd: String!) {
