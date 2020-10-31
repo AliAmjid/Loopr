@@ -55,9 +55,10 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
   };
 
   const nameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
     setValues(values => ({
       ...values,
-      name: { ...values.name, value: e.target.value },
+      name: { ...values.name, value },
     }));
   };
 
