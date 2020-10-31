@@ -89,16 +89,18 @@ ARG APP_ENV=prod
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.json composer.lock symfony.lock ./
 RUN set -eux; \
-	composer install --prefer-dist --no-scripts --no-progress --no-suggest; \
+	composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest; \
 	composer clear-cache
 
 # do not use .env files in production
 COPY .env ./
-RUN composer dump-env dev;
+RUN composer dump-env prod; \
+	rm .env
 
 # copy only specifically what we need
 COPY bin bin/
 COPY config config/
+COPY migrations migrations/
 COPY public public/
 COPY src src/
 
@@ -132,3 +134,26 @@ COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 WORKDIR /srv/api/public
 
 COPY --from=api_platform_php /srv/api/public ./
+
+
+# "varnish" stage
+# does not depend on any of the above stages, but placed here to keep everything in one Dockerfile
+FROM varnish:${VARNISH_VERSION} AS api_platform_varnish
+
+ENV BACKEND=api
+ENV UPSTREAM=php
+
+COPY docker/varnish/conf/default.tmpl /usr/local/etc/varnish/default.tmpl
+
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y gettext-base; \
+	apt-get clean; \
+	rm -rf /var/lib/apt/lists/*
+
+COPY docker/varnish/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
+
+CMD ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_resp_hdr_len=65536", "-p", "http_resp_size=98304"]
