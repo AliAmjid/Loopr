@@ -1,75 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useMutation } from '@apollo/client';
+
+import USERS_USER_DETAIL_UPDATE_USER_MUTATION from 'pages/users/userDetail/mutations/editUser';
 
 import {
-  Avatar,
-  Box,
-  IconButton,
-  makeStyles,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-  Theme,
-  Typography,
-} from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
+  UsersUserDetailUpdateUserMutation,
+  UsersUserDetailUpdateUserMutationVariables,
+} from 'types/graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  avatar: {
-    width: theme.spacing(14),
-    height: theme.spacing(14),
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.common.black,
-  },
-}));
+import stripRolePrefix from 'components/stripRolePrefix';
 
-const GeneralInformationIndex: React.FC = () => {
-  const classes = useStyles();
+import GeneralInformation from './generalInformation';
+import { GeneralInformationIndexProps, OnChangeValues } from './types';
 
-  const [state, setState] = useState({ editing: false });
+const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props => {
+  const [updateUser] = useMutation<
+    UsersUserDetailUpdateUserMutation,
+    UsersUserDetailUpdateUserMutationVariables
+  >(USERS_USER_DETAIL_UPDATE_USER_MUTATION);
+
+  const changeHandler = (values: OnChangeValues): Promise<boolean> => {
+    return updateUser({
+      variables: { input: { id: props.user!.id, ...values } },
+    })
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
+  };
+
+  const rolesLookup: Record<string, string> = {};
+  props.roles?.forEach(role => {
+    if (role) {
+      rolesLookup[role.id] = stripRolePrefix(role.name);
+    }
+  });
 
   return (
-    <Paper>
-      <Box display="flex">
-        <Box pr={2}>
-          <Avatar className={classes.avatar} variant="rounded">
-            AJ
-          </Avatar>
-        </Box>
-        <Box display="flex" width="100%">
-          <Box flexGrow={1}>
-            {state.editing ? (
-              <div>
-                <TextField defaultValue="Adam Janov" />
-              </div>
-            ) : (
-              <Typography variant="h5">Adam Janov</Typography>
-            )}
-            {state.editing ? (
-              <div>
-                <Select defaultValue={0}>
-                  <MenuItem value={0}>Student</MenuItem>
-                </Select>
-              </div>
-            ) : (
-              <Typography>Student</Typography>
-            )}
-          </Box>
-          <Box>
-            <IconButton
-              onClick={() =>
-                setState(prevState => ({
-                  ...prevState,
-                  editing: !prevState.editing,
-                }))
-              }
-            >
-              <EditIcon />
-            </IconButton>
-          </Box>
-        </Box>
-      </Box>
-    </Paper>
+    <GeneralInformation
+      user={props.user}
+      onChange={changeHandler}
+      rolesLookup={rolesLookup}
+    />
   );
 };
 

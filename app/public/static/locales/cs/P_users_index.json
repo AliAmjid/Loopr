@@ -6,8 +6,9 @@
     "csv": "Z CSV souboru"
   },
   "columns": {
-    "name": "Jméno",
-    "username": "Email",
+    "firstname": "Jméno",
+    "lastname": "Příjmení",
+    "email": "Email",
     "createdAt": "Registrován v",
     "role": "Role"
   }

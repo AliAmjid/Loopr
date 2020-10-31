@@ -1,7 +1,8 @@
 export interface User {
-  username: string;
+  email: string;
   role: string;
-  name: string;
+  firstname: string;
+  lastname: string;
 }
 export type Users = User[];
 

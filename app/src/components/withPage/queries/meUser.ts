@@ -4,7 +4,8 @@ const WITH_PAGE_ME_USER_QUERY = gql`
   query WithPageMeUserQuery {
     meUser {
       id
-      name
+      firstname
+      lastname
       role {
         name
       }

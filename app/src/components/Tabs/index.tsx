@@ -14,7 +14,7 @@ const Tabs: React.FC<TabsProps> = props => {
 
   const mappedPanels = props.tabs.map(tab => (
     <Box width="100%" key={tab.id}>
-      {tab.panel}
+      {tab.Panel}
     </Box>
   ));
 

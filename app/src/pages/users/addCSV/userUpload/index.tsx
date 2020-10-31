@@ -15,9 +15,10 @@ const UserUploadIndex: React.FC = () => {
 
   fileData.forEach(row => {
     const user: User = {
-      username: '',
+      email: '',
       role: '',
-      name: '',
+      firstname: '',
+      lastname: '',
     };
     Object.values(fields).forEach((field, index) => {
       if (field !== '__nothing__') user[field] = row.data[index];

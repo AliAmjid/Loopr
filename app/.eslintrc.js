@@ -77,6 +77,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-curly-newline': 'off',
+    'react/no-array-index-key': 'off',
     'react/jsx-filename-extension': [
       'error',
       { extensions: ['.js', '.jsx', '.tsx'] },

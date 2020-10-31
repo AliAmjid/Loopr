@@ -13,7 +13,7 @@ export interface AclProps<
   }
 > {
   columns: Column<RowData>[];
-  rows: RowData[];
+  rows?: RowData[];
   onResourceChange: (props: OnResourceChangeProps) => Promise<boolean>;
   onRoleAdd: () => void;
   loading: boolean;

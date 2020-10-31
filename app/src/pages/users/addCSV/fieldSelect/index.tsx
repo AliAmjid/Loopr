@@ -32,8 +32,9 @@ const FieldSelect: React.FC = () => {
   }
 
   const requiredFields = [
-    { value: 'name', label: 'Name' },
-    { value: 'username', label: 'Email' },
+    { value: 'email', label: 'Email' },
+    { value: 'firstname', label: 'FirstName' },
+    { value: 'lastname', label: 'LastName' },
     { value: 'role', label: 'Role' },
     { value: '__nothing__', label: '----' },
   ];
@@ -49,7 +50,7 @@ const FieldSelect: React.FC = () => {
         let complete = true;
         requiredFields.forEach(field => {
           if (!Object.values(updatedFields).some(f => f === field.value)) {
-            complete = false;
+            if (field.value !== '__nothing__') complete = false;
           }
         });
         const fieldsWithoutNothing = Object.values(updatedFields).filter(
@@ -79,7 +80,6 @@ const FieldSelect: React.FC = () => {
         <TableHead>
           <TableRow>
             {fileData[0].data.map((title, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <TableCell key={index}>{HeadSelect(index)}</TableCell>
             ))}
           </TableRow>
@@ -87,10 +87,8 @@ const FieldSelect: React.FC = () => {
         <TableBody>
           {fileData.slice(0, 5).map((row, index) => {
             return row ? (
-              // eslint-disable-next-line react/no-array-index-key
               <TableRow key={index}>
                 {row.data.map((value, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
                   <TableCell key={value + index}>{value}</TableCell>
                 ))}
               </TableRow>

@@ -2,7 +2,7 @@ export interface TabsProps {
   tabs: {
     id: number;
     label: string;
-    panel: JSX.Element;
+    Panel: JSX.Element;
   }[];
   defaultTabsId?: number;
   variant?: 'scrollable' | 'fullWidth';

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { fade, makeStyles, Theme, useTheme } from '@material-ui/core';
 import MaterialTablePrefab, {
@@ -50,6 +50,30 @@ const MaterialTable = <RowData extends {}>(
     setGroupingActive: state.setActive,
   }));
 
+  useEffect(() => {
+    if (!props.defaultActions?.grouping?.active && groupingActive === true)
+      setGroupingActive(false);
+    if (!props.defaultActions?.columnFiltering?.active && selected.length !== 0)
+      setSelected([]);
+  }, []);
+
+  useEffect(() => {
+    const savedString = window.localStorage.getItem(
+      `${props.uniqueName}-selected`,
+    );
+    if (savedString) {
+      const savedObject = JSON.parse(savedString);
+      setSelected(savedObject);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      `${props.uniqueName}-selected`,
+      JSON.stringify(selected),
+    );
+  }, [selected]);
+
   let { columns } = props;
   if (props.defaultActions?.columnFiltering?.active) {
     columns = props.defaultActions.columnFiltering.columns.filter(
@@ -65,13 +89,6 @@ const MaterialTable = <RowData extends {}>(
   if (props.defaultActions?.grouping?.active) {
     actions.push(groupingAction(t));
   }
-
-  useEffect(() => {
-    if (!props.defaultActions?.grouping?.active && groupingActive === true)
-      setGroupingActive(false);
-    if (!props.defaultActions?.columnFiltering?.active && selected.length !== 0)
-      setSelected([]);
-  }, []);
 
   return (
     <>
@@ -116,6 +133,9 @@ const MaterialTable = <RowData extends {}>(
             // eslint-disable-next-line react/display-name
             ...(props.hidePagination && { Pagination: () => <div /> }),
             ...props.components,
+          }}
+          onChangeRowsPerPage={(size: number) => {
+            setSavedOptions(prevState => ({ ...prevState, pageSize: size }));
           }}
           options={{
             search: false,
