@@ -60,7 +60,7 @@ const LoginIndex: React.FC = () => {
 
   const submitHandler = (email: string, password: string): void => {
     cookie.remove(config.tokenCookie);
-    getToken({ variables: { username: email, password } });
+    getToken({ variables: { email, password } });
   };
 
   const { enqueueSnackbar } = useSnackbar();

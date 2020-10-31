@@ -20,8 +20,9 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
         title={t('tableTitle')}
         isLoading={props.loading}
         columns={[
-          { title: t('name'), field: 'name' },
-          { title: t('email'), field: 'username' },
+          { title: t('firstname'), field: 'firstname' },
+          { title: t('lastname'), field: 'lastname' },
+          { title: t('email'), field: 'email' },
           { title: t('role'), field: 'role', lookup: props.rolesLookup },
         ]}
         data={props.users}

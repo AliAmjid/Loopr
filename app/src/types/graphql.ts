@@ -74,7 +74,8 @@ export interface WithPageMeUserQuery_meUser_role {
 export interface WithPageMeUserQuery_meUser {
   __typename: "User";
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
   role: WithPageMeUserQuery_meUser_role;
 }
 
@@ -294,7 +295,7 @@ export interface LoginGetTokenQuery {
 }
 
 export interface LoginGetTokenQueryVariables {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -310,7 +311,8 @@ export interface LoginGetTokenQueryVariables {
 export interface LoginMeUserQuery_meUser {
   __typename: "User";
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface LoginMeUserQuery {
@@ -345,30 +347,6 @@ export interface UsersAddCsvCreateUserMutation {
 
 export interface UsersAddCsvCreateUserMutationVariables {
   input: createUserInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: UsersAddCsvAclRolesQuey
-// ====================================================
-
-export interface UsersAddCsvAclRolesQuey_aclRoles {
-  __typename: "AclRoleCollection";
-  id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
-  name: string;
-}
-
-export interface UsersAddCsvAclRolesQuey {
-  aclRoles: (UsersAddCsvAclRolesQuey_aclRoles | null)[] | null;
 }
 
 /* tslint:disable */
@@ -423,11 +401,12 @@ export interface UsersAddManualUpdateUser_updateUser_user_role {
 
 export interface UsersAddManualUpdateUser_updateUser_user {
   __typename: "updateUserPayloadData";
-  name: string | null;
+  firstname: string | null;
+  lastname: string | null;
   /**
    * email of user
    */
-  username: string | null;
+  email: string | null;
   role: UsersAddManualUpdateUser_updateUser_user_role | null;
 }
 
@@ -494,11 +473,12 @@ export interface UsersUsersQuery_users_edges_node_role {
 export interface UsersUsersQuery_users_edges_node {
   __typename: "UserCollection";
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
   /**
    * email of user
    */
-  username: string;
+  email: string;
   createdAt: string;
   role: UsersUsersQuery_users_edges_node_role;
 }
@@ -535,17 +515,19 @@ export interface createAclRoleInput {
 
 export interface createUserInput {
   clientMutationId?: string | null;
-  name: string;
+  email: string;
+  firstname: string;
+  lastname: string;
   role: string;
-  username: string;
 }
 
 export interface updateUserInput {
   clientMutationId?: string | null;
+  email?: string | null;
+  firstname?: string | null;
   id: string;
-  name?: string | null;
+  lastname?: string | null;
   role?: string | null;
-  username?: string | null;
 }
 
 //==============================================================

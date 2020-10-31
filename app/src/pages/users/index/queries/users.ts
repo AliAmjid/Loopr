@@ -6,8 +6,9 @@ const USERS_USERS_QUERY = gql`
       edges {
         node {
           id
-          name
-          username
+          firstname
+          lastname
+          email
           createdAt
           role {
             id

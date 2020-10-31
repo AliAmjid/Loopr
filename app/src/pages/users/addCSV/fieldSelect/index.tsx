@@ -32,8 +32,9 @@ const FieldSelect: React.FC = () => {
   }
 
   const requiredFields = [
-    { value: 'name', label: 'Name' },
-    { value: 'username', label: 'Email' },
+    { value: 'email', label: 'Email' },
+    { value: 'firstname', label: 'FirstName' },
+    { value: 'lastname', label: 'LastName' },
     { value: 'role', label: 'Role' },
     { value: '__nothing__', label: '----' },
   ];
@@ -49,7 +50,7 @@ const FieldSelect: React.FC = () => {
         let complete = true;
         requiredFields.forEach(field => {
           if (!Object.values(updatedFields).some(f => f === field.value)) {
-            complete = false;
+            if (field.value !== '__nothing__') complete = false;
           }
         });
         const fieldsWithoutNothing = Object.values(updatedFields).filter(
