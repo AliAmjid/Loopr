@@ -33,7 +33,7 @@ class User implements UserInterface {
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"aclRole:read", "user:write"})
+     * @Groups({"user:read", "user:write"})
      */
     private AclRole $role;
 

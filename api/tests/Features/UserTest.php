@@ -6,7 +6,6 @@ namespace App\Tests\Features;
 
 use App\Entity\User;
 use App\Enum\AclResourceEnum;
-use App\GraphqlClient\GraphQLClient;
 use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 use Softonic\GraphQL\Response;

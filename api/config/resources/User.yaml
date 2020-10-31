@@ -8,12 +8,6 @@ App\Entity\User:
             read: false
             output: false
     graphql:
-        normalizationContext:
-            groups:
-                - user:read
-        denormalizationContext:
-            groups:
-                - user:write
         me:
             security_message: "r: USER_LOGGED"
             security: "is_granted('USER_LOGGED')"
@@ -26,13 +20,11 @@ App\Entity\User:
         item_query:
             security_mssage: "r: SEE_USER"
             security: "is_granted('SEE_USER')"
+       
         collection_query:
-            security_message: "r: LIST_ALL_USERS"
-            security: "is_granted('LIST_ALL_USERS')"
             normalization_context:
                 groups:
                     - user:read
-                    - aclRole:read
         create:
             security: "is_granted('CREATE_USER')"
             security_message: "r: CREATE_USER"
