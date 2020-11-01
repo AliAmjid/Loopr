@@ -10,6 +10,9 @@ import {
   TableRow,
 } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import useAddCSVState from 'pages/users/addCSV/state';
 import { FieldType } from 'pages/users/addCSV/types';
 
@@ -22,6 +25,7 @@ const FieldSelect: React.FC = () => {
       setFieldSelectNext: state.setFieldSelectNext,
     }),
   );
+  const { t } = useTranslation(namespaces.pages.users.addCSV);
 
   useEffect(() => {
     setFields(fileData.map(() => '__nothing__'));
@@ -32,10 +36,10 @@ const FieldSelect: React.FC = () => {
   }
 
   const requiredFields = [
-    { value: 'email', label: 'Email' },
-    { value: 'firstname', label: 'FirstName' },
-    { value: 'lastname', label: 'LastName' },
-    { value: 'role', label: 'Role' },
+    { value: 'email', label: t('columns.email') },
+    { value: 'firstname', label: t('columns.firstname') },
+    { value: 'lastname', label: t('columns.lastname') },
+    { value: 'role', label: t('columns.role') },
     { value: '__nothing__', label: '----' },
   ];
 

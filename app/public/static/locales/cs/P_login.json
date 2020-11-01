@@ -4,5 +4,9 @@
   "password": "Heslo",
   "logIn": "Přihlásit se",
   "forgottenPassword":"Zapomenuté heslo?",
-  "doNotHaveAccount": "Ještě nemáte účet?"
+  "doNotHaveAccount": "Ještě nemáte účet?",
+  "automaticLogin": "Byli jste automaticky přihlášeni",
+  "noInternet": "Žádné připojení k internetu",
+  "noMatch": "Tyto údaje se neshodují",
+  "success": "Přihlášení proběhlo úspešně"
 }

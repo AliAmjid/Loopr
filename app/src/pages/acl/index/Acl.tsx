@@ -43,7 +43,7 @@ const Acl: React.FC<AclProps> = props => {
         hidePagination
         actions={[
           {
-            tooltip: 'addRole',
+            tooltip: t('add'),
             icon: AddIconWithDisplayName,
             onClick: props.onRoleAdd,
             isFreeAction: true,

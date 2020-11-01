@@ -14,6 +14,9 @@ import Link from 'next/link';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import { EditRoleProps } from 'pages/acl/editRole/types';
 
 import OverlayLoading from 'components/OverlayLoading';
@@ -29,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
   const classes = useStyles();
   const [values, setValues] = useState({ name: { value: '', error: false } });
+  const { t } = useTranslation(namespaces.pages.acl.editRole);
 
   useEffect(() => {
     setValues(values => ({
@@ -74,7 +78,7 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                label="name"
+                label={t('name')}
                 value={values.name.value}
                 onChange={nameChangeHandler}
               />
@@ -88,18 +92,18 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
                   }}
                   variant="contained"
                 >
-                  Remove
+                  {t('delete')}
                 </Button>
               </Box>
               <Box mr={2}>
                 <Button color="primary" variant="contained" type="submit">
-                  Save
+                  {t('save')}
                 </Button>
               </Box>
               <Grid item>
                 <Link href={routes.acl.index}>
                   <Button color="secondary" variant="contained">
-                    Cancel
+                    {t('cancel')}
                   </Button>
                 </Link>
               </Grid>

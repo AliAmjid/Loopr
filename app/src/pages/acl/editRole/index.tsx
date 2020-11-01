@@ -6,6 +6,9 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import EditRole from 'pages/acl/editRole/EditRole';
 import ACL_EDIT_ROLE_UPDATE_ROLE from 'pages/acl/editRole/mutations/updateRole';
 import editRolePageOptions from 'pages/acl/editRole/pageOptions';
@@ -35,6 +38,8 @@ const EditRoleIndex: React.FC = () => {
     AclEditRoleUpdateRoleVariables
   >(ACL_EDIT_ROLE_UPDATE_ROLE);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.acl.editRole);
+
   const submitHandler = (values: FormValues): void => {
     updateRole({
       variables: {
@@ -43,11 +48,11 @@ const EditRoleIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('success', { variant: 'success' });
+        enqueueSnackbar(t('success'), { variant: 'success' });
         router.push(routes.acl.index);
       })
       .catch(() => {
-        enqueueSnackbar('error', { variant: 'error' });
+        enqueueSnackbar(t('error'), { variant: 'error' });
       });
   };
 

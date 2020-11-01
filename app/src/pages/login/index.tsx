@@ -12,6 +12,7 @@ import routes from 'config/routes';
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
 import withApollo from 'lib/apollo/withApollo';
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import useTour from 'lib/reactour';
@@ -53,6 +54,7 @@ const LoginIndex: React.FC = () => {
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
   const tour = useTour();
+  const { t } = useTranslation(namespaces.pages.login);
 
   useEffect(() => {
     tour.start({ steps: loginTour, defaultNamespace: namespaces.pages.login });
@@ -69,7 +71,7 @@ const LoginIndex: React.FC = () => {
     if (!automaticallyLogged) {
       setAutomaticallyLogged(true);
       router.push(routes.dashboard.index);
-      enqueueSnackbar('Byli jste automaticky přihlášeni', {
+      enqueueSnackbar(t('automaticLogin'), {
         variant: 'success',
       });
     }
@@ -89,16 +91,17 @@ const LoginIndex: React.FC = () => {
   if (!getTokenLoading) {
     if (getTokenError) {
       if (recognizeError(getTokenError) === errors.network.failedToFetch) {
-        enqueueSnackbar('noInternet', {
+        enqueueSnackbar(t('noInternet'), {
           variant: 'warning',
         });
       } else {
-        enqueueSnackbar('noMatch', {
+        enqueueSnackbar(t('noMatch'), {
           variant: 'error',
         });
       }
     }
     if (getTokenData?.getToken) {
+      enqueueSnackbar(t('success'), { variant: 'success' });
       cookie.set(config.tokenCookie, getTokenData.getToken.token);
       router.push(routes.dashboard.index);
     }
