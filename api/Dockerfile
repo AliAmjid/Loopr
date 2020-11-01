@@ -114,12 +114,16 @@ VOLUME /srv/api/var
 COPY docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
+COPY docker/php/messager.sh /usr/local/bin/messager
+RUN chmod +x /usr/local/bin/messager
+
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
+CMD 'messager'
 CMD ["php-fpm"]
 
 

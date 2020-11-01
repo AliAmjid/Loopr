@@ -86,7 +86,7 @@ class ErrorNormalizer implements NormalizerInterface {
      * {@inheritdoc}
      */
     public function supportsNormalization($data, string $format = null): bool {
-        return $data instanceof Error;
+        return $data instanceof \Throwable;
     }
 
     protected function pushExceptionWithTranslateToLooprError(array $translator, \Throwable $exception, &$error) {

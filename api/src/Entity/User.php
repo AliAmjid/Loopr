@@ -33,7 +33,7 @@ class User implements UserInterface {
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user:role", "user:read", "user:write"})
      */
     private AclRole $role;
 
@@ -64,7 +64,7 @@ class User implements UserInterface {
     private \DateTimeInterface $createdAt;
 
 
-    public function getId(): ?string {
+    public function getId(): string {
         return $this->id;
     }
 

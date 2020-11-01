@@ -7,10 +7,10 @@ namespace App\Events;
 use App\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class NewUserCreatedEvent extends Event {
+class NewUserCreatedEvent {
     public const NAME = 'user.created';
 
-    protected User $user;
+    protected string $email;
     protected string $password;
 
     /**
@@ -19,15 +19,15 @@ class NewUserCreatedEvent extends Event {
      * @param string $password
      */
     public function __construct(User $user, string $password) {
-        $this->user = $user;
+        $this->email = $user->getEmail();
         $this->password = $password;
     }
 
     /**
-     * @return User
+     * @return string
      */
-    public function getUser(): User {
-        return $this->user;
+    public function getEmail(): string {
+        return $this->email;
     }
 
     /**
