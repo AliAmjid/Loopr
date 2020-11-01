@@ -7,8 +7,6 @@ namespace App\Events\Handler;
 use App\Entity\User;
 use App\Events\NewUserCreatedEvent;
 use App\Service\EmailService;
-use Doctrine\ORM\Decorator\EntityManagerDecorator;
-use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

@@ -18,6 +18,7 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
     <>
       <MaterialTable
         title={t('tableTitle')}
+        uniqueName="components/UserImportTable/UserImportTableUI"
         isLoading={props.loading}
         columns={[
           { title: t('firstname'), field: 'firstname' },

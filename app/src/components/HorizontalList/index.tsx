@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, List, ListItem, makeStyles, Theme } from '@material-ui/core';
+import { List, ListItem, makeStyles, Theme } from '@material-ui/core';
 
 import { HorizontalListProps } from './types';
 

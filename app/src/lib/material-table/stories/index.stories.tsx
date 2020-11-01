@@ -16,12 +16,18 @@ const data = [
   { field1: 'AA', field2: 'BB' },
 ];
 export const Basic: React.FC = () => (
-  <MaterialTable title="Basic" columns={columns} data={data} />
+  <MaterialTable
+    title="Basic"
+    uniqueName="lib/material-table/stories/index"
+    columns={columns}
+    data={data}
+  />
 );
 
 export const WithGrouping: React.FC = () => (
   <MaterialTable
     title="WithGrouping"
+    uniqueName="lib/material-table/stories/index"
     columns={columns}
     data={data}
     defaultActions={{ grouping: { active: true } }}
@@ -31,6 +37,7 @@ export const WithGrouping: React.FC = () => (
 export const WithColumnFiltering: React.FC = () => (
   <MaterialTable
     title="WithColumnFitlering"
+    uniqueName="lib/material-table/stories/index"
     columns={[]}
     data={data}
     defaultActions={{
