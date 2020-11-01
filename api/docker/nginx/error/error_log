@@ -4179,3 +4179,1028 @@ PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Com
 PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
 PHP message: [debug] SELECT count(DISTINCT u0_.id) AS sclr_0 FROM "user" u0_ INNER JOIN acl_role a1_ ON u0_.role_id = a1_.id
 PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname 
+2020/11/01 13:23:31 [error] 6#6: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.27.0.1, server: , request: "POST /graphql HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "localhost:8001", referrer: "http://localhost:3000/"
+2020/11/01 13:23:32 [error] 6#6: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.27.0.1, server: , request: "POST /graphql HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "localhost:8001", referrer: "http://localhost:3000/"
+2020/11/01 13:23:32 [error] 6#6: *4 connect() failed (111: Connection refused) while connecting to upstream, client: 172.27.0.1, server: , request: "POST /graphql HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "localhost:8001", referrer: "http://localhost:3000/"
+2020/11/01 13:23:32 [error] 6#6: *4 connect() failed (111: Connection refused) while connecting to upstream, client: 172.27.0.1, server: , request: "POST /graphql HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "localhost:8001", referrer: "http://localhost:3000/"
+2020/11/01 13:23:32 [error] 6#6: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.27.0.1, server: , request: "POST /graphql HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "localhost:8001", referrer: "http://localhost:3000/"
+2020/11/01 13:23:37 [error] 6#6: *4 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname AS firstname_2, u0_.lastname AS lastname_3, u0_.created_at AS created_at_4, u0_.id AS id_5, a1_.name AS name_6, a1_.id AS id_7
+2020/11/01 13:23:37 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriza
+2020/11/01 13:23:40 [error] 6#6: *4 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriza
+2020/11/01 13:23:40 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT count(DISTINCT u0_.id) AS sclr_0 FROM "user" u0_ INNER JOIN acl_role a1_ ON u0_.role_id = a1_.id
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname A
+2020/11/01 13:23:41 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriza
+2020/11/01 13:23:49 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriza
+2020/11/01 13:23:49 [error] 6#6: *4 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT count(DISTINCT u0_.id) AS sclr_0 FROM "user" u0_ INNER JOIN acl_role a1_ ON u0_.role_id = a1_.id
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname A
+2020/11/01 13:23:50 [error] 6#6: *4 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT count(DISTINCT u0_.id) AS sclr_0 FROM "user" u0_ INNER JOIN acl_role a1_ ON u0_.role_id = a1_.id
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname A
+2020/11/01 13:23:50 [error] 6#6: *4 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriza
+2020/11/01 13:24:49 [error] 6#6: *17 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:25:49 [error] 6#6: *19 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:26:49 [error] 6#6: *21 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:27:49 [error] 6#6: *23 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:29:40 [error] 6#6: *25 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:29:40 [error] 6#6: *27 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname AS firstname_2, u0_.lastname AS lastname_3, u0_.created_at AS created_at_4, u0_.id AS id_5, a1_.name AS name_6, a1_.id AS id_
+2020/11/01 13:29:45 [error] 6#6: *27 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:29:45 [error] 6#6: *25 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname AS firstname_2, u0_.lastname AS lastname_3, u0_.created_at AS created_at_4, u0_.id AS id_5, a1_.name AS name_6, a1_.id AS id_
+2020/11/01 13:29:47 [error] 6#6: *25 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:29:47 [error] 6#6: *27 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT count(DISTINCT u0_.id) AS sclr_0 FROM "user" u0_ INNER JOIN acl_role a1_ ON u0_.role_id = a1_.id
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname 
+2020/11/01 13:29:48 [error] 6#6: *27 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:30:13 [error] 6#6: *34 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:30:13 [error] 6#6: *36 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname AS firstname_2, u0_.lastname AS lastname_3, u0_.created_at AS created_at_4, u0_.id AS id_5, a1_.name AS name_6, a1_.id AS id_
+2020/11/01 13:30:14 [error] 6#6: *36 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:30:25 [error] 6#6: *36 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname AS firstname_2, u0_.lastname AS lastname_3, u0_.created_at AS created_at_4, u0_.id AS id_5, a1_.name AS name_6, a1_.id AS id_
+2020/11/01 13:30:25 [error] 6#6: *36 FastCGI sent in stderr: "Bundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+PHP message: [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest"" while reading response header from upstream, client: 172.27.0.1, server: , request: "POST /graphql HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "localhost:8001", referrer: "http://localhost:3000/"
+2020/11/01 13:30:25 [error] 6#6: *36 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:30:25 [error] 6#6: *34 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname AS firstname_2, u0_.lastname AS lastname_3, u0_.created_at AS created_at_4, u0_.id AS id_5, a1_.name AS name_6, a1_.id AS id_
+2020/11/01 13:30:25 [error] 6#6: *34 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:30:30 [error] 6#6: *34 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:30:30 [error] 6#6: *36 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] SELECT count(DISTINCT u0_.id) AS sclr_0 FROM "user" u0_ INNER JOIN acl_role a1_ ON u0_.role_id = a1_.id
+PHP message: [debug] SELECT u0_.email AS email_0, u0_.password AS password_1, u0_.firstname 
+2020/11/01 13:30:31 [error] 6#6: *36 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:31:30 [error] 6#6: *46 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
+2020/11/01 13:32:30 [error] 6#6: *48 FastCGI sent in stderr: "PHP message: [info] Matched route "api_graphql_entrypoint".
+PHP message: [debug] Checking for guard authentication credentials.
+PHP message: [debug] Checking support on guard authenticator.
+PHP message: [debug] Calling getCredentials() on guard authenticator.
+PHP message: [debug] Passing guard token information to the GuardAuthenticationProvider
+PHP message: [debug] SELECT t0.email AS email_1, t0.password AS password_2, t0.firstname AS firstname_3, t0.lastname AS lastname_4, t0.created_at AS created_at_5, t0.id AS id_6, t0.role_id AS role_id_7 FROM "user" t0 WHERE t0.id = ? LIMIT 1
+PHP message: [debug] SELECT t0.name AS name_1, t0.id AS id_2 FROM acl_role t0 WHERE t0.id = ?
+PHP message: [info] Guard authentication successful!
+PHP message: [debug] Guard authenticator set no success response: request continues.
+PHP message: [debug] Remember me skipped: it is not configured for the firewall.
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Filter\QueryParameterValidateListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\AddFormatListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\ReadListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurity".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\EventListener\DeserializeListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Security\EventListener\DenyAccessListener::onSecurityPostDenormalize".
+PHP message: [debug] Notified event "kernel.request" to listener "ApiPlatform\Core\Bridge\Symfony\Bundle\EventListener\SwaggerUiListener::onKernelRequest".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+PHP message: [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+PHP message: [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+PHP message: [debug] Notified event "debug.security.authoriz
