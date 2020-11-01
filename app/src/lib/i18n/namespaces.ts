@@ -3,6 +3,7 @@ export default {
     login: 'P_login',
     acl: {
       index: 'P_acl_index',
+      editRole: 'P_acl_editRole',
     },
     users: {
       index: 'P_users_index',

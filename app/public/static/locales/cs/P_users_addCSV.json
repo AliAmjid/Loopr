@@ -2,5 +2,11 @@
   "csv": "Nahrání CSV",
   "select": "Přiřazení sloupců",
   "upload": "Nahrání uživatelů",
-  "csvDropzone": "Soubor nahrajete kliknutím nebo přetažením souboru na ohraničenou oblast"
+  "csvDropzone": "Soubor nahrajete kliknutím nebo přetažením souboru na ohraničenou oblast",
+  "columns": {
+    "email": "Email",
+    "firstname": "Jméno",
+    "lastname": "Příjmení",
+    "role": "Role"
+  }
 }

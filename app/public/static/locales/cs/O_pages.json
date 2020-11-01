@@ -6,5 +6,8 @@
     "index": "Uživatelé",
     "addManual": "Přidat manuálně",
     "addCSV": "Přidat z CSV"
+  },
+  "acl": {
+    "index": "Role"
   }
 }

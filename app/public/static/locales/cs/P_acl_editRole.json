@@ -1,0 +1,8 @@
+{
+  "success": "Role úspěšně upravena",
+  "error": "Roli se nepovedlo upravit",
+  "save": "Uložit",
+  "delete": "Odstranit",
+  "cancel": "Zrušit",
+  "name": "Jméno"
+}

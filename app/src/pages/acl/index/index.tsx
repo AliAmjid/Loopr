@@ -41,7 +41,10 @@ const AclIndex: React.FC = () => {
   const [addRole, { loading: addRoleLoading }] = useMutation<
     AclCreateAclRole,
     AclCreateAclRoleVariables
-  >(ACL_CREATE_ACL_ROLE);
+  >(ACL_CREATE_ACL_ROLE, {
+    refetchQueries: ['AclTableQuery'],
+    awaitRefetchQueries: true,
+  });
   const { t } = useTranslation(namespaces.pages.acl.index);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -97,9 +100,9 @@ const AclIndex: React.FC = () => {
 
   const roleAddHandler = (): void => {
     addRole({ variables: { input: { name: 'ROLE_NEW' } } })
-      .then(() => enqueueSnackbar('success', { variant: 'success' }))
+      .then(() => enqueueSnackbar(t('addSuccess'), { variant: 'success' }))
       .catch(() => {
-        enqueueSnackbar('error', { variant: 'error' });
+        enqueueSnackbar(t('addError'), { variant: 'error' });
       });
   };
 

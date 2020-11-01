@@ -69,6 +69,7 @@ const Login: React.FC<LoginProps> = props => {
             <Grid item xs={12}>
               <TextField
                 name="password"
+                type="password"
                 label={t('password')}
                 variant="outlined"
                 fullWidth
