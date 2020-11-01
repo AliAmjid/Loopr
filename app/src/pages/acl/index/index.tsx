@@ -25,7 +25,7 @@ import ACL_UPDATE_ACL_MUTATION from './mutations/updateAcl';
 import ACL_TABLE_QUERY from './queries/aclTable';
 import Acl from './Acl';
 import aclPageOptions from './pageOptions';
-import { OnResourceChangeProps } from './types';
+import { OnResourceChangeProps, RowData } from './types';
 
 const AclIndex: React.FC = () => {
   const { data, loading: aclTableLoading } = useQuery<AclTableQuery>(
@@ -45,7 +45,7 @@ const AclIndex: React.FC = () => {
   const { t } = useTranslation(namespaces.pages.acl.index);
   const { enqueueSnackbar } = useSnackbar();
 
-  const columns: Column<any>[] = [
+  const columns: Column<RowData>[] = [
     { title: t('resources'), field: 'name', editable: 'never' },
     ...(data?.aclRoles?.map(role => ({
       title: (

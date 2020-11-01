@@ -13,12 +13,12 @@ const AddIconWithDisplayName = (): JSX.Element => <AddIcon />;
 
 const Acl: React.FC<AclProps> = props => {
   const { t } = useTranslation(namespaces.pages.acl.index);
-  console.log(props.rows);
 
   return (
     <Paper>
       <MaterialTable
         title={t('tableTitle')}
+        uniqueName="pages/acl/index/Acl"
         columns={props.columns}
         isLoading={props.loading}
         data={props.rows || []}

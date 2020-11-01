@@ -28,6 +28,7 @@ describe('MaterialTable', () => {
         const wrapper = mount(
           <MaterialTable
             columns={[]}
+            uniqueName="lib/material-table/tests/index"
             data={data}
             defaultActions={{
               columnFiltering: {

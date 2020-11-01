@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { fade, makeStyles, Theme, useTheme } from '@material-ui/core';
 import MaterialTablePrefab, {
@@ -133,9 +133,6 @@ const MaterialTable = <RowData extends {}>(
             // eslint-disable-next-line react/display-name
             ...(props.hidePagination && { Pagination: () => <div /> }),
             ...props.components,
-          }}
-          onChangeRowsPerPage={(size: number) => {
-            setSavedOptions(prevState => ({ ...prevState, pageSize: size }));
           }}
           options={{
             search: false,

@@ -6,12 +6,12 @@ export interface OnResourceChangeProps {
   value: boolean;
 }
 
-export interface AclProps<
-  RowData extends { name: string; resourceId: string } = {
-    name: string;
-    resourceId: string;
-  }
-> {
+export interface RowData {
+  name: string;
+  resourceId: string;
+}
+
+export interface AclProps {
   columns: Column<RowData>[];
   rows?: RowData[];
   onResourceChange: (props: OnResourceChangeProps) => Promise<boolean>;
