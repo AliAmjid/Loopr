@@ -25,6 +25,7 @@ App\Entity\User:
             normalization_context:
                 groups:
                     - user:read
+                    - aclRole:read
         create:
             security: "is_granted('CREATE_USER')"
             security_message: "r: CREATE_USER"
