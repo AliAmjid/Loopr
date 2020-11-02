@@ -13,6 +13,9 @@ const recognizeError = (error: ApolloError | undefined): string | undefined => {
         return undefined;
     }
   }
+  error.graphQLErrors.forEach(err => {
+    console.log(err);
+  });
 
   return undefined;
 };

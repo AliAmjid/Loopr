@@ -11,6 +11,7 @@ import ProfileHeader from 'components/ProfileHeader';
 import Tabs from 'components/Tabs';
 
 import GeneralInformation from './generalInformation';
+import LoginIndex from './login';
 import { ProfileProps } from './types';
 
 const Profile: React.FC<ProfileProps> = props => {
@@ -32,6 +33,7 @@ const Profile: React.FC<ProfileProps> = props => {
               label: t('generalInformation'),
               Panel: <GeneralInformation user={props.user} />,
             },
+            { id: 1, label: t('login'), Panel: <LoginIndex /> },
           ]}
         />
       </OverlayLoadingContainer>

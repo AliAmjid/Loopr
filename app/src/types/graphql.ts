@@ -325,6 +325,36 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ProfileChangePassword
+// ====================================================
+
+export interface ProfileChangePassword_changePasswordUser_user {
+  __typename: "UserItem";
+  id: string;
+}
+
+export interface ProfileChangePassword_changePasswordUser {
+  __typename: "changePasswordUserPayload";
+  user: ProfileChangePassword_changePasswordUser_user | null;
+}
+
+export interface ProfileChangePassword {
+  /**
+   * ChangePasswords a User.
+   */
+  changePasswordUser: ProfileChangePassword_changePasswordUser | null;
+}
+
+export interface ProfileChangePasswordVariables {
+  input: changePasswordUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: ProfileUserQuery
 // ====================================================
 
@@ -643,6 +673,12 @@ export interface UsersUserDetailUserQueryVariables {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface changePasswordUserInput {
+  clientMutationId?: string | null;
+  newPassword: string;
+  oldPassword: string;
+}
 
 export interface createAclRoleInput {
   clientMutationId?: string | null;

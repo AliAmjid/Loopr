@@ -5,6 +5,7 @@ import spacing from '../spacing';
 import button from './button';
 import list from './list';
 import navigation from './navigation';
+import typography from './typography';
 
 const tabHeight = '30px';
 
@@ -12,6 +13,7 @@ const overrides: Overrides = {
   ...list,
   ...button,
   ...navigation,
+  ...typography,
   MuiPaper: {
     root: {
       padding: spacing * 2,
