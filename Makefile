@@ -32,3 +32,5 @@ api-tests:
 	sudo docker-compose $(dockerComposeDevFiles) exec php bin/phpunit
 api-dump-env:
 	sudo docker-compose $(dockerComposeDevFiles) exec php composer dump-env dev
+api-messenger:
+	sudo docker-compose $(dockerComposeDevFiles) exec php php bin/console messenger:consume async
