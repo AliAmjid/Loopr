@@ -325,6 +325,42 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: ProfileUserQuery
+// ====================================================
+
+export interface ProfileUserQuery_meUser_role {
+  __typename: "AclRole";
+  id: string;
+  /**
+   * Example format: ROLE_ADMIN.
+   * Must start with 'ROLE_' and name cant be longer than 20 letters.
+   * (regex: ^ROLE_[A-Z]{1,20}$/m)
+   */
+  name: string;
+}
+
+export interface ProfileUserQuery_meUser {
+  __typename: "User";
+  id: string;
+  /**
+   * email of user
+   */
+  email: string;
+  firstname: string;
+  lastname: string;
+  role: ProfileUserQuery_meUser_role;
+}
+
+export interface ProfileUserQuery {
+  meUser: ProfileUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UsersAddCsvCreateUserMutation
 // ====================================================
 

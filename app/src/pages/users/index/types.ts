@@ -10,5 +10,6 @@ export interface User {
 }
 export type Users = User[];
 export interface UsersProps {
+  loading: boolean;
   users: Users;
 }

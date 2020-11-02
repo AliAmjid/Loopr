@@ -4,5 +4,6 @@
   "logOut": "Odhlásit se",
   "notifications": "Upozornění",
   "back": "Zpět",
-  "logOutDialogTitle": "Opravdu se chcete odhlásit?"
+  "logOutDialogTitle": "Opravdu se chcete odhlásit?",
+  "profileSettings": "Nastavení profilu"
 }

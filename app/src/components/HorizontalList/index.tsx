@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const HorizontalList: React.FC<HorizontalListProps> = props => {
   const classes = useStyles();
+
   const mappedChildren = props.children.map((ch, index) => (
     <ListItem key={index} className={classes.listItem}>
       {ch}

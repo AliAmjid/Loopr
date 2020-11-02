@@ -9,6 +9,9 @@ export default {
       index: 'P_users_index',
       addCSV: 'P_users_addCSV',
     },
+    profile: {
+      index: 'P_profile_index',
+    },
   },
   components: {
     withPage: 'C_withPage',

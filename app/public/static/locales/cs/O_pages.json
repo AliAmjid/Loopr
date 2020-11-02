@@ -4,10 +4,14 @@
   },
   "users": {
     "index": "Uživatelé",
+    "userDetail": "Detail",
     "addManual": "Přidat manuálně",
     "addCSV": "Přidat z CSV"
   },
   "acl": {
     "index": "Role"
+  },
+  "profile": {
+    "index": "Profil"
   }
 }

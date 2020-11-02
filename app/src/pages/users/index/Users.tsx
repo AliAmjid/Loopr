@@ -27,6 +27,7 @@ const Users: React.FC<UsersProps> = props => {
       <MaterialTable
         uniqueName="pages/users/index"
         title={t('tableTitle')}
+        isLoading={props.loading}
         columns={[]}
         data={props.users}
         options={{ exportButton: true }}

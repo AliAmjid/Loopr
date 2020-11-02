@@ -1,3 +1,3 @@
 export interface HorizontalListProps {
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
 }

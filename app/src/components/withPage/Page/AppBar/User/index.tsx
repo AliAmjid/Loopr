@@ -11,6 +11,9 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
+import Link from 'next/link';
+
+import routes from 'config/routes';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -97,7 +100,9 @@ const User: React.FC<UserProps> = props => {
               </Typography>
             </Box>
             <Box display="flex">
-              <Button color="primary">Nastavení profilu</Button>
+              <Link href={routes.profile.index} passHref>
+                <Button color="primary">{t('profileSettings')}</Button>
+              </Link>
             </Box>
           </Box>
           <Avatar className={classes.popoverAvatar} variant="rounded">

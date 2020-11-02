@@ -15,6 +15,9 @@ const routes = {
     index: '/acl',
     editRole: '/acl/editRole',
   },
+  profile: {
+    index: '/profile',
+  },
 };
 
 export default routes;

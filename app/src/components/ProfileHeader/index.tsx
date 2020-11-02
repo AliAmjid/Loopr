@@ -5,7 +5,7 @@ import { Avatar, Box, makeStyles, Theme, Typography } from '@material-ui/core';
 import getInitials from 'components/getInitials';
 import stripRolePrefix from 'components/stripRolePrefix';
 
-import { HeaderProps } from './types';
+import { ProfileHeaderProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
@@ -16,22 +16,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Header: React.FC<HeaderProps> = props => {
+const ProfileHeader: React.FC<ProfileHeaderProps> = props => {
   const classes = useStyles();
 
   return (
     <Box display="flex" pb={2}>
       <Avatar className={classes.avatar} variant="rounded">
-        {getInitials(props.user?.firstname || '', props.user?.lastname || '')}
+        {getInitials(props.firstname || '', props.lastname || '')}
       </Avatar>
       <Box pl={2}>
         <Typography variant="h4">
-          {props.user?.firstname || `${props.user?.lastname}` || ''}
+          {`${props.firstname || ''} ${props.lastname || ''}`}
         </Typography>
-        <Typography>{stripRolePrefix(props.user?.role.name || '')}</Typography>
+        <Typography>{stripRolePrefix(props.roleName || '')}</Typography>
       </Box>
     </Box>
   );
 };
 
-export default Header;
+export default ProfileHeader;

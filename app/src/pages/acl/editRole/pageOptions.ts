@@ -1,3 +1,5 @@
+import namespaces from 'lib/i18n/namespaces';
+
 import { aclBreadcrumbs } from 'pages/acl/index/pageOptions';
 
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
@@ -8,8 +10,11 @@ const editRoleBreadcrumbs: Breadcrumbs = [
   { label: 'acl.editRole' },
 ];
 
+const editRoleNamespaces = [namespaces.pages.acl.editRole];
+
 const editRolePageOptions: PageOptions = {
   title: 'acl.editRole',
   breadcrumbs: editRoleBreadcrumbs,
+  namespaces: editRoleNamespaces,
 };
 export default editRolePageOptions;

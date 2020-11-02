@@ -13,7 +13,9 @@ import { User } from './types';
 import Users from './Users';
 
 const UsersIndex: React.FC = () => {
-  const { data: usersData } = useQuery<UsersUsersQuery>(USERS_USERS_QUERY);
+  const { data: usersData, loading: usersLoading } = useQuery<UsersUsersQuery>(
+    USERS_USERS_QUERY,
+  );
 
   const users: User[] =
     usersData?.users?.edges?.map(
@@ -27,7 +29,7 @@ const UsersIndex: React.FC = () => {
         } as User),
     ) || [];
 
-  return <Users users={users} />;
+  return <Users users={users} loading={usersLoading} />;
 };
 
 export default withPage(usersPageOptions)(UsersIndex);
