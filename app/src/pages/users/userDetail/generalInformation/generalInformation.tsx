@@ -13,25 +13,25 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
     <>
       <HorizontalList>
         <EditableListItem
-          primary="Jméno"
+          primary="name"
           secondary={props.user?.firstname || ''}
           edit="secondary"
           onSubmit={firstname => props.onChange({ firstname })}
         />
         <EditableListItem
-          primary="Jméno"
+          primary="surname"
           secondary={props.user?.lastname || ''}
           edit="secondary"
           onSubmit={lastName => props.onChange({ lastName })}
         />
         <EditableListItem
-          primary="Email"
+          primary="email"
           secondary={props.user?.email || ''}
           edit="secondary"
           onSubmit={username => props.onChange({ email: username })}
         />
         <EditableListItem
-          primary="Role"
+          primary="role"
           secondary={props.user?.role.id || ''}
           edit="secondary"
           onSubmit={role => props.onChange({ role })}
@@ -39,7 +39,7 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
         />
         <>
           <ListItemText
-            primary="Registrován v"
+            primary="registered in"
             secondary={formatDateToMinute(props.user?.createdAt || '')}
           />
         </>
