@@ -15,6 +15,8 @@ import withApollo from 'lib/apollo/withApollo';
 
 import { WithPageMeUserQuery } from 'types/graphql';
 
+import hasAccess from 'components/hasAccess';
+
 import WITH_PAGE_ME_USER_QUERY from './queries/meUser';
 import Page from './Page';
 import { WithPageInternalProps } from './types';
@@ -33,6 +35,13 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   const apolloClient = useApolloClient();
   const cachePersistor = useCachePersistor();
 
+  const unauthorized = !hasAccess({
+    requiredResources: props.resources || [],
+    role: data?.meUser?.role,
+  });
+  const notLoggedIn =
+    error && recognizeError(error) !== errors.network.failedToFetch;
+
   const logOutHandler = async (): Promise<void> => {
     cookie.remove(config.tokenCookie);
     await cachePersistor.purge();
@@ -42,7 +51,7 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     enqueueSnackbar('Uživatel úspěšně odhlášen', { variant: 'success' });
   };
 
-  if (error && recognizeError(error) !== errors.network.failedToFetch) {
+  if (notLoggedIn || unauthorized) {
     return <Unauthorized />;
   }
 

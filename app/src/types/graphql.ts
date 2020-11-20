@@ -61,6 +61,11 @@ export interface UserImportTableAclRolesQuery {
 // GraphQL query operation: WithPageMeUserQuery
 // ====================================================
 
+export interface WithPageMeUserQuery_meUser_role_resources {
+  __typename: "AclResource";
+  name: string;
+}
+
 export interface WithPageMeUserQuery_meUser_role {
   __typename: "AclRole";
   /**
@@ -69,6 +74,10 @@ export interface WithPageMeUserQuery_meUser_role {
    * (regex: ^ROLE_[A-Z]{1,20}$/m)
    */
   name: string;
+  /**
+   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
+   */
+  resources: (WithPageMeUserQuery_meUser_role_resources | null)[] | null;
 }
 
 export interface WithPageMeUserQuery_meUser {

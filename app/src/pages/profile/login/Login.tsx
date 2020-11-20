@@ -53,7 +53,7 @@ const Login: React.FC<LoginProps> = props => {
             </Box>
           </Box>
           <Box pt={2} pb={2} display="flex" justifyContent="flex-end">
-            <Button color="primary" variant="contained" type="sbumit">
+            <Button color="primary" variant="contained" type="submit">
               Změnit
             </Button>
           </Box>
