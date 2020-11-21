@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Box, Button, Menu, MenuItem, Paper } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import dayjs from 'dayjs';
+import { QueryResult } from 'material-table';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -11,6 +12,8 @@ import routes from 'config/routes';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
+
+import stripRolePrefix from 'components/stripRolePrefix';
 
 import { User, UsersProps } from './types';
 
@@ -27,10 +30,24 @@ const Users: React.FC<UsersProps> = props => {
       <MaterialTable
         uniqueName="pages/users/index"
         title={t('tableTitle')}
-        isLoading={props.loading}
         columns={[]}
-        data={props.users}
-        options={{ exportButton: true }}
+        data={query =>
+          new Promise<QueryResult<User>>((resolve, reject) => {
+            props.getUsers(query).then(res => {
+              if (res.data?.users !== null && res.data?.users !== undefined) {
+                resolve({
+                  page: query.page,
+                  totalCount: res.data.users.totalCount,
+                  data: (res.data.users.edges?.map(e => ({ ...e?.node })) ||
+                    []) as User[],
+                });
+              }
+
+              reject();
+            });
+          })
+        }
+        options={{ exportButton: true, pageSize: 2, pageSizeOptions: [2] }}
         defaultActions={{
           columnFiltering: {
             active: true,
@@ -52,13 +69,14 @@ const Users: React.FC<UsersProps> = props => {
               {
                 title: t('columns.createdAt'),
                 field: 'createdAt',
-                render: (data: User) =>
-                  dayjs(data.createdAt).format('DD.MM. YYYY'),
+                render: (row: User) =>
+                  dayjs(row.createdAt).format('DD.MM. YYYY'),
                 filtering: false,
               },
               {
                 title: t('columns.role'),
                 field: 'role.name',
+                render: (row: User) => stripRolePrefix(row.role.name || ''),
               },
             ],
           },

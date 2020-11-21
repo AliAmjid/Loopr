@@ -567,10 +567,18 @@ export interface UsersUsersQuery_users_edges {
 export interface UsersUsersQuery_users {
   __typename: "UserCollectionConnection";
   edges: (UsersUsersQuery_users_edges | null)[] | null;
+  totalCount: number;
 }
 
 export interface UsersUsersQuery {
   users: UsersUsersQuery_users | null;
+}
+
+export interface UsersUsersQueryVariables {
+  first?: number | null;
+  after?: string | null;
+  last?: number | null;
+  before?: string | null;
 }
 
 /* tslint:disable */

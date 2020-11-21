@@ -1,3 +1,8 @@
+import { ApolloQueryResult } from '@apollo/client';
+import { Query } from 'material-table';
+
+import { UsersUsersQuery } from 'types/graphql';
+
 export interface User {
   id: string;
   name: string;
@@ -8,8 +13,6 @@ export interface User {
     name: string;
   };
 }
-export type Users = User[];
 export interface UsersProps {
-  loading: boolean;
-  users: Users;
+  getUsers: (query: Query<User>) => Promise<ApolloQueryResult<UsersUsersQuery>>;
 }
