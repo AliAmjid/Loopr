@@ -13,6 +13,7 @@ import SVGLogo from 'components/SVGLogo';
 import usePageState from 'components/withPage/Page/state';
 
 import Navigation from './Navigation';
+import { DrawerProps } from './types';
 
 export const drawerWidth = 260;
 const useStyles = makeStyles({
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Drawer: React.FC = () => {
+const Drawer: React.FC<DrawerProps> = props => {
   const classes = useStyles();
 
   const { open, setOpen } = usePageState(state => ({
@@ -44,7 +45,7 @@ const Drawer: React.FC = () => {
             <SVGLogo height="auto" />
           </Toolbar>
           <Divider />
-          <Navigation />
+          <Navigation user={props.user} />
         </DrawerPrefab>
       </Hidden>
       <Hidden mdUp>

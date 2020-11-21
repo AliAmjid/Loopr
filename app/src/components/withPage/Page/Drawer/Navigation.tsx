@@ -15,7 +15,10 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import hasAccess from 'components/hasAccess';
+
 import navigationList from './navigationList';
+import { NavigationProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   selectedItem: {
@@ -29,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textDecoration: 'none',
   },
 }));
-const Navigation: React.FC = () => {
+const Navigation: React.FC<NavigationProps> = props => {
   const classes = useStyles();
 
   const { t } = useTranslation(namespaces.other.pages);
@@ -37,6 +40,17 @@ const Navigation: React.FC = () => {
 
   const mappedNavigation = navigationList.map(item => {
     const selected = router.pathname === item.href;
+
+    if (item.resources) {
+      if (
+        !hasAccess({
+          requiredResources: item.resources,
+          role: props.user?.role,
+        })
+      ) {
+        return null;
+      }
+    }
 
     return (
       <Link key={item.label + item.href} href={item.href}>

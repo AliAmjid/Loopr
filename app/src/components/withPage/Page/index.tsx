@@ -33,7 +33,7 @@ const Page: React.FC<PageProps> = props => {
   return (
     <div>
       <AppBar {...rest} />
-      <Drawer />
+      <Drawer user={props.user} />
       <div className={classes.toolbar} />
       <div className={classes.content}>
         <Breadcrumbs breadcrumbs={breadcrumbs} />

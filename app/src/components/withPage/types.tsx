@@ -8,7 +8,7 @@ export interface WithPageInternalProps {
   breadcrumbs: Breadcrumbs;
   title: string;
   helpPath?: string;
-  resources?: string[];
+  resources?: string[][];
 }
 
 export interface PageOptions {
@@ -16,5 +16,5 @@ export interface PageOptions {
   title: string;
   namespaces?: string[];
   helpPath?: string;
-  resources?: string[];
+  resources?: string[][];
 }

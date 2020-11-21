@@ -1,3 +1,4 @@
+import resources from 'config/resources';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -15,10 +16,13 @@ const aclPageNamespaces = [
   ...materialTableNamespaces,
 ];
 
+const aclPageResources = [[resources.role.edit], [resources.role.createRole]];
+
 const aclPageOptions: PageOptions = {
   title: 'acl.index',
   namespaces: aclPageNamespaces,
   breadcrumbs: aclBreadcrumbs,
+  resources: aclPageResources,
 };
 
 export default aclPageOptions;

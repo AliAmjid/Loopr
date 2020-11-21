@@ -6,7 +6,10 @@ export type User =
   | {
       firstname: string;
       lastname: string;
-      role: { name: string };
+      role?: {
+        name?: string;
+        resources?: ({ name: string } | undefined | null)[] | null;
+      } | null;
     }
   | null
   | undefined;
