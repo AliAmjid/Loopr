@@ -53,6 +53,12 @@ const withApollo = <ComponentProps extends {} = any>(
         watchQuery: {
           fetchPolicy: 'cache-and-network',
         },
+        query: {
+          fetchPolicy: 'no-cache',
+        },
+        mutate: {
+          fetchPolicy: 'no-cache',
+        },
       },
     });
   };

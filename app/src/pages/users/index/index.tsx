@@ -43,7 +43,6 @@ const UsersIndex: React.FC = () => {
       .query<UsersUsersQuery, UsersUsersQueryVariables>({
         query: USERS_USERS_QUERY,
         variables,
-        fetchPolicy: 'no-cache',
       })
       .then(res => {
         const edges = res.data?.users?.edges;
