@@ -25,14 +25,18 @@ const UsersIndex: React.FC = () => {
   ): Promise<ApolloQueryResult<UsersUsersQuery>> => {
     const variables: UsersUsersQueryVariables = {};
 
-    if (query.page > pagination.page || pagination.page === 0) {
+    if (query.page === pagination.page + 1 || query.page === pagination.page) {
       variables.first = query.pageSize;
       if (query.page > 0) variables.after = pagination.lastCursor;
     }
 
-    if (query.page < pagination.page) {
+    if (
+      query.page === pagination.page - 1 ||
+      query.page > pagination.page + 1
+    ) {
       variables.last = query.pageSize;
-      variables.before = pagination.firstCursor;
+      if (query.page === pagination.page - 1)
+        variables.before = pagination.firstCursor;
     }
 
     return client
