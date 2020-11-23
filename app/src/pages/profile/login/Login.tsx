@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = props => {
             <Box pr={2} pt={2}>
               <TextField
                 variant="outlined"
-                label="Aktuální heslo"
+                label="currentPassword"
                 type="password"
                 name="oldPassword"
                 inputRef={register({ required: true })}
@@ -34,7 +34,7 @@ const Login: React.FC<LoginProps> = props => {
             <Box pr={2} pt={2}>
               <TextField
                 variant="outlined"
-                label="Nové heslo"
+                label="newPassword"
                 type="password"
                 error={props.notMatch}
                 name="newPassword1"
@@ -44,7 +44,7 @@ const Login: React.FC<LoginProps> = props => {
             <Box pr={2} pt={2}>
               <TextField
                 variant="outlined"
-                label="Nové heslo znovu"
+                label="newPasswordAgain"
                 type="password"
                 error={props.notMatch}
                 name="newPassword2"
@@ -54,7 +54,7 @@ const Login: React.FC<LoginProps> = props => {
           </Box>
           <Box pt={2} pb={2} display="flex" justifyContent="flex-end">
             <Button color="primary" variant="contained" type="submit">
-              Změnit
+              Change
             </Button>
           </Box>
         </form>

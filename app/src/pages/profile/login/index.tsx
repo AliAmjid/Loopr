@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
-import recognizeError from 'lib/apollo/recognizeError';
-
 import { SubmitValues } from 'pages/profile/login/types';
 
 import {
@@ -17,12 +15,10 @@ import PROFILE_CHANGE_PASSWORD from '../mutations/changePassword';
 import Login from './Login';
 
 const LoginIndex: React.FC = () => {
-  const [
-    changePassword,
-    { loading: changePasswordLoading, error: changePasswordError },
-  ] = useMutation<ProfileChangePassword, ProfileChangePasswordVariables>(
-    PROFILE_CHANGE_PASSWORD,
-  );
+  const [changePassword, { loading: changePasswordLoading }] = useMutation<
+    ProfileChangePassword,
+    ProfileChangePasswordVariables
+  >(PROFILE_CHANGE_PASSWORD);
   const [notMatch, setNotMatch] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 

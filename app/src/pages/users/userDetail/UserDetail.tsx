@@ -24,7 +24,7 @@ const UserDetail: React.FC<UserDetailProps> = props => {
           tabs={[
             {
               id: 0,
-              label: 'Osobní informace',
+              label: 'Personal information',
               Panel: (
                 <GeneralInformation user={props.user} roles={props.roles} />
               ),

@@ -2,7 +2,7 @@ import { Roles, User } from '../types';
 
 export interface OnChangeValues {
   firstname?: string;
-  lastName?: string;
+  lastname?: string;
   email?: string;
   role?: string;
 }

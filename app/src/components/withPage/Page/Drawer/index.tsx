@@ -59,7 +59,7 @@ const Drawer: React.FC<DrawerProps> = props => {
             <SVGLogo height="auto" />
           </Toolbar>
           <Divider />
-          <Navigation />
+          <Navigation user={props.user} />
         </SwipeableDrawer>
       </Hidden>
     </>

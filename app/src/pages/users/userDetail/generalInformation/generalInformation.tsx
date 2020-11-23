@@ -22,7 +22,7 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
           primary="surname"
           secondary={props.user?.lastname || ''}
           edit="secondary"
-          onSubmit={lastName => props.onChange({ lastName })}
+          onSubmit={lastname => props.onChange({ lastname })}
         />
         <EditableListItem
           primary="email"
