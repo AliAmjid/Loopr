@@ -47,7 +47,7 @@ const Users: React.FC<UsersProps> = props => {
             });
           })
         }
-        options={{ exportButton: true, pageSize: 2, pageSizeOptions: [2] }}
+        options={{ exportButton: true }}
         defaultActions={{
           columnFiltering: {
             active: true,
