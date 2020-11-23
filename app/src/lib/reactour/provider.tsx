@@ -7,8 +7,6 @@ import config from 'config';
 
 import { useTranslation } from 'lib/i18n';
 
-import loginTour from 'pages/login/tour';
-
 import { ReactourProvider as ReactourProviderPrefab } from './context';
 
 const Tour = dynamic(() => import('reactour'), { ssr: false });
@@ -29,7 +27,7 @@ const ReactourProvider: React.FC<any> = props => {
     >
       <Tour
         isOpen={Boolean(steps) && !config.disableTour}
-        steps={loginTour(t)}
+        steps={steps || []}
         onRequestClose={() => setSteps(null)}
       />
       {props.children}
