@@ -16,7 +16,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
- * @ApiFilter(SearchFilter::class, properties={"id": "exact", "name": "partial", "email": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact", "firstname": "exact", "lastname": "exact", "email": "exact"})
  */
 class User implements UserInterface {
 
