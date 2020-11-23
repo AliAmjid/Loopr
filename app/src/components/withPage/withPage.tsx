@@ -36,7 +36,7 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   const cachePersistor = useCachePersistor();
 
   const unauthorized = !hasAccess({
-    requiredResources: props.resources || [],
+    requiredResources: props.resources,
     role: data?.meUser?.role,
   });
   const notLoggedIn =

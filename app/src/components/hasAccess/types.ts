@@ -1,4 +1,4 @@
 export interface HasAccessProps {
-  requiredResources: string[][];
+  requiredResources?: string[][];
   role?: { resources?: ({ name: string } | undefined | null)[] | null } | null;
 }
