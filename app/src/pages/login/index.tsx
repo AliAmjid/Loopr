@@ -109,7 +109,7 @@ const LoginIndex: React.FC = () => {
 
   return (
     <>
-      <Login onSubmit={submitHandler} />
+      <Login onSubmit={submitHandler} loading={getTokenLoading} />
     </>
   );
 };

@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 
-import { Box, Tab, Tabs as TabsPrefab } from '@material-ui/core';
+import { Box, makeStyles, Tab, Tabs as TabsPrefab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 
 import { TabsProps } from './types';
 
+const useStyles = makeStyles({
+  tabs: {
+    overflow: 'hidden',
+  },
+});
+
 const Tabs: React.FC<TabsProps> = props => {
+  const classes = useStyles();
+
   const [value, setValue] = useState(props.defaultTabsId ?? 0);
 
   const mappedTabs = props.tabs.map(tab => (
@@ -21,6 +29,7 @@ const Tabs: React.FC<TabsProps> = props => {
   return (
     <>
       <TabsPrefab
+        className={classes.tabs}
         value={value}
         onChange={(e, value) => setValue(value)}
         indicatorColor="primary"

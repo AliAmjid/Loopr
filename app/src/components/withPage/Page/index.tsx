@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       marginLeft: drawerWidth,
     },
+    height: '100%',
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -31,7 +32,7 @@ const Page: React.FC<PageProps> = props => {
   const { breadcrumbs, title, children, ...rest } = props;
 
   return (
-    <div>
+    <>
       <AppBar {...rest} />
       <Drawer user={props.user} />
       <div className={classes.toolbar} />
@@ -42,7 +43,7 @@ const Page: React.FC<PageProps> = props => {
         </Typography>
         {children}
       </div>
-    </div>
+    </>
   );
 };
 

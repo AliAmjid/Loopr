@@ -1,4 +1,5 @@
 export interface LoginProps {
+  loading: boolean;
   onSubmit: (email: string, password: string) => void;
 }
 
