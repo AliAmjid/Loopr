@@ -9,7 +9,6 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use GraphQL\Error\Error;
 use GraphQL\Error\FormattedError;
 use Symfony\Component\Validator\ConstraintViolation;
 
