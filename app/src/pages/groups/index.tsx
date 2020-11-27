@@ -1,20 +1,16 @@
 import React from 'react';
 
 import { Grid, makeStyles, Paper } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 import groupsPageOptions from 'pages/groups/pageOptions';
 
 import SideTable from 'components/SideTable';
-import Tabs from 'components/Tabs';
 import withPage from 'components/withPage';
-
-import Classes from './classes';
 
 const useStyles = makeStyles({
   paper: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 0,
+    padding: 0,
   },
 });
 
@@ -24,21 +20,40 @@ const GroupsIndex: React.FC = () => {
   return (
     <Paper className={classes.paper}>
       <Grid container>
-        <Grid item xs={3}>
-          <SideTable />
-        </Grid>
-        <Grid item xs={9}>
-          <Tabs
-            tabs={[
-              { id: 0, label: 'A', Panel: <Classes /> },
-              { id: 1, label: 'A', Panel: <>a</> },
-              { id: 2, label: 'A', Panel: <>a</> },
+        <Grid item xs={12} sm={6} md={5} lg={4} xl={3}>
+          <SideTable
+            title="Groups"
+            bottomAction={{ icon: <AddIcon />, onClick: () => {} }}
+            items={[
+              {
+                id: 0,
+                primary: 'DVOP Matematika',
+                secondary: '4.A, 4.B, 4.C',
+                selected: true,
+              },
+              { id: 1, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 2, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 3, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 4, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 5, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 6, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 7, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 8, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              { id: 9, primary: 'DVOP Matematika', secondary: '4.A, 4.B, 4.C' },
+              {
+                id: 10,
+                primary: 'DVOP Matematika',
+                secondary: '4.A, 4.B, 4.C',
+              },
+              {
+                id: 11,
+                primary: 'DVOP Matematika',
+                secondary: '4.A, 4.B, 4.C',
+              },
             ]}
-            variant="fullWidth"
-          >
-            ahoj
-          </Tabs>
+          />
         </Grid>
+        <Grid item xs={0} sm={6} md={7} lg={8} xl={9} />
       </Grid>
     </Paper>
   );

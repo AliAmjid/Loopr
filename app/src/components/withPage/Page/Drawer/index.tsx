@@ -36,7 +36,7 @@ const Drawer: React.FC<DrawerProps> = props => {
 
   return (
     <>
-      <Hidden smDown>
+      <Hidden mdDown>
         <DrawerPrefab
           variant="permanent"
           classes={{ paper: classes.drawerPaper }}
@@ -48,7 +48,7 @@ const Drawer: React.FC<DrawerProps> = props => {
           <Navigation user={props.user} />
         </DrawerPrefab>
       </Hidden>
-      <Hidden mdUp>
+      <Hidden lgUp>
         <SwipeableDrawer
           classes={{ paper: classes.drawerPaper }}
           open={open}

@@ -32,7 +32,7 @@ import User from './User';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingLeft: drawerWidth,
     },
   },
@@ -81,20 +81,20 @@ const AppBar: React.FC<AppBarProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
   const setDrawerOpen = usePageState(state => state.setDrawerOpen);
   const theme = useTheme();
-  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdDown = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <AppBarPrefab className={classes.appBar}>
       <Toolbar>
         <Grid container>
-          <Hidden mdUp>
+          <Hidden lgUp>
             <Grid item xs={1}>
               <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
               </IconButton>
             </Grid>
           </Hidden>
-          <Hidden smDown>
+          <Hidden mdDown>
             <Grid item container xs={6} alignItems="center">
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -116,7 +116,7 @@ const AppBar: React.FC<AppBarProps> = props => {
             container
             alignItems="center"
             justify="flex-end"
-            xs={smDown ? 11 : 6}
+            xs={mdDown ? 11 : 6}
           >
             {props.helpPath && <Help path={props.helpPath} color="inherit" />}
             <LanguageSelect color="inherit" />

@@ -58,7 +58,6 @@ const Navigation: React.FC<NavigationProps> = props => {
           <ListItem
             button
             selected={selected}
-            classes={selected ? { root: classes.selectedItem } : {}}
             className={selected ? classes.selectedItem : ''}
           >
             <ListItemIcon className={selected ? classes.selectedItemColor : ''}>

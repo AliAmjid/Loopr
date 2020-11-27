@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     padding: theme.spacing(2),
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       marginLeft: drawerWidth,
     },
     height: '100%',
