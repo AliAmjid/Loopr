@@ -25,6 +25,7 @@ class User implements UserInterface {
 
     /** @var string email of user
      * @Assert\Email()
+     * @Assert\NotBlank()
      * @ORM\Column(type="string",unique=true)
      * @Groups({"user:read", "user:write"})
      */

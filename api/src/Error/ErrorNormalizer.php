@@ -14,7 +14,7 @@ use Symfony\Component\Validator\ConstraintViolation;
 
 class ErrorNormalizer implements NormalizerInterface {
 
-    protected $translators = [];
+    protected array $translators = [];
 
     public function __construct() {
         $this->translators = [
