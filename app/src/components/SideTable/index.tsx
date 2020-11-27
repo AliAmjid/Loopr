@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflowY: 'scroll',
   },
   header: {
-    paddingTop: theme.spacing(2),
+    paddingTop: theme.spacing(4),
     position: 'sticky',
     top: 0,
     backgroundColor: theme.palette.common.white,

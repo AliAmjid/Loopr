@@ -9,6 +9,7 @@ export interface MaterialTableCustomProps<RowData extends {}>
   extends MaterialTableProps<RowData> {
   uniqueName: string;
   hidePagination?: boolean;
+  totalCount?: number;
   defaultActions?: {
     columnFiltering?: {
       active: boolean;

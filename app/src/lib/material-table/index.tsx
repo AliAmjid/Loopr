@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { fade, makeStyles, Theme, useTheme } from '@material-ui/core';
 import MaterialTablePrefab, {
@@ -49,6 +49,7 @@ const MaterialTable = <RowData extends {}>(
     groupingActive: state.active,
     setGroupingActive: state.setActive,
   }));
+  const [rowsPerPage, setRowsPerPage] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     if (!props.defaultActions?.grouping?.active && groupingActive === true)
@@ -58,12 +59,19 @@ const MaterialTable = <RowData extends {}>(
   }, []);
 
   useEffect(() => {
-    const savedString = window.localStorage.getItem(
+    const savedSelectedString = window.localStorage.getItem(
       `${props.uniqueName}-selected`,
     );
-    if (savedString) {
-      const savedObject = JSON.parse(savedString);
-      setSelected(savedObject);
+    if (savedSelectedString) {
+      const savedSelectedObject = JSON.parse(savedSelectedString);
+      setSelected(savedSelectedObject);
+    }
+    const savedRowsPerPageString = window.localStorage.getItem(
+      `${props.uniqueName}-rowsPerPage`,
+    );
+    if (savedRowsPerPageString) {
+      const savedRowsPerPageObject = JSON.parse(savedRowsPerPageString);
+      setRowsPerPage(savedRowsPerPageObject);
     }
   }, []);
 
@@ -73,6 +81,12 @@ const MaterialTable = <RowData extends {}>(
       JSON.stringify(selected),
     );
   }, [selected]);
+  useEffect(() => {
+    window.localStorage.setItem(
+      `${props.uniqueName}-rowsPerPage`,
+      JSON.stringify(rowsPerPage),
+    );
+  }, [rowsPerPage]);
 
   let { columns } = props;
   if (props.defaultActions?.columnFiltering?.active) {
@@ -88,6 +102,11 @@ const MaterialTable = <RowData extends {}>(
     actions.push(columnFilteringAction(t));
   if (props.defaultActions?.grouping?.active) {
     actions.push(groupingAction(t));
+  }
+
+  let pageSizeOptions = [50, 100, 200, 400];
+  if (props.totalCount && props.totalCount > 400) {
+    pageSizeOptions = [...pageSizeOptions, props.totalCount];
   }
 
   return (
@@ -134,12 +153,15 @@ const MaterialTable = <RowData extends {}>(
             ...(props.hidePagination && { Pagination: () => <div /> }),
             ...props.components,
           }}
+          onChangeRowsPerPage={rows => {
+            setRowsPerPage(rows);
+          }}
           options={{
             search: false,
             filtering: true,
             emptyRowsWhenPaging: false,
-            pageSize: 50,
-            pageSizeOptions: [50, 100, 200, 400],
+            pageSize: rowsPerPage,
+            pageSizeOptions,
             exportAllData: true,
             grouping: groupingActive,
             ...props.options,

@@ -23,6 +23,8 @@ const Users: React.FC<UsersProps> = props => {
   const { t } = useTranslation(namespaces.pages.users.index);
   const router = useRouter();
 
+  const [totalCount, setTotalCount] = useState<undefined | number>(undefined);
+
   const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | null>(null);
 
   return (
@@ -35,6 +37,7 @@ const Users: React.FC<UsersProps> = props => {
           new Promise<QueryResult<User>>((resolve, reject) => {
             props.getUsers(query).then(res => {
               if (res.data?.users !== null && res.data?.users !== undefined) {
+                setTotalCount(res.data.users.totalCount);
                 resolve({
                   page: query.page,
                   totalCount: res.data.users.totalCount,
@@ -47,6 +50,7 @@ const Users: React.FC<UsersProps> = props => {
             });
           })
         }
+        totalCount={totalCount}
         options={{ exportButton: true }}
         defaultActions={{
           columnFiltering: {

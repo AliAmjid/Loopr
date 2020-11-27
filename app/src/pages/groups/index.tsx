@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Grid, makeStyles, Paper } from '@material-ui/core';
+import { Box, Grid, makeStyles, Paper } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+
+import MaterialTable from 'lib/material-table';
 
 import groupsPageOptions from 'pages/groups/pageOptions';
 
@@ -53,7 +55,28 @@ const GroupsIndex: React.FC = () => {
             ]}
           />
         </Grid>
-        <Grid item xs={0} sm={6} md={7} lg={8} xl={9} />
+        <Grid item xs={false} sm={6} md={7} lg={8} xl={9}>
+          <Box p={2}>
+            <MaterialTable
+              uniqueName="pages/groups/index"
+              title="Students"
+              columns={[]}
+              data={[
+                { name: 'A', surname: 'AA' },
+                { name: 'B', surname: 'BB' },
+                { name: 'C', surname: 'CC' },
+              ]}
+              defaultActions={{
+                columnFiltering: {
+                  active: true,
+                  defaultColumns: ['name'],
+                  columns: [{ title: 'Name', field: 'name' }],
+                },
+              }}
+              options={{ exportButton: true }}
+            />
+          </Box>
+        </Grid>
       </Grid>
     </Paper>
   );
