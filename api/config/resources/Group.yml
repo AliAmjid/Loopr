@@ -1,0 +1,22 @@
+App\Entity\Group:
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        create:
+            security_message: 'r: GROUP_CREATE'
+            security: "is_granted('GROUP_CREATE')"
+            normalization_context:
+                groups:
+                    - group:read
+                    - user:read
+            denormalization_context:
+                groups:
+                    - group:write
+            
+            

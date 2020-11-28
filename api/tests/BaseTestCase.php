@@ -15,7 +15,8 @@ use PHPUnit\Framework\TestCase;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Response;
 
-abstract class BaseTestCase extends TestCase {
+abstract class BaseTestCase extends TestCase
+{
 
     protected Kernel $kernel;
     /** @var EntityManagerInterface $em */
@@ -25,7 +26,8 @@ abstract class BaseTestCase extends TestCase {
     use TCreateEntityHelpers;
     use TAssertsHelper;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         parent::setUp();
         $this->kernel = new Kernel($_SERVER['APP_ENV'], (bool)$_SERVER['APP_DEBUG']);
         $this->kernel->boot();
@@ -34,13 +36,15 @@ abstract class BaseTestCase extends TestCase {
         $this->em = $this->doctrine->getManager();
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         $this->deleteAllTestingEntities();
 
         parent::tearDown();
     }
 
-    protected function getClient($token = null) {
+    protected function getClient($token = null)
+    {
         return GraphQLClientBuilder::build('http://api:80/graphql', $token ? [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token
@@ -54,20 +58,40 @@ abstract class BaseTestCase extends TestCase {
     ): GraphQLClient {
         $response = $this->getClient()->query(
         /** @lang GraphQL */
-            'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}', [
-            'email' => $email,
-            'password' => $password
-        ]);
+            'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}',
+            [
+                'email' => $email,
+                'password' => $password
+            ]);
         $this->assertNoErrors($response);
         return $this->getClient($response->getData()['getToken']['token']);
     }
 
 
-    protected function assertNoErrors(Response $response) {
+    protected function assertNoErrors(Response $response)
+    {
         $this->assertErrors($response, 0);
     }
 
-    protected function assertErrors(Response $response, $errors) {
-        $this->assertEquals($errors, count($response->getErrors()), 'There are un-expected errors ' . json_encode($response->getErrors(), JSON_PRETTY_PRINT));
+    protected function assertErrors(Response $response, $errors)
+    {
+        $this->assertEquals($errors, count($response->getErrors()),
+            'There are un-expected errors ' . json_encode($response->getErrors(), JSON_PRETTY_PRINT));
+    }
+
+    protected function assertError(Response $response, string $errorCode)
+    {
+        $errorFounded = false;
+        $errors = $response->getErrors();
+        foreach ($errors as $error) {
+            $loopr = $error['loopr-error'] ?? null;
+            if (!$loopr) {
+                throw new \RuntimeException("Loopr secction is missing!!!");
+            }
+            if ($loopr['code'] == $errorCode) {
+                $errorFounded = true;
+            }
+        }
+        $this->assertTrue($errorFounded);
     }
 }

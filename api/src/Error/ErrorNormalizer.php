@@ -12,11 +12,13 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use GraphQL\Error\FormattedError;
 use Symfony\Component\Validator\ConstraintViolation;
 
-class ErrorNormalizer implements NormalizerInterface {
+class ErrorNormalizer implements NormalizerInterface
+{
 
-    protected array $translators = [];
+    protected $translators = [];
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->translators = [
             AccessDeniedHttpException::class => function (AccessDeniedHttpException $e, &$error) {
                 $this->pushExceptionWithTranslateToLooprError(ClientErrorType::ACCESS_DENIED, $e, $error);
@@ -49,7 +51,8 @@ class ErrorNormalizer implements NormalizerInterface {
     /**
      * {@inheritdoc}
      */
-    public function normalize($object, string $format = null, array $context = []): array {
+    public function normalize($object, string $format = null, array $context = []): array
+    {
         $exception = $object->getPrevious();
         $error = FormattedError::createFromException($object);
         if ($exception instanceof ClientError) {
@@ -64,10 +67,12 @@ class ErrorNormalizer implements NormalizerInterface {
             if ($exception instanceof $exceptionClass) {
                 if (is_callable($translator)) {
                     $translator($exception, $error);
-                } else if (is_array($translator)) {
-                    $this->pushExceptionWithTranslateToLooprError($translator, $exception, $error);
                 } else {
-                    throw new \RuntimeException("$exceptionClass has bad translator");
+                    if (is_array($translator)) {
+                        $this->pushExceptionWithTranslateToLooprError($translator, $exception, $error);
+                    } else {
+                        throw new \RuntimeException("$exceptionClass has bad translator");
+                    }
                 }
             }
         }
@@ -84,11 +89,13 @@ class ErrorNormalizer implements NormalizerInterface {
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization($data, string $format = null): bool {
+    public function supportsNormalization($data, string $format = null): bool
+    {
         return $data instanceof \Throwable;
     }
 
-    protected function pushExceptionWithTranslateToLooprError(array $translator, \Throwable $exception, &$error) {
+    protected function pushExceptionWithTranslateToLooprError(array $translator, \Throwable $exception, &$error)
+    {
         $error['loopr-error'] = [
             'msg' => $translator['msg'],
             'code' => $translator['code'],

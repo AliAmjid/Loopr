@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9453b903453bc2a09d07678a6dc0154f",
+    "content-hash": "091dacf8b2f9101824cbc991e0b6be47",
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "dev-master",
+            "version": "v2.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "a2f719cfa2a04c252d3b3968f7ad1baf41d088dc"
+                "reference": "37b5edf50cc05299b12cb8982be3efa035d726ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/a2f719cfa2a04c252d3b3968f7ad1baf41d088dc",
-                "reference": "a2f719cfa2a04c252d3b3968f7ad1baf41d088dc",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/37b5edf50cc05299b12cb8982be3efa035d726ce",
+                "reference": "37b5edf50cc05299b12cb8982be3efa035d726ce",
                 "shasum": ""
             },
             "require": {
@@ -26,13 +26,13 @@
                 "php": ">=7.1",
                 "psr/cache": "^1.0",
                 "psr/container": "^1.0",
-                "symfony/http-foundation": "^4.4 || ^5.1",
-                "symfony/http-kernel": "^4.4 || ^5.1",
-                "symfony/property-access": "^3.4.19 || ^4.4 || ^5.1",
-                "symfony/property-info": "^3.4 || ^4.4 || ^5.1",
-                "symfony/serializer": "^4.4 || ^5.1",
-                "symfony/web-link": "^4.4 || ^5.1",
-                "willdurand/negotiation": "^2.0.3 || 3.0.x-dev"
+                "symfony/http-foundation": "^4.3.6 || ^5.0",
+                "symfony/http-kernel": "^4.3.7 || ^5.0",
+                "symfony/property-access": "^3.4 || ^4.0 || ^5.0",
+                "symfony/property-info": "^3.4 || ^4.0 || ^5.0",
+                "symfony/serializer": "^4.3 || ^5.0",
+                "symfony/web-link": "^4.1 || ^5.0",
+                "willdurand/negotiation": "^2.0.3"
             },
             "conflict": {
                 "doctrine/common": "<2.7",
@@ -42,66 +42,68 @@
             "require-dev": {
                 "behat/behat": "^3.1",
                 "behat/mink": "^1.7",
+                "behat/mink-browserkit-driver": "^1.3.1",
+                "behat/mink-extension": "^2.2",
+                "behat/symfony2-extension": "^2.1.1",
+                "behatch/contexts": "^3.1.0",
                 "doctrine/annotations": "^1.7",
-                "doctrine/common": "^2.11 || ^3.0",
+                "doctrine/common": "^2.11",
                 "doctrine/data-fixtures": "^1.2.2",
-                "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+                "doctrine/doctrine-bundle": "^1.8 || ^2.0",
+                "doctrine/doctrine-cache-bundle": "^1.3.5",
                 "doctrine/mongodb-odm": "^2.0",
                 "doctrine/mongodb-odm-bundle": "^4.0",
-                "doctrine/orm": "^2.6.4 || ^3.0",
-                "elasticsearch/elasticsearch": "^6.0 || ^7.0",
-                "friends-of-behat/mink-browserkit-driver": "^1.3.1",
-                "friends-of-behat/mink-extension": "^2.2",
-                "friends-of-behat/symfony-extension": "^2.1",
-                "guzzlehttp/guzzle": "^6.0 || ^7.0",
-                "jangregor/phpstan-prophecy": "^0.8",
+                "doctrine/orm": "^2.6.4",
+                "elasticsearch/elasticsearch": "^6.0",
+                "friendsofsymfony/user-bundle": "2.2.x-dev#157b53bd7d6c347148a90e723981a43f9c897bf5",
+                "guzzlehttp/guzzle": "^6.0",
+                "jangregor/phpstan-prophecy": "^0.6",
                 "justinrainbow/json-schema": "^5.2.1",
-                "phpdocumentor/reflection-docblock": "^3.0 || ^4.0 || ^5.1",
-                "phpdocumentor/type-resolver": "^0.3 || ^0.4 || ^1.4",
+                "nelmio/api-doc-bundle": "^2.13.4",
+                "phpdocumentor/reflection-docblock": "^3.0 || ^4.0",
+                "phpdocumentor/type-resolver": "^0.3 || ^0.4",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.53@dev",
+                "phpstan/phpstan": "^0.12.4",
                 "phpstan/phpstan-doctrine": "^0.12.7",
                 "phpstan/phpstan-phpunit": "^0.12.4",
                 "phpstan/phpstan-symfony": "^0.12.4",
                 "psr/log": "^1.0",
-                "ramsey/uuid": "^3.7 || ^4.0",
+                "ramsey/uuid": "^3.7",
                 "ramsey/uuid-doctrine": "^1.4",
-                "soyuka/contexts": "^3.3.1",
-                "soyuka/stubs-mongodb": "^1.0",
-                "symfony/asset": "^3.4 || ^4.4 || ^5.1",
-                "symfony/browser-kit": "^4.4 || ^5.1",
-                "symfony/cache": "^3.4 || ^4.4 || ^5.1",
-                "symfony/config": "^3.4 || ^4.4 || ^5.1",
-                "symfony/console": "^3.4 || ^4.4 || ^5.1",
-                "symfony/css-selector": "^3.4 || ^4.4 || ^5.1",
-                "symfony/debug": "^3.4 || ^4.4 || ^5.1",
-                "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.1",
-                "symfony/doctrine-bridge": "^3.4 || ^4.4 || ^5.1",
-                "symfony/dom-crawler": "^3.4 || ^4.4 || ^5.1",
-                "symfony/event-dispatcher": "^3.4 || ^4.4 || ^5.1",
-                "symfony/expression-language": "^3.4 || ^4.4 || ^5.1",
-                "symfony/finder": "^3.4 || ^4.4 || ^5.1",
-                "symfony/form": "^3.4 || ^4.4 || ^5.1",
-                "symfony/framework-bundle": "^4.4 || ^5.1",
-                "symfony/http-client": "^4.4 || ^5.1",
+                "symfony/asset": "^3.4 || ^4.0 || ^5.0",
+                "symfony/browser-kit": "^4.3 || ^5.0",
+                "symfony/cache": "^3.4 || ^4.0 || ^5.0",
+                "symfony/config": "^3.4 || ^4.0 || ^5.0",
+                "symfony/console": "^3.4 || ^4.0 || ^5.0",
+                "symfony/css-selector": "^3.4 || ^4.0 || ^5.0",
+                "symfony/debug": "^3.4 || ^4.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
+                "symfony/doctrine-bridge": "^3.4 || ^4.0 || ^5.0",
+                "symfony/dom-crawler": "^3.4 || ^4.0 || ^5.0",
+                "symfony/event-dispatcher": "^3.4 || ^4.0 || ^5.0",
+                "symfony/expression-language": "^3.4 || ^4.0 || ^5.0",
+                "symfony/finder": "^3.4 || ^4.0 || ^5.0",
+                "symfony/form": "^3.4 || ^4.0 || ^5.0",
+                "symfony/framework-bundle": "^4.3.2 || ^5.0",
+                "symfony/http-client": "^4.3 || ^5.0",
                 "symfony/mercure-bundle": "*",
-                "symfony/messenger": "^4.4 || ^5.1",
-                "symfony/phpunit-bridge": "^5.1.7",
-                "symfony/routing": "^3.4 || ^4.4 || ^5.1",
-                "symfony/security-bundle": "^3.4 || ^4.4 || ^5.1",
-                "symfony/security-core": "^4.4 || ^5.1",
-                "symfony/twig-bundle": "^3.4 || ^4.4 || ^5.1",
-                "symfony/validator": "^3.4 || ^4.4 || ^5.1",
-                "symfony/web-profiler-bundle": "^4.4 || ^5.1",
-                "symfony/yaml": "^3.4 || ^4.4 || ^5.1",
-                "twig/twig": "^1.42.3 || ^2.12 || ^3.0",
+                "symfony/messenger": "^4.3 || ^5.0",
+                "symfony/phpunit-bridge": "dev-master",
+                "symfony/routing": "^3.4 || ^4.3 || ^5.0",
+                "symfony/security-bundle": "^3.4 || ^4.0 || ^5.0",
+                "symfony/security-core": "^4.3 || ^5.0",
+                "symfony/twig-bundle": "^3.4 || ^4.0 || ^5.0",
+                "symfony/validator": "^3.4 || ^4.0 || ^5.0",
+                "symfony/web-profiler-bundle": "^4.2 || ^5.0",
+                "symfony/yaml": "^3.4 || ^4.0 || ^5.0",
+                "teohhanhui/stubs-mongodb": "@dev",
+                "twig/twig": "^1.42.3 || ^2.12",
                 "webonyx/graphql-php": "^14.0"
             },
             "suggest": {
                 "doctrine/mongodb-odm-bundle": "To support MongoDB. Only versions 4.0 and later are supported.",
                 "elasticsearch/elasticsearch": "To support Elasticsearch.",
                 "guzzlehttp/guzzle": "To use the HTTP cache invalidation system.",
-                "ocramius/package-versions": "To display the API Platform's version in the debug bar.",
                 "phpdocumentor/reflection-docblock": "To support extracting metadata from PHPDoc.",
                 "psr/cache-implementation": "To use metadata caching.",
                 "ramsey/uuid": "To support Ramsey's UUID identifiers.",
@@ -110,17 +112,16 @@
                 "symfony/expression-language": "To use authorization features.",
                 "symfony/security": "To use authorization features.",
                 "symfony/twig-bundle": "To use the Swagger UI integration.",
-                "symfony/uid": "To support Symfony UUID/ULID identifiers.",
                 "symfony/web-profiler-bundle": "To use the data collector.",
                 "webonyx/graphql-php": "To support GraphQL."
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6.x-dev"
+                    "dev-master": "2.5.x-dev"
                 },
                 "symfony": {
-                    "require": "^3.4 || ^4.4 || ^5.1"
+                    "require": "^3.4 || ^4.0 || ^5.0"
                 }
             },
             "autoload": {
@@ -139,7 +140,7 @@
                     "homepage": "https://dunglas.fr"
                 }
             ],
-            "description": "Build a fully-featured hypermedia or GraphQL API in minutes!",
+            "description": "Build a fully-featured hypermedia or GraphQL API in minutes",
             "homepage": "https://api-platform.com",
             "keywords": [
                 "Hydra",
@@ -152,13 +153,7 @@
                 "rest",
                 "swagger"
             ],
-            "funding": [
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/api-platform/core",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-11-26T12:45:56+00:00"
+            "time": "2020-08-28T16:23:13+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -1727,49 +1722,105 @@
             "time": "2020-09-14T14:23:00+00:00"
         },
         {
-            "name": "lcobucci/jwt",
-            "version": "3.4.1",
+            "name": "lcobucci/clock",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "958a9873a63b0244a72f6e354ccc86019ee674a5"
+                "url": "https://github.com/lcobucci/clock.git",
+                "reference": "353d83fe2e6ae95745b16b3d911813df6a05bfb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/958a9873a63b0244a72f6e354ccc86019ee674a5",
-                "reference": "958a9873a63b0244a72f6e354ccc86019ee674a5",
+                "url": "https://api.github.com/repos/lcobucci/clock/zipball/353d83fe2e6ae95745b16b3d911813df6a05bfb3",
+                "reference": "353d83fe2e6ae95745b16b3d911813df6a05bfb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "infection/infection": "^0.17",
+                "lcobucci/coding-standard": "^6.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/php-code-coverage": "9.1.4",
+                "phpunit/phpunit": "9.3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\Clock\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Cobucci",
+                    "email": "lcobucci@gmail.com"
+                }
+            ],
+            "description": "Yet another clock abstraction",
+            "funding": [
+                {
+                    "url": "https://github.com/lcobucci",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lcobucci",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-08-27T18:56:02+00:00"
+        },
+        {
+            "name": "lcobucci/jwt",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "6d8665ccd924dc076a9b65d1ea8abe21d68f6958"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/6d8665ccd924dc076a9b65d1ea8abe21d68f6958",
+                "reference": "6d8665ccd924dc076a9b65d1ea8abe21d68f6958",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
-                "php": "^5.6 || ^7.0"
+                "lcobucci/clock": "^2.0",
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "mikey179/vfsstream": "~1.5",
-                "phpmd/phpmd": "~2.2",
-                "phpunit/php-invoker": "~1.1",
-                "phpunit/phpunit": "^5.7 || ^7.3",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "suggest": {
-                "lcobucci/clock": "*"
+                "infection/infection": "^0.20",
+                "lcobucci/coding-standard": "^6.0",
+                "mikey179/vfsstream": "^1.6",
+                "phpbench/phpbench": "^0.17",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/php-invoker": "^3.1",
+                "phpunit/phpunit": "^9.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
-                },
-                "files": [
-                    "compat/class-aliases.php",
-                    "compat/json-exception-polyfill.php",
-                    "compat/lcobucci-clock-polyfill.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1777,7 +1828,7 @@
             ],
             "authors": [
                 {
-                    "name": "Luís Otávio Cobucci Oblonczyk",
+                    "name": "Luís Cobucci",
                     "email": "lcobucci@gmail.com",
                     "role": "Developer"
                 }
@@ -1797,25 +1848,25 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-27T01:17:14+00:00"
+            "time": "2020-11-25T02:06:12+00:00"
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.10.0",
+            "version": "v2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "3c9f4e7f5a0e0817de2dd88ae8347d4da4b0c57b"
+                "reference": "aec36a0c2618317271cfd1e19160d5040f173282"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/3c9f4e7f5a0e0817de2dd88ae8347d4da4b0c57b",
-                "reference": "3c9f4e7f5a0e0817de2dd88ae8347d4da4b0c57b",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/aec36a0c2618317271cfd1e19160d5040f173282",
+                "reference": "aec36a0c2618317271cfd1e19160d5040f173282",
                 "shasum": ""
             },
             "require": {
                 "ext-openssl": "*",
-                "lcobucci/jwt": "^3.2",
+                "lcobucci/jwt": "^3.2|^4.0",
                 "namshi/jose": "^7.2",
                 "php": ">=5.6",
                 "symfony/framework-bundle": "^3.4|^4.0|^5.0",
@@ -1899,7 +1950,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-23T15:31:35+00:00"
+            "time": "2020-11-28T12:07:51+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8282,16 +8333,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.24.1",
+            "version": "v1.24.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "40b49abf01810453f73e3e239759f1736607f029"
+                "reference": "87620ef23319ebbdfc5b51dd6b6e7d12003f4564"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/40b49abf01810453f73e3e239759f1736607f029",
-                "reference": "40b49abf01810453f73e3e239759f1736607f029",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/87620ef23319ebbdfc5b51dd6b6e7d12003f4564",
+                "reference": "87620ef23319ebbdfc5b51dd6b6e7d12003f4564",
                 "shasum": ""
             },
             "require": {
@@ -8362,7 +8413,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-25T17:19:22+00:00"
+            "time": "2020-11-27T17:49:17+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -8644,9 +8695,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "api-platform/core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

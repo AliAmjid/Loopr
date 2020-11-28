@@ -14,24 +14,28 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class AclLoadResourcesCommand extends Command {
+class AclLoadResourcesCommand extends Command
+{
     private EntityManagerInterface $em;
 
     public function __construct(
         string $name = null,
-        EntityManagerInterface $em) {
+        EntityManagerInterface $em
+    ) {
         parent::__construct($name);
         $this->em = $em;
     }
 
     protected static $defaultName = 'acl:load-resources';
 
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setDescription('Loads resources into database');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int {
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
         $io = new SymfonyStyle($input, $output);
         /** @var AclResource[] $resourceEntities */
         $resourceEntities = [];
@@ -49,7 +53,9 @@ class AclLoadResourcesCommand extends Command {
             $parents = new ArrayCollection();
             $entity = $resourceEntities[$name];
             foreach ($array as $name) {
-                $parents->add($resourceEntities[$name]);
+                if (!$entity->getDependsOn()->contains($resourceEntities[$name])) {
+                    $entity->getDependsOn()->add($resourceEntities[$name]);
+                }
             }
             $entity->setDependsOn($parents);
             $this->em->persist($entity);
@@ -74,7 +80,8 @@ class AclLoadResourcesCommand extends Command {
     }
 
 
-    private function createOrGetEntity(string $uuid, string $name): AclResource {
+    private function createOrGetEntity(string $uuid, string $name): AclResource
+    {
         /** @var AclResource $entity */
         $entity = $this->em->find(AclResource::class, $uuid);
         if ($entity) {
@@ -87,7 +94,8 @@ class AclLoadResourcesCommand extends Command {
         return $entity;
     }
 
-    private function findOrCreateRole(string $name): AclRole {
+    private function findOrCreateRole(string $name): AclRole
+    {
         $userRepository = $this->em->getRepository(AclRole::class);
         /** @var ?AclRole $role */
         $role = $userRepository->findOneBy(['name' => $name]);

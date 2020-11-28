@@ -18,8 +18,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Table(name="`user`")
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "firstname": "exact", "lastname": "exact", "email": "exact"})
  */
-class User implements UserInterface {
-
+class User implements UserInterface
+{
     use Tid;
 
 
@@ -64,8 +64,16 @@ class User implements UserInterface {
      */
     private \DateTimeInterface $createdAt;
 
+    /**
+     * @var ClassGroup|null
+     * @Groups({"user:read", "user:write"})
+     * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
+     */
+    private ?ClassGroup $classGroup = null;
 
-    public function getId(): string {
+
+    public function getId(): string
+    {
         return $this->id;
     }
 
@@ -73,90 +81,127 @@ class User implements UserInterface {
      * @return string
      * @internal
      * @deprecated
-     * @ApiProperty(deprecationReason="uset email instead")
+     * @ApiProperty(deprecationReason="use email instead")
      */
-    public function getUsername(): string {
+    public function getUsername(): string
+    {
         return $this->id;
     }
 
-    public function setEmail(string $email): void {
+    public function setEmail(string $email): void
+    {
         $this->email = $email;
     }
 
-    public function getEmail(): string {
+    public function getEmail(): string
+    {
         return $this->email;
     }
 
-    public function getRoles(): array {
+    public function getRoles(): array
+    {
         return [$this->role->getName()];
     }
 
-    public function setRole(AclRole $role): void {
+    public function setRole(AclRole $role): void
+    {
         $this->role = $role;
     }
 
-    public function getRole(): AclRole {
+    public function getRole(): AclRole
+    {
         return $this->role;
     }
 
-    public function getPassword(): string {
+    public function getPassword(): string
+    {
         return (string)$this->password;
     }
 
-    public function setPassword(string $password): self {
+    public function setPassword(string $password): self
+    {
         $this->password = $password;
         return $this;
     }
 
-    public function getSalt() {
+    public function getSalt()
+    {
         return null;
     }
 
-    public function eraseCredentials() {}
+    public function eraseCredentials()
+    {
+    }
 
     /**
      * @return string
      */
-    public function getLastname(): string {
+    public function getLastname(): string
+    {
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): User {
+    public function setLastname(string $lastname): User
+    {
         $this->lastname = $lastname;
         return $this;
     }
 
     /**
-     *@ApiProperty(deprecationReason="Replaced with firstname and lastname")
+     * @ApiProperty(deprecationReason="Replaced with firstname and lastname")
      */
-    public function getName(): ?string {
+    public function getName(): ?string
+    {
         return $this->firstname . " " . $this->lastname;
     }
 
-    public function setFirstname(string $firstname): self {
+    public function setFirstname(string $firstname): self
+    {
         $this->firstname = $firstname;
         return $this;
     }
 
-    public function getFirstname(): string {
+    public function getFirstname(): string
+    {
         return $this->firstname;
     }
 
-    public function getCreatedAt(): \DateTimeInterface {
+    public function getCreatedAt(): \DateTimeInterface
+    {
         return $this->createdAt;
+    }
+
+    /**
+     * @return ClassGroup|null
+     */
+    public function getClassGroup(): ?ClassGroup
+    {
+        return $this->classGroup;
+    }
+
+    /**
+     * @param ClassGroup|null $classGroup
+     * @return User
+     */
+    public function setClassGroup(?ClassGroup $classGroup): User
+    {
+        $this->classGroup = $classGroup;
+        return $this;
     }
 
     /**
      * @Groups({"user:read"})
      */
-    public function getResources() {
+    public function getResources()
+    {
         return $this->getRoles();
     }
 
     /**
      * @ORM\PrePersist()
      */
-    public function setCreatedAt(): void {
+    public function setCreatedAt(): void
+    {
         $this->createdAt = new \DateTime();
     }
 }
