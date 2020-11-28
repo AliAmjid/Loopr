@@ -20,3 +20,25 @@ App\Entity\Group:
                     - group:write
             
             
+        update:
+            security: "is_granted('GROUP_CREATE')"
+            security_message: 'r: GROUP_CREATE'
+            normalization_context:
+                groups:
+                    - group:read
+                    - user:read
+            denormalization_context:
+                groups:
+                    - group:write
+        item_query:
+            security_message: "r: GROUP_SHOW"
+            security: "is_granted('GROUP_SHOW')"
+            normalization_context:
+                groups:
+                    - group:read
+
+        collection_query:
+            security: "is_granted('GROUP_SHOW_ALL')"
+            normalization_context:
+                groups:
+                    - group:read
