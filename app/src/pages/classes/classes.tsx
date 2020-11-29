@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import MaterialTable from 'lib/material-table';
 
-import groupsPageOptions from 'pages/groups/pageOptions';
+import groupsPageOptions from 'pages/classes/pageOptions';
 
 import SideTable from 'components/SideTable';
 import withPage from 'components/withPage';
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const GroupsIndex: React.FC = () => {
+const Classes: React.FC = () => {
   const classes = useStyles();
 
   return (
@@ -82,4 +82,4 @@ const GroupsIndex: React.FC = () => {
   );
 };
 
-export default withPage(groupsPageOptions)(GroupsIndex);
+export default withPage(groupsPageOptions)(Classes);

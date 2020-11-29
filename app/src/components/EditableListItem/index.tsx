@@ -111,9 +111,19 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
             </IconButton>
           </>
         ) : (
-          <IconButton onClick={() => setEditing(true)}>
-            <EditIcon />
-          </IconButton>
+          <>
+            {!props.editingDisabled && (
+              <IconButton
+                className={props.classes?.editIconButton || ''}
+                onClick={() => {
+                  setEditing(true);
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            )}
+            {props.additionalActions}
+          </>
         )}
       </ListItemSecondaryAction>
     </>

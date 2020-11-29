@@ -17,6 +17,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
+import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
@@ -60,15 +61,26 @@ const SideTable: React.FC<SideTableProps> = props => {
       }}
       className={item.selected ? classes.selectedItem : ''}
     >
-      <ListItemText primary={item.primary} secondary={item.secondary} />
-      <ListItemSecondaryAction>
-        <IconButton className={item.selected ? classes.selectedItemColor : ''}>
-          <EditIcon />
-        </IconButton>
-        <IconButton className={item.selected ? classes.selectedItemColor : ''}>
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
+      <EditableListItem
+        edit="primary"
+        primary={item.primary}
+        secondary={item.secondary}
+        onSubmit={
+          item.onValueChange ? value => item.onValueChange(value) : undefined
+        }
+        editingDisabled={!item.onValueChange}
+        additionalActions={[
+          <IconButton
+            key={0}
+            className={item.selected ? classes.selectedItemColor : ''}
+          >
+            <DeleteIcon />
+          </IconButton>,
+        ]}
+        classes={{
+          editIconButton: item.selected ? classes.selectedItemColor : '',
+        }}
+      />
     </ListItem>
   ));
 
