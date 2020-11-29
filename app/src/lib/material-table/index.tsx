@@ -49,7 +49,7 @@ const MaterialTable = <RowData extends {}>(
     groupingActive: state.active,
     setGroupingActive: state.setActive,
   }));
-  const [rowsPerPage, setRowsPerPage] = useState<number | undefined>(undefined);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
 
   useEffect(() => {
     if (!props.defaultActions?.grouping?.active && groupingActive === true)
@@ -82,10 +82,12 @@ const MaterialTable = <RowData extends {}>(
     );
   }, [selected]);
   useEffect(() => {
-    window.localStorage.setItem(
-      `${props.uniqueName}-rowsPerPage`,
-      JSON.stringify(rowsPerPage),
-    );
+    if (rowsPerPage) {
+      window.localStorage.setItem(
+        `${props.uniqueName}-rowsPerPage`,
+        JSON.stringify(rowsPerPage),
+      );
+    }
   }, [rowsPerPage]);
 
   let { columns } = props;
@@ -119,7 +121,9 @@ const MaterialTable = <RowData extends {}>(
       />
       <OverlayLoadingContainer>
         <MaterialTablePrefab
+          key={rowsPerPage}
           {...props}
+          data={props.data}
           columns={columns}
           icons={materialTableIcons}
           localization={materialTableLocalization(t)}
