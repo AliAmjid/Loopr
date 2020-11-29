@@ -4,7 +4,8 @@
 namespace App\Error;
 
 
-class ClientErrorType {
+class ClientErrorType
+{
     const INVALID_ROLE_CONFIG = [
         'code' => 'INVALID_ROLE_CONFIG',
         'msg' => 'Role configuration is incompatible or wrong.'
@@ -38,5 +39,10 @@ class ClientErrorType {
     const OLD_PASSWORD_IS_WRONG = [
         'code' => 'OLD_PASSWORD_IS_WRONG',
         'msg' => 'Old password is wrong'
+    ];
+
+    const USER_IS_NOT_TEACHER = [
+        'code' => 'USER_IS_NOT_TEACHER',
+        'msg' => 'User does not have GROUP_TEACHER resources.'
     ];
 }

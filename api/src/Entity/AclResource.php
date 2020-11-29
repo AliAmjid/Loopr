@@ -13,7 +13,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity()
  */
-class AclResource {
+class AclResource
+{
 
     /**
      * @var string
@@ -26,14 +27,16 @@ class AclResource {
     /**
      * @return string
      */
-    public function getId(): string {
+    public function getId(): string
+    {
         return $this->id;
     }
 
     /**
      * @param string $id
      */
-    public function setId(string $id): void {
+    public function setId(string $id): void
+    {
         $this->id = $id;
     }
 
@@ -51,39 +54,46 @@ class AclResource {
      */
     private ?Collection  $dependsOn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->resources = new ArrayCollection();
+        $this->dependsOn = new ArrayCollection();
     }
 
     /**
      * @return string
      */
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName(string $name): void {
+    public function setName(string $name): void
+    {
         $this->name = $name;
     }
 
     /**
      * @return Collection|AclResource[]
      */
-    public function getDependsOn(): ?Collection {
+    public function getDependsOn(): ?Collection
+    {
         return $this->dependsOn;
     }
 
     /**
      * @param Collection|null $dependsOn
      */
-    public function setDependsOn(?Collection $dependsOn): void {
+    public function setDependsOn(?Collection $dependsOn): void
+    {
         $this->dependsOn = $dependsOn;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->name;
     }
 }

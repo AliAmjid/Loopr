@@ -4,14 +4,17 @@
 namespace App\Tests\Features;
 
 
+use App\Entity\AclRole;
 use App\Entity\User;
 use App\Enum\AclResourceEnum;
 use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 use Softonic\GraphQL\Response;
 
-class UserTest extends BaseTestCase {
-    public function testListAllUsers() {
+class UserTest extends BaseTestCase
+{
+    public function testListAllUsers()
+    {
         $query = /** @lang GraphQL */
             '
             query {
@@ -19,7 +22,7 @@ class UserTest extends BaseTestCase {
             }
         ';
         $this->assertSecurityResources(
-            [AclResourceEnum::LIST_ALL_USERS],
+            [AclResourceEnum::USER_SHOW_ALL],
             function (User $user) use ($query) : Response {
                 $client = $this->createLoggedClient($user->getEmail());
                 return $client->query($query);
@@ -27,7 +30,8 @@ class UserTest extends BaseTestCase {
         );
     }
 
-    public function testCreateAndUpdateUser() {
+    public function testCreateAndUpdateUser()
+    {
         $createQuery = /** @lang GraphQL */
             '
             mutation createUser($email: String!, $firstname: String!, $lastname: String! $role: String! ){
@@ -48,7 +52,8 @@ class UserTest extends BaseTestCase {
               }
             }
 ';
-        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::CREATE_USER])->getEmail());
+        $client = $this->createLoggedClient($this->createRandomUser('test',
+            [AclResourceEnum::USER_CREATE])->getEmail());
         $response = $client->query($createQuery, [
             'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
             'firstname' => Random::generate(),
@@ -81,7 +86,7 @@ class UserTest extends BaseTestCase {
             }
 ';
 
-        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::EDIT_USER])->getEmail());
+        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::USER_EDIT])->getEmail());
         $client->query($editQuery, [
             'id' => $iri,
             'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
@@ -92,7 +97,8 @@ class UserTest extends BaseTestCase {
     }
 
 
-    public function testGetUser() {
+    public function testGetUser()
+    {
         $query = 'query getUser($id: ID!) {
   user(id: $id) {
     roles
@@ -100,7 +106,7 @@ class UserTest extends BaseTestCase {
     password
   }
 }';
-        $user = $this->createRandomUser('test', [AclResourceEnum::SEE_USER]);
+        $user = $this->createRandomUser('test', [AclResourceEnum::USER_SHOW]);
         $client = $this->createLoggedClient($user->getEmail());
         $r = $client->query($query, [
             'id' => 'users/' . $user->getId(),
@@ -111,8 +117,10 @@ class UserTest extends BaseTestCase {
     }
 
 
-    public function testChangePassword() {
-        $client = $this->createLoggedClient($this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getEmail());
+    public function testChangePassword()
+    {
+        $client = $this->createLoggedClient($this->createRandomUser('test',
+            AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getEmail());
         $query = '
 mutation changePassword($oldPwd: String! $newPwd: String!) {
   changePasswordUser(
@@ -129,5 +137,57 @@ mutation changePassword($oldPwd: String! $newPwd: String!) {
         ]);
 
         $this->assertErrors($response, 1);
+    }
+
+
+    public function testCreateEmptyEmail()
+    {
+        $user = $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_ADMIN']);
+        $clinet = $this->createLoggedClient($user->getEmail());
+        $response = $clinet->query($this->getCreateUserQuery(), [
+            'email' => '',
+            'password' => 'test123',
+            'role' => 'acl_roles/' . $this->em->getRepository(AclRole::class)->findOneBy(['name' => 'ROLE_USER'])->getId(),
+            'firstname' => Random::generate(),
+            'lastname' => Random::generate()
+        ]);
+
+        $this->assertError($response, 'VALIDATION_ERROR');
+    }
+
+
+    private function getCreateUserQuery()
+    {
+        return /** @lang GraphQL */ '
+mutation createUser(
+  $email: String!
+  $role: String!
+  $firstname: String!
+  $lastname: String!
+) {
+  createUser(
+    input: {
+      email: $email
+      role: $role
+      firstname: $firstname
+      lastname: $lastname
+    }
+  ) {
+    user {
+      id
+      lastname
+      firstname
+      role {
+        name
+        id
+        resources {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+';
     }
 }

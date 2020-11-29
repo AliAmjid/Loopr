@@ -18,17 +18,18 @@ App\Entity\User:
                     - user:read
                     - aclRole:read
         item_query:
-            security_mssage: "r: SEE_USER"
-            security: "is_granted('SEE_USER')"
+            security_message: "r: USER_SHOW"
+            security: "is_granted('USER_SHOW')"
        
         collection_query:
+            security: "is_granted('USER_SHOW_ALL')"
             normalization_context:
                 groups:
                     - user:read
                     - aclRole:read
         create:
-            security: "is_granted('CREATE_USER')"
-            security_message: "r: CREATE_USER"
+            security: "is_granted('USER_CREATE')"
+            security_message: "r: USER_CREATE"
             normalization_context:
                 groups:
                     - user:read
@@ -47,8 +48,8 @@ App\Entity\User:
                     type: String!
             
         update:
-            security: "is_granted('EDIT_USER')"
-            security_message: "r: EDIT_USER"
+            security: "is_granted('USER_EDIT')"
+            security_message: "r: USER_EDIT"
             normalization_context:
                 groups:
                     - user:read
