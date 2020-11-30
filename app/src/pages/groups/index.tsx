@@ -1,67 +1,35 @@
 import React from 'react';
 
-import { useMutation, useQuery } from '@apollo/client';
-import { useSnackbar } from 'notistack';
+import { Grid, Hidden, makeStyles, Paper } from '@material-ui/core';
 
-import {
-  GroupsAddGroupMutation,
-  GroupsAddGroupMutationVariables,
-  GroupsGroupsQuery,
-} from 'types/graphql';
+import GroupIndex from 'pages/groups/group';
+import GroupListIndex from 'pages/groups/groupList';
+import groupsPageOptions from 'pages/groups/pageOptions';
 
 import withPage from 'components/withPage';
 
-import GROUPS_ADD_GROUP_MUTATION from './mutations/addGroup';
-import GROUPS_GROUPS_QUERY from './queries/groups';
-import Groups from './groups';
-import groupsPageOptions from './pageOptions';
-import { AddValues, TableGroup } from './types';
+const useStyles = makeStyles({
+  paper: {
+    padding: 0,
+  },
+});
 
 const GroupsIndex: React.FC = () => {
-  const { data: groupsData, loading: groupsLoading } = useQuery<
-    GroupsGroupsQuery
-  >(GROUPS_GROUPS_QUERY);
-  const [addGroup, { loading: addGroupLoading }] = useMutation<
-    GroupsAddGroupMutation,
-    GroupsAddGroupMutationVariables
-  >(GROUPS_ADD_GROUP_MUTATION, {
-    refetchQueries: ['GroupsGroupsQuery'],
-    awaitRefetchQueries: true,
-  });
-  const { enqueueSnackbar } = useSnackbar();
-
-  const addHandler = (values: AddValues): Promise<boolean> => {
-    return addGroup({
-      variables: {
-        input: values,
-      },
-    })
-      .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
-
-        return true;
-      })
-      .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
-
-        return false;
-      });
-  };
-
-  const groups: TableGroup[] = [];
-  (groupsData?.groups?.edges?.map(e => e?.node) || []).forEach(group => {
-    if (group) {
-      groups.push(group);
-    }
-  });
+  const classes = useStyles();
 
   return (
-    <Groups
-      groups={groups}
-      onAdd={addHandler}
-      groupsLoading={groupsLoading}
-      addGroupLoading={addGroupLoading}
-    />
+    <Paper className={classes.paper}>
+      <Grid container>
+        <Grid item xs={12} sm={6} md={5} lg={4} xl={3}>
+          <GroupListIndex />
+        </Grid>
+        <Hidden xsDown>
+          <Grid item sm={6} md={7} lg={8} xl={9}>
+            <GroupIndex />
+          </Grid>
+        </Hidden>
+      </Grid>
+    </Paper>
   );
 };
 

@@ -15,10 +15,6 @@ export type DetailGroup =
   | undefined
   | null;
 
-export interface GroupIndexProps {
-  selectedGroup?: string;
-}
-
 export interface GroupProps {
   group: DetailGroup;
   loading: boolean;

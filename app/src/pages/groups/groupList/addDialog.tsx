@@ -10,7 +10,10 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import { AddDialogFormValues, AddDialogProps } from './types';
+import {
+  AddDialogFormValues,
+  AddDialogProps,
+} from 'pages/groups/groupList/types';
 
 const AddDialog: React.FC<AddDialogProps> = props => {
   const { handleSubmit, register, errors } = useForm<AddDialogFormValues>();
