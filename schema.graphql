@@ -77,19 +77,66 @@ type AclRoleItem implements Node {
     resources: [AclResourceItem]
 }
 
+type Group implements Node {
+    createdAt: String!
+    createdBy: UserItem
+    id: ID!
+    section: String!
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        email: String,
+        email_list: [String],
+        "Returns the first n elements from the list."
+        first: Int,
+        firstname: String,
+        firstname_list: [String],
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        lastname: String,
+        lastname_list: [String]
+    ): UserItemConnection
+    year: Int!
+}
+
+"Connection for Group."
+type GroupConnection {
+    edges: [GroupEdge]
+    pageInfo: GroupPageInfo!
+    totalCount: Int!
+}
+
+"Edge of Group."
+type GroupEdge {
+    cursor: String!
+    node: Group
+}
+
+"Information about the current page."
+type GroupPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
 type Mutation {
     "ChangePasswords a User."
     changePasswordUser(input: changePasswordUserInput!): changePasswordUserPayload
     "Creates a AclRole."
     createAclRole(input: createAclRoleInput!): createAclRolePayload
+    "Creates a Group."
+    createGroup(input: createGroupInput!): createGroupPayload
     "Creates a User."
     createUser(input: createUserInput!): createUserPayload
-    "DenormalizationContexts a User."
-    denormalizationContextUser(input: denormalizationContextUserInput!): denormalizationContextUserPayload
-    "NormalizationContexts a User."
-    normalizationContextUser(input: normalizationContextUserInput!): normalizationContextUserPayload
     "Updates a AclRole."
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
+    "Updates a Group."
+    updateGroup(input: updateGroupInput!): updateGroupPayload
     "Updates a User."
     updateUser(input: updateUserInput!): updateUserPayload
 }
@@ -99,6 +146,17 @@ type Query {
     aclRole(id: ID!): AclRoleItem
     aclRoles: [AclRoleCollection]
     getToken(email: String!, password: String!): Token
+    group(id: ID!): Group
+    groups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): GroupConnection
     meUser: User
     node(id: ID!): Node
     user(id: ID!): UserItem
@@ -108,12 +166,17 @@ type Query {
         "Returns the elements in the list that come before the specified cursor."
         before: String,
         email: String,
+        email_list: [String],
         "Returns the first n elements from the list."
         first: Int,
+        firstname: String,
+        firstname_list: [String],
         id: String,
         id_list: [String],
         "Returns the last n elements from the list."
-        last: Int
+        last: Int,
+        lastname: String,
+        lastname_list: [String]
     ): UserCollectionConnection
 }
 
@@ -180,7 +243,28 @@ type UserItem implements Node {
     password: String!
     role: AclRoleItem!
     roles: Iterable!
-    username: String! @deprecated(reason : "uset email instead")
+    username: String! @deprecated(reason : "use email instead")
+}
+
+"Connection for UserItem."
+type UserItemConnection {
+    edges: [UserItemEdge]
+    pageInfo: UserItemPageInfo!
+    totalCount: Int!
+}
+
+"Edge of UserItem."
+type UserItemEdge {
+    cursor: String!
+    node: UserItem
+}
+
+"Information about the current page."
+type UserItemPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
 }
 
 type changePasswordUserPayload {
@@ -215,6 +299,53 @@ type createAclRolePayload {
     clientMutationId: String
 }
 
+type createGroupPayload {
+    clientMutationId: String
+    group: createGroupPayloadData
+}
+
+type createGroupPayloadData implements Node {
+    _id: String!
+    createdAt: String!
+    createdBy: createUserNestedPayload
+    id: ID!
+    section: String!
+    users: createUserNestedPayloadConnection
+    year: Int!
+}
+
+type createUserNestedPayload implements Node {
+    _id: String!
+    createdAt: String!
+    "email of user"
+    email: String!
+    firstname: String!
+    id: ID!
+    lastname: String!
+    role: createAclRoleNestedPayload!
+}
+
+"Connection for createUserNestedPayload."
+type createUserNestedPayloadConnection {
+    edges: [createUserNestedPayloadEdge]
+    pageInfo: createUserNestedPayloadPageInfo!
+    totalCount: Int!
+}
+
+"Edge of createUserNestedPayload."
+type createUserNestedPayloadEdge {
+    cursor: String!
+    node: createUserNestedPayload
+}
+
+"Information about the current page."
+type createUserNestedPayloadPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
 type createUserPayload {
     clientMutationId: String
     user: createUserPayloadData
@@ -229,16 +360,6 @@ type createUserPayloadData implements Node {
     id: ID!
     lastname: String!
     role: createAclRoleNestedPayload!
-}
-
-type denormalizationContextUserPayload {
-    clientMutationId: String
-    user: UserItem
-}
-
-type normalizationContextUserPayload {
-    clientMutationId: String
-    user: UserItem
 }
 
 type updateAclResourceNestedPayload implements Node {
@@ -266,6 +387,53 @@ type updateAclRoleNestedPayload implements Node {
 type updateAclRolePayload {
     aclRole: AclRoleItem
     clientMutationId: String
+}
+
+type updateGroupPayload {
+    clientMutationId: String
+    group: updateGroupPayloadData
+}
+
+type updateGroupPayloadData implements Node {
+    _id: String
+    createdAt: String
+    createdBy: updateUserNestedPayload
+    id: ID!
+    section: String
+    users: updateUserNestedPayloadConnection
+    year: Int
+}
+
+type updateUserNestedPayload implements Node {
+    _id: String
+    createdAt: String
+    "email of user"
+    email: String
+    firstname: String
+    id: ID!
+    lastname: String
+    role: updateAclRoleNestedPayload
+}
+
+"Connection for updateUserNestedPayload."
+type updateUserNestedPayloadConnection {
+    edges: [updateUserNestedPayloadEdge]
+    pageInfo: updateUserNestedPayloadPageInfo!
+    totalCount: Int!
+}
+
+"Edge of updateUserNestedPayload."
+type updateUserNestedPayloadEdge {
+    cursor: String!
+    node: updateUserNestedPayload
+}
+
+"Information about the current page."
+type updateUserNestedPayloadPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
 }
 
 type updateUserPayload {
@@ -303,36 +471,20 @@ input createAclRoleInput {
     resources: [String]
 }
 
+input createGroupInput {
+    clientMutationId: String
+    section: String!
+    users: [String]
+    year: Int!
+}
+
 input createUserInput {
+    classGroup: String
     clientMutationId: String
     "email of user"
     email: String!
     firstname: String!
     lastname: String!
-    role: String!
-}
-
-input denormalizationContextUserInput {
-    clientMutationId: String
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    "The hashed password"
-    password: String!
-    role: String!
-}
-
-input normalizationContextUserInput {
-    clientMutationId: String
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    "The hashed password"
-    password: String!
     role: String!
 }
 
@@ -359,7 +511,16 @@ input updateAclRoleInput {
     resources: [String]
 }
 
+input updateGroupInput {
+    clientMutationId: String
+    id: ID!
+    section: String
+    users: [String]
+    year: Int
+}
+
 input updateUserInput {
+    classGroup: String
     clientMutationId: String
     "email of user"
     email: String
