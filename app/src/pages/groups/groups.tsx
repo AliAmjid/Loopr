@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Grid, makeStyles, Paper } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import MaterialTable from 'lib/material-table';
-
-import Group from 'pages/groups/group';
+import GroupIndex from 'pages/groups/group';
 
 import SideTable from 'components/SideTable';
 
@@ -22,6 +20,9 @@ const Groups: React.FC<GroupsProps> = props => {
   const classes = useStyles();
 
   const [addOpen, setAddOpen] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<string | undefined>(
+    undefined,
+  );
 
   return (
     <>
@@ -52,13 +53,13 @@ const Groups: React.FC<GroupsProps> = props => {
                 id: group.id,
                 primary: `${group?.year} ${group?.section}`,
                 onClick: () => {
-                  props.onGroupChange(group.id);
+                  setSelectedGroup(group.id);
                 },
               }))}
             />
           </Grid>
           <Grid item xs={false} sm={6} md={7} lg={8} xl={9}>
-            <Group group={props.group} />
+            <GroupIndex selectedGroup={selectedGroup} />
           </Grid>
         </Grid>
       </Paper>
