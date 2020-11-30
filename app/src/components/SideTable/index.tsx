@@ -1,21 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
   Fab,
   fade,
-  IconButton,
   List,
   ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
   makeStyles,
   TextField,
   Theme,
   Typography,
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 
 import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
@@ -41,48 +36,48 @@ const useStyles = makeStyles((theme: Theme) => ({
   selectedItem: {
     backgroundColor: `${fade(theme.palette.secondary.light, 0.5)} !important`,
   },
-  selectedItemColor: {
-    color: theme.palette.common.black,
-  },
 }));
 
 const SideTable: React.FC<SideTableProps> = props => {
   const classes = useStyles();
 
-  const mappedItems = props.items.map(item => (
-    <ListItem
-      key={item.id}
-      button
-      selected={item.selected || false}
-      onClick={() => {
-        if (item.onClick) {
-          item.onClick();
-        }
-      }}
-      className={item.selected ? classes.selectedItem : ''}
-    >
-      <EditableListItem
-        edit="primary"
-        primary={item.primary}
-        secondary={item.secondary}
-        onSubmit={
-          item.onValueChange ? value => item.onValueChange(value) : undefined
-        }
-        editingDisabled={!item.onValueChange}
-        additionalActions={[
-          <IconButton
-            key={0}
-            className={item.selected ? classes.selectedItemColor : ''}
-          >
-            <DeleteIcon />
-          </IconButton>,
-        ]}
-        classes={{
-          editIconButton: item.selected ? classes.selectedItemColor : '',
+  const [selected, setSelected] = useState<number | string | undefined>(
+    undefined,
+  );
+
+  const mappedItems = props.items.map(item => {
+    const itemSelected = item.id === selected;
+
+    return (
+      <ListItem
+        key={item.id}
+        button
+        selected={itemSelected}
+        onClick={() => {
+          setSelected(item.id);
+          if (item.onClick) {
+            item.onClick();
+          }
         }}
-      />
-    </ListItem>
-  ));
+        className={itemSelected ? classes.selectedItem : ''}
+      >
+        <EditableListItem
+          edit="primary"
+          primary={item.primary}
+          secondary={item.secondary}
+          onSubmit={value => {
+            if (item.onValueChange) {
+              return item.onValueChange(value);
+            }
+
+            return Promise.resolve(false);
+          }}
+          editingDisabled={!item.onValueChange}
+          additionalActions={item.additionalActions}
+        />
+      </ListItem>
+    );
+  });
 
   let style = {};
 

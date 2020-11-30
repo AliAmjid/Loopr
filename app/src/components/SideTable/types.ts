@@ -7,9 +7,9 @@ export interface SideTableProps {
     id: number | string;
     primary: string;
     secondary?: string;
-    selected?: boolean;
     onClick?: () => void;
     onValueChange?: (value: string) => Promise<boolean>;
+    additionalActions?: JSX.Element[];
   }[];
   bottomAction?: {
     icon: JSX.Element;

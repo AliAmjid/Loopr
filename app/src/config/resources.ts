@@ -1,13 +1,13 @@
 const resources = {
   user: {
-    listAll: 'LIST_ALL_USERS',
-    edit: 'EDIT_USER',
-    see: 'SEE_USER',
-    create: 'CREATE_USER',
+    seeAll: 'USER_SEE_ALL',
+    edit: 'USER_EDIT',
+    show: 'USER_SHOW',
+    create: 'USER_CREATE',
   },
   role: {
-    edit: 'EDIT_ROLE',
-    createRole: 'CREATE_ROLE',
+    edit: 'ROLE_EDIT',
+    createRole: 'ROLE_CREATE',
   },
 };
 
