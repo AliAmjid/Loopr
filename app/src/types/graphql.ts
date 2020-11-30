@@ -318,6 +318,38 @@ export interface GroupsAddGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: GroupsUpdateGroupInfoMutation
+// ====================================================
+
+export interface GroupsUpdateGroupInfoMutation_updateGroup_group {
+  __typename: "updateGroupPayloadData";
+  id: string;
+  year: number | null;
+  section: string | null;
+}
+
+export interface GroupsUpdateGroupInfoMutation_updateGroup {
+  __typename: "updateGroupPayload";
+  group: GroupsUpdateGroupInfoMutation_updateGroup_group | null;
+}
+
+export interface GroupsUpdateGroupInfoMutation {
+  /**
+   * Updates a Group.
+   */
+  updateGroup: GroupsUpdateGroupInfoMutation_updateGroup | null;
+}
+
+export interface GroupsUpdateGroupInfoMutationVariables {
+  input: updateGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GroupsGroupQuery
 // ====================================================
 
@@ -817,6 +849,14 @@ export interface createUserInput {
   firstname: string;
   lastname: string;
   role: string;
+}
+
+export interface updateGroupInput {
+  clientMutationId?: string | null;
+  id: string;
+  section?: string | null;
+  users?: (string | null)[] | null;
+  year?: number | null;
 }
 
 export interface updateUserInput {

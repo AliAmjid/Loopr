@@ -22,6 +22,7 @@ export interface GroupListProps {
   addGroupLoading: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
+  onUpdate: (values: AddValues) => Promise<boolean>;
 }
 
 export interface AddDialogProps {
