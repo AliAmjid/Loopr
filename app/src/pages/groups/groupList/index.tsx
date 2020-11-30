@@ -3,7 +3,7 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
-import { AddValues, Group } from 'pages/groups/groupList/types';
+import { AddValues, Group, UpdateValues } from 'pages/groups/groupList/types';
 import GROUPS_UPDATE_GROUP_INFO_MUTATION from 'pages/groups/mutations/updateGroupInfo';
 import useGroupsState from 'pages/groups/state';
 
@@ -34,16 +34,38 @@ const GroupListIndex: React.FC = () => {
     refetchQueries: ['GroupsGroupsQuery'],
     awaitRefetchQueries: true,
   });
-  const [updateGroup, { loading: updateLoading }] = useMutation<
+  const [updateGroup] = useMutation<
     GroupsUpdateGroupInfoMutation,
     GroupsUpdateGroupInfoMutationVariables
-  >(GROUPS_UPDATE_GROUP_INFO_MUTATION);
+  >(GROUPS_UPDATE_GROUP_INFO_MUTATION, {
+    // TODO typename
+    refetchQueries: ['GroupsGroupsQuery'],
+    awaitRefetchQueries: true,
+  });
   const { enqueueSnackbar } = useSnackbar();
 
   const addHandler = (values: AddValues): Promise<boolean> => {
     return addGroup({
       variables: {
         input: values,
+      },
+    })
+      .then(() => {
+        enqueueSnackbar('S', { variant: 'success' });
+
+        return true;
+      })
+      .catch(() => {
+        enqueueSnackbar('E', { variant: 'error' });
+
+        return false;
+      });
+  };
+
+  const updateHandler = (values: UpdateValues): Promise<boolean> => {
+    return updateGroup({
+      variables: {
+        input: { id: values.id, section: values.section, year: 2020 },
       },
     })
       .then(() => {
@@ -74,6 +96,7 @@ const GroupListIndex: React.FC = () => {
       onSelectedGroupChange={(group: string) => {
         setSelectedGroup(group);
       }}
+      onUpdate={updateHandler}
     />
   );
 };

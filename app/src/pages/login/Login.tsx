@@ -66,6 +66,7 @@ const Login: React.FC<LoginProps> = props => {
                   variant="outlined"
                   fullWidth
                   autoComplete="email"
+                  autoFocus
                   inputRef={register({ required: true })}
                   inputProps={{ 'test-id': 'Login-emailInput' }}
                 />

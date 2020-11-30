@@ -16,13 +16,18 @@ export interface Group {
 
 export type Groups = Group[];
 
+export interface UpdateValues {
+  id: string;
+  section: string;
+}
+
 export interface GroupListProps {
   groups: Groups;
   groupsLoading: boolean;
   addGroupLoading: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
-  onUpdate: (values: AddValues) => Promise<boolean>;
+  onUpdate: (values: UpdateValues) => Promise<boolean>;
 }
 
 export interface AddDialogProps {

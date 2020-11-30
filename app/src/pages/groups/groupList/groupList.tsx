@@ -35,10 +35,10 @@ const GroupList: React.FC<GroupListProps> = props => {
         }}
         items={props.groups.map(group => ({
           id: group.id,
-          primary: `${group?.year} ${group?.section}`,
-          onClick: () => {
-            props.onSelectedGroupChange(group.id);
-          },
+          primary: group?.section,
+          onValueChange: (value: string) =>
+            props.onUpdate({ id: group.id, section: value }),
+          onClick: () => props.onSelectedGroupChange(group.id),
         }))}
       />
     </>

@@ -14,6 +14,9 @@ import ClearIcon from '@material-ui/icons/Clear';
 import DoneIcon from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+
 import { EditableListItemProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -30,14 +33,18 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(editValue);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const cancelHandler = (): void => {
     setEditing(false);
-    setValue(editValue);
     setError(false);
   };
-  const submitHandler = (): void => {
+  const submitHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    setLoading(true);
     props.onSubmit(`${value}`).then(success => {
+      setLoading(false);
+
       if (success) cancelHandler();
       else setError(true);
     });
@@ -61,6 +68,7 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
       onChange={e => setValue(e.target.value)}
       error={error}
       fullWidth
+      autoFocus
     />
   );
 
@@ -99,33 +107,42 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
 
   return (
     <>
-      {props.edit === 'primary' ? primaryEditable : secondaryEditable}
-      <ListItemSecondaryAction>
-        {editing ? (
-          <>
-            <IconButton onClick={submitHandler} color="primary">
-              <DoneIcon />
-            </IconButton>
-            <IconButton onClick={cancelHandler}>
-              <ClearIcon />
-            </IconButton>
-          </>
-        ) : (
-          <>
-            {!props.editingDisabled && (
+      <OverlayLoading loading={loading} />
+      <form>
+        {props.edit === 'primary' ? primaryEditable : secondaryEditable}
+        <ListItemSecondaryAction>
+          {editing ? (
+            <>
               <IconButton
-                className={props.classes?.editIconButton || ''}
-                onClick={() => {
-                  setEditing(true);
-                }}
+                key="submit"
+                type="submit"
+                onClick={submitHandler}
+                color="primary"
               >
-                <EditIcon />
+                <DoneIcon />
               </IconButton>
-            )}
-            {props.additionalActions}
-          </>
-        )}
-      </ListItemSecondaryAction>
+              <IconButton onClick={cancelHandler}>
+                <ClearIcon />
+              </IconButton>
+            </>
+          ) : (
+            <>
+              {!props.editingDisabled && (
+                <IconButton
+                  key="edit"
+                  className={props.classes?.editIconButton || ''}
+                  onClick={() => {
+                    setEditing(true);
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
+              )}
+              {props.additionalActions}
+            </>
+          )}
+        </ListItemSecondaryAction>
+      </form>
     </>
   );
 };
