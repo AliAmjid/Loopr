@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 
-import { Box, Grid, IconButton, makeStyles, Paper } from '@material-ui/core';
+import { Box, Grid, makeStyles, Paper } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { bool } from 'prop-types';
 
 import MaterialTable from 'lib/material-table';
 
+import Group from 'pages/groups/group';
+
 import SideTable from 'components/SideTable';
-import withPage from 'components/withPage';
 
 import AddDialog from './addDialog';
-import groupsPageOptions from './pageOptions';
 import { GroupsProps } from './types';
 
 const useStyles = makeStyles({
@@ -43,103 +41,24 @@ const Groups: React.FC<GroupsProps> = props => {
           <Grid item xs={12} sm={6} md={5} lg={4} xl={3}>
             <SideTable
               title="Groups"
+              loading={props.groupsLoading}
               bottomAction={{
                 icon: <AddIcon />,
                 onClick: () => {
                   setAddOpen(true);
                 },
               }}
-              items={[
-                {
-                  id: 0,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                  onValueChange: () => {},
-                  additionalActions: [
-                    <IconButton key={0}>
-                      <DeleteIcon />
-                    </IconButton>,
-                  ],
+              items={props.groups.map(group => ({
+                id: group.id,
+                primary: `${group?.year} ${group?.section}`,
+                onClick: () => {
+                  props.onGroupChange(group.id);
                 },
-                {
-                  id: 1,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 2,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 3,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 4,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 5,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 6,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 7,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 8,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 9,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 10,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-                {
-                  id: 11,
-                  primary: 'DVOP Matematika',
-                  secondary: '4.A, 4.B, 4.C',
-                },
-              ]}
+              }))}
             />
           </Grid>
           <Grid item xs={false} sm={6} md={7} lg={8} xl={9}>
-            <Box p={2}>
-              <MaterialTable
-                uniqueName="pages/groups/index"
-                title="Students"
-                columns={[]}
-                data={[
-                  { name: 'A', surname: 'AA' },
-                  { name: 'B', surname: 'BB' },
-                  { name: 'C', surname: 'CC' },
-                ]}
-                defaultActions={{
-                  columnFiltering: {
-                    active: true,
-                    defaultColumns: ['name'],
-                    columns: [{ title: 'Name', field: 'name' }],
-                  },
-                }}
-                options={{ exportButton: true }}
-              />
-            </Box>
+            <Group group={props.group} />
           </Grid>
         </Grid>
       </Paper>

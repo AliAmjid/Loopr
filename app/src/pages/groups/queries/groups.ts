@@ -1,6 +1,17 @@
 import { gql } from '@apollo/client';
 
 const GROUPS_GROUPS_QUERY = gql`
-    {
-        user(;+)
-    }`;
+  query GroupsGroupsQuery {
+    groups {
+      edges {
+        node {
+          id
+          year
+          section
+        }
+      }
+    }
+  }
+`;
+
+export default GROUPS_GROUPS_QUERY;

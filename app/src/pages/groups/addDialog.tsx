@@ -8,21 +8,41 @@ import {
   Grid,
   TextField,
 } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 
-import { AddDialogProps } from './types';
+import { AddDialogFormValues, AddDialogProps } from './types';
 
 const AddDialog: React.FC<AddDialogProps> = props => {
+  const { handleSubmit, register, errors } = useForm<AddDialogFormValues>();
+
+  const submitHandler = (values: AddDialogFormValues): void => {
+    props.onSubmit({ section: values.name, year: +values.year });
+  };
+
   return (
     <Dialog open={props.open} onClose={props.onClose}>
       <DialogTitle>Group add</DialogTitle>
       <DialogContent>
-        <form>
+        <form onSubmit={handleSubmit(submitHandler)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField label="group year" type="number" fullWidth />
+              <TextField
+                name="year"
+                label="group year"
+                type="number"
+                fullWidth
+                inputRef={register({ required: true })}
+                error={errors.year !== undefined}
+              />
             </Grid>
             <Grid item xs={12}>
-              <TextField label="group name" fullWidth />
+              <TextField
+                name="name"
+                label="group name"
+                fullWidth
+                inputRef={register({ required: true })}
+                error={errors.name !== undefined}
+              />
             </Grid>
             <Grid item xs={6}>
               <Button
@@ -30,10 +50,6 @@ const AddDialog: React.FC<AddDialogProps> = props => {
                 fullWidth
                 color="primary"
                 variant="contained"
-                onClick={e => {
-                  e.preventDefault();
-                  props.onSubmit({});
-                }}
               >
                 Add
               </Button>

@@ -20,7 +20,7 @@ import { SideTableProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    maxHeight: '100%',
+    height: '100%',
     boxShadow: '5px 0px 4px -1px rgba(0,0,0,0.2)',
     padding: theme.spacing(2),
     paddingTop: 0,

@@ -288,6 +288,106 @@ export interface AclTableQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: GroupsAddGroupMutation
+// ====================================================
+
+export interface GroupsAddGroupMutation_createGroup_group {
+  __typename: "createGroupPayloadData";
+  id: string;
+}
+
+export interface GroupsAddGroupMutation_createGroup {
+  __typename: "createGroupPayload";
+  group: GroupsAddGroupMutation_createGroup_group | null;
+}
+
+export interface GroupsAddGroupMutation {
+  /**
+   * Creates a Group.
+   */
+  createGroup: GroupsAddGroupMutation_createGroup | null;
+}
+
+export interface GroupsAddGroupMutationVariables {
+  input: createGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GroupsGroupQuery
+// ====================================================
+
+export interface GroupsGroupQuery_group_users_edges_node {
+  __typename: "UserItem";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface GroupsGroupQuery_group_users_edges {
+  __typename: "UserItemEdge";
+  node: GroupsGroupQuery_group_users_edges_node | null;
+}
+
+export interface GroupsGroupQuery_group_users {
+  __typename: "UserItemConnection";
+  edges: (GroupsGroupQuery_group_users_edges | null)[] | null;
+}
+
+export interface GroupsGroupQuery_group {
+  __typename: "Group";
+  id: string;
+  users: GroupsGroupQuery_group_users | null;
+}
+
+export interface GroupsGroupQuery {
+  group: GroupsGroupQuery_group | null;
+}
+
+export interface GroupsGroupQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GroupsGroupsQuery
+// ====================================================
+
+export interface GroupsGroupsQuery_groups_edges_node {
+  __typename: "Group";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface GroupsGroupsQuery_groups_edges {
+  __typename: "GroupEdge";
+  node: GroupsGroupsQuery_groups_edges_node | null;
+}
+
+export interface GroupsGroupsQuery_groups {
+  __typename: "GroupConnection";
+  edges: (GroupsGroupsQuery_groups_edges | null)[] | null;
+}
+
+export interface GroupsGroupsQuery {
+  groups: GroupsGroupsQuery_groups | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: LoginGetTokenQuery
 // ====================================================
 
@@ -703,7 +803,15 @@ export interface createAclRoleInput {
   resources?: (string | null)[] | null;
 }
 
+export interface createGroupInput {
+  clientMutationId?: string | null;
+  section: string;
+  users?: (string | null)[] | null;
+  year: number;
+}
+
 export interface createUserInput {
+  classGroup?: string | null;
   clientMutationId?: string | null;
   email: string;
   firstname: string;
@@ -712,6 +820,7 @@ export interface createUserInput {
 }
 
 export interface updateUserInput {
+  classGroup?: string | null;
   clientMutationId?: string | null;
   email?: string | null;
   firstname?: string | null;
