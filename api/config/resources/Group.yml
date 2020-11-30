@@ -31,8 +31,8 @@ App\Entity\Group:
                 groups:
                     - group:write
         item_query:
-            security_message: "r: GROUP_SHOW"
-            security: "is_granted('GROUP_SHOW')"
+            security_message: "r: GROUP_SHOW_ALL"
+            security: "is_granted('GROUP_SHOW_ALL')"
             normalization_context:
                 groups:
                     - group:read
