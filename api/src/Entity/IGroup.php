@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\Collection;
 interface IGroup
 {
     /**
-     * @return Collection|User[]
+     * @return User[]
      */
-    public function getUsers(): Collection;
+    public function getUsers(): array;
 
     public function getYear(): int;
 

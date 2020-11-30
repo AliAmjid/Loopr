@@ -10,8 +10,10 @@ use App\Entity\Attributes\Tid;
 use App\Enum\AclResourceEnum;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,6 +30,7 @@ class ClassGroup implements IGroup
      * @ORM\Column(type="integer", length=4)
      * @Assert\NotBlank()
      * @Assert\NotNull()
+     * @Groups({"classGroup:read", "classGroup:write"})
      */
     private int $year;
 
@@ -35,24 +38,27 @@ class ClassGroup implements IGroup
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      * @Assert\NotNull()
+     * @Groups({"classGroup:read", "classGroup:write"})
      */
     private string $section;
 
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="classGroup")
+     * @Groups({"classGroup:read", "classGroup:write"})
      */
     private Collection $users;
 
-    /** @var User Teacher needs to be user with resource GROUP_TEACHER
+    /** @var User|null Teacher needs to be user with resource GROUP_TEACHER
      * @ORM\ManyToOne(targetEntity="User")
-     * @Assert\NotNull()
+     * @Groups({"classGroup:read"})
      */
-    private User $teacher;
+    private ?User $teacher = null;
 
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User")
+     * @Groups({"classGroup:read"})
      */
     private User $createdBy;
 
@@ -61,6 +67,13 @@ class ClassGroup implements IGroup
      * @ORM\Column(type="datetime")
      */
     private \DateTime $createdAt;
+
+    public array $usersToChange = [];
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -99,27 +112,27 @@ class ClassGroup implements IGroup
     }
 
     /**
-     * @return Collection
+     * @return User[]
      */
-    public function getUsers(): Collection
+    public function getUsers(): array
     {
-        return $this->users;
+        return $this->users->getValues();
+    }
+
+    public function addUser(User $user)
+    {
+        $this->usersToChange[] = $user;
+    }
+
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
     }
 
     /**
-     * @param Collection $users
-     * @return ClassGroup
+     * @return User|null
      */
-    public function setUsers(Collection $users): ClassGroup
-    {
-        $this->users = $users;
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function getTeacher(): User
+    public function getTeacher(): ?User
     {
         return $this->teacher;
     }

@@ -45,4 +45,9 @@ class ClientErrorType
         'code' => 'USER_IS_NOT_TEACHER',
         'msg' => 'User does not have GROUP_TEACHER resources.'
     ];
+
+    const EMPTY_GROUP_CLASS_GROUP = [
+        'code' => 'EMPTY_GROUP_CLASS_GROUP',
+        'msg' => 'Group or ClassGroup is empty.'
+    ];
 }

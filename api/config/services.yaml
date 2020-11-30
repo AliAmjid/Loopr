@@ -32,8 +32,8 @@ services:
         decorates: 'api_platform.doctrine.orm.data_persister'
         
     App\DataPersister\InjectPersister:
-        decorates: 'api_platform.doctrine.orm.data_persister'  
-        
+        decorates: 'api_platform.doctrine.orm.data_persister'
+
     App\Error\ErrorNormalizer:
         tags:
             - { name: 'serializer.normalizer', priority: 12 }

@@ -1,6 +1,6 @@
-App\Entity\Group:
+App\Entity\Subject:
     #disable rest
-    collectionOperations: { }
+    collectionOperations: {}
     itemOperations:
         get:
             method: GET
@@ -13,39 +13,36 @@ App\Entity\Group:
             security: "is_granted('GROUP_CREATE')"
             normalization_context:
                 groups:
-                    - group:read
-                    - user:read
+                    - subject:read
             denormalization_context:
                 groups:
-                    - group:write
-            
-            
+                    - subject:write
+
         update:
             security: "is_granted('GROUP_CREATE')"
             security_message: 'r: GROUP_CREATE'
             normalization_context:
                 groups:
-                    - group:read
-                    - user:read
+                    - subject:read
             denormalization_context:
                 groups:
-                    - group:write
+                    - subject:write
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
             normalization_context:
                 groups:
-                    - group:read
+                    - subject:read
 
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
             normalization_context:
                 groups:
-                    - group:read
+                    - subject:read
 
-App\Entity\ClassGroup:
+App\Entity\SubjectHasGroup:
     #disable rest
-    collectionOperations: { }
+    collectionOperations: {}
     itemOperations:
         get:
             method: GET
@@ -58,33 +55,20 @@ App\Entity\ClassGroup:
             security: "is_granted('GROUP_CREATE')"
             normalization_context:
                 groups:
-                    - classGroup:read
-                    - user:read
+                    - subjectHasGroup:read
             denormalization_context:
                 groups:
-                    - classGroup:write
+                    - subjectHasGroup:write
 
-
-        update:
-            security: "is_granted('GROUP_CREATE')"
-            security_message: 'r: GROUP_CREATE'
-            normalization_context:
-                groups:
-                    - classGroup:read
-                    - user:read
-            denormalization_context:
-                groups:
-                    - classGroup:write
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
             normalization_context:
                 groups:
-                    - classGroup:read
+                    - subjectHasGroup:read
 
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
             normalization_context:
                 groups:
-                    - classGroup:read
-
+                    - subjectHasGroup:read
