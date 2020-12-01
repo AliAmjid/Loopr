@@ -26,7 +26,7 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
           { title: t('email'), field: 'email' },
           { title: t('role'), field: 'role', lookup: props.rolesLookup },
         ]}
-        data={props.users}
+        data={props.users.map(u => u)}
         options={{
           selection: true,
         }}

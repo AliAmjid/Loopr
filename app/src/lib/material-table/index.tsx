@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Container: React.FC = props => props.children;
+const Container: React.FC = props => <div>{props.children}</div>;
 
 const MaterialTable = <RowData extends {}>(
   props: MaterialTableCustomProps<RowData>,
@@ -123,10 +123,9 @@ const MaterialTable = <RowData extends {}>(
       />
       <OverlayLoadingContainer>
         <MaterialTablePrefab
-          key={rowsPerPage}
           {...props}
           data={props.data}
-          columns={columns}
+          columns={props.columns}
           icons={materialTableIcons}
           localization={materialTableLocalization(t)}
           components={{
