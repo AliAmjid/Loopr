@@ -363,11 +363,13 @@ export interface GroupsGroupQuery_group_users_edges_node {
 export interface GroupsGroupQuery_group_users_edges {
   __typename: "UserItemEdge";
   node: GroupsGroupQuery_group_users_edges_node | null;
+  cursor: string;
 }
 
 export interface GroupsGroupQuery_group_users {
   __typename: "UserItemConnection";
   edges: (GroupsGroupQuery_group_users_edges | null)[] | null;
+  totalCount: number;
 }
 
 export interface GroupsGroupQuery_group {
@@ -382,6 +384,10 @@ export interface GroupsGroupQuery {
 
 export interface GroupsGroupQueryVariables {
   id: string;
+  usersFirst?: number | null;
+  usersLast?: number | null;
+  usersAfter?: string | null;
+  usersBefore?: string | null;
 }
 
 /* tslint:disable */

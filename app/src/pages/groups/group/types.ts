@@ -1,21 +1,19 @@
-export type DetailGroupUsers =
-  | {
-      id: string;
-      firstname: string;
-      lastname: string;
-    }[]
-  | null
-  | undefined;
+import { Query } from 'material-table';
 
-export type DetailGroup =
-  | {
-      id: string;
-      users: DetailGroupUsers;
-    }
-  | undefined
-  | null;
+export type DetailGroupUser = {
+  id: string;
+  firstname: string;
+  lastname: string;
+};
+
+export interface GetGroupsUsersReturn {
+  users: DetailGroupUser[];
+  totalCount: number;
+}
 
 export interface GroupProps {
-  group: DetailGroup;
-  loading: boolean;
+  getGroupUsers: (
+    query: Query<DetailGroupUser>,
+  ) => Promise<GetGroupsUsersReturn>;
+  selectedGroup?: string;
 }

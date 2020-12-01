@@ -1,43 +1,69 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { useLazyQuery } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
+import { Query } from 'material-table';
 
 import GROUPS_GROUP_QUERY from 'pages/groups/queries/group';
 import useGroupsState from 'pages/groups/state';
 
 import { GroupsGroupQuery, GroupsGroupQueryVariables } from 'types/graphql';
 
+import usePagination from 'components/usePagination';
+
 import Group from './group';
-import { DetailGroup, DetailGroupUsers } from './types';
+import { DetailGroupUser, GetGroupsUsersReturn } from './types';
 
 const GroupIndex: React.FC = () => {
   const { selectedGroup } = useGroupsState(state => ({
     selectedGroup: state.selectedGroup,
   }));
-  const [fetchGroup, { data: groupData, loading: groupLoading }] = useLazyQuery<
-    GroupsGroupQuery,
-    GroupsGroupQueryVariables
-  >(GROUPS_GROUP_QUERY);
+  const client = useApolloClient();
+  const { getPagination, setPagination } = usePagination();
 
-  useEffect(() => {
-    if (selectedGroup) fetchGroup({ variables: { id: selectedGroup } });
-  }, [selectedGroup]);
+  const getGroupUsers = (
+    query: Query<DetailGroupUser>,
+  ): Promise<GetGroupsUsersReturn> => {
+    const variables = getPagination({
+      page: query.page,
+      pageSize: query.pageSize,
+    });
 
-  const groupUsers: DetailGroupUsers = [];
-  groupData?.group?.users?.edges?.forEach(e => {
-    if (e?.node) {
-      groupUsers.push({ ...e.node });
+    const defaultValue = { users: [], totalCount: 0 };
+
+    if (selectedGroup) {
+      return client
+        .query<GroupsGroupQuery, GroupsGroupQueryVariables>({
+          query: GROUPS_GROUP_QUERY,
+          variables: {
+            id: selectedGroup,
+            usersFirst: variables.first,
+            usersLast: variables.last,
+            usersBefore: variables.before,
+            usersAfter: variables.after,
+          },
+        })
+        .then(res => {
+          const edges = res.data?.group?.users?.edges;
+          const totalCount = res.data?.group?.users?.totalCount;
+          if (edges && totalCount) {
+            setPagination({ edges, totalCount });
+
+            const users = [];
+            for (const user of res.data?.group?.users?.edges || []) {
+              if (user?.node) users.push(user.node);
+            }
+
+            return { users, totalCount };
+          }
+
+          return defaultValue;
+        });
     }
-  });
 
-  const group: DetailGroup = groupData?.group
-    ? {
-        ...groupData?.group,
-        users: groupUsers,
-      }
-    : undefined;
+    return Promise.resolve(defaultValue);
+  };
 
-  return <Group group={group} loading={groupLoading} />;
+  return <Group selectedGroup={selectedGroup} getGroupUsers={getGroupUsers} />;
 };
 
 export default GroupIndex;
