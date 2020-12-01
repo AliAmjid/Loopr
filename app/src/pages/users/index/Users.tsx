@@ -41,8 +41,11 @@ const Users: React.FC<UsersProps> = props => {
                 resolve({
                   page: query.page,
                   totalCount: res.data.users.totalCount,
-                  data: (res.data.users.edges?.map(e => ({ ...e?.node })) ||
-                    []) as User[],
+                  data: (res.data.users.edges?.map(e => ({
+                    ...e?.node,
+                    role: { name: stripRolePrefix(e?.node?.role?.name || '') },
+                    createdAt: dayjs(e?.node?.createdAt).format('DD.MM. YYYY'),
+                  })) || []) as User[],
                 });
               }
 
@@ -73,14 +76,11 @@ const Users: React.FC<UsersProps> = props => {
               {
                 title: t('columns.createdAt'),
                 field: 'createdAt',
-                render: (row: User) =>
-                  dayjs(row.createdAt).format('DD.MM. YYYY'),
                 filtering: false,
               },
               {
                 title: t('columns.role'),
                 field: 'role.name',
-                render: (row: User) => stripRolePrefix(row.role.name || ''),
                 filtering: false,
               },
             ],

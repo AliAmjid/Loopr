@@ -4,11 +4,11 @@ import { Query } from 'material-table';
 import { UsersUsersQuery } from 'types/graphql';
 
 export interface User {
-  id: string;
-  name: string;
-  username: string;
-  createdAt: string;
-  role: {
+  id?: string;
+  name?: string;
+  username?: string;
+  createdAt?: string;
+  role?: {
     id: string;
     name: string;
   };
