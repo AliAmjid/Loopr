@@ -81,6 +81,7 @@ const Users: React.FC<UsersProps> = props => {
                 title: t('columns.role'),
                 field: 'role.name',
                 render: (row: User) => stripRolePrefix(row.role.name || ''),
+                filtering: false,
               },
             ],
           },

@@ -26,17 +26,23 @@ const UsersIndex: React.FC = () => {
       pageSize: query.pageSize,
     });
 
-    const lastNameFilter =
-      query.filters.find(f => f.column.field === 'lastname')?.value || '';
-
-    console.log(query);
+    const emailFilter = query.filters.find(f => f.column.field === 'email')
+      ?.value;
+    const firstNameFilter = query.filters.find(
+      f => f.column.field === 'firstname',
+    )?.value;
+    const lastNameFilter = query.filters.find(
+      f => f.column.field === 'lastname',
+    )?.value;
 
     return client
       .query<UsersUsersQuery, UsersUsersQueryVariables>({
         query: USERS_USERS_QUERY,
         variables: {
           ...paginationVariables,
+          email: emailFilter,
           lastName: lastNameFilter,
+          firstName: firstNameFilter,
         },
       })
       .then(res => {
