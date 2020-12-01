@@ -123,9 +123,10 @@ const MaterialTable = <RowData extends {}>(
       />
       <OverlayLoadingContainer>
         <MaterialTablePrefab
+          key={rowsPerPage}
           {...props}
           data={props.data}
-          columns={props.columns}
+          columns={columns}
           icons={materialTableIcons}
           localization={materialTableLocalization(t)}
           components={{
