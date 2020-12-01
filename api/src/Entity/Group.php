@@ -4,20 +4,24 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="`group`", uniqueConstraints={
  *     @UniqueConstraint(name="name_unique_g", columns={"year", "section"})
  *     })
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact", "section":"partial"})
  */
 class Group implements IGroup
 {
@@ -40,11 +44,11 @@ class Group implements IGroup
     private string $section;
 
     /**
-     * @var Collection
+     * @var User[]
      * @ORM\ManyToMany(targetEntity="User")
      * @Groups({"group:read", "group:write"})
      */
-    private Collection $users;
+    private $users;
 
     /**
      * @var User
@@ -59,6 +63,11 @@ class Group implements IGroup
      * @Groups({"group:read"})
      */
     private \DateTime $createdAt;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -97,11 +106,21 @@ class Group implements IGroup
     }
 
     /**
-     * @return Collection
+     * @return User[]
      */
-    public function getUsers(): Collection
+    public function getUsers(): array
     {
-        return $this->users;
+        return $this->users->getValues();
+    }
+
+    public function addUser(User $user): void
+    {
+        $this->users->add($user);
+    }
+
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
     }
 
     /**
@@ -151,5 +170,4 @@ class Group implements IGroup
         $this->createdAt = $createdAt;
         return $this;
     }
-
 }

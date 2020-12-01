@@ -9,7 +9,6 @@ use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\User;
 use App\Service\AnnotationReaderHelperService;
-use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class InjectPersister implements ContextAwareDataPersisterInterface

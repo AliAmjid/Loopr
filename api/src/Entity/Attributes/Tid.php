@@ -8,7 +8,8 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-trait Tid {
+trait Tid
+{
     /**
      * @var string
      * @ORM\GeneratedValue(strategy="UUID")
@@ -22,14 +23,16 @@ trait Tid {
     /**
      * @return string
      */
-    public function getId(): string {
+    public function getId(): string
+    {
         return $this->id;
     }
 
     /**
      * @param string $id
      */
-    public function setId(string $id): void {
+    public function setId(string $id): void
+    {
         $this->id = $id;
     }
 }
