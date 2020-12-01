@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const Container: React.FC = props => props.children;
+
 const MaterialTable = <RowData extends {}>(
   props: MaterialTableCustomProps<RowData>,
 ): JSX.Element => {
@@ -128,7 +130,7 @@ const MaterialTable = <RowData extends {}>(
           icons={materialTableIcons}
           localization={materialTableLocalization(t)}
           components={{
-            Container: p => p.children,
+            Container,
             // eslint-disable-next-line react/display-name
             Groupbar: p => {
               return (

@@ -6,8 +6,19 @@ const USERS_USERS_QUERY = gql`
     $after: String
     $last: Int
     $before: String
+    $email: String
+    $firstName: String
+    $lastName: String
   ) {
-    users(first: $first, after: $after, last: $last, before: $before) {
+    users(
+      first: $first
+      after: $after
+      last: $last
+      before: $before
+      email: $email
+      firstname: $firstName
+      lastname: $lastName
+    ) {
       edges {
         node {
           id

@@ -21,15 +21,23 @@ const UsersIndex: React.FC = () => {
   const getUsers = (
     query: Query<User>,
   ): Promise<ApolloQueryResult<UsersUsersQuery>> => {
-    const variables = getPagination({
+    const paginationVariables = getPagination({
       page: query.page,
       pageSize: query.pageSize,
     });
 
+    const lastNameFilter =
+      query.filters.find(f => f.column.field === 'lastname')?.value || '';
+
+    console.log(query);
+
     return client
       .query<UsersUsersQuery, UsersUsersQueryVariables>({
         query: USERS_USERS_QUERY,
-        variables,
+        variables: {
+          ...paginationVariables,
+          lastName: lastNameFilter,
+        },
       })
       .then(res => {
         const edges = res.data?.users?.edges;

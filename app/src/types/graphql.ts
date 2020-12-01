@@ -756,6 +756,9 @@ export interface UsersUsersQueryVariables {
   after?: string | null;
   last?: number | null;
   before?: string | null;
+  email?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
 }
 
 /* tslint:disable */
