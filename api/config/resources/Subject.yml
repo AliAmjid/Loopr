@@ -1,4 +1,6 @@
 App\Entity\Subject:
+    normalizationContext:
+        groups: [subject:read]
     #disable rest
     collectionOperations: {}
     itemOperations:
@@ -41,6 +43,8 @@ App\Entity\Subject:
                     - subject:read
 
 App\Entity\SubjectHasGroup:
+    normalizationContext:
+        groups: [subjectHasGroup:read]
     #disable rest
     collectionOperations: {}
     itemOperations:

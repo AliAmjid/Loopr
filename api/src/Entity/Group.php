@@ -5,6 +5,8 @@ namespace App\Entity;
 
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
@@ -13,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
@@ -27,17 +30,9 @@ class Group implements IGroup
 {
     use Tid;
 
-    /** @var int
-     * @ORM\Column(type="integer", length=4)
-     * @Groups({"group:read", "group:write"})
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
-     */
-    private int $year;
-
     /** @var string
      * @ORM\Column(type="string")
-     * @Groups({"group:read", "group:write"})
+     * @Groups({"group:read", "group:write", "group:basic"})
      * @Assert\NotBlank()
      * @Assert\NotNull()
      */
@@ -64,27 +59,26 @@ class Group implements IGroup
      */
     private \DateTime $createdAt;
 
+    /**
+     * @Groups({"group:read", "group:basic", "subjectHasGroup:read"})
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="SubjectHasGroup", mappedBy="group")
+     * @ApiProperty(readableLink=true)
+     * @MaxDepth(5)
+     */
+    private Collection $subjectRelations;
+
+    /**
+     * @return Collection
+     */
+    public function getSubjectRelations(): Collection
+    {
+        return $this->subjectRelations;
+    }
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
-    }
-
-    /**
-     * @return int
-     */
-    public function getYear(): int
-    {
-        return $this->year;
-    }
-
-    /**
-     * @param int $year
-     * @return Group
-     */
-    public function setYear(int $year): Group
-    {
-        $this->year = $year;
-        return $this;
     }
 
     /**

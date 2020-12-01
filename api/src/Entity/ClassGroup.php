@@ -70,6 +70,32 @@ class ClassGroup implements IGroup
 
     public array $usersToChange = [];
 
+    /**
+     * @Groups({"group:read", "group:basic", "subjectHasGroup:read"})
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="SubjectHasGroup", mappedBy="classGroup")
+     */
+    private Collection $subjectRelations;
+
+    /**
+     * @return Collection
+     */
+    public function getSubjectRelations(): Collection
+    {
+        return $this->subjectRelations;
+    }
+
+    /**
+     * @param Collection $subjectRelations
+     * @return ClassGroup
+     */
+    public function setSubjectRelations(Collection $subjectRelations): ClassGroup
+    {
+        $this->subjectRelations = $subjectRelations;
+        return $this;
+    }
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();

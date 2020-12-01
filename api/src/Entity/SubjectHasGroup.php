@@ -9,6 +9,7 @@ use App\Error\ClientError;
 use App\Error\ClientErrorType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity()
@@ -20,20 +21,20 @@ class SubjectHasGroup
     /**
      * @var Subject
      * @ORM\ManyToOne(targetEntity="Subject")
-     * @Groups({"subjectHasGroup:read", "subjectHasGroup:write"})
+     * @Groups({"subjectHasGroup:read", "subjectHasGroup:write", "group:read", "subject:read"})
      */
     private Subject $subject;
 
     /**
      * @var Group|null
      * @ORM\ManyToOne(targetEntity="Group")
-     * @Groups({"subjectHasGroup:read", "subjectHasGroup:write"})
+     * @Groups({"subjectHasGroup:read", "subjectHasGroup:write", "group:read"})
      */
     private ?Group $group = null;
 
     /** @var ClassGroup|null
      * @ORM\ManyToOne(targetEntity="ClassGroup")
-     * @Groups({"subjectHasGroup:read", "subjectHasGroup:write"})
+     * @Groups({"subjectHasGroup:read", "subjectHasGroup:write", "group:read"})
      */
     private ?ClassGroup $classGroup = null;
 
@@ -67,8 +68,7 @@ class SubjectHasGroup
     /**
      * @Groups({"subjectHasGroup:read"})
      */
-    public
-    function getIGroup(): IGroup
+    public function getIGroup(): IGroup
     {
         return $this->group ?? $this->classGroup;
     }
@@ -76,8 +76,7 @@ class SubjectHasGroup
     /**
      * @return Subject
      */
-    public
-    function getSubject(): Subject
+    public function getSubject(): Subject
     {
         return $this->subject;
     }
@@ -86,8 +85,7 @@ class SubjectHasGroup
      * @param Subject $subject
      * @return SubjectHasGroup
      */
-    public
-    function setSubject(
+    public function setSubject(
         Subject $subject
     ): SubjectHasGroup {
         $this->subject = $subject;
@@ -97,8 +95,7 @@ class SubjectHasGroup
     /**
      * @return Group|null
      */
-    public
-    function getGroup(): ?Group
+    public function getGroup(): ?Group
     {
         return $this->group;
     }
@@ -107,8 +104,7 @@ class SubjectHasGroup
      * @param Group|null $group
      * @return SubjectHasGroup
      */
-    public
-    function setGroup(
+    public function setGroup(
         ?Group $group
     ): SubjectHasGroup {
         $this->group = $group;
@@ -118,8 +114,7 @@ class SubjectHasGroup
     /**
      * @return ClassGroup|null
      */
-    public
-    function getClassGroup(): ?ClassGroup
+    public function getClassGroup(): ?ClassGroup
     {
         return $this->classGroup;
     }
@@ -128,8 +123,7 @@ class SubjectHasGroup
      * @param ClassGroup|null $classGroup
      * @return SubjectHasGroup
      */
-    public
-    function setClassGroup(
+    public function setClassGroup(
         ?ClassGroup $classGroup
     ): SubjectHasGroup {
         $this->classGroup = $classGroup;
@@ -139,8 +133,7 @@ class SubjectHasGroup
     /**
      * @return User
      */
-    public
-    function getTeacher(): User
+    public function getTeacher(): User
     {
         return $this->teacher;
     }
@@ -149,8 +142,7 @@ class SubjectHasGroup
      * @param User $teacher
      * @return SubjectHasGroup
      */
-    public
-    function setTeacher(
+    public function setTeacher(
         User $teacher
     ): SubjectHasGroup {
         $this->teacher = $teacher;

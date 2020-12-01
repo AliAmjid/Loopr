@@ -13,7 +13,5 @@ interface IGroup
      */
     public function getUsers(): array;
 
-    public function getYear(): int;
-
     public function getSection(): string;
 }

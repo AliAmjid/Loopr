@@ -18,8 +18,6 @@ App\Entity\Group:
             denormalization_context:
                 groups:
                     - group:write
-            
-            
         update:
             security: "is_granted('GROUP_CREATE')"
             security_message: 'r: GROUP_CREATE'
@@ -36,12 +34,10 @@ App\Entity\Group:
             normalization_context:
                 groups:
                     - group:read
-
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
             normalization_context:
-                groups:
-                    - group:read
+                groups: ["group:read", "subjectHasGroup:read", "subject:read"]
 
 App\Entity\ClassGroup:
     #disable rest
@@ -60,11 +56,11 @@ App\Entity\ClassGroup:
                 groups:
                     - classGroup:read
                     - user:read
+                    - subjectHasGroup:read
+                    - subject:read
             denormalization_context:
                 groups:
                     - classGroup:write
-
-
         update:
             security: "is_granted('GROUP_CREATE')"
             security_message: 'r: GROUP_CREATE'
