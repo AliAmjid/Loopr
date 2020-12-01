@@ -18,7 +18,11 @@ const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props =>
   const [updateUser] = useMutation<
     UsersUserDetailUpdateUserMutation,
     UsersUserDetailUpdateUserMutationVariables
-  >(USERS_USER_DETAIL_UPDATE_USER_MUTATION);
+  >(USERS_USER_DETAIL_UPDATE_USER_MUTATION, {
+    // TODO typename
+    refetchQueries: ['UsersUserDetailUserQuery'],
+    awaitRefetchQueries: true,
+  });
 
   const changeHandler = (values: OnChangeValues): Promise<boolean> => {
     return updateUser({
