@@ -4,15 +4,15 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
 import { AddValues, Group, UpdateValues } from 'pages/groups/groupList/types';
-import GROUPS_UPDATE_GROUP_INFO_MUTATION from 'pages/groups/mutations/updateGroupInfo';
+import GROUPS_UPDATE_GROUP_MUTATION from 'pages/groups/mutations/updateGroup';
 import useGroupsState from 'pages/groups/state';
 
 import {
   GroupsAddGroupMutation,
   GroupsAddGroupMutationVariables,
   GroupsGroupsQuery,
-  GroupsUpdateGroupInfoMutation,
-  GroupsUpdateGroupInfoMutationVariables,
+  GroupsUpdateGroupMutation,
+  GroupsUpdateGroupMutationVariables,
 } from 'types/graphql';
 
 import GROUPS_ADD_GROUP_MUTATION from '../mutations/addGroup';
@@ -35,9 +35,9 @@ const GroupListIndex: React.FC = () => {
     awaitRefetchQueries: true,
   });
   const [updateGroup] = useMutation<
-    GroupsUpdateGroupInfoMutation,
-    GroupsUpdateGroupInfoMutationVariables
-  >(GROUPS_UPDATE_GROUP_INFO_MUTATION, {
+    GroupsUpdateGroupMutation,
+    GroupsUpdateGroupMutationVariables
+  >(GROUPS_UPDATE_GROUP_MUTATION, {
     // TODO typename
     refetchQueries: ['GroupsGroupsQuery'],
     awaitRefetchQueries: true,

@@ -318,29 +318,29 @@ export interface GroupsAddGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: GroupsUpdateGroupInfoMutation
+// GraphQL mutation operation: GroupsUpdateGroupMutation
 // ====================================================
 
-export interface GroupsUpdateGroupInfoMutation_updateGroup_group {
+export interface GroupsUpdateGroupMutation_updateGroup_group {
   __typename: "updateGroupPayloadData";
   id: string;
   year: number | null;
   section: string | null;
 }
 
-export interface GroupsUpdateGroupInfoMutation_updateGroup {
+export interface GroupsUpdateGroupMutation_updateGroup {
   __typename: "updateGroupPayload";
-  group: GroupsUpdateGroupInfoMutation_updateGroup_group | null;
+  group: GroupsUpdateGroupMutation_updateGroup_group | null;
 }
 
-export interface GroupsUpdateGroupInfoMutation {
+export interface GroupsUpdateGroupMutation {
   /**
    * Updates a Group.
    */
-  updateGroup: GroupsUpdateGroupInfoMutation_updateGroup | null;
+  updateGroup: GroupsUpdateGroupMutation_updateGroup | null;
 }
 
-export interface GroupsUpdateGroupInfoMutationVariables {
+export interface GroupsUpdateGroupMutationVariables {
   input: updateGroupInput;
 }
 
@@ -418,6 +418,45 @@ export interface GroupsGroupsQuery_groups {
 
 export interface GroupsGroupsQuery {
   groups: GroupsGroupsQuery_groups | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GroupsUsersQuery
+// ====================================================
+
+export interface GroupsUsersQuery_users_edges_node {
+  __typename: "UserCollection";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface GroupsUsersQuery_users_edges {
+  __typename: "UserCollectionEdge";
+  node: GroupsUsersQuery_users_edges_node | null;
+  cursor: string;
+}
+
+export interface GroupsUsersQuery_users {
+  __typename: "UserCollectionConnection";
+  edges: (GroupsUsersQuery_users_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface GroupsUsersQuery {
+  users: GroupsUsersQuery_users | null;
+}
+
+export interface GroupsUsersQueryVariables {
+  first?: number | null;
+  after?: string | null;
+  last?: number | null;
+  before?: string | null;
 }
 
 /* tslint:disable */

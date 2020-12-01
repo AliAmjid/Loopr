@@ -46,7 +46,11 @@ const usePagination = (): UsePaginationReturn => {
     }
   };
 
-  return { getPagination, setPagination };
+  const resetPagination = (): void => {
+    setState({ page: 0, firstCursor: '', lastCursor: '', totalCount: 0 });
+  };
+
+  return { getPagination, setPagination, resetPagination };
 };
 
 export default usePagination;

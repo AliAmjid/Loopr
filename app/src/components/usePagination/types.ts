@@ -18,4 +18,5 @@ export interface SetPaginationArgs {
 export interface UsePaginationReturn {
   getPagination: (args: GetPaginationArgs) => PaginationVariables;
   setPagination: (args: SetPaginationArgs) => void;
+  resetPagination: () => void;
 }

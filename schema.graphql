@@ -77,6 +77,54 @@ type AclRoleItem implements Node {
     resources: [AclResourceItem]
 }
 
+type ClassGroup implements Node {
+    createdBy: UserItem
+    id: ID!
+    section: String!
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: UserItem
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        email: String,
+        email_list: [String],
+        "Returns the first n elements from the list."
+        first: Int,
+        firstname: String,
+        firstname_list: [String],
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        lastname: String,
+        lastname_list: [String]
+    ): UserItemConnection
+    year: Int!
+}
+
+"Connection for ClassGroup."
+type ClassGroupConnection {
+    edges: [ClassGroupEdge]
+    pageInfo: ClassGroupPageInfo!
+    totalCount: Int!
+}
+
+"Edge of ClassGroup."
+type ClassGroupEdge {
+    cursor: String!
+    node: ClassGroup
+}
+
+"Information about the current page."
+type ClassGroupPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
 type Group implements Node {
     createdAt: String!
     createdBy: UserItem
@@ -129,14 +177,24 @@ type Mutation {
     changePasswordUser(input: changePasswordUserInput!): changePasswordUserPayload
     "Creates a AclRole."
     createAclRole(input: createAclRoleInput!): createAclRolePayload
+    "Creates a ClassGroup."
+    createClassGroup(input: createClassGroupInput!): createClassGroupPayload
     "Creates a Group."
     createGroup(input: createGroupInput!): createGroupPayload
+    "Creates a Subject."
+    createSubject(input: createSubjectInput!): createSubjectPayload
+    "Creates a SubjectHasGroup."
+    createSubjectHasGroup(input: createSubjectHasGroupInput!): createSubjectHasGroupPayload
     "Creates a User."
     createUser(input: createUserInput!): createUserPayload
     "Updates a AclRole."
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
+    "Updates a ClassGroup."
+    updateClassGroup(input: updateClassGroupInput!): updateClassGroupPayload
     "Updates a Group."
     updateGroup(input: updateGroupInput!): updateGroupPayload
+    "Updates a Subject."
+    updateSubject(input: updateSubjectInput!): updateSubjectPayload
     "Updates a User."
     updateUser(input: updateUserInput!): updateUserPayload
 }
@@ -145,6 +203,17 @@ type Query {
     aclResources: [AclResourceCollection]
     aclRole(id: ID!): AclRoleItem
     aclRoles: [AclRoleCollection]
+    classGroup(id: ID!): ClassGroup
+    classGroups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): ClassGroupConnection
     getToken(email: String!, password: String!): Token
     group(id: ID!): Group
     groups(
@@ -154,11 +223,36 @@ type Query {
         before: String,
         "Returns the first n elements from the list."
         first: Int,
+        id: String,
+        id_list: [String],
         "Returns the last n elements from the list."
-        last: Int
+        last: Int,
+        section: String
     ): GroupConnection
     meUser: User
     node(id: ID!): Node
+    subject(id: ID!): Subject
+    subjectHasGroup(id: ID!): SubjectHasGroup
+    subjectHasGroups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectHasGroupConnection
+    subjects(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectConnection
     user(id: ID!): UserItem
     users(
         "Returns the elements in the list that come after the specified cursor."
@@ -180,6 +274,61 @@ type Query {
     ): UserCollectionConnection
 }
 
+type Subject implements Node {
+    id: ID!
+    name: String!
+}
+
+"Connection for Subject."
+type SubjectConnection {
+    edges: [SubjectEdge]
+    pageInfo: SubjectPageInfo!
+    totalCount: Int!
+}
+
+"Edge of Subject."
+type SubjectEdge {
+    cursor: String!
+    node: Subject
+}
+
+type SubjectHasGroup implements Node {
+    classGroup: ClassGroup
+    group: Group
+    id: ID!
+    subject: Subject
+    teacher: UserItem
+}
+
+"Connection for SubjectHasGroup."
+type SubjectHasGroupConnection {
+    edges: [SubjectHasGroupEdge]
+    pageInfo: SubjectHasGroupPageInfo!
+    totalCount: Int!
+}
+
+"Edge of SubjectHasGroup."
+type SubjectHasGroupEdge {
+    cursor: String!
+    node: SubjectHasGroup
+}
+
+"Information about the current page."
+type SubjectHasGroupPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+"Information about the current page."
+type SubjectPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
 type Token implements Node {
     id: ID!
     "Use token in header like this: 'Authorization: Bearer {token}'"
@@ -189,6 +338,7 @@ type Token implements Node {
 
 type User implements Node {
     _id: String!
+    classGroup: ClassGroup
     createdAt: String!
     "email of user"
     email: String!
@@ -200,6 +350,7 @@ type User implements Node {
 
 type UserCollection implements Node {
     _id: String!
+    classGroup: ClassGroup
     createdAt: String!
     "email of user"
     email: String!
@@ -232,6 +383,7 @@ type UserCollectionPageInfo {
 
 type UserItem implements Node {
     _id: String!
+    classGroup: ClassGroup
     createdAt: String!
     "email of user"
     email: String!
@@ -299,6 +451,43 @@ type createAclRolePayload {
     clientMutationId: String
 }
 
+type createClassGroupNestedPayload implements Node {
+    _id: String!
+    createdBy: createUserNestedPayload
+    id: ID!
+    section: String!
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: createUserNestedPayload
+    users: createUserNestedPayloadConnection
+    year: Int!
+}
+
+type createClassGroupPayload {
+    classGroup: createClassGroupPayloadData
+    clientMutationId: String
+}
+
+type createClassGroupPayloadData implements Node {
+    _id: String!
+    createdBy: createUserNestedPayload
+    id: ID!
+    section: String!
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: createUserNestedPayload
+    users: createUserNestedPayloadConnection
+    year: Int!
+}
+
+type createGroupNestedPayload implements Node {
+    _id: String!
+    createdAt: String!
+    createdBy: createUserNestedPayload
+    id: ID!
+    section: String!
+    users: createUserNestedPayloadConnection
+    year: Int!
+}
+
 type createGroupPayload {
     clientMutationId: String
     group: createGroupPayloadData
@@ -314,8 +503,37 @@ type createGroupPayloadData implements Node {
     year: Int!
 }
 
+type createSubjectHasGroupPayload {
+    clientMutationId: String
+    subjectHasGroup: createSubjectHasGroupPayloadData
+}
+
+type createSubjectHasGroupPayloadData implements Node {
+    classGroup: createClassGroupNestedPayload
+    group: createGroupNestedPayload
+    id: ID!
+    subject: createSubjectNestedPayload
+    teacher: createUserNestedPayload
+}
+
+type createSubjectNestedPayload implements Node {
+    id: ID!
+    name: String!
+}
+
+type createSubjectPayload {
+    clientMutationId: String
+    subject: createSubjectPayloadData
+}
+
+type createSubjectPayloadData implements Node {
+    id: ID!
+    name: String!
+}
+
 type createUserNestedPayload implements Node {
     _id: String!
+    classGroup: createClassGroupNestedPayload
     createdAt: String!
     "email of user"
     email: String!
@@ -353,6 +571,7 @@ type createUserPayload {
 
 type createUserPayloadData implements Node {
     _id: String!
+    classGroup: createClassGroupNestedPayload
     createdAt: String!
     "email of user"
     email: String!
@@ -389,6 +608,33 @@ type updateAclRolePayload {
     clientMutationId: String
 }
 
+type updateClassGroupNestedPayload implements Node {
+    _id: String
+    createdBy: updateUserNestedPayload
+    id: ID!
+    section: String
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: updateUserNestedPayload
+    users: updateUserNestedPayloadConnection
+    year: Int
+}
+
+type updateClassGroupPayload {
+    classGroup: updateClassGroupPayloadData
+    clientMutationId: String
+}
+
+type updateClassGroupPayloadData implements Node {
+    _id: String
+    createdBy: updateUserNestedPayload
+    id: ID!
+    section: String
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: updateUserNestedPayload
+    users: updateUserNestedPayloadConnection
+    year: Int
+}
+
 type updateGroupPayload {
     clientMutationId: String
     group: updateGroupPayloadData
@@ -404,8 +650,19 @@ type updateGroupPayloadData implements Node {
     year: Int
 }
 
+type updateSubjectPayload {
+    clientMutationId: String
+    subject: updateSubjectPayloadData
+}
+
+type updateSubjectPayloadData implements Node {
+    id: ID!
+    name: String
+}
+
 type updateUserNestedPayload implements Node {
     _id: String
+    classGroup: updateClassGroupNestedPayload
     createdAt: String
     "email of user"
     email: String
@@ -443,6 +700,7 @@ type updateUserPayload {
 
 type updateUserPayloadData implements Node {
     _id: String
+    classGroup: updateClassGroupNestedPayload
     createdAt: String
     "email of user"
     email: String
@@ -471,11 +729,31 @@ input createAclRoleInput {
     resources: [String]
 }
 
+input createClassGroupInput {
+    clientMutationId: String
+    section: String!
+    users: [String]
+    year: Int!
+}
+
 input createGroupInput {
     clientMutationId: String
     section: String!
     users: [String]
     year: Int!
+}
+
+input createSubjectHasGroupInput {
+    classGroup: String
+    clientMutationId: String
+    group: String
+    subject: String
+    teacher: String
+}
+
+input createSubjectInput {
+    clientMutationId: String
+    name: String!
 }
 
 input createUserInput {
@@ -511,12 +789,26 @@ input updateAclRoleInput {
     resources: [String]
 }
 
+input updateClassGroupInput {
+    clientMutationId: String
+    id: ID!
+    section: String
+    users: [String]
+    year: Int
+}
+
 input updateGroupInput {
     clientMutationId: String
     id: ID!
     section: String
     users: [String]
     year: Int
+}
+
+input updateSubjectInput {
+    clientMutationId: String
+    id: ID!
+    name: String
 }
 
 input updateUserInput {
