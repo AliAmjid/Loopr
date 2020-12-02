@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,6 +72,12 @@ class User implements UserInterface
      */
     private ?ClassGroup $classGroup = null;
 
+    /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @Groups({"user:read", "user:write"})
+     */
+    private $groups;
 
     public function getId(): string
     {

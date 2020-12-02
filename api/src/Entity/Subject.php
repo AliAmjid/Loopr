@@ -17,18 +17,18 @@ class Subject
     use Tid;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\NotNull()
      * @Assert\NotBlank()
-     * @ORM\Column(type="string")
-     * @Groups({"subject:read", "subject:write"})
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"subject:read", "subject:write", "group:read"})
      */
     private string $name;
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }

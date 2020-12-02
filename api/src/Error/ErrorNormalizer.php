@@ -8,12 +8,15 @@ use ApiPlatform\Core\Bridge\Symfony\Validator\Exception\ValidationException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use GraphQL\Error\FormattedError;
 use Symfony\Component\Validator\ConstraintViolation;
 
-class ErrorNormalizer implements NormalizerInterface
+class ErrorNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
+    use NormalizerAwareTrait;
 
     protected $translators = [];
 
@@ -53,6 +56,9 @@ class ErrorNormalizer implements NormalizerInterface
      */
     public function normalize($object, string $format = null, array $context = []): array
     {
+        dump($format);
+        dump($context);
+        exit();
         $exception = $object->getPrevious();
         $error = FormattedError::createFromException($object);
         if ($exception instanceof ClientError) {
@@ -91,6 +97,7 @@ class ErrorNormalizer implements NormalizerInterface
      */
     public function supportsNormalization($data, string $format = null): bool
     {
+        return false;
         return $data instanceof \Throwable;
     }
 
@@ -105,5 +112,4 @@ class ErrorNormalizer implements NormalizerInterface
             ]
         ];
     }
-
 }
