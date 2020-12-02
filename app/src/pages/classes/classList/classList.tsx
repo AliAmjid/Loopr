@@ -2,20 +2,19 @@ import React, { useState } from 'react';
 
 import AddIcon from '@material-ui/icons/Add';
 
-import { GroupListProps } from 'pages/groups/groupList/types';
-
 import SideTable from 'components/SideTable';
 
 import AddDialog from './addDialog';
+import { ClassListProps } from './types';
 
-const GroupList: React.FC<GroupListProps> = props => {
+const ClassList: React.FC<ClassListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
 
   return (
     <>
       <AddDialog
         open={addOpen}
-        loading={props.addGroupLoading}
+        loading={props.addClassLoading}
         onSubmit={values => {
           props.onAdd(values).then((success: boolean) => {
             if (success) setAddOpen(false);
@@ -26,24 +25,24 @@ const GroupList: React.FC<GroupListProps> = props => {
         }}
       />
       <SideTable
-        title="Groups"
-        loading={props.groupsLoading}
+        title="Classes"
+        loading={props.classesLoading}
         bottomAction={{
           icon: <AddIcon />,
           onClick: () => {
             setAddOpen(true);
           },
         }}
-        items={props.groups.map(group => ({
-          id: group.id,
-          primary: group?.section,
+        items={props.classes.map(cl => ({
+          id: cl.id,
+          primary: cl?.section,
           onValueChange: (value: string) =>
-            props.onUpdate({ id: group.id, section: value }),
-          onClick: () => props.onSelectedGroupChange(group.id),
+            props.onUpdate({ id: cl.id, section: value }),
+          onClick: () => props.onSelectedClassChange(cl.id),
         }))}
       />
     </>
   );
 };
 
-export default GroupList;
+export default ClassList;

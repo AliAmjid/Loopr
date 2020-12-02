@@ -5,7 +5,6 @@ const GROUPS_UPDATE_GROUP_MUTATION = gql`
     updateGroup(input: $input) {
       group {
         id
-        year
         section
       }
     }

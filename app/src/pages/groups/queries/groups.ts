@@ -6,7 +6,6 @@ const GROUPS_GROUPS_QUERY = gql`
       edges {
         node {
           id
-          year
           section
         }
       }

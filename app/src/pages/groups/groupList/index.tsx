@@ -65,7 +65,7 @@ const GroupListIndex: React.FC = () => {
   const updateHandler = (values: UpdateValues): Promise<boolean> => {
     return updateGroup({
       variables: {
-        input: { id: values.id, section: values.section, year: 2020 },
+        input: { id: values.id, section: values.section },
       },
     })
       .then(() => {

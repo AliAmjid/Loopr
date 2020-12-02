@@ -125,11 +125,77 @@ type ClassGroupPageInfo {
     startCursor: String
 }
 
-type Group implements Node {
+type GroupCollection implements Node {
+    createdAt: String!
+    createdBy: UserCollection
+    id: ID!
+    section: String!
+    subjectRelations(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectHasGroupConnection
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        email: String,
+        email_list: [String],
+        "Returns the first n elements from the list."
+        first: Int,
+        firstname: String,
+        firstname_list: [String],
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        lastname: String,
+        lastname_list: [String]
+    ): UserCollectionConnection
+}
+
+"Connection for GroupCollection."
+type GroupCollectionConnection {
+    edges: [GroupCollectionEdge]
+    pageInfo: GroupCollectionPageInfo!
+    totalCount: Int!
+}
+
+"Edge of GroupCollection."
+type GroupCollectionEdge {
+    cursor: String!
+    node: GroupCollection
+}
+
+"Information about the current page."
+type GroupCollectionPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type GroupItem implements Node {
     createdAt: String!
     createdBy: UserItem
     id: ID!
     section: String!
+    subjectRelations(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectHasGroupConnection
     users(
         "Returns the elements in the list that come after the specified cursor."
         after: String,
@@ -148,28 +214,6 @@ type Group implements Node {
         lastname: String,
         lastname_list: [String]
     ): UserItemConnection
-    year: Int!
-}
-
-"Connection for Group."
-type GroupConnection {
-    edges: [GroupEdge]
-    pageInfo: GroupPageInfo!
-    totalCount: Int!
-}
-
-"Edge of Group."
-type GroupEdge {
-    cursor: String!
-    node: Group
-}
-
-"Information about the current page."
-type GroupPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
 }
 
 type Mutation {
@@ -215,7 +259,7 @@ type Query {
         last: Int
     ): ClassGroupConnection
     getToken(email: String!, password: String!): Token
-    group(id: ID!): Group
+    group(id: ID!): GroupItem
     groups(
         "Returns the elements in the list that come after the specified cursor."
         after: String,
@@ -228,7 +272,7 @@ type Query {
         "Returns the last n elements from the list."
         last: Int,
         section: String
-    ): GroupConnection
+    ): GroupCollectionConnection
     meUser: User
     node(id: ID!): Node
     subject(id: ID!): Subject
@@ -276,7 +320,7 @@ type Query {
 
 type Subject implements Node {
     id: ID!
-    name: String!
+    name: String
 }
 
 "Connection for Subject."
@@ -294,7 +338,7 @@ type SubjectEdge {
 
 type SubjectHasGroup implements Node {
     classGroup: ClassGroup
-    group: Group
+    group: GroupItem
     id: ID!
     subject: Subject
     teacher: UserItem
@@ -456,6 +500,7 @@ type createClassGroupNestedPayload implements Node {
     createdBy: createUserNestedPayload
     id: ID!
     section: String!
+    subjectRelations: createSubjectHasGroupNestedPayloadConnection
     "Teacher needs to be user with resource GROUP_TEACHER"
     teacher: createUserNestedPayload
     users: createUserNestedPayloadConnection
@@ -472,6 +517,7 @@ type createClassGroupPayloadData implements Node {
     createdBy: createUserNestedPayload
     id: ID!
     section: String!
+    subjectRelations: createSubjectHasGroupNestedPayloadConnection
     "Teacher needs to be user with resource GROUP_TEACHER"
     teacher: createUserNestedPayload
     users: createUserNestedPayloadConnection
@@ -484,8 +530,8 @@ type createGroupNestedPayload implements Node {
     createdBy: createUserNestedPayload
     id: ID!
     section: String!
+    subjectRelations: createSubjectHasGroupNestedPayloadConnection
     users: createUserNestedPayloadConnection
-    year: Int!
 }
 
 type createGroupPayload {
@@ -499,8 +545,37 @@ type createGroupPayloadData implements Node {
     createdBy: createUserNestedPayload
     id: ID!
     section: String!
+    subjectRelations: createSubjectHasGroupNestedPayloadConnection
     users: createUserNestedPayloadConnection
-    year: Int!
+}
+
+type createSubjectHasGroupNestedPayload implements Node {
+    classGroup: createClassGroupNestedPayload
+    group: createGroupNestedPayload
+    id: ID!
+    subject: createSubjectNestedPayload
+    teacher: createUserNestedPayload
+}
+
+"Connection for createSubjectHasGroupNestedPayload."
+type createSubjectHasGroupNestedPayloadConnection {
+    edges: [createSubjectHasGroupNestedPayloadEdge]
+    pageInfo: createSubjectHasGroupNestedPayloadPageInfo!
+    totalCount: Int!
+}
+
+"Edge of createSubjectHasGroupNestedPayload."
+type createSubjectHasGroupNestedPayloadEdge {
+    cursor: String!
+    node: createSubjectHasGroupNestedPayload
+}
+
+"Information about the current page."
+type createSubjectHasGroupNestedPayloadPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
 }
 
 type createSubjectHasGroupPayload {
@@ -518,7 +593,7 @@ type createSubjectHasGroupPayloadData implements Node {
 
 type createSubjectNestedPayload implements Node {
     id: ID!
-    name: String!
+    name: String
 }
 
 type createSubjectPayload {
@@ -528,7 +603,7 @@ type createSubjectPayload {
 
 type createSubjectPayloadData implements Node {
     id: ID!
-    name: String!
+    name: String
 }
 
 type createUserNestedPayload implements Node {
@@ -635,6 +710,16 @@ type updateClassGroupPayloadData implements Node {
     year: Int
 }
 
+type updateGroupNestedPayload implements Node {
+    _id: String
+    createdAt: String
+    createdBy: updateUserNestedPayload
+    id: ID!
+    section: String
+    subjectRelations: updateSubjectHasGroupNestedPayloadConnection
+    users: updateUserNestedPayloadConnection
+}
+
 type updateGroupPayload {
     clientMutationId: String
     group: updateGroupPayloadData
@@ -646,8 +731,43 @@ type updateGroupPayloadData implements Node {
     createdBy: updateUserNestedPayload
     id: ID!
     section: String
+    subjectRelations: updateSubjectHasGroupNestedPayloadConnection
     users: updateUserNestedPayloadConnection
-    year: Int
+}
+
+type updateSubjectHasGroupNestedPayload implements Node {
+    _id: String
+    classGroup: updateClassGroupNestedPayload
+    group: updateGroupNestedPayload
+    id: ID!
+    subject: updateSubjectNestedPayload
+    teacher: updateUserNestedPayload
+}
+
+"Connection for updateSubjectHasGroupNestedPayload."
+type updateSubjectHasGroupNestedPayloadConnection {
+    edges: [updateSubjectHasGroupNestedPayloadEdge]
+    pageInfo: updateSubjectHasGroupNestedPayloadPageInfo!
+    totalCount: Int!
+}
+
+"Edge of updateSubjectHasGroupNestedPayload."
+type updateSubjectHasGroupNestedPayloadEdge {
+    cursor: String!
+    node: updateSubjectHasGroupNestedPayload
+}
+
+"Information about the current page."
+type updateSubjectHasGroupNestedPayloadPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type updateSubjectNestedPayload implements Node {
+    id: ID!
+    name: String
 }
 
 type updateSubjectPayload {
@@ -740,7 +860,6 @@ input createGroupInput {
     clientMutationId: String
     section: String!
     users: [String]
-    year: Int!
 }
 
 input createSubjectHasGroupInput {
@@ -753,7 +872,7 @@ input createSubjectHasGroupInput {
 
 input createSubjectInput {
     clientMutationId: String
-    name: String!
+    name: String
 }
 
 input createUserInput {
@@ -802,7 +921,6 @@ input updateGroupInput {
     id: ID!
     section: String
     users: [String]
-    year: Int
 }
 
 input updateSubjectInput {

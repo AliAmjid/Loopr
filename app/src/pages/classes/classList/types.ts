@@ -4,27 +4,29 @@ export interface AddDialogFormValues {
 }
 
 export interface AddValues {
+  year: number;
   section: string;
 }
 
-export interface Group {
+export interface Class {
   id: string;
+  year: number;
   section: string;
 }
 
-export type Groups = Group[];
+export type Classes = Class[];
 
 export interface UpdateValues {
   id: string;
   section: string;
 }
 
-export interface GroupListProps {
-  groups: Groups;
-  groupsLoading: boolean;
-  addGroupLoading: boolean;
+export interface ClassListProps {
+  classes: Classes;
+  classesLoading: boolean;
+  addClassLoading: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
-  onSelectedGroupChange: (group: string) => void;
+  onSelectedClassChange: (cl: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
 }
 

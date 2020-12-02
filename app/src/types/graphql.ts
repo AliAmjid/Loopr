@@ -288,6 +288,183 @@ export interface AclTableQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ClassesAddClassMutation
+// ====================================================
+
+export interface ClassesAddClassMutation_createClassGroup_classGroup {
+  __typename: "createClassGroupPayloadData";
+  id: string;
+}
+
+export interface ClassesAddClassMutation_createClassGroup {
+  __typename: "createClassGroupPayload";
+  classGroup: ClassesAddClassMutation_createClassGroup_classGroup | null;
+}
+
+export interface ClassesAddClassMutation {
+  /**
+   * Creates a ClassGroup.
+   */
+  createClassGroup: ClassesAddClassMutation_createClassGroup | null;
+}
+
+export interface ClassesAddClassMutationVariables {
+  input: createClassGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: ClassesUpdateClassMutation
+// ====================================================
+
+export interface ClassesUpdateClassMutation_updateClassGroup_classGroup {
+  __typename: "updateClassGroupPayloadData";
+  id: string;
+  year: number | null;
+  section: string | null;
+}
+
+export interface ClassesUpdateClassMutation_updateClassGroup {
+  __typename: "updateClassGroupPayload";
+  classGroup: ClassesUpdateClassMutation_updateClassGroup_classGroup | null;
+}
+
+export interface ClassesUpdateClassMutation {
+  /**
+   * Updates a ClassGroup.
+   */
+  updateClassGroup: ClassesUpdateClassMutation_updateClassGroup | null;
+}
+
+export interface ClassesUpdateClassMutationVariables {
+  input: updateClassGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: ClassesClassQuery
+// ====================================================
+
+export interface ClassesClassQuery_classGroup_users_edges_node {
+  __typename: "UserItem";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface ClassesClassQuery_classGroup_users_edges {
+  __typename: "UserItemEdge";
+  node: ClassesClassQuery_classGroup_users_edges_node | null;
+  cursor: string;
+}
+
+export interface ClassesClassQuery_classGroup_users {
+  __typename: "UserItemConnection";
+  edges: (ClassesClassQuery_classGroup_users_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface ClassesClassQuery_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  users: ClassesClassQuery_classGroup_users | null;
+}
+
+export interface ClassesClassQuery {
+  classGroup: ClassesClassQuery_classGroup | null;
+}
+
+export interface ClassesClassQueryVariables {
+  id: string;
+  usersFirst?: number | null;
+  usersLast?: number | null;
+  usersAfter?: string | null;
+  usersBefore?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: ClassesClassesQuery
+// ====================================================
+
+export interface ClassesClassesQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface ClassesClassesQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: ClassesClassesQuery_classGroups_edges_node | null;
+}
+
+export interface ClassesClassesQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (ClassesClassesQuery_classGroups_edges | null)[] | null;
+}
+
+export interface ClassesClassesQuery {
+  classGroups: ClassesClassesQuery_classGroups | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: ClassesUsersQuery
+// ====================================================
+
+export interface ClassesUsersQuery_users_edges_node {
+  __typename: "UserCollection";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface ClassesUsersQuery_users_edges {
+  __typename: "UserCollectionEdge";
+  node: ClassesUsersQuery_users_edges_node | null;
+  cursor: string;
+}
+
+export interface ClassesUsersQuery_users {
+  __typename: "UserCollectionConnection";
+  edges: (ClassesUsersQuery_users_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface ClassesUsersQuery {
+  users: ClassesUsersQuery_users | null;
+}
+
+export interface ClassesUsersQueryVariables {
+  first?: number | null;
+  after?: string | null;
+  last?: number | null;
+  before?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: GroupsAddGroupMutation
 // ====================================================
 
@@ -324,7 +501,6 @@ export interface GroupsAddGroupMutationVariables {
 export interface GroupsUpdateGroupMutation_updateGroup_group {
   __typename: "updateGroupPayloadData";
   id: string;
-  year: number | null;
   section: string | null;
 }
 
@@ -373,7 +549,7 @@ export interface GroupsGroupQuery_group_users {
 }
 
 export interface GroupsGroupQuery_group {
-  __typename: "Group";
+  __typename: "GroupItem";
   id: string;
   users: GroupsGroupQuery_group_users | null;
 }
@@ -400,19 +576,18 @@ export interface GroupsGroupQueryVariables {
 // ====================================================
 
 export interface GroupsGroupsQuery_groups_edges_node {
-  __typename: "Group";
+  __typename: "GroupCollection";
   id: string;
-  year: number;
   section: string;
 }
 
 export interface GroupsGroupsQuery_groups_edges {
-  __typename: "GroupEdge";
+  __typename: "GroupCollectionEdge";
   node: GroupsGroupsQuery_groups_edges_node | null;
 }
 
 export interface GroupsGroupsQuery_groups {
-  __typename: "GroupConnection";
+  __typename: "GroupCollectionConnection";
   edges: (GroupsGroupsQuery_groups_edges | null)[] | null;
 }
 
@@ -883,11 +1058,17 @@ export interface createAclRoleInput {
   resources?: (string | null)[] | null;
 }
 
-export interface createGroupInput {
+export interface createClassGroupInput {
   clientMutationId?: string | null;
   section: string;
   users?: (string | null)[] | null;
   year: number;
+}
+
+export interface createGroupInput {
+  clientMutationId?: string | null;
+  section: string;
+  users?: (string | null)[] | null;
 }
 
 export interface createUserInput {
@@ -899,12 +1080,19 @@ export interface createUserInput {
   role: string;
 }
 
-export interface updateGroupInput {
+export interface updateClassGroupInput {
   clientMutationId?: string | null;
   id: string;
   section?: string | null;
   users?: (string | null)[] | null;
   year?: number | null;
+}
+
+export interface updateGroupInput {
+  clientMutationId?: string | null;
+  id: string;
+  section?: string | null;
+  users?: (string | null)[] | null;
 }
 
 export interface updateUserInput {

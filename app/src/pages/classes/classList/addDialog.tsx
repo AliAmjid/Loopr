@@ -10,34 +10,40 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import {
-  AddDialogFormValues,
-  AddDialogProps,
-} from 'pages/groups/groupList/types';
-
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+
+import { AddDialogFormValues, AddDialogProps } from './types';
 
 const AddDialog: React.FC<AddDialogProps> = props => {
   const { handleSubmit, register, errors } = useForm<AddDialogFormValues>();
 
   const submitHandler = (values: AddDialogFormValues): void => {
-    props.onSubmit({ section: values.name });
+    props.onSubmit({ section: values.name, year: +values.year });
   };
 
   return (
     <Dialog open={props.open} onClose={props.onClose}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
-
-        <DialogTitle>Group add</DialogTitle>
+        <DialogTitle>Class add</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(submitHandler)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  name="year"
+                  label="class year"
+                  type="number"
+                  fullWidth
+                  inputRef={register({ required: true })}
+                  error={errors.year !== undefined}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   name="name"
-                  label="group name"
+                  label="class name"
                   fullWidth
                   inputRef={register({ required: true })}
                   error={errors.name !== undefined}
