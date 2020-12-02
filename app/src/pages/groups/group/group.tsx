@@ -42,14 +42,19 @@ const Group: React.FC<GroupProps> = props => {
                 data: res.users,
               }))
         }
-        onSelectionChange={data => {
-          console.log(data);
+        onSelectionChange={(data, row) => {
+          if (row) {
+            props.onSelectionChange({
+              id: row?.id,
+              selected: row?.tableData?.checked || false,
+            });
+          }
         }}
         columns={[
           { title: 'Name', field: 'firstname' },
           { title: 'lastname', field: 'lastname' },
         ]}
-        options={{ selection: editing }}
+        options={{ selection: editing, pageSize: 2, pageSizeOptions: [2] }}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         {editing ? (

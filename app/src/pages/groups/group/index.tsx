@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
@@ -17,7 +17,7 @@ import {
 import usePagination from 'components/usePagination';
 
 import Group from './group';
-import { DetailGroupUser, GetUsersReturn } from './types';
+import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
 
 const GroupIndex: React.FC = () => {
   const { selectedGroup } = useGroupsState(state => ({
@@ -34,6 +34,7 @@ const GroupIndex: React.FC = () => {
     setPagination: setUserPagination,
     resetPagination: resetUserPagination,
   } = usePagination();
+  const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {
     resetGroupPagination();
@@ -105,11 +106,15 @@ const GroupIndex: React.FC = () => {
 
             const users: DetailGroupUser[] = [];
             for (const user of res.data?.users?.edges || []) {
-              if (user?.node)
+              if (user?.node) {
+                const node = user?.node;
                 users.push({
-                  ...user.node,
-                  tableData: { checked: true },
+                  ...node,
+                  tableData: {
+                    checked: selected.some(id => id === node.id),
+                  },
                 });
+              }
             }
 
             return { users, totalCount };
@@ -122,11 +127,27 @@ const GroupIndex: React.FC = () => {
     return Promise.resolve(defaultValue);
   };
 
+  const selectionChangeHandler = (args: SelectionChangeArgs): void => {
+    if (args.selected) {
+      setSelected(prevState => [...prevState, args.id]);
+    } else {
+      setSelected(prevState => {
+        prevState.splice(
+          prevState.findIndex(s => s === args.id),
+          1,
+        );
+
+        return prevState;
+      });
+    }
+  };
+
   return (
     <Group
       selectedGroup={selectedGroup}
       getUsers={getUsers}
       getGroupUsers={getGroupUsers}
+      onSelectionChange={selectionChangeHandler}
     />
   );
 };

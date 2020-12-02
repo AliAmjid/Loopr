@@ -24,7 +24,10 @@ const usePagination = (): UsePaginationReturn => {
 
     if (args.page === state.page - 1 || args.page > state.page + 1) {
       variables.last = state.totalCount % args.pageSize;
-      if (args.page === state.page - 1) variables.before = state.firstCursor;
+      if (args.page === state.page - 1) {
+        variables.before = state.firstCursor;
+        variables.last = state.totalCount;
+      }
     }
 
     setState(prevState => ({ ...prevState, page: args.page }));
