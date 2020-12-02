@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useApolloClient } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
 
 import GROUPS_GROUP_QUERY from 'pages/groups/queries/group';
@@ -10,11 +10,15 @@ import useGroupsState from 'pages/groups/state';
 import {
   GroupsGroupQuery,
   GroupsGroupQueryVariables,
+  GroupsUpdateGroupMutation,
+  GroupsUpdateGroupMutationVariables,
   GroupsUsersQuery,
   GroupsUsersQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
+
+import GROUPS_UPDATE_GROUP_MUTATION from '../mutations/updateGroup';
 
 import Group from './group';
 import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
@@ -24,6 +28,10 @@ const GroupIndex: React.FC = () => {
     selectedGroup: state.selectedGroup,
   }));
   const client = useApolloClient();
+  const [updateGroup] = useMutation<
+    GroupsUpdateGroupMutation,
+    GroupsUpdateGroupMutationVariables
+  >(GROUPS_UPDATE_GROUP_MUTATION);
   const {
     getPagination: getGroupPagination,
     setPagination: setGroupPagination,
@@ -142,12 +150,29 @@ const GroupIndex: React.FC = () => {
     }
   };
 
+  const submitHandler = (): Promise<boolean> => {
+    if (selectedGroup) {
+      return updateGroup({
+        variables: { input: { id: selectedGroup, users: selected } },
+      })
+        .then(() => {
+          return true;
+        })
+        .catch(() => {
+          return false;
+        });
+    }
+
+    return Promise.resolve(false);
+  };
+
   return (
     <Group
       selectedGroup={selectedGroup}
       getUsers={getUsers}
       getGroupUsers={getGroupUsers}
       onSelectionChange={selectionChangeHandler}
+      onSubmit={submitHandler}
     />
   );
 };

@@ -6,6 +6,8 @@ import MaterialTablePrefab, {
   MTableEditRow,
   MTableGroupbar,
 } from 'material-table';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -20,6 +22,8 @@ import useColumnFilteringState from './actions/columnFiltering/state';
 import groupingAction from './actions/grouping';
 import materialTableIcons from './icons';
 import { MaterialTableCustomProps } from './types';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const useStyles = makeStyles((theme: Theme) => ({
   groupbar: {
@@ -37,8 +41,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Container: React.FC = props => <div>{props.children}</div>;
 
-const MaterialTable = <RowData extends {}>(
-  props: MaterialTableCustomProps<RowData>,
+const MaterialTable = <RowD extends {}>(
+  props: MaterialTableCustomProps<RowD>,
 ): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
@@ -95,7 +99,7 @@ const MaterialTable = <RowData extends {}>(
   let { columns } = props;
   if (props.defaultActions?.columnFiltering?.active) {
     columns = props.defaultActions.columnFiltering.columns.filter(
-      (c): c is Column<RowData> =>
+      (c): c is Column<RowD> =>
         'field' in c && selected.some((s: string) => s === c.field),
     );
   }
@@ -173,6 +177,48 @@ const MaterialTable = <RowData extends {}>(
             ...props.options,
             exportButton: props.options?.exportButton && !groupingActive,
             actionsCellStyle: { color: theme.palette.common.black },
+
+            // @ts-ignore
+            exportPdf: (columns: Column<any>[], data: any[]) => {
+              // @ts-ignore
+              const filteredColumns: {
+                field: string;
+                title: string;
+              }[] = columns.filter(
+                c => typeof c.field === 'string' && typeof c.title === 'string',
+              );
+
+              const docDefinition = {
+                content: [
+                  {
+                    layout: 'lightHorizontalLines',
+                    table: {
+                      headerRows: 1,
+                      widths: filteredColumns.map(() => '*'),
+
+                      body: [
+                        filteredColumns.map(c => c.title),
+                        ...data.map(row =>
+                          filteredColumns.map(c => {
+                            const { field } = c;
+
+                            let value: any = '';
+                            const fieldSteps = field.split('.');
+                            value = row;
+                            fieldSteps.forEach(step => {
+                              value = value[step];
+                            });
+
+                            return value;
+                          }),
+                        ),
+                      ],
+                    },
+                  },
+                ],
+              };
+              pdfMake.createPdf(docDefinition).download(`${props.title}`);
+            },
           }}
           actions={[...actions, ...(props.actions || [])]}
         />

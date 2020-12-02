@@ -63,7 +63,10 @@ const Group: React.FC<GroupProps> = props => {
               <Button
                 color="primary"
                 variant="contained"
-                onClick={() => setEditing(false)}
+                onClick={() => {
+                  props.onSubmit();
+                  setEditing(false);
+                }}
               >
                 Save
               </Button>

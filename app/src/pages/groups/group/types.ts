@@ -24,4 +24,5 @@ export interface GroupProps {
   getUsers: (query: Query<DetailGroupUser>) => Promise<GetUsersReturn>;
   selectedGroup?: string;
   onSelectionChange: (args: SelectionChangeArgs) => void;
+  onSubmit: () => Promise<boolean>;
 }
