@@ -15,7 +15,6 @@ import DoneIcon from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
 
 import OverlayLoading from 'components/OverlayLoading';
-import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
 import { EditableListItemProps } from './types';
 

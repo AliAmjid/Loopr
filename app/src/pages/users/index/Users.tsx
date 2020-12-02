@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Box, Button, Menu, MenuItem, Paper } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import dayjs from 'dayjs';
-import { QueryResult } from 'material-table';
+import { Query, QueryResult } from 'material-table';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -33,7 +33,7 @@ const Users: React.FC<UsersProps> = props => {
         uniqueName="pages/users/index"
         title={t('tableTitle')}
         columns={[]}
-        data={query =>
+        data={(query: Query<User>) =>
           new Promise<QueryResult<User>>((resolve, reject) => {
             props.getUsers(query).then(res => {
               if (res.data?.users !== null && res.data?.users !== undefined) {

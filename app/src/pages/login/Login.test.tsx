@@ -12,7 +12,7 @@ describe('Login', () => {
   it('Should not fire without email or password', async () => {
     const submitHandler = jest.fn(() => {});
     await act(async () => {
-      const wrapper = mount(<Login onSubmit={submitHandler} />);
+      const wrapper = mount(<Login onSubmit={submitHandler} loading={false} />);
 
       wrapper.find(testId('Login-submitButton')).at(0).simulate('submit');
     });
@@ -26,7 +26,7 @@ describe('Login', () => {
     const submitHandler = jest.fn(() => {});
 
     await act(async () => {
-      const wrapper = mount(<Login onSubmit={submitHandler} />);
+      const wrapper = mount(<Login onSubmit={submitHandler} loading={false} />);
 
       hookFormType(wrapper.find(testId('Login-emailInput')), email);
       hookFormType(wrapper.find(testId('Login-passwordInput')), password);
