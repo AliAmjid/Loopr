@@ -177,16 +177,24 @@ const MaterialTable = <RowD extends {}>(
             ...props.options,
             exportButton: props.options?.exportButton && !groupingActive,
             actionsCellStyle: { color: theme.palette.common.black },
-
+            // TODO remove after upgrade
             // @ts-ignore
             exportPdf: (columns: Column<any>[], data: any[]) => {
-              // @ts-ignore
               const filteredColumns: {
                 field: string;
                 title: string;
-              }[] = columns.filter(
-                c => typeof c.field === 'string' && typeof c.title === 'string',
-              );
+              }[] = [];
+              columns.forEach(column => {
+                if (
+                  typeof column.field === 'string' &&
+                  typeof column.title === 'string'
+                ) {
+                  filteredColumns.push({
+                    field: column.field,
+                    title: column.title,
+                  });
+                }
+              });
 
               const docDefinition = {
                 content: [
