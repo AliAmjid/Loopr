@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Button,
@@ -13,17 +13,19 @@ import { useForm } from 'react-hook-form';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
-import { AddDialogFormValues, AddDialogProps } from './types';
+import { ClassGroupDialogFormValues, ClassGroupDialogProps } from './types';
 
-const AddDialog: React.FC<AddDialogProps> = props => {
-  const { handleSubmit, register, errors } = useForm<AddDialogFormValues>();
+const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
+  const { handleSubmit, register, errors, setValue } = useForm<
+    ClassGroupDialogFormValues
+  >();
 
-  const submitHandler = (values: AddDialogFormValues): void => {
+  const submitHandler = (values: ClassGroupDialogFormValues): void => {
     props.onSubmit({ section: values.name, year: +values.year });
   };
 
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <Dialog open={props.open}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
         <DialogTitle>Class add</DialogTitle>
@@ -38,6 +40,7 @@ const AddDialog: React.FC<AddDialogProps> = props => {
                   fullWidth
                   inputRef={register({ required: true })}
                   error={errors.year !== undefined}
+                  defaultValue={props.defaultValues?.year || ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -47,6 +50,7 @@ const AddDialog: React.FC<AddDialogProps> = props => {
                   fullWidth
                   inputRef={register({ required: true })}
                   error={errors.name !== undefined}
+                  defaultValue={props.defaultValues?.section || ''}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -56,7 +60,7 @@ const AddDialog: React.FC<AddDialogProps> = props => {
                   color="primary"
                   variant="contained"
                 >
-                  Add
+                  {props.primaryButtonLabel}
                 </Button>
               </Grid>
               <Grid item xs={6}>
@@ -77,4 +81,4 @@ const AddDialog: React.FC<AddDialogProps> = props => {
   );
 };
 
-export default AddDialog;
+export default ClassGroupDialog;

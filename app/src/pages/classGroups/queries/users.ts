@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const CLASSES_USERS_QUERY = gql`
-  query ClassesUsersQuery(
+const CLASS_GROUPS_USERS_QUERY = gql`
+  query ClassGroupsUsersQuery(
     $first: Int
     $after: String
     $last: Int
@@ -21,4 +21,4 @@ const CLASSES_USERS_QUERY = gql`
   }
 `;
 
-export default CLASSES_USERS_QUERY;
+export default CLASS_GROUPS_USERS_QUERY;

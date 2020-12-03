@@ -1,6 +1,6 @@
 import { Query } from 'material-table';
 
-export type DetailClassUser = {
+export type DetailClassGroupUser = {
   id: string;
   firstname: string;
   lastname: string;
@@ -10,7 +10,7 @@ export type DetailClassUser = {
 };
 
 export interface GetUsersReturn {
-  users: DetailClassUser[];
+  users: DetailClassGroupUser[];
   totalCount: number;
 }
 
@@ -19,10 +19,12 @@ export interface SelectionChangeArgs {
   selected: boolean;
 }
 
-export interface ClassProps {
-  getClassUsers: (query: Query<DetailClassUser>) => Promise<GetUsersReturn>;
-  getUsers: (query: Query<DetailClassUser>) => Promise<GetUsersReturn>;
-  selectedClass?: string;
+export interface ClassGroupProps {
+  getClassGroupUsers: (
+    query: Query<DetailClassGroupUser>,
+  ) => Promise<GetUsersReturn>;
+  getUsers: (query: Query<DetailClassGroupUser>) => Promise<GetUsersReturn>;
+  selectedClassGroup?: string;
   onSelectionChange: (args: SelectionChangeArgs) => void;
   onSubmit: () => Promise<boolean>;
 }

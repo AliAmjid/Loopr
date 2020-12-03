@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const CLASSES_CLASS_QUERY = gql`
-  query ClassesClassQuery(
+const CLASS_GROUPS_CLASS_GROUP_QUERY = gql`
+  query ClassGroupsClassGroupQuery(
     $id: ID!
     $usersFirst: Int
     $usersLast: Int
@@ -30,4 +30,4 @@ const CLASSES_CLASS_QUERY = gql`
   }
 `;
 
-export default CLASSES_CLASS_QUERY;
+export default CLASS_GROUPS_CLASS_GROUP_QUERY;

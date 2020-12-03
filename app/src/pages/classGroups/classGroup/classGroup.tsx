@@ -5,12 +5,12 @@ import { Query } from 'material-table';
 
 import MaterialTable from 'lib/material-table';
 
-import { ClassProps, DetailClassUser } from './types';
+import { ClassGroupProps, DetailClassGroupUser } from './types';
 
-const ClassC: React.FC<ClassProps> = props => {
+const ClassGroup: React.FC<ClassGroupProps> = props => {
   const [editing, setEditing] = useState(false);
 
-  if (!props.selectedClass)
+  if (!props.selectedClassGroup)
     return (
       <Box
         width="100%"
@@ -26,17 +26,17 @@ const ClassC: React.FC<ClassProps> = props => {
   return (
     <Box p={2}>
       <MaterialTable
-        key={props.selectedClass + editing}
+        key={props.selectedClassGroup + editing}
         uniqueName="pages/classes/class"
         title="USERS"
-        data={(query: Query<DetailClassUser>) =>
+        data={(query: Query<DetailClassGroupUser>) =>
           editing
             ? props.getUsers(query).then(res => ({
                 page: query.page,
                 totalCount: res.totalCount,
                 data: res.users,
               }))
-            : props.getClassUsers(query).then(res => ({
+            : props.getClassGroupUsers(query).then(res => ({
                 page: query.page,
                 totalCount: res.totalCount,
                 data: res.users,
@@ -93,4 +93,4 @@ const ClassC: React.FC<ClassProps> = props => {
   );
 };
 
-export default ClassC;
+export default ClassGroup;

@@ -4,37 +4,41 @@ import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
 
 import {
-  ClassesClassQuery,
-  ClassesClassQueryVariables,
-  ClassesUpdateClassMutation,
-  ClassesUpdateClassMutationVariables,
-  ClassesUsersQuery,
-  ClassesUsersQueryVariables,
+  ClassGroupsClassGroupQuery,
+  ClassGroupsClassGroupQueryVariables,
+  ClassGroupsUpdateClassGroupMutation,
+  ClassGroupsUpdateClassGroupMutationVariables,
+  ClassGroupsUsersQuery,
+  ClassGroupsUsersQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
 
-import CLASSES_UPDATE_CLASS_MUTATION from '../mutations/updateClass';
-import CLASSES_CLASS_QUERY from '../queries/class';
-import CLASSES_USERS_QUERY from '../queries/users';
-import useClassesState from '../state';
+import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClass';
+import CLASS_GROUPS_CLASS_GROUP_QUERY from '../queries/class';
+import CLASS_GROUPS_USERS_QUERY from '../queries/users';
+import useClassGroupsState from '../state';
 
-import ClassC from './class';
-import { DetailClassUser, GetUsersReturn, SelectionChangeArgs } from './types';
+import ClassGroup from './classGroup';
+import {
+  DetailClassGroupUser,
+  GetUsersReturn,
+  SelectionChangeArgs,
+} from './types';
 
 const ClassIndex: React.FC = () => {
-  const { selectedClass } = useClassesState(state => ({
-    selectedClass: state.selectedClass,
+  const { selectedClassGroup } = useClassGroupsState(state => ({
+    selectedClassGroup: state.selectedClassGroup,
   }));
   const client = useApolloClient();
   const [updateClass] = useMutation<
-    ClassesUpdateClassMutation,
-    ClassesUpdateClassMutationVariables
-  >(CLASSES_UPDATE_CLASS_MUTATION);
+    ClassGroupsUpdateClassGroupMutation,
+    ClassGroupsUpdateClassGroupMutationVariables
+  >(CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION);
   const {
-    getPagination: getClassPagination,
-    setPagination: setClassPagination,
-    resetPagination: resetClassPagination,
+    getPagination: getClassGroupPagination,
+    setPagination: setClassGroupPagination,
+    resetPagination: resetClassGroupPagination,
   } = usePagination();
   const {
     getPagination: getUserPagination,
@@ -44,37 +48,39 @@ const ClassIndex: React.FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {
-    resetClassPagination();
+    resetClassGroupPagination();
     resetUserPagination();
-  }, [selectedClass]);
+  }, [selectedClassGroup]);
 
-  const getClassUsers = (
-    query: Query<DetailClassUser>,
+  const getClassGroupUsers = (
+    query: Query<DetailClassGroupUser>,
   ): Promise<GetUsersReturn> => {
-    const variables = getClassPagination({
+    const variables = getClassGroupPagination({
       page: query.page,
       pageSize: query.pageSize,
     });
 
     const defaultValue = { users: [], totalCount: 0 };
 
-    if (selectedClass) {
+    if (selectedClassGroup) {
       return client
-        .query<ClassesClassQuery, ClassesClassQueryVariables>({
-          query: CLASSES_CLASS_QUERY,
-          variables: {
-            id: selectedClass,
-            usersFirst: variables.first,
-            usersLast: variables.last,
-            usersBefore: variables.before,
-            usersAfter: variables.after,
+        .query<ClassGroupsClassGroupQuery, ClassGroupsClassGroupQueryVariables>(
+          {
+            query: CLASS_GROUPS_CLASS_GROUP_QUERY,
+            variables: {
+              id: selectedClassGroup,
+              usersFirst: variables.first,
+              usersLast: variables.last,
+              usersBefore: variables.before,
+              usersAfter: variables.after,
+            },
           },
-        })
+        )
         .then(res => {
           const edges = res.data?.classGroup?.users?.edges;
           const totalCount = res.data?.classGroup?.users?.totalCount;
           if (edges && totalCount) {
-            setClassPagination({ edges, totalCount });
+            setClassGroupPagination({ edges, totalCount });
 
             const users = [];
             for (const user of res.data?.classGroup?.users?.edges || []) {
@@ -91,7 +97,9 @@ const ClassIndex: React.FC = () => {
     return Promise.resolve(defaultValue);
   };
 
-  const getUsers = (query: Query<DetailClassUser>): Promise<GetUsersReturn> => {
+  const getUsers = (
+    query: Query<DetailClassGroupUser>,
+  ): Promise<GetUsersReturn> => {
     const variables = getUserPagination({
       page: query.page,
       pageSize: query.pageSize,
@@ -99,10 +107,10 @@ const ClassIndex: React.FC = () => {
 
     const defaultValue = { users: [], totalCount: 0 };
 
-    if (selectedClass) {
+    if (selectedClassGroup) {
       return client
-        .query<ClassesUsersQuery, ClassesUsersQueryVariables>({
-          query: CLASSES_USERS_QUERY,
+        .query<ClassGroupsUsersQuery, ClassGroupsUsersQueryVariables>({
+          query: CLASS_GROUPS_USERS_QUERY,
           variables,
         })
         .then(res => {
@@ -111,7 +119,7 @@ const ClassIndex: React.FC = () => {
           if (edges && totalCount) {
             setUserPagination({ edges, totalCount });
 
-            const users: DetailClassUser[] = [];
+            const users: DetailClassGroupUser[] = [];
             for (const user of res.data?.users?.edges || []) {
               if (user?.node) {
                 const node = user?.node;
@@ -150,9 +158,9 @@ const ClassIndex: React.FC = () => {
   };
 
   const submitHandler = (): Promise<boolean> => {
-    if (selectedClass) {
+    if (selectedClassGroup) {
       return updateClass({
-        variables: { input: { id: selectedClass, users: selected } },
+        variables: { input: { id: selectedClassGroup, users: selected } },
       })
         .then(() => {
           return true;
@@ -166,10 +174,10 @@ const ClassIndex: React.FC = () => {
   };
 
   return (
-    <ClassC
-      selectedClass={selectedClass}
+    <ClassGroup
+      selectedClassGroup={selectedClassGroup}
       getUsers={getUsers}
-      getClassUsers={getClassUsers}
+      getClassGroupUsers={getClassGroupUsers}
       onSelectionChange={selectionChangeHandler}
       onSubmit={submitHandler}
     />

@@ -1,8 +1,8 @@
 import { PageOptions } from 'components/withPage/types';
 
-const classesPageOptions: PageOptions = {
+const classGroupsPageOptions: PageOptions = {
   title: 'Classes',
   breadcrumbs: [],
 };
 
-export default classesPageOptions;
+export default classGroupsPageOptions;

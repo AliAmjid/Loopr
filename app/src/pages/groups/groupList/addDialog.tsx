@@ -26,7 +26,7 @@ const AddDialog: React.FC<AddDialogProps> = props => {
   };
 
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <Dialog open={props.open}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
 

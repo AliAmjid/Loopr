@@ -288,27 +288,27 @@ export interface AclTableQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: ClassesAddClassMutation
+// GraphQL mutation operation: ClassGroupsAddClassGroupMutation
 // ====================================================
 
-export interface ClassesAddClassMutation_createClassGroup_classGroup {
+export interface ClassGroupsAddClassGroupMutation_createClassGroup_classGroup {
   __typename: "createClassGroupPayloadData";
   id: string;
 }
 
-export interface ClassesAddClassMutation_createClassGroup {
+export interface ClassGroupsAddClassGroupMutation_createClassGroup {
   __typename: "createClassGroupPayload";
-  classGroup: ClassesAddClassMutation_createClassGroup_classGroup | null;
+  classGroup: ClassGroupsAddClassGroupMutation_createClassGroup_classGroup | null;
 }
 
-export interface ClassesAddClassMutation {
+export interface ClassGroupsAddClassGroupMutation {
   /**
    * Creates a ClassGroup.
    */
-  createClassGroup: ClassesAddClassMutation_createClassGroup | null;
+  createClassGroup: ClassGroupsAddClassGroupMutation_createClassGroup | null;
 }
 
-export interface ClassesAddClassMutationVariables {
+export interface ClassGroupsAddClassGroupMutationVariables {
   input: createClassGroupInput;
 }
 
@@ -318,29 +318,29 @@ export interface ClassesAddClassMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: ClassesUpdateClassMutation
+// GraphQL mutation operation: ClassGroupsUpdateClassGroupMutation
 // ====================================================
 
-export interface ClassesUpdateClassMutation_updateClassGroup_classGroup {
+export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup {
   __typename: "updateClassGroupPayloadData";
   id: string;
   year: number | null;
   section: string | null;
 }
 
-export interface ClassesUpdateClassMutation_updateClassGroup {
+export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup {
   __typename: "updateClassGroupPayload";
-  classGroup: ClassesUpdateClassMutation_updateClassGroup_classGroup | null;
+  classGroup: ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup | null;
 }
 
-export interface ClassesUpdateClassMutation {
+export interface ClassGroupsUpdateClassGroupMutation {
   /**
    * Updates a ClassGroup.
    */
-  updateClassGroup: ClassesUpdateClassMutation_updateClassGroup | null;
+  updateClassGroup: ClassGroupsUpdateClassGroupMutation_updateClassGroup | null;
 }
 
-export interface ClassesUpdateClassMutationVariables {
+export interface ClassGroupsUpdateClassGroupMutationVariables {
   input: updateClassGroupInput;
 }
 
@@ -350,39 +350,39 @@ export interface ClassesUpdateClassMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ClassesClassQuery
+// GraphQL query operation: ClassGroupsClassGroupQuery
 // ====================================================
 
-export interface ClassesClassQuery_classGroup_users_edges_node {
+export interface ClassGroupsClassGroupQuery_classGroup_users_edges_node {
   __typename: "UserItem";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface ClassesClassQuery_classGroup_users_edges {
+export interface ClassGroupsClassGroupQuery_classGroup_users_edges {
   __typename: "UserItemEdge";
-  node: ClassesClassQuery_classGroup_users_edges_node | null;
+  node: ClassGroupsClassGroupQuery_classGroup_users_edges_node | null;
   cursor: string;
 }
 
-export interface ClassesClassQuery_classGroup_users {
+export interface ClassGroupsClassGroupQuery_classGroup_users {
   __typename: "UserItemConnection";
-  edges: (ClassesClassQuery_classGroup_users_edges | null)[] | null;
+  edges: (ClassGroupsClassGroupQuery_classGroup_users_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface ClassesClassQuery_classGroup {
+export interface ClassGroupsClassGroupQuery_classGroup {
   __typename: "ClassGroup";
   id: string;
-  users: ClassesClassQuery_classGroup_users | null;
+  users: ClassGroupsClassGroupQuery_classGroup_users | null;
 }
 
-export interface ClassesClassQuery {
-  classGroup: ClassesClassQuery_classGroup | null;
+export interface ClassGroupsClassGroupQuery {
+  classGroup: ClassGroupsClassGroupQuery_classGroup | null;
 }
 
-export interface ClassesClassQueryVariables {
+export interface ClassGroupsClassGroupQueryVariables {
   id: string;
   usersFirst?: number | null;
   usersLast?: number | null;
@@ -396,28 +396,28 @@ export interface ClassesClassQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ClassesClassesQuery
+// GraphQL query operation: ClassGroupsClassGroupsQuery
 // ====================================================
 
-export interface ClassesClassesQuery_classGroups_edges_node {
+export interface ClassGroupsClassGroupsQuery_classGroups_edges_node {
   __typename: "ClassGroup";
   id: string;
   year: number;
   section: string;
 }
 
-export interface ClassesClassesQuery_classGroups_edges {
+export interface ClassGroupsClassGroupsQuery_classGroups_edges {
   __typename: "ClassGroupEdge";
-  node: ClassesClassesQuery_classGroups_edges_node | null;
+  node: ClassGroupsClassGroupsQuery_classGroups_edges_node | null;
 }
 
-export interface ClassesClassesQuery_classGroups {
+export interface ClassGroupsClassGroupsQuery_classGroups {
   __typename: "ClassGroupConnection";
-  edges: (ClassesClassesQuery_classGroups_edges | null)[] | null;
+  edges: (ClassGroupsClassGroupsQuery_classGroups_edges | null)[] | null;
 }
 
-export interface ClassesClassesQuery {
-  classGroups: ClassesClassesQuery_classGroups | null;
+export interface ClassGroupsClassGroupsQuery {
+  classGroups: ClassGroupsClassGroupsQuery_classGroups | null;
 }
 
 /* tslint:disable */
@@ -426,33 +426,33 @@ export interface ClassesClassesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ClassesUsersQuery
+// GraphQL query operation: ClassGroupsUsersQuery
 // ====================================================
 
-export interface ClassesUsersQuery_users_edges_node {
+export interface ClassGroupsUsersQuery_users_edges_node {
   __typename: "UserCollection";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface ClassesUsersQuery_users_edges {
+export interface ClassGroupsUsersQuery_users_edges {
   __typename: "UserCollectionEdge";
-  node: ClassesUsersQuery_users_edges_node | null;
+  node: ClassGroupsUsersQuery_users_edges_node | null;
   cursor: string;
 }
 
-export interface ClassesUsersQuery_users {
+export interface ClassGroupsUsersQuery_users {
   __typename: "UserCollectionConnection";
-  edges: (ClassesUsersQuery_users_edges | null)[] | null;
+  edges: (ClassGroupsUsersQuery_users_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface ClassesUsersQuery {
-  users: ClassesUsersQuery_users | null;
+export interface ClassGroupsUsersQuery {
+  users: ClassGroupsUsersQuery_users | null;
 }
 
-export interface ClassesUsersQueryVariables {
+export interface ClassGroupsUsersQueryVariables {
   first?: number | null;
   after?: string | null;
   last?: number | null;

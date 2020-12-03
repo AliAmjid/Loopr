@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const CLASSES_CLASSES_QUERY = gql`
-  query ClassesClassesQuery {
+const CLASS_GROUPS_CLASS_GROUPS_QUERY = gql`
+  query ClassGroupsClassGroupsQuery {
     classGroups {
       edges {
         node {
@@ -14,4 +14,4 @@ const CLASSES_CLASSES_QUERY = gql`
   }
 `;
 
-export default CLASSES_CLASSES_QUERY;
+export default CLASS_GROUPS_CLASS_GROUPS_QUERY;
