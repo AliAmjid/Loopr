@@ -28,6 +28,9 @@ App\Entity\Group:
             denormalization_context:
                 groups:
                     - group:write
+        delete:
+            security: "is_granted('GROUP_CREATE')"
+            
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
@@ -71,6 +74,9 @@ App\Entity\ClassGroup:
             denormalization_context:
                 groups:
                     - classGroup:write
+        delete:
+            security: "is_granted('GROUP_DELETE')"
+            
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
@@ -83,4 +89,3 @@ App\Entity\ClassGroup:
             normalization_context:
                 groups:
                     - classGroup:read
-
