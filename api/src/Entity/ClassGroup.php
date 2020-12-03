@@ -51,7 +51,7 @@ class ClassGroup implements IGroup
 
     /** @var User|null Teacher needs to be user with resource GROUP_TEACHER
      * @ORM\ManyToOne(targetEntity="User")
-     * @Groups({"classGroup:read"})
+     * @Groups({"classGroup:read", "classGroup:write"})
      */
     private ?User $teacher = null;
 

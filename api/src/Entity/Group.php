@@ -21,9 +21,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="`group`", uniqueConstraints={
- *     @UniqueConstraint(name="name_unique_g", columns={"year", "section"})
- *     })
+ * @ORM\Table(name="`group`")
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "section":"partial"})
  */
 class Group implements IGroup
@@ -31,7 +29,7 @@ class Group implements IGroup
     use Tid;
 
     /** @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      * @Groups({"group:read", "group:write", "group:basic"})
      * @Assert\NotBlank()
      * @Assert\NotNull()
@@ -64,7 +62,6 @@ class Group implements IGroup
      * @var Collection
      * @ORM\OneToMany(targetEntity="SubjectHasGroup", mappedBy="group")
      * @ApiProperty(readableLink=true)
-     * @MaxDepth(5)
      */
     private Collection $subjectRelations;
 

@@ -27,7 +27,7 @@ class SubjectHasGroup
 
     /**
      * @var Group|null
-     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="subjectRelations")
      * @Groups({"subjectHasGroup:read", "subjectHasGroup:write", "group:read"})
      */
     private ?Group $group = null;
