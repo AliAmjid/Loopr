@@ -34,6 +34,7 @@ export interface StudentsProps {
 
 export interface TeacherProps {
   teacher?: DetailClassGroupUser | null;
+  loading: boolean;
   onGetUsers: GetUsers;
   onChange: (id: string) => Promise<boolean>;
 }
@@ -41,6 +42,7 @@ export interface TeacherProps {
 export interface ClassGroupProps {
   selectedClassGroup?: string;
   teacher?: DetailClassGroupUser | null;
+  teacherLoading: boolean;
   onGetClassGroupUsers: (
     query: Query<DetailClassGroupUser>,
   ) => Promise<GetUsersReturn>;

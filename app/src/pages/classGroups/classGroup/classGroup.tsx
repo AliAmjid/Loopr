@@ -53,6 +53,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
           Panel: (
             <Teacher
               teacher={props.teacher}
+              loading={props.teacherLoading}
               onGetUsers={props.onGetUsers}
               onChange={props.onTeacherChange}
             />

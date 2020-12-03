@@ -37,10 +37,15 @@ const ClassIndex: React.FC = () => {
   }));
 
   const client = useApolloClient();
-  const { data: classGroupTeacherData } = useQuery<
+  const {
+    data: classGroupTeacherData,
+    loading: classGroupTeacherLoading,
+  } = useQuery<
     ClassGroupsClassGroupTeacher,
     ClassGroupsClassGroupTeacherVariables
-  >(CLASS_GROUPS_CLASS_GROUP_TEACHER);
+  >(CLASS_GROUPS_CLASS_GROUP_TEACHER, {
+    variables: { id: `${selectedClassGroup}` },
+  });
   const [updateClassGroup] = useMutation<
     ClassGroupsUpdateClassGroupMutation,
     ClassGroupsUpdateClassGroupMutationVariables
@@ -214,6 +219,7 @@ const ClassIndex: React.FC = () => {
   return (
     <ClassGroup
       teacher={classGroupTeacherData?.classGroup?.teacher}
+      teacherLoading={classGroupTeacherLoading}
       selectedClassGroup={selectedClassGroup}
       onGetUsers={getUsersHandler}
       onGetClassGroupUsers={getClassGroupUsersHandler}

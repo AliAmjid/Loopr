@@ -6,13 +6,17 @@ import { Query } from 'material-table';
 
 import MaterialTable from 'lib/material-table';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+
 import { DetailClassGroupUser, TeacherProps } from './types';
 
 const Teacher: React.FC<TeacherProps> = props => {
   const [editing, setEditing] = useState(false);
 
   return (
-    <>
+    <OverlayLoadingContainer>
+      <OverlayLoading loading={props.loading} />
       <MaterialTable
         key={`${editing}`}
         title="Teacher"
@@ -91,7 +95,7 @@ const Teacher: React.FC<TeacherProps> = props => {
           </Button>
         )}
       </Box>
-    </>
+    </OverlayLoadingContainer>
   );
 };
 
