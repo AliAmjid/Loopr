@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Box, makeStyles, Tab, Tabs as TabsPrefab } from '@material-ui/core';
-import SwipeableViews from 'react-swipeable-views';
 
 import { TabsProps } from './types';
 
@@ -20,16 +19,18 @@ const Tabs: React.FC<TabsProps> = props => {
     <Tab key={tab.id} value={tab.id} label={tab.label} />
   ));
 
-  const mappedPanels = props.tabs.map(tab => (
-    <Box width="100%" key={tab.id}>
-      {tab.Panel}
-    </Box>
-  ));
+  let Wrapper: React.FC = props => <>{props.children}</>;
+  if (props.TabWrapper) {
+    Wrapper = props.TabWrapper;
+  }
 
   return (
     <>
       <TabsPrefab
         className={classes.tabs}
+        classes={{
+          scroller: classes.tabs,
+        }}
         value={value}
         onChange={(e, value) => setValue(value)}
         indicatorColor="primary"
@@ -38,12 +39,9 @@ const Tabs: React.FC<TabsProps> = props => {
       >
         {mappedTabs}
       </TabsPrefab>
-      <SwipeableViews
-        index={props.tabs.findIndex(t => t.id === value)}
-        onChangeIndex={value => setValue(value)}
-      >
-        {mappedPanels}
-      </SwipeableViews>
+      <Box width="100%">
+        <Wrapper>{props.tabs.find(tab => tab.id === value)?.Panel}</Wrapper>
+      </Box>
     </>
   );
 };

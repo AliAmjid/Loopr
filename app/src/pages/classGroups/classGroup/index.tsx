@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
+import { useSnackbar } from 'notistack';
+
+import CLASS_GROUPS_CLASS_GROUP_TEACHER from 'pages/classGroups/queries/classGroupTeacher';
 
 import {
-  ClassGroupsClassGroupQuery,
-  ClassGroupsClassGroupQueryVariables,
+  ClassGroupsClassGroupTeacher,
+  ClassGroupsClassGroupTeacherVariables,
+  ClassGroupsClassGroupUsersQuery,
+  ClassGroupsClassGroupUsersQueryVariables,
   ClassGroupsUpdateClassGroupMutation,
   ClassGroupsUpdateClassGroupMutationVariables,
   ClassGroupsUsersQuery,
@@ -15,7 +20,7 @@ import {
 import usePagination from 'components/usePagination';
 
 import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClass';
-import CLASS_GROUPS_CLASS_GROUP_QUERY from '../queries/class';
+import CLASS_GROUPS_CLASS_GROUP_USERS_QUERY from '../queries/classGroupUsers';
 import CLASS_GROUPS_USERS_QUERY from '../queries/users';
 import useClassGroupsState from '../state';
 
@@ -30,11 +35,17 @@ const ClassIndex: React.FC = () => {
   const { selectedClassGroup } = useClassGroupsState(state => ({
     selectedClassGroup: state.selectedClassGroup,
   }));
+
   const client = useApolloClient();
-  const [updateClass] = useMutation<
+  const { data: classGroupTeacherData } = useQuery<
+    ClassGroupsClassGroupTeacher,
+    ClassGroupsClassGroupTeacherVariables
+  >(CLASS_GROUPS_CLASS_GROUP_TEACHER);
+  const [updateClassGroup] = useMutation<
     ClassGroupsUpdateClassGroupMutation,
     ClassGroupsUpdateClassGroupMutationVariables
   >(CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION);
+
   const {
     getPagination: getClassGroupPagination,
     setPagination: setClassGroupPagination,
@@ -45,14 +56,16 @@ const ClassIndex: React.FC = () => {
     setPagination: setUserPagination,
     resetPagination: resetUserPagination,
   } = usePagination();
+
   const [selected, setSelected] = useState<string[]>([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     resetClassGroupPagination();
     resetUserPagination();
   }, [selectedClassGroup]);
 
-  const getClassGroupUsers = (
+  const getClassGroupUsersHandler = (
     query: Query<DetailClassGroupUser>,
   ): Promise<GetUsersReturn> => {
     const variables = getClassGroupPagination({
@@ -64,18 +77,19 @@ const ClassIndex: React.FC = () => {
 
     if (selectedClassGroup) {
       return client
-        .query<ClassGroupsClassGroupQuery, ClassGroupsClassGroupQueryVariables>(
-          {
-            query: CLASS_GROUPS_CLASS_GROUP_QUERY,
-            variables: {
-              id: selectedClassGroup,
-              usersFirst: variables.first,
-              usersLast: variables.last,
-              usersBefore: variables.before,
-              usersAfter: variables.after,
-            },
+        .query<
+          ClassGroupsClassGroupUsersQuery,
+          ClassGroupsClassGroupUsersQueryVariables
+        >({
+          query: CLASS_GROUPS_CLASS_GROUP_USERS_QUERY,
+          variables: {
+            id: selectedClassGroup,
+            usersFirst: variables.first,
+            usersLast: variables.last,
+            usersBefore: variables.before,
+            usersAfter: variables.after,
           },
-        )
+        })
         .then(res => {
           const edges = res.data?.classGroup?.users?.edges;
           const totalCount = res.data?.classGroup?.users?.totalCount;
@@ -97,7 +111,7 @@ const ClassIndex: React.FC = () => {
     return Promise.resolve(defaultValue);
   };
 
-  const getUsers = (
+  const getUsersHandler = (
     query: Query<DetailClassGroupUser>,
   ): Promise<GetUsersReturn> => {
     const variables = getUserPagination({
@@ -159,13 +173,37 @@ const ClassIndex: React.FC = () => {
 
   const submitHandler = (): Promise<boolean> => {
     if (selectedClassGroup) {
-      return updateClass({
+      return updateClassGroup({
         variables: { input: { id: selectedClassGroup, users: selected } },
       })
         .then(() => {
+          enqueueSnackbar('S', { variant: 'success' });
+
           return true;
         })
         .catch(() => {
+          enqueueSnackbar('E', { variant: 'error' });
+
+          return false;
+        });
+    }
+
+    return Promise.resolve(false);
+  };
+
+  const teacherChangeHandler = (id: string): Promise<boolean> => {
+    if (selectedClassGroup) {
+      return updateClassGroup({
+        variables: { input: { id: selectedClassGroup } },
+      })
+        .then(() => {
+          enqueueSnackbar('S', { variant: 'success' });
+
+          return true;
+        })
+        .catch(() => {
+          enqueueSnackbar('E', { variant: 'error' });
+
           return false;
         });
     }
@@ -175,11 +213,13 @@ const ClassIndex: React.FC = () => {
 
   return (
     <ClassGroup
+      teacher={classGroupTeacherData?.classGroup?.teacher}
       selectedClassGroup={selectedClassGroup}
-      getUsers={getUsers}
-      getClassGroupUsers={getClassGroupUsers}
-      onSelectionChange={selectionChangeHandler}
-      onSubmit={submitHandler}
+      onGetUsers={getUsersHandler}
+      onGetClassGroupUsers={getClassGroupUsersHandler}
+      onStudentsChange={selectionChangeHandler}
+      onStudentsSubmit={submitHandler}
+      onTeacherChange={teacherChangeHandler}
     />
   );
 };

@@ -11,6 +11,7 @@ const CLASS_GROUPS_USERS_QUERY = gql`
       edges {
         node {
           id
+          email
           firstname
           lastname
         }

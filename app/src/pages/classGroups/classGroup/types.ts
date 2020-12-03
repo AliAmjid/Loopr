@@ -2,6 +2,7 @@ import { Query } from 'material-table';
 
 export type DetailClassGroupUser = {
   id: string;
+  email: string;
   firstname: string;
   lastname: string;
   tableData?: {
@@ -19,12 +20,32 @@ export interface SelectionChangeArgs {
   selected: boolean;
 }
 
-export interface ClassGroupProps {
-  getClassGroupUsers: (
+type GetUsers = (query: Query<DetailClassGroupUser>) => Promise<GetUsersReturn>;
+
+export interface StudentsProps {
+  selectedClassGroup?: string;
+  onGetClassGroupUsers: (
     query: Query<DetailClassGroupUser>,
   ) => Promise<GetUsersReturn>;
-  getUsers: (query: Query<DetailClassGroupUser>) => Promise<GetUsersReturn>;
-  selectedClassGroup?: string;
+  onGetUsers: GetUsers;
   onSelectionChange: (args: SelectionChangeArgs) => void;
   onSubmit: () => Promise<boolean>;
+}
+
+export interface TeacherProps {
+  teacher?: DetailClassGroupUser | null;
+  onGetUsers: GetUsers;
+  onChange: (id: string) => Promise<boolean>;
+}
+
+export interface ClassGroupProps {
+  selectedClassGroup?: string;
+  teacher?: DetailClassGroupUser | null;
+  onGetClassGroupUsers: (
+    query: Query<DetailClassGroupUser>,
+  ) => Promise<GetUsersReturn>;
+  onGetUsers: (query: Query<DetailClassGroupUser>) => Promise<GetUsersReturn>;
+  onStudentsChange: (args: SelectionChangeArgs) => void;
+  onStudentsSubmit: () => Promise<boolean>;
+  onTeacherChange: (id: string) => Promise<boolean>;
 }

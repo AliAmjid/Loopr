@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+// TODO add fragment
 const CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION = gql`
   mutation ClassGroupsUpdateClassGroupMutation($input: updateClassGroupInput!) {
     updateClassGroup(input: $input) {
@@ -7,6 +8,12 @@ const CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION = gql`
         id
         year
         section
+        teacher {
+          id
+          email
+          firstname
+          lastname
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const CLASS_GROUPS_CLASS_GROUP_QUERY = gql`
-  query ClassGroupsClassGroupQuery(
+const CLASS_GROUPS_CLASS_GROUP_USERS_QUERY = gql`
+  query ClassGroupsClassGroupUsersQuery(
     $id: ID!
     $usersFirst: Int
     $usersLast: Int
@@ -19,6 +19,7 @@ const CLASS_GROUPS_CLASS_GROUP_QUERY = gql`
         edges {
           node {
             id
+            email
             firstname
             lastname
           }
@@ -30,4 +31,4 @@ const CLASS_GROUPS_CLASS_GROUP_QUERY = gql`
   }
 `;
 
-export default CLASS_GROUPS_CLASS_GROUP_QUERY;
+export default CLASS_GROUPS_CLASS_GROUP_USERS_QUERY;

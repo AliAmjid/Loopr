@@ -350,52 +350,6 @@ export interface ClassGroupsUpdateClassGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ClassGroupsClassGroupQuery
-// ====================================================
-
-export interface ClassGroupsClassGroupQuery_classGroup_users_edges_node {
-  __typename: "UserItem";
-  id: string;
-  firstname: string;
-  lastname: string;
-}
-
-export interface ClassGroupsClassGroupQuery_classGroup_users_edges {
-  __typename: "UserItemEdge";
-  node: ClassGroupsClassGroupQuery_classGroup_users_edges_node | null;
-  cursor: string;
-}
-
-export interface ClassGroupsClassGroupQuery_classGroup_users {
-  __typename: "UserItemConnection";
-  edges: (ClassGroupsClassGroupQuery_classGroup_users_edges | null)[] | null;
-  totalCount: number;
-}
-
-export interface ClassGroupsClassGroupQuery_classGroup {
-  __typename: "ClassGroup";
-  id: string;
-  users: ClassGroupsClassGroupQuery_classGroup_users | null;
-}
-
-export interface ClassGroupsClassGroupQuery {
-  classGroup: ClassGroupsClassGroupQuery_classGroup | null;
-}
-
-export interface ClassGroupsClassGroupQueryVariables {
-  id: string;
-  usersFirst?: number | null;
-  usersLast?: number | null;
-  usersAfter?: string | null;
-  usersBefore?: string | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL query operation: ClassGroupsClassGroupsQuery
 // ====================================================
 
@@ -426,12 +380,102 @@ export interface ClassGroupsClassGroupsQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: ClassGroupsClassGroupTeacher
+// ====================================================
+
+export interface ClassGroupsClassGroupTeacher_classGroup_teacher {
+  __typename: "UserItem";
+  id: string;
+  /**
+   * email of user
+   */
+  email: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface ClassGroupsClassGroupTeacher_classGroup {
+  __typename: "ClassGroup";
+  /**
+   * Teacher needs to be user with resource GROUP_TEACHER
+   */
+  teacher: ClassGroupsClassGroupTeacher_classGroup_teacher | null;
+}
+
+export interface ClassGroupsClassGroupTeacher {
+  classGroup: ClassGroupsClassGroupTeacher_classGroup | null;
+}
+
+export interface ClassGroupsClassGroupTeacherVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: ClassGroupsClassGroupUsersQuery
+// ====================================================
+
+export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
+  __typename: "UserItem";
+  id: string;
+  /**
+   * email of user
+   */
+  email: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges {
+  __typename: "UserItemEdge";
+  node: ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node | null;
+  cursor: string;
+}
+
+export interface ClassGroupsClassGroupUsersQuery_classGroup_users {
+  __typename: "UserItemConnection";
+  edges: (ClassGroupsClassGroupUsersQuery_classGroup_users_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface ClassGroupsClassGroupUsersQuery_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  users: ClassGroupsClassGroupUsersQuery_classGroup_users | null;
+}
+
+export interface ClassGroupsClassGroupUsersQuery {
+  classGroup: ClassGroupsClassGroupUsersQuery_classGroup | null;
+}
+
+export interface ClassGroupsClassGroupUsersQueryVariables {
+  id: string;
+  usersFirst?: number | null;
+  usersLast?: number | null;
+  usersAfter?: string | null;
+  usersBefore?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: ClassGroupsUsersQuery
 // ====================================================
 
 export interface ClassGroupsUsersQuery_users_edges_node {
   __typename: "UserCollection";
   id: string;
+  /**
+   * email of user
+   */
+  email: string;
   firstname: string;
   lastname: string;
 }

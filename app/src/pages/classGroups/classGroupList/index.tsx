@@ -13,7 +13,7 @@ import {
 
 import CLASS_GROUPS_ADD_CLASS_GROUP_MUTATION from '../mutations/addClass';
 import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClass';
-import CLASS_GROUPS_CLASS_GROUPS_QUERY from '../queries/classes';
+import CLASS_GROUPS_CLASS_GROUPS_QUERY from '../queries/classGroups';
 import useClassGroupsState from '../state';
 
 import ClassGroupList from './classGroupList';

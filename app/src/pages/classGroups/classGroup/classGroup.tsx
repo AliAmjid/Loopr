@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Box, Button, Typography } from '@material-ui/core';
-import { Query } from 'material-table';
+import { Box, Typography } from '@material-ui/core';
 
-import MaterialTable from 'lib/material-table';
+import Teacher from 'pages/classGroups/classGroup/teacher';
 
-import { ClassGroupProps, DetailClassGroupUser } from './types';
+import Tabs from 'components/Tabs';
+
+import Students from './students';
+import { ClassGroupProps } from './types';
+
+const TabWrapper: React.FC = props => (
+  <Box p={2} pt={0}>
+    {props.children}
+  </Box>
+);
 
 const ClassGroup: React.FC<ClassGroupProps> = props => {
-  const [editing, setEditing] = useState(false);
-
   if (!props.selectedClassGroup)
     return (
       <Box
@@ -24,72 +30,36 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
     );
 
   return (
-    <Box p={2}>
-      <MaterialTable
-        key={props.selectedClassGroup + editing}
-        uniqueName="pages/classes/class"
-        title="USERS"
-        data={(query: Query<DetailClassGroupUser>) =>
-          editing
-            ? props.getUsers(query).then(res => ({
-                page: query.page,
-                totalCount: res.totalCount,
-                data: res.users,
-              }))
-            : props.getClassGroupUsers(query).then(res => ({
-                page: query.page,
-                totalCount: res.totalCount,
-                data: res.users,
-              }))
-        }
-        onSelectionChange={(data, row) => {
-          if (row) {
-            props.onSelectionChange({
-              id: row?.id,
-              selected: row?.tableData?.checked || false,
-            });
-          }
-        }}
-        columns={[
-          { title: 'Name', field: 'firstname' },
-          { title: 'lastname', field: 'lastname' },
-        ]}
-        options={{ selection: editing, pageSize: 2, pageSizeOptions: [2] }}
-      />
-      <Box pt={2} display="flex" justifyContent="flex-end">
-        {editing ? (
-          <>
-            <Box pr={2}>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {
-                  props.onSubmit();
-                  setEditing(false);
-                }}
-              >
-                Save
-              </Button>
-            </Box>
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={() => setEditing(false)}
-            >
-              Cancel
-            </Button>
-          </>
-        ) : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setEditing(true)}
-          >
-            Edit
-          </Button>
-        )}
-      </Box>
-    </Box>
+    <Tabs
+      variant="fullWidth"
+      TabWrapper={TabWrapper}
+      tabs={[
+        {
+          id: 0,
+          label: 'students',
+          Panel: (
+            <Students
+              selectedClassGroup={props.selectedClassGroup}
+              onGetUsers={props.onGetUsers}
+              onGetClassGroupUsers={props.onGetClassGroupUsers}
+              onSelectionChange={props.onStudentsChange}
+              onSubmit={props.onStudentsSubmit}
+            />
+          ),
+        },
+        {
+          id: 1,
+          label: 'teachers',
+          Panel: (
+            <Teacher
+              teacher={props.teacher}
+              onGetUsers={props.onGetUsers}
+              onChange={props.onTeacherChange}
+            />
+          ),
+        },
+      ]}
+    />
   );
 };
 
