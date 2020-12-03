@@ -5,9 +5,11 @@ namespace App\Entity;
 
 
 use App\Entity\Attributes\Tid;
+use App\Enum\AclResourceEnum;
+use App\Error\ClientError;
+use App\Error\ClientErrorType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -17,29 +19,141 @@ class Subject
     use Tid;
 
     /**
-     * @var string|null
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups({"subject:read", "subject:write", "group:read"})
+     * @var SubjectType
+     * @ORM\ManyToOne(targetEntity="SubjectType")
+     * @Groups({"subject:read", "subject:write"})
      */
-    private string $name;
+    private $subjectType;
 
     /**
-     * @return string
+     * @var Group|null
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="subjectRelations")
+     * @Groups({"subject:read", "subject:write", "group:read"})
      */
-    public function getName(): ?string
+    private ?Group $group = null;
+
+    /** @var ClassGroup|null
+     * @ORM\ManyToOne(targetEntity="ClassGroup")
+     * @Groups({"subject:read", "subject:write", "group:read"})
+     */
+    private ?ClassGroup $classGroup = null;
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @Groups({"subject:read", "subject:write"})
+     */
+    private User $teacher;
+
+    /**
+     * subject constructor.
+     * @param SubjectType $subjectType
+     * @param User $teacher
+     * @param Group|null $group
+     * @param ClassGroup|null $classGroup
+     * @throws ClientError
+     */
+    public function __construct(
+        SubjectType $subjectType,
+        User $teacher,
+        ?Group $group = null,
+        ?ClassGroup $classGroup = null
+    ) {
+        $this->subjectType = $subjectType;
+        $this->group = $group;
+        $this->classGroup = $classGroup;
+        $this->teacher = $teacher;
+        if (!$teacher->getRole()->hasResource(AclResourceEnum::GROUP_TEACHER)) {
+            throw new ClientError(ClientErrorType::USER_IS_NOT_TEACHER);
+        }
+
+        if ($classGroup == null && $group == null) {
+            throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
+        }
+    }
+
+
+    /**
+     * @Groups({"subject:read"})
+     */
+    public function getIGroup(): IGroup
     {
-        return $this->name;
+        return $this->group ?? $this->classGroup;
     }
 
     /**
-     * @param string $name
+     * @return SubjectType
+     */
+    public function getSubjectType(): SubjectType
+    {
+        return $this->subjectType;
+    }
+
+    /**
+     * @param SubjectType $subjectType
      * @return Subject
      */
-    public function setName(string $name): Subject
+    public function setSubjectType(
+        SubjectType $subjectType
+    ): Subject {
+        $this->subjectType = $subjectType;
+        return $this;
+    }
+
+    /**
+     * @return Group|null
+     */
+    public function getGroup(): ?Group
     {
-        $this->name = $name;
+        return $this->group;
+    }
+
+    /**
+     * @param Group|null $group
+     * @return Subject
+     */
+    public function setGroup(
+        ?Group $group
+    ): Subject {
+        $this->group = $group;
+        return $this;
+    }
+
+    /**
+     * @return ClassGroup|null
+     */
+    public function getClassGroup(): ?ClassGroup
+    {
+        return $this->classGroup;
+    }
+
+    /**
+     * @param ClassGroup|null $classGroup
+     * @return Subject
+     */
+    public function setClassGroup(
+        ?ClassGroup $classGroup
+    ): Subject {
+        $this->classGroup = $classGroup;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getTeacher(): User
+    {
+        return $this->teacher;
+    }
+
+    /**
+     * @param User $teacher
+     * @return Subject
+     */
+    public function setTeacher(
+        User $teacher
+    ): Subject {
+        $this->teacher = $teacher;
         return $this;
     }
 }

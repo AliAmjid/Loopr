@@ -38,7 +38,7 @@ class Group implements IGroup
 
     /**
      * @var User[]
-     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
      * @Groups({"group:read", "group:write"})
      */
     private $users;
@@ -60,7 +60,7 @@ class Group implements IGroup
     /**
      * @Groups({"group:read", "group:basic", "subjectHasGroup:read"})
      * @var Collection
-     * @ORM\OneToMany(targetEntity="SubjectHasGroup", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="group")
      * @ApiProperty(readableLink=true)
      */
     private Collection $subjectRelations;

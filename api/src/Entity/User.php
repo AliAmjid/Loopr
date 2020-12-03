@@ -77,7 +77,7 @@ class User implements UserInterface
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
      * @Groups({"user:read", "user:write"})
      */
     private $groups;

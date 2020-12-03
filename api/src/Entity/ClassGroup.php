@@ -73,7 +73,7 @@ class ClassGroup implements IGroup
     /**
      * @Groups({"group:read", "group:basic", "subjectHasGroup:read"})
      * @var Collection
-     * @ORM\OneToMany(targetEntity="SubjectHasGroup", mappedBy="classGroup")
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="classGroup")
      */
     private Collection $subjectRelations;
 
