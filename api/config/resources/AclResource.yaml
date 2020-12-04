@@ -4,6 +4,7 @@ App\Entity\AclResource:
             groups: [ aclResource:write ]
         normalization_context:
             groups: [ exposed ]
+    pagination_enabled: false
     #disable rest
     collectionOperations: { }
     itemOperations:
