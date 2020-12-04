@@ -3,15 +3,22 @@ import { Query } from 'material-table';
 export interface Group {
   id: string;
   section: string;
+  year?: number;
+  teacher?: {
+    id: string;
+    firstname: string;
+    lastname: string;
+  };
 }
 
 export type Groups = Group[];
 
-export type OnGetGroupReturn = Promise<{
+export type OnGetGroupsReturn = Promise<{
   totalCount: number;
   groups: Groups;
 }>;
 
 export interface GroupTableProps {
-  onGetGroups: (query: Query<Group>) => OnGetGroupReturn;
+  classGroup?: boolean;
+  onGetGroups: (query: Query<Group>) => OnGetGroupsReturn;
 }

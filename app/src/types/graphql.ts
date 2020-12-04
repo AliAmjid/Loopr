@@ -811,6 +811,56 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: SubjectsAddSubjectClassGroupsQuery
+// ====================================================
+
+export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node_teacher {
+  __typename: "UserItem";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  section: string;
+  year: number;
+  /**
+   * Teacher needs to be user with resource GROUP_TEACHER
+   */
+  teacher: SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
+}
+
+export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsAddSubjectClassGroupsQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (SubjectsAddSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsAddSubjectClassGroupsQuery {
+  classGroups: SubjectsAddSubjectClassGroupsQuery_classGroups | null;
+}
+
+export interface SubjectsAddSubjectClassGroupsQueryVariables {
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SubjectsAddSubjectGroupQuery
 // ====================================================
 

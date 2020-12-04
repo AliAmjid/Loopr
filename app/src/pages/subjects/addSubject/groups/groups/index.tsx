@@ -13,14 +13,14 @@ import {
 import usePagination from 'components/usePagination';
 
 import GroupTable from '../groupTable';
-import { Group, Groups, OnGetGroupReturn } from '../types';
+import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const GroupsIndex: React.FC = () => {
   const client = useApolloClient();
 
   const { getPagination, setPagination } = usePagination();
 
-  const getGroupsHandler = (query: Query<Group>): OnGetGroupReturn => {
+  const getGroupsHandler = (query: Query<Group>): OnGetGroupsReturn => {
     return client
       .query<
         SubjectsAddSubjectGroupQuery,
