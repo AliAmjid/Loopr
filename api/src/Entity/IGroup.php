@@ -14,4 +14,9 @@ interface IGroup
     public function getUsers(): array;
 
     public function getSection(): string;
+
+    /**
+     * @return Subject[]|Collection
+     */
+    public function getSubjects();
 }

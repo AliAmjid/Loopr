@@ -32,7 +32,7 @@ class User implements UserInterface
      * @Assert\Email()
      * @Assert\NotBlank()
      * @ORM\Column(type="string",unique=true)
-     * @Groups({"exposed", "user:write", "read:userOwner", "read:userTeacher", "read:USER_SHOW_ALL"})
+     * @Groups({"exposed", "user:write", "read"})
      */
     private string $email;
 

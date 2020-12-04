@@ -20,7 +20,7 @@ App\Entity\User:
             args: [ ]
         item_query:
             security_message: "r: USER_SHOW"
-            security: "is_granted('USER_SHOW')"
+            security: "is_granted('USER_SHOW_ALL')"
         collection_query:
             security: "is_granted('USER_SHOW_ALL')"
         create:

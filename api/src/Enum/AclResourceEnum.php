@@ -19,7 +19,6 @@ class AclResourceEnum
         self::GROUP_SHOW_ALL => 'a4f06f15-48d1-4fee-9408-3c7b891226a9',
         self::GROUP_TEACHER => 'f309dc64-f545-4903-8fa4-362a6453c598',
         self::GROUP_CREATE => '003d3f22-ba8b-4903-ab48-70c1501c3909',
-        self::GROUP_SHOW => 'bf7746a1-657c-4d86-9641-6cfd4b96a594'
     ];
 
     const PROP_DEPENDENT_ON = [
@@ -32,6 +31,13 @@ class AclResourceEnum
         ],
         self::USER_SHOW_ALL => [
             self::USER_LOGGED
+        ],
+        self::SUBJECT_EDIT => [
+            self::GROUP_SHOW_ALL,
+            self::SUBJECT_TYPE_SHOW_ALL
+        ],
+        self::GROUP_CREATE => [
+            self::USER_SHOW_ALL
         ]
     ];
 
@@ -52,7 +58,6 @@ class AclResourceEnum
             self::GROUP_TEACHER,
             self::GROUP_SHOW_ALL,
             self::GROUP_CREATE,
-            self::GROUP_SHOW
         ]
     ];
 
@@ -71,5 +76,14 @@ class AclResourceEnum
     const GROUP_TEACHER = 'GROUP_TEACHER'; // can be group class teacher
     const GROUP_SHOW_ALL = 'GROUP_SHOW_ALL';
     const GROUP_CREATE = 'GROUP_CREATE';
-    const GROUP_SHOW = 'GROUP_SHOW';
+
+    //subject
+    const SUBJECT_SHOW_ALL = 'SUBJECT_SHOW_ALL';
+    const SUBJECT_EDIT = 'SUBJECT_EDIT';
+    const SUBJECT_DELETE = 'SUBJECT_DELETE';
+
+    //subject type
+    const SUBJECT_TYPE_SHOW_ALL = 'SUBJECT_TYPE_SHOW_ALL';
+    const SUBJECT_TYPE_EDIT = 'SUBJECT_TYPE_EDIT';
+    const SUBJECT_TYPE_DELETE = 'SUBJECT_TYPE_DELETE';
 }

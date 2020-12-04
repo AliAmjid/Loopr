@@ -4,13 +4,13 @@
 namespace App\Security\Voter;
 
 
-use App\Entity\User;
-use App\Enum\AclResourceEnum;
+use App\Entity\IGroup;
+use App\Entity\Subject;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
-class UserVoter extends Voter
+class SubjectVoter extends Voter
 {
     private Security $security;
 
@@ -22,30 +22,23 @@ class UserVoter extends Voter
 
     protected function supports(string $attribute, $subject)
     {
-        return $attribute === 'ENTITY_ACCESS' && $subject instanceof User;
+        return $attribute === 'ENTITY_ACCESS' && $subject instanceof Subject;
+
     }
 
     /**
-     * @param User $subject
+     * @param Subject $subject
      */
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
     {
-        /** @var User $loggedUser */
         $loggedUser = $token->getUser();
 
-        if ($subject->getId() === $loggedUser->getId()) {
+        if ($loggedUser->getId() === $subject->getTeacher()->getId()) {
             return true;
         }
 
-        if ($this->security->isGranted(AclResourceEnum::USER_SHOW_ALL)) {
+        if ($this->security->isGranted('ENTITY_ACCESS', $subject->getIGroup())) {
             return true;
         }
-
-
-        if ($this->security->isGranted(IsUserTeacherVoter::IS_USERS_TEACHER, $subject)) {
-            return true;
-        }
-
-        return false;
     }
 }

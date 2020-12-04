@@ -16,7 +16,6 @@ App\Entity\AclRole:
         graphql:
             collection_query:
                 pagination_enabled: false
-                normalization_context: [ aclRole:read ]
             item_query:
             update:
                 security: "is_granted('ROLE_EDIT')"
