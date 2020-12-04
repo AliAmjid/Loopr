@@ -4,7 +4,7 @@ App\Entity\AclResource:
             groups: [ aclResource:write ]
         normalization_context:
             groups: [ exposed ]
-    pagination_enabled: false
+        pagination_enabled: false
     #disable rest
     collectionOperations: { }
     itemOperations:
@@ -13,6 +13,6 @@ App\Entity\AclResource:
             controller: ApiPlatform\Core\Action\NotFoundAction
             read: false
             output: false
-        graphql:
-            collection_query:
-                pagination_enabled: false
+    graphql:
+        collection_query:
+            pagination_enabled: false
