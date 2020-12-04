@@ -34,9 +34,13 @@ class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerA
                 $context['groups'] = 'read:' . $resource->getName();
             }
         }
+
+        if ($object instanceof User) {
+            $this->aclForUser($object, $context);
+        }
+
         $context['groups'] = array_unique($context['groups']);
         $context[self::ALREADY_CALLED] = true;
-
         return $this->normalizer->normalize($object, $format, $context);
     }
 
@@ -46,5 +50,10 @@ class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerA
             return false;
         }
         return is_object($data);
+    }
+
+    private function aclForUser(User $user, array &$context)
+    {
+
     }
 }

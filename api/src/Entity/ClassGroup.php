@@ -45,7 +45,7 @@ class ClassGroup implements IGroup
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="classGroup")
-     * @Groups({"read", "exposed",  "classGroup:write"})
+     * @Groups({"read:USER_SHOW_ALL", "exposed",  "classGroup:write"})
      */
     private Collection $users;
 

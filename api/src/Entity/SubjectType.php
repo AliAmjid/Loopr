@@ -19,10 +19,10 @@ class SubjectType
     use Tid;
 
     /**
-     * @var string|null
+     * @var string
      * @Assert\NotNull()
      * @Assert\NotBlank()
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @Groups({"read", "exposed", "subjectType:write"})
      */
     private string $name;
@@ -42,7 +42,7 @@ class SubjectType
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

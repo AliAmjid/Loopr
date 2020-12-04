@@ -14,16 +14,17 @@ App\Entity\SubjectType:
             output: false
     graphql:
         create:
-            security_message: 'r: GROUP_CREATE'
-            security: "is_granted('GROUP_CREATE')"
-
+            security_message: 'r: SUBJECT_SHOW_ALL'
+            security: "is_granted('SUBJECT_SHOW_ALL')"
         update:
-            security: "is_granted('GROUP_CREATE')"
-            security_message: 'r: GROUP_CREATE'
+            security: "is_granted('SUBJECT_SHOW_ALL')"
+            security_message: 'r: SUBJECT_SHOW_ALL'
 
         item_query:
-            security_message: "r: GROUP_SHOW_ALL"
-            security: "is_granted('GROUP_SHOW_ALL')"
+            security_message: "r: SUBJECT_SHOW_ALL"
+            security: "is_granted('SUBJECT_SHOW_ALL')"
 
         collection_query:
-            security: "is_granted('GROUP_SHOW_ALL')"
+            security: "is_granted('SUBJECT_SHOW_ALL')"
+        delete:
+            security: "is_granted('SUBJECT_DELETE')"
