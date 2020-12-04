@@ -2,6 +2,8 @@ import React from 'react';
 
 import { makeStyles, Paper } from '@material-ui/core';
 
+import SubjectIndex from 'pages/subjects/subject';
+
 import SideListGrid from 'components/SideList/grid';
 import withPage from 'components/withPage';
 
@@ -19,7 +21,7 @@ const SubjectsIndex: React.FC = () => {
 
   return (
     <Paper className={classes.paper}>
-      <SideListGrid sideList={<SubjectList />} body={<>ahoj</>} />
+      <SideListGrid sideList={<SubjectList />} body={<SubjectIndex />} />
     </Paper>
   );
 };
