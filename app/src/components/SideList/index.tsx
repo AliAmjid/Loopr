@@ -16,7 +16,7 @@ import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
-import { SideTableProps } from './types';
+import { SideListProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SideTable: React.FC<SideTableProps> = props => {
+const SideList: React.FC<SideListProps> = props => {
   const classes = useStyles();
 
   const [selected, setSelected] = useState<number | string | undefined>(
@@ -112,4 +112,4 @@ const SideTable: React.FC<SideTableProps> = props => {
   );
 };
 
-export default SideTable;
+export default SideList;

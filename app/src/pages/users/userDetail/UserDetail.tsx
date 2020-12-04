@@ -25,7 +25,7 @@ const UserDetail: React.FC<UserDetailProps> = props => {
             {
               id: 0,
               label: 'Personal information',
-              Panel: (
+              panel: (
                 <GeneralInformation user={props.user} roles={props.roles} />
               ),
             },

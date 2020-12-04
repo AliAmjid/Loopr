@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 
 import {
+  Box,
   Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
   TextField,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
@@ -29,53 +30,39 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
         <DialogTitle>Class add</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  name="year"
-                  label="class year"
-                  type="number"
-                  fullWidth
-                  inputRef={register({ required: true })}
-                  error={errors.year !== undefined}
-                  defaultValue={props.defaultValues?.year || ''}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="name"
-                  label="class name"
-                  fullWidth
-                  inputRef={register({ required: true })}
-                  error={errors.name !== undefined}
-                  defaultValue={props.defaultValues?.section || ''}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  type="submit"
-                  fullWidth
-                  color="primary"
-                  variant="contained"
-                >
-                  {props.primaryButtonLabel}
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  fullWidth
-                  color="secondary"
-                  variant="contained"
-                  onClick={props.onClose}
-                >
-                  Cancel
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        </DialogContent>
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <DialogContent>
+            <Box pb={2}>
+              <TextField
+                name="year"
+                label="class year"
+                type="number"
+                fullWidth
+                inputRef={register({ required: true })}
+                error={errors.year !== undefined}
+                defaultValue={props.defaultValues?.year || ''}
+              />
+            </Box>
+
+            <TextField
+              name="name"
+              label="class name"
+              fullWidth
+              inputRef={register({ required: true })}
+              error={errors.name !== undefined}
+              defaultValue={props.defaultValues?.section || ''}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button type="submit" color="primary">
+              {props.primaryButtonLabel}
+            </Button>
+
+            <Button color="secondary" onClick={props.onClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
       </OverlayLoadingContainer>
     </Dialog>
   );

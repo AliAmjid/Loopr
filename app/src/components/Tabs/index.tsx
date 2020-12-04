@@ -40,7 +40,7 @@ const Tabs: React.FC<TabsProps> = props => {
         {mappedTabs}
       </TabsPrefab>
       <Box width="100%">
-        <Wrapper>{props.tabs.find(tab => tab.id === value)?.Panel}</Wrapper>
+        <Wrapper>{props.tabs.find(tab => tab.id === value)?.panel}</Wrapper>
       </Box>
     </>
   );

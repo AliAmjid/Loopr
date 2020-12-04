@@ -6,44 +6,34 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
   TextField,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
-import {
-  AddDialogFormValues,
-  AddDialogProps,
-} from 'pages/groups/groupList/types';
-
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
-const AddDialog: React.FC<AddDialogProps> = props => {
-  const { handleSubmit, register, errors } = useForm<AddDialogFormValues>();
+import { AddDialogFormValues, AddDialogProps } from './types';
 
-  const submitHandler = (values: AddDialogFormValues): void => {
-    props.onSubmit({ section: values.name });
-  };
+const AddDialog: React.FC<AddDialogProps> = props => {
+  const { register, errors, handleSubmit } = useForm<AddDialogFormValues>();
 
   return (
     <Dialog open={props.open}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
-
-        <DialogTitle>Group add</DialogTitle>
-        <form onSubmit={handleSubmit(submitHandler)}>
+        <form onSubmit={handleSubmit(props.onSubmit)}>
+          <DialogTitle>Add subject</DialogTitle>
           <DialogContent>
             <TextField
               name="name"
-              label="group name"
-              fullWidth
+              label="name"
               inputRef={register({ required: true })}
               error={errors.name !== undefined}
             />
           </DialogContent>
           <DialogActions>
-            <Button type="submit" color="primary">
+            <Button color="primary" type="submit">
               Add
             </Button>
             <Button color="secondary" onClick={props.onClose}>

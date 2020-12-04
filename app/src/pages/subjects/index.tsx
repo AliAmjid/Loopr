@@ -2,12 +2,11 @@ import React from 'react';
 
 import { makeStyles, Paper } from '@material-ui/core';
 
-import GroupIndex from 'pages/groups/group';
-import GroupListIndex from 'pages/groups/groupList';
-import groupsPageOptions from 'pages/groups/pageOptions';
-
 import SideListGrid from 'components/SideList/grid';
 import withPage from 'components/withPage';
+
+import subjectsPageOptions from './pageOptions';
+import SubjectList from './subjectList';
 
 const useStyles = makeStyles({
   paper: {
@@ -15,14 +14,14 @@ const useStyles = makeStyles({
   },
 });
 
-const GroupsIndex: React.FC = () => {
+const SubjectsIndex: React.FC = () => {
   const classes = useStyles();
 
   return (
     <Paper className={classes.paper}>
-      <SideListGrid sideList={<GroupListIndex />} body={<GroupIndex />} />
+      <SideListGrid sideList={<SubjectList />} body={<>ahoj</>} />
     </Paper>
   );
 };
 
-export default withPage(groupsPageOptions)(GroupsIndex);
+export default withPage(subjectsPageOptions)(SubjectsIndex);

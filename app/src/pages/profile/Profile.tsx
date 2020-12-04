@@ -31,9 +31,9 @@ const Profile: React.FC<ProfileProps> = props => {
             {
               id: 0,
               label: t('generalInformation'),
-              Panel: <GeneralInformation user={props.user} />,
+              panel: <GeneralInformation user={props.user} />,
             },
-            { id: 1, label: t('login'), Panel: <LoginIndex /> },
+            { id: 1, label: t('login'), panel: <LoginIndex /> },
           ]}
         />
       </OverlayLoadingContainer>

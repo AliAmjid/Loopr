@@ -4,7 +4,7 @@ export interface TabsProps {
   tabs: {
     id: number;
     label: string;
-    Panel: JSX.Element;
+    panel: JSX.Element;
   }[];
   TabWrapper?: React.FC;
   defaultTabsId?: number;

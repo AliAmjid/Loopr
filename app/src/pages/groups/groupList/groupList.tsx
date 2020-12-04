@@ -4,7 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import { GroupListProps } from 'pages/groups/groupList/types';
 
-import SideTable from 'components/SideTable';
+import SideList from 'components/SideList';
 
 import AddDialog from './addDialog';
 
@@ -25,7 +25,7 @@ const GroupList: React.FC<GroupListProps> = props => {
           setAddOpen(false);
         }}
       />
-      <SideTable
+      <SideList
         title="Groups"
         loading={props.groupsLoading}
         bottomAction={{

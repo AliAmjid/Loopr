@@ -37,7 +37,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
         {
           id: 0,
           label: 'students',
-          Panel: (
+          panel: (
             <Students
               selectedClassGroup={props.selectedClassGroup}
               onGetUsers={props.onGetUsers}
@@ -50,7 +50,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
         {
           id: 1,
           label: 'teachers',
-          Panel: (
+          panel: (
             <Teacher
               teacher={props.teacher}
               loading={props.teacherLoading}

@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Grid, Hidden, makeStyles, Paper } from '@material-ui/core';
+import { makeStyles, Paper } from '@material-ui/core';
 
+import SideListGrid from 'components/SideList/grid';
 import withPage from 'components/withPage';
 
 import ClassIndex from './classGroup';
@@ -19,16 +20,7 @@ const ClassGroupsIndex: React.FC = () => {
 
   return (
     <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item xs={12} sm={6} md={5} lg={4} xl={3}>
-          <ClassGroupListIndex />
-        </Grid>
-        <Hidden xsDown>
-          <Grid item sm={6} md={7} lg={8} xl={9}>
-            <ClassIndex />
-          </Grid>
-        </Hidden>
-      </Grid>
+      <SideListGrid sideList={<ClassGroupListIndex />} body={<ClassIndex />} />
     </Paper>
   );
 };

@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 
-export interface SideTableProps {
+export interface SideListProps {
   title: string;
   loading?: boolean;
   items: {
@@ -15,4 +15,9 @@ export interface SideTableProps {
     icon: JSX.Element;
     onClick: MouseEventHandler<HTMLElement>;
   };
+}
+
+export interface SideListGridProps {
+  sideList: JSX.Element;
+  body: JSX.Element;
 }

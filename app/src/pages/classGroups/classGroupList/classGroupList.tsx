@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 
-import SideTable from 'components/SideTable';
+import SideList from 'components/SideList';
 
 import ClassGroupDialog from './classGroupDialog';
 import { ClassGroupListProps } from './types';
@@ -54,7 +54,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
           setEditId(undefined);
         }}
       />
-      <SideTable
+      <SideList
         title="Classes"
         loading={props.classGroupsLoading}
         bottomAction={{

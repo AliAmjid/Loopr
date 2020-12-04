@@ -321,11 +321,26 @@ export interface ClassGroupsAddClassGroupMutationVariables {
 // GraphQL mutation operation: ClassGroupsUpdateClassGroupMutation
 // ====================================================
 
+export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup_teacher {
+  __typename: "updateUserNestedPayload";
+  id: string;
+  /**
+   * email of user
+   */
+  email: string | null;
+  firstname: string | null;
+  lastname: string | null;
+}
+
 export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup {
   __typename: "updateClassGroupPayloadData";
   id: string;
   year: number | null;
   section: string | null;
+  /**
+   * Teacher needs to be user with resource GROUP_TEACHER
+   */
+  teacher: ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup_teacher | null;
 }
 
 export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup {
@@ -796,6 +811,96 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsAddSubjectTypeMutation
+// ====================================================
+
+export interface SubjectsAddSubjectTypeMutation_createSubjectType_subjectType {
+  __typename: "createSubjectTypePayloadData";
+  id: string;
+}
+
+export interface SubjectsAddSubjectTypeMutation_createSubjectType {
+  __typename: "createSubjectTypePayload";
+  subjectType: SubjectsAddSubjectTypeMutation_createSubjectType_subjectType | null;
+}
+
+export interface SubjectsAddSubjectTypeMutation {
+  /**
+   * Creates a SubjectType.
+   */
+  createSubjectType: SubjectsAddSubjectTypeMutation_createSubjectType | null;
+}
+
+export interface SubjectsAddSubjectTypeMutationVariables {
+  input: createSubjectTypeInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SubjectsUpdateSubjectTypeMutation
+// ====================================================
+
+export interface SubjectsUpdateSubjectTypeMutation_updateSubjectType_subjectType {
+  __typename: "updateSubjectTypePayloadData";
+  id: string;
+  name: string | null;
+}
+
+export interface SubjectsUpdateSubjectTypeMutation_updateSubjectType {
+  __typename: "updateSubjectTypePayload";
+  subjectType: SubjectsUpdateSubjectTypeMutation_updateSubjectType_subjectType | null;
+}
+
+export interface SubjectsUpdateSubjectTypeMutation {
+  /**
+   * Updates a SubjectType.
+   */
+  updateSubjectType: SubjectsUpdateSubjectTypeMutation_updateSubjectType | null;
+}
+
+export interface SubjectsUpdateSubjectTypeMutationVariables {
+  input: updateSubjectTypeInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsSubjectTypesQuery
+// ====================================================
+
+export interface SubjectsSubjectTypesQuery_subjectTypes_edges_node {
+  __typename: "SubjectType";
+  id: string;
+  name: string | null;
+}
+
+export interface SubjectsSubjectTypesQuery_subjectTypes_edges {
+  __typename: "SubjectTypeEdge";
+  node: SubjectsSubjectTypesQuery_subjectTypes_edges_node | null;
+}
+
+export interface SubjectsSubjectTypesQuery_subjectTypes {
+  __typename: "SubjectTypeConnection";
+  edges: (SubjectsSubjectTypesQuery_subjectTypes_edges | null)[] | null;
+}
+
+export interface SubjectsSubjectTypesQuery {
+  subjectTypes: SubjectsSubjectTypesQuery_subjectTypes | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UsersAddCsvCreateUserMutation
 // ====================================================
 
@@ -1105,6 +1210,7 @@ export interface createAclRoleInput {
 export interface createClassGroupInput {
   clientMutationId?: string | null;
   section: string;
+  teacher?: string | null;
   users?: (string | null)[] | null;
   year: number;
 }
@@ -1113,6 +1219,11 @@ export interface createGroupInput {
   clientMutationId?: string | null;
   section: string;
   users?: (string | null)[] | null;
+}
+
+export interface createSubjectTypeInput {
+  clientMutationId?: string | null;
+  name?: string | null;
 }
 
 export interface createUserInput {
@@ -1128,6 +1239,7 @@ export interface updateClassGroupInput {
   clientMutationId?: string | null;
   id: string;
   section?: string | null;
+  teacher?: string | null;
   users?: (string | null)[] | null;
   year?: number | null;
 }
@@ -1137,6 +1249,12 @@ export interface updateGroupInput {
   id: string;
   section?: string | null;
   users?: (string | null)[] | null;
+}
+
+export interface updateSubjectTypeInput {
+  clientMutationId?: string | null;
+  id: string;
+  name?: string | null;
 }
 
 export interface updateUserInput {
