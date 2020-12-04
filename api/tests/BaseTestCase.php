@@ -4,6 +4,7 @@
 namespace App\Tests;
 
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use App\GraphqlClient\GraphQLClient;
 use App\GraphqlClient\GraphQLClientBuilder;
 use App\Kernel;
@@ -22,7 +23,6 @@ abstract class BaseTestCase extends TestCase
     /** @var EntityManagerInterface $em */
     protected EntityManagerInterface $em;
     protected Registry $doctrine;
-
     use TCreateEntityHelpers;
     use TAssertsHelper;
 

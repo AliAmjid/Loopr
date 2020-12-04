@@ -58,19 +58,18 @@ class Group implements IGroup
     private \DateTime $createdAt;
 
     /**
-     * @Groups({"read", "exposed", "group:basic"})
+     * @Groups({"read", "exposed"})
      * @var Collection
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="group")
-     * @ApiProperty(readableLink=true)
      */
-    private Collection $subjectRelations;
+    private Collection $subjects;
 
     /**
      * @return Collection
      */
-    public function getSubjectRelations(): Collection
+    public function getSubjects(): Collection
     {
-        return $this->subjectRelations;
+        return $this->subjects;
     }
 
     public function __construct()

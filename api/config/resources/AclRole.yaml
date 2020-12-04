@@ -4,8 +4,8 @@ App\Entity\AclRole:
             groups: [ aclRole:write ]
         normalization_context:
             groups: [ exposed ]
-    pagination_enabled: false
-#disable rest
+        pagination_enabled: false
+    #disable rest
     collectionOperations: { }
     itemOperations:
         get:
@@ -13,17 +13,16 @@ App\Entity\AclRole:
             controller: ApiPlatform\Core\Action\NotFoundAction
             read: false
             output: false
-        graphql:
-            collection_query:
-                pagination_enabled: false
-            item_query:
-            update:
-                security: "is_granted('ROLE_EDIT')"
-            create:
-                security: "is_granted('ROLE_CREATE')"
-                denormalization_context:
-                    groups:
-                        - aclRole:write
-                        - aclResource:write
+    graphql:
+        collection_query:
+            pagination_enabled: false
+        item_query:
+        update:
+            security: "is_granted('ROLE_EDIT')"
+        create:
+            security: "is_granted('ROLE_CREATE')"
+            denormalization_context:
+                groups:
+                    - aclRole:write
+                    - aclResource:write
                 
-            

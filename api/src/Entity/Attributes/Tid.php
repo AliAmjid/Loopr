@@ -16,7 +16,7 @@ trait Tid
      * @ORM\Id()
      * @ORM\Column(type="guid")
      * @ApiProperty(identifier=true)
-     * @Groups({"read", "user:read", "id"})
+     * @Groups({"read", "exposed", "id", "read:always"})
      */
     private string $id;
 

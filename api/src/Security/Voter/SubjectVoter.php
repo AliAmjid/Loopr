@@ -40,5 +40,7 @@ class SubjectVoter extends Voter
         if ($this->security->isGranted('ENTITY_ACCESS', $subject->getIGroup())) {
             return true;
         }
+
+        return false;
     }
 }
