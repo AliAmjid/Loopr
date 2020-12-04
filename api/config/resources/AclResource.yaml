@@ -1,19 +1,18 @@
 App\Entity\AclResource:
-    normalizationContext:
-        groups: [aclResource:read]
-    denormalizationContext:
-        groups: [aclResource:write]
+    attributes:
+        denormalization_context:
+            groups: [ aclResource:write ]
+        normalization_context:
+            groups: [ exposed ]
+        pagination_enabled: false
     #disable rest
-    collectionOperations: {}
+    collectionOperations: { }
     itemOperations:
         get:
             method: GET
             controller: ApiPlatform\Core\Action\NotFoundAction
             read: false
             output: false
-    attributes:
-        pagination_enabled: false
     graphql:
         collection_query:
             pagination_enabled: false
-            normalization_context: [aclResource:read]

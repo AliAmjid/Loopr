@@ -1,8 +1,12 @@
 App\Entity\AclRole:
-    normalizationContext:
-        groups: [aclRole:read]
-    #disable rest
-    collectionOperations: {}
+    attributes:
+        denormalization_context:
+            groups: [ aclRole:write ]
+        normalization_context:
+            groups: [ exposed ]
+        pagination_enabled: false
+#disable rest
+    collectionOperations: { }
     itemOperations:
         get:
             method: GET
@@ -12,7 +16,7 @@ App\Entity\AclRole:
     graphql:
         collection_query:
             pagination_enabled: false
-            normalization_context: [aclRole:read]
+            normalization_context: [ aclRole:read ]
         item_query:
         update:
             security: "is_granted('ROLE_EDIT')"
@@ -23,4 +27,4 @@ App\Entity\AclRole:
                     - aclRole:write
                     - aclResource:write
             
-        
+            

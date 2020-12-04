@@ -1,6 +1,11 @@
 App\Entity\User:
     attributes:
-    collectionOperations: {}
+        normalization_context:
+            groups: [ exposed, read ]
+        denormalization_context:
+            groups: [ user:write ]
+
+    collectionOperations: { }
     itemOperations:
         get:
             method: GET
@@ -13,30 +18,16 @@ App\Entity\User:
             security: "is_granted('USER_LOGGED')"
             item_query: App\Controller\GetMeController
             args: [ ]
-            normalization_context:
-                groups:
-                    - user:read
-                    - aclRole:read
         item_query:
             security_message: "r: USER_SHOW"
             security: "is_granted('USER_SHOW')"
-       
         collection_query:
             security: "is_granted('USER_SHOW_ALL')"
-            normalization_context:
-                groups:
-                    - user:read
-                    - aclRole:read
         create:
             security: "is_granted('USER_CREATE')"
             security_message: "r: USER_CREATE"
-            normalization_context:
-                groups:
-                    - user:read
-                    - aclRole:read
             denormalization_context:
-                groups:
-                    - user:write
+                groups: [ user:password, user:write ]
         changePassword:
             security: "is_granted('USER_LOGGED')"
             security_message: "r USER_LOGGED"
@@ -46,14 +37,7 @@ App\Entity\User:
                     type: String!
                 newPassword:
                     type: String!
-            
+
         update:
             security: "is_granted('USER_EDIT')"
             security_message: "r: USER_EDIT"
-            normalization_context:
-                groups:
-                    - user:read
-                    - aclRole:read
-            denormalization_context:
-                groups:
-                    - user:write

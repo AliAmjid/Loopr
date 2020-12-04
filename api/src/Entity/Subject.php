@@ -21,27 +21,27 @@ class Subject
     /**
      * @var SubjectType
      * @ORM\ManyToOne(targetEntity="SubjectType")
-     * @Groups({"subject:read", "subject:write"})
+     * @Groups({"read", "exposed", "subject:write"})
      */
     private $subjectType;
 
     /**
      * @var Group|null
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="subjectRelations")
-     * @Groups({"subject:read", "subject:write", "group:read"})
+     * @Groups({"read", "exposed", "subject:write", "group:read"})
      */
     private ?Group $group = null;
 
     /** @var ClassGroup|null
      * @ORM\ManyToOne(targetEntity="ClassGroup")
-     * @Groups({"subject:read", "subject:write", "group:read"})
+     * @Groups({"read", "exposed", "subject:write", "group:read"})
      */
     private ?ClassGroup $classGroup = null;
 
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User")
-     * @Groups({"subject:read", "subject:write"})
+     * @Groups({"read", "exposed", "subject:write"})
      */
     private User $teacher;
 
@@ -74,7 +74,7 @@ class Subject
 
 
     /**
-     * @Groups({"subject:read"})
+     * @Groups({"read", "exposed"})
      */
     public function getIGroup(): IGroup
     {

@@ -30,7 +30,7 @@ class Group implements IGroup
 
     /** @var string
      * @ORM\Column(type="string", unique=true)
-     * @Groups({"group:read", "group:write", "group:basic"})
+     * @Groups({"read", "exposed",  "group:write", "group:basic"})
      * @Assert\NotBlank()
      * @Assert\NotNull()
      */
@@ -39,26 +39,26 @@ class Group implements IGroup
     /**
      * @var User[]
      * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
-     * @Groups({"group:read", "group:write"})
+     * @Groups({"read", "exposed",  "group:write"})
      */
     private $users;
 
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User")
-     * @Groups({"group:read"})
+     * @Groups({"read", "exposed"})
      */
     private User $createdBy;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Groups({"group:read"})
+     * @Groups({"read", "exposed"})
      */
     private \DateTime $createdAt;
 
     /**
-     * @Groups({"group:read", "group:basic", "subjectHasGroup:read"})
+     * @Groups({"read", "exposed", "group:basic"})
      * @var Collection
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="group")
      * @ApiProperty(readableLink=true)

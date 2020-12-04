@@ -30,7 +30,7 @@ class ClassGroup implements IGroup
      * @ORM\Column(type="integer", length=4)
      * @Assert\NotBlank()
      * @Assert\NotNull()
-     * @Groups({"classGroup:read", "classGroup:write"})
+     * @Groups({"read", "exposed",  "classGroup:write"})
      */
     private int $year;
 
@@ -38,27 +38,27 @@ class ClassGroup implements IGroup
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      * @Assert\NotNull()
-     * @Groups({"classGroup:read", "classGroup:write"})
+     * @Groups({"read", "exposed",  "classGroup:write"})
      */
     private string $section;
 
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="classGroup")
-     * @Groups({"classGroup:read", "classGroup:write"})
+     * @Groups({"read:USER_SHOW_ALL", "exposed",  "classGroup:write"})
      */
     private Collection $users;
 
     /** @var User|null Teacher needs to be user with resource GROUP_TEACHER
      * @ORM\ManyToOne(targetEntity="User")
-     * @Groups({"classGroup:read", "classGroup:write"})
+     * @Groups({"read", "exposed",  "classGroup:write"})
      */
     private ?User $teacher = null;
 
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User")
-     * @Groups({"classGroup:read"})
+     * @Groups({"read"})
      */
     private User $createdBy;
 

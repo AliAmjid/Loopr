@@ -37,3 +37,8 @@ services:
     App\Error\ErrorNormalizer:
         tags:
             - { name: 'serializer.normalizer', priority: 12 }
+
+    'App\Serializer\ResourceContextBuilder':
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\ResourceContextBuilder.inner' ]
+        autoconfigure: false
