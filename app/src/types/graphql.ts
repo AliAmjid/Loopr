@@ -811,6 +811,44 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: SubjectsAddSubjectGroupQuery
+// ====================================================
+
+export interface SubjectsAddSubjectGroupQuery_groups_edges_node {
+  __typename: "GroupCollection";
+  id: string;
+  section: string;
+}
+
+export interface SubjectsAddSubjectGroupQuery_groups_edges {
+  __typename: "GroupCollectionEdge";
+  node: SubjectsAddSubjectGroupQuery_groups_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsAddSubjectGroupQuery_groups {
+  __typename: "GroupCollectionConnection";
+  edges: (SubjectsAddSubjectGroupQuery_groups_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsAddSubjectGroupQuery {
+  groups: SubjectsAddSubjectGroupQuery_groups | null;
+}
+
+export interface SubjectsAddSubjectGroupQueryVariables {
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsAddSubjectTypeMutation
 // ====================================================
 
