@@ -1,7 +1,7 @@
-App\Entity\Group:
+App\Entity\ClassGroup:
     attributes:
         denormalization_context:
-            groups: [ group:write ]
+            groups: [ classGroup:write ]
         normalization_context:
             groups: [ exposed ]
     #disable rest
@@ -20,11 +20,13 @@ App\Entity\Group:
         update:
             security: "is_granted('GROUP_CREATE')"
             security_message: 'r: GROUP_CREATE'
+        
         delete:
-            security: "is_granted('GROUP_CREATE')"
+            security: "is_granted('GROUP_DELETE')"
 
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
+
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"

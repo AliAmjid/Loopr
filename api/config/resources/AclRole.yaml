@@ -1,26 +1,29 @@
 App\Entity\AclRole:
-    normalizationContext:
-        groups: [aclRole:read]
-    #disable rest
-    collectionOperations: {}
+    attributes:
+        denormalization_context:
+            groups: [ aclRole:write ]
+        normalization_context:
+            groups: [ exposed ]
+#disable rest
+    collectionOperations: { }
     itemOperations:
         get:
             method: GET
             controller: ApiPlatform\Core\Action\NotFoundAction
             read: false
             output: false
-    graphql:
-        collection_query:
-            pagination_enabled: false
-            normalization_context: [aclRole:read]
-        item_query:
-        update:
-            security: "is_granted('ROLE_EDIT')"
-        create:
-            security: "is_granted('ROLE_CREATE')"
-            denormalization_context:
-                groups:
-                    - aclRole:write
-                    - aclResource:write
+        graphql:
+            collection_query:
+                pagination_enabled: false
+                normalization_context: [ aclRole:read ]
+            item_query:
+            update:
+                security: "is_granted('ROLE_EDIT')"
+            create:
+                security: "is_granted('ROLE_CREATE')"
+                denormalization_context:
+                    groups:
+                        - aclRole:write
+                        - aclResource:write
+                
             
-        

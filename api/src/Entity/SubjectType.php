@@ -23,13 +23,13 @@ class SubjectType
      * @Assert\NotNull()
      * @Assert\NotBlank()
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"subjectType:read", "subjectType:write"})
+     * @Groups({"read", "exposed", "subjectType:write"})
      */
     private string $name;
 
 
     /** @var Collection
-     * @Groups({"subjectType:read"})
+     * @Groups({"read", "exposed"})
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="subject")
      */
     private Collection $subjects;

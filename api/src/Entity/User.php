@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use App\Filter\ResourceFilter;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -31,14 +32,14 @@ class User implements UserInterface
      * @Assert\Email()
      * @Assert\NotBlank()
      * @ORM\Column(type="string",unique=true)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"exposed", "read"})
      */
     private string $email;
 
     /**
      * @ORM\ManyToOne(targetEntity="AclRole")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:role", "user:read", "user:write"})
+     * @Groups({"user:role", "exposed", "read", "user:write"})
      */
     private AclRole $role;
 
@@ -52,39 +53,47 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"read", "user:write", "exposed"})
      */
     private string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"read", "user:write", "exposed"})
      */
     private string $lastname;
 
     /** @var \DateTimeInterface
      * @ORM\Column(type="datetime")
-     * @Groups({"user:read"})
+     * @Groups({"read", "exposed"})
      */
     private \DateTimeInterface $createdAt;
 
     /**
      * @var ClassGroup|null
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"read", "user:write", "exposed"})
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
      */
     private ?ClassGroup $classGroup = null;
 
     /**
-     * @var Collection
+     * @var Collection|Groups[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"read", "user:write", "exposed"})
      */
     private $groups;
 
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection|Groups[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
     }
 
     /**
@@ -200,7 +209,7 @@ class User implements UserInterface
     }
 
     /**
-     * @Groups({"user:read"})
+     * @Groups({"read"})
      */
     public function getResources()
     {
