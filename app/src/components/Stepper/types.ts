@@ -2,7 +2,7 @@ export interface StepperProps {
   steps: {
     label: string;
     index: number;
-    Component: JSX.Element;
+    component: JSX.Element;
     nextActive: boolean;
   }[];
 }

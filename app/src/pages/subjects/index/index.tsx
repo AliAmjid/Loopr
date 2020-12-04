@@ -2,7 +2,7 @@ import React from 'react';
 
 import { makeStyles, Paper } from '@material-ui/core';
 
-import SubjectIndex from 'pages/subjects/subject';
+import SubjectIndex from 'pages/subjects/index/subject';
 
 import SideListGrid from 'components/SideList/grid';
 import withPage from 'components/withPage';

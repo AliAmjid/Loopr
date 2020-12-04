@@ -29,19 +29,19 @@ const AddCSVIndex: React.FC = () => {
           {
             index: 0,
             label: t('csv'),
-            Component: <CSVUpload />,
+            component: <CSVUpload />,
             nextActive: uploadCSVNext,
           },
           {
             index: 1,
             label: t('select'),
-            Component: <FieldSelect />,
+            component: <FieldSelect />,
             nextActive: fieldSelectNext,
           },
           {
             index: 2,
             label: t('upload'),
-            Component: <UserUploadIndex />,
+            component: <UserUploadIndex />,
             nextActive: true,
           },
         ]}

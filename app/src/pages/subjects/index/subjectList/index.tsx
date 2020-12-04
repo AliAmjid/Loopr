@@ -3,8 +3,8 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
-import SUBJECTS_ADD_SUBJECT_TYPE_MUTATION from 'pages/subjects/mutations/addSubjectType';
-import SUBJECTS_UPDATE_SUBJECT_TYPE_MUTATION from 'pages/subjects/mutations/updateSubjectType';
+import SUBJECTS_ADD_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/addSubjectType';
+import SUBJECTS_UPDATE_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/updateSubjectType';
 
 import {
   SubjectsAddSubjectTypeMutation,
