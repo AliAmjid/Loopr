@@ -8,7 +8,7 @@ export interface Group {
     id: string;
     firstname: string;
     lastname: string;
-  };
+  } | null;
 }
 
 export type Groups = Group[];
