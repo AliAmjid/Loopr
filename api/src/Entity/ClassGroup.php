@@ -71,27 +71,27 @@ class ClassGroup implements IGroup
     public array $usersToChange = [];
 
     /**
-     * @Groups({"group:read", "group:basic", "subjectHasGroup:read"})
+     * @Groups({"read"})
      * @var Collection
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="classGroup")
      */
-    private Collection $subjectRelations;
+    private Collection $subjects;
 
     /**
      * @return Collection
      */
-    public function getSubjectRelations(): Collection
+    public function getSubjects(): Collection
     {
-        return $this->subjectRelations;
+        return $this->subjects;
     }
 
     /**
-     * @param Collection $subjectRelations
+     * @param Collection $subjects
      * @return ClassGroup
      */
-    public function setSubjectRelations(Collection $subjectRelations): ClassGroup
+    public function setSubjects(Collection $subjects): ClassGroup
     {
-        $this->subjectRelations = $subjectRelations;
+        $this->subjects = $subjects;
         return $this;
     }
 

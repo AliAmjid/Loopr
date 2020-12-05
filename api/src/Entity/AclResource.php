@@ -41,7 +41,7 @@ class AclResource
     }
 
     /** @var string
-     * @Groups({"read","exposed", "aclResource:write"})
+     * @Groups({"read:always","exposed", "aclResource:write"})
      * @ORM\Column(type="string")
      */
     private string $name;
@@ -49,10 +49,10 @@ class AclResource
 
     /**
      * @var Collection|null
-     * @Groups({"read", "exposed", "aclResource:write"})
+     * @Groups({"read:always", "exposed", "aclResource:write"})
      * @ORM\ManyToMany(targetEntity="AclResource")
      */
-    private ?Collection  $dependsOn;
+    private ?Collection $dependsOn;
 
     public function __construct()
     {

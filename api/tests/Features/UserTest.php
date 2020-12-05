@@ -23,7 +23,7 @@ class UserTest extends BaseTestCase
         ';
         $this->assertSecurityResources(
             [AclResourceEnum::USER_SHOW_ALL],
-            function (User $user) use ($query) : Response {
+            function (User $user) use ($query): Response {
                 $client = $this->createLoggedClient($user->getEmail());
                 return $client->query($query);
             }
@@ -53,13 +53,15 @@ class UserTest extends BaseTestCase
             }
 ';
         $client = $this->createLoggedClient($this->createRandomUser('test',
-            [AclResourceEnum::USER_CREATE])->getEmail());
+            [AclResourceEnum::USER_EDIT, AclResourceEnum::USER_SHOW_ALL]
+        )->getEmail());
         $response = $client->query($createQuery, [
             'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
             'firstname' => Random::generate(),
             'lastname' => Random::generate(),
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
+
         $this->assertNoErrors($response);
         $idUser = $response->getData()['createUser']['user']['_id'];
         $iri = $response->getData()['createUser']['user']['id'];
@@ -69,7 +71,7 @@ class UserTest extends BaseTestCase
         $editQuery = /** @lang GraphQL */
             '
             mutation editUser($id: ID!, $lastname: String! $email: String!, $name: String!, $role: String! ){
-              editUser(
+              updateUser(
                 input: {
                   id: $id
                   email: $email
@@ -80,20 +82,23 @@ class UserTest extends BaseTestCase
               ) {
                 user {
                   id
-                  name
+                  firstname
                 }
               }
             }
 ';
 
-        $client = $this->createLoggedClient($this->createRandomUser('test', [AclResourceEnum::USER_EDIT])->getEmail());
-        $client->query($editQuery, [
+        $client = $this->createLoggedClient($this->createRandomUser('test',
+            [AclResourceEnum::USER_EDIT, AclResourceEnum::USER_SHOW_ALL])->getEmail());
+        $response = $client->query($editQuery, [
             'id' => $iri,
             'email' => Random::generate(5, 'a-z') . '@loopr-testing.cz',
             'name' => Random::generate(),
             'lastname' => Random::generate(),
             'role' => 'acl_roles/' . $this->createRoleWithResources([AclResourceEnum::USER_LOGGED])->getId(),
         ]);
+
+        $this->assertNoErrors($response);
     }
 
 
@@ -101,12 +106,11 @@ class UserTest extends BaseTestCase
     {
         $query = 'query getUser($id: ID!) {
   user(id: $id) {
-    roles
+    role{id}
     email
-    password
   }
 }';
-        $user = $this->createRandomUser('test', [AclResourceEnum::USER_SHOW]);
+        $user = $this->createRandomUser('test', [AclResourceEnum::USER_SHOW_ALL]);
         $client = $this->createLoggedClient($user->getEmail());
         $r = $client->query($query, [
             'id' => 'users/' . $user->getId(),

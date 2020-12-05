@@ -56,9 +56,6 @@ class ErrorNormalizer implements NormalizerInterface, NormalizerAwareInterface
      */
     public function normalize($object, string $format = null, array $context = []): array
     {
-        dump($format);
-        dump($context);
-        exit();
         $exception = $object->getPrevious();
         $error = FormattedError::createFromException($object);
         if ($exception instanceof ClientError) {
@@ -97,7 +94,6 @@ class ErrorNormalizer implements NormalizerInterface, NormalizerAwareInterface
      */
     public function supportsNormalization($data, string $format = null): bool
     {
-        return false;
         return $data instanceof \Throwable;
     }
 

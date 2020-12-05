@@ -29,14 +29,14 @@ class AclRole
      * (regex: ^ROLE_[A-Z]{1,20}$/m)
      *
      * @ORM\Column(type="string")
-     * @Groups({"aclRole:write", "exposed", "read"})
+     * @Groups({"aclRole:write", "exposed", "read:always"})
      * @Assert\Regex(pattern="/^ROLE_[A-Z]{1,20}$/m",message="INVALID_ROLE_NAME")
      */
     private string $name;
 
     /** @var Collection|AclResource[] Must be an array IRIs (acl_resources/<uuid>) of existing resources
      * @ORM\ManyToMany(targetEntity="AclResource")
-     * @Groups({"read", "exposed", "aclResource:write"})
+     * @Groups({"read:always", "exposed", "aclResource:write"})
      */
     private Collection $resources;
 

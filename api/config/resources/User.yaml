@@ -19,15 +19,20 @@ App\Entity\User:
             item_query: App\Controller\GetMeController
             args: [ ]
         item_query:
-            security_message: "r: USER_SHOW"
-            security: "is_granted('USER_SHOW')"
+            security_message: "r: USER_SHOW_ALL"
+            security: "is_granted('USER_SHOW_ALL')"
         collection_query:
             security: "is_granted('USER_SHOW_ALL')"
         create:
-            security: "is_granted('USER_CREATE')"
-            security_message: "r: USER_CREATE"
+            security: "is_granted('USER_EDIT')"
+            security_message: "r: USER_EDIT"
             denormalization_context:
-                groups: [ user:password, user:write ]
+                groups: [ user:write ]
+        delete:
+            security: "is_granted('USER_DELETE')"
+            security_message: "r: USER_DELETE"
+
+
         changePassword:
             security: "is_granted('USER_LOGGED')"
             security_message: "r USER_LOGGED"

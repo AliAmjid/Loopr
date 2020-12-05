@@ -12,22 +12,7 @@ interface Node {
 }
 
 type AclResource implements Node {
-    _id: String!
     dependsOn: [AclResource]
-    id: ID!
-    name: String!
-}
-
-type AclResourceCollection implements Node {
-    _id: String!
-    dependsOn: [AclResourceCollection]
-    id: ID!
-    name: String!
-}
-
-type AclResourceItem implements Node {
-    _id: String!
-    dependsOn: [AclResourceItem]
     id: ID!
     name: String!
 }
@@ -42,53 +27,22 @@ type AclRole implements Node {
     (regex: ^ROLE_[A-Z]{1,20}$/m)
     """
     name: String!
-    resource: [AclResource]
     "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
     resources: [AclResource]
 }
 
-type AclRoleCollection implements Node {
-    _id: String!
-    id: ID!
-    """
-
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String!
-    resource: [AclResourceCollection]
-    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [AclResourceCollection]
-}
-
-type AclRoleItem implements Node {
-    _id: String!
-    id: ID!
-    """
-
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String!
-    resource: [AclResourceItem]
-    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [AclResourceItem]
-}
-
 type ClassGroup implements Node {
-    createdBy: UserItem
+    _id: String!
     id: ID!
     section: String!
     "Teacher needs to be user with resource GROUP_TEACHER"
-    teacher: UserItem
+    teacher: User
     users(
         "Returns the elements in the list that come after the specified cursor."
         after: String,
         "Returns the elements in the list that come before the specified cursor."
         before: String,
-        createdAt: UserFilter_createdAt,
+        createdAt: [UserFilter_createdAt],
         "Returns the first n elements from the list."
         first: Int,
         "Returns the last n elements from the list."
@@ -97,8 +51,62 @@ type ClassGroup implements Node {
         role_resources_id_list: [String],
         role_resources_name: String,
         role_resources_name_list: [String]
-    ): UserItemConnection
+    ): UserConnection
     year: Int!
+}
+
+"Connection for ClassGroup."
+type ClassGroupConnection {
+    edges: [ClassGroupEdge]
+    pageInfo: ClassGroupPageInfo!
+    totalCount: Int!
+}
+
+"Edge of ClassGroup."
+type ClassGroupEdge {
+    cursor: String!
+    node: ClassGroup
+}
+
+"Information about the current page."
+type ClassGroupPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type Group implements Node {
+    _id: String!
+    createdAt: String!
+    createdBy: User
+    id: ID!
+    section: String!
+    subjects(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectConnection
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        createdAt: [UserFilter_createdAt],
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int,
+        role_resources_id: String,
+        role_resources_id_list: [String],
+        role_resources_name: String,
+        role_resources_name_list: [String]
+    ): UserConnection
 }
 
 "Connection for ClassGroup."
@@ -226,6 +234,10 @@ type Mutation {
     deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
     "Deletes a Group."
     deleteGroup(input: deleteGroupInput!): deleteGroupPayload
+    "Deletes a SubjectType."
+    deleteSubjectType(input: deleteSubjectTypeInput!): deleteSubjectTypePayload
+    "Deletes a User."
+    deleteUser(input: deleteUserInput!): deleteUserPayload
     "Edits a Subject."
     editSubject(input: editSubjectInput!): editSubjectPayload
     "Updates a AclRole."
@@ -241,9 +253,9 @@ type Mutation {
 }
 
 type Query {
-    aclResources: [AclResourceCollection]
-    aclRole(id: ID!): AclRoleItem
-    aclRoles: [AclRoleCollection]
+    aclResources: [AclResource]
+    aclRole(id: ID!): AclRole
+    aclRoles: [AclRole]
     classGroup(id: ID!): ClassGroup
     classGroups(
         "Returns the elements in the list that come after the specified cursor."
@@ -269,10 +281,10 @@ type Query {
         "Returns the last n elements from the list."
         last: Int,
         section: String
-    ): GroupCollectionConnection
+    ): GroupConnection
     meUser: User
     node(id: ID!): Node
-    subject(id: ID!): SubjectItem
+    subject(id: ID!): Subject
     subjectType(id: ID!): SubjectType
     subjectTypes(
         "Returns the elements in the list that come after the specified cursor."
@@ -293,14 +305,14 @@ type Query {
         first: Int,
         "Returns the last n elements from the list."
         last: Int
-    ): SubjectCollectionConnection
-    user(id: ID!): UserItem
+    ): SubjectConnection
+    user(id: ID!): User
     users(
         "Returns the elements in the list that come after the specified cursor."
         after: String,
         "Returns the elements in the list that come before the specified cursor."
         before: String,
-        createdAt: UserFilter_createdAt,
+        createdAt: [UserFilter_createdAt],
         "Returns the first n elements from the list."
         first: Int,
         "Returns the last n elements from the list."
@@ -309,61 +321,33 @@ type Query {
         role_resources_id_list: [String],
         role_resources_name: String,
         role_resources_name_list: [String]
-    ): UserCollectionConnection
+    ): UserConnection
 }
 
-type SubjectCollection implements Node {
+type Subject implements Node {
+    _id: String!
     classGroup: ClassGroup
-    group: GroupCollection
+    group: Group
     id: ID!
     subjectType: SubjectType
-    teacher: UserCollection
+    teacher: User
 }
 
-"Connection for SubjectCollection."
-type SubjectCollectionConnection {
-    edges: [SubjectCollectionEdge]
-    pageInfo: SubjectCollectionPageInfo!
+"Connection for Subject."
+type SubjectConnection {
+    edges: [SubjectEdge]
+    pageInfo: SubjectPageInfo!
     totalCount: Int!
 }
 
-"Edge of SubjectCollection."
-type SubjectCollectionEdge {
+"Edge of Subject."
+type SubjectEdge {
     cursor: String!
-    node: SubjectCollection
+    node: Subject
 }
 
 "Information about the current page."
-type SubjectCollectionPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
-}
-
-type SubjectItem implements Node {
-    classGroup: ClassGroup
-    group: GroupItem
-    id: ID!
-    subjectType: SubjectType
-    teacher: UserItem
-}
-
-"Connection for SubjectItem."
-type SubjectItemConnection {
-    edges: [SubjectItemEdge]
-    pageInfo: SubjectItemPageInfo!
-    totalCount: Int!
-}
-
-"Edge of SubjectItem."
-type SubjectItemEdge {
-    cursor: String!
-    node: SubjectItem
-}
-
-"Information about the current page."
-type SubjectItemPageInfo {
+type SubjectPageInfo {
     endCursor: String
     hasNextPage: Boolean!
     hasPreviousPage: Boolean!
@@ -371,8 +355,9 @@ type SubjectItemPageInfo {
 }
 
 type SubjectType implements Node {
+    _id: String!
     id: ID!
-    name: String
+    name: String!
 }
 
 "Connection for SubjectType."
@@ -410,76 +395,39 @@ type User implements Node {
     "email of user"
     email: String!
     firstname: String!
+    groups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        section: String
+    ): GroupConnection
     id: ID!
     lastname: String!
     role: AclRole!
 }
 
-type UserCollection implements Node {
-    _id: String!
-    classGroup: ClassGroup
-    createdAt: String!
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    role: AclRoleCollection!
-}
-
-"Connection for UserCollection."
-type UserCollectionConnection {
-    edges: [UserCollectionEdge]
-    pageInfo: UserCollectionPageInfo!
+"Connection for User."
+type UserConnection {
+    edges: [UserEdge]
+    pageInfo: UserPageInfo!
     totalCount: Int!
 }
 
-"Edge of UserCollection."
-type UserCollectionEdge {
+"Edge of User."
+type UserEdge {
     cursor: String!
-    node: UserCollection
+    node: User
 }
 
 "Information about the current page."
-type UserCollectionPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
-}
-
-type UserItem implements Node {
-    _id: String!
-    classGroup: ClassGroup
-    createdAt: String!
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    name: String @deprecated(reason : "Replaced with firstname and lastname")
-    "The hashed password"
-    password: String!
-    role: AclRoleItem!
-    roles: Iterable!
-    username: String! @deprecated(reason : "use email instead")
-}
-
-"Connection for UserItem."
-type UserItemConnection {
-    edges: [UserItemEdge]
-    pageInfo: UserItemPageInfo!
-    totalCount: Int!
-}
-
-"Edge of UserItem."
-type UserItemEdge {
-    cursor: String!
-    node: UserItem
-}
-
-"Information about the current page."
-type UserItemPageInfo {
+type UserPageInfo {
     endCursor: String
     hasNextPage: Boolean!
     hasPreviousPage: Boolean!
@@ -488,33 +436,16 @@ type UserItemPageInfo {
 
 type changePasswordUserPayload {
     clientMutationId: String
-    user: UserItem
-}
-
-type createAclResourceNestedPayload implements Node {
-    _id: String!
-    dependsOn: [createAclResourceNestedPayload]
-    id: ID!
-    name: String!
-}
-
-type createAclRoleNestedPayload implements Node {
-    _id: String!
-    id: ID!
-    """
-
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String!
-    resource: [createAclResourceNestedPayload]
-    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [createAclResourceNestedPayload]
+    user: User
 }
 
 type createAclRolePayload {
-    aclRole: AclRoleItem
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+type createClassGroupPayload {
+    classGroup: ClassGroup
     clientMutationId: String
 }
 
@@ -559,124 +490,22 @@ type createGroupNestedPayload implements Node {
 
 type createGroupPayload {
     clientMutationId: String
-    group: createGroupPayloadData
-}
-
-type createGroupPayloadData implements Node {
-    _id: String!
-    createdAt: String!
-    createdBy: createUserNestedPayload
-    id: ID!
-    section: String!
-    subjectRelations: createSubjectNestedPayloadConnection
-    users: createUserNestedPayloadConnection
-}
-
-type createSubjectNestedPayload implements Node {
-    classGroup: createClassGroupNestedPayload
-    group: createGroupNestedPayload
-    id: ID!
-    subjectType: createSubjectTypeNestedPayload
-    teacher: createUserNestedPayload
-}
-
-"Connection for createSubjectNestedPayload."
-type createSubjectNestedPayloadConnection {
-    edges: [createSubjectNestedPayloadEdge]
-    pageInfo: createSubjectNestedPayloadPageInfo!
-    totalCount: Int!
-}
-
-"Edge of createSubjectNestedPayload."
-type createSubjectNestedPayloadEdge {
-    cursor: String!
-    node: createSubjectNestedPayload
-}
-
-"Information about the current page."
-type createSubjectNestedPayloadPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
+    group: Group
 }
 
 type createSubjectPayload {
     clientMutationId: String
-    subject: createSubjectPayloadData
-}
-
-type createSubjectPayloadData implements Node {
-    classGroup: createClassGroupNestedPayload
-    group: createGroupNestedPayload
-    id: ID!
-    subjectType: createSubjectTypeNestedPayload
-    teacher: createUserNestedPayload
-}
-
-type createSubjectTypeNestedPayload implements Node {
-    id: ID!
-    name: String
+    subject: Subject
 }
 
 type createSubjectTypePayload {
     clientMutationId: String
-    subjectType: createSubjectTypePayloadData
-}
-
-type createSubjectTypePayloadData implements Node {
-    id: ID!
-    name: String
-}
-
-type createUserNestedPayload implements Node {
-    _id: String!
-    classGroup: createClassGroupNestedPayload
-    createdAt: String!
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    role: createAclRoleNestedPayload!
-}
-
-"Connection for createUserNestedPayload."
-type createUserNestedPayloadConnection {
-    edges: [createUserNestedPayloadEdge]
-    pageInfo: createUserNestedPayloadPageInfo!
-    totalCount: Int!
-}
-
-"Edge of createUserNestedPayload."
-type createUserNestedPayloadEdge {
-    cursor: String!
-    node: createUserNestedPayload
-}
-
-"Information about the current page."
-type createUserNestedPayloadPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
+    subjectType: SubjectType
 }
 
 type createUserPayload {
     clientMutationId: String
-    user: createUserPayloadData
-}
-
-type createUserPayloadData implements Node {
-    _id: String!
-    classGroup: createClassGroupNestedPayload
-    createdAt: String!
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    role: createAclRoleNestedPayload!
+    user: User
 }
 
 type deleteClassGroupPayload {
@@ -686,165 +515,31 @@ type deleteClassGroupPayload {
 
 type deleteGroupPayload {
     clientMutationId: String
-    group: GroupItem
+    group: Group
 }
 
-type editAclResourceNestedPayload implements Node {
-    _id: String!
-    dependsOn: [editAclResourceNestedPayload]
-    id: ID!
-    name: String!
+type deleteSubjectTypePayload {
+    clientMutationId: String
+    subjectType: SubjectType
 }
 
-type editAclRoleNestedPayload implements Node {
-    _id: String!
-    id: ID!
-    """
-
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String!
-    resource: [editAclResourceNestedPayload]
-    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [editAclResourceNestedPayload]
-}
-
-type editClassGroupNestedPayload implements Node {
-    _id: String!
-    createdAt: String!
-    createdBy: editUserNestedPayload
-    id: ID!
-    section: String!
-    subjectRelations: editSubjectNestedPayloadConnection
-    "Teacher needs to be user with resource GROUP_TEACHER"
-    teacher: editUserNestedPayload
-    users: editUserNestedPayloadConnection
-    usersToChange: Iterable!
-    year: Int!
-}
-
-type editGroupNestedPayload implements Node {
-    _id: String!
-    createdAt: String!
-    createdBy: editUserNestedPayload
-    id: ID!
-    section: String!
-    subjectRelations: editSubjectNestedPayloadConnection
-    users: editUserNestedPayloadConnection
-}
-
-type editSubjectNestedPayload implements Node {
-    classGroup: editClassGroupNestedPayload
-    group: editGroupNestedPayload
-    id: ID!
-    subjectType: editSubjectTypeNestedPayload
-    teacher: editUserNestedPayload
-}
-
-"Connection for editSubjectNestedPayload."
-type editSubjectNestedPayloadConnection {
-    edges: [editSubjectNestedPayloadEdge]
-    pageInfo: editSubjectNestedPayloadPageInfo!
-    totalCount: Int!
-}
-
-"Edge of editSubjectNestedPayload."
-type editSubjectNestedPayloadEdge {
-    cursor: String!
-    node: editSubjectNestedPayload
-}
-
-"Information about the current page."
-type editSubjectNestedPayloadPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
+type deleteUserPayload {
+    clientMutationId: String
+    user: User
 }
 
 type editSubjectPayload {
     clientMutationId: String
-    subject: editSubjectPayloadData
-}
-
-type editSubjectPayloadData implements Node {
-    classGroup: editClassGroupNestedPayload
-    group: editGroupNestedPayload
-    id: ID!
-    subjectType: editSubjectTypeNestedPayload
-    teacher: editUserNestedPayload
-}
-
-type editSubjectTypeNestedPayload implements Node {
-    _id: String!
-    id: ID!
-    name: String
-}
-
-type editUserNestedPayload implements Node {
-    _id: String!
-    classGroup: editClassGroupNestedPayload
-    createdAt: String!
-    "email of user"
-    email: String!
-    firstname: String!
-    id: ID!
-    lastname: String!
-    name: String @deprecated(reason : "Replaced with firstname and lastname")
-    "The hashed password"
-    password: String!
-    role: editAclRoleNestedPayload!
-    roles: Iterable!
-    username: String! @deprecated(reason : "use email instead")
-}
-
-"Connection for editUserNestedPayload."
-type editUserNestedPayloadConnection {
-    edges: [editUserNestedPayloadEdge]
-    pageInfo: editUserNestedPayloadPageInfo!
-    totalCount: Int!
-}
-
-"Edge of editUserNestedPayload."
-type editUserNestedPayloadEdge {
-    cursor: String!
-    node: editUserNestedPayload
-}
-
-"Information about the current page."
-type editUserNestedPayloadPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
-}
-
-type updateAclResourceNestedPayload implements Node {
-    _id: String
-    dependsOn: [updateAclResourceNestedPayload]
-    id: ID!
-    name: String
-}
-
-type updateAclRoleNestedPayload implements Node {
-    _id: String
-    id: ID!
-    """
-
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String
-    resource: [updateAclResourceNestedPayload]
-    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [updateAclResourceNestedPayload]
+    subject: Subject
 }
 
 type updateAclRolePayload {
-    aclRole: AclRoleItem
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+type updateClassGroupPayload {
+    classGroup: ClassGroup
     clientMutationId: String
 }
 
@@ -887,112 +582,24 @@ type updateGroupNestedPayload implements Node {
 
 type updateGroupPayload {
     clientMutationId: String
-    group: updateGroupPayloadData
-}
-
-type updateGroupPayloadData implements Node {
-    _id: String
-    createdAt: String
-    createdBy: updateUserNestedPayload
-    id: ID!
-    section: String
-    subjectRelations: updateSubjectNestedPayloadConnection
-    users: updateUserNestedPayloadConnection
-}
-
-type updateSubjectNestedPayload implements Node {
-    _id: String
-    classGroup: updateClassGroupNestedPayload
-    group: updateGroupNestedPayload
-    id: ID!
-    subjectType: updateSubjectTypeNestedPayload
-    teacher: updateUserNestedPayload
-}
-
-"Connection for updateSubjectNestedPayload."
-type updateSubjectNestedPayloadConnection {
-    edges: [updateSubjectNestedPayloadEdge]
-    pageInfo: updateSubjectNestedPayloadPageInfo!
-    totalCount: Int!
-}
-
-"Edge of updateSubjectNestedPayload."
-type updateSubjectNestedPayloadEdge {
-    cursor: String!
-    node: updateSubjectNestedPayload
-}
-
-"Information about the current page."
-type updateSubjectNestedPayloadPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
-}
-
-type updateSubjectTypeNestedPayload implements Node {
-    id: ID!
-    name: String
+    group: Group
 }
 
 type updateSubjectTypePayload {
     clientMutationId: String
-    subjectType: updateSubjectTypePayloadData
-}
-
-type updateSubjectTypePayloadData implements Node {
-    id: ID!
-    name: String
-}
-
-type updateUserNestedPayload implements Node {
-    _id: String
-    classGroup: updateClassGroupNestedPayload
-    createdAt: String
-    "email of user"
-    email: String
-    firstname: String
-    id: ID!
-    lastname: String
-    role: updateAclRoleNestedPayload
-}
-
-"Connection for updateUserNestedPayload."
-type updateUserNestedPayloadConnection {
-    edges: [updateUserNestedPayloadEdge]
-    pageInfo: updateUserNestedPayloadPageInfo!
-    totalCount: Int!
-}
-
-"Edge of updateUserNestedPayload."
-type updateUserNestedPayloadEdge {
-    cursor: String!
-    node: updateUserNestedPayload
-}
-
-"Information about the current page."
-type updateUserNestedPayloadPageInfo {
-    endCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
+    subjectType: SubjectType
 }
 
 type updateUserPayload {
     clientMutationId: String
-    user: updateUserPayloadData
+    user: User
 }
 
-type updateUserPayloadData implements Node {
-    _id: String
-    classGroup: updateClassGroupNestedPayload
-    createdAt: String
-    "email of user"
-    email: String
-    firstname: String
-    id: ID!
-    lastname: String
-    role: updateAclRoleNestedPayload
+input UserFilter_createdAt {
+    after: String
+    before: String
+    strictly_after: String
+    strictly_before: String
 }
 
 input UserFilter_createdAt {
@@ -1046,7 +653,7 @@ input createSubjectInput {
 
 input createSubjectTypeInput {
     clientMutationId: String
-    name: String
+    name: String!
 }
 
 input createUserInput {
@@ -1069,6 +676,16 @@ input deleteGroupInput {
     id: ID!
 }
 
+input deleteSubjectTypeInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input deleteUserInput {
+    clientMutationId: String
+    id: ID!
+}
+
 input editSubjectInput {
     classGroup: String
     clientMutationId: String
@@ -1076,14 +693,6 @@ input editSubjectInput {
     id: ID!
     subjectType: String
     teacher: String
-}
-
-input updateAclResourceInput {
-    _id: String
-    clientMutationId: String
-    dependsOn: [String]
-    id: ID!
-    name: String
 }
 
 input updateAclRoleInput {
@@ -1096,9 +705,6 @@ input updateAclRoleInput {
     (regex: ^ROLE_[A-Z]{1,20}$/m)
     """
     name: String
-    resource: [updateAclResourceInput!]
-    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
-    resources: [String]
 }
 
 input updateClassGroupInput {
@@ -1134,7 +740,3 @@ input updateUserInput {
     lastname: String
     role: String
 }
-
-
-"The `Iterable` scalar type represents an array or a Traversable with any kind of data."
-scalar Iterable

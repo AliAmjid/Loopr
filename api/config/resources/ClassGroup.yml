@@ -14,13 +14,13 @@ App\Entity\ClassGroup:
             output: false
     graphql:
         create:
-            security_message: 'r: GROUP_CREATE'
-            security: "is_granted('GROUP_CREATE')"
+            security_message: 'r: GROUP_EDIT'
+            security: "is_granted('GROUP_EDIT')"
             normalization_context:
         update:
-            security: "is_granted('GROUP_CREATE')"
-            security_message: 'r: GROUP_CREATE'
-        
+            security: "is_granted('GROUP_EDIT')"
+            security_message: 'r: GROUP_EDIT'
+
         delete:
             security: "is_granted('GROUP_DELETE')"
 
