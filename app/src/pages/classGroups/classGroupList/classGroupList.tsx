@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-import { IconButton } from '@material-ui/core';
+import { Button, IconButton, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 import SideList from 'components/SideList';
+import SimpleDialog from 'components/SimpleDialog';
 
 import ClassGroupDialog from './classGroupDialog';
 import { ClassGroupListProps } from './types';
@@ -12,6 +14,7 @@ import { ClassGroupListProps } from './types';
 const ClassGroupList: React.FC<ClassGroupListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
   const [editId, setEditId] = useState<string | undefined>(undefined);
+  const [deleting, setDeleting] = useState<string | undefined>(undefined);
 
   const editingClassGroup = props.classGroups.find(
     classGroup => classGroup.id === editId,
@@ -19,6 +22,36 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
 
   return (
     <>
+      <SimpleDialog
+        open={Boolean(deleting)}
+        title="Sure??"
+        content={<Typography>Irreversible</Typography>}
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => {
+              setDeleting(undefined);
+            }}
+          >
+            Cancel
+          </Button>,
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              props.onDelete(`${deleting}`).then(successful => {
+                if (successful) {
+                  setDeleting(undefined);
+                }
+              });
+            }}
+          >
+            Delete
+          </Button>,
+        ]}
+      />
       <ClassGroupDialog
         open={addOpen || editId !== undefined}
         title={addOpen ? 'Add class' : 'Edit class'}
@@ -70,6 +103,9 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
           additionalActions: [
             <IconButton key={0} onClick={() => setEditId(classGroup.id)}>
               <EditIcon />
+            </IconButton>,
+            <IconButton key={1} onClick={() => setDeleting(classGroup.id)}>
+              <DeleteIcon />
             </IconButton>,
           ],
           onClick: () => props.onSelectedClassChange(classGroup.id),

@@ -40,6 +40,11 @@ const overrides: Overrides = {
       padding: spacing * 2,
     },
   },
+  MuiDialog: {
+    paper: {
+      minWidth: spacing * 50,
+    },
+  },
 };
 
 export default overrides;

@@ -317,6 +317,36 @@ export interface ClassGroupsAddClassGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ClassGroupsDeleteClassGroupMutation
+// ====================================================
+
+export interface ClassGroupsDeleteClassGroupMutation_deleteClassGroup_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface ClassGroupsDeleteClassGroupMutation_deleteClassGroup {
+  __typename: "deleteClassGroupPayload";
+  classGroup: ClassGroupsDeleteClassGroupMutation_deleteClassGroup_classGroup | null;
+}
+
+export interface ClassGroupsDeleteClassGroupMutation {
+  /**
+   * Deletes a ClassGroup.
+   */
+  deleteClassGroup: ClassGroupsDeleteClassGroupMutation_deleteClassGroup | null;
+}
+
+export interface ClassGroupsDeleteClassGroupMutationVariables {
+  input: deleteClassGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ClassGroupsUpdateClassGroupMutation
 // ====================================================
 
@@ -1563,6 +1593,11 @@ export interface createUserInput {
   firstname: string;
   lastname: string;
   role: string;
+}
+
+export interface deleteClassGroupInput {
+  clientMutationId?: string | null;
+  id: string;
 }
 
 export interface deleteGroupInput {

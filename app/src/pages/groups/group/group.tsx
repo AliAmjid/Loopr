@@ -54,7 +54,7 @@ const Group: React.FC<GroupProps> = props => {
           { title: 'Name', field: 'firstname' },
           { title: 'lastname', field: 'lastname' },
         ]}
-        options={{ selection: editing, pageSize: 2, pageSizeOptions: [2] }}
+        options={{ selection: editing }}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         {editing ? (

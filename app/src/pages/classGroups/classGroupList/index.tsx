@@ -3,10 +3,14 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION from 'pages/classGroups/mutations/deleteClass';
+
 import {
   ClassGroupsAddClassGroupMutation,
   ClassGroupsAddClassGroupMutationVariables,
   ClassGroupsClassGroupsQuery,
+  ClassGroupsDeleteClassGroupMutation,
+  ClassGroupsDeleteClassGroupMutationVariables,
   ClassGroupsUpdateClassGroupMutation,
   ClassGroupsUpdateClassGroupMutationVariables,
 } from 'types/graphql';
@@ -38,6 +42,13 @@ const ClassGroupListIndex: React.FC = () => {
     ClassGroupsUpdateClassGroupMutationVariables
   >(CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION, {
     // TODO typename
+    refetchQueries: ['ClassGroupsClassGroupsQuery'],
+    awaitRefetchQueries: true,
+  });
+  const [deleteClassGroup, { loading: deleteClassGroupLoading }] = useMutation<
+    ClassGroupsDeleteClassGroupMutation,
+    ClassGroupsDeleteClassGroupMutationVariables
+  >(CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION, {
     refetchQueries: ['ClassGroupsClassGroupsQuery'],
     awaitRefetchQueries: true,
   });
@@ -79,6 +90,20 @@ const ClassGroupListIndex: React.FC = () => {
       });
   };
 
+  const deleteHandler = (classGroup: string): Promise<boolean> => {
+    return deleteClassGroup({ variables: { input: { id: classGroup } } })
+      .then(() => {
+        enqueueSnackbar('S', { variant: 'success' });
+
+        return true;
+      })
+      .catch(() => {
+        enqueueSnackbar('E', { variant: 'error' });
+
+        return false;
+      });
+  };
+
   const classGroups: ClassGroup[] = [];
   (classesData?.classGroups?.edges?.map(e => e?.node) || []).forEach(
     classGroup => {
@@ -99,6 +124,7 @@ const ClassGroupListIndex: React.FC = () => {
         setSelectedClassGroup(cl);
       }}
       onUpdate={updateHandler}
+      onDelete={deleteHandler}
     />
   );
 };

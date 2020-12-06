@@ -36,8 +36,9 @@ const GroupList: React.FC<GroupListProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              props.onDelete(deleting);
-              setDeleting(undefined);
+              props.onDelete(`${deleting}`).then(successful => {
+                if (successful) setDeleting(undefined);
+              });
             }}
           >
             Delete

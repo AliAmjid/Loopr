@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
 import { AddValues, Group, UpdateValues } from 'pages/groups/groupList/types';
-import GROUPS_DELETE_MUTATION from 'pages/groups/mutations/delete';
+import GROUPS_DELETE_MUTATION from 'pages/groups/mutations/deleteGroup';
 import GROUPS_UPDATE_GROUP_MUTATION from 'pages/groups/mutations/updateGroup';
 import useGroupsState from 'pages/groups/state';
 
@@ -90,13 +90,17 @@ const GroupListIndex: React.FC = () => {
       });
   };
 
-  const deleteHandler = (group: string): void => {
-    deleteGroup({ variables: { input: { id: group } } })
+  const deleteHandler = (group: string): Promise<boolean> => {
+    return deleteGroup({ variables: { input: { id: group } } })
       .then(() => {
         enqueueSnackbar('S', { variant: 'success' });
+
+        return true;
       })
       .catch(() => {
         enqueueSnackbar('E', { variant: 'error' });
+
+        return false;
       });
   };
 

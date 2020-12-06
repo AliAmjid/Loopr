@@ -30,6 +30,7 @@ export interface ClassGroupListProps {
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedClassChange: (cl: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
+  onDelete: (classGroup: string) => Promise<boolean>;
 }
 
 export interface ClassGroupDialogProps {

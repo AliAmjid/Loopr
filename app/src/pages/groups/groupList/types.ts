@@ -1,3 +1,5 @@
+import bodyParser from 'body-parser';
+
 export interface AddDialogFormValues {
   year: string;
   name: string;
@@ -26,7 +28,7 @@ export interface GroupListProps {
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
-  onDelete: (group: string) => void;
+  onDelete: (group: string) => Promise<boolean>;
 }
 
 export interface AddDialogProps {
