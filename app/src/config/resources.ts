@@ -6,8 +6,7 @@ const resources = {
     create: 'USER_CREATE',
   },
   role: {
-    edit: 'ROLE_EDIT',
-    createRole: 'ROLE_CREATE',
+    edit: 'ACL_ROLE_EDIT',
   },
 };
 

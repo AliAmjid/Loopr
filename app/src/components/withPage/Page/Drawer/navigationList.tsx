@@ -6,6 +6,8 @@ import AclIcon from '@material-ui/icons/HowToReg';
 
 import routes from 'config/routes';
 
+import { aclPageResources } from 'pages/acl/index/pageOptions';
+
 import { NavigationList } from 'components/withPage/Page/Drawer/types';
 
 const navigationList: NavigationList = [
@@ -14,8 +16,17 @@ const navigationList: NavigationList = [
     icon: <DashboardIcon />,
     href: routes.dashboard.index,
   },
-  { label: 'users.index', icon: <GroupIcon />, href: routes.users.index },
-  { label: 'acl.index', icon: <AclIcon />, href: routes.acl.index },
+  {
+    label: 'users.index',
+    icon: <GroupIcon />,
+    href: routes.users.index,
+  },
+  {
+    label: 'acl.index',
+    icon: <AclIcon />,
+    href: routes.acl.index,
+    resources: aclPageResources,
+  },
   { label: 'groups.index', icon: <AclIcon />, href: routes.groups.index },
   {
     label: 'classGroups.index',

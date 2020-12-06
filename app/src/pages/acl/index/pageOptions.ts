@@ -16,7 +16,7 @@ const aclPageNamespaces = [
   ...materialTableNamespaces,
 ];
 
-const aclPageResources = [[resources.role.edit], [resources.role.createRole]];
+export const aclPageResources = [[resources.role.edit]];
 
 const aclPageOptions: PageOptions = {
   title: 'acl.index',
