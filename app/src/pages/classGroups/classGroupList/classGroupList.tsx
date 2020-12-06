@@ -66,7 +66,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
         items={props.classGroups.map(classGroup => ({
           id: classGroup.id,
           primary: classGroup?.section,
-          secondary: classGroup?.year,
+          secondary: `${classGroup?.year}`,
           additionalActions: [
             <IconButton key={0} onClick={() => setEditId(classGroup.id)}>
               <EditIcon />

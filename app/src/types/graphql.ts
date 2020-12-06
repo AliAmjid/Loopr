@@ -1098,6 +1098,73 @@ export interface SubjectsUpdateSubjectTypeMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: SubjectsSubjectTypeQuery
+// ====================================================
+
+export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_group {
+  __typename: "Group";
+  id: string;
+  section: string;
+}
+
+export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node {
+  __typename: "Subject";
+  id: string;
+  group: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_group | null;
+  classGroup: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_classGroup | null;
+  teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher | null;
+}
+
+export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges {
+  __typename: "SubjectEdge";
+  node: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsSubjectTypeQuery_subjectType_subjects {
+  __typename: "SubjectConnection";
+  edges: (SubjectsSubjectTypeQuery_subjectType_subjects_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsSubjectTypeQuery_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  subjects: SubjectsSubjectTypeQuery_subjectType_subjects | null;
+}
+
+export interface SubjectsSubjectTypeQuery {
+  subjectType: SubjectsSubjectTypeQuery_subjectType | null;
+}
+
+export interface SubjectsSubjectTypeQueryVariables {
+  id: string;
+  subjectsFirst?: number | null;
+  subjectsLast?: number | null;
+  subjectsAfter?: string | null;
+  subjectsBefore?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SubjectsSubjectTypesQuery
 // ====================================================
 
@@ -1437,7 +1504,6 @@ export interface createClassGroupInput {
   clientMutationId?: string | null;
   section: string;
   teacher?: string | null;
-  users?: (string | null)[] | null;
   year: number;
 }
 
@@ -1473,6 +1539,7 @@ export interface updateAclRoleInput {
   clientMutationId?: string | null;
   id: string;
   name?: string | null;
+  resources?: (string | null)[] | null;
 }
 
 export interface updateClassGroupInput {
@@ -1480,7 +1547,6 @@ export interface updateClassGroupInput {
   id: string;
   section?: string | null;
   teacher?: string | null;
-  users?: (string | null)[] | null;
   year?: number | null;
 }
 

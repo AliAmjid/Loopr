@@ -15,7 +15,7 @@ import {
   SubjectsUpdateSubjectTypeMutationVariables,
 } from 'types/graphql';
 
-import SUBJECTS_SUBJECT_TYPES_QUERY from '../queries/subjects';
+import SUBJECTS_SUBJECT_TYPES_QUERY from '../queries/subjectTypes';
 
 import SubjectList from './subjectList';
 import { AddSubjectArgs, Subjects, UpdateSubjectArgs } from './types';
