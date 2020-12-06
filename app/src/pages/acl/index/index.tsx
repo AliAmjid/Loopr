@@ -60,18 +60,32 @@ const AclIndex: React.FC = () => {
       sorting: false,
     })) || []),
   ];
-  const rows: (any & { name: string; resourceId: string }) | undefined =
-    data?.aclResources?.map(resource => {
-      const row: Record<string, any> = {};
-      data?.aclRoles?.forEach(role => {
-        const roleResource = role?.resources?.find(
-          roleResource => roleResource?.id === resource?.id,
-        );
-        row[role?.id ?? ''] = Boolean(roleResource);
-      });
 
-      return { ...row, name: resource?.name, resourceId: resource?.id };
-    }) || undefined;
+  const aclResources = [...(data?.aclResources || [])];
+
+  const rows: (any & { name: string; resourceId: string }) | undefined =
+    aclResources
+      ?.sort((resource1, resource2) => {
+        if ((resource1?.name || '') > (resource2?.name || '')) {
+          return 1;
+        }
+        if ((resource1?.name || '') < (resource2?.name || '')) {
+          return -1;
+        }
+
+        return 0;
+      })
+      .map(resource => {
+        const row: Record<string, any> = {};
+        data?.aclRoles?.forEach(role => {
+          const roleResource = role?.resources?.find(
+            roleResource => roleResource?.id === resource?.id,
+          );
+          row[role?.id ?? ''] = Boolean(roleResource);
+        });
+
+        return { ...row, name: resource?.name, resourceId: resource?.id };
+      }) || undefined;
 
   const resourceChangeHandler = (
     props: OnResourceChangeProps,
@@ -88,7 +102,7 @@ const AclIndex: React.FC = () => {
     }
 
     return updateAcl({
-      variables: { id: props.roleId, resources },
+      variables: { input: { id: props.roleId, resources } },
     })
       .then(() => true)
       .catch(() => {

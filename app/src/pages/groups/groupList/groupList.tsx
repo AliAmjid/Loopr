@@ -1,20 +1,49 @@
 import React, { useState } from 'react';
 
-import { IconButton } from '@material-ui/core';
+import { Button, IconButton, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { GroupListProps } from 'pages/groups/groupList/types';
 
 import SideList from 'components/SideList';
+import SimpleDialog from 'components/SimpleDialog';
 
 import AddDialog from './addDialog';
 
 const GroupList: React.FC<GroupListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
+  const [deleting, setDeleting] = useState<string | undefined>(undefined);
 
   return (
     <>
+      <SimpleDialog
+        open={Boolean(deleting)}
+        title="Sure delete?"
+        content={<Typography>Irreversible</Typography>}
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => {
+              setDeleting(undefined);
+            }}
+          >
+            Cancel
+          </Button>,
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              props.onDelete(deleting);
+              setDeleting(undefined);
+            }}
+          >
+            Delete
+          </Button>,
+        ]}
+      />
       <AddDialog
         open={addOpen}
         loading={props.addGroupLoading}
@@ -43,7 +72,7 @@ const GroupList: React.FC<GroupListProps> = props => {
             props.onUpdate({ id: group.id, section: value }),
           onClick: () => props.onSelectedGroupChange(group.id),
           additionalActions: [
-            <IconButton key={0} onClick={() => props.onDelete(group.id)}>
+            <IconButton key={0} onClick={() => setDeleting(group.id)}>
               <DeleteIcon />
             </IconButton>,
           ],

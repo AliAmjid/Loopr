@@ -84,6 +84,7 @@ const SummaryIndex: React.FC = () => {
           classGroup,
           group,
           teacher,
+          subjectType: `${router.query.subjectTypeId}`,
         },
       },
     })
