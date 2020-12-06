@@ -8,6 +8,9 @@ const resources = {
   role: {
     edit: 'ACL_ROLE_EDIT',
   },
+  group: {
+    teacher: 'GROUP_TEACHER',
+  },
 };
 
 export default resources;

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useApolloClient } from '@apollo/client';
 
+import resources from 'config/resources';
+
 import useAddSubjectState from 'pages/subjects/addSubject/state';
 
 import {
@@ -34,6 +36,7 @@ const TeachersIndex: React.FC = () => {
         query: SUBJECTS_ADD_SUBJECT_TEACHER_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
+          resourceName: resources.group.teacher,
         },
       })
       .then(res => {

@@ -26,7 +26,23 @@ const Subject: React.FC<SubjectProps> = props => {
       <MaterialTable
         key={props.selectedSubject}
         uniqueName="pages/subjects/subject/subject"
-        columns={[]}
+        columns={[
+          {
+            title: 'Group/ClassGroup',
+            render: (row: SubjectT) => {
+              if (row.classGroup)
+                return `${row.classGroup.year} ${row.classGroup.section}`;
+              if (row.group) return row.group.section;
+
+              return '-';
+            },
+          },
+          {
+            title: 'Teacher',
+            render: (row: SubjectT) =>
+              `${row.teacher?.firstname} ${row.teacher?.lastname}`,
+          },
+        ]}
         data={(query: Query<SubjectT>) =>
           props.onGetSubjects(query).then(res => ({
             totalCount: res.totalCount,
