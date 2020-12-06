@@ -29,7 +29,7 @@ class SubjectType
 
 
     /** @var Collection
-     * @Groups({"read:SUBJECT_SHOW_ALL", "exposed"})
+     * @Groups({"read", "exposed"})
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="subjectType")
      */
     private Collection $subjects;

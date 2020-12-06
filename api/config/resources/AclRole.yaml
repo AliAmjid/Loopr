@@ -18,11 +18,6 @@ App\Entity\AclRole:
             pagination_enabled: false
         item_query:
         update:
-            security: "is_granted('ROLE_EDIT')"
+            security: "is_granted('ACL_ROLE_EDIT')"
         create:
-            security: "is_granted('ROLE_CREATE')"
-            denormalization_context:
-                groups:
-                    - aclRole:write
-                    - aclResource:write
-                
+            security: "is_granted('ACL_ROLE_EDIT')"

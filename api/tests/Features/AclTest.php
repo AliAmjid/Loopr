@@ -34,7 +34,7 @@ class AclTest extends BaseTestCase {
 
     public function testCreateRole() {
         $this->assertSecurityResources(
-            [AclResourceEnum::ROLE_CREATE],
+            [AclResourceEnum::ACL_ROLE_CREATE],
             function (User $user): Response {
                 $client = $this->createLoggedClient($user->getEmail(), 'test');
                 $response = $client->query(/** @lang GraphQL */ 'mutation role($name: String!, $idResources: [String]) {
@@ -53,7 +53,7 @@ class AclTest extends BaseTestCase {
     }
 
     public function testCreateRoleWithInvalidName() {
-        $user = $this->createRandomUser('test', [AclResourceEnum::ROLE_CREATE]);
+        $user = $this->createRandomUser('test', [AclResourceEnum::ACL_ROLE_CREATE]);
 
         $client = $this->createLoggedClient($user->getEmail());
         $query = /** @lang GraphQL */
@@ -75,7 +75,7 @@ class AclTest extends BaseTestCase {
     }
 
     public function testUpdateAclRole() {
-        $this->assertSecurityResources([AclResourceEnum::ROLE_EDIT], function (User $user, bool $noError) {
+        $this->assertSecurityResources([AclResourceEnum::ACL_ROLE_EDIT], function (User $user, bool $noError) {
             $role = $this->createRoleWithResources([]);
             $client = $this->createLoggedClient($user->getEmail());
             $query = /** @lang GraphQL */
