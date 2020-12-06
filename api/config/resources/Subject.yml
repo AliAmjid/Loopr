@@ -27,3 +27,6 @@ App\Entity\Subject:
         
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
+        
+        delete:
+            security: "is_granted('SUBJECT_DELETE')"
