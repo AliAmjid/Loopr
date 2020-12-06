@@ -553,6 +553,36 @@ export interface GroupsAddGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: GroupsDeleteMutation
+// ====================================================
+
+export interface GroupsDeleteMutation_deleteGroup_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface GroupsDeleteMutation_deleteGroup {
+  __typename: "deleteGroupPayload";
+  group: GroupsDeleteMutation_deleteGroup_group | null;
+}
+
+export interface GroupsDeleteMutation {
+  /**
+   * Deletes a Group.
+   */
+  deleteGroup: GroupsDeleteMutation_deleteGroup | null;
+}
+
+export interface GroupsDeleteMutationVariables {
+  input: deleteGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: GroupsUpdateGroupMutation
 // ====================================================
 
@@ -1533,6 +1563,11 @@ export interface createUserInput {
   firstname: string;
   lastname: string;
   role: string;
+}
+
+export interface deleteGroupInput {
+  clientMutationId?: string | null;
+  id: string;
 }
 
 export interface updateAclRoleInput {

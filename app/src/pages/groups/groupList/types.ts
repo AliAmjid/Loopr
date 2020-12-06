@@ -26,6 +26,7 @@ export interface GroupListProps {
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
+  onDelete: (group: string) => void;
 }
 
 export interface AddDialogProps {

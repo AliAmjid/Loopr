@@ -4,12 +4,15 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
 import { AddValues, Group, UpdateValues } from 'pages/groups/groupList/types';
+import GROUPS_DELETE_MUTATION from 'pages/groups/mutations/delete';
 import GROUPS_UPDATE_GROUP_MUTATION from 'pages/groups/mutations/updateGroup';
 import useGroupsState from 'pages/groups/state';
 
 import {
   GroupsAddGroupMutation,
   GroupsAddGroupMutationVariables,
+  GroupsDeleteMutation,
+  GroupsDeleteMutationVariables,
   GroupsGroupsQuery,
   GroupsUpdateGroupMutation,
   GroupsUpdateGroupMutationVariables,
@@ -31,6 +34,13 @@ const GroupListIndex: React.FC = () => {
     GroupsAddGroupMutation,
     GroupsAddGroupMutationVariables
   >(GROUPS_ADD_GROUP_MUTATION, {
+    refetchQueries: ['GroupsGroupsQuery'],
+    awaitRefetchQueries: true,
+  });
+  const [deleteGroup, { loading: deleteGroupLoading }] = useMutation<
+    GroupsDeleteMutation,
+    GroupsDeleteMutationVariables
+  >(GROUPS_DELETE_MUTATION, {
     refetchQueries: ['GroupsGroupsQuery'],
     awaitRefetchQueries: true,
   });
@@ -80,6 +90,16 @@ const GroupListIndex: React.FC = () => {
       });
   };
 
+  const deleteHandler = (group: string): void => {
+    deleteGroup({ variables: { input: { id: group } } })
+      .then(() => {
+        enqueueSnackbar('S', { variant: 'success' });
+      })
+      .catch(() => {
+        enqueueSnackbar('E', { variant: 'error' });
+      });
+  };
+
   const groups: Group[] = [];
   (groupsData?.groups?.edges?.map(e => e?.node) || []).forEach(group => {
     if (group) {
@@ -97,6 +117,7 @@ const GroupListIndex: React.FC = () => {
         setSelectedGroup(group);
       }}
       onUpdate={updateHandler}
+      onDelete={deleteHandler}
     />
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
+import { IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { GroupListProps } from 'pages/groups/groupList/types';
 
@@ -40,6 +42,11 @@ const GroupList: React.FC<GroupListProps> = props => {
           onValueChange: (value: string) =>
             props.onUpdate({ id: group.id, section: value }),
           onClick: () => props.onSelectedGroupChange(group.id),
+          additionalActions: [
+            <IconButton key={0} onClick={() => props.onDelete(group.id)}>
+              <DeleteIcon />
+            </IconButton>,
+          ],
         }))}
       />
     </>
