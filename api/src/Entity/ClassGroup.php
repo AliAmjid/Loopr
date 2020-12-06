@@ -207,23 +207,17 @@ class ClassGroup implements IGroup
         return $this;
     }
 
-    public function addDeleteUser(User $user)
+    public function addUser(User $user): User
     {
-        $this->deleteUsers->add($user);
+        $user->setClassGroup($this);
+        $this->users->add($user);
+        return $user;
     }
 
-    public function removeDeleteUser(User $user)
+    public function deleteUser(User $user): User
     {
-        $this->deleteUsers->removeElement($user);
-    }
-
-    public function addAddUser(User $user)
-    {
-        $this->addUsers->add($user);
-    }
-
-    public function removeAddUser(User $user)
-    {
-        $this->addUsers->removeElement($user);
+        $user->setClassGroup(null);
+        $this->users->removeElement($user);
+        return $user;
     }
 }

@@ -19,4 +19,8 @@ interface IGroup
      * @return Subject[]|Collection
      */
     public function getSubjects();
+
+    public function addUser(User $user): User;
+
+    public function deleteUser(User $user): User;
 }

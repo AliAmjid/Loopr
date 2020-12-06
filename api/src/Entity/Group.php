@@ -39,7 +39,7 @@ class Group implements IGroup
     /**
      * @var User[]
      * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
-     * @Groups({"read", "exposed",  "group:write"})
+     * @Groups({"read", "exposed"})
      */
     private $users;
 
@@ -103,14 +103,16 @@ class Group implements IGroup
         return $this->users->getValues();
     }
 
-    public function addUser(User $user): void
+    public function addUser(User $user): User
     {
         $this->users->add($user);
+        return $user;
     }
 
-    public function removeUser(User $user)
+    public function deleteUser(User $user): User
     {
         $this->users->removeElement($user);
+        return $user;
     }
 
     /**
