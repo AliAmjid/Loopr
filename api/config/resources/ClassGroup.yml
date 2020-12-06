@@ -20,6 +20,18 @@ App\Entity\ClassGroup:
             security: "is_granted('GROUP_EDIT')"
             security_message: 'r: GROUP_EDIT'
 
+        updateUsers:
+            security: "is_granted('GROUP_EDIT')"
+            security_message: 'r: GROUP_EDIT'
+            mutation: App\Controller\ModifyUsersInGroupController
+            args:
+                id:
+                    type: '[ID]'
+                addUsers:
+                    type: '[ID]'
+                deleteUsers:
+                    type: '[ID]'
+
         delete:
             security: "is_granted('GROUP_DELETE')"
 

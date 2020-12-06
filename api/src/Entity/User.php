@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,9 +20,17 @@ use App\Filter\ResourceFilter;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
- * @ApiFilter(SearchFilter::class, properties={"id": "exact", "firstname": "partial", "lastname": "partial", "email": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "id": "exact",
+ *      "firstname": "partial",
+ *      "lastname": "partial",
+ *      "email": "partial",
+ *     "role.resources.name": "exact",
+ *     "role.resources.id": "exact",
+ *     "classGroup.id": "exact",
+ *     "groups.id": "exact"
+ * })
  * @ApiFilter(DateFilter::class, properties={"createdAt"})
- * @ApiFilter(SearchFilter::class, properties={"role.resources.name": "exact", "role.resources.id": "exact"})
  */
 class User implements UserInterface
 {
@@ -73,6 +82,7 @@ class User implements UserInterface
      * @var ClassGroup|null
      * @Groups({"read", "user:write", "exposed"})
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
+     * @ORM\JoinColumn(name="class_group_id", referencedColumnName="id")
      */
     private ?ClassGroup $classGroup = null;
 

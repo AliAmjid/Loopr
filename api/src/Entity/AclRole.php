@@ -36,7 +36,7 @@ class AclRole
 
     /** @var Collection|AclResource[] Must be an array IRIs (acl_resources/<uuid>) of existing resources
      * @ORM\ManyToMany(targetEntity="AclResource")
-     * @Groups({"read:always", "exposed", "aclResource:write"})
+     * @Groups({"read:always", "exposed", "aclRole:write"})
      */
     private Collection $resources;
 

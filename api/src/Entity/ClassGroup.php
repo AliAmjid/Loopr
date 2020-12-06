@@ -4,6 +4,7 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
@@ -43,9 +44,9 @@ class ClassGroup implements IGroup
     private string $section;
 
     /**
-     * @var Collection
+     * @var Collection|User[]
      * @ORM\OneToMany(targetEntity="User", mappedBy="classGroup")
-     * @Groups({"read:USER_SHOW_ALL", "exposed",  "classGroup:write"})
+     * @Groups({"exposed", "read"})
      */
     private Collection $users;
 
@@ -68,14 +69,17 @@ class ClassGroup implements IGroup
      */
     private \DateTime $createdAt;
 
-    public array $usersToChange = [];
-
     /**
-     * @Groups({"read"})
+     * @Groups({"read", "exposed"})
      * @var Collection
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="classGroup")
      */
     private Collection $subjects;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * @return Collection
@@ -93,12 +97,6 @@ class ClassGroup implements IGroup
     {
         $this->subjects = $subjects;
         return $this;
-    }
-
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
     }
 
     /**
@@ -143,11 +141,6 @@ class ClassGroup implements IGroup
     public function getUsers(): array
     {
         return $this->users->getValues();
-    }
-
-    public function addUser(User $user)
-    {
-        $this->usersToChange[] = $user;
     }
 
     public function removeUser(User $user)
@@ -212,5 +205,25 @@ class ClassGroup implements IGroup
     {
         $this->createdAt = $createdAt;
         return $this;
+    }
+
+    public function addDeleteUser(User $user)
+    {
+        $this->deleteUsers->add($user);
+    }
+
+    public function removeDeleteUser(User $user)
+    {
+        $this->deleteUsers->removeElement($user);
+    }
+
+    public function addAddUser(User $user)
+    {
+        $this->addUsers->add($user);
+    }
+
+    public function removeAddUser(User $user)
+    {
+        $this->addUsers->removeElement($user);
     }
 }
