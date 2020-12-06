@@ -55,7 +55,7 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
                 ['edit', 'create'])) {
             /** @var ClassGroup $classGroup */
             $classGroup = $this->decorated->persist($data, $context);
-            $users = $classGroup->usersToChange;
+            $users = $classGroup->usersToAdd;
             $this->managerRegistery->getManager()->persist($classGroup);
             foreach ($users as $user) {
                 $user->setClassGroup($classGroup);

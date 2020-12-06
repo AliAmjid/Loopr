@@ -10,6 +10,6 @@ class GroupTest extends BaseTestCase
 {
     public function testCreateClassGroup()
     {
-
+        
     }
 }
