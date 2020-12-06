@@ -34,7 +34,7 @@ class Subject
 
     /** @var ClassGroup|null
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="subjects")
-     * @Groups({"read", "exposed", "subject:write", "group:read"})
+     * @Groups({"read", "exposed", "subject:write"})
      */
     private ?ClassGroup $classGroup = null;
 
