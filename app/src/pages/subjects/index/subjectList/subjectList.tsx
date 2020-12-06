@@ -34,6 +34,7 @@ const SubjectList: React.FC<SubjectListProps> = props => {
           primary: subject.name,
           onValueChange: value =>
             props.onSubjectUpdate({ id: subject.id, name: value }),
+          onClick: () => props.onSelectedSubjectChange(subject.id),
         }))}
         bottomAction={{
           icon: <AddIcon />,

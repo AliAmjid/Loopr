@@ -22,6 +22,7 @@ export interface SubjectListProps {
   addLoading: boolean;
   onSubjectAdd: (args: AddSubjectArgs) => Promise<boolean>;
   onSubjectUpdate: (args: UpdateSubjectArgs) => Promise<boolean>;
+  onSelectedSubjectChange: (subject: string) => void;
 }
 
 export interface AddDialogProps {

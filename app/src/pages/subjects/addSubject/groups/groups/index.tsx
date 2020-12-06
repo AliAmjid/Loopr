@@ -4,6 +4,7 @@ import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
 
 import SUBJECTS_ADD_SUBJECT_GROUP_QUERY from 'pages/subjects/addSubject/queries/groups';
+import useAddSubjectState from 'pages/subjects/addSubject/state';
 
 import {
   SubjectsAddSubjectGroupQuery,
@@ -16,6 +17,11 @@ import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const GroupsIndex: React.FC = () => {
+  const { group, setGroup } = useAddSubjectState(state => ({
+    group: state.group,
+    setGroup: state.setGroup,
+  }));
+
   const client = useApolloClient();
 
   const { getPagination, setPagination } = usePagination();
@@ -54,7 +60,13 @@ const GroupsIndex: React.FC = () => {
       });
   };
 
-  return <GroupTable onGetGroups={getGroupsHandler} />;
+  return (
+    <GroupTable
+      selectedGroup={group}
+      onSelectedGroupChange={(group: string) => setGroup(group)}
+      onGetGroups={getGroupsHandler}
+    />
+  );
 };
 
 export default GroupsIndex;

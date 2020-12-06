@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface UserImportTableCreateUserMutation_createUser_user {
-  __typename: "createUserPayloadData";
+  __typename: "User";
   id: string;
 }
 
@@ -38,7 +38,7 @@ export interface UserImportTableCreateUserMutationVariables {
 // ====================================================
 
 export interface UserImportTableAclRolesQuery_aclRoles {
-  __typename: "AclRoleCollection";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -102,7 +102,7 @@ export interface WithPageMeUserQuery {
 // ====================================================
 
 export interface AclEditRoleUpdateRole_updateAclRole_aclRole {
-  __typename: "AclRoleItem";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -139,7 +139,7 @@ export interface AclEditRoleUpdateRoleVariables {
 // ====================================================
 
 export interface AclEditRoleAclRole_aclRole {
-  __typename: "AclRoleItem";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -167,12 +167,12 @@ export interface AclEditRoleAclRoleVariables {
 // ====================================================
 
 export interface AclCreateAclRole_createAclRole_aclRole_resources {
-  __typename: "AclResourceItem";
+  __typename: "AclResource";
   id: string;
 }
 
 export interface AclCreateAclRole_createAclRole_aclRole {
-  __typename: "AclRoleItem";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -212,12 +212,12 @@ export interface AclCreateAclRoleVariables {
 // ====================================================
 
 export interface AclUpdateAclMutation_updateAclRole_aclRole_resources {
-  __typename: "AclResourceItem";
+  __typename: "AclResource";
   id: string;
 }
 
 export interface AclUpdateAclMutation_updateAclRole_aclRole {
-  __typename: "AclRoleItem";
+  __typename: "AclRole";
   id: string;
   /**
    * Must be an array IRIs (acl_resources/<uuid>) of existing resources
@@ -252,18 +252,18 @@ export interface AclUpdateAclMutationVariables {
 // ====================================================
 
 export interface AclTableQuery_aclResources {
-  __typename: "AclResourceCollection";
+  __typename: "AclResource";
   id: string;
   name: string;
 }
 
 export interface AclTableQuery_aclRoles_resources {
-  __typename: "AclResourceCollection";
+  __typename: "AclResource";
   id: string;
 }
 
 export interface AclTableQuery_aclRoles {
-  __typename: "AclRoleCollection";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -292,7 +292,7 @@ export interface AclTableQuery {
 // ====================================================
 
 export interface ClassGroupsAddClassGroupMutation_createClassGroup_classGroup {
-  __typename: "createClassGroupPayloadData";
+  __typename: "ClassGroup";
   id: string;
 }
 
@@ -322,21 +322,21 @@ export interface ClassGroupsAddClassGroupMutationVariables {
 // ====================================================
 
 export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup_teacher {
-  __typename: "updateUserNestedPayload";
+  __typename: "User";
   id: string;
   /**
    * email of user
    */
-  email: string | null;
-  firstname: string | null;
-  lastname: string | null;
+  email: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup {
-  __typename: "updateClassGroupPayloadData";
+  __typename: "ClassGroup";
   id: string;
-  year: number | null;
-  section: string | null;
+  year: number;
+  section: string;
   /**
    * Teacher needs to be user with resource GROUP_TEACHER
    */
@@ -399,7 +399,7 @@ export interface ClassGroupsClassGroupsQuery {
 // ====================================================
 
 export interface ClassGroupsClassGroupTeacher_classGroup_teacher {
-  __typename: "UserItem";
+  __typename: "User";
   id: string;
   /**
    * email of user
@@ -435,7 +435,7 @@ export interface ClassGroupsClassGroupTeacherVariables {
 // ====================================================
 
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
-  __typename: "UserItem";
+  __typename: "User";
   id: string;
   /**
    * email of user
@@ -446,13 +446,13 @@ export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
 }
 
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges {
-  __typename: "UserItemEdge";
+  __typename: "UserEdge";
   node: ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node | null;
   cursor: string;
 }
 
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users {
-  __typename: "UserItemConnection";
+  __typename: "UserConnection";
   edges: (ClassGroupsClassGroupUsersQuery_classGroup_users_edges | null)[] | null;
   totalCount: number;
 }
@@ -485,7 +485,7 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
 // ====================================================
 
 export interface ClassGroupsUsersQuery_users_edges_node {
-  __typename: "UserCollection";
+  __typename: "User";
   id: string;
   /**
    * email of user
@@ -496,13 +496,13 @@ export interface ClassGroupsUsersQuery_users_edges_node {
 }
 
 export interface ClassGroupsUsersQuery_users_edges {
-  __typename: "UserCollectionEdge";
+  __typename: "UserEdge";
   node: ClassGroupsUsersQuery_users_edges_node | null;
   cursor: string;
 }
 
 export interface ClassGroupsUsersQuery_users {
-  __typename: "UserCollectionConnection";
+  __typename: "UserConnection";
   edges: (ClassGroupsUsersQuery_users_edges | null)[] | null;
   totalCount: number;
 }
@@ -528,7 +528,7 @@ export interface ClassGroupsUsersQueryVariables {
 // ====================================================
 
 export interface GroupsAddGroupMutation_createGroup_group {
-  __typename: "createGroupPayloadData";
+  __typename: "Group";
   id: string;
 }
 
@@ -558,9 +558,9 @@ export interface GroupsAddGroupMutationVariables {
 // ====================================================
 
 export interface GroupsUpdateGroupMutation_updateGroup_group {
-  __typename: "updateGroupPayloadData";
+  __typename: "Group";
   id: string;
-  section: string | null;
+  section: string;
 }
 
 export interface GroupsUpdateGroupMutation_updateGroup {
@@ -589,26 +589,26 @@ export interface GroupsUpdateGroupMutationVariables {
 // ====================================================
 
 export interface GroupsGroupQuery_group_users_edges_node {
-  __typename: "UserItem";
+  __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
 export interface GroupsGroupQuery_group_users_edges {
-  __typename: "UserItemEdge";
+  __typename: "UserEdge";
   node: GroupsGroupQuery_group_users_edges_node | null;
   cursor: string;
 }
 
 export interface GroupsGroupQuery_group_users {
-  __typename: "UserItemConnection";
+  __typename: "UserConnection";
   edges: (GroupsGroupQuery_group_users_edges | null)[] | null;
   totalCount: number;
 }
 
 export interface GroupsGroupQuery_group {
-  __typename: "GroupItem";
+  __typename: "Group";
   id: string;
   users: GroupsGroupQuery_group_users | null;
 }
@@ -635,18 +635,18 @@ export interface GroupsGroupQueryVariables {
 // ====================================================
 
 export interface GroupsGroupsQuery_groups_edges_node {
-  __typename: "GroupCollection";
+  __typename: "Group";
   id: string;
   section: string;
 }
 
 export interface GroupsGroupsQuery_groups_edges {
-  __typename: "GroupCollectionEdge";
+  __typename: "GroupEdge";
   node: GroupsGroupsQuery_groups_edges_node | null;
 }
 
 export interface GroupsGroupsQuery_groups {
-  __typename: "GroupCollectionConnection";
+  __typename: "GroupConnection";
   edges: (GroupsGroupsQuery_groups_edges | null)[] | null;
 }
 
@@ -664,20 +664,20 @@ export interface GroupsGroupsQuery {
 // ====================================================
 
 export interface GroupsUsersQuery_users_edges_node {
-  __typename: "UserCollection";
+  __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
 export interface GroupsUsersQuery_users_edges {
-  __typename: "UserCollectionEdge";
+  __typename: "UserEdge";
   node: GroupsUsersQuery_users_edges_node | null;
   cursor: string;
 }
 
 export interface GroupsUsersQuery_users {
-  __typename: "UserCollectionConnection";
+  __typename: "UserConnection";
   edges: (GroupsUsersQuery_users_edges | null)[] | null;
   totalCount: number;
 }
@@ -749,7 +749,7 @@ export interface LoginMeUserQuery {
 // ====================================================
 
 export interface ProfileChangePassword_changePasswordUser_user {
-  __typename: "UserItem";
+  __typename: "User";
   id: string;
 }
 
@@ -811,11 +811,41 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsAddSubjectTypeAddMutation
+// ====================================================
+
+export interface SubjectsAddSubjectTypeAddMutation_createSubjectType_subjectType {
+  __typename: "SubjectType";
+  id: string;
+}
+
+export interface SubjectsAddSubjectTypeAddMutation_createSubjectType {
+  __typename: "createSubjectTypePayload";
+  subjectType: SubjectsAddSubjectTypeAddMutation_createSubjectType_subjectType | null;
+}
+
+export interface SubjectsAddSubjectTypeAddMutation {
+  /**
+   * Creates a SubjectType.
+   */
+  createSubjectType: SubjectsAddSubjectTypeAddMutation_createSubjectType | null;
+}
+
+export interface SubjectsAddSubjectTypeAddMutationVariables {
+  input: createSubjectTypeInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SubjectsAddSubjectClassGroupsQuery
 // ====================================================
 
 export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node_teacher {
-  __typename: "UserItem";
+  __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
@@ -865,19 +895,19 @@ export interface SubjectsAddSubjectClassGroupsQueryVariables {
 // ====================================================
 
 export interface SubjectsAddSubjectGroupQuery_groups_edges_node {
-  __typename: "GroupCollection";
+  __typename: "Group";
   id: string;
   section: string;
 }
 
 export interface SubjectsAddSubjectGroupQuery_groups_edges {
-  __typename: "GroupCollectionEdge";
+  __typename: "GroupEdge";
   node: SubjectsAddSubjectGroupQuery_groups_edges_node | null;
   cursor: string;
 }
 
 export interface SubjectsAddSubjectGroupQuery_groups {
-  __typename: "GroupCollectionConnection";
+  __typename: "GroupConnection";
   edges: (SubjectsAddSubjectGroupQuery_groups_edges | null)[] | null;
   totalCount: number;
 }
@@ -899,11 +929,120 @@ export interface SubjectsAddSubjectGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: SubjectsAddSubjectSummaryClassGroupQuery
+// ====================================================
+
+export interface SubjectsAddSubjectSummaryClassGroupQuery_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface SubjectsAddSubjectSummaryClassGroupQuery_user {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsAddSubjectSummaryClassGroupQuery {
+  classGroup: SubjectsAddSubjectSummaryClassGroupQuery_classGroup | null;
+  user: SubjectsAddSubjectSummaryClassGroupQuery_user | null;
+}
+
+export interface SubjectsAddSubjectSummaryClassGroupQueryVariables {
+  classGroup: string;
+  teacher: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsAddSubjectSummaryGroupQuery
+// ====================================================
+
+export interface SubjectsAddSubjectSummaryGroupQuery_group {
+  __typename: "Group";
+  id: string;
+  section: string;
+}
+
+export interface SubjectsAddSubjectSummaryGroupQuery_user {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsAddSubjectSummaryGroupQuery {
+  group: SubjectsAddSubjectSummaryGroupQuery_group | null;
+  user: SubjectsAddSubjectSummaryGroupQuery_user | null;
+}
+
+export interface SubjectsAddSubjectSummaryGroupQueryVariables {
+  group: string;
+  teacher: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsAddSubjectTeacherQuery
+// ====================================================
+
+export interface SubjectsAddSubjectTeacherQuery_users_edges_node {
+  __typename: "User";
+  id: string;
+  /**
+   * email of user
+   */
+  email: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsAddSubjectTeacherQuery_users_edges {
+  __typename: "UserEdge";
+  node: SubjectsAddSubjectTeacherQuery_users_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsAddSubjectTeacherQuery_users {
+  __typename: "UserConnection";
+  edges: (SubjectsAddSubjectTeacherQuery_users_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsAddSubjectTeacherQuery {
+  users: SubjectsAddSubjectTeacherQuery_users | null;
+}
+
+export interface SubjectsAddSubjectTeacherQueryVariables {
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+  resourceName?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsAddSubjectTypeMutation
 // ====================================================
 
 export interface SubjectsAddSubjectTypeMutation_createSubjectType_subjectType {
-  __typename: "createSubjectTypePayloadData";
+  __typename: "SubjectType";
   id: string;
 }
 
@@ -933,9 +1072,9 @@ export interface SubjectsAddSubjectTypeMutationVariables {
 // ====================================================
 
 export interface SubjectsUpdateSubjectTypeMutation_updateSubjectType_subjectType {
-  __typename: "updateSubjectTypePayloadData";
+  __typename: "SubjectType";
   id: string;
-  name: string | null;
+  name: string;
 }
 
 export interface SubjectsUpdateSubjectTypeMutation_updateSubjectType {
@@ -966,7 +1105,7 @@ export interface SubjectsUpdateSubjectTypeMutationVariables {
 export interface SubjectsSubjectTypesQuery_subjectTypes_edges_node {
   __typename: "SubjectType";
   id: string;
-  name: string | null;
+  name: string;
 }
 
 export interface SubjectsSubjectTypesQuery_subjectTypes_edges {
@@ -993,7 +1132,7 @@ export interface SubjectsSubjectTypesQuery {
 // ====================================================
 
 export interface UsersAddCsvCreateUserMutation_createUser_user {
-  __typename: "createUserPayloadData";
+  __typename: "User";
   id: string;
 }
 
@@ -1023,7 +1162,7 @@ export interface UsersAddCsvCreateUserMutationVariables {
 // ====================================================
 
 export interface UsersAddManualCreateUserMutation_createUser_user {
-  __typename: "createUserPayloadData";
+  __typename: "User";
   id: string;
 }
 
@@ -1053,25 +1192,25 @@ export interface UsersAddManualCreateUserMutationVariables {
 // ====================================================
 
 export interface UsersAddManualUpdateUser_updateUser_user_role {
-  __typename: "updateAclRoleNestedPayload";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
    * Must start with 'ROLE_' and name cant be longer than 20 letters.
    * (regex: ^ROLE_[A-Z]{1,20}$/m)
    */
-  name: string | null;
+  name: string;
 }
 
 export interface UsersAddManualUpdateUser_updateUser_user {
-  __typename: "updateUserPayloadData";
-  firstname: string | null;
-  lastname: string | null;
+  __typename: "User";
+  firstname: string;
+  lastname: string;
   /**
    * email of user
    */
-  email: string | null;
-  role: UsersAddManualUpdateUser_updateUser_user_role | null;
+  email: string;
+  role: UsersAddManualUpdateUser_updateUser_user_role;
 }
 
 export interface UsersAddManualUpdateUser_updateUser {
@@ -1100,7 +1239,7 @@ export interface UsersAddManualUpdateUserVariables {
 // ====================================================
 
 export interface UsersAddManualAclRolesQuery_aclRoles {
-  __typename: "AclRoleCollection";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -1124,7 +1263,7 @@ export interface UsersAddManualAclRolesQuery {
 // ====================================================
 
 export interface UsersUsersQuery_users_edges_node_role {
-  __typename: "AclRoleCollection";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -1135,7 +1274,7 @@ export interface UsersUsersQuery_users_edges_node_role {
 }
 
 export interface UsersUsersQuery_users_edges_node {
-  __typename: "UserCollection";
+  __typename: "User";
   id: string;
   /**
    * email of user
@@ -1148,13 +1287,13 @@ export interface UsersUsersQuery_users_edges_node {
 }
 
 export interface UsersUsersQuery_users_edges {
-  __typename: "UserCollectionEdge";
+  __typename: "UserEdge";
   node: UsersUsersQuery_users_edges_node | null;
   cursor: string;
 }
 
 export interface UsersUsersQuery_users {
-  __typename: "UserCollectionConnection";
+  __typename: "UserConnection";
   edges: (UsersUsersQuery_users_edges | null)[] | null;
   totalCount: number;
 }
@@ -1183,26 +1322,26 @@ export interface UsersUsersQueryVariables {
 // ====================================================
 
 export interface UsersUserDetailUpdateUserMutation_updateUser_user_role {
-  __typename: "updateAclRoleNestedPayload";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
    * Must start with 'ROLE_' and name cant be longer than 20 letters.
    * (regex: ^ROLE_[A-Z]{1,20}$/m)
    */
-  name: string | null;
+  name: string;
 }
 
 export interface UsersUserDetailUpdateUserMutation_updateUser_user {
-  __typename: "updateUserPayloadData";
+  __typename: "User";
   id: string;
   /**
    * email of user
    */
-  email: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  role: UsersUserDetailUpdateUserMutation_updateUser_user_role | null;
+  email: string;
+  firstname: string;
+  lastname: string;
+  role: UsersUserDetailUpdateUserMutation_updateUser_user_role;
 }
 
 export interface UsersUserDetailUpdateUserMutation_updateUser {
@@ -1231,7 +1370,7 @@ export interface UsersUserDetailUpdateUserMutationVariables {
 // ====================================================
 
 export interface UsersUserDetailUserQuery_user_role {
-  __typename: "AclRoleItem";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -1242,7 +1381,7 @@ export interface UsersUserDetailUserQuery_user_role {
 }
 
 export interface UsersUserDetailUserQuery_user {
-  __typename: "UserItem";
+  __typename: "User";
   id: string;
   /**
    * email of user
@@ -1255,7 +1394,7 @@ export interface UsersUserDetailUserQuery_user {
 }
 
 export interface UsersUserDetailUserQuery_aclRoles {
-  __typename: "AclRoleCollection";
+  __typename: "AclRole";
   id: string;
   /**
    * Example format: ROLE_ADMIN.
@@ -1311,7 +1450,7 @@ export interface createGroupInput {
 
 export interface createSubjectTypeInput {
   clientMutationId?: string | null;
-  name?: string | null;
+  name: string;
 }
 
 export interface createUserInput {

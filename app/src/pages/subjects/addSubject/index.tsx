@@ -3,12 +3,14 @@ import React from 'react';
 import { Paper } from '@material-ui/core';
 
 import useAddSubjectState from 'pages/subjects/addSubject/state';
+import SummaryIndex from 'pages/subjects/addSubject/summary';
 
 import Stepper from 'components/Stepper';
 import withPage from 'components/withPage';
 
 import GroupsIndex from './groups';
 import addSubjectPageOptions from './pageOptions';
+import TeachersIndex from './teachers';
 
 const AddSubjectIndex: React.FC = () => {
   const { group, classGroup, teacher } = useAddSubjectState(state => ({
@@ -27,7 +29,18 @@ const AddSubjectIndex: React.FC = () => {
             component: <GroupsIndex />,
             nextActive: group !== undefined || classGroup !== undefined,
           },
-          { index: 1, label: 'B', component: <>ahoj</>, nextActive: true },
+          {
+            index: 1,
+            label: 'Teacher',
+            component: <TeachersIndex />,
+            nextActive: teacher !== undefined,
+          },
+          {
+            index: 2,
+            label: 'Summary',
+            component: <SummaryIndex />,
+            nextActive: false,
+          },
         ]}
       />
     </Paper>

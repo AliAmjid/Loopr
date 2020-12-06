@@ -1,25 +1,15 @@
 import React from 'react';
 
-import { fade, useTheme } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { Column, Query } from 'material-table';
 
 import MaterialTable from 'lib/material-table';
-
-import useAddSubjectState from 'pages/subjects/addSubject/state';
+import useSelectedBackground from 'lib/material-table/useSelectedBackground';
 
 import { Group, GroupTableProps } from '../types';
 
 const GroupTable: React.FC<GroupTableProps> = props => {
-  const theme = useTheme();
-  const { group, classGroup, setGroup, setClassGroup } = useAddSubjectState(
-    state => ({
-      group: state.group,
-      classGroup: state.classGroup,
-      setGroup: state.setGroup,
-      setClassGroup: state.setClassGroup,
-    }),
-  );
+  const selectedBackground = useSelectedBackground();
 
   const columns: Column<Group>[] = [{ title: 'Name', field: 'section' }];
   if (props.classGroup) {
@@ -48,8 +38,8 @@ const GroupTable: React.FC<GroupTableProps> = props => {
       }
       options={{
         rowStyle: (row: Group) => {
-          if (row.id === group || row.id === classGroup) {
-            return { backgroundColor: fade(theme.palette.primary.main, 0.3) };
+          if (row.id === props.selectedGroup) {
+            return { backgroundColor: selectedBackground };
           }
 
           return {};
@@ -61,11 +51,8 @@ const GroupTable: React.FC<GroupTableProps> = props => {
           tooltip: 'select',
           onClick: (_, row) => {
             row = row as Group;
-            if (props.classGroup) {
-              setClassGroup(row.id);
-            } else {
-              setGroup(row.id);
-            }
+
+            props.onSelectedGroupChange(row.id);
           },
         },
       ]}

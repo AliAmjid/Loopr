@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
+const DefaultWrapper: React.FC = props => <>{props.children}</>;
 const Tabs: React.FC<TabsProps> = props => {
   const classes = useStyles();
 
@@ -19,7 +20,7 @@ const Tabs: React.FC<TabsProps> = props => {
     <Tab key={tab.id} value={tab.id} label={tab.label} />
   ));
 
-  let Wrapper: React.FC = props => <>{props.children}</>;
+  let Wrapper = DefaultWrapper;
   if (props.TabWrapper) {
     Wrapper = props.TabWrapper;
   }

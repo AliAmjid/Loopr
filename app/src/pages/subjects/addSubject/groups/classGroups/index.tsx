@@ -3,6 +3,8 @@ import React from 'react';
 import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
 
+import useAddSubjectState from 'pages/subjects/addSubject/state';
+
 import {
   SubjectsAddSubjectClassGroupsQuery,
   SubjectsAddSubjectClassGroupsQueryVariables,
@@ -15,6 +17,11 @@ import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const ClassGroups: React.FC = () => {
+  const { classGroup, setClassGroup } = useAddSubjectState(state => ({
+    classGroup: state.classGroup,
+    setClassGroup: state.setClassGroup,
+  }));
+
   const client = useApolloClient();
 
   const { getPagination, setPagination } = usePagination();
@@ -52,7 +59,16 @@ const ClassGroups: React.FC = () => {
       });
   };
 
-  return <GroupTable onGetGroups={getGroupsHandler} classGroup />;
+  return (
+    <GroupTable
+      selectedGroup={classGroup}
+      classGroup
+      onSelectedGroupChange={(classGroup: string) => {
+        setClassGroup(classGroup);
+      }}
+      onGetGroups={getGroupsHandler}
+    />
+  );
 };
 
 export default ClassGroups;

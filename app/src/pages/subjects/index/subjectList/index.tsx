@@ -5,6 +5,7 @@ import { useSnackbar } from 'notistack';
 
 import SUBJECTS_ADD_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/addSubjectType';
 import SUBJECTS_UPDATE_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/updateSubjectType';
+import useSubjectsState from 'pages/subjects/index/state';
 
 import {
   SubjectsAddSubjectTypeMutation,
@@ -20,6 +21,10 @@ import SubjectList from './subjectList';
 import { AddSubjectArgs, Subjects, UpdateSubjectArgs } from './types';
 
 const SubjectListIndex: React.FC = () => {
+  const { setSelectedSubject } = useSubjectsState(state => ({
+    setSelectedSubject: state.setSelectedSubject,
+  }));
+
   const { data: subjectTypesData, loading: subjectTypesLoading } = useQuery<
     SubjectsSubjectTypesQuery
   >(SUBJECTS_SUBJECT_TYPES_QUERY);
@@ -84,6 +89,7 @@ const SubjectListIndex: React.FC = () => {
       subjects={subjects}
       onSubjectAdd={subjectAddHandler}
       onSubjectUpdate={subjectUpdateHandler}
+      onSelectedSubjectChange={(subject: string) => setSelectedSubject(subject)}
     />
   );
 };

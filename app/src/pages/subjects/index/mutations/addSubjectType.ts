@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const SUBJECTS_ADD_SUBJECT_TYPE_MUTATION = gql`
+const SUBJECTS_ADD_SUBJECT_MUTATION = gql`
   mutation SubjectsAddSubjectTypeMutation($input: createSubjectTypeInput!) {
     createSubjectType(input: $input) {
       subjectType {
@@ -10,4 +10,4 @@ const SUBJECTS_ADD_SUBJECT_TYPE_MUTATION = gql`
   }
 `;
 
-export default SUBJECTS_ADD_SUBJECT_TYPE_MUTATION;
+export default SUBJECTS_ADD_SUBJECT_MUTATION;

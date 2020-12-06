@@ -18,6 +18,9 @@ const routes = {
   profile: {
     index: '/profile',
   },
+  subjects: {
+    index: '/subjects',
+  },
 };
 
 export default routes;
