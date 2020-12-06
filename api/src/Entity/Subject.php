@@ -63,11 +63,15 @@ class Subject
         $this->group = $group;
         $this->classGroup = $classGroup;
         $this->teacher = $teacher;
-        if (!$teacher->getRole()->hasResource(AclResourceEnum::GROUP_TEACHER)) {
+        if (!$teacher->getRole()->hasResource(AclResourceEnum::SUBJECT_TEACHER)) {
             throw new ClientError(ClientErrorType::USER_IS_NOT_TEACHER);
         }
 
         if ($classGroup == null && $group == null) {
+            throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
+        }
+
+        if ($classGroup && $group) {
             throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
         }
     }
