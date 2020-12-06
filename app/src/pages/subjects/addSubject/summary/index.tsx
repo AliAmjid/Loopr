@@ -6,11 +6,11 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
-import SUBJECTS_ADD_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/addSubjectType';
+import SUBJECTS_ADD_SUBJECT_ADD_MUTATION from 'pages/subjects/addSubject/mutations/add';
 
 import {
-  SubjectsAddSubjectMutation,
-  SubjectsAddSubjectMutationVariables,
+  SubjectsAddSubjectAddMutation,
+  SubjectsAddSubjectAddMutationVariables,
   SubjectsAddSubjectSummaryClassGroupQuery,
   SubjectsAddSubjectSummaryClassGroupQueryVariables,
   SubjectsAddSubjectSummaryGroupQuery,
@@ -38,9 +38,9 @@ const SummaryIndex: React.FC = () => {
   >(undefined);
   const client = useApolloClient();
   const [addSubjectType] = useMutation<
-    SubjectsAddSubjectMutation,
-    SubjectsAddSubjectMutationVariables
-  >(SUBJECTS_ADD_SUBJECT_TYPE_MUTATION);
+    SubjectsAddSubjectAddMutation,
+    SubjectsAddSubjectAddMutationVariables
+  >(SUBJECTS_ADD_SUBJECT_ADD_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
@@ -76,7 +76,7 @@ const SummaryIndex: React.FC = () => {
     }
   }, [teacher, group, classGroup]);
 
-  const submitHandler = () => {
+  const submitHandler = (): void => {
     setLoading(true);
     addSubjectType({
       variables: {
@@ -92,6 +92,7 @@ const SummaryIndex: React.FC = () => {
         router.push(routes.subjects.index);
       })
       .catch(() => {
+        setLoading(false);
         enqueueSnackbar('E', { variant: 'error' });
       });
   };

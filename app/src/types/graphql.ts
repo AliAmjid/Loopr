@@ -238,8 +238,7 @@ export interface AclUpdateAclMutation {
 }
 
 export interface AclUpdateAclMutationVariables {
-  id: string;
-  resources: string[];
+  input: updateAclRoleInput;
 }
 
 /* tslint:disable */
@@ -811,28 +810,28 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: SubjectsAddSubjectTypeAddMutation
+// GraphQL mutation operation: SubjectsAddSubjectAddMutation
 // ====================================================
 
-export interface SubjectsAddSubjectTypeAddMutation_createSubjectType_subjectType {
-  __typename: "SubjectType";
+export interface SubjectsAddSubjectAddMutation_createSubject_subject {
+  __typename: "Subject";
   id: string;
 }
 
-export interface SubjectsAddSubjectTypeAddMutation_createSubjectType {
-  __typename: "createSubjectTypePayload";
-  subjectType: SubjectsAddSubjectTypeAddMutation_createSubjectType_subjectType | null;
+export interface SubjectsAddSubjectAddMutation_createSubject {
+  __typename: "createSubjectPayload";
+  subject: SubjectsAddSubjectAddMutation_createSubject_subject | null;
 }
 
-export interface SubjectsAddSubjectTypeAddMutation {
+export interface SubjectsAddSubjectAddMutation {
   /**
-   * Creates a SubjectType.
+   * Creates a Subject.
    */
-  createSubjectType: SubjectsAddSubjectTypeAddMutation_createSubjectType | null;
+  createSubject: SubjectsAddSubjectAddMutation_createSubject | null;
 }
 
-export interface SubjectsAddSubjectTypeAddMutationVariables {
-  input: createSubjectTypeInput;
+export interface SubjectsAddSubjectAddMutationVariables {
+  input: createSubjectInput;
 }
 
 /* tslint:disable */
@@ -1448,6 +1447,14 @@ export interface createGroupInput {
   users?: (string | null)[] | null;
 }
 
+export interface createSubjectInput {
+  classGroup?: string | null;
+  clientMutationId?: string | null;
+  group?: string | null;
+  subjectType?: string | null;
+  teacher?: string | null;
+}
+
 export interface createSubjectTypeInput {
   clientMutationId?: string | null;
   name: string;
@@ -1460,6 +1467,12 @@ export interface createUserInput {
   firstname: string;
   lastname: string;
   role: string;
+}
+
+export interface updateAclRoleInput {
+  clientMutationId?: string | null;
+  id: string;
+  name?: string | null;
 }
 
 export interface updateClassGroupInput {

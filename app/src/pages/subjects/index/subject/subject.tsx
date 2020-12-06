@@ -28,7 +28,7 @@ const Subject: React.FC<SubjectProps> = props => {
         data={[]}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
-        <Button color="primary" variant="contained">
+        <Button color="primary" variant="contained" onClick={props.onAddClick}>
           Add
         </Button>
       </Box>

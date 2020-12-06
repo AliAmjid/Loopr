@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 const SUBJECTS_ADD_SUBJECT_ADD_MUTATION = gql`
-  mutation SubjectsAddSubjectTypeAddMutation($input: createSubjectTypeInput!) {
-    createSubjectType(input: $input) {
-      subjectType {
+  mutation SubjectsAddSubjectAddMutation($input: createSubjectInput!) {
+    createSubject(input: $input) {
+      subject {
         id
       }
     }
