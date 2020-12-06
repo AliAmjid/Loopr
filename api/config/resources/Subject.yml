@@ -14,12 +14,12 @@ App\Entity\Subject:
             output: false
     graphql:
         create:
-            security_message: 'r: GROUP_CREATE'
-            security: "is_granted('GROUP_CREATE')"
+            security_message: 'r: GROUP_EDIT'
+            security: "is_granted('GROUP_EDIT')"
         
         edit:
-            security_message: 'r: GROUP_CREATE'
-            security: "is_granted('GROUP_CREATE')"
+            security_message: 'r: GROUP_EDIT'
+            security: "is_granted('GROUP_EDIT')"
 
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
