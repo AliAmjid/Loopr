@@ -16,6 +16,17 @@ const navigationList: NavigationList = [
   },
   { label: 'users.index', icon: <GroupIcon />, href: routes.users.index },
   { label: 'acl.index', icon: <AclIcon />, href: routes.acl.index },
+  { label: 'groups.index', icon: <AclIcon />, href: routes.groups.index },
+  {
+    label: 'classGroups.index',
+    icon: <AclIcon />,
+    href: routes.classGroups.index,
+  },
+  {
+    label: 'subjects.index',
+    icon: <AclIcon />,
+    href: routes.subjects.index,
+  },
 ];
 
 export default navigationList;

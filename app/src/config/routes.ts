@@ -18,6 +18,12 @@ const routes = {
   profile: {
     index: '/profile',
   },
+  groups: {
+    index: '/groups',
+  },
+  classGroups: {
+    index: '/classGroups',
+  },
   subjects: {
     index: '/subjects',
     addSubject: '/subjects/addSubject',
