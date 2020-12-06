@@ -4,6 +4,10 @@ namespace App\Serializer\Normalizer;
 
 use App\Entity\User;
 use App\Security\Voter\IsUserTeacherVoter;
+use Doctrine\Common\Proxy\Proxy;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
@@ -19,15 +23,18 @@ class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerA
 
     private ?User $user;
     private Security $security;
+    private ManagerRegistry $managerRegistry;
 
     public function __construct(
         ObjectNormalizer $normalizer,
         Security $security,
+        ManagerRegistry $managerRegistry,
         ?UserInterface $user = null
     ) {
         $this->normalizer = $normalizer;
         $this->user = $user;
         $this->security = $security;
+        $this->managerRegistry = $managerRegistry;
     }
 
     public function normalize($object, string $format = null, array $context = []): array
@@ -61,6 +68,17 @@ class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerA
         if (isset($context[self::ALREADY_CALLED])) {
             return false;
         }
-        return is_object($data);
+        return $this->isEntity($this->managerRegistry->getManager(), $data);
+    }
+
+    private function isEntity(ObjectManager $em, $class): bool
+    {
+        if (is_object($class)) {
+            $class = ($class instanceof Proxy)
+                ? get_parent_class($class)
+                : get_class($class);
+            return !$em->getMetadataFactory()->isTransient($class);
+        }
+        return false;
     }
 }

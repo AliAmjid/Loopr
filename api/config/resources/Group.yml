@@ -22,7 +22,6 @@ App\Entity\Group:
             security_message: 'r: GROUP_EDIT'
         delete:
             security: "is_granted('GROUP_DELETE')"
-
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
