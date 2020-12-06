@@ -10,7 +10,6 @@ class AclResourceEnum
     //To have same uuid everytime
     const PROP_UUIDS = [
         self::USER_LOGGED => '173a348e-12f6-4da4-ab8e-b984cee25eaa',
-        self::ACL_ROLE_CREATE => 'cbfd4f00-35fb-4a6e-8c96-35ad7b9aefbe',
         self::ACL_ROLE_EDIT => '8a146009-deca-4625-b590-e44c2283c8d3',
         self::USER_SHOW_ALL => '717f72f6-6b6c-4033-aba3-130976fa3620',
         self::USER_EDIT => 'c1f52e13-1864-42d1-a095-dcc42eefb7a3',
@@ -29,9 +28,6 @@ class AclResourceEnum
 
     const PROP_DEPENDENT_ON = [
         self::USER_LOGGED => [],
-        self::ACL_ROLE_CREATE => [
-            self::USER_LOGGED
-        ],
         self::ACL_ROLE_EDIT => [
             self::USER_LOGGED
         ],
@@ -67,7 +63,6 @@ class AclResourceEnum
 
         'ROLE_ADMIN' => [
             self::USER_LOGGED,
-            self::ACL_ROLE_CREATE,
             self::ACL_ROLE_EDIT,
             self::USER_SHOW_ALL,
             self::USER_EDIT,
