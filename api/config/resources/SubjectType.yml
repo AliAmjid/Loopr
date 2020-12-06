@@ -28,4 +28,4 @@ App\Entity\SubjectType:
             security: "is_granted('SUBJECT_TYPE_SHOW_ALL')"
 
         delete:
-            security: "is_granted('SUBJECT_TYPE_SHOW_ALL')"
+            security: "is_granted('SUBJECT_TYPE_DELETE')"
