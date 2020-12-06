@@ -29,8 +29,8 @@ class SubjectType
 
 
     /** @var Collection
-     * @Groups({"read", "exposed"})
-     * @ORM\OneToMany(targetEntity="Subject", mappedBy="subject")
+     * @Groups({"read:SUBJECT_SHOW_ALL", "exposed"})
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="subjectType")
      */
     private Collection $subjects;
 
@@ -55,5 +55,13 @@ class SubjectType
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
     }
 }
