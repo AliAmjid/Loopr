@@ -14,7 +14,7 @@ import { ClassGroupListProps } from './types';
 const ClassGroupList: React.FC<ClassGroupListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
   const [editId, setEditId] = useState<string | undefined>(undefined);
-  const [deleting, setDeleting] = useState<string | undefined>(undefined);
+  const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
 
   const editingClassGroup = props.classGroups.find(
     classGroup => classGroup.id === editId,
@@ -23,7 +23,8 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
   return (
     <>
       <SimpleDialog
-        open={Boolean(deleting)}
+        open={Boolean(deleteId)}
+        loading={props.deleteLoading}
         title="Sure??"
         content={<Typography>Irreversible</Typography>}
         actions={[
@@ -31,7 +32,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
             key={0}
             color="primary"
             onClick={() => {
-              setDeleting(undefined);
+              setDeleteId(undefined);
             }}
           >
             Cancel
@@ -41,9 +42,9 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              props.onDelete(`${deleting}`).then(successful => {
+              props.onDelete(`${deleteId}`).then(successful => {
                 if (successful) {
-                  setDeleting(undefined);
+                  setDeleteId(undefined);
                 }
               });
             }}
@@ -104,7 +105,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
             <IconButton key={0} onClick={() => setEditId(classGroup.id)}>
               <EditIcon />
             </IconButton>,
-            <IconButton key={1} onClick={() => setDeleting(classGroup.id)}>
+            <IconButton key={1} onClick={() => setDeleteId(classGroup.id)}>
               <DeleteIcon />
             </IconButton>,
           ],

@@ -116,6 +116,7 @@ const GroupListIndex: React.FC = () => {
       groups={groups}
       onAdd={addHandler}
       groupsLoading={groupsLoading}
+      deleteLoading={deleteGroupLoading}
       addGroupLoading={addGroupLoading}
       onSelectedGroupChange={(group: string) => {
         setSelectedGroup(group);

@@ -1127,6 +1127,36 @@ export interface SubjectsAddSubjectTypeMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsDeleteSubjectTypeMutation
+// ====================================================
+
+export interface SubjectsDeleteSubjectTypeMutation_deleteSubjectType_subjectType {
+  __typename: "SubjectType";
+  id: string;
+}
+
+export interface SubjectsDeleteSubjectTypeMutation_deleteSubjectType {
+  __typename: "deleteSubjectTypePayload";
+  subjectType: SubjectsDeleteSubjectTypeMutation_deleteSubjectType_subjectType | null;
+}
+
+export interface SubjectsDeleteSubjectTypeMutation {
+  /**
+   * Deletes a SubjectType.
+   */
+  deleteSubjectType: SubjectsDeleteSubjectTypeMutation_deleteSubjectType | null;
+}
+
+export interface SubjectsDeleteSubjectTypeMutationVariables {
+  input: deleteSubjectTypeInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsUpdateSubjectTypeMutation
 // ====================================================
 
@@ -1601,6 +1631,11 @@ export interface deleteClassGroupInput {
 }
 
 export interface deleteGroupInput {
+  clientMutationId?: string | null;
+  id: string;
+}
+
+export interface deleteSubjectTypeInput {
   clientMutationId?: string | null;
   id: string;
 }

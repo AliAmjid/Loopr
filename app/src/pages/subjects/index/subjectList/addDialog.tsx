@@ -28,16 +28,17 @@ const AddDialog: React.FC<AddDialogProps> = props => {
             <TextField
               name="name"
               label="name"
+              fullWidth
               inputRef={register({ required: true })}
               error={errors.name !== undefined}
             />
           </DialogContent>
           <DialogActions>
-            <Button color="primary" type="submit">
-              Add
-            </Button>
-            <Button color="secondary" onClick={props.onClose}>
+            <Button color="primary" onClick={props.onClose}>
               Cancel
+            </Button>
+            <Button color="primary" variant="contained" type="submit">
+              Add
             </Button>
           </DialogActions>
         </form>

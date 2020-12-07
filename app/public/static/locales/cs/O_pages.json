@@ -13,5 +13,14 @@
   },
   "profile": {
     "index": "Profil"
+  },
+  "classGroups": {
+    "index": "Třídy"
+  },
+  "groups": {
+    "index": "Skupiny"
+  },
+  "subjects": {
+    "index": "Předměty"
   }
 }

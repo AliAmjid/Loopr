@@ -31,4 +31,5 @@ export interface SubjectProps {
   selectedSubject?: string;
   onAddClick: () => void;
   onGetSubjects: (args: GetSubjectsArgs) => GetSubjectsReturn;
+  onDelete: (subject: string) => Promise<boolean>;
 }

@@ -7,14 +7,20 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+
 import { SimpleDialogProps } from './types';
 
 const SimpleDialog: React.FC<SimpleDialogProps> = props => {
   return (
     <Dialog open={props.open} onClose={props.onClose}>
-      {props.title && <DialogTitle>{props.title}</DialogTitle>}
-      {props.content && <DialogContent>{props.content}</DialogContent>}
-      {props.actions && <DialogActions>{props.actions}</DialogActions>}
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={props.loading || false} />
+        {props.title && <DialogTitle>{props.title}</DialogTitle>}
+        {props.content && <DialogContent>{props.content}</DialogContent>}
+        {props.actions && <DialogActions>{props.actions}</DialogActions>}
+      </OverlayLoadingContainer>
     </Dialog>
   );
 };

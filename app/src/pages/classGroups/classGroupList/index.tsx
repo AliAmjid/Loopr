@@ -120,6 +120,7 @@ const ClassGroupListIndex: React.FC = () => {
       classGroupsLoading={classGroupLoading}
       updateClassGroupLoading={updateClassGroupLoading}
       addClassGroupLoading={addClassGroupLoading}
+      deleteLoading={deleteClassGroupLoading}
       onSelectedClassChange={(cl: string) => {
         setSelectedClassGroup(cl);
       }}

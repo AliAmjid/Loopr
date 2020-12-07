@@ -20,9 +20,11 @@ export interface SubjectListProps {
   loading: boolean;
   subjects: Subjects;
   addLoading: boolean;
+  deleteLoading: boolean;
   onSubjectAdd: (args: AddSubjectArgs) => Promise<boolean>;
   onSubjectUpdate: (args: UpdateSubjectArgs) => Promise<boolean>;
   onSelectedSubjectChange: (subject: string) => void;
+  onDelete: (subject: string) => Promise<boolean>;
 }
 
 export interface AddDialogProps {

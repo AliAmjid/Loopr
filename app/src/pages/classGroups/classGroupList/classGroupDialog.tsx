@@ -17,7 +17,7 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import { ClassGroupDialogFormValues, ClassGroupDialogProps } from './types';
 
 const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
-  const { handleSubmit, register, errors, setValue } = useForm<
+  const { handleSubmit, register, errors } = useForm<
     ClassGroupDialogFormValues
   >();
 
@@ -29,7 +29,7 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
     <Dialog open={props.open}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
-        <DialogTitle>Class add</DialogTitle>
+        <DialogTitle>{props.title}</DialogTitle>
         <form onSubmit={handleSubmit(submitHandler)}>
           <DialogContent>
             <Box pb={2}>

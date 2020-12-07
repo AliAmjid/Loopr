@@ -4,12 +4,15 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
 import SUBJECTS_ADD_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/addSubjectType';
+import SUBJECTS_DELETE_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/deleteSubjectType';
 import SUBJECTS_UPDATE_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/updateSubjectType';
 import useSubjectsState from 'pages/subjects/index/state';
 
 import {
   SubjectsAddSubjectTypeMutation,
   SubjectsAddSubjectTypeMutationVariables,
+  SubjectsDeleteSubjectTypeMutation,
+  SubjectsDeleteSubjectTypeMutationVariables,
   SubjectsSubjectTypesQuery,
   SubjectsUpdateSubjectTypeMutation,
   SubjectsUpdateSubjectTypeMutationVariables,
@@ -40,6 +43,16 @@ const SubjectListIndex: React.FC = () => {
     SubjectsUpdateSubjectTypeMutation,
     SubjectsUpdateSubjectTypeMutationVariables
   >(SUBJECTS_UPDATE_SUBJECT_TYPE_MUTATION, {
+    refetchQueries: ['SubjectsSubjectTypesQuery'],
+    awaitRefetchQueries: true,
+  });
+  const [
+    deleteSubjectType,
+    { loading: deleteSubjectTypeLoading },
+  ] = useMutation<
+    SubjectsDeleteSubjectTypeMutation,
+    SubjectsDeleteSubjectTypeMutationVariables
+  >(SUBJECTS_DELETE_SUBJECT_TYPE_MUTATION, {
     refetchQueries: ['SubjectsSubjectTypesQuery'],
     awaitRefetchQueries: true,
   });
@@ -82,14 +95,30 @@ const SubjectListIndex: React.FC = () => {
       });
   };
 
+  const deleteHandler = (subjectType: string): Promise<boolean> => {
+    return deleteSubjectType({ variables: { input: { id: subjectType } } })
+      .then(() => {
+        enqueueSnackbar('S', { variant: 'success' });
+
+        return true;
+      })
+      .catch(() => {
+        enqueueSnackbar('E', { variant: 'error' });
+
+        return false;
+      });
+  };
+
   return (
     <SubjectList
       loading={subjectTypesLoading}
       addLoading={addSubjectTypeLoading}
       subjects={subjects}
+      deleteLoading={deleteSubjectTypeLoading}
       onSubjectAdd={subjectAddHandler}
       onSubjectUpdate={subjectUpdateHandler}
       onSelectedSubjectChange={(subject: string) => setSelectedSubject(subject)}
+      onDelete={deleteHandler}
     />
   );
 };

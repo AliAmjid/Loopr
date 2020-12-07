@@ -13,12 +13,13 @@ import AddDialog from './addDialog';
 
 const GroupList: React.FC<GroupListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
-  const [deleting, setDeleting] = useState<string | undefined>(undefined);
+  const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
 
   return (
     <>
       <SimpleDialog
-        open={Boolean(deleting)}
+        open={Boolean(deleteId)}
+        loading={props.deleteLoading}
         title="Sure delete?"
         content={<Typography>Irreversible</Typography>}
         actions={[
@@ -26,7 +27,7 @@ const GroupList: React.FC<GroupListProps> = props => {
             key={0}
             color="primary"
             onClick={() => {
-              setDeleting(undefined);
+              setDeleteId(undefined);
             }}
           >
             Cancel
@@ -36,8 +37,8 @@ const GroupList: React.FC<GroupListProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              props.onDelete(`${deleting}`).then(successful => {
-                if (successful) setDeleting(undefined);
+              props.onDelete(`${deleteId}`).then(successful => {
+                if (successful) setDeleteId(undefined);
               });
             }}
           >
@@ -73,7 +74,7 @@ const GroupList: React.FC<GroupListProps> = props => {
             props.onUpdate({ id: group.id, section: value }),
           onClick: () => props.onSelectedGroupChange(group.id),
           additionalActions: [
-            <IconButton key={0} onClick={() => setDeleting(group.id)}>
+            <IconButton key={0} onClick={() => setDeleteId(group.id)}>
               <DeleteIcon />
             </IconButton>,
           ],

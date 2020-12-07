@@ -3,5 +3,6 @@ export interface SimpleDialogProps {
   title?: string;
   content?: JSX.Element;
   actions?: JSX.Element[];
+  loading?: boolean;
   onClose?: () => void;
 }

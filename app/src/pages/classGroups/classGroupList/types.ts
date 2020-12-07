@@ -27,6 +27,7 @@ export interface ClassGroupListProps {
   classGroupsLoading: boolean;
   addClassGroupLoading: boolean;
   updateClassGroupLoading: boolean;
+  deleteLoading: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedClassChange: (cl: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;

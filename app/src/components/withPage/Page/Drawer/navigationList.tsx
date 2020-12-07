@@ -27,12 +27,12 @@ const navigationList: NavigationList = [
     href: routes.acl.index,
     resources: aclPageResources,
   },
-  { label: 'groups.index', icon: <AclIcon />, href: routes.groups.index },
   {
     label: 'classGroups.index',
     icon: <AclIcon />,
     href: routes.classGroups.index,
   },
+  { label: 'groups.index', icon: <AclIcon />, href: routes.groups.index },
   {
     label: 'subjects.index',
     icon: <AclIcon />,

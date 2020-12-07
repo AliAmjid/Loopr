@@ -25,6 +25,7 @@ export interface GroupListProps {
   groups: Groups;
   groupsLoading: boolean;
   addGroupLoading: boolean;
+  deleteLoading: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;

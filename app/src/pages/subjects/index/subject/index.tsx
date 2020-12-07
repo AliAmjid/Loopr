@@ -85,6 +85,7 @@ const SubjectIndex: React.FC = () => {
       selectedSubject={selectedSubject}
       onAddClick={addClickHandler}
       onGetSubjects={getSubjectsHandler}
+      onDelete={() => Promise.resolve(true)}
     />
   );
 };

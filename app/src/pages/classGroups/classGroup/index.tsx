@@ -218,7 +218,7 @@ const ClassIndex: React.FC = () => {
 
   return (
     <ClassGroup
-      teacher={classGroupTeacherData?.classGroup?.teacher}
+      teacher={{ ...classGroupTeacherData?.classGroup?.teacher }}
       teacherLoading={classGroupTeacherLoading}
       selectedClassGroup={selectedClassGroup}
       onGetUsers={getUsersHandler}
