@@ -24,6 +24,10 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
   },
+  logo: {
+    maxHeight: '80%',
+    maxWidth: '80%',
+  },
 });
 
 const Drawer: React.FC<DrawerProps> = props => {
@@ -42,7 +46,7 @@ const Drawer: React.FC<DrawerProps> = props => {
           classes={{ paper: classes.drawerPaper }}
         >
           <Toolbar className={classes.logoToolbar}>
-            <SVGLogo height="auto" />
+            <SVGLogo className={classes.logo} height="auto" />
           </Toolbar>
           <Divider />
           <Navigation user={props.user} />

@@ -4,6 +4,9 @@ import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import CLASS_GROUPS_CLASS_GROUP_TEACHER from 'pages/classGroups/queries/classGroupTeacher';
 
 import {
@@ -32,6 +35,7 @@ import {
 } from './types';
 
 const ClassIndex: React.FC = () => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
   const { selectedClassGroup } = useClassGroupsState(state => ({
     selectedClassGroup: state.selectedClassGroup,
   }));
@@ -175,19 +179,23 @@ const ClassIndex: React.FC = () => {
       });
     }
   };
-
+  console.log(t('snackbars.studentEdit.success'));
   const submitHandler = (): Promise<boolean> => {
     if (selectedClassGroup) {
       return updateClassGroup({
         variables: { input: { id: selectedClassGroup, users: selected } },
       })
         .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
+          enqueueSnackbar(t('snackbars.studentEdit.success'), {
+            variant: 'success',
+          });
 
           return true;
         })
         .catch(() => {
-          enqueueSnackbar('E', { variant: 'error' });
+          enqueueSnackbar(t('snackbars.studentEdit.error'), {
+            variant: 'error',
+          });
 
           return false;
         });
@@ -202,12 +210,16 @@ const ClassIndex: React.FC = () => {
         variables: { input: { id: selectedClassGroup } },
       })
         .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
+          enqueueSnackbar(t('snackbars.teacherEdit.success'), {
+            variant: 'success',
+          });
 
           return true;
         })
         .catch(() => {
-          enqueueSnackbar('E', { variant: 'error' });
+          enqueueSnackbar(t('snackbars.teacherEdit.error'), {
+            variant: 'error',
+          });
 
           return false;
         });
