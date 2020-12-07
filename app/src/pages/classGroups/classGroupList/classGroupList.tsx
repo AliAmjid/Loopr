@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
-import { Button, IconButton, Typography } from '@material-ui/core';
+import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import SideList from 'components/SideList';
 import SimpleDialog from 'components/SimpleDialog';
@@ -12,6 +15,8 @@ import ClassGroupDialog from './classGroupDialog';
 import { ClassGroupListProps } from './types';
 
 const ClassGroupList: React.FC<ClassGroupListProps> = props => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
+
   const [addOpen, setAddOpen] = useState(false);
   const [editId, setEditId] = useState<string | undefined>(undefined);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
@@ -89,25 +94,30 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
         }}
       />
       <SideList
-        title="Classes"
+        title={t('listTitle')}
         loading={props.classGroupsLoading}
         bottomAction={{
           icon: <AddIcon />,
           onClick: () => {
             setAddOpen(true);
           },
+          tooltip: t('add'),
         }}
         items={props.classGroups.map(classGroup => ({
           id: classGroup.id,
           primary: classGroup?.section,
           secondary: `${classGroup?.year}`,
           additionalActions: [
-            <IconButton key={0} onClick={() => setEditId(classGroup.id)}>
-              <EditIcon />
-            </IconButton>,
-            <IconButton key={1} onClick={() => setDeleteId(classGroup.id)}>
-              <DeleteIcon />
-            </IconButton>,
+            <Tooltip key={0} title={`${t('edit')}`}>
+              <IconButton onClick={() => setEditId(classGroup.id)}>
+                <EditIcon />
+              </IconButton>
+            </Tooltip>,
+            <Tooltip key={1} title={`${t('delete')}`}>
+              <IconButton onClick={() => setDeleteId(classGroup.id)}>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>,
           ],
           onClick: () => props.onSelectedClassChange(classGroup.id),
         }))}

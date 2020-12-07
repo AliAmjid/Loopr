@@ -14,6 +14,7 @@ export interface SideListProps {
   bottomAction?: {
     icon: JSX.Element;
     onClick: MouseEventHandler<HTMLElement>;
+    tooltip?: string;
   };
 }
 

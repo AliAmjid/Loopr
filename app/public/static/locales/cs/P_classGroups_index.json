@@ -1,0 +1,31 @@
+{
+  "listTitle": "Třídy",
+  "students": "Studenti",
+  "teacher": "Učitel",
+  "nothingSelected": "Není vybrána žádna třída",
+  "editDialogTitle": "Upravit třídu",
+  "year": "Rok",
+  "section": "Název",
+  "add": "Přidat",
+  "edit": "Upravit",
+  "delete": "Odstranit",
+  "save": "Uložit",
+  "cancel": "Zrušit",
+  "email": "Email",
+  "firstname": "Jméno",
+  "lastname": "Příjmení",
+  "snackbars": {
+    "edit": {
+      "success": "Třída úspešně upravena",
+      "error": "Nepovedlo se upravit třídu"
+    },
+    "delete": {
+      "success": "Třída úspěšně odstraněna",
+      "error": "Nepovedlo se odstranit třídu"
+    },
+    "add": {
+      "success": "Třída úspěšně přidána",
+      "error": "Nepovedlose přidat třídu"
+    }
+  }
+}

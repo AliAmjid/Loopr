@@ -12,6 +12,9 @@ export default {
     profile: {
       index: 'P_profile_index',
     },
+    classGroups: {
+      index: 'P_classGroups_index',
+    },
   },
   components: {
     withPage: 'C_withPage',
@@ -19,6 +22,7 @@ export default {
     Help: 'C_Help',
     UserImportTable: 'C_UserImportTable',
     Stepper: 'C_Stepper',
+    EditableListItem: 'C_EditableListItem',
   },
   other: {
     pages: 'O_pages',

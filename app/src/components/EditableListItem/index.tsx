@@ -9,10 +9,13 @@ import {
   Select,
   TextField,
   Theme,
+  Tooltip,
 } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import DoneIcon from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
+
+import { useTranslation } from 'lib/i18n';
 
 import OverlayLoading from 'components/OverlayLoading';
 
@@ -26,6 +29,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const EditableListItem: React.FC<EditableListItemProps> = props => {
   const classes = useStyles();
+
+  const { t } = useTranslation();
 
   const editValue = props.edit === 'primary' ? props.primary : props.secondary;
 
@@ -112,30 +117,36 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
         <ListItemSecondaryAction>
           {editing ? (
             <>
-              <IconButton
-                key="submit"
-                type="submit"
-                onClick={submitHandler}
-                color="primary"
-              >
-                <DoneIcon />
-              </IconButton>
-              <IconButton onClick={cancelHandler}>
-                <ClearIcon />
-              </IconButton>
+              <Tooltip title={`${t('save')}`}>
+                <IconButton
+                  key="submit"
+                  type="submit"
+                  onClick={submitHandler}
+                  color="primary"
+                >
+                  <DoneIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={`${t('cancel')}`}>
+                <IconButton onClick={cancelHandler}>
+                  <ClearIcon />
+                </IconButton>
+              </Tooltip>
             </>
           ) : (
             <>
               {!props.editingDisabled && (
-                <IconButton
-                  key="edit"
-                  className={props.classes?.editIconButton || ''}
-                  onClick={() => {
-                    setEditing(true);
-                  }}
-                >
-                  <EditIcon />
-                </IconButton>
+                <Tooltip title={`${t('edit')}`}>
+                  <IconButton
+                    key="edit"
+                    className={props.classes?.editIconButton || ''}
+                    onClick={() => {
+                      setEditing(true);
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
               )}
               {props.additionalActions}
             </>

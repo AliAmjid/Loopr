@@ -3,6 +3,9 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION from 'pages/classGroups/mutations/deleteClass';
 
 import {
@@ -24,6 +27,7 @@ import ClassGroupList from './classGroupList';
 import { AddValues, ClassGroup, UpdateValues } from './types';
 
 const ClassGroupListIndex: React.FC = () => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
   const { setSelectedClassGroup } = useClassGroupsState(state => ({
     setSelectedClassGroup: state.setSelectedClassGroup,
   }));
@@ -61,12 +65,12 @@ const ClassGroupListIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
 
         return false;
       });
@@ -79,12 +83,12 @@ const ClassGroupListIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
 
         return false;
       });
@@ -93,12 +97,12 @@ const ClassGroupListIndex: React.FC = () => {
   const deleteHandler = (classGroup: string): Promise<boolean> => {
     return deleteClassGroup({ variables: { input: { id: classGroup } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.delete.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.delete.success'), { variant: 'error' });
 
         return false;
       });

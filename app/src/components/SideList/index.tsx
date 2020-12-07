@@ -9,6 +9,7 @@ import {
   makeStyles,
   TextField,
   Theme,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
 
@@ -86,6 +87,8 @@ const SideList: React.FC<SideListProps> = props => {
     style = { maxHeight: window.innerHeight - toolbarHeight * 2 };
   }
 
+  console.log(props.bottomAction?.tooltip, props.bottomAction?.tooltip || '');
+
   return (
     <div className={classes.container} style={style}>
       <OverlayLoadingContainer>
@@ -103,9 +106,11 @@ const SideList: React.FC<SideListProps> = props => {
           justifyContent="center"
           onClick={props.bottomAction?.onClick}
         >
-          <Fab color="primary">
-            <>{props.bottomAction?.icon}</>
-          </Fab>
+          {props.bottomAction && (
+            <Tooltip title={props.bottomAction.tooltip || ''}>
+              <Fab color="primary">{props.bottomAction.icon}</Fab>
+            </Tooltip>
+          )}
         </Box>
       </OverlayLoadingContainer>
     </div>
