@@ -11,12 +11,16 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
 import { ClassGroupDialogFormValues, ClassGroupDialogProps } from './types';
 
 const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
   const { handleSubmit, register, errors } = useForm<
     ClassGroupDialogFormValues
   >();
@@ -35,7 +39,7 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
             <Box pb={2}>
               <TextField
                 name="year"
-                label="class year"
+                label={t('year')}
                 type="number"
                 fullWidth
                 inputRef={register({ required: true })}
@@ -46,7 +50,7 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
 
             <TextField
               name="name"
-              label="class name"
+              label={t('section')}
               fullWidth
               inputRef={register({ required: true })}
               error={errors.name !== undefined}
@@ -54,12 +58,11 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
             />
           </DialogContent>
           <DialogActions>
-            <Button type="submit" color="primary">
-              {props.primaryButtonLabel}
+            <Button color="primary" onClick={props.onClose}>
+              {t('cancel')}
             </Button>
-
-            <Button color="secondary" onClick={props.onClose}>
-              Cancel
+            <Button type="submit" color="primary" variant="contained">
+              {props.primaryButtonLabel}
             </Button>
           </DialogActions>
         </form>

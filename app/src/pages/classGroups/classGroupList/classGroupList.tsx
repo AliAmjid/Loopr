@@ -60,9 +60,9 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
       />
       <ClassGroupDialog
         open={addOpen || editId !== undefined}
-        title={addOpen ? 'Add class' : 'Edit class'}
+        title={addOpen ? t('addDialogTitle') : t('editDialogTitle')}
         loading={props.addClassGroupLoading || props.updateClassGroupLoading}
-        primaryButtonLabel={addOpen ? 'Add' : 'Edit'}
+        primaryButtonLabel={addOpen ? t('add') : t('edit')}
         onSubmit={values => {
           if (addOpen) {
             props.onAdd(values).then((success: boolean) => {

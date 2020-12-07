@@ -3,11 +3,15 @@ import React, { useState } from 'react';
 import { Box, Button } from '@material-ui/core';
 import { Query } from 'material-table';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import { DetailClassGroupUser, StudentsProps } from './types';
 
 const Students: React.FC<StudentsProps> = props => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
+
   const [editing, setEditing] = useState(false);
 
   return (
@@ -15,7 +19,7 @@ const Students: React.FC<StudentsProps> = props => {
       <MaterialTable
         key={`${props.selectedClassGroup}-${editing}`}
         uniqueName="pages/classGroups/classGoup/students"
-        title="USERS"
+        title={t('students')}
         data={(query: Query<DetailClassGroupUser>) =>
           editing
             ? props.onGetUsers(query).then(res => ({
@@ -42,9 +46,9 @@ const Students: React.FC<StudentsProps> = props => {
           columnFiltering: {
             active: true,
             columns: [
-              { title: 'email', field: 'email' },
-              { title: 'Name', field: 'firstname' },
-              { title: 'lastname', field: 'lastname' },
+              { title: t('email'), field: 'email' },
+              { title: t('firstname'), field: 'firstname' },
+              { title: t('lastname'), field: 'lastname' },
             ],
             defaultColumns: ['firstname', 'lastname', 'email'],
           },
@@ -55,23 +59,19 @@ const Students: React.FC<StudentsProps> = props => {
         {editing ? (
           <>
             <Box pr={2}>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {
-                  props.onSubmit();
-                  setEditing(false);
-                }}
-              >
-                Save
+              <Button color="primary" onClick={() => setEditing(false)}>
+                {t('cancel')}
               </Button>
             </Box>
             <Button
-              color="secondary"
+              color="primary"
               variant="contained"
-              onClick={() => setEditing(false)}
+              onClick={() => {
+                props.onSubmit();
+                setEditing(false);
+              }}
             >
-              Cancel
+              {t('save')}
             </Button>
           </>
         ) : (
@@ -80,7 +80,7 @@ const Students: React.FC<StudentsProps> = props => {
             variant="contained"
             onClick={() => setEditing(true)}
           >
-            Edit
+            {t('edit')}
           </Button>
         )}
       </Box>

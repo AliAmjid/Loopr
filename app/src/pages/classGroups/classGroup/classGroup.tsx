@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Box, Typography } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import Teacher from 'pages/classGroups/classGroup/teacher';
 
 import Tabs from 'components/Tabs';
@@ -16,6 +19,8 @@ const TabWrapper: React.FC = props => (
 );
 
 const ClassGroup: React.FC<ClassGroupProps> = props => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
+
   if (!props.selectedClassGroup)
     return (
       <Box
@@ -25,7 +30,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography>No class selected</Typography>
+        <Typography>{t('nothingSelected')}</Typography>
       </Box>
     );
 
@@ -36,7 +41,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
       tabs={[
         {
           id: 0,
-          label: 'students',
+          label: t('students'),
           panel: (
             <Students
               selectedClassGroup={props.selectedClassGroup}
@@ -49,7 +54,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
         },
         {
           id: 1,
-          label: 'teachers',
+          label: t('teacher'),
           panel: (
             <Teacher
               teacher={props.teacher}

@@ -3,6 +3,7 @@
   "students": "Studenti",
   "teacher": "Učitel",
   "nothingSelected": "Není vybrána žádna třída",
+  "addDialogTitle": "Přidat třídu",
   "editDialogTitle": "Upravit třídu",
   "year": "Rok",
   "section": "Název",
@@ -27,5 +28,5 @@
       "success": "Třída úspěšně přidána",
       "error": "Nepovedlose přidat třídu"
     }
-  }
+  },
 }

@@ -216,9 +216,11 @@ const ClassIndex: React.FC = () => {
     return Promise.resolve(false);
   };
 
+  const teacher = classGroupTeacherData?.classGroup?.teacher || undefined;
+
   return (
     <ClassGroup
-      teacher={{ ...classGroupTeacherData?.classGroup?.teacher }}
+      teacher={teacher ? { ...teacher } : undefined}
       teacherLoading={classGroupTeacherLoading}
       selectedClassGroup={selectedClassGroup}
       onGetUsers={getUsersHandler}

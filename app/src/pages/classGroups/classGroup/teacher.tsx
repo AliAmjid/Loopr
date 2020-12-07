@@ -4,6 +4,8 @@ import { Box, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { Query } from 'material-table';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import OverlayLoading from 'components/OverlayLoading';
@@ -12,6 +14,8 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import { DetailClassGroupUser, TeacherProps } from './types';
 
 const Teacher: React.FC<TeacherProps> = props => {
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
+
   const [editing, setEditing] = useState(false);
 
   return (
@@ -19,7 +23,7 @@ const Teacher: React.FC<TeacherProps> = props => {
       <OverlayLoading loading={props.loading} />
       <MaterialTable
         key={`${editing}`}
-        title="Teacher"
+        title={t('teacher')}
         uniqueName="pages/classGroups/classGroup/teacher"
         data={(() => {
           if (!editing) {
@@ -39,15 +43,15 @@ const Teacher: React.FC<TeacherProps> = props => {
             active: true,
             columns: [
               {
-                title: 'email',
+                title: t('email'),
                 field: 'email',
               },
               {
-                title: 'firstname',
+                title: t('firstname'),
                 field: 'firstname',
               },
               {
-                title: 'lastname',
+                title: t('lastname'),
                 field: 'lastname',
               },
             ],
@@ -61,15 +65,10 @@ const Teacher: React.FC<TeacherProps> = props => {
                   icon: AddIcon,
                   tooltip: 'Select',
                   onClick: (_, row) => {
-                    props
-                      .onChange(
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                        // @ts-ignore
-                        row.id,
-                      )
-                      .then(successful => {
-                        if (successful) setEditing(false);
-                      });
+                    row = row as DetailClassGroupUser;
+                    props.onChange(row.id).then(successful => {
+                      if (successful) setEditing(false);
+                    });
                   },
                 },
               ]
@@ -78,12 +77,8 @@ const Teacher: React.FC<TeacherProps> = props => {
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         {editing ? (
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() => setEditing(true)}
-          >
-            Cancel
+          <Button color="primary" onClick={() => setEditing(false)}>
+            {t('cancel')}
           </Button>
         ) : (
           <Button
@@ -91,7 +86,7 @@ const Teacher: React.FC<TeacherProps> = props => {
             variant="contained"
             onClick={() => setEditing(true)}
           >
-            Edit
+            {t('edit')}
           </Button>
         )}
       </Box>
