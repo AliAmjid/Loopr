@@ -4,6 +4,7 @@ import languageSelectNamespaces from 'components/LanguageSelect/namespaces';
 
 const withPageNamespaces = [
   namespaces.components.withPage,
+  namespaces.other.pages,
   ...languageSelectNamespaces,
 ];
 
