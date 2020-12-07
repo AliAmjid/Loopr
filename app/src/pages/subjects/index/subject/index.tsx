@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useApolloClient, useQuery } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
 
 import routes from 'config/routes';
@@ -15,7 +15,6 @@ import {
 import {
   SubjectsSubjectTypeQuery,
   SubjectsSubjectTypeQueryVariables,
-  SubjectsSubjectTypesQuery,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';

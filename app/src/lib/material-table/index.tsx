@@ -178,6 +178,7 @@ const MaterialTable = <RowD extends {}>(
             exportButton: props.options?.exportButton && !groupingActive,
             actionsCellStyle: { color: theme.palette.common.black },
             // TODO remove after upgrade
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             exportPdf: (columns: Column<any>[], data: any[]) => {
               const filteredColumns: {

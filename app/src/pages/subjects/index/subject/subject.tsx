@@ -45,7 +45,7 @@ const Subject: React.FC<SubjectProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              props.onDelete(deleteId).then(successful => {
+              props.onDelete(`${deleteId}`).then(successful => {
                 if (successful) setDeleteId(undefined);
               });
             }}

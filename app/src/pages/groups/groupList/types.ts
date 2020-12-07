@@ -1,5 +1,3 @@
-import bodyParser from 'body-parser';
-
 export interface AddDialogFormValues {
   year: string;
   name: string;
