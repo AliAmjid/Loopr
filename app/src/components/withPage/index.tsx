@@ -23,7 +23,7 @@ const withPage = <ComponentProps extends {}>(pageOptions: PageOptions) => (
 
   const pageNamespaces = namespaces || [];
 
-  return withNamespaces([...withPageNamespaces, ...pageNamespaces])(
+  return withNamespaces(['common', ...withPageNamespaces, ...pageNamespaces])(
     EndComponent,
   );
 };

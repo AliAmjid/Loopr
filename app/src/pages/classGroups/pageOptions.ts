@@ -1,4 +1,5 @@
 import namespaces from 'lib/i18n/namespaces';
+import materialTableNamespaces from 'lib/material-table/namespaces';
 
 import sideListNamespaces from 'components/SideList/namespaces';
 import { PageOptions } from 'components/withPage/types';
@@ -6,8 +7,11 @@ import { PageOptions } from 'components/withPage/types';
 const classGroupsPageOptions: PageOptions = {
   title: 'classGroups.index',
   breadcrumbs: [],
-  // TODO add namespace but
-  namespaces: [...sideListNamespaces],
+  namespaces: [
+    ...sideListNamespaces,
+    ...materialTableNamespaces,
+    namespaces.pages.classGroups.index,
+  ],
 };
 
 export default classGroupsPageOptions;

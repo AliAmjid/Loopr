@@ -186,14 +186,14 @@ const ClassIndex: React.FC = () => {
         variables: { input: { id: selectedClassGroup, users: selected } },
       })
         .then(() => {
-          enqueueSnackbar(t('snackbars.studentEdit.success'), {
+          enqueueSnackbar(t('snackbars.studentsEdit.success'), {
             variant: 'success',
           });
 
           return true;
         })
         .catch(() => {
-          enqueueSnackbar(t('snackbars.studentEdit.error'), {
+          enqueueSnackbar(t('snackbars.studentsEdit.error'), {
             variant: 'error',
           });
 
