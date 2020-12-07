@@ -12,6 +12,8 @@
   "delete": "Odstranit",
   "save": "Uložit",
   "cancel": "Zrušit",
+  "sureDelete": "Doopravdy chcete třídu odstranit?",
+  "irreversibleAction": "Nevratná operace",
   "email": "Email",
   "firstname": "Jméno",
   "lastname": "Příjmení",

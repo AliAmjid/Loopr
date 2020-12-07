@@ -4,9 +4,10 @@ import sideListNamespaces from 'components/SideList/namespaces';
 import { PageOptions } from 'components/withPage/types';
 
 const classGroupsPageOptions: PageOptions = {
-  title: 'Classes',
+  title: 'classGroups.index',
   breadcrumbs: [],
-  namespaces: [...sideListNamespaces, namespaces.pages.classGroups.index],
+  // TODO add namespace but
+  namespaces: [...sideListNamespaces],
 };
 
 export default classGroupsPageOptions;

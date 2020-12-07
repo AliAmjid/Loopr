@@ -30,8 +30,8 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
       <SimpleDialog
         open={Boolean(deleteId)}
         loading={props.deleteLoading}
-        title="Sure??"
-        content={<Typography>Irreversible</Typography>}
+        title={t('sureDelete')}
+        content={<Typography>{t('irreversibleAction')}</Typography>}
         actions={[
           <Button
             key={0}
@@ -40,7 +40,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
               setDeleteId(undefined);
             }}
           >
-            Cancel
+            {t('cancel')}
           </Button>,
           <Button
             key={1}
@@ -54,7 +54,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
               });
             }}
           >
-            Delete
+            {t('delete')}
           </Button>,
         ]}
       />

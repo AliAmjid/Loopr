@@ -87,8 +87,6 @@ const SideList: React.FC<SideListProps> = props => {
     style = { maxHeight: window.innerHeight - toolbarHeight * 2 };
   }
 
-  console.log(props.bottomAction?.tooltip, props.bottomAction?.tooltip || '');
-
   return (
     <div className={classes.container} style={style}>
       <OverlayLoadingContainer>

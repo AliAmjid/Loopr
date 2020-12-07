@@ -179,7 +179,7 @@ const ClassIndex: React.FC = () => {
       });
     }
   };
-  console.log(t('snackbars.studentEdit.success'));
+
   const submitHandler = (): Promise<boolean> => {
     if (selectedClassGroup) {
       return updateClassGroup({
