@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import { AddValues, Group, UpdateValues } from 'pages/groups/groupList/types';
 import GROUPS_DELETE_MUTATION from 'pages/groups/mutations/deleteGroup';
@@ -24,6 +27,7 @@ import GROUPS_GROUPS_QUERY from '../queries/groups';
 import GroupList from './groupList';
 
 const GroupListIndex: React.FC = () => {
+  const { t } = useTranslation(namespaces.pages.groups.index);
   const { setSelectedGroup } = useGroupsState(state => ({
     setSelectedGroup: state.setSelectedGroup,
   }));
@@ -61,12 +65,12 @@ const GroupListIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
 
         return false;
       });
@@ -79,12 +83,12 @@ const GroupListIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
 
         return false;
       });
@@ -93,12 +97,12 @@ const GroupListIndex: React.FC = () => {
   const deleteHandler = (group: string): Promise<boolean> => {
     return deleteGroup({ variables: { input: { id: group } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.delete.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.delete.error'), { variant: 'error' });
 
         return false;
       });

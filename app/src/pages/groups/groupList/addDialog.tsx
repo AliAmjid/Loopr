@@ -9,6 +9,9 @@ import {
   TextField,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import {
   AddDialogFormValues,
@@ -19,6 +22,7 @@ import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
 const AddDialog: React.FC<AddDialogProps> = props => {
+  const { t } = useTranslation(namespaces.pages.groups.index);
   const { handleSubmit, register, errors } = useForm<AddDialogFormValues>();
 
   const submitHandler = (values: AddDialogFormValues): void => {
@@ -30,23 +34,23 @@ const AddDialog: React.FC<AddDialogProps> = props => {
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
 
-        <DialogTitle>Group add</DialogTitle>
+        <DialogTitle>{t('addModalTitle')}</DialogTitle>
         <form onSubmit={handleSubmit(submitHandler)}>
           <DialogContent>
             <TextField
               name="name"
-              label="group name"
+              label={t('common:gqlObjects.classGroup.section')}
               fullWidth
               inputRef={register({ required: true })}
               error={errors.name !== undefined}
             />
           </DialogContent>
           <DialogActions>
-            <Button type="submit" color="primary">
-              Add
+            <Button color="primary" onClick={props.onClose}>
+              {t('common:actions.cancel')}
             </Button>
-            <Button color="secondary" onClick={props.onClose}>
-              Cancel
+            <Button type="submit" color="primary" variant="contained">
+              {t('common:actions.add')}
             </Button>
           </DialogActions>
         </form>

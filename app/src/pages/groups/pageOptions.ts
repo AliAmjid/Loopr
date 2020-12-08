@@ -1,7 +1,7 @@
 import { PageOptions } from 'components/withPage/types';
 
 const groupsPageOptions: PageOptions = {
-  title: 'Groups',
+  title: 'groups.index',
   breadcrumbs: [],
 };
 

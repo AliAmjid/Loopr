@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import GROUPS_GROUP_QUERY from 'pages/groups/queries/group';
 import GROUPS_USERS_QUERY from 'pages/groups/queries/users';
@@ -24,6 +28,7 @@ import Group from './group';
 import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
 
 const GroupIndex: React.FC = () => {
+  const { t } = useTranslation(namespaces.pages.groups.index);
   const { selectedGroup } = useGroupsState(state => ({
     selectedGroup: state.selectedGroup,
   }));
@@ -43,6 +48,7 @@ const GroupIndex: React.FC = () => {
     resetPagination: resetUserPagination,
   } = usePagination();
   const [selected, setSelected] = useState<string[]>([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     resetGroupPagination();
@@ -156,9 +162,17 @@ const GroupIndex: React.FC = () => {
         variables: { input: { id: selectedGroup, users: selected } },
       })
         .then(() => {
+          enqueueSnackbar(t('snackbars.studentsEdit.success'), {
+            variant: 'success',
+          });
+
           return true;
         })
         .catch(() => {
+          enqueueSnackbar(t('snackbars.studentsEdit.error'), {
+            variant: 'error',
+          });
+
           return false;
         });
     }

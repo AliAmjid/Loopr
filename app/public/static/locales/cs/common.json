@@ -1,1 +1,20 @@
-{}
+{
+  "gqlObjects": {
+    "user": {
+      "firstname": "Jméno",
+      "lastname": "Příjmení",
+      "email": "Email"
+    },
+    "classGroup": {
+      "section": "Název",
+      "year": "Rok"
+    }
+  },
+  "actions": {
+    "add": "Přidat",
+    "edit": "Upravit",
+    "delete": "Odstranit",
+    "cancel": "Zrušit",
+    "save": "Uložit"
+  }
+}

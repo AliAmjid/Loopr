@@ -15,6 +15,9 @@ export default {
     classGroups: {
       index: 'P_classGroups_index',
     },
+    groups: {
+      index: 'P_groups_index',
+    },
   },
   components: {
     withPage: 'C_withPage',

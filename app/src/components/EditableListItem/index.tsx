@@ -117,7 +117,7 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
         <ListItemSecondaryAction>
           {editing ? (
             <>
-              <Tooltip title={`${t('save')}`}>
+              <Tooltip title={`${t('actions.save')}`}>
                 <IconButton
                   key="submit"
                   type="submit"
@@ -127,7 +127,7 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
                   <DoneIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title={`${t('cancel')}`}>
+              <Tooltip title={`${t('actions.cancel')}`}>
                 <IconButton onClick={cancelHandler}>
                   <ClearIcon />
                 </IconButton>
@@ -136,7 +136,7 @@ const EditableListItem: React.FC<EditableListItemProps> = props => {
           ) : (
             <>
               {!props.editingDisabled && (
-                <Tooltip title={`${t('edit')}`}>
+                <Tooltip title={`${t('actions.edit')}`}>
                   <IconButton
                     key="edit"
                     className={props.classes?.editIconButton || ''}

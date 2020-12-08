@@ -2,7 +2,10 @@ import React from 'react';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import GroupIcon from '@material-ui/icons/Group';
-import AclIcon from '@material-ui/icons/HowToReg';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
+import TableChartIcon from '@material-ui/icons/TableChart';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
 import routes from 'config/routes';
 
@@ -23,19 +26,23 @@ const navigationList: NavigationList = [
   },
   {
     label: 'acl.index',
-    icon: <AclIcon />,
+    icon: <HowToRegIcon />,
     href: routes.acl.index,
     resources: aclPageResources,
   },
   {
     label: 'classGroups.index',
-    icon: <AclIcon />,
+    icon: <TableChartIcon />,
     href: routes.classGroups.index,
   },
-  { label: 'groups.index', icon: <AclIcon />, href: routes.groups.index },
+  {
+    label: 'groups.index',
+    icon: <ViewModuleIcon />,
+    href: routes.groups.index,
+  },
   {
     label: 'subjects.index',
-    icon: <AclIcon />,
+    icon: <ViewListIcon />,
     href: routes.subjects.index,
   },
 ];

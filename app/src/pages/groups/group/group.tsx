@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 import { Box, Button, Typography } from '@material-ui/core';
 import { Query } from 'material-table';
+import { useTranslation } from 'react-i18next';
 
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import { DetailGroupUser, GroupProps } from './types';
 
 const Group: React.FC<GroupProps> = props => {
+  const { t } = useTranslation(namespaces.pages.groups.index);
   const [editing, setEditing] = useState(false);
 
   if (!props.selectedGroup)
@@ -19,7 +22,7 @@ const Group: React.FC<GroupProps> = props => {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography>No group selected</Typography>
+        <Typography>{t('nothingSelected')}</Typography>
       </Box>
     );
 
@@ -28,7 +31,7 @@ const Group: React.FC<GroupProps> = props => {
       <MaterialTable
         key={props.selectedGroup + editing}
         uniqueName="pages/groups/group"
-        title="USERS"
+        title={t('students')}
         data={(query: Query<DetailGroupUser>) =>
           editing
             ? props.getUsers(query).then(res => ({
@@ -51,8 +54,8 @@ const Group: React.FC<GroupProps> = props => {
           }
         }}
         columns={[
-          { title: 'Name', field: 'firstname' },
-          { title: 'lastname', field: 'lastname' },
+          { title: t('common:gqlObjects.user.firstname'), field: 'firstname' },
+          { title: t('common:gqlObjects.user.lastname'), field: 'lastname' },
         ]}
         options={{ selection: editing }}
       />
@@ -68,7 +71,7 @@ const Group: React.FC<GroupProps> = props => {
                   setEditing(false);
                 }}
               >
-                Save
+                {t('common:actions.save')}
               </Button>
             </Box>
             <Button
@@ -76,7 +79,7 @@ const Group: React.FC<GroupProps> = props => {
               variant="contained"
               onClick={() => setEditing(false)}
             >
-              Cancel
+              {t('common:actions.cancel')}
             </Button>
           </>
         ) : (
@@ -85,7 +88,7 @@ const Group: React.FC<GroupProps> = props => {
             variant="contained"
             onClick={() => setEditing(true)}
           >
-            Edit
+            {t('common:actions.edit')}
           </Button>
         )}
       </Box>
