@@ -40,7 +40,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
               setDeleteId(undefined);
             }}
           >
-            {t('cancel')}
+            {t('common:actions.cancel')}
           </Button>,
           <Button
             key={1}
@@ -54,7 +54,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
               });
             }}
           >
-            {t('delete')}
+            {t('common:actions.delete')}
           </Button>,
         ]}
       />
@@ -62,7 +62,9 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
         open={addOpen || editId !== undefined}
         title={addOpen ? t('addDialogTitle') : t('editDialogTitle')}
         loading={props.addClassGroupLoading || props.updateClassGroupLoading}
-        primaryButtonLabel={addOpen ? t('add') : t('edit')}
+        primaryButtonLabel={
+          addOpen ? t('common:actions.add') : t('common:actions.edit')
+        }
         onSubmit={values => {
           if (addOpen) {
             props.onAdd(values).then((success: boolean) => {
@@ -101,19 +103,19 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
           onClick: () => {
             setAddOpen(true);
           },
-          tooltip: t('add'),
+          tooltip: t('common:actions.add'),
         }}
         items={props.classGroups.map(classGroup => ({
           id: classGroup.id,
           primary: classGroup?.section,
           secondary: `${classGroup?.year}`,
           additionalActions: [
-            <Tooltip key={0} title={`${t('edit')}`}>
+            <Tooltip key={0} title={`${t('common:actions.edit')}`}>
               <IconButton onClick={() => setEditId(classGroup.id)}>
                 <EditIcon />
               </IconButton>
             </Tooltip>,
-            <Tooltip key={1} title={`${t('delete')}`}>
+            <Tooltip key={1} title={`${t('common:actions.delete')}`}>
               <IconButton onClick={() => setDeleteId(classGroup.id)}>
                 <DeleteIcon />
               </IconButton>

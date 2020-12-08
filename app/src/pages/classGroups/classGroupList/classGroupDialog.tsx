@@ -39,7 +39,7 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
             <Box pb={2}>
               <TextField
                 name="year"
-                label={t('year')}
+                label={t('common:gqlObjects.classGroup.year')}
                 type="number"
                 fullWidth
                 inputRef={register({ required: true })}
@@ -50,7 +50,7 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
 
             <TextField
               name="name"
-              label={t('section')}
+              label={t('common:gqlObjects.classGroup.section')}
               fullWidth
               inputRef={register({ required: true })}
               error={errors.name !== undefined}
@@ -59,7 +59,7 @@ const ClassGroupDialog: React.FC<ClassGroupDialogProps> = props => {
           </DialogContent>
           <DialogActions>
             <Button color="primary" onClick={props.onClose}>
-              {t('cancel')}
+              {t('common:actions.cancel')}
             </Button>
             <Button type="submit" color="primary" variant="contained">
               {props.primaryButtonLabel}

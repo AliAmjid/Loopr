@@ -43,15 +43,15 @@ const Teacher: React.FC<TeacherProps> = props => {
             active: true,
             columns: [
               {
-                title: t('email'),
+                title: t('common:gqlObjects.user.email'),
                 field: 'email',
               },
               {
-                title: t('firstname'),
+                title: t('common:gqlObjects.user.firstname'),
                 field: 'firstname',
               },
               {
-                title: t('lastname'),
+                title: t('common:gqlObjects.user.lastname'),
                 field: 'lastname',
               },
             ],
@@ -63,7 +63,7 @@ const Teacher: React.FC<TeacherProps> = props => {
             ? [
                 {
                   icon: AddIcon,
-                  tooltip: 'Select',
+                  tooltip: t('common:actions.select'),
                   onClick: (_, row) => {
                     row = row as DetailClassGroupUser;
                     props.onChange(row.id).then(successful => {
@@ -78,7 +78,7 @@ const Teacher: React.FC<TeacherProps> = props => {
       <Box pt={2} display="flex" justifyContent="flex-end">
         {editing ? (
           <Button color="primary" onClick={() => setEditing(false)}>
-            {t('cancel')}
+            {t('common:actions.cancel')}
           </Button>
         ) : (
           <Button
@@ -86,7 +86,7 @@ const Teacher: React.FC<TeacherProps> = props => {
             variant="contained"
             onClick={() => setEditing(true)}
           >
-            {t('edit')}
+            {t('common:actions.edit')}
           </Button>
         )}
       </Box>

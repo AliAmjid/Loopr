@@ -5,18 +5,8 @@
   "nothingSelected": "Není vybrána žádna třída",
   "addDialogTitle": "Přidat třídu",
   "editDialogTitle": "Upravit třídu",
-  "year": "Rok",
-  "section": "Název",
-  "add": "Přidat",
-  "edit": "Upravit",
-  "delete": "Odstranit",
-  "save": "Uložit",
-  "cancel": "Zrušit",
   "sureDelete": "Doopravdy chcete třídu odstranit?",
   "irreversibleAction": "Nevratná operace",
-  "email": "Email",
-  "firstname": "Jméno",
-  "lastname": "Příjmení",
   "snackbars": {
     "edit": {
       "success": "Třída úspešně upravena",

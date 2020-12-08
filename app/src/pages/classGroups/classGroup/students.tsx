@@ -46,9 +46,15 @@ const Students: React.FC<StudentsProps> = props => {
           columnFiltering: {
             active: true,
             columns: [
-              { title: t('email'), field: 'email' },
-              { title: t('firstname'), field: 'firstname' },
-              { title: t('lastname'), field: 'lastname' },
+              { title: t('common:gqlObjects.user.email'), field: 'email' },
+              {
+                title: t('common:gqlObjects.user.firstname'),
+                field: 'firstname',
+              },
+              {
+                title: t('common:gqlObjects.user.lastname'),
+                field: 'lastname',
+              },
             ],
             defaultColumns: ['firstname', 'lastname', 'email'],
           },
@@ -60,7 +66,7 @@ const Students: React.FC<StudentsProps> = props => {
           <>
             <Box pr={2}>
               <Button color="primary" onClick={() => setEditing(false)}>
-                {t('cancel')}
+                {t('common:actions.cancel')}
               </Button>
             </Box>
             <Button
@@ -71,7 +77,7 @@ const Students: React.FC<StudentsProps> = props => {
                 setEditing(false);
               }}
             >
-              {t('save')}
+              {t('common:actions.save')}
             </Button>
           </>
         ) : (
@@ -80,7 +86,7 @@ const Students: React.FC<StudentsProps> = props => {
             variant="contained"
             onClick={() => setEditing(true)}
           >
-            {t('edit')}
+            {t('common:actions.edit')}
           </Button>
         )}
       </Box>
