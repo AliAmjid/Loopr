@@ -18,7 +18,8 @@
     "test:all": "jest",
     "test:coverage": "jest --coverage",
     "apollo:generate-types": "apollo codegen:generate --localSchemaFile=../schema.graphql --target=typescript --includes=src/**/*.{ts,tsx} --tagName=gql --addTypename --outputFlat ./src/types/graphql.ts",
-    "translations:export": "node scripts/translations/export.js"
+    "translations:export": "node scripts/translations/export.js",
+    "translations:import": "node scripts/translations/import.js"
   },
   "dependencies": {
     "@apollo/client": "^3.1.3",

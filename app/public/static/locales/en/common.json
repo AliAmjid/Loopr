@@ -1,3 +1,5 @@
 {
-  "changeLanguage": "change language"
+  "actions": {
+    "cancel": "Cancel"
+  }
 }
