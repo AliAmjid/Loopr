@@ -6,7 +6,7 @@ const fs = require('fs');
 const importData = [
   {
     name: 'P_groups_index.listTitle',
-    cs: 'Zvolit',
+    cs: 'Zvolita',
     en: 'Select',
   },
 ];
@@ -64,7 +64,9 @@ for (const parsedItem of parsedData) {
 for (const fileData of filesData) {
   const fileName = path.join(
     __dirname,
-    '../../public/static/translations',
+    '../../public/static/locales',
     `${fileData.file}.json`,
   );
+
+  fs.writeFileSync(fileName, JSON.stringify(fileData.data, undefined, 2));
 }

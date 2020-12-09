@@ -1,4 +1,9 @@
 {
+  "gqlObjects": {
+    "user": {},
+    "classGroup": {},
+    "subjectType": {}
+  },
   "actions": {
     "cancel": "Cancel"
   }

@@ -1,0 +1,10 @@
+{
+  "listTitle": "Select",
+  "deleteModal": {},
+  "snackbars": {
+    "add": {},
+    "edit": {},
+    "delete": {},
+    "studentsEdit": {}
+  }
+}

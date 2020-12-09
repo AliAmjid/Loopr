@@ -1,0 +1,10 @@
+{
+  "deleteTypeDialog": {},
+  "deleteDialog": {},
+  "snackbars": {
+    "typeAdd": {},
+    "typeEdit": {},
+    "typeDelete": {},
+    "delete": {}
+  }
+}

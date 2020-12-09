@@ -21,10 +21,10 @@
   "addTooltip": "Přidat",
   "defaultActions": {
     "grouping": {
-      "tooltip":"Seskupit"
+      "tooltip": "Seskupit"
     },
     "columnFiltering": {
-      "tooltip":"Sloupce",
+      "tooltip": "Sloupce",
       "dialogTitle": "Vyberte sloupce, které chcete zobrazovat"
     }
   }
