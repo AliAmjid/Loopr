@@ -1,10 +1,28 @@
 {
-  "listTitle": "Select",
-  "deleteModal": {},
+  "listTitle": "",
+  "nothingSelected": "",
+  "addModalTitle": "",
+  "students": "",
+  "deleteModal": {
+    "title": "",
+    "description": ""
+  },
   "snackbars": {
-    "add": {},
-    "edit": {},
-    "delete": {},
-    "studentsEdit": {}
+    "add": {
+      "success": "",
+      "error": ""
+    },
+    "edit": {
+      "success": "",
+      "error": ""
+    },
+    "delete": {
+      "success": "",
+      "error": ""
+    },
+    "studentsEdit": {
+      "success": "",
+      "error": ""
+    }
   }
 }

@@ -1,9 +1,26 @@
 {
-  "dashboard": {},
-  "users": {},
-  "acl": {},
-  "profile": {},
-  "classGroups": {},
-  "groups": {},
-  "subjects": {}
+  "dashboard": {
+    "index": ""
+  },
+  "users": {
+    "index": "",
+    "userDetail": "",
+    "addManual": "",
+    "addCSV": ""
+  },
+  "acl": {
+    "index": ""
+  },
+  "profile": {
+    "index": ""
+  },
+  "classGroups": {
+    "index": ""
+  },
+  "groups": {
+    "index": ""
+  },
+  "subjects": {
+    "index": ""
+  }
 }

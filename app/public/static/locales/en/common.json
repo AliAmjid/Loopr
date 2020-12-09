@@ -1,10 +1,24 @@
 {
   "gqlObjects": {
-    "user": {},
-    "classGroup": {},
-    "subjectType": {}
+    "user": {
+      "firstname": "",
+      "lastname": "",
+      "email": ""
+    },
+    "classGroup": {
+      "section": "",
+      "year": ""
+    },
+    "subjectType": {
+      "name": ""
+    }
   },
   "actions": {
-    "cancel": "Cancel"
+    "add": "",
+    "edit": "",
+    "delete": "",
+    "cancel": "",
+    "save": "",
+    "select": ""
   }
 }

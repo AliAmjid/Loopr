@@ -4,5 +4,9 @@
   "password": "Password",
   "logIn": "Log in",
   "forgottenPassword": "Forgotten password?",
-  "doNotHaveAccount": "Don`t have account yet?"
+  "doNotHaveAccount": "Don`t have account yet?",
+  "automaticLogin": "",
+  "noInternet": "",
+  "noMatch": "",
+  "success": ""
 }

@@ -1,10 +1,35 @@
 {
-  "deleteTypeDialog": {},
-  "deleteDialog": {},
+  "listTitle": "",
+  "nothingSelected": "",
+  "deleteTypeDialog": {
+    "title": "",
+    "description": ""
+  },
+  "deleteDialog": {
+    "title": "",
+    "description": ""
+  },
+  "addDialogTitle": "",
+  "subjects": "",
+  "group": "",
+  "classGroup": "",
+  "teacher": "",
   "snackbars": {
-    "typeAdd": {},
-    "typeEdit": {},
-    "typeDelete": {},
-    "delete": {}
+    "typeAdd": {
+      "success": "",
+      "error": ""
+    },
+    "typeEdit": {
+      "success": "",
+      "error": ""
+    },
+    "typeDelete": {
+      "success": "",
+      "error": ""
+    },
+    "delete": {
+      "success": "",
+      "error": ""
+    }
   }
 }

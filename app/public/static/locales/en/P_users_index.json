@@ -1,4 +1,15 @@
 {
-  "addUsers": {},
-  "columns": {}
+  "tableTitle": "",
+  "addUsers": {
+    "button": "",
+    "manual": "",
+    "csv": ""
+  },
+  "columns": {
+    "firstname": "",
+    "lastname": "",
+    "email": "",
+    "createdAt": "",
+    "role": ""
+  }
 }

@@ -1,6 +1,31 @@
 {
+  "nextTooltip": "",
+  "previousTooltip": "",
+  "lastTooltip": "",
+  "firstTooltip": "",
+  "labelRowsSelect": "",
+  "from": "",
+  "actions": "",
+  "emptyDataSourceMessage": "",
+  "exportTitle": "",
+  "exportCSVName": "",
+  "exportPDFName": "",
+  "groupingPlaceholder": "",
+  "groupedBy": "",
+  "save": "",
+  "cancel": "",
+  "nRowsSelected": "",
+  "deleteText": "",
+  "deleteTooltip": "",
+  "editTooltip": "",
+  "addTooltip": "",
   "defaultActions": {
-    "grouping": {},
-    "columnFiltering": {}
+    "grouping": {
+      "tooltip": ""
+    },
+    "columnFiltering": {
+      "tooltip": "",
+      "dialogTitle": ""
+    }
   }
 }

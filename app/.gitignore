@@ -9,4 +9,5 @@ src/config/index.js
 coverage
 
 translations-export.csv
+translations-import.csv
 
