@@ -8,6 +8,9 @@
     "classGroup": {
       "section": "Název",
       "year": "Rok"
+    },
+    "subjectType": {
+      "name": "Název"
     }
   },
   "actions": {

@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { Box, Button, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Query } from 'material-table';
+import { useTranslation } from 'react-i18next';
 
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import SimpleDialog from 'components/SimpleDialog';
@@ -11,6 +13,7 @@ import SimpleDialog from 'components/SimpleDialog';
 import { Subject as SubjectT, SubjectProps } from './types';
 
 const Subject: React.FC<SubjectProps> = props => {
+  const { t } = useTranslation(namespaces.pages.subjects.index);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
 
   if (!props.selectedSubject)
@@ -22,7 +25,7 @@ const Subject: React.FC<SubjectProps> = props => {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography>No subject selected</Typography>
+        <Typography>{t('nothingSelected')}</Typography>
       </Box>
     );
 
@@ -30,15 +33,15 @@ const Subject: React.FC<SubjectProps> = props => {
     <Box p={2}>
       <SimpleDialog
         open={Boolean(deleteId)}
-        title="Sure?"
-        content={<Typography>Irreversible</Typography>}
+        title={t('deleteDialog.title')}
+        content={<Typography>{t('deleteDialog.description')}</Typography>}
         actions={[
           <Button
             key={0}
             color="primary"
             onClick={() => setDeleteId(undefined)}
           >
-            Cancel
+            {t('common:actions.cancel')}
           </Button>,
           <Button
             key={1}
@@ -50,16 +53,17 @@ const Subject: React.FC<SubjectProps> = props => {
               });
             }}
           >
-            Delete
+            {t('common:actions.delete')}
           </Button>,
         ]}
       />
       <MaterialTable
         key={props.selectedSubject}
+        title={t('subjects')}
         uniqueName="pages/subjects/subject/subject"
         columns={[
           {
-            title: 'Group/ClassGroup',
+            title: `${t('group')}/${t('classGroup')}`,
             render: (row: SubjectT) => {
               if (row.classGroup)
                 return `${row.classGroup.year} ${row.classGroup.section}`;
@@ -69,7 +73,7 @@ const Subject: React.FC<SubjectProps> = props => {
             },
           },
           {
-            title: 'Teacher',
+            title: t('teacher'),
             render: (row: SubjectT) =>
               `${row.teacher?.firstname} ${row.teacher?.lastname}`,
           },
@@ -85,7 +89,7 @@ const Subject: React.FC<SubjectProps> = props => {
         actions={[
           {
             icon: DeleteIcon,
-            tooltip: 'Delete',
+            tooltip: t('common:actions.delete'),
             onClick: (_, row) => {
               row = row as SubjectT;
               setDeleteId(row.id);
@@ -95,7 +99,7 @@ const Subject: React.FC<SubjectProps> = props => {
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         <Button color="primary" variant="contained" onClick={props.onAddClick}>
-          Add
+          {t('common:actions.add')}
         </Button>
       </Box>
     </Box>

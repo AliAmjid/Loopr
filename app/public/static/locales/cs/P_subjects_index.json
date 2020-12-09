@@ -1,0 +1,35 @@
+{
+  "listTitle": "Typy předmětů",
+  "nothingSelected": "Není vybrán žádný předmět",
+  "deleteTypeDialog": {
+    "title": "Doopravdy chcete odstranit typ předmětu?",
+    "description": "Tato operace je nevratná"
+  },
+  "deleteDialog": {
+    "title": "Doopravdy chcete odstranit předmět?",
+    "description": "Tato operace je nevratná"
+  },
+  "addDialogTitle": "Přidat typ předměte",
+  "subjects": "Předměty",
+  "group": "Skupina",
+  "classGroup": "Třída",
+  "teacher": "Učitel",
+  "snackbars": {
+    "typeAdd": {
+      "success": "Typ předmětu úspěšně přidán",
+      "error": "Nepovedlo se přidat typ předmětu"
+    },
+    "typeEdit": {
+      "success": "Typ předměětu úspěšně upraven",
+      "error": "Nepovedlo se upravit typ předmětu"
+    },
+    "typeDelete": {
+      "success": "Typ předmětu úspěšně odstraněn",
+      "error": "Nepovedlo se odstranit typ předmětu"
+    },
+    "delete": {
+      "success": "Předmět úspěšně odstraněn",
+      "error": "Nepovedlo se odstranit přemět"
+    }
+  }
+}

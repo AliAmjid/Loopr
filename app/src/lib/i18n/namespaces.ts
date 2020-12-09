@@ -18,6 +18,9 @@ export default {
     groups: {
       index: 'P_groups_index',
     },
+    subjects: {
+      index: 'P_subjects_index',
+    },
   },
   components: {
     withPage: 'C_withPage',

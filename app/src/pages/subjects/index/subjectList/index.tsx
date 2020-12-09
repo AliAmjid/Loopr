@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import SUBJECTS_ADD_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/addSubjectType';
 import SUBJECTS_DELETE_SUBJECT_TYPE_MUTATION from 'pages/subjects/index/mutations/deleteSubjectType';
@@ -56,7 +59,7 @@ const SubjectListIndex: React.FC = () => {
     refetchQueries: ['SubjectsSubjectTypesQuery'],
     awaitRefetchQueries: true,
   });
-
+  const { t } = useTranslation(namespaces.pages.subjects.index);
   const { enqueueSnackbar } = useSnackbar();
 
   const subjects: Subjects = [];
@@ -70,12 +73,12 @@ const SubjectListIndex: React.FC = () => {
   const subjectAddHandler = (args: AddSubjectArgs): Promise<boolean> => {
     return addSubjectType({ variables: { input: args } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.typeAdd.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.typeAdd.error'), { variant: 'error' });
 
         return false;
       });
@@ -84,12 +87,14 @@ const SubjectListIndex: React.FC = () => {
   const subjectUpdateHandler = (args: UpdateSubjectArgs): Promise<boolean> => {
     return updateSubjectType({ variables: { input: args } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.typeEdit.success'), {
+          variant: 'success',
+        });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.typeEdit.error'), { variant: 'error' });
 
         return false;
       });
@@ -98,12 +103,14 @@ const SubjectListIndex: React.FC = () => {
   const deleteHandler = (subjectType: string): Promise<boolean> => {
     return deleteSubjectType({ variables: { input: { id: subjectType } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.typeDelete.success'), {
+          variant: 'success',
+        });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.typeDelete.error'), { variant: 'error' });
 
         return false;
       });
