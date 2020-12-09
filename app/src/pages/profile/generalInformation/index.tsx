@@ -11,25 +11,25 @@ import stripRolePrefix from 'components/stripRolePrefix';
 import { GeneralInformationsProps } from './types';
 
 const GeneralInformation: React.FC<GeneralInformationsProps> = props => {
-  const { t } = useTranslation(namespaces.pages.profile.index);
+  const { t } = useTranslation('common');
 
   return (
     <>
       <HorizontalList>
         <ListItemText
-          primary={t('firstname')}
+          primary={t('gqlObjects.user.firstname')}
           secondary={props.user?.firstname || ''}
         />
         <ListItemText
-          primary={t('lastname')}
+          primary={t('gqlObjects.user.lastname')}
           secondary={props.user?.lastname || ''}
         />
         <ListItemText
-          primary={t('email')}
+          primary={t('gqlObjects.user.email')}
           secondary={props.user?.email || ''}
         />
         <ListItemText
-          primary={t('role')}
+          primary={t('gqlObjects.user.role')}
           secondary={stripRolePrefix(props.user?.role.name || '')}
         />
       </HorizontalList>

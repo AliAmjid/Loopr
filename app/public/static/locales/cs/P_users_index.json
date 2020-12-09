@@ -4,12 +4,5 @@
     "button": "Přidat uživatele",
     "manual": "Manuálně",
     "csv": "Z CSV souboru"
-  },
-  "columns": {
-    "firstname": "Jméno",
-    "lastname": "Příjmení",
-    "email": "Email",
-    "createdAt": "Registrován v",
-    "role": "Role"
   }
 }

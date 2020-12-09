@@ -31,13 +31,13 @@ const materialTableLocalization = (t: TFunction): Localization => ({
   body: {
     emptyDataSourceMessage: t('emptyDataSourceMessage'),
     editRow: {
-      saveTooltip: t('save'),
-      cancelTooltip: t('cancel'),
+      saveTooltip: t('common:actions.save'),
+      cancelTooltip: t('common:actions.cancel'),
       deleteText: t('deleteText'),
     },
-    deleteTooltip: t('deleteTooltip'),
-    editTooltip: t('editTooltipgpu'),
-    addTooltip: t('addTooltip'),
+    deleteTooltip: t('common:actions.delete'),
+    editTooltip: t('common:actions.edit'),
+    addTooltip: t('common:actions.add'),
   },
 });
 

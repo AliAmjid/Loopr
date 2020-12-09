@@ -92,18 +92,18 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
                   }}
                   variant="contained"
                 >
-                  {t('delete')}
+                  {t('common:actions.delete')}
                 </Button>
               </Box>
               <Box mr={2}>
                 <Button color="primary" variant="contained" type="submit">
-                  {t('save')}
+                  {t('common:actions.save')}
                 </Button>
               </Box>
               <Grid item>
                 <Link href={routes.acl.index}>
                   <Button color="secondary" variant="contained">
-                    {t('cancel')}
+                    {t('common:actions.cancel')}
                   </Button>
                 </Link>
               </Grid>

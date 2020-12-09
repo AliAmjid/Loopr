@@ -62,24 +62,24 @@ const Users: React.FC<UsersProps> = props => {
             columns: [
               { section: 'personalInfo' },
               {
-                title: t('columns.firstname'),
+                title: t('common:gqlObjects.user.firstname'),
                 field: 'firstname',
               },
               {
-                title: t('columns.lastname'),
+                title: t('common:gqlObjects.user.lastname'),
                 field: 'lastname',
               },
               {
-                title: t('columns.email'),
+                title: t('common:gqlObjects.user.email'),
                 field: 'email',
               },
               {
-                title: t('columns.createdAt'),
+                title: t('common:gqlObjects.user.createdAt'),
                 field: 'createdAt',
                 filtering: false,
               },
               {
-                title: t('columns.role'),
+                title: t('common:gqlObjects.user.role'),
                 field: 'role.name',
                 filtering: false,
               },

@@ -3,7 +3,9 @@
     "user": {
       "firstname": "Jméno",
       "lastname": "Příjmení",
-      "email": "Email"
+      "email": "Email",
+      "role": "Role",
+      "createdAt": "Registrován v"
     },
     "classGroup": {
       "section": "Název",

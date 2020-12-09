@@ -25,7 +25,7 @@ const FieldSelect: React.FC = () => {
       setFieldSelectNext: state.setFieldSelectNext,
     }),
   );
-  const { t } = useTranslation(namespaces.pages.users.addCSV);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setFields(fileData.map(() => '__nothing__'));
@@ -36,10 +36,10 @@ const FieldSelect: React.FC = () => {
   }
 
   const requiredFields = [
-    { value: 'email', label: t('columns.email') },
-    { value: 'firstname', label: t('columns.firstname') },
-    { value: 'lastname', label: t('columns.lastname') },
-    { value: 'role', label: t('columns.role') },
+    { value: 'email', label: t('gqlObjects.user.email') },
+    { value: 'firstname', label: t('gqlObjects.user.firstname') },
+    { value: 'lastname', label: t('gqlObjects.user.lastname') },
+    { value: 'role', label: t('gqlObjects.user.role') },
     { value: '__nothing__', label: '----' },
   ];
 
