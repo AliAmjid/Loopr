@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     justifyContent: 'center',
   },
   logo: {
-    maxHeight: '80%',
-    maxWidth: '80%',
+    maxHeight: '70%',
+    maxWidth: '70%',
   },
 });
 

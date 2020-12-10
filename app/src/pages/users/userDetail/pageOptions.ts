@@ -1,3 +1,5 @@
+import namespaces from 'lib/i18n/namespaces';
+
 import { usersBreadcrumbs } from 'pages/users/index/pageOptions';
 
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
@@ -11,6 +13,7 @@ const usersDetailBreadcrumbs: Breadcrumbs = [
 const usersDetailPageOptions: PageOptions = {
   title: 'users.userDetail',
   breadcrumbs: usersDetailBreadcrumbs,
+  namespaces: [namespaces.pages.users.userDetail],
 };
 
 export default usersDetailPageOptions;

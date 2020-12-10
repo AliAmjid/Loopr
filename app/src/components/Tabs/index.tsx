@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
 
-import { Box, makeStyles, Tab, Tabs as TabsPrefab } from '@material-ui/core';
+import {
+  Box,
+  makeStyles,
+  Tab,
+  Tabs as TabsPrefab,
+  Theme,
+} from '@material-ui/core';
 
 import { TabsProps } from './types';
 
-const useStyles = makeStyles({
-  tabs: {
-    overflow: 'hidden',
+const useStyles = makeStyles((theme: Theme) => ({
+  tabsRoot: {
+    height: 'auto',
   },
-});
+  selectedTabRoot: {
+    color: theme.palette.primary.main,
+  },
+  tabRoot: {
+    height: 'auto',
+    padding: theme.spacing(1),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+  },
+}));
 
 const DefaultWrapper: React.FC = props => <>{props.children}</>;
 const Tabs: React.FC<TabsProps> = props => {
@@ -17,7 +32,16 @@ const Tabs: React.FC<TabsProps> = props => {
   const [value, setValue] = useState(props.defaultTabsId ?? 0);
 
   const mappedTabs = props.tabs.map(tab => (
-    <Tab key={tab.id} value={tab.id} label={tab.label} />
+    <Tab
+      classes={{
+        root: `${classes.tabRoot} ${
+          value === tab.id ? classes.selectedTabRoot : ''
+        }`,
+      }}
+      key={tab.id}
+      value={tab.id}
+      label={tab.label}
+    />
   ));
 
   let Wrapper = DefaultWrapper;
@@ -28,9 +52,8 @@ const Tabs: React.FC<TabsProps> = props => {
   return (
     <>
       <TabsPrefab
-        className={classes.tabs}
         classes={{
-          scroller: classes.tabs,
+          root: classes.tabsRoot,
         }}
         value={value}
         onChange={(e, value) => setValue(value)}

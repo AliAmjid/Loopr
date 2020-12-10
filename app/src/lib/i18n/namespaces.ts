@@ -8,6 +8,7 @@ export default {
     users: {
       index: 'P_users_index',
       addCSV: 'P_users_addCSV',
+      userDetail: 'P_users_userDetail',
     },
     profile: {
       index: 'P_profile_index',
