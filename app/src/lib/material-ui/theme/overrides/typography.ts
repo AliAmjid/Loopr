@@ -1,6 +1,8 @@
+import { fade } from '@material-ui/core';
 import { Overrides } from '@material-ui/core/styles/overrides';
 
 import palette from '../palette';
+import spacing from '../spacing';
 
 const typography: Overrides = {
   MuiTypography: {
@@ -8,6 +10,10 @@ const typography: Overrides = {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       color: palette!.primary.main,
+    },
+    h5: {
+      fontWeight: 500,
+      paddingBottom: spacing,
     },
   },
 };

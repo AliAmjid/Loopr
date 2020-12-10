@@ -9,7 +9,8 @@
     "addCSV": "Přidat z CSV"
   },
   "acl": {
-    "index": "Role"
+    "index": "Role",
+    "editRole": "Upravit roli"
   },
   "profile": {
     "index": "Profil"

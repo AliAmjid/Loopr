@@ -14,7 +14,8 @@ import { PageProps } from './types';
 const useStyles = makeStyles((theme: Theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
+    paddingTop: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
       marginLeft: drawerWidth,
     },

@@ -34,13 +34,6 @@ const UserDetail: React.FC<UserDetailProps> = props => {
                 <GeneralInformation user={props.user} roles={props.roles} />
               ),
             },
-            {
-              id: 1,
-              label: t('personalInformation'),
-              panel: (
-                <GeneralInformation user={props.user} roles={props.roles} />
-              ),
-            },
           ]}
         />
       </Paper>
