@@ -23,7 +23,6 @@ const CSVUpload: React.FC = () => {
 
       return;
     }
-    console.log('data', data);
     setFileData(data);
     setUploadNext(true);
   };
