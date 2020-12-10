@@ -11,6 +11,7 @@ import {
   Theme,
   Tooltip,
   Typography,
+  useTheme,
 } from '@material-ui/core';
 
 import EditableListItem from 'components/EditableListItem';
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const SideList: React.FC<SideListProps> = props => {
   const classes = useStyles();
+  const theme = useTheme();
 
   const [selected, setSelected] = useState<number | string | undefined>(
     undefined,
@@ -99,7 +101,7 @@ const SideList: React.FC<SideListProps> = props => {
         <Box
           position="sticky"
           width="100%"
-          bottom={0}
+          bottom={theme.spacing(2)}
           display={props?.bottomAction ? 'flex' : 'none'}
           justifyContent="center"
           onClick={props.bottomAction?.onClick}

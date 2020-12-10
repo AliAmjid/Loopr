@@ -26,6 +26,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(6),
     height: theme.spacing(6),
   },
+  sticky: {
+    position: 'sticky',
+    top: theme.spacing(6),
+    backgroundColor: theme.palette.common.white,
+    zIndex: 100,
+  },
 }));
 const Stepper: React.FC<StepperProps> = props => {
   const classes = useStyles();
@@ -45,7 +51,7 @@ const Stepper: React.FC<StepperProps> = props => {
 
   return (
     <>
-      <Box display="flex" alignItems="center">
+      <Box display="flex" alignItems="center" className={classes.sticky}>
         <Box pl={4}>
           <Tooltip title={`${t('previous')}`}>
             <IconButton
@@ -84,7 +90,6 @@ const Stepper: React.FC<StepperProps> = props => {
           </Tooltip>
         </Box>
       </Box>
-
       {props.steps.map(step => (
         <Box
           key={step.index}
