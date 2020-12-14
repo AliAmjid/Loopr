@@ -21,6 +21,7 @@ export default {
     },
     subjects: {
       index: 'P_subjects_index',
+      editSubject: 'P_subjects_editSubject',
     },
   },
   components: {

@@ -22,6 +22,10 @@
     "index": "Skupiny"
   },
   "subjects": {
-    "index": "Předměty"
+    "index": "Předměty",
+    "editSubject": {
+      "add": "Přidat předmět",
+      "edit": "Upravit předmět"
+    }
   }
 }

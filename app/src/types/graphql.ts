@@ -900,6 +900,36 @@ export interface SubjectsEditSubjectAddMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsEditSubjectUpdateMutation
+// ====================================================
+
+export interface SubjectsEditSubjectUpdateMutation_editSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface SubjectsEditSubjectUpdateMutation_editSubject {
+  __typename: "editSubjectPayload";
+  subject: SubjectsEditSubjectUpdateMutation_editSubject_subject | null;
+}
+
+export interface SubjectsEditSubjectUpdateMutation {
+  /**
+   * Edits a Subject.
+   */
+  editSubject: SubjectsEditSubjectUpdateMutation_editSubject | null;
+}
+
+export interface SubjectsEditSubjectUpdateMutationVariables {
+  input: editSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SubjectsEditSubjectClassGroupsQuery
 // ====================================================
 
@@ -1678,6 +1708,15 @@ export interface deleteGroupInput {
 export interface deleteSubjectTypeInput {
   clientMutationId?: string | null;
   id: string;
+}
+
+export interface editSubjectInput {
+  classGroup?: string | null;
+  clientMutationId?: string | null;
+  group?: string | null;
+  id: string;
+  subjectType?: string | null;
+  teacher?: string | null;
 }
 
 export interface updateAclRoleInput {

@@ -7,6 +7,7 @@ import { useSnackbar } from 'notistack';
 import routes from 'config/routes';
 
 import SUBJECTS_EDIT_SUBJECT_ADD_MUTATION from 'pages/subjects/editSubject/mutations/add';
+import SUBJECTS_EDIT_SUBJECT_UPDATE_MUTATION from 'pages/subjects/editSubject/mutations/update';
 
 import {
   SubjectsAddSubjectAddMutation,
@@ -15,6 +16,8 @@ import {
   SubjectsAddSubjectSummaryClassGroupQueryVariables,
   SubjectsAddSubjectSummaryGroupQuery,
   SubjectsAddSubjectSummaryGroupQueryVariables,
+  SubjectsEditSubjectUpdateMutation,
+  SubjectsEditSubjectUpdateMutationVariables,
 } from 'types/graphql';
 
 import SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY from '../queries/summaryClassGroup';
@@ -37,10 +40,14 @@ const SummaryIndex: React.FC = () => {
     | undefined
   >(undefined);
   const client = useApolloClient();
-  const [addSubjectType] = useMutation<
+  const [addSubject] = useMutation<
     SubjectsAddSubjectAddMutation,
     SubjectsAddSubjectAddMutationVariables
   >(SUBJECTS_EDIT_SUBJECT_ADD_MUTATION);
+  const [updateSubject] = useMutation<
+    SubjectsEditSubjectUpdateMutation,
+    SubjectsEditSubjectUpdateMutationVariables
+  >(SUBJECTS_EDIT_SUBJECT_UPDATE_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
@@ -78,24 +85,49 @@ const SummaryIndex: React.FC = () => {
 
   const submitHandler = (): void => {
     setLoading(true);
-    addSubjectType({
-      variables: {
-        input: {
-          classGroup,
-          group,
-          teacher,
-          subjectType: `${router.query.subjectTypeId}`,
+
+    if (
+      // eslint-disable-next-line no-extra-boolean-cast
+      Boolean(router.query.add)
+    ) {
+      addSubject({
+        variables: {
+          input: {
+            classGroup,
+            group,
+            teacher,
+            subjectType: `${router.query.subjectTypeId}`,
+          },
         },
-      },
-    })
-      .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
-        router.push(routes.subjects.index);
       })
-      .catch(() => {
-        setLoading(false);
-        enqueueSnackbar('E', { variant: 'error' });
-      });
+        .then(() => {
+          enqueueSnackbar('S', { variant: 'success' });
+          router.push(routes.subjects.index);
+        })
+        .catch(() => {
+          setLoading(false);
+          enqueueSnackbar('E', { variant: 'error' });
+        });
+    } else {
+      updateSubject({
+        variables: {
+          input: {
+            id: `${router.query.subjectId}`,
+            classGroup,
+            group,
+            teacher,
+          },
+        },
+      })
+        .then(() => {
+          enqueueSnackbar('S', { variant: 'success' });
+          router.push(routes.subjects.index);
+        })
+        .catch(() => {
+          setLoading(false);
+          enqueueSnackbar('E', { variant: 'error' });
+        });
+    }
   };
 
   let summaryGroup;
@@ -111,6 +143,10 @@ const SummaryIndex: React.FC = () => {
     <>
       <Summary
         loading={loading}
+        editing={
+          // eslint-disable-next-line no-extra-boolean-cast
+          !Boolean(router.query.add)
+        }
         teacher={data?.user}
         group={summaryGroup}
         classGroup={classGroup !== undefined}

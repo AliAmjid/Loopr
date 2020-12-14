@@ -1,6 +1,7 @@
 export interface SummaryProps {
   loading: boolean;
   classGroup: boolean;
+  editing: boolean;
   teacher?: {
     firstname: string;
     lastname: string;
