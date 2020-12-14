@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useApolloClient, useMutation } from '@apollo/client';
-import { useRouter } from 'next/router';
-import { useSnackbar } from 'notistack';
-
-import routes from 'config/routes';
-
-import SUBJECTS_EDIT_SUBJECT_ADD_MUTATION from 'pages/subjects/editSubjectShared/mutations/add';
-import SUBJECTS_EDIT_SUBJECT_UPDATE_MUTATION from 'pages/subjects/editSubjectShared/mutations/update';
+import { useApolloClient } from '@apollo/client';
 
 import {
   SubjectsAddSubjectAddMutation,
@@ -25,13 +18,13 @@ import SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY from '../queries/summaryGroup';
 import useEditSubjectState from '../state';
 
 import Summary from './summary';
+import { SummaryIndexProps } from './types';
 
-const SummaryIndex: React.FC = () => {
-  const { group, classGroup, teacher, add } = useEditSubjectState(state => ({
+const SummaryIndex: React.FC<SummaryIndexProps> = props => {
+  const { group, classGroup, teacher } = useEditSubjectState(state => ({
     group: state.group,
     classGroup: state.classGroup,
     teacher: state.teacher,
-    add: state.add,
   }));
 
   const [loading, setLoading] = useState(false);
@@ -41,16 +34,6 @@ const SummaryIndex: React.FC = () => {
     | undefined
   >(undefined);
   const client = useApolloClient();
-  const [addSubject] = useMutation<
-    SubjectsAddSubjectAddMutation,
-    SubjectsAddSubjectAddMutationVariables
-  >(SUBJECTS_EDIT_SUBJECT_ADD_MUTATION);
-  const [updateSubject] = useMutation<
-    SubjectsEditSubjectUpdateMutation,
-    SubjectsEditSubjectUpdateMutationVariables
-  >(SUBJECTS_EDIT_SUBJECT_UPDATE_MUTATION);
-  const { enqueueSnackbar } = useSnackbar();
-  const router = useRouter();
 
   useEffect(() => {
     if (group && teacher) {
@@ -87,45 +70,9 @@ const SummaryIndex: React.FC = () => {
   const submitHandler = (): void => {
     setLoading(true);
 
-    if (add) {
-      addSubject({
-        variables: {
-          input: {
-            classGroup,
-            group,
-            teacher,
-            subjectType: `${router.query.subjectTypeId}`,
-          },
-        },
-      })
-        .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
-          router.push(routes.subjects.index);
-        })
-        .catch(() => {
-          setLoading(false);
-          enqueueSnackbar('E', { variant: 'error' });
-        });
-    } else {
-      updateSubject({
-        variables: {
-          input: {
-            id: `${router.query.subjectId}`,
-            classGroup,
-            group,
-            teacher,
-          },
-        },
-      })
-        .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
-          router.push(routes.subjects.index);
-        })
-        .catch(() => {
-          setLoading(false);
-          enqueueSnackbar('E', { variant: 'error' });
-        });
-    }
+    props.onSubmit().then(() => {
+      setLoading(false);
+    });
   };
 
   let summaryGroup;
@@ -141,7 +88,7 @@ const SummaryIndex: React.FC = () => {
     <>
       <Summary
         loading={loading}
-        editing={!add}
+        submitButtonLabel={props.submitButtonLabel}
         teacher={data?.user}
         group={summaryGroup}
         classGroup={classGroup !== undefined}

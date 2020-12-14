@@ -31,7 +31,7 @@ const Summary: React.FC<SummaryProps> = props => {
           </Link>
         </Box>
         <Button color="primary" variant="contained" onClick={props.onSubmit}>
-          {props.editing ? 'Edit' : 'Add'}
+          {props.submitButtonLabel}
         </Button>
       </Box>
     </OverlayLoadingContainer>

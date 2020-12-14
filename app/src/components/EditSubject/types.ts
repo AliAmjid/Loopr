@@ -9,6 +9,18 @@ export interface EditSubjectState {
   setAdd: (add: boolean) => void;
 }
 
-export interface EditSubjectSharedIndexProps {
-  add?: boolean;
+export interface SubmitArgs {
+  group?: string;
+  classGroup?: string;
+  teacher: string;
+}
+
+export interface EditSubjectProps {
+  defaultValues?: {
+    group?: string;
+    classGroup?: string;
+    teacher?: string;
+  };
+  submitButtonLabel: string;
+  onSubmit: (args: SubmitArgs) => Promise<void>;
 }

@@ -4,8 +4,6 @@ import { useApolloClient } from '@apollo/client';
 
 import resources from 'config/resources';
 
-import useEditSubjectState from 'pages/subjects/editSubjectShared/state';
-
 import {
   SubjectsAddSubjectTeacherQuery,
   SubjectsAddSubjectTeacherQueryVariables,
@@ -14,6 +12,7 @@ import {
 import usePagination from 'components/usePagination';
 
 import SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY from '../queries/teachers';
+import useEditSubjectState from '../state';
 
 import Teachers from './teachers';
 import { Teacher, TeacherGetArgs, TeacherGetReturn } from './types';

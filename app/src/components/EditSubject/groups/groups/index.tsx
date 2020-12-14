@@ -3,9 +3,6 @@ import React from 'react';
 import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
 
-import SUBJECTS_EDIT_SUBJECT_GROUP_QUERY from 'pages/subjects/editSubjectShared/queries/groups';
-import useEditSubjectState from 'pages/subjects/editSubjectShared/state';
-
 import {
   SubjectsAddSubjectGroupQuery,
   SubjectsAddSubjectGroupQueryVariables,
@@ -13,6 +10,8 @@ import {
 
 import usePagination from 'components/usePagination';
 
+import SUBJECTS_EDIT_SUBJECT_GROUP_QUERY from '../../queries/groups';
+import useEditSubjectState from '../../state';
 import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 

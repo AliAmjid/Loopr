@@ -1,7 +1,7 @@
 export interface SummaryProps {
   loading: boolean;
   classGroup: boolean;
-  editing: boolean;
+  submitButtonLabel: string;
   teacher?: {
     firstname: string;
     lastname: string;
@@ -11,4 +11,9 @@ export interface SummaryProps {
     section: string;
   } | null;
   onSubmit: () => void;
+}
+
+export interface SummaryIndexProps {
+  submitButtonLabel: string;
+  onSubmit: () => Promise<void>;
 }
