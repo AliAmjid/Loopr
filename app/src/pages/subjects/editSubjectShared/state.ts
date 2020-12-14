@@ -6,6 +6,7 @@ const useEditSubjectState = create<EditSubjectState>(set => ({
   group: undefined,
   classGroup: undefined,
   teacher: undefined,
+  add: false,
   setGroup: (group: string | undefined) => {
     set({
       group,
@@ -17,6 +18,9 @@ const useEditSubjectState = create<EditSubjectState>(set => ({
   },
   setTeacher: (teacher: string | undefined) => {
     set({ teacher });
+  },
+  setAdd: (add: boolean) => {
+    set({ add });
   },
 }));
 

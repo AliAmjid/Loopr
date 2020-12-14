@@ -34,10 +34,9 @@ const SubjectIndex: React.FC = () => {
 
   const addClickHandler = (): void => {
     router.push({
-      pathname: routes.subjects.editSubject,
+      pathname: routes.subjects.addSubject,
       query: {
         subjectTypeId: selectedSubject,
-        add: true,
       },
     });
   };

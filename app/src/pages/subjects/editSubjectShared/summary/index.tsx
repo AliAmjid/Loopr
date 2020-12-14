@@ -6,8 +6,8 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
-import SUBJECTS_EDIT_SUBJECT_ADD_MUTATION from 'pages/subjects/editSubject/mutations/add';
-import SUBJECTS_EDIT_SUBJECT_UPDATE_MUTATION from 'pages/subjects/editSubject/mutations/update';
+import SUBJECTS_EDIT_SUBJECT_ADD_MUTATION from 'pages/subjects/editSubjectShared/mutations/add';
+import SUBJECTS_EDIT_SUBJECT_UPDATE_MUTATION from 'pages/subjects/editSubjectShared/mutations/update';
 
 import {
   SubjectsAddSubjectAddMutation,
@@ -27,10 +27,11 @@ import useEditSubjectState from '../state';
 import Summary from './summary';
 
 const SummaryIndex: React.FC = () => {
-  const { group, classGroup, teacher } = useEditSubjectState(state => ({
+  const { group, classGroup, teacher, add } = useEditSubjectState(state => ({
     group: state.group,
     classGroup: state.classGroup,
     teacher: state.teacher,
+    add: state.add,
   }));
 
   const [loading, setLoading] = useState(false);
@@ -86,10 +87,7 @@ const SummaryIndex: React.FC = () => {
   const submitHandler = (): void => {
     setLoading(true);
 
-    if (
-      // eslint-disable-next-line no-extra-boolean-cast
-      Boolean(router.query.add)
-    ) {
+    if (add) {
       addSubject({
         variables: {
           input: {
@@ -143,10 +141,7 @@ const SummaryIndex: React.FC = () => {
     <>
       <Summary
         loading={loading}
-        editing={
-          // eslint-disable-next-line no-extra-boolean-cast
-          !Boolean(router.query.add)
-        }
+        editing={!add}
         teacher={data?.user}
         group={summaryGroup}
         classGroup={classGroup !== undefined}

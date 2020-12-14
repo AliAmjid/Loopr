@@ -4,7 +4,7 @@ import { useApolloClient } from '@apollo/client';
 
 import resources from 'config/resources';
 
-import useEditSubjectState from 'pages/subjects/editSubject/state';
+import useEditSubjectState from 'pages/subjects/editSubjectShared/state';
 
 import {
   SubjectsAddSubjectTeacherQuery,
