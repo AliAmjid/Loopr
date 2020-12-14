@@ -3,7 +3,7 @@ import React from 'react';
 import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
 
-import useAddSubjectState from 'pages/subjects/addSubject/state';
+import useEditSubjectState from 'pages/subjects/editSubject/state';
 
 import {
   SubjectsAddSubjectClassGroupsQuery,
@@ -12,12 +12,12 @@ import {
 
 import usePagination from 'components/usePagination';
 
-import SUBJECTS_ADD_SUBJECT_CLASS_GROUPS_QUERY from '../../queries/classGroups';
+import SUBJECTS_EDIT_SUBJECT_CLASS_GROUPS_QUERY from '../../queries/classGroups';
 import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const ClassGroups: React.FC = () => {
-  const { classGroup, setClassGroup } = useAddSubjectState(state => ({
+  const { classGroup, setClassGroup } = useEditSubjectState(state => ({
     classGroup: state.classGroup,
     setClassGroup: state.setClassGroup,
   }));
@@ -32,7 +32,7 @@ const ClassGroups: React.FC = () => {
         SubjectsAddSubjectClassGroupsQuery,
         SubjectsAddSubjectClassGroupsQueryVariables
       >({
-        query: SUBJECTS_ADD_SUBJECT_CLASS_GROUPS_QUERY,
+        query: SUBJECTS_EDIT_SUBJECT_CLASS_GROUPS_QUERY,
         variables: {
           ...getPagination({ pageSize: query.pageSize, page: query.page }),
         },

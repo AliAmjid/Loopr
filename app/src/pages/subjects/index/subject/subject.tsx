@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 import { Box, Button, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import { Query } from 'material-table';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
@@ -16,7 +17,7 @@ const Subject: React.FC<SubjectProps> = props => {
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
 
-  if (!props.selectedSubject)
+  if (!props.selectedSubjectType)
     return (
       <Box
         width="100%"
@@ -58,7 +59,7 @@ const Subject: React.FC<SubjectProps> = props => {
         ]}
       />
       <MaterialTable
-        key={props.selectedSubject}
+        key={props.selectedSubjectType}
         title={t('subjects')}
         uniqueName="pages/subjects/subject/subject"
         columns={[
@@ -93,6 +94,14 @@ const Subject: React.FC<SubjectProps> = props => {
             onClick: (_, row) => {
               row = row as SubjectT;
               setDeleteId(row.id);
+            },
+          },
+          {
+            icon: EditIcon,
+            tooltip: t('common:actions.edit'),
+            onClick: (_, row) => {
+              row = row as SubjectT;
+              props.onEdit(row.id);
             },
           },
         ]}

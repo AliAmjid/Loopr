@@ -26,7 +26,7 @@ const routes = {
   },
   subjects: {
     index: '/subjects',
-    addSubject: '/subjects/addSubject',
+    editSubject: '/subjects/editSubject',
   },
 };
 

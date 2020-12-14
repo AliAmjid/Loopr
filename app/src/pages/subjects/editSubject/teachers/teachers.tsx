@@ -13,7 +13,7 @@ const Teachers: React.FC<TeacherProps> = props => {
 
   return (
     <MaterialTable
-      uniqueName="pages/subjects/addSubject/teacher/teacher"
+      uniqueName="pages/subjects/editSubject/teacher/teacher"
       columns={[]}
       defaultActions={{
         columnFiltering: {

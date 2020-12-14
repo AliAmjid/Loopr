@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
-import SUBJECTS_ADD_SUBJECT_ADD_MUTATION from 'pages/subjects/addSubject/mutations/add';
+import SUBJECTS_EDIT_SUBJECT_ADD_MUTATION from 'pages/subjects/editSubject/mutations/add';
 
 import {
   SubjectsAddSubjectAddMutation,
@@ -17,14 +17,14 @@ import {
   SubjectsAddSubjectSummaryGroupQueryVariables,
 } from 'types/graphql';
 
-import SUBJECTS_ADD_SUBJECT_SUMMARY_CLASS_GROUP_QUERY from '../queries/summaryClassGroup';
-import SUBJECTS_ADD_SUBJECT_SUMMARY_GROUP_QUERY from '../queries/summaryGroup';
-import useAddSubjectState from '../state';
+import SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY from '../queries/summaryClassGroup';
+import SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY from '../queries/summaryGroup';
+import useEditSubjectState from '../state';
 
 import Summary from './summary';
 
 const SummaryIndex: React.FC = () => {
-  const { group, classGroup, teacher } = useAddSubjectState(state => ({
+  const { group, classGroup, teacher } = useEditSubjectState(state => ({
     group: state.group,
     classGroup: state.classGroup,
     teacher: state.teacher,
@@ -40,7 +40,7 @@ const SummaryIndex: React.FC = () => {
   const [addSubjectType] = useMutation<
     SubjectsAddSubjectAddMutation,
     SubjectsAddSubjectAddMutationVariables
-  >(SUBJECTS_ADD_SUBJECT_ADD_MUTATION);
+  >(SUBJECTS_EDIT_SUBJECT_ADD_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
@@ -52,7 +52,7 @@ const SummaryIndex: React.FC = () => {
           SubjectsAddSubjectSummaryGroupQuery,
           SubjectsAddSubjectSummaryGroupQueryVariables
         >({
-          query: SUBJECTS_ADD_SUBJECT_SUMMARY_GROUP_QUERY,
+          query: SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY,
           variables: { group, teacher },
         })
         .then(res => {
@@ -66,7 +66,7 @@ const SummaryIndex: React.FC = () => {
           SubjectsAddSubjectSummaryClassGroupQuery,
           SubjectsAddSubjectSummaryClassGroupQueryVariables
         >({
-          query: SUBJECTS_ADD_SUBJECT_SUMMARY_CLASS_GROUP_QUERY,
+          query: SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY,
           variables: { classGroup, teacher },
         })
         .then(res => {

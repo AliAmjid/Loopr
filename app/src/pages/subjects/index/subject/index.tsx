@@ -34,9 +34,10 @@ const SubjectIndex: React.FC = () => {
 
   const addClickHandler = (): void => {
     router.push({
-      pathname: routes.subjects.addSubject,
+      pathname: routes.subjects.editSubject,
       query: {
         subjectTypeId: selectedSubject,
+        add: true,
       },
     });
   };
@@ -79,12 +80,20 @@ const SubjectIndex: React.FC = () => {
     return Promise.resolve({ totalCount: 0, subjects: [] });
   };
 
+  const editHandler = (subject: string): void => {
+    router.push({
+      pathname: routes.subjects.editSubject,
+      query: { subjectId: subject },
+    });
+  };
+
   return (
     <Subject
-      selectedSubject={selectedSubject}
+      selectedSubjectType={selectedSubject}
       onAddClick={addClickHandler}
       onGetSubjects={getSubjectsHandler}
       onDelete={() => Promise.resolve(true)}
+      onEdit={editHandler}
     />
   );
 };

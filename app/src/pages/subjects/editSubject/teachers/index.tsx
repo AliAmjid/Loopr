@@ -4,7 +4,7 @@ import { useApolloClient } from '@apollo/client';
 
 import resources from 'config/resources';
 
-import useAddSubjectState from 'pages/subjects/addSubject/state';
+import useEditSubjectState from 'pages/subjects/editSubject/state';
 
 import {
   SubjectsAddSubjectTeacherQuery,
@@ -13,13 +13,13 @@ import {
 
 import usePagination from 'components/usePagination';
 
-import SUBJECTS_ADD_SUBJECT_TEACHER_QUERY from '../queries/teachers';
+import SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY from '../queries/teachers';
 
 import Teachers from './teachers';
 import { Teacher, TeacherGetArgs, TeacherGetReturn } from './types';
 
 const TeachersIndex: React.FC = () => {
-  const { teacher, setTeacher } = useAddSubjectState(state => ({
+  const { teacher, setTeacher } = useEditSubjectState(state => ({
     teacher: state.teacher,
     setTeacher: state.setTeacher,
   }));
@@ -33,7 +33,7 @@ const TeachersIndex: React.FC = () => {
         SubjectsAddSubjectTeacherQuery,
         SubjectsAddSubjectTeacherQueryVariables
       >({
-        query: SUBJECTS_ADD_SUBJECT_TEACHER_QUERY,
+        query: SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
           resourceName: resources.group.teacher,

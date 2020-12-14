@@ -28,8 +28,9 @@ export type GetSubjectsReturn = Promise<{
 }>;
 
 export interface SubjectProps {
-  selectedSubject?: string;
+  selectedSubjectType?: string;
   onAddClick: () => void;
   onGetSubjects: (args: GetSubjectsArgs) => GetSubjectsReturn;
   onDelete: (subject: string) => Promise<boolean>;
+  onEdit: (subject: string) => void;
 }

@@ -870,27 +870,27 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: SubjectsAddSubjectAddMutation
+// GraphQL mutation operation: SubjectsEditSubjectAddMutation
 // ====================================================
 
-export interface SubjectsAddSubjectAddMutation_createSubject_subject {
+export interface SubjectsEditSubjectAddMutation_createSubject_subject {
   __typename: "Subject";
   id: string;
 }
 
-export interface SubjectsAddSubjectAddMutation_createSubject {
+export interface SubjectsEditSubjectAddMutation_createSubject {
   __typename: "createSubjectPayload";
-  subject: SubjectsAddSubjectAddMutation_createSubject_subject | null;
+  subject: SubjectsEditSubjectAddMutation_createSubject_subject | null;
 }
 
-export interface SubjectsAddSubjectAddMutation {
+export interface SubjectsEditSubjectAddMutation {
   /**
    * Creates a Subject.
    */
-  createSubject: SubjectsAddSubjectAddMutation_createSubject | null;
+  createSubject: SubjectsEditSubjectAddMutation_createSubject | null;
 }
 
-export interface SubjectsAddSubjectAddMutationVariables {
+export interface SubjectsEditSubjectAddMutationVariables {
   input: createSubjectInput;
 }
 
@@ -900,17 +900,17 @@ export interface SubjectsAddSubjectAddMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsAddSubjectClassGroupsQuery
+// GraphQL query operation: SubjectsEditSubjectClassGroupsQuery
 // ====================================================
 
-export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node_teacher {
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node {
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node {
   __typename: "ClassGroup";
   id: string;
   section: string;
@@ -918,26 +918,26 @@ export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node {
   /**
    * Teacher needs to be user with resource GROUP_TEACHER
    */
-  teacher: SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
+  teacher: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
 }
 
-export interface SubjectsAddSubjectClassGroupsQuery_classGroups_edges {
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges {
   __typename: "ClassGroupEdge";
-  node: SubjectsAddSubjectClassGroupsQuery_classGroups_edges_node | null;
+  node: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node | null;
   cursor: string;
 }
 
-export interface SubjectsAddSubjectClassGroupsQuery_classGroups {
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups {
   __typename: "ClassGroupConnection";
-  edges: (SubjectsAddSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
+  edges: (SubjectsEditSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface SubjectsAddSubjectClassGroupsQuery {
-  classGroups: SubjectsAddSubjectClassGroupsQuery_classGroups | null;
+export interface SubjectsEditSubjectClassGroupsQuery {
+  classGroups: SubjectsEditSubjectClassGroupsQuery_classGroups | null;
 }
 
-export interface SubjectsAddSubjectClassGroupsQueryVariables {
+export interface SubjectsEditSubjectClassGroupsQueryVariables {
   before?: string | null;
   after?: string | null;
   first?: number | null;
@@ -950,32 +950,32 @@ export interface SubjectsAddSubjectClassGroupsQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsAddSubjectGroupQuery
+// GraphQL query operation: SubjectsEditSubjectGroupQuery
 // ====================================================
 
-export interface SubjectsAddSubjectGroupQuery_groups_edges_node {
+export interface SubjectsEditSubjectGroupQuery_groups_edges_node {
   __typename: "Group";
   id: string;
   section: string;
 }
 
-export interface SubjectsAddSubjectGroupQuery_groups_edges {
+export interface SubjectsEditSubjectGroupQuery_groups_edges {
   __typename: "GroupEdge";
-  node: SubjectsAddSubjectGroupQuery_groups_edges_node | null;
+  node: SubjectsEditSubjectGroupQuery_groups_edges_node | null;
   cursor: string;
 }
 
-export interface SubjectsAddSubjectGroupQuery_groups {
+export interface SubjectsEditSubjectGroupQuery_groups {
   __typename: "GroupConnection";
-  edges: (SubjectsAddSubjectGroupQuery_groups_edges | null)[] | null;
+  edges: (SubjectsEditSubjectGroupQuery_groups_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface SubjectsAddSubjectGroupQuery {
-  groups: SubjectsAddSubjectGroupQuery_groups | null;
+export interface SubjectsEditSubjectGroupQuery {
+  groups: SubjectsEditSubjectGroupQuery_groups | null;
 }
 
-export interface SubjectsAddSubjectGroupQueryVariables {
+export interface SubjectsEditSubjectGroupQueryVariables {
   before?: string | null;
   after?: string | null;
   first?: number | null;
@@ -988,29 +988,69 @@ export interface SubjectsAddSubjectGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsAddSubjectSummaryClassGroupQuery
+// GraphQL query operation: SubjectsEditSubjectSubjectQuery
 // ====================================================
 
-export interface SubjectsAddSubjectSummaryClassGroupQuery_classGroup {
+export interface SubjectsEditSubjectSubjectQuery_subject_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject_teacher {
+  __typename: "User";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject {
+  __typename: "Subject";
+  id: string;
+  classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
+  group: SubjectsEditSubjectSubjectQuery_subject_group | null;
+  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
+}
+
+export interface SubjectsEditSubjectSubjectQuery {
+  subject: SubjectsEditSubjectSubjectQuery_subject | null;
+}
+
+export interface SubjectsEditSubjectSubjectQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectSummaryClassGroupQuery
+// ====================================================
+
+export interface SubjectsEditSubjectSummaryClassGroupQuery_classGroup {
   __typename: "ClassGroup";
   id: string;
   year: number;
   section: string;
 }
 
-export interface SubjectsAddSubjectSummaryClassGroupQuery_user {
+export interface SubjectsEditSubjectSummaryClassGroupQuery_user {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface SubjectsAddSubjectSummaryClassGroupQuery {
-  classGroup: SubjectsAddSubjectSummaryClassGroupQuery_classGroup | null;
-  user: SubjectsAddSubjectSummaryClassGroupQuery_user | null;
+export interface SubjectsEditSubjectSummaryClassGroupQuery {
+  classGroup: SubjectsEditSubjectSummaryClassGroupQuery_classGroup | null;
+  user: SubjectsEditSubjectSummaryClassGroupQuery_user | null;
 }
 
-export interface SubjectsAddSubjectSummaryClassGroupQueryVariables {
+export interface SubjectsEditSubjectSummaryClassGroupQueryVariables {
   classGroup: string;
   teacher: string;
 }
@@ -1021,28 +1061,28 @@ export interface SubjectsAddSubjectSummaryClassGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsAddSubjectSummaryGroupQuery
+// GraphQL query operation: SubjectsEditSubjectSummaryGroupQuery
 // ====================================================
 
-export interface SubjectsAddSubjectSummaryGroupQuery_group {
+export interface SubjectsEditSubjectSummaryGroupQuery_group {
   __typename: "Group";
   id: string;
   section: string;
 }
 
-export interface SubjectsAddSubjectSummaryGroupQuery_user {
+export interface SubjectsEditSubjectSummaryGroupQuery_user {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface SubjectsAddSubjectSummaryGroupQuery {
-  group: SubjectsAddSubjectSummaryGroupQuery_group | null;
-  user: SubjectsAddSubjectSummaryGroupQuery_user | null;
+export interface SubjectsEditSubjectSummaryGroupQuery {
+  group: SubjectsEditSubjectSummaryGroupQuery_group | null;
+  user: SubjectsEditSubjectSummaryGroupQuery_user | null;
 }
 
-export interface SubjectsAddSubjectSummaryGroupQueryVariables {
+export interface SubjectsEditSubjectSummaryGroupQueryVariables {
   group: string;
   teacher: string;
 }
@@ -1053,10 +1093,10 @@ export interface SubjectsAddSubjectSummaryGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsAddSubjectTeacherQuery
+// GraphQL query operation: SubjectsEditSubjectTeacherQuery
 // ====================================================
 
-export interface SubjectsAddSubjectTeacherQuery_users_edges_node {
+export interface SubjectsEditSubjectTeacherQuery_users_edges_node {
   __typename: "User";
   id: string;
   /**
@@ -1067,23 +1107,23 @@ export interface SubjectsAddSubjectTeacherQuery_users_edges_node {
   lastname: string;
 }
 
-export interface SubjectsAddSubjectTeacherQuery_users_edges {
+export interface SubjectsEditSubjectTeacherQuery_users_edges {
   __typename: "UserEdge";
-  node: SubjectsAddSubjectTeacherQuery_users_edges_node | null;
+  node: SubjectsEditSubjectTeacherQuery_users_edges_node | null;
   cursor: string;
 }
 
-export interface SubjectsAddSubjectTeacherQuery_users {
+export interface SubjectsEditSubjectTeacherQuery_users {
   __typename: "UserConnection";
-  edges: (SubjectsAddSubjectTeacherQuery_users_edges | null)[] | null;
+  edges: (SubjectsEditSubjectTeacherQuery_users_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface SubjectsAddSubjectTeacherQuery {
-  users: SubjectsAddSubjectTeacherQuery_users | null;
+export interface SubjectsEditSubjectTeacherQuery {
+  users: SubjectsEditSubjectTeacherQuery_users | null;
 }
 
-export interface SubjectsAddSubjectTeacherQueryVariables {
+export interface SubjectsEditSubjectTeacherQueryVariables {
   before?: string | null;
   after?: string | null;
   first?: number | null;

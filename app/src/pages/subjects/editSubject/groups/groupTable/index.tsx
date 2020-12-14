@@ -27,7 +27,7 @@ const GroupTable: React.FC<GroupTableProps> = props => {
 
   return (
     <MaterialTable
-      uniqueName="pages/subjects/addSubject/groups/groupTable"
+      uniqueName="pages/subjects/editSubject/groups/groupTable"
       columns={columns}
       data={(query: Query<Group>) =>
         props.onGetGroups(query).then(res => ({
