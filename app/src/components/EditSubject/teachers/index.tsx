@@ -5,13 +5,13 @@ import { useApolloClient } from '@apollo/client';
 import resources from 'config/resources';
 
 import {
-  SubjectsAddSubjectTeacherQuery,
-  SubjectsAddSubjectTeacherQueryVariables,
+  EditSubjectTeacherQuery,
+  EditSubjectTeacherQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
 
-import SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY from '../queries/teachers';
+import EDIT_SUBJECT_TEACHER_QUERY from '../queries/teachers';
 import useEditSubjectState from '../state';
 
 import Teachers from './teachers';
@@ -28,11 +28,8 @@ const TeachersIndex: React.FC = () => {
 
   const teacherGetHandler = (query: TeacherGetArgs): TeacherGetReturn => {
     return client
-      .query<
-        SubjectsAddSubjectTeacherQuery,
-        SubjectsAddSubjectTeacherQueryVariables
-      >({
-        query: SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY,
+      .query<EditSubjectTeacherQuery, EditSubjectTeacherQueryVariables>({
+        query: EDIT_SUBJECT_TEACHER_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
           resourceName: resources.group.teacher,

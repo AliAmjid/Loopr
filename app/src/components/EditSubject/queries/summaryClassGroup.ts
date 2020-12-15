@@ -1,10 +1,7 @@
 import { gql } from '@apollo/client';
 
-const SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY = gql`
-  query SubjectsEditSubjectSummaryClassGroupQuery(
-    $classGroup: ID!
-    $teacher: ID!
-  ) {
+const EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY = gql`
+  query EditSubjectSummaryClassGroupQuery($classGroup: ID!, $teacher: ID!) {
     classGroup(id: $classGroup) {
       id
       year
@@ -18,4 +15,4 @@ const SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY = gql`
   }
 `;
 
-export default SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY;
+export default EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY;

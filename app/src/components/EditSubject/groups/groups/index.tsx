@@ -4,13 +4,13 @@ import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
 
 import {
-  SubjectsAddSubjectGroupQuery,
-  SubjectsAddSubjectGroupQueryVariables,
+  EditSubjectGroupQuery,
+  EditSubjectGroupQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
 
-import SUBJECTS_EDIT_SUBJECT_GROUP_QUERY from '../../queries/groups';
+import EDIT_SUBJECT_GROUP_QUERY from '../../queries/groups';
 import useEditSubjectState from '../../state';
 import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
@@ -27,11 +27,8 @@ const GroupsIndex: React.FC = () => {
 
   const getGroupsHandler = (query: Query<Group>): OnGetGroupsReturn => {
     return client
-      .query<
-        SubjectsAddSubjectGroupQuery,
-        SubjectsAddSubjectGroupQueryVariables
-      >({
-        query: SUBJECTS_EDIT_SUBJECT_GROUP_QUERY,
+      .query<EditSubjectGroupQuery, EditSubjectGroupQueryVariables>({
+        query: EDIT_SUBJECT_GROUP_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
         },

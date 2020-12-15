@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY = gql`
-  query SubjectsEditSubjectSummaryGroupQuery($group: ID!, $teacher: ID!) {
+const EDIT_SUBJECT_SUMMARY_GROUP_QUERY = gql`
+  query EditSubjectSummaryGroupQuery($group: ID!, $teacher: ID!) {
     group(id: $group) {
       id
       section
@@ -14,4 +14,4 @@ const SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY = gql`
   }
 `;
 
-export default SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY;
+export default EDIT_SUBJECT_SUMMARY_GROUP_QUERY;

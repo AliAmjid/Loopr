@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY = gql`
-  query SubjectsEditSubjectTeacherQuery(
+const EDIT_SUBJECT_TEACHER_QUERY = gql`
+  query EditSubjectTeacherQuery(
     $before: String
     $after: String
     $first: Int
@@ -29,4 +29,4 @@ const SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY = gql`
   }
 `;
 
-export default SUBJECTS_EDIT_SUBJECT_TEACHER_QUERY;
+export default EDIT_SUBJECT_TEACHER_QUERY;

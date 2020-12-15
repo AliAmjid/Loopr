@@ -3,18 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 
 import {
-  SubjectsAddSubjectAddMutation,
-  SubjectsAddSubjectAddMutationVariables,
-  SubjectsAddSubjectSummaryClassGroupQuery,
-  SubjectsAddSubjectSummaryClassGroupQueryVariables,
-  SubjectsAddSubjectSummaryGroupQuery,
-  SubjectsAddSubjectSummaryGroupQueryVariables,
-  SubjectsEditSubjectUpdateMutation,
-  SubjectsEditSubjectUpdateMutationVariables,
+  EditSubjectSummaryClassGroupQuery,
+  EditSubjectSummaryClassGroupQueryVariables,
+  EditSubjectSummaryGroupQuery,
+  EditSubjectSummaryGroupQueryVariables,
 } from 'types/graphql';
 
-import SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY from '../queries/summaryClassGroup';
-import SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY from '../queries/summaryGroup';
+import EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY from '../queries/summaryClassGroup';
+import EDIT_SUBJECT_SUMMARY_GROUP_QUERY from '../queries/summaryGroup';
 import useEditSubjectState from '../state';
 
 import Summary from './summary';
@@ -29,9 +25,7 @@ const SummaryIndex: React.FC<SummaryIndexProps> = props => {
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<
-    | SubjectsAddSubjectSummaryGroupQuery
-    | SubjectsAddSubjectSummaryClassGroupQuery
-    | undefined
+    EditSubjectSummaryGroupQuery | EditSubjectSummaryClassGroupQuery | undefined
   >(undefined);
   const client = useApolloClient();
 
@@ -40,10 +34,10 @@ const SummaryIndex: React.FC<SummaryIndexProps> = props => {
       setLoading(true);
       client
         .query<
-          SubjectsAddSubjectSummaryGroupQuery,
-          SubjectsAddSubjectSummaryGroupQueryVariables
+          EditSubjectSummaryGroupQuery,
+          EditSubjectSummaryGroupQueryVariables
         >({
-          query: SUBJECTS_EDIT_SUBJECT_SUMMARY_GROUP_QUERY,
+          query: EDIT_SUBJECT_SUMMARY_GROUP_QUERY,
           variables: { group, teacher },
         })
         .then(res => {
@@ -54,10 +48,10 @@ const SummaryIndex: React.FC<SummaryIndexProps> = props => {
       setLoading(true);
       client
         .query<
-          SubjectsAddSubjectSummaryClassGroupQuery,
-          SubjectsAddSubjectSummaryClassGroupQueryVariables
+          EditSubjectSummaryClassGroupQuery,
+          EditSubjectSummaryClassGroupQueryVariables
         >({
-          query: SUBJECTS_EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY,
+          query: EDIT_SUBJECT_SUMMARY_CLASS_GROUP_QUERY,
           variables: { classGroup, teacher },
         })
         .then(res => {

@@ -4,17 +4,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsEditSubjectClassGroupsQuery
+// GraphQL query operation: EditSubjectClassGroupsQuery
 // ====================================================
 
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher {
+export interface EditSubjectClassGroupsQuery_classGroups_edges_node_teacher {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node {
+export interface EditSubjectClassGroupsQuery_classGroups_edges_node {
   __typename: "ClassGroup";
   id: string;
   section: string;
@@ -22,26 +22,26 @@ export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node {
   /**
    * Teacher needs to be user with resource GROUP_TEACHER
    */
-  teacher: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
+  teacher: EditSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
 }
 
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges {
+export interface EditSubjectClassGroupsQuery_classGroups_edges {
   __typename: "ClassGroupEdge";
-  node: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node | null;
+  node: EditSubjectClassGroupsQuery_classGroups_edges_node | null;
   cursor: string;
 }
 
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups {
+export interface EditSubjectClassGroupsQuery_classGroups {
   __typename: "ClassGroupConnection";
-  edges: (SubjectsEditSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
+  edges: (EditSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface SubjectsEditSubjectClassGroupsQuery {
-  classGroups: SubjectsEditSubjectClassGroupsQuery_classGroups | null;
+export interface EditSubjectClassGroupsQuery {
+  classGroups: EditSubjectClassGroupsQuery_classGroups | null;
 }
 
-export interface SubjectsEditSubjectClassGroupsQueryVariables {
+export interface EditSubjectClassGroupsQueryVariables {
   before?: string | null;
   after?: string | null;
   first?: number | null;
@@ -54,32 +54,32 @@ export interface SubjectsEditSubjectClassGroupsQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsEditSubjectGroupQuery
+// GraphQL query operation: EditSubjectGroupQuery
 // ====================================================
 
-export interface SubjectsEditSubjectGroupQuery_groups_edges_node {
+export interface EditSubjectGroupQuery_groups_edges_node {
   __typename: "Group";
   id: string;
   section: string;
 }
 
-export interface SubjectsEditSubjectGroupQuery_groups_edges {
+export interface EditSubjectGroupQuery_groups_edges {
   __typename: "GroupEdge";
-  node: SubjectsEditSubjectGroupQuery_groups_edges_node | null;
+  node: EditSubjectGroupQuery_groups_edges_node | null;
   cursor: string;
 }
 
-export interface SubjectsEditSubjectGroupQuery_groups {
+export interface EditSubjectGroupQuery_groups {
   __typename: "GroupConnection";
-  edges: (SubjectsEditSubjectGroupQuery_groups_edges | null)[] | null;
+  edges: (EditSubjectGroupQuery_groups_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface SubjectsEditSubjectGroupQuery {
-  groups: SubjectsEditSubjectGroupQuery_groups | null;
+export interface EditSubjectGroupQuery {
+  groups: EditSubjectGroupQuery_groups | null;
 }
 
-export interface SubjectsEditSubjectGroupQueryVariables {
+export interface EditSubjectGroupQueryVariables {
   before?: string | null;
   after?: string | null;
   first?: number | null;
@@ -92,29 +92,29 @@ export interface SubjectsEditSubjectGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsEditSubjectSummaryClassGroupQuery
+// GraphQL query operation: EditSubjectSummaryClassGroupQuery
 // ====================================================
 
-export interface SubjectsEditSubjectSummaryClassGroupQuery_classGroup {
+export interface EditSubjectSummaryClassGroupQuery_classGroup {
   __typename: "ClassGroup";
   id: string;
   year: number;
   section: string;
 }
 
-export interface SubjectsEditSubjectSummaryClassGroupQuery_user {
+export interface EditSubjectSummaryClassGroupQuery_user {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface SubjectsEditSubjectSummaryClassGroupQuery {
-  classGroup: SubjectsEditSubjectSummaryClassGroupQuery_classGroup | null;
-  user: SubjectsEditSubjectSummaryClassGroupQuery_user | null;
+export interface EditSubjectSummaryClassGroupQuery {
+  classGroup: EditSubjectSummaryClassGroupQuery_classGroup | null;
+  user: EditSubjectSummaryClassGroupQuery_user | null;
 }
 
-export interface SubjectsEditSubjectSummaryClassGroupQueryVariables {
+export interface EditSubjectSummaryClassGroupQueryVariables {
   classGroup: string;
   teacher: string;
 }
@@ -125,28 +125,28 @@ export interface SubjectsEditSubjectSummaryClassGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsEditSubjectSummaryGroupQuery
+// GraphQL query operation: EditSubjectSummaryGroupQuery
 // ====================================================
 
-export interface SubjectsEditSubjectSummaryGroupQuery_group {
+export interface EditSubjectSummaryGroupQuery_group {
   __typename: "Group";
   id: string;
   section: string;
 }
 
-export interface SubjectsEditSubjectSummaryGroupQuery_user {
+export interface EditSubjectSummaryGroupQuery_user {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
 }
 
-export interface SubjectsEditSubjectSummaryGroupQuery {
-  group: SubjectsEditSubjectSummaryGroupQuery_group | null;
-  user: SubjectsEditSubjectSummaryGroupQuery_user | null;
+export interface EditSubjectSummaryGroupQuery {
+  group: EditSubjectSummaryGroupQuery_group | null;
+  user: EditSubjectSummaryGroupQuery_user | null;
 }
 
-export interface SubjectsEditSubjectSummaryGroupQueryVariables {
+export interface EditSubjectSummaryGroupQueryVariables {
   group: string;
   teacher: string;
 }
@@ -157,10 +157,10 @@ export interface SubjectsEditSubjectSummaryGroupQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SubjectsEditSubjectTeacherQuery
+// GraphQL query operation: EditSubjectTeacherQuery
 // ====================================================
 
-export interface SubjectsEditSubjectTeacherQuery_users_edges_node {
+export interface EditSubjectTeacherQuery_users_edges_node {
   __typename: "User";
   id: string;
   /**
@@ -171,23 +171,23 @@ export interface SubjectsEditSubjectTeacherQuery_users_edges_node {
   lastname: string;
 }
 
-export interface SubjectsEditSubjectTeacherQuery_users_edges {
+export interface EditSubjectTeacherQuery_users_edges {
   __typename: "UserEdge";
-  node: SubjectsEditSubjectTeacherQuery_users_edges_node | null;
+  node: EditSubjectTeacherQuery_users_edges_node | null;
   cursor: string;
 }
 
-export interface SubjectsEditSubjectTeacherQuery_users {
+export interface EditSubjectTeacherQuery_users {
   __typename: "UserConnection";
-  edges: (SubjectsEditSubjectTeacherQuery_users_edges | null)[] | null;
+  edges: (EditSubjectTeacherQuery_users_edges | null)[] | null;
   totalCount: number;
 }
 
-export interface SubjectsEditSubjectTeacherQuery {
-  users: SubjectsEditSubjectTeacherQuery_users | null;
+export interface EditSubjectTeacherQuery {
+  users: EditSubjectTeacherQuery_users | null;
 }
 
-export interface SubjectsEditSubjectTeacherQueryVariables {
+export interface EditSubjectTeacherQueryVariables {
   before?: string | null;
   after?: string | null;
   first?: number | null;

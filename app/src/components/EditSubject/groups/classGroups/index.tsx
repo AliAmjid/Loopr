@@ -4,13 +4,13 @@ import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
 
 import {
-  SubjectsAddSubjectClassGroupsQuery,
-  SubjectsAddSubjectClassGroupsQueryVariables,
+  EditSubjectClassGroupsQuery,
+  EditSubjectClassGroupsQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
 
-import SUBJECTS_EDIT_SUBJECT_CLASS_GROUPS_QUERY from '../../queries/classGroups';
+import EDIT_SUBJECT_CLASS_GROUPS_QUERY from '../../queries/classGroups';
 import useEditSubjectState from '../../state';
 import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
@@ -27,15 +27,14 @@ const ClassGroups: React.FC = () => {
 
   const getGroupsHandler = (query: Query<Group>): OnGetGroupsReturn => {
     return client
-      .query<
-        SubjectsAddSubjectClassGroupsQuery,
-        SubjectsAddSubjectClassGroupsQueryVariables
-      >({
-        query: SUBJECTS_EDIT_SUBJECT_CLASS_GROUPS_QUERY,
-        variables: {
-          ...getPagination({ pageSize: query.pageSize, page: query.page }),
+      .query<EditSubjectClassGroupsQuery, EditSubjectClassGroupsQueryVariables>(
+        {
+          query: EDIT_SUBJECT_CLASS_GROUPS_QUERY,
+          variables: {
+            ...getPagination({ pageSize: query.pageSize, page: query.page }),
+          },
         },
-      })
+      )
       .then(res => {
         const edges = res.data?.classGroups?.edges;
         const totalCount = res.data?.classGroups?.totalCount;
