@@ -45,7 +45,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
           panel: (
             <Students
               selectedClassGroup={props.selectedClassGroup}
-              onGetUsers={props.onGetUsers}
+              onGetUsers={query => props.onGetUsers(query, false)}
               onGetClassGroupUsers={props.onGetClassGroupUsers}
               onSelectionChange={props.onStudentsChange}
               onSubmit={props.onStudentsSubmit}
@@ -59,7 +59,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
             <Teacher
               teacher={props.teacher}
               loading={props.teacherLoading}
-              onGetUsers={props.onGetUsers}
+              onGetUsers={query => props.onGetUsers(query, true)}
               onChange={props.onTeacherChange}
             />
           ),

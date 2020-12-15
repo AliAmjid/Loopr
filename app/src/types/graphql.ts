@@ -742,6 +742,7 @@ export interface ClassGroupsUsersQueryVariables {
   after?: string | null;
   last?: number | null;
   before?: string | null;
+  resourceName?: string | null;
 }
 
 /* tslint:disable */

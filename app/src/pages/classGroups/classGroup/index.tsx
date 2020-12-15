@@ -4,6 +4,8 @@ import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
+import resources from 'config/resources';
+
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -53,7 +55,10 @@ const ClassIndex: React.FC = () => {
   const [updateClassGroup] = useMutation<
     ClassGroupsUpdateClassGroupMutation,
     ClassGroupsUpdateClassGroupMutationVariables
-  >(CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION);
+  >(CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION, {
+    refetchQueries: ['ClassGroupsClassGroupTeacher'],
+    awaitRefetchQueries: true,
+  });
 
   const {
     getPagination: getClassGroupPagination,
@@ -122,6 +127,7 @@ const ClassIndex: React.FC = () => {
 
   const getUsersHandler = (
     query: Query<DetailClassGroupUser>,
+    teacher: boolean,
   ): Promise<GetUsersReturn> => {
     const variables = getUserPagination({
       page: query.page,
@@ -134,7 +140,10 @@ const ClassIndex: React.FC = () => {
       return client
         .query<ClassGroupsUsersQuery, ClassGroupsUsersQueryVariables>({
           query: CLASS_GROUPS_USERS_QUERY,
-          variables,
+          variables: {
+            ...variables,
+            resourceName: teacher ? resources.group.teacher : '',
+          },
         })
         .then(res => {
           const edges = res.data?.users?.edges;

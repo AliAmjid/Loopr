@@ -46,7 +46,10 @@ export interface ClassGroupProps {
   onGetClassGroupUsers: (
     query: Query<DetailClassGroupUser>,
   ) => Promise<GetUsersReturn>;
-  onGetUsers: (query: Query<DetailClassGroupUser>) => Promise<GetUsersReturn>;
+  onGetUsers: (
+    query: Query<DetailClassGroupUser>,
+    teacher: boolean,
+  ) => Promise<GetUsersReturn>;
   onStudentsChange: (args: SelectionChangeArgs) => void;
   onStudentsSubmit: () => Promise<boolean>;
   onTeacherChange: (id: string) => Promise<boolean>;
