@@ -16,6 +16,7 @@ import { Subject as SubjectT, SubjectProps } from './types';
 const Subject: React.FC<SubjectProps> = props => {
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   if (!props.selectedSubjectType)
     return (
@@ -33,6 +34,7 @@ const Subject: React.FC<SubjectProps> = props => {
   return (
     <Box p={2}>
       <SimpleDialog
+        loading={deleteLoading}
         open={Boolean(deleteId)}
         title={t('deleteDialog.title')}
         content={<Typography>{t('deleteDialog.description')}</Typography>}
@@ -49,7 +51,9 @@ const Subject: React.FC<SubjectProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
+              setDeleteLoading(true);
               props.onDelete(`${deleteId}`).then(successful => {
+                setDeleteLoading(false);
                 if (successful) setDeleteId(undefined);
               });
             }}
@@ -59,7 +63,7 @@ const Subject: React.FC<SubjectProps> = props => {
         ]}
       />
       <MaterialTable
-        key={props.selectedSubjectType}
+        key={`${props.selectedSubjectType}-${deleteLoading}`}
         title={t('subjects')}
         uniqueName="pages/subjects/subject/subject"
         columns={[

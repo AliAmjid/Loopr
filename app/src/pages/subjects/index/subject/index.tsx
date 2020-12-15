@@ -1,10 +1,15 @@
 import React from 'react';
 
-import { useApolloClient } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
+import SUBJECTS_DELETE_SUBJECT_MUTATION from 'pages/subjects/index/mutations/deleteSubject';
 import SUBJECTS_SUBJECT_TYPE_QUERY from 'pages/subjects/index/queries/subjectType';
 import {
   GetSubjectsArgs,
@@ -13,6 +18,8 @@ import {
 } from 'pages/subjects/index/subject/types';
 
 import {
+  SubjectsDeleteSubjectMutation,
+  SubjectsDeleteSubjectMutationVariables,
   SubjectsSubjectTypeQuery,
   SubjectsSubjectTypeQueryVariables,
 } from 'types/graphql';
@@ -27,10 +34,15 @@ const SubjectIndex: React.FC = () => {
   const { selectedSubject } = useSubjectsState(state => ({
     selectedSubject: state.selectedSubject,
   }));
-
+  const [deleteSubject] = useMutation<
+    SubjectsDeleteSubjectMutation,
+    SubjectsDeleteSubjectMutationVariables
+  >(SUBJECTS_DELETE_SUBJECT_MUTATION);
   const client = useApolloClient();
   const { getPagination, setPagination } = usePagination();
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.subjects.index);
 
   const addClickHandler = (): void => {
     router.push({
@@ -86,12 +98,26 @@ const SubjectIndex: React.FC = () => {
     });
   };
 
+  const deleteHandler = (subject: string): Promise<boolean> => {
+    return deleteSubject({ variables: { input: { id: subject } } })
+      .then(() => {
+        enqueueSnackbar(t('snackbars.delete.success'), { variant: 'success' });
+
+        return true;
+      })
+      .catch(() => {
+        enqueueSnackbar(t('snackbars.delete.error'), { variant: 'error' });
+
+        return false;
+      });
+  };
+
   return (
     <Subject
       selectedSubjectType={selectedSubject}
       onAddClick={addClickHandler}
       onGetSubjects={getSubjectsHandler}
-      onDelete={() => Promise.resolve(true)}
+      onDelete={deleteHandler}
       onEdit={editHandler}
     />
   );

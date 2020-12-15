@@ -177,6 +177,8 @@ type Mutation {
     deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
     "Deletes a Group."
     deleteGroup(input: deleteGroupInput!): deleteGroupPayload
+    "Deletes a Subject."
+    deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
     "Deletes a SubjectType."
     deleteSubjectType(input: deleteSubjectTypeInput!): deleteSubjectTypePayload
     "Deletes a User."
@@ -443,6 +445,11 @@ type deleteGroupPayload {
     group: Group
 }
 
+type deleteSubjectPayload {
+    clientMutationId: String
+    subject: Subject
+}
+
 type deleteSubjectTypePayload {
     clientMutationId: String
     subjectType: SubjectType
@@ -525,7 +532,6 @@ input createClassGroupInput {
 input createGroupInput {
     clientMutationId: String
     section: String!
-    users: [String]
 }
 
 input createSubjectInput {
@@ -557,6 +563,11 @@ input deleteClassGroupInput {
 }
 
 input deleteGroupInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input deleteSubjectInput {
     clientMutationId: String
     id: ID!
 }
@@ -607,7 +618,6 @@ input updateGroupInput {
     clientMutationId: String
     id: ID!
     section: String
-    users: [String]
 }
 
 input updateSubjectTypeInput {
@@ -631,5 +641,5 @@ input updateUsersClassGroupInput {
     addUsers: [ID]
     clientMutationId: String
     deleteUsers: [ID]
-    id: [ID]
+    id: ID!
 }
