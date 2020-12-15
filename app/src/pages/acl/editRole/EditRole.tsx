@@ -4,10 +4,8 @@ import {
   Box,
   Button,
   Grid,
-  makeStyles,
   Paper,
   TextField,
-  Theme,
   Typography,
 } from '@material-ui/core';
 import Link from 'next/link';
@@ -19,25 +17,19 @@ import namespaces from 'lib/i18n/namespaces';
 
 import { EditRoleProps } from 'pages/acl/editRole/types';
 
+import addRolePrefix from 'components/addRolePrefix';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  removeButton: {
-    backgroundColor: theme.palette.error.main,
-    '&:hover': { backgroundColor: theme.palette.error.main },
-  },
-}));
+import stripRolePrefix from 'components/stripRolePrefix';
 
 const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
-  const classes = useStyles();
   const [values, setValues] = useState({ name: { value: '', error: false } });
   const { t } = useTranslation(namespaces.pages.acl.editRole);
 
   useEffect(() => {
     setValues(values => ({
       ...values,
-      name: { value: role.name, error: false },
+      name: { value: stripRolePrefix(role.name), error: false },
     }));
   }, [role]);
 
@@ -55,7 +47,7 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
       ...values,
       name: { ...values.name, error: false },
     }));
-    onSubmit({ name: values.name.value });
+    onSubmit({ name: addRolePrefix(values.name.value) });
   };
 
   const nameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -85,28 +77,14 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
             </Grid>
             <Grid item container justify="flex-end" xs={12}>
               <Box mr={2}>
-                <Button
-                  classes={{
-                    contained: classes.removeButton,
-                    root: classes.removeButton,
-                  }}
-                  variant="contained"
-                >
-                  {t('common:actions.delete')}
-                </Button>
-              </Box>
-              <Box mr={2}>
-                <Button color="primary" variant="contained" type="submit">
-                  {t('common:actions.save')}
-                </Button>
-              </Box>
-              <Grid item>
                 <Link href={routes.acl.index}>
-                  <Button color="secondary" variant="contained">
-                    {t('common:actions.cancel')}
-                  </Button>
+                  <Button color="primary">{t('common:actions.cancel')}</Button>
                 </Link>
-              </Grid>
+              </Box>
+
+              <Button color="primary" variant="contained" type="submit">
+                {t('common:actions.save')}
+              </Button>
             </Grid>
           </Grid>
         </form>
