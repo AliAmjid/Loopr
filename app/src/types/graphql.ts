@@ -4,6 +4,303 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsEditSubjectAddMutation
+// ====================================================
+
+export interface SubjectsEditSubjectAddMutation_createSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface SubjectsEditSubjectAddMutation_createSubject {
+  __typename: "createSubjectPayload";
+  subject: SubjectsEditSubjectAddMutation_createSubject_subject | null;
+}
+
+export interface SubjectsEditSubjectAddMutation {
+  /**
+   * Creates a Subject.
+   */
+  createSubject: SubjectsEditSubjectAddMutation_createSubject | null;
+}
+
+export interface SubjectsEditSubjectAddMutationVariables {
+  input: createSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SubjectsEditSubjectUpdateMutation
+// ====================================================
+
+export interface SubjectsEditSubjectUpdateMutation_editSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface SubjectsEditSubjectUpdateMutation_editSubject {
+  __typename: "editSubjectPayload";
+  subject: SubjectsEditSubjectUpdateMutation_editSubject_subject | null;
+}
+
+export interface SubjectsEditSubjectUpdateMutation {
+  /**
+   * Edits a Subject.
+   */
+  editSubject: SubjectsEditSubjectUpdateMutation_editSubject | null;
+}
+
+export interface SubjectsEditSubjectUpdateMutationVariables {
+  input: editSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectClassGroupsQuery
+// ====================================================
+
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  section: string;
+  year: number;
+  /**
+   * Teacher needs to be user with resource GROUP_TEACHER
+   */
+  teacher: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
+}
+
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsEditSubjectClassGroupsQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (SubjectsEditSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsEditSubjectClassGroupsQuery {
+  classGroups: SubjectsEditSubjectClassGroupsQuery_classGroups | null;
+}
+
+export interface SubjectsEditSubjectClassGroupsQueryVariables {
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectGroupQuery
+// ====================================================
+
+export interface SubjectsEditSubjectGroupQuery_groups_edges_node {
+  __typename: "Group";
+  id: string;
+  section: string;
+}
+
+export interface SubjectsEditSubjectGroupQuery_groups_edges {
+  __typename: "GroupEdge";
+  node: SubjectsEditSubjectGroupQuery_groups_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsEditSubjectGroupQuery_groups {
+  __typename: "GroupConnection";
+  edges: (SubjectsEditSubjectGroupQuery_groups_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsEditSubjectGroupQuery {
+  groups: SubjectsEditSubjectGroupQuery_groups | null;
+}
+
+export interface SubjectsEditSubjectGroupQueryVariables {
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectSubjectQuery
+// ====================================================
+
+export interface SubjectsEditSubjectSubjectQuery_subject_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject_teacher {
+  __typename: "User";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject {
+  __typename: "Subject";
+  id: string;
+  classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
+  group: SubjectsEditSubjectSubjectQuery_subject_group | null;
+  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
+}
+
+export interface SubjectsEditSubjectSubjectQuery {
+  subject: SubjectsEditSubjectSubjectQuery_subject | null;
+}
+
+export interface SubjectsEditSubjectSubjectQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectSummaryClassGroupQuery
+// ====================================================
+
+export interface SubjectsEditSubjectSummaryClassGroupQuery_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface SubjectsEditSubjectSummaryClassGroupQuery_user {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsEditSubjectSummaryClassGroupQuery {
+  classGroup: SubjectsEditSubjectSummaryClassGroupQuery_classGroup | null;
+  user: SubjectsEditSubjectSummaryClassGroupQuery_user | null;
+}
+
+export interface SubjectsEditSubjectSummaryClassGroupQueryVariables {
+  classGroup: string;
+  teacher: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectSummaryGroupQuery
+// ====================================================
+
+export interface SubjectsEditSubjectSummaryGroupQuery_group {
+  __typename: "Group";
+  id: string;
+  section: string;
+}
+
+export interface SubjectsEditSubjectSummaryGroupQuery_user {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsEditSubjectSummaryGroupQuery {
+  group: SubjectsEditSubjectSummaryGroupQuery_group | null;
+  user: SubjectsEditSubjectSummaryGroupQuery_user | null;
+}
+
+export interface SubjectsEditSubjectSummaryGroupQueryVariables {
+  group: string;
+  teacher: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectTeacherQuery
+// ====================================================
+
+export interface SubjectsEditSubjectTeacherQuery_users_edges_node {
+  __typename: "User";
+  id: string;
+  /**
+   * email of user
+   */
+  email: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface SubjectsEditSubjectTeacherQuery_users_edges {
+  __typename: "UserEdge";
+  node: SubjectsEditSubjectTeacherQuery_users_edges_node | null;
+  cursor: string;
+}
+
+export interface SubjectsEditSubjectTeacherQuery_users {
+  __typename: "UserConnection";
+  edges: (SubjectsEditSubjectTeacherQuery_users_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SubjectsEditSubjectTeacherQuery {
+  users: SubjectsEditSubjectTeacherQuery_users | null;
+}
+
+export interface SubjectsEditSubjectTeacherQueryVariables {
+  before?: string | null;
+  after?: string | null;
+  first?: number | null;
+  last?: number | null;
+  resourceName?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UserImportTableCreateUserMutation
 // ====================================================
 
@@ -870,295 +1167,28 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: SubjectsEditSubjectAddMutation
+// GraphQL mutation operation: SubjectsAddSubjectCreateSubjectMutataion
 // ====================================================
 
-export interface SubjectsEditSubjectAddMutation_createSubject_subject {
+export interface SubjectsAddSubjectCreateSubjectMutataion_createSubject_subject {
   __typename: "Subject";
   id: string;
 }
 
-export interface SubjectsEditSubjectAddMutation_createSubject {
+export interface SubjectsAddSubjectCreateSubjectMutataion_createSubject {
   __typename: "createSubjectPayload";
-  subject: SubjectsEditSubjectAddMutation_createSubject_subject | null;
+  subject: SubjectsAddSubjectCreateSubjectMutataion_createSubject_subject | null;
 }
 
-export interface SubjectsEditSubjectAddMutation {
+export interface SubjectsAddSubjectCreateSubjectMutataion {
   /**
    * Creates a Subject.
    */
-  createSubject: SubjectsEditSubjectAddMutation_createSubject | null;
+  createSubject: SubjectsAddSubjectCreateSubjectMutataion_createSubject | null;
 }
 
-export interface SubjectsEditSubjectAddMutationVariables {
+export interface SubjectsAddSubjectCreateSubjectMutataionVariables {
   input: createSubjectInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: SubjectsEditSubjectUpdateMutation
-// ====================================================
-
-export interface SubjectsEditSubjectUpdateMutation_editSubject_subject {
-  __typename: "Subject";
-  id: string;
-}
-
-export interface SubjectsEditSubjectUpdateMutation_editSubject {
-  __typename: "editSubjectPayload";
-  subject: SubjectsEditSubjectUpdateMutation_editSubject_subject | null;
-}
-
-export interface SubjectsEditSubjectUpdateMutation {
-  /**
-   * Edits a Subject.
-   */
-  editSubject: SubjectsEditSubjectUpdateMutation_editSubject | null;
-}
-
-export interface SubjectsEditSubjectUpdateMutationVariables {
-  input: editSubjectInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectClassGroupsQuery
-// ====================================================
-
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher {
-  __typename: "User";
-  id: string;
-  firstname: string;
-  lastname: string;
-}
-
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node {
-  __typename: "ClassGroup";
-  id: string;
-  section: string;
-  year: number;
-  /**
-   * Teacher needs to be user with resource GROUP_TEACHER
-   */
-  teacher: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
-}
-
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups_edges {
-  __typename: "ClassGroupEdge";
-  node: SubjectsEditSubjectClassGroupsQuery_classGroups_edges_node | null;
-  cursor: string;
-}
-
-export interface SubjectsEditSubjectClassGroupsQuery_classGroups {
-  __typename: "ClassGroupConnection";
-  edges: (SubjectsEditSubjectClassGroupsQuery_classGroups_edges | null)[] | null;
-  totalCount: number;
-}
-
-export interface SubjectsEditSubjectClassGroupsQuery {
-  classGroups: SubjectsEditSubjectClassGroupsQuery_classGroups | null;
-}
-
-export interface SubjectsEditSubjectClassGroupsQueryVariables {
-  before?: string | null;
-  after?: string | null;
-  first?: number | null;
-  last?: number | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectGroupQuery
-// ====================================================
-
-export interface SubjectsEditSubjectGroupQuery_groups_edges_node {
-  __typename: "Group";
-  id: string;
-  section: string;
-}
-
-export interface SubjectsEditSubjectGroupQuery_groups_edges {
-  __typename: "GroupEdge";
-  node: SubjectsEditSubjectGroupQuery_groups_edges_node | null;
-  cursor: string;
-}
-
-export interface SubjectsEditSubjectGroupQuery_groups {
-  __typename: "GroupConnection";
-  edges: (SubjectsEditSubjectGroupQuery_groups_edges | null)[] | null;
-  totalCount: number;
-}
-
-export interface SubjectsEditSubjectGroupQuery {
-  groups: SubjectsEditSubjectGroupQuery_groups | null;
-}
-
-export interface SubjectsEditSubjectGroupQueryVariables {
-  before?: string | null;
-  after?: string | null;
-  first?: number | null;
-  last?: number | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectSubjectQuery
-// ====================================================
-
-export interface SubjectsEditSubjectSubjectQuery_subject_classGroup {
-  __typename: "ClassGroup";
-  id: string;
-}
-
-export interface SubjectsEditSubjectSubjectQuery_subject_group {
-  __typename: "Group";
-  id: string;
-}
-
-export interface SubjectsEditSubjectSubjectQuery_subject_teacher {
-  __typename: "User";
-  id: string;
-}
-
-export interface SubjectsEditSubjectSubjectQuery_subject {
-  __typename: "Subject";
-  id: string;
-  classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
-  group: SubjectsEditSubjectSubjectQuery_subject_group | null;
-  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
-}
-
-export interface SubjectsEditSubjectSubjectQuery {
-  subject: SubjectsEditSubjectSubjectQuery_subject | null;
-}
-
-export interface SubjectsEditSubjectSubjectQueryVariables {
-  id: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectSummaryClassGroupQuery
-// ====================================================
-
-export interface SubjectsEditSubjectSummaryClassGroupQuery_classGroup {
-  __typename: "ClassGroup";
-  id: string;
-  year: number;
-  section: string;
-}
-
-export interface SubjectsEditSubjectSummaryClassGroupQuery_user {
-  __typename: "User";
-  id: string;
-  firstname: string;
-  lastname: string;
-}
-
-export interface SubjectsEditSubjectSummaryClassGroupQuery {
-  classGroup: SubjectsEditSubjectSummaryClassGroupQuery_classGroup | null;
-  user: SubjectsEditSubjectSummaryClassGroupQuery_user | null;
-}
-
-export interface SubjectsEditSubjectSummaryClassGroupQueryVariables {
-  classGroup: string;
-  teacher: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectSummaryGroupQuery
-// ====================================================
-
-export interface SubjectsEditSubjectSummaryGroupQuery_group {
-  __typename: "Group";
-  id: string;
-  section: string;
-}
-
-export interface SubjectsEditSubjectSummaryGroupQuery_user {
-  __typename: "User";
-  id: string;
-  firstname: string;
-  lastname: string;
-}
-
-export interface SubjectsEditSubjectSummaryGroupQuery {
-  group: SubjectsEditSubjectSummaryGroupQuery_group | null;
-  user: SubjectsEditSubjectSummaryGroupQuery_user | null;
-}
-
-export interface SubjectsEditSubjectSummaryGroupQueryVariables {
-  group: string;
-  teacher: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectTeacherQuery
-// ====================================================
-
-export interface SubjectsEditSubjectTeacherQuery_users_edges_node {
-  __typename: "User";
-  id: string;
-  /**
-   * email of user
-   */
-  email: string;
-  firstname: string;
-  lastname: string;
-}
-
-export interface SubjectsEditSubjectTeacherQuery_users_edges {
-  __typename: "UserEdge";
-  node: SubjectsEditSubjectTeacherQuery_users_edges_node | null;
-  cursor: string;
-}
-
-export interface SubjectsEditSubjectTeacherQuery_users {
-  __typename: "UserConnection";
-  edges: (SubjectsEditSubjectTeacherQuery_users_edges | null)[] | null;
-  totalCount: number;
-}
-
-export interface SubjectsEditSubjectTeacherQuery {
-  users: SubjectsEditSubjectTeacherQuery_users | null;
-}
-
-export interface SubjectsEditSubjectTeacherQueryVariables {
-  before?: string | null;
-  after?: string | null;
-  first?: number | null;
-  last?: number | null;
-  resourceName?: string | null;
 }
 
 /* tslint:disable */
