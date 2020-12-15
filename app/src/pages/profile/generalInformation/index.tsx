@@ -3,7 +3,6 @@ import React from 'react';
 import { ListItemText } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
-import namespaces from 'lib/i18n/namespaces';
 
 import HorizontalList from 'components/HorizontalList';
 import stripRolePrefix from 'components/stripRolePrefix';

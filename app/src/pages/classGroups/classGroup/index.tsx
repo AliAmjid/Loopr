@@ -207,7 +207,7 @@ const ClassIndex: React.FC = () => {
   const teacherChangeHandler = (id: string): Promise<boolean> => {
     if (selectedClassGroup) {
       return updateClassGroup({
-        variables: { input: { id: selectedClassGroup } },
+        variables: { input: { id: selectedClassGroup, teacher: id } },
       })
         .then(() => {
           enqueueSnackbar(t('snackbars.teacherEdit.success'), {

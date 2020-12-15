@@ -3,10 +3,10 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import {

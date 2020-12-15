@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
-import namespaces from 'lib/i18n/namespaces';
 
 import useAddCSVState from 'pages/users/addCSV/state';
 import { FieldType } from 'pages/users/addCSV/types';
