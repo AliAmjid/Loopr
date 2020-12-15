@@ -9,8 +9,8 @@ import {
   TextField,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import {

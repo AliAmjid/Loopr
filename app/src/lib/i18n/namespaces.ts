@@ -22,6 +22,7 @@ export default {
     subjects: {
       index: 'P_subjects_index',
       editSubject: 'P_subjects_editSubject',
+      addSubject: 'P_subjects_addSubject',
     },
   },
   components: {
@@ -31,6 +32,7 @@ export default {
     UserImportTable: 'C_UserImportTable',
     Stepper: 'C_Stepper',
     EditableListItem: 'C_EditableListItem',
+    EditSubject: 'C_EditSubject',
   },
   other: {
     pages: 'O_pages',

@@ -6,6 +6,9 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import SUBJECTS_EDIT_SUBJECT_UPDATE_SUBJECT_MUTATION from 'pages/subjects/editSubject/mutations/update';
 
 import {
@@ -35,6 +38,7 @@ const EditSubjectIndex: React.FC = () => {
     SubjectsEditSubjectUpdateSubjectMutationVariables
   >(SUBJECTS_EDIT_SUBJECT_UPDATE_SUBJECT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.subjects.editSubject);
 
   const submitHandler = (args: SubmitArgs): Promise<void> => {
     return updateSubject({
@@ -42,10 +46,10 @@ const EditSubjectIndex: React.FC = () => {
     })
       .then(() => {
         router.push(routes.subjects.index);
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
       });
   };
 
@@ -57,7 +61,7 @@ const EditSubjectIndex: React.FC = () => {
         teacher: subjectData?.subject?.teacher?.id,
       }}
       loading={subjectLoading}
-      submitButtonLabel="Edit"
+      submitButtonLabel={t('common:actions.edit')}
       onSubmit={submitHandler}
     />
   );

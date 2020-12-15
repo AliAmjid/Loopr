@@ -23,9 +23,7 @@
   },
   "subjects": {
     "index": "Předměty",
-    "editSubject": {
-      "add": "Přidat předmět",
-      "edit": "Upravit předmět"
-    }
+    "editSubject": "Upravit předmět",
+    "addSubject": "Přidat předmět"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "snackbars": {
+    "add": {
+      "success": "Předmět úspěšně přidán",
+      "error": "Nepovedlo se přidat předmět"
+    }
+  }
+}

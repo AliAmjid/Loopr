@@ -1,3 +1,5 @@
+import routes from 'config/routes';
+
 import namespaces from 'lib/i18n/namespaces';
 import materialTableNamespaces from 'lib/material-table/namespaces';
 
@@ -6,7 +8,7 @@ import { PageOptions } from 'components/withPage/types';
 
 const classGroupsPageOptions: PageOptions = {
   title: 'classGroups.index',
-  breadcrumbs: [],
+  breadcrumbs: [{ label: 'classGroups.index', href: routes.classGroups.index }],
   namespaces: [
     ...sideListNamespaces,
     ...materialTableNamespaces,

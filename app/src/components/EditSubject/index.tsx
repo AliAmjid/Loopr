@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 
 import { Paper } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import Stepper from 'components/Stepper';
@@ -28,6 +31,7 @@ const EditSubject: React.FC<EditSubjectProps> = props => {
     setClassGroup: state.setClassGroup,
     setTeacher: state.setTeacher,
   }));
+  const { t } = useTranslation(namespaces.components.EditSubject);
 
   useEffect(() => {
     setTeacher(props.defaultValues?.teacher);
@@ -52,19 +56,19 @@ const EditSubject: React.FC<EditSubjectProps> = props => {
           steps={[
             {
               index: 0,
-              label: 'Group/ClassGroup',
+              label: t('group/classGroup'),
               component: <GroupsIndex />,
               nextActive: group !== undefined || classGroup !== undefined,
             },
             {
               index: 1,
-              label: 'Teacher',
+              label: t('teacher'),
               component: <TeachersIndex />,
               nextActive: teacher !== undefined,
             },
             {
               index: 2,
-              label: 'Summary',
+              label: t('summary'),
               component: (
                 <SummaryIndex
                   submitButtonLabel={props.submitButtonLabel}

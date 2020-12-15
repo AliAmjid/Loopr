@@ -3,8 +3,11 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 import routes from 'config/routes';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import {
   SubjectsAddSubjectCreateSubjectMutataion,
@@ -25,6 +28,7 @@ const AddSubjectIndex: React.FC = () => {
   >(SUBJECTS_ADD_SUBJECT_CREATE_SUBJECT_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+  const { t } = useTranslation(namespaces.pages.subjects.addSubject);
 
   const submitHandler = (args: SubmitArgs): Promise<void> => {
     return createSubject({
@@ -33,15 +37,20 @@ const AddSubjectIndex: React.FC = () => {
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
         router.push(routes.subjects.index);
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
       });
   };
 
-  return <EditSubject submitButtonLabel="Add" onSubmit={submitHandler} />;
+  return (
+    <EditSubject
+      submitButtonLabel={t('common:actions.add')}
+      onSubmit={submitHandler}
+    />
+  );
 };
 
 export default withPage(addSubjectPageOptions)(AddSubjectIndex);

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import GROUPS_GROUP_QUERY from 'pages/groups/queries/group';

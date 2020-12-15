@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import { GroupListProps } from 'pages/groups/groupList/types';

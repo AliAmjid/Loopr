@@ -1,9 +1,8 @@
 {
-  "groups/classGroups": "Skupiny/Třídy",
-  "classGroups": "Třídy",
-  "groups": "Skupiny",
-  "classGroup": "Třída",
-  "group": "Skupina",
-  "teacher": "Učitel",
-  "summary": "Shrnutí"
+  "snackbars": {
+    "edit": {
+      "success": "Předmět úspěšně upraven",
+      "error": "Nepovedlo se upravit předmět"
+    }
+  }
 }

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import { AddValues, Group, UpdateValues } from 'pages/groups/groupList/types';
