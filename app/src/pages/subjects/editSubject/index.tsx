@@ -4,6 +4,8 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
+import routes from 'config/routes';
+
 import SUBJECTS_EDIT_SUBJECT_UPDATE_SUBJECT_MUTATION from 'pages/subjects/editSubject/mutations/update';
 
 import {
@@ -39,6 +41,7 @@ const EditSubjectIndex: React.FC = () => {
       variables: { input: { ...args, id: `${router.query.subjectId}` } },
     })
       .then(() => {
+        router.push(routes.subjects.index);
         enqueueSnackbar('S', { variant: 'success' });
       })
       .catch(() => {
