@@ -21,6 +21,7 @@ export interface EditSubjectProps {
     classGroup?: string;
     teacher?: string;
   };
+  loading?: boolean;
   submitButtonLabel: string;
   onSubmit: (args: SubmitArgs) => Promise<void>;
 }

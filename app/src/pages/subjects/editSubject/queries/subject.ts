@@ -4,10 +4,10 @@ const SUBJECTS_EDIT_SUBJECT_SUBJECT_QUERY = gql`
   query SubjectsEditSubjectSubjectQuery($id: ID!) {
     subject(id: $id) {
       id
-      classGroup {
+      group {
         id
       }
-      group {
+      classGroup {
         id
       }
       teacher {

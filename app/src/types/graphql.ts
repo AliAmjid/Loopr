@@ -4,66 +4,6 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: SubjectsEditSubjectAddMutation
-// ====================================================
-
-export interface SubjectsEditSubjectAddMutation_createSubject_subject {
-  __typename: "Subject";
-  id: string;
-}
-
-export interface SubjectsEditSubjectAddMutation_createSubject {
-  __typename: "createSubjectPayload";
-  subject: SubjectsEditSubjectAddMutation_createSubject_subject | null;
-}
-
-export interface SubjectsEditSubjectAddMutation {
-  /**
-   * Creates a Subject.
-   */
-  createSubject: SubjectsEditSubjectAddMutation_createSubject | null;
-}
-
-export interface SubjectsEditSubjectAddMutationVariables {
-  input: createSubjectInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: SubjectsEditSubjectUpdateMutation
-// ====================================================
-
-export interface SubjectsEditSubjectUpdateMutation_editSubject_subject {
-  __typename: "Subject";
-  id: string;
-}
-
-export interface SubjectsEditSubjectUpdateMutation_editSubject {
-  __typename: "editSubjectPayload";
-  subject: SubjectsEditSubjectUpdateMutation_editSubject_subject | null;
-}
-
-export interface SubjectsEditSubjectUpdateMutation {
-  /**
-   * Edits a Subject.
-   */
-  editSubject: SubjectsEditSubjectUpdateMutation_editSubject | null;
-}
-
-export interface SubjectsEditSubjectUpdateMutationVariables {
-  input: editSubjectInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL query operation: SubjectsEditSubjectClassGroupsQuery
 // ====================================================
 
@@ -144,46 +84,6 @@ export interface SubjectsEditSubjectGroupQueryVariables {
   after?: string | null;
   first?: number | null;
   last?: number | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: SubjectsEditSubjectSubjectQuery
-// ====================================================
-
-export interface SubjectsEditSubjectSubjectQuery_subject_classGroup {
-  __typename: "ClassGroup";
-  id: string;
-}
-
-export interface SubjectsEditSubjectSubjectQuery_subject_group {
-  __typename: "Group";
-  id: string;
-}
-
-export interface SubjectsEditSubjectSubjectQuery_subject_teacher {
-  __typename: "User";
-  id: string;
-}
-
-export interface SubjectsEditSubjectSubjectQuery_subject {
-  __typename: "Subject";
-  id: string;
-  classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
-  group: SubjectsEditSubjectSubjectQuery_subject_group | null;
-  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
-}
-
-export interface SubjectsEditSubjectSubjectQuery {
-  subject: SubjectsEditSubjectSubjectQuery_subject | null;
-}
-
-export interface SubjectsEditSubjectSubjectQueryVariables {
-  id: string;
 }
 
 /* tslint:disable */
@@ -1189,6 +1089,76 @@ export interface SubjectsAddSubjectCreateSubjectMutataion {
 
 export interface SubjectsAddSubjectCreateSubjectMutataionVariables {
   input: createSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SubjectsEditSubjectUpdateSubjectMutation
+// ====================================================
+
+export interface SubjectsEditSubjectUpdateSubjectMutation_editSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface SubjectsEditSubjectUpdateSubjectMutation_editSubject {
+  __typename: "editSubjectPayload";
+  subject: SubjectsEditSubjectUpdateSubjectMutation_editSubject_subject | null;
+}
+
+export interface SubjectsEditSubjectUpdateSubjectMutation {
+  /**
+   * Edits a Subject.
+   */
+  editSubject: SubjectsEditSubjectUpdateSubjectMutation_editSubject | null;
+}
+
+export interface SubjectsEditSubjectUpdateSubjectMutationVariables {
+  input: editSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SubjectsEditSubjectSubjectQuery
+// ====================================================
+
+export interface SubjectsEditSubjectSubjectQuery_subject_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject_teacher {
+  __typename: "User";
+  id: string;
+}
+
+export interface SubjectsEditSubjectSubjectQuery_subject {
+  __typename: "Subject";
+  id: string;
+  group: SubjectsEditSubjectSubjectQuery_subject_group | null;
+  classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
+  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
+}
+
+export interface SubjectsEditSubjectSubjectQuery {
+  subject: SubjectsEditSubjectSubjectQuery_subject | null;
+}
+
+export interface SubjectsEditSubjectSubjectQueryVariables {
+  id: string;
 }
 
 /* tslint:disable */

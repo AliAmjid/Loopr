@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 
 import { Paper } from '@material-ui/core';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import Stepper from 'components/Stepper';
 
 import GroupsIndex from './groups';
@@ -29,8 +31,9 @@ const EditSubject: React.FC<EditSubjectProps> = props => {
 
   useEffect(() => {
     setTeacher(props.defaultValues?.teacher);
-    setClassGroup(props.defaultValues?.classGroup);
-    setGroup(props.defaultValues?.group);
+    if (props.defaultValues?.classGroup)
+      setClassGroup(props.defaultValues?.classGroup);
+    if (props.defaultValues?.group) setGroup(props.defaultValues?.group);
   }, [props.defaultValues]);
 
   const submitHandler = (): Promise<void> => {
@@ -43,33 +46,36 @@ const EditSubject: React.FC<EditSubjectProps> = props => {
 
   return (
     <Paper>
-      <Stepper
-        steps={[
-          {
-            index: 0,
-            label: 'Group/ClassGroup',
-            component: <GroupsIndex />,
-            nextActive: group !== undefined || classGroup !== undefined,
-          },
-          {
-            index: 1,
-            label: 'Teacher',
-            component: <TeachersIndex />,
-            nextActive: teacher !== undefined,
-          },
-          {
-            index: 2,
-            label: 'Summary',
-            component: (
-              <SummaryIndex
-                submitButtonLabel={props.submitButtonLabel}
-                onSubmit={submitHandler}
-              />
-            ),
-            nextActive: false,
-          },
-        ]}
-      />
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={props.loading || false} />
+        <Stepper
+          steps={[
+            {
+              index: 0,
+              label: 'Group/ClassGroup',
+              component: <GroupsIndex />,
+              nextActive: group !== undefined || classGroup !== undefined,
+            },
+            {
+              index: 1,
+              label: 'Teacher',
+              component: <TeachersIndex />,
+              nextActive: teacher !== undefined,
+            },
+            {
+              index: 2,
+              label: 'Summary',
+              component: (
+                <SummaryIndex
+                  submitButtonLabel={props.submitButtonLabel}
+                  onSubmit={submitHandler}
+                />
+              ),
+              nextActive: false,
+            },
+          ]}
+        />
+      </OverlayLoadingContainer>
     </Paper>
   );
 };
