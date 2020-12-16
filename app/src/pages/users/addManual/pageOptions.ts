@@ -6,7 +6,7 @@ import userImportTableNamespaces from 'components/UserImportTable/namespaces';
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
 import { PageOptions } from 'components/withPage/types';
 
-export const addManualBreadcrumbs: Breadcrumbs = [
+const addManualBreadcrumbs: Breadcrumbs = [
   ...usersBreadcrumbs,
   { label: 'users.addManual', href: routes.users.addManual },
 ];

@@ -14,7 +14,7 @@ export interface ClassGroup {
   section: string;
 }
 
-export type ClassGroups = ClassGroup[];
+type ClassGroups = ClassGroup[];
 
 export interface UpdateValues {
   id: string;

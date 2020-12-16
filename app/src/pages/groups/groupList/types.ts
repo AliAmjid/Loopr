@@ -12,7 +12,7 @@ export interface Group {
   section: string;
 }
 
-export type Groups = Group[];
+type Groups = Group[];
 
 export interface UpdateValues {
   id: string;

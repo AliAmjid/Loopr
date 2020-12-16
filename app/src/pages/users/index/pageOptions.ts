@@ -11,7 +11,7 @@ export const usersBreadcrumbs: Breadcrumbs = [
   { label: 'users.index', href: routes.users.index },
 ];
 
-export const usersNamespaces = [
+const usersNamespaces = [
   namespaces.pages.users.index,
   ...materialTableNamespaces,
 ];

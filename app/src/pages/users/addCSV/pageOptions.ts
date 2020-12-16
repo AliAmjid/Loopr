@@ -9,7 +9,7 @@ import userImportTableNamespaces from 'components/UserImportTable/namespaces';
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
 import { PageOptions } from 'components/withPage/types';
 
-export const addCSVBreadcrumbs: Breadcrumbs = [
+const addCSVBreadcrumbs: Breadcrumbs = [
   ...usersBreadcrumbs,
   { label: 'users.addCSV', href: routes.users.addCSV },
 ];

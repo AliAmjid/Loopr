@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 
 const command =
-  'ts-prune -p tsconfig.json | grep -v pages | grep -v **/*.stories.tsx | grep -v src/types/graphql.ts';
+  'ts-prune -p tsconfig.json | grep -v ^pages | grep -v **/*.stories.tsx | grep -v src/types/graphql.ts';
 
 exec(command, (err, stdout) => {
   // eslint-disable-next-line no-console

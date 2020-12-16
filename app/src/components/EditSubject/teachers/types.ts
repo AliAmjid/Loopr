@@ -7,7 +7,7 @@ export interface Teacher {
   lastname: string;
 }
 
-export type Teachers = Teacher[];
+type Teachers = Teacher[];
 
 export type TeacherGetReturn = Promise<{
   totalCount: number;
