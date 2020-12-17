@@ -47,7 +47,6 @@ class GroupTest extends BaseTestCase
             count($users) - 1,
             count($response->getData()['updateUsersClassGroup']['classGroup']['users']['edges'])
         );
-
     }
 
     public function testUpdateUsersGroup()

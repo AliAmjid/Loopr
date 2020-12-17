@@ -87,7 +87,7 @@ abstract class BaseTestCase extends TestCase
         foreach ($errors as $error) {
             $loopr = $error['loopr-error'] ?? null;
             if (!$loopr) {
-                throw new \RuntimeException("Loopr secction is missing!!!");
+                throw new \RuntimeException("Loopr secction is missing!");
             }
             if ($loopr['code'] == $errorCode) {
                 $errorFounded = true;
