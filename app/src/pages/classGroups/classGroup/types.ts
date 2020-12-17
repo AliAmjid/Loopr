@@ -5,6 +5,9 @@ export type DetailClassGroupUser = {
   email: string;
   firstname: string;
   lastname: string;
+  classGroup?: {
+    id: string;
+  } | null;
   tableData?: {
     checked?: boolean;
   };

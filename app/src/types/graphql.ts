@@ -710,6 +710,11 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
 // GraphQL query operation: ClassGroupsUsersQuery
 // ====================================================
 
+export interface ClassGroupsUsersQuery_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
 export interface ClassGroupsUsersQuery_users_edges_node {
   __typename: "User";
   id: string;
@@ -719,6 +724,7 @@ export interface ClassGroupsUsersQuery_users_edges_node {
   email: string;
   firstname: string;
   lastname: string;
+  classGroup: ClassGroupsUsersQuery_users_edges_node_classGroup | null;
 }
 
 export interface ClassGroupsUsersQuery_users_edges {
@@ -1101,25 +1107,25 @@ export interface SubjectsAddSubjectCreateSubjectMutataionVariables {
 // GraphQL mutation operation: SubjectsEditSubjectUpdateSubjectMutation
 // ====================================================
 
-export interface SubjectsEditSubjectUpdateSubjectMutation_editSubject_subject {
+export interface SubjectsEditSubjectUpdateSubjectMutation_updateSubject_subject {
   __typename: "Subject";
   id: string;
 }
 
-export interface SubjectsEditSubjectUpdateSubjectMutation_editSubject {
-  __typename: "editSubjectPayload";
-  subject: SubjectsEditSubjectUpdateSubjectMutation_editSubject_subject | null;
+export interface SubjectsEditSubjectUpdateSubjectMutation_updateSubject {
+  __typename: "updateSubjectPayload";
+  subject: SubjectsEditSubjectUpdateSubjectMutation_updateSubject_subject | null;
 }
 
 export interface SubjectsEditSubjectUpdateSubjectMutation {
   /**
-   * Edits a Subject.
+   * Updates a Subject.
    */
-  editSubject: SubjectsEditSubjectUpdateSubjectMutation_editSubject | null;
+  updateSubject: SubjectsEditSubjectUpdateSubjectMutation_updateSubject | null;
 }
 
 export interface SubjectsEditSubjectUpdateSubjectMutationVariables {
-  input: editSubjectInput;
+  input: updateSubjectInput;
 }
 
 /* tslint:disable */
@@ -1385,137 +1391,6 @@ export interface SubjectsSubjectTypesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: UsersAddCsvCreateUserMutation
-// ====================================================
-
-export interface UsersAddCsvCreateUserMutation_createUser_user {
-  __typename: "User";
-  id: string;
-}
-
-export interface UsersAddCsvCreateUserMutation_createUser {
-  __typename: "createUserPayload";
-  user: UsersAddCsvCreateUserMutation_createUser_user | null;
-}
-
-export interface UsersAddCsvCreateUserMutation {
-  /**
-   * Creates a User.
-   */
-  createUser: UsersAddCsvCreateUserMutation_createUser | null;
-}
-
-export interface UsersAddCsvCreateUserMutationVariables {
-  input: createUserInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: UsersAddManualCreateUserMutation
-// ====================================================
-
-export interface UsersAddManualCreateUserMutation_createUser_user {
-  __typename: "User";
-  id: string;
-}
-
-export interface UsersAddManualCreateUserMutation_createUser {
-  __typename: "createUserPayload";
-  user: UsersAddManualCreateUserMutation_createUser_user | null;
-}
-
-export interface UsersAddManualCreateUserMutation {
-  /**
-   * Creates a User.
-   */
-  createUser: UsersAddManualCreateUserMutation_createUser | null;
-}
-
-export interface UsersAddManualCreateUserMutationVariables {
-  input: createUserInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: UsersAddManualUpdateUser
-// ====================================================
-
-export interface UsersAddManualUpdateUser_updateUser_user_role {
-  __typename: "AclRole";
-  id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
-  name: string;
-}
-
-export interface UsersAddManualUpdateUser_updateUser_user {
-  __typename: "User";
-  firstname: string;
-  lastname: string;
-  /**
-   * email of user
-   */
-  email: string;
-  role: UsersAddManualUpdateUser_updateUser_user_role;
-}
-
-export interface UsersAddManualUpdateUser_updateUser {
-  __typename: "updateUserPayload";
-  user: UsersAddManualUpdateUser_updateUser_user | null;
-}
-
-export interface UsersAddManualUpdateUser {
-  /**
-   * Updates a User.
-   */
-  updateUser: UsersAddManualUpdateUser_updateUser | null;
-}
-
-export interface UsersAddManualUpdateUserVariables {
-  input: updateUserInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: UsersAddManualAclRolesQuery
-// ====================================================
-
-export interface UsersAddManualAclRolesQuery_aclRoles {
-  __typename: "AclRole";
-  id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
-  name: string;
-}
-
-export interface UsersAddManualAclRolesQuery {
-  aclRoles: (UsersAddManualAclRolesQuery_aclRoles | null)[] | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL query operation: UsersUsersQuery
 // ====================================================
 
@@ -1745,15 +1620,6 @@ export interface deleteSubjectTypeInput {
   id: string;
 }
 
-export interface editSubjectInput {
-  classGroup?: string | null;
-  clientMutationId?: string | null;
-  group?: string | null;
-  id: string;
-  subjectType?: string | null;
-  teacher?: string | null;
-}
-
 export interface updateAclRoleInput {
   clientMutationId?: string | null;
   id: string;
@@ -1773,6 +1639,15 @@ export interface updateGroupInput {
   clientMutationId?: string | null;
   id: string;
   section?: string | null;
+}
+
+export interface updateSubjectInput {
+  classGroup?: string | null;
+  clientMutationId?: string | null;
+  group?: string | null;
+  id: string;
+  subjectType?: string | null;
+  teacher?: string | null;
 }
 
 export interface updateSubjectTypeInput {

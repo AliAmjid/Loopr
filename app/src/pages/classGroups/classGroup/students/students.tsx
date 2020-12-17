@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { Box, Button } from '@material-ui/core';
 import { Query } from 'material-table';
 
-import { useTranslation } from 'lib/i18n';
+import { useTranslation } from 'lib/i18n/index';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
-import { DetailClassGroupUser, StudentsProps } from './types';
+import { ClassGroupUser, StudentsProps } from './types';
 
 const Students: React.FC<StudentsProps> = props => {
   const { t } = useTranslation(namespaces.pages.classGroups.index);
@@ -18,15 +18,19 @@ const Students: React.FC<StudentsProps> = props => {
     <>
       <MaterialTable
         key={`${props.selectedClassGroup}-${editing}`}
-        uniqueName="pages/classGroups/classGoup/students"
+        uniqueName="pages/classGroups/classGroup/students"
         title={t('students')}
-        data={(query: Query<DetailClassGroupUser>) =>
+        data={(query: Query<ClassGroupUser>) =>
           editing
-            ? props.onGetUsers(query).then(res => ({
-                page: query.page,
-                totalCount: res.totalCount,
-                data: res.users,
-              }))
+            ? props.onGetUsers(query).then(res => {
+                return {
+                  page: query.page,
+                  totalCount: res.totalCount,
+                  data: res.users.map(user => ({
+                    ...user,
+                  })),
+                };
+              })
             : props.onGetClassGroupUsers(query).then(res => ({
                 page: query.page,
                 totalCount: res.totalCount,

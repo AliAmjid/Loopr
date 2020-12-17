@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const next = require('next');
+const chalk = require('chalk');
 
 const prefabConfig = require('./src/config/prefab');
 
@@ -34,5 +35,9 @@ const createConfig = () => {
   server.get('*', (req, res) => handle(req, res));
 
   await server.listen(port);
-  console.log(`> Ready on http://localhost:${port}`); // eslint-disable-line no-console
+  // eslint-disable-next-line no-console
+  console.log(
+    chalk.green('ready'),
+    `- started server on http://localhost:${port}`,
+  );
 })();

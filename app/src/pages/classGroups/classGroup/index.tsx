@@ -142,7 +142,7 @@ const ClassIndex: React.FC = () => {
           query: CLASS_GROUPS_USERS_QUERY,
           variables: {
             ...variables,
-            resourceName: teacher ? resources.group.teacher : '',
+            resourceName: teacher ? resources.group.teacher : undefined,
           },
         })
         .then(res => {
@@ -158,7 +158,7 @@ const ClassIndex: React.FC = () => {
                 users.push({
                   ...node,
                   tableData: {
-                    checked: selected.some(id => id === node.id),
+                    checked: node.classGroup?.id === selectedClassGroup,
                   },
                 });
               }
