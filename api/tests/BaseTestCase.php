@@ -5,6 +5,7 @@ namespace App\Tests;
 
 
 use ApiPlatform\Core\Api\IriConverterInterface;
+use App\Entity\User;
 use App\GraphqlClient\GraphQLClient;
 use App\GraphqlClient\GraphQLClientBuilder;
 use App\Kernel;
@@ -43,7 +44,7 @@ abstract class BaseTestCase extends TestCase
         parent::tearDown();
     }
 
-    protected function getClient($token = null)
+    protected function clientFactory($token = null)
     {
         return GraphQLClientBuilder::build('http://api:80/graphql', $token ? [
             'headers' => [
@@ -52,11 +53,11 @@ abstract class BaseTestCase extends TestCase
         ] : []);
     }
 
-    protected function createLoggedClient(
+    protected function client(
         $email,
         $password = 'test'
     ): GraphQLClient {
-        $response = $this->getClient()->query(
+        $response = $this->clientFactory()->query(
         /** @lang GraphQL */
             'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}',
             [
@@ -64,7 +65,7 @@ abstract class BaseTestCase extends TestCase
                 'password' => $password
             ]);
         $this->assertNoErrors($response);
-        return $this->getClient($response->getData()['getToken']['token']);
+        return $this->clientFactory($response->getData()['getToken']['token']);
     }
 
 

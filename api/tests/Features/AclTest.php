@@ -14,7 +14,7 @@ class AclTest extends BaseTestCase {
 
     public function testGetTokenAndLogin() {
         $user = $this->createRandomUser();
-        $client = $this->getClient();
+        $client = $this->clientFactory();
         $response = $client->query(
         /** @lang GraphQL */
             'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}', [
@@ -23,7 +23,7 @@ class AclTest extends BaseTestCase {
         ]);
 
         $this->assertNoErrors($response);
-        $loggedClient = $this->getClient($response->getData()['getToken']['token']);
+        $loggedClient = $this->clientFactory($response->getData()['getToken']['token']);
         $response = $loggedClient->query(
         /** @lang GraphQL */
             'query {meUser{_id,id,email,firstname,lastname,role{resources{name,dependsOn{name}}}}}'
@@ -36,7 +36,7 @@ class AclTest extends BaseTestCase {
         $this->assertSecurityResources(
             [AclResourceEnum::ACL_ROLE_CREATE],
             function (User $user): Response {
-                $client = $this->createLoggedClient($user->getEmail(), 'test');
+                $client = $this->client($user->getEmail(), 'test');
                 $response = $client->query(/** @lang GraphQL */ 'mutation role($name: String!, $idResources: [String]) {
         createAclRole(input: {
         name: $name,
@@ -55,7 +55,7 @@ class AclTest extends BaseTestCase {
     public function testCreateRoleWithInvalidName() {
         $user = $this->createRandomUser('test', [AclResourceEnum::ACL_ROLE_CREATE]);
 
-        $client = $this->createLoggedClient($user->getEmail());
+        $client = $this->client($user->getEmail());
         $query = /** @lang GraphQL */
             '
         mutation role($name: String!, $idResources: [String]) {
@@ -77,7 +77,7 @@ class AclTest extends BaseTestCase {
     public function testUpdateAclRole() {
         $this->assertSecurityResources([AclResourceEnum::ACL_ROLE_EDIT], function (User $user, bool $noError) {
             $role = $this->createRoleWithResources([]);
-            $client = $this->createLoggedClient($user->getEmail());
+            $client = $this->client($user->getEmail());
             $query = /** @lang GraphQL */
                 '
         mutation role($name: String!, $idResources: [String], $id: ID!) {

@@ -24,7 +24,7 @@ class UserTest extends BaseTestCase
         $this->assertSecurityResources(
             [AclResourceEnum::USER_SHOW_ALL],
             function (User $user) use ($query): Response {
-                $client = $this->createLoggedClient($user->getEmail());
+                $client = $this->client($user->getEmail());
                 return $client->query($query);
             }
         );
@@ -52,7 +52,7 @@ class UserTest extends BaseTestCase
               }
             }
 ';
-        $client = $this->createLoggedClient($this->createRandomUser('test',
+        $client = $this->client($this->createRandomUser('test',
             [AclResourceEnum::USER_EDIT, AclResourceEnum::USER_SHOW_ALL]
         )->getEmail());
         $response = $client->query($createQuery, [
@@ -88,7 +88,7 @@ class UserTest extends BaseTestCase
             }
 ';
 
-        $client = $this->createLoggedClient($this->createRandomUser('test',
+        $client = $this->client($this->createRandomUser('test',
             [AclResourceEnum::USER_EDIT, AclResourceEnum::USER_SHOW_ALL])->getEmail());
         $response = $client->query($editQuery, [
             'id' => $iri,
@@ -111,7 +111,7 @@ class UserTest extends BaseTestCase
   }
 }';
         $user = $this->createRandomUser('test', [AclResourceEnum::USER_SHOW_ALL]);
-        $client = $this->createLoggedClient($user->getEmail());
+        $client = $this->client($user->getEmail());
         $r = $client->query($query, [
             'id' => 'users/' . $user->getId(),
         ]);
@@ -123,7 +123,7 @@ class UserTest extends BaseTestCase
 
     public function testChangePassword()
     {
-        $client = $this->createLoggedClient($this->createRandomUser('test',
+        $client = $this->client($this->createRandomUser('test',
             AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getEmail());
         $query = '
 mutation changePassword($oldPwd: String! $newPwd: String!) {
@@ -147,7 +147,7 @@ mutation changePassword($oldPwd: String! $newPwd: String!) {
     public function testCreateEmptyEmail()
     {
         $user = $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_ADMIN']);
-        $clinet = $this->createLoggedClient($user->getEmail());
+        $clinet = $this->client($user->getEmail());
         $response = $clinet->query($this->getCreateUserQuery(), [
             'email' => '',
             'password' => 'test123',

@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UserTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <CommandLine>
+      <PhpTestInterpreterSettings>
+        <option name="interpreterName" value="php" />
+      </PhpTestInterpreterSettings>
+    </CommandLine>
+    <TestRunner bootstrap_file="$PROJECT_DIR$/api/tests/bootstrap.php" class="App\Tests\Features\UserTest" configuration_file="$PROJECT_DIR$/api/phpunit.xml" file="$PROJECT_DIR$/api/tests/Features/UserTest.php" scope="Class" use_alternative_bootstrap_file="true" use_alternative_configuration_file="true" />
+    <method v="2" />
+  </configuration>
+</component>

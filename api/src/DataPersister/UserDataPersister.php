@@ -51,18 +51,6 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         } elseif ($data instanceof User && ($context['graphql_operation_name'] ?? null) == 'edit') {
             $data->setPassword($this->encoder->encodePassword($data, $data->getPassword()));
             $result = $this->decorated->persist($data, $context);
-        } elseif ($data instanceof ClassGroup && in_array(($context['graphql_operation_name'] ?? null),
-                ['edit', 'create'])) {
-            /** @var ClassGroup $classGroup */
-            $classGroup = $this->decorated->persist($data, $context);
-            $users = $classGroup->usersToAdd;
-            $this->managerRegistery->getManager()->persist($classGroup);
-            foreach ($users as $user) {
-                $user->setClassGroup($classGroup);
-                $this->managerRegistery->getManager()->persist($user);
-            }
-            $this->managerRegistery->getManager()->flush();
-            return $classGroup;
         } else {
             $result = $this->decorated->persist($data, $context);
         }

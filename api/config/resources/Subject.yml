@@ -17,7 +17,7 @@ App\Entity\Subject:
             security_message: 'r: GROUP_EDIT'
             security: "is_granted('GROUP_EDIT')"
         
-        edit:
+        update:
             security_message: 'r: GROUP_EDIT'
             security: "is_granted('GROUP_EDIT')"
 

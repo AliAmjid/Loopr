@@ -27,31 +27,25 @@ class ModifyUsersInGroupController extends AbstractController implements Mutatio
      */
     public function __invoke($item, array $context): ?object
     {
+        $em = $this->getDoctrine()->getManager();
+
         $args = $context['args']['input'];
         foreach ($args['addUsers'] as $iri) {
-            $user = $this->getDoctrine()->getManager()->find(User::class, explode('/', $iri)[1]);
+            $user = $em->find(User::class, explode('/', $iri)[1] ?? null);
             if ($user instanceof User) {
-                $this->getDoctrine()
-                    ->getManager()
-                    ->persist($item->addUser($user));
+                $em->persist($item->addUser($user));
             }
         }
 
         foreach ($args['deleteUsers'] as $iri) {
-            $user = $this->getDoctrine()->getManager()->find(User::class, explode('/', $iri)[1]);
+            $user = $em->find(User::class, explode('/', $iri)[1] ?? null);
             if ($user instanceof User) {
-                $this->getDoctrine()
-                    ->getManager()
-                    ->persist($item->deleteUser($user));
+                $em->persist($item->deleteUser($user));
             }
         }
 
-        $this->getDoctrine()
-            ->getManager()
-            ->persist($item);
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
+        $em->persist($item);
+        $em->flush();
 
         return $item;
     }

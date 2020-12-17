@@ -34,8 +34,9 @@
         "symfony/uid": "5.1.*",
         "symfony/validator": "5.1.*",
         "symfony/yaml": "5.1.*",
-        "webonyx/graphql-php": "14.*"
-    },
+        "webonyx/graphql-php": "14.*",
+		 "ext-json": "*"
+	 },
     "require-dev": {
         "api-platform/schema-generator": "^2.2",
         "symfony/browser-kit": "^5.1",

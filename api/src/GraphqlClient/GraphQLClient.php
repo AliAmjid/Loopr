@@ -12,13 +12,15 @@ use Softonic\GraphQL\Client;
 use Softonic\GraphQL\Response;
 use Softonic\GraphQL\ResponseBuilder;
 
-class GraphQLClient {
+class GraphQLClient
+{
 
     private $httpClient;
     private $responseBuilder;
     protected $writeInfo = false;
 
-    public function __construct(ClientInterface $httpClient, ResponseBuilder $responseBuilder, bool $writeInfo = false) {
+    public function __construct(ClientInterface $httpClient, ResponseBuilder $responseBuilder, bool $writeInfo = false)
+    {
         $this->httpClient = $httpClient;
         $this->responseBuilder = $responseBuilder;
         $this->writeInfo = $writeInfo;
@@ -30,7 +32,15 @@ class GraphQLClient {
      * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function query(string $query, array $variables = null): Response {
+    public function query(string $query, array $variables = null): Response
+    {
+        if ($variables) {
+            foreach ($variables as $key => $variable) {
+                if ($variable === null) {
+                    unset($variables[$key]);
+                }
+            }
+        }
         $options = [
             'json' => [
                 'query' => $query,
@@ -45,7 +55,7 @@ class GraphQLClient {
             $response = $this->httpClient->request('POST', '', $options);
 
         } catch (\Throwable $e) {
-            if($e instanceof ServerException) {
+            if ($e instanceof ServerException) {
                 echo json_encode(json_decode($e->getResponse()->getBody()->__toString()), JSON_PRETTY_PRINT);
             }
             throw new \RuntimeException('Network Error.' . $e->getMessage(), 0, $e);
@@ -60,7 +70,8 @@ class GraphQLClient {
         return $response;
     }
 
-    protected function writeInfo($info) {
+    protected function writeInfo($info)
+    {
         if ($this->writeInfo && $info && strlen($info) > 0) {
             echo PHP_EOL . '================[DEBUG] [GRAPHQL CLIENT]======================' . PHP_EOL;
             echo '[debug] [GraphQl Client]: ' . $info;

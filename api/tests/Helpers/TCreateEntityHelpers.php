@@ -14,7 +14,8 @@ use Nette\Utils\Random;
 use Softonic\GraphQL\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
-trait TCreateEntityHelpers {
+trait TCreateEntityHelpers
+{
 
     protected $testingEntities = [];
     protected EntityManagerInterface $em;
@@ -39,13 +40,16 @@ trait TCreateEntityHelpers {
     }
 
 
-    protected function createRoleWithResources(array $resources) {
+    protected function createRoleWithResources(array $resources)
+    {
         $role = new AclRole();
         $role->setName($this->randomRoleName());
         foreach ($resources as $resource) {
             /** @var AclResource $resource */
             $resource = $this->em->find(AclResource::class, AclResourceEnum::PROP_UUIDS[$resource]);
-            if ($resource) $role->getResources()->add($resource);
+            if ($resource) {
+                $role->getResources()->add($resource);
+            }
             foreach ($resource->getDependsOn() as $parent) {
                 $role->addResource($parent);
             }
@@ -57,10 +61,12 @@ trait TCreateEntityHelpers {
     }
 
 
-    protected function deleteAllTestingEntities() {
+    protected function deleteAllTestingEntities()
+    {
     }
 
-    protected function randomRoleName(): string {
+    protected function randomRoleName(): string
+    {
         return 'ROLE_' . strtoupper(Random::generate(5, 'a-z'));
     }
 

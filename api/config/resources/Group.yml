@@ -28,3 +28,15 @@ App\Entity\Group:
             security: "is_granted('GROUP_SHOW_ALL')"
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
+
+        updateUsers:
+            security: "is_granted('GROUP_EDIT')"
+            security_message: 'r: GROUP_EDIT'
+            mutation: App\Controller\ModifyUsersInGroupController
+            args:
+                id:
+                    type: 'ID!'
+                addUsers:
+                    type: '[ID]'
+                deleteUsers:
+                    type: '[ID]'
