@@ -53,6 +53,6 @@ class ClientErrorType
 
     const USER_CAN_NOT_BE_TAUGHT = [
         'code' => 'USER_CAN_NOT_BE_TAUGHT',
-        'msg' => 'User need resource GROUP_CAN_BE_TAUGHT'
+        'msg' => 'User need resource USER_CAN_STUDY'
     ];
 }

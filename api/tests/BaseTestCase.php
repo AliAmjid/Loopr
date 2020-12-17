@@ -95,4 +95,9 @@ abstract class BaseTestCase extends TestCase
         }
         $this->assertTrue($errorFounded);
     }
+
+    public function clientLibrary(GraphQLClient $client): QueryLibrary
+    {
+        return new QueryLibrary($client);
+    }
 }

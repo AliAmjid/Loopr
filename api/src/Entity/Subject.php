@@ -21,7 +21,7 @@ class Subject
     /**
      * @var SubjectType
      * @ORM\ManyToOne(targetEntity="SubjectType")
-     * @Groups({"read", "exposed"})
+     * @Groups({"read", "exposed", "subject:create"})
      */
     private $subjectType;
 

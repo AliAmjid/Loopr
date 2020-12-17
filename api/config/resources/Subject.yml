@@ -16,7 +16,9 @@ App\Entity\Subject:
         create:
             security_message: 'r: GROUP_EDIT'
             security: "is_granted('GROUP_EDIT')"
-        
+            denormalization_context:
+                groups: [ subject:write, subject:create ]
+
         update:
             security_message: 'r: GROUP_EDIT'
             security: "is_granted('GROUP_EDIT')"
@@ -24,9 +26,9 @@ App\Entity\Subject:
         item_query:
             security_message: "r: GROUP_SHOW_ALL"
             security: "is_granted('GROUP_SHOW_ALL')"
-        
+
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
-        
+
         delete:
             security: "is_granted('SUBJECT_DELETE')"

@@ -108,7 +108,7 @@ class Group implements IGroup
 
     public function addUser(User $user): User
     {
-        if (!$user->getRole()->hasResource(AclResourceEnum::GROUP_CAN_BE_TAUGHT)) {
+        if (!$user->getRole()->hasResource(AclResourceEnum::USER_CAN_STUDY)) {
             throw new ClientError(ClientErrorType::USER_CAN_NOT_BE_TAUGHT);
         }
 

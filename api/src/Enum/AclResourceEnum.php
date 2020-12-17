@@ -60,6 +60,7 @@ class AclResourceEnum
     const PROP_DEFAULT_ROLES = [
         'ROLE_USER' => [
             self::USER_LOGGED,
+            self::USER_CAN_STUDY
         ],
 
         'ROLE_ADMIN' => [

@@ -10,17 +10,20 @@ use PHPUnit\Util\Exception;
 use Softonic\GraphQL\Response;
 
 
-class AclTest extends BaseTestCase {
+class AclTest extends BaseTestCase
+{
 
-    public function testGetTokenAndLogin() {
+    public function testGetTokenAndLogin()
+    {
         $user = $this->createRandomUser();
         $client = $this->clientFactory();
         $response = $client->query(
         /** @lang GraphQL */
-            'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}', [
-            'email' => $user->getEmail(),
-            'password' => 'test'
-        ]);
+            'query Token($email : String!, $password : String!) {getToken(email: $email, password: $password ) {token}}',
+            [
+                'email' => $user->getEmail(),
+                'password' => 'test'
+            ]);
 
         $this->assertNoErrors($response);
         $loggedClient = $this->clientFactory($response->getData()['getToken']['token']);
@@ -32,7 +35,8 @@ class AclTest extends BaseTestCase {
         $this->assertEquals($user->getId(), $response->getData()['meUser']['_id']);
     }
 
-    public function testCreateRole() {
+    public function testCreateRole()
+    {
         $this->assertSecurityResources(
             [AclResourceEnum::ACL_ROLE_CREATE],
             function (User $user): Response {
@@ -43,16 +47,20 @@ class AclTest extends BaseTestCase {
         resources: $idResources
         }
       ) {aclRole{name,resources{name}}}
-}', ['name' => $this->randomRoleName(), 'idResources' => [
-                    'acl_resources/' . AclResourceEnum::PROP_UUIDS[AclResourceEnum::USER_LOGGED]
-                ]]);
+}', [
+                    'name' => $this->randomRoleName(),
+                    'idResources' => [
+                        'acl_resources/' . AclResourceEnum::PROP_UUIDS[AclResourceEnum::USER_LOGGED]
+                    ]
+                ]);
 
                 return $response;
             }
         );
     }
 
-    public function testCreateRoleWithInvalidName() {
+    public function testCreateRoleWithInvalidName()
+    {
         $user = $this->createRandomUser('test', [AclResourceEnum::ACL_ROLE_CREATE]);
 
         $client = $this->client($user->getEmail());
@@ -67,14 +75,18 @@ class AclTest extends BaseTestCase {
 }
 ';
 
-        $response = $client->query($query, ['name' => 'InvalidName', 'idResources' => [
-            'acl_resources/' . AclResourceEnum::PROP_UUIDS[AclResourceEnum::USER_LOGGED]
-        ]]);
+        $response = $client->query($query, [
+            'name' => 'InvalidName',
+            'idResources' => [
+                'acl_resources/' . AclResourceEnum::PROP_UUIDS[AclResourceEnum::USER_LOGGED]
+            ]
+        ]);
         print_r($response->getErrors());
         $this->assertErrors($response, 1);
     }
 
-    public function testUpdateAclRole() {
+    public function testUpdateAclRole()
+    {
         $this->assertSecurityResources([AclResourceEnum::ACL_ROLE_EDIT], function (User $user, bool $noError) {
             $role = $this->createRoleWithResources([]);
             $client = $this->client($user->getEmail());
