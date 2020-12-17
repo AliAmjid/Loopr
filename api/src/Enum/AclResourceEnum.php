@@ -24,7 +24,7 @@ class AclResourceEnum
         self::SUBJECT_TYPE_EDIT => '07ddfa12-82da-46c6-afbf-cf8043ebed55',
         self::GROUP_DELETE => 'fd6cc009-f1c3-43c5-a1ae-33ad12f2b907',
         self::SUBJECT_TEACHER => '961fca80-a758-4dff-873a-09d428323943',
-        self::GROUP_CAN_BE_TAUGHT => 'd31f7b05-192e-4d5b-a40c-5036cdf30224'
+        self::USER_CAN_STUDY => 'd31f7b05-192e-4d5b-a40c-5036cdf30224'
     ];
 
     const PROP_DEPENDENT_ON = [
@@ -88,13 +88,13 @@ class AclResourceEnum
     const USER_SHOW_ALL = 'USER_SHOW_ALL';
     const USER_EDIT = 'USER_EDIT';
     const USER_DELETE = 'USER_DELETE';
+    const USER_CAN_STUDY = 'USER_CAN_STUDY';
 
     //group
     const GROUP_TEACHER = 'GROUP_TEACHER'; // can be group class teacher
     const GROUP_SHOW_ALL = 'GROUP_SHOW_ALL';
     const GROUP_EDIT = 'GROUP_EDIT';
     const GROUP_DELETE = 'GROUP_DELETE';
-    const GROUP_CAN_BE_TAUGHT = 'GROUP_CAN_BE_TAUGHT';
 
     //subject
     const SUBJECT_SHOW_ALL = 'SUBJECT_SHOW_ALL';
