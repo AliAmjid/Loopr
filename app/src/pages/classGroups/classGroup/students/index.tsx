@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useApolloClient } from '@apollo/client';
 import { Query } from 'material-table';
+import { Simulate } from 'react-dom/test-utils';
 
 import {
   ClassGroupsClassGroupUsersQuery,
@@ -29,7 +30,12 @@ const StudentsIndex: React.FC = () => {
   const { selectedClassGroup } = useClassGroupsState(state => ({
     selectedClassGroup: state.selectedClassGroup,
   }));
-  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+  const [changedUsers, setChangedUsers] = useState<
+    {
+      id: string;
+      selected: boolean;
+    }[]
+  >([]);
   const {
     getPagination: getClassGroupPagination,
     setPagination: setClassGroupPagination,
@@ -121,15 +127,6 @@ const StudentsIndex: React.FC = () => {
               }
             }
 
-            const unsavedUsers = users
-              .filter(
-                user =>
-                  user.tableData?.checked &&
-                  !selectedUsers.some(selectedUser => selectedUser === user.id),
-              )
-              .map(user => user.id);
-            setSelectedUsers(prevState => [...prevState, ...unsavedUsers]);
-
             return { users, totalCount };
           }
 
@@ -140,16 +137,21 @@ const StudentsIndex: React.FC = () => {
     return Promise.resolve(defaultValue);
   };
 
-  console.log(selectedUsers);
+  console.log(changedUsers);
 
   const selectionChangeHandler = (args: SelectionChangeArgs): void => {
-    if (args.selected) {
-      setSelectedUsers(prevState => [...prevState, args.id]);
-    } else {
-      setSelectedUsers(prevState => [
-        ...prevState.filter(selectedUser => selectedUser !== args.id),
-      ]);
-    }
+    setChangedUsers(prevState => {
+      const index = prevState.findIndex(
+        changedUser => changedUser.id === args.id,
+      );
+      if (index !== -1) {
+        prevState[index].selected = args.selected;
+      } else {
+        prevState = [...prevState, { id: args.id, selected: args.selected }];
+      }
+
+      return prevState;
+    });
   };
 
   return (
