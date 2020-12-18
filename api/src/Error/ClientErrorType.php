@@ -55,4 +55,9 @@ class ClientErrorType
         'code' => 'USER_CAN_NOT_BE_TAUGHT',
         'msg' => 'User need resource USER_CAN_STUDY'
     ];
+
+    const INVALID_IRI = [
+        'code' => 'INVALID_IRI',
+        'msg' => 'Invalid IRI'
+    ];
 }

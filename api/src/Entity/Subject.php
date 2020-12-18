@@ -160,6 +160,19 @@ class Subject
         return $this;
     }
 
+    public function setIGroup(IGroup $group)
+    {
+        if ($group instanceof Group) {
+            $this->setClassGroup(null);
+            $this->setGroup($group);
+        } elseif ($group instanceof ClassGroup) {
+            $this->setGroup(null);
+            $this->setClassGroup($group);
+        } else {
+            throw new \RuntimeException(get_class($group) . " not implemented in IGroup");
+        }
+    }
+
 
     /**
      * @ORM\PrePersist()

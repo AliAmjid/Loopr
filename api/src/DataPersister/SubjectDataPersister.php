@@ -4,23 +4,30 @@
 namespace App\DataPersister;
 
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\ClassGroup;
 use App\Entity\Group;
+use App\Entity\IGroup;
 use App\Entity\Subject;
+use App\Error\ClientError;
+use App\Error\ClientErrorType;
 use \Doctrine\Persistence\ManagerRegistry;
 
 class SubjectDataPersister implements ContextAwareDataPersisterInterface
 {
     private ContextAwareDataPersisterInterface $decorated;
     private ManagerRegistry $registry;
+    private IriConverterInterface $iriConverter;
 
     public function __construct(
         ContextAwareDataPersisterInterface $decorated,
-        ManagerRegistry $registry
+        ManagerRegistry $registry,
+        IriConverterInterface $iriConverter
     ) {
         $this->decorated = $decorated;
         $this->registry = $registry;
+        $this->iriConverter = $iriConverter;
     }
 
     public function supports($data, array $context = []): bool
@@ -35,15 +42,11 @@ class SubjectDataPersister implements ContextAwareDataPersisterInterface
         ) {
             $iri = $data->getIGroupIri();
             if ($iri) {
-                $iri = explode('/', $iri);
-                if ($iri[0] === 'groups') {
-                    $group = $this->registry->getManager()->find(Group::class, $iri[1]);
-                    $data->setGroup($group);
-                    $data->setClassGroup(null);
-                } elseif ($iri[0] === 'class_groups') {
-                    $group = $this->registry->getManager()->find(ClassGroup::class, $iri[1]);
-                    $data->setClassGroup($group);
-                    $data->setGroup(null);
+                $iGroup = $this->iriConverter->getItemFromIri($iri, $context);
+                if ($iGroup instanceof IGroup) {
+                    $data->setIGroup($iGroup);
+                } else {
+                    throw new ClientError(ClientErrorType::INVALID_IRI);
                 }
             }
         }
