@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Subject
 {
@@ -21,20 +22,20 @@ class Subject
     /**
      * @var SubjectType
      * @ORM\ManyToOne(targetEntity="SubjectType")
-     * @Groups({"read", "exposed", "subject:create"})
+     * @Groups({"read", "exposed", "subject:write"})
      */
     private $subjectType;
 
     /**
      * @var Group|null
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="subjects")
-     * @Groups({"read", "exposed", "subject:write", "group:read"})
+     * @Groups({"read", "exposed"})
      */
     private ?Group $group = null;
 
     /** @var ClassGroup|null
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="subjects")
-     * @Groups({"read", "exposed", "subject:write"})
+     * @Groups({"read", "exposed"})
      */
     private ?ClassGroup $classGroup = null;
 
@@ -46,34 +47,21 @@ class Subject
     private User $teacher;
 
     /**
+     * @Groups({"subject:write"})
+     */
+    private ?string $iGroupIri = null;
+
+    /**
      * subject constructor.
      * @param SubjectType $subjectType
      * @param User $teacher
-     * @param Group|null $group
-     * @param ClassGroup|null $classGroup
-     * @throws ClientError
      */
     public function __construct(
         SubjectType $subjectType,
-        User $teacher,
-        ?Group $group = null,
-        ?ClassGroup $classGroup = null
+        User $teacher
     ) {
         $this->subjectType = $subjectType;
-        $this->group = $group;
-        $this->classGroup = $classGroup;
         $this->teacher = $teacher;
-        if (!$teacher->getRole()->hasResource(AclResourceEnum::SUBJECT_TEACHER)) {
-            throw new ClientError(ClientErrorType::USER_IS_NOT_TEACHER);
-        }
-
-        if ($classGroup == null && $group == null) {
-            throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
-        }
-
-        if ($classGroup && $group) {
-            throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
-        }
     }
 
 
@@ -150,6 +138,17 @@ class Subject
         return $this->teacher;
     }
 
+    public function setIGroupIri(string $iGroupIri): Subject
+    {
+        $this->iGroupIri = $iGroupIri;
+        return $this;
+    }
+
+    public function getIGroupIri(): ?string
+    {
+        return $this->iGroupIri;
+    }
+
     /**
      * @param User $teacher
      * @return Subject
@@ -159,5 +158,24 @@ class Subject
     ): Subject {
         $this->teacher = $teacher;
         return $this;
+    }
+
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist(): void
+    {
+        if (!$this->teacher->getRole()->hasResource(AclResourceEnum::SUBJECT_TEACHER)) {
+            throw new ClientError(ClientErrorType::USER_IS_NOT_TEACHER);
+        }
+
+        if ($this->classGroup == null && $this->group == null) {
+            throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
+        }
+
+        if ($this->classGroup && $this->group) {
+            throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
+        }
     }
 }

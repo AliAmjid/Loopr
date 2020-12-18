@@ -22,16 +22,19 @@ services:
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
         resource: '../src/Controller'
-        tags: ['api_platform.graphql.query_resolver']
-        
+        tags: [ 'api_platform.graphql.query_resolver' ]
+
     jwt_token_authenticator:
         class: 'App\Security\JwtTokenAuthenticator'
         autowire: true
-    
+
     App\DataPersister\UserDataPersister:
         decorates: 'api_platform.doctrine.orm.data_persister'
-        
+
     App\DataPersister\InjectPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
+
+    App\DataPersister\SubjectDataPersister:
         decorates: 'api_platform.doctrine.orm.data_persister'
 
     App\Error\ErrorNormalizer:

@@ -40,7 +40,7 @@ class QueryLibrary
     }
 
     public function createSubjectWithGroup(
-        string $subject,
+        string $subjectType,
         string $teacher,
         string $group
     ) {
@@ -71,10 +71,15 @@ class QueryLibrary
             }',
             [
                 'group' => $group,
-                'subject' => $subject,
+                'subjectType' => $subjectType,
                 'teacher' => $teacher
             ]
         );
+    }
+
+    public function updateSubjectWithGroup()
+    {
+
     }
 
     public function createSubjectWithClassGroup(

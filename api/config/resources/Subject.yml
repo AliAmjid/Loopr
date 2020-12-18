@@ -22,6 +22,8 @@ App\Entity\Subject:
         update:
             security_message: 'r: GROUP_EDIT'
             security: "is_granted('GROUP_EDIT')"
+            denormalization_context:
+                groups: [ subject:write, subject:edit ]
 
         item_query:
             security_message: "r: GROUP_SHOW_ALL"

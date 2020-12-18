@@ -4,7 +4,6 @@
 namespace App\Entity;
 
 
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
