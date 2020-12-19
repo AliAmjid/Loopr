@@ -1,0 +1,24 @@
+version: '3.4'
+
+x-cache-from:
+  - &api-cache-from-testing
+    cache_from:
+      - ${NGINX_IMAGE:-quay.io/api-platform/nginx}
+      - ${PHP_IMAGE:-quay.io/api-platform/php}
+
+services:
+  php:
+    image: ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+    restart: always
+    environment:
+      - APP_DEBUG=${APP_DEBUG:-0}
+      - APP_ENV=${APP_ENV:-prod}
+      - APP_SECRET=${APP_SECRET:?APP_SECRET is not set or empty}
+      - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN:?CORS_ALLOW_ORIGIN is not set or empty}
+      - DATABASE_URL=${DATABASE_URL:?DATABASE_URL is not set or empty}
+      - MERCURE_JWT_TOKEN=${MERCURE_JWT_TOKEN:?MERCURE_JWT_TOKEN is not set or empty}
+      - MERCURE_SUBSCRIBE_URL=${MERCURE_SUBSCRIBE_URL:?MERCURE_SUBSCRIBE_URL is not set or empty}
+      - TRUSTED_HOSTS=${TRUSTED_HOSTS:?TRUSTED_HOSTS is not set or empty}
+      - TRUSTED_PROXIES=${TRUSTED_PROXIES:-10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+volumes:
+  db-data: { }

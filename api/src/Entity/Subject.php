@@ -101,25 +101,6 @@ class Subject
     }
 
     /**
-     * @param Group|null $group
-     * @return Subject
-     */
-    public function setGroup(
-        ?Group $group
-    ): Subject {
-        $this->group = $group;
-        return $this;
-    }
-
-    /**
-     * @return ClassGroup|null
-     */
-    public function getClassGroup(): ?ClassGroup
-    {
-        return $this->classGroup;
-    }
-
-    /**
      * @param ClassGroup|null $classGroup
      * @return Subject
      */
@@ -163,11 +144,11 @@ class Subject
     public function setIGroup(IGroup $group)
     {
         if ($group instanceof Group) {
-            $this->setClassGroup(null);
-            $this->setGroup($group);
+            $this->classGroup = null;
+            $this->group = $group;
         } elseif ($group instanceof ClassGroup) {
-            $this->setGroup(null);
-            $this->setClassGroup($group);
+            $this->group = null;
+            $this->classGroup = $group;
         } else {
             throw new \RuntimeException(get_class($group) . " not implemented in IGroup");
         }

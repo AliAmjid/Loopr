@@ -1,0 +1,14 @@
+version: '3.4'
+
+x-cache-from:
+    - &api-cache-from
+        cache_from:
+            - ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+
+services:
+    php:
+        build:
+            context: ../api
+            target: api_platform_php
+            <<: *api-cache-from
+        image: ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
