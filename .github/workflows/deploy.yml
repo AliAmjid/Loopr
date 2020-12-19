@@ -34,9 +34,6 @@ jobs:
     # pull & build the Docker image
     - name: Pull
       run: docker-compose -f docker-compose-prod/docker-compose.build.yml pull --ignore-pull-failures
-    
-    - name: Login to gcloud 
-      run: docker login -u _json_key -p "`cat ${secrets.GKE_SA_KEY}`" https://gcr.io
    
     - name: Build
       run: docker-compose -f docker-compose-prod/docker-compose.build.yml build --pull
