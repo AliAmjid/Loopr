@@ -1,0 +1,59 @@
+# This workflow will build a docker container, publish it to Google Container Registry, and deploy it to GKE when a release is created
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Google Kubernetes Engine cluster, including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace: GKE_PROJECT with the name of the project and GKE_SA_KEY with the Base64 encoded JSON service account key (https://github.com/GoogleCloudPlatform/github-actions/tree/docs/service-account-key/setup-gcloud#inputs).
+#
+# 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, and DEPLOYMENT_NAME environment variables (below).
+#
+# For more support on how to run the workflow, please visit https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke
+
+name: Build and deploy to app.loopr.cz
+
+on:
+  # but only for the main branch
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  PHP_IMAGE: eu.gcr.io/loopr-299120/php
+  APP_IMAGE: eu.gcr.io/loopr-299120/app
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+    # pull & build the Docker image
+    - name: Pull
+      run: docker-compose -f docker-compose-prod/docker-compose.build.yml pull --ignore-pull-failures
+    - name: Build
+      run: docker-compose -f docker-compose-prod/docker-compose.build.yml build --pull
+          .
+
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: docker-compose -f docker-compose-prod/docker-compose.build.yml push
+
