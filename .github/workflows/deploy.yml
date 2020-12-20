@@ -52,7 +52,7 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
         with:
           source: "./docker-compose-prod"
-          target: "/var/www/loopr/docker-compose-prod"
+          target: "/var/www/loopr/"
 
       - name: Run script
         uses: appleboy/ssh-action@master
