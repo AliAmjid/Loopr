@@ -8,17 +8,31 @@ x-cache-from:
 
 services:
   php:
-    image: ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+    image: ${PHP_IMAGE}
     restart: always
+    network_mode: "host"
+    ports:
+      - "127.0.0.1:9022:9000"
+    env_file:
+      - ../.env
     environment:
       - APP_DEBUG=${APP_DEBUG:-0}
       - APP_ENV=${APP_ENV:-prod}
-      - APP_SECRET=${APP_SECRET:?APP_SECRET is not set or empty}
-      - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN:?CORS_ALLOW_ORIGIN is not set or empty}
-      - DATABASE_URL=${DATABASE_URL:?DATABASE_URL is not set or empty}
-      - MERCURE_JWT_TOKEN=${MERCURE_JWT_TOKEN:?MERCURE_JWT_TOKEN is not set or empty}
-      - MERCURE_SUBSCRIBE_URL=${MERCURE_SUBSCRIBE_URL:?MERCURE_SUBSCRIBE_URL is not set or empty}
-      - TRUSTED_HOSTS=${TRUSTED_HOSTS:?TRUSTED_HOSTS is not set or empty}
-      - TRUSTED_PROXIES=${TRUSTED_PROXIES:-10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      - APP_SECRET=${APP_SECRET} #required
+      - CORS_ALLOW_ORIGIN=CORS_ALLOW_ORIGIN
+      - DATABASE_URL=${DATABASE_URL} #required
+      - TRUSTED_HOSTS=TRUSTED_HOSTS
+      - TRUSTED_PROXIES=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+      - SENDGRID_KEY=${SEND_GRID} #required
+      - MESSENGER_TRANSPORT_DSN=doctrine://default
+  api:
+    image: ${NGINX_IMAGE}
+    restart: always
+    ports:
+      - target: 80
+        published: 8001
+    depends_on:
+      - php
+
 volumes:
   db-data: { }
