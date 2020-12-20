@@ -10,6 +10,7 @@ use App\Entity\AclRole;
 use App\Entity\User;
 use App\Enum\AclResourceEnum;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Nette\Utils\Random;
 use Softonic\GraphQL\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
@@ -18,14 +19,15 @@ trait TCreateEntityHelpers
 {
 
     protected $testingEntities = [];
-    protected EntityManagerInterface $em;
+    protected ObjectManager $em;
 
     protected function createRandomUser(
         $password = 'test',
-        $resources = AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER']
+        $resources = AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'],
+        $email = null
     ): User {
         $user = new User();
-        $user->setEmail(Random::generate(4) . "@test.cz");
+        $user->setEmail($email ?? Random::generate(4) . "@loopr.cz");
         $user->setFirstname(Random::generate());
         /** @var UserPasswordEncoder $encoder */
         $encoder = $this->kernel->getContainer()->get('security.password_encoder');
