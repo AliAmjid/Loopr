@@ -5,15 +5,12 @@ x-cache-from:
     cache_from:
       - ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
       - ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
-      - ${APP_IMAGE}
-      - ${DOCS_IMAGE}
 
 services:
   php:
     build:
       context: ../api
       target: api_platform_php
-      <<: *api-cache-from
     image: ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
 
   api:
