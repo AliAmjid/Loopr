@@ -199,6 +199,7 @@ const StudentsIndex: React.FC = () => {
 
   return (
     <Students
+      selectedClassGroup={selectedClassGroup}
       onGetClassGroupUsers={getClassGroupUsersHandler}
       onGetUsers={getUsersHandler}
       onSelectionChange={selectionChangeHandler}
