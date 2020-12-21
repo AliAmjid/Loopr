@@ -50,11 +50,9 @@ services:
     image: ${APP_IMAGE}
     ports:
       - 3000:3000
-
   docs:
     image: ${DOCS_IMAGE}
     ports:
       - 3001:3001
-
 volumes:
   db-data: { }

@@ -31,7 +31,9 @@ services:
       dockerfile: ../docker/app/prod/Dockerfile
       <<: *api-cache-from
     image: ${APP_IMAGE}
-
+    environment:
+      - API_URL=https://app.loopr.cz/graphql
+      - DISABLE_TOUR=1
   docs:
     build:
       context: ../docs
