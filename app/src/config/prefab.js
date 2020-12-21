@@ -1,10 +1,10 @@
 const prefabConfig = env => ({
   production: env.NODE_ENV === 'production',
-  port: env.port || 3000,
-  apiURL: env.apiURL || 'http://localhost:8001/graphql',
-  docsURL: env.docsURL || 'http://localhost:3001',
-  disableTour: Boolean(env.disableTour) || false,
-  tokenCookie: env.tokenCookie || 'tokenCookie',
+  port: env.PORT || 3000,
+  apiURL: env.API_URL || 'http://localhost:8001/graphql',
+  docsURL: env.DOCS_URL || 'http://localhost:3001',
+  disableTour: env.DISABLE_TOUR ? Boolean(env.DISABLE_TOUR) : false,
+  tokenCookie: env.TOKEN_COOKIE || 'tokenCookie',
 });
 
 module.exports = prefabConfig;
