@@ -1657,9 +1657,8 @@ export interface createGroupInput {
 }
 
 export interface createSubjectInput {
-  classGroup?: string | null;
   clientMutationId?: string | null;
-  group?: string | null;
+  iGroupIri: string;
   subjectType?: string | null;
   teacher?: string | null;
 }
@@ -1720,9 +1719,8 @@ export interface updateGroupInput {
 }
 
 export interface updateSubjectInput {
-  classGroup?: string | null;
   clientMutationId?: string | null;
-  group?: string | null;
+  iGroupIri?: string | null;
   id: string;
   subjectType?: string | null;
   teacher?: string | null;

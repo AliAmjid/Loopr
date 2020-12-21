@@ -284,6 +284,7 @@ type Query {
 
 type Subject implements Node {
     _id: String!
+    classGroup: ClassGroup
     group: Group
     id: ID!
     subjectType: SubjectType

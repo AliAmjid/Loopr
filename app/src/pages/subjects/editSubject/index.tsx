@@ -42,7 +42,12 @@ const EditSubjectIndex: React.FC = () => {
 
   const submitHandler = (args: SubmitArgs): Promise<void> => {
     return updateSubject({
-      variables: { input: { ...args, id: `${router.query.subjectId}` } },
+      variables: {
+        input: {
+          iGroupIri: args.classGroup || args.group,
+          id: `${router.query.subjectId}`,
+        },
+      },
     })
       .then(() => {
         router.push(routes.subjects.index);

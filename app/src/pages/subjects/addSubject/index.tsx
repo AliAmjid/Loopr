@@ -33,7 +33,10 @@ const AddSubjectIndex: React.FC = () => {
   const submitHandler = (args: SubmitArgs): Promise<void> => {
     return createSubject({
       variables: {
-        input: { ...args, subjectType: `${router.query.subjectTypeId}` },
+        input: {
+          iGroupIri: args.classGroup || args.group || '',
+          subjectType: `${router.query.subjectTypeId}`,
+        },
       },
     })
       .then(() => {
