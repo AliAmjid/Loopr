@@ -6,6 +6,7 @@ x-cache-from:
       - ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
       - ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
       - ${APP_IMAGE}
+      - ${DOCS_IMAGE}
 
 services:
   php:
@@ -29,3 +30,9 @@ services:
     build:
       context: ../app
       dockerfile: ../docker/app/prod/Dockerfile
+
+  docs:
+    container_name: loopr_docs
+    build:
+      context: ./docs
+      dockerfile: ../docker/docs/Dockerfile

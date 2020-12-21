@@ -10,6 +10,7 @@ env:
   PHP_IMAGE: eu.gcr.io/loopr-299120/php
   APP_IMAGE: eu.gcr.io/loopr-299120/app
   NGINX_IMAGE: eu.gcr.io/loopr-299120/nginx
+  DOCS_IMAGE: eu.gcr.io/loopr-299120/docs
   CLOUDSDK_PYTHON: /usr/bin/python
 
 jobs:
