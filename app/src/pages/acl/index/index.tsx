@@ -37,7 +37,10 @@ const AclIndex: React.FC = () => {
   const [updateAcl] = useMutation<
     AclUpdateAclMutation,
     AclUpdateAclMutationVariables
-  >(ACL_UPDATE_ACL_MUTATION);
+  >(ACL_UPDATE_ACL_MUTATION, {
+    refetchQueries: ['AclTableQuery'],
+    awaitRefetchQueries: true,
+  });
   const [addRole, { loading: addRoleLoading }] = useMutation<
     AclCreateAclRole,
     AclCreateAclRoleVariables

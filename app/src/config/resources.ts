@@ -4,6 +4,7 @@ const resources = {
     edit: 'USER_EDIT',
     show: 'USER_SHOW',
     create: 'USER_CREATE',
+    canStudy: 'USER_CAN_STUDY',
   },
   role: {
     edit: 'ACL_ROLE_EDIT',

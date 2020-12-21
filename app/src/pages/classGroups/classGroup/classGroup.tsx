@@ -5,11 +5,11 @@ import { Box, Typography } from '@material-ui/core';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import Teacher from 'pages/classGroups/classGroup/teacher';
+import StudentsIndex from 'pages/classGroups/classGroup/students';
 
 import Tabs from 'components/Tabs';
 
-import Students from './students';
+import TeacherIndex from './teacher';
 import { ClassGroupProps } from './types';
 
 const TabWrapper: React.FC = props => (
@@ -42,27 +42,12 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
         {
           id: 0,
           label: t('students'),
-          panel: (
-            <Students
-              selectedClassGroup={props.selectedClassGroup}
-              onGetUsers={query => props.onGetUsers(query, false)}
-              onGetClassGroupUsers={props.onGetClassGroupUsers}
-              onSelectionChange={props.onStudentsChange}
-              onSubmit={props.onStudentsSubmit}
-            />
-          ),
+          panel: <StudentsIndex />,
         },
         {
           id: 1,
           label: t('teacher'),
-          panel: (
-            <Teacher
-              teacher={props.teacher}
-              loading={props.teacherLoading}
-              onGetUsers={query => props.onGetUsers(query, true)}
-              onChange={props.onTeacherChange}
-            />
-          ),
+          panel: <TeacherIndex />,
         },
       ]}
     />

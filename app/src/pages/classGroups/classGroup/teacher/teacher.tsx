@@ -7,6 +7,7 @@ import { Query } from 'material-table';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
+import useSelectedBackground from 'lib/material-table/useSelectedBackground';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -16,6 +17,7 @@ import { DetailClassGroupUser, TeacherProps } from './types';
 const Teacher: React.FC<TeacherProps> = props => {
   const { t } = useTranslation(namespaces.pages.classGroups.index);
 
+  const selectedBackground = useSelectedBackground();
   const [editing, setEditing] = useState(false);
 
   return (
@@ -56,6 +58,15 @@ const Teacher: React.FC<TeacherProps> = props => {
               },
             ],
             defaultColumns: ['firstname', 'lastname', 'email'],
+          },
+        }}
+        options={{
+          rowStyle: (row: DetailClassGroupUser) => {
+            if (row.id === props.teacher?.id && editing) {
+              return { backgroundColor: selectedBackground };
+            }
+
+            return {};
           },
         }}
         actions={

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
@@ -9,75 +9,76 @@ import resources from 'config/resources';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import GROUPS_GROUP_QUERY from 'pages/groups/queries/group';
-import GROUPS_USERS_QUERY from 'pages/groups/queries/users';
-import useGroupsState from 'pages/groups/state';
-
 import {
-  GroupsGroupQuery,
-  GroupsGroupQueryVariables,
-  GroupsUpdateUsersGroupMutation,
-  GroupsUpdateUsersGroupMutationVariables,
-  GroupsUsersQuery,
-  GroupsUsersQueryVariables,
+  ClassGroupsClassGroupUsersQuery,
+  ClassGroupsClassGroupUsersQueryVariables,
+  ClassGroupsUpdateUsersClassGroupMutation,
+  ClassGroupsUpdateUsersClassGroupMutationVariables,
+  ClassGroupsUsersQuery,
+  ClassGroupsUsersQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
 
-import GROUPS_UPDATE_USERS_GROUP_MUTATION from '../mutations/updateUsersGroup';
+import CLASS_GROUPS_UPDATE_USERS_CLASS_GROUP_MUTATION from '../../mutations/updateUsersClassGroup';
+import CLASS_GROUPS_CLASS_GROUP_USERS_QUERY from '../../queries/classGroupUsers';
+import CLASS_GROUPS_USERS_QUERY from '../../queries/users';
+import useClassGroupsState from '../../state';
 
-import Group from './group';
-import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
+import Students from './students';
+import {
+  ClassGroupUser,
+  GetClassGroupUsersReturn,
+  GetUsersReturn,
+  SelectionChangeArgs,
+  User,
+} from './types';
 
-const GroupIndex: React.FC = () => {
-  const { t } = useTranslation(namespaces.pages.groups.index);
-  const { selectedGroup } = useGroupsState(state => ({
-    selectedGroup: state.selectedGroup,
+const StudentsIndex: React.FC = () => {
+  const { selectedClassGroup } = useClassGroupsState(state => ({
+    selectedClassGroup: state.selectedClassGroup,
   }));
-  const client = useApolloClient();
-  const [updateUsersGroup] = useMutation<
-    GroupsUpdateUsersGroupMutation,
-    GroupsUpdateUsersGroupMutationVariables
-  >(GROUPS_UPDATE_USERS_GROUP_MUTATION);
-  const {
-    getPagination: getGroupPagination,
-    setPagination: setGroupPagination,
-    resetPagination: resetGroupPagination,
-  } = usePagination();
-  const {
-    getPagination: getUserPagination,
-    setPagination: setUserPagination,
-    resetPagination: resetUserPagination,
-  } = usePagination();
+  const [updateUsersClassGroup] = useMutation<
+    ClassGroupsUpdateUsersClassGroupMutation,
+    ClassGroupsUpdateUsersClassGroupMutationVariables
+  >(CLASS_GROUPS_UPDATE_USERS_CLASS_GROUP_MUTATION);
   const [changedUsers, setChangedUsers] = useState<
     {
       id: string;
       selected: boolean;
     }[]
   >([]);
+  const {
+    getPagination: getClassGroupPagination,
+    setPagination: setClassGroupPagination,
+  } = usePagination();
+  const {
+    getPagination: getUserPagination,
+    setPagination: setUserPagination,
+  } = usePagination();
+  const client = useApolloClient();
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.classGroups.index);
 
-  useEffect(() => {
-    resetGroupPagination();
-    resetUserPagination();
-  }, [selectedGroup]);
-
-  const getGroupUsers = (
-    query: Query<DetailGroupUser>,
-  ): Promise<GetUsersReturn> => {
-    const variables = getGroupPagination({
+  const getClassGroupUsersHandler = (
+    query: Query<ClassGroupUser>,
+  ): Promise<GetClassGroupUsersReturn> => {
+    const variables = getClassGroupPagination({
       page: query.page,
       pageSize: query.pageSize,
     });
 
     const defaultValue = { users: [], totalCount: 0 };
 
-    if (selectedGroup) {
+    if (selectedClassGroup) {
       return client
-        .query<GroupsGroupQuery, GroupsGroupQueryVariables>({
-          query: GROUPS_GROUP_QUERY,
+        .query<
+          ClassGroupsClassGroupUsersQuery,
+          ClassGroupsClassGroupUsersQueryVariables
+        >({
+          query: CLASS_GROUPS_CLASS_GROUP_USERS_QUERY,
           variables: {
-            id: selectedGroup,
+            id: selectedClassGroup,
             usersFirst: variables.first,
             usersLast: variables.last,
             usersBefore: variables.before,
@@ -85,13 +86,13 @@ const GroupIndex: React.FC = () => {
           },
         })
         .then(res => {
-          const edges = res.data?.group?.users?.edges;
-          const totalCount = res.data?.group?.users?.totalCount;
+          const edges = res.data?.classGroup?.users?.edges;
+          const totalCount = res.data?.classGroup?.users?.totalCount;
           if (edges && totalCount) {
-            setGroupPagination({ edges, totalCount });
+            setClassGroupPagination({ edges, totalCount });
 
             const users = [];
-            for (const user of res.data?.group?.users?.edges || []) {
+            for (const user of res.data?.classGroup?.users?.edges || []) {
               if (user?.node) users.push(user.node);
             }
 
@@ -104,8 +105,7 @@ const GroupIndex: React.FC = () => {
 
     return Promise.resolve(defaultValue);
   };
-
-  const getUsers = (query: Query<DetailGroupUser>): Promise<GetUsersReturn> => {
+  const getUsersHandler = (query: Query<User>): Promise<GetUsersReturn> => {
     const variables = getUserPagination({
       page: query.page,
       pageSize: query.pageSize,
@@ -113,13 +113,12 @@ const GroupIndex: React.FC = () => {
 
     const defaultValue = { users: [], totalCount: 0 };
 
-    if (selectedGroup) {
+    if (selectedClassGroup) {
       return client
-        .query<GroupsUsersQuery, GroupsUsersQueryVariables>({
-          query: GROUPS_USERS_QUERY,
+        .query<ClassGroupsUsersQuery, ClassGroupsUsersQueryVariables>({
+          query: CLASS_GROUPS_USERS_QUERY,
           variables: {
             ...variables,
-            groupId: selectedGroup.substring('/groups/'.length),
             resourceName: resources.user.canStudy,
           },
         })
@@ -129,14 +128,14 @@ const GroupIndex: React.FC = () => {
           if (edges && totalCount) {
             setUserPagination({ edges, totalCount });
 
-            const users: DetailGroupUser[] = [];
+            const users: User[] = [];
             for (const user of res.data?.users?.edges || []) {
               if (user?.node) {
                 const node = user?.node;
                 users.push({
                   ...node,
                   tableData: {
-                    checked: (node.groups?.edges?.length || 0) > 0,
+                    checked: node.classGroup?.id === selectedClassGroup,
                   },
                 });
               }
@@ -168,10 +167,10 @@ const GroupIndex: React.FC = () => {
   };
 
   const submitHandler = (): Promise<boolean> => {
-    return updateUsersGroup({
+    return updateUsersClassGroup({
       variables: {
         input: {
-          id: `${selectedGroup}`,
+          id: `${selectedClassGroup}`,
           addUsers: changedUsers
             .filter(user => user.selected)
             .map(user => user.id),
@@ -199,14 +198,14 @@ const GroupIndex: React.FC = () => {
   };
 
   return (
-    <Group
-      selectedGroup={selectedGroup}
-      getUsers={getUsers}
-      getGroupUsers={getGroupUsers}
+    <Students
+      selectedClassGroup={selectedClassGroup}
+      onGetClassGroupUsers={getClassGroupUsersHandler}
+      onGetUsers={getUsersHandler}
       onSelectionChange={selectionChangeHandler}
       onSubmit={submitHandler}
     />
   );
 };
 
-export default GroupIndex;
+export default StudentsIndex;

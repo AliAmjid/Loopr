@@ -2,17 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const next = require('next');
+const chalk = require('chalk');
 
 const prefabConfig = require('./src/config/prefab');
-
-const createConfig = () => {
-  const configPath = `${__dirname}/src/config/index.js`;
-  if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
-  fs.writeFileSync(
-    configPath,
-    `module.exports=${JSON.stringify(prefabConfig(process.env))}`,
-  );
-};
 
 (async () => {
   const app = next({ dev: process.env.NODE_ENV !== 'production' });
@@ -21,7 +13,8 @@ const createConfig = () => {
 
   await app.prepare();
 
-  createConfig();
+  // eslint-disable-next-line global-require
+  require('./scripts/createConfig');
 
   // eslint-disable-next-line global-require
   const config = require('./src/config');
@@ -34,5 +27,9 @@ const createConfig = () => {
   server.get('*', (req, res) => handle(req, res));
 
   await server.listen(port);
-  console.log(`> Ready on http://localhost:${port}`); // eslint-disable-line no-console
+  // eslint-disable-next-line no-console
+  console.log(
+    chalk.green('ready'),
+    `- started server on http://localhost:${port}`,
+  );
 })();

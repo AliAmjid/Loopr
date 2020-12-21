@@ -21,6 +21,9 @@ const CLASS_GROUPS_USERS_QUERY = gql`
           email
           firstname
           lastname
+          classGroup {
+            id
+          }
         }
         cursor
       }

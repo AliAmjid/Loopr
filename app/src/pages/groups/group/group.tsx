@@ -12,6 +12,7 @@ import { DetailGroupUser, GroupProps } from './types';
 const Group: React.FC<GroupProps> = props => {
   const { t } = useTranslation(namespaces.pages.groups.index);
   const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (!props.selectedGroup)
     return (
@@ -31,6 +32,7 @@ const Group: React.FC<GroupProps> = props => {
       <MaterialTable
         key={props.selectedGroup + editing}
         uniqueName="pages/groups/group"
+        isLoading={loading}
         title={t('students')}
         data={(query: Query<DetailGroupUser>) =>
           editing
@@ -67,8 +69,11 @@ const Group: React.FC<GroupProps> = props => {
                 color="primary"
                 variant="contained"
                 onClick={() => {
-                  props.onSubmit();
-                  setEditing(false);
+                  setLoading(true);
+                  props.onSubmit().then(success => {
+                    setLoading(false);
+                    if (success) setEditing(false);
+                  });
                 }}
               >
                 {t('common:actions.save')}
