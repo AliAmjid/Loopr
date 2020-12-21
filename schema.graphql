@@ -284,7 +284,6 @@ type Query {
 
 type Subject implements Node {
     _id: String!
-    classGroup: ClassGroup
     group: Group
     id: ID!
     subjectType: SubjectType
@@ -542,9 +541,8 @@ input createGroupInput {
 }
 
 input createSubjectInput {
-    classGroup: String
     clientMutationId: String
-    group: String
+    iGroupIri: String!
     subjectType: String
     teacher: String
 }
@@ -619,9 +617,8 @@ input updateGroupInput {
 }
 
 input updateSubjectInput {
-    classGroup: String
     clientMutationId: String
-    group: String
+    iGroupIri: String
     id: ID!
     subjectType: String
     teacher: String
