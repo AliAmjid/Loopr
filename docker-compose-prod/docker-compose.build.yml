@@ -26,13 +26,15 @@ services:
       - php
 
   app:
-    container_name: loopr_app_prod
     build:
       context: ../app
       dockerfile: ../docker/app/prod/Dockerfile
+      <<: *api-cache-from
+    image: ${APP_IMAGE}
 
   docs:
-    container_name: loopr_docs
     build:
-      context: ./docs
+      context: ../docs
       dockerfile: ../docker/docs/Dockerfile
+      <<: *api-cache-from
+    image: ${DOCS_IMAGE}
