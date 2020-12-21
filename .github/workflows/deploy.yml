@@ -12,6 +12,7 @@ env:
   NGINX_IMAGE: eu.gcr.io/loopr-299120/nginx
   DOCS_IMAGE: eu.gcr.io/loopr-299120/docs
   CLOUDSDK_PYTHON: /usr/bin/python
+  API_URL: https://app.loopr.cz/graphql
 
 jobs:
   setup-build-publish-deploy:
