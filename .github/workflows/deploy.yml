@@ -1,0 +1,64 @@
+name: Build and deploy to app.loopr.cz
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  PHP_IMAGE: eu.gcr.io/loopr-299120/php
+  APP_IMAGE: eu.gcr.io/loopr-299120/app
+  NGINX_IMAGE: eu.gcr.io/loopr-299120/nginx
+  CLOUDSDK_PYTHON: /usr/bin/python
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+
+      # Configure Docker to use the gcloud command-line tool as a credential
+      # helper for authentication
+      - run: |-
+          gcloud --quiet auth configure-docker
+
+      # pull & build the Docker image
+      - name: Pull
+        run: docker-compose -f docker-compose-prod/docker-compose.build.yml pull --ignore-pull-failures
+
+      - name: Build
+        run: docker-compose -f docker-compose-prod/docker-compose.build.yml build --pull
+
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: docker-compose -f docker-compose-prod/docker-compose.build.yml push
+
+      - name: Copy docker-compose-prod file to loopr dir
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+        with:
+          source: "./docker-compose-prod"
+          target: "/var/www/loopr/"
+
+      - name: Run script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          script: sh /var/www/loopr/docker-compose-prod/deploy.sh

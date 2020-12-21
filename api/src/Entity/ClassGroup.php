@@ -4,7 +4,6 @@
 namespace App\Entity;
 
 
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
@@ -209,6 +208,9 @@ class ClassGroup implements IGroup
 
     public function addUser(User $user): User
     {
+        if (!$user->getRole()->hasResource(AclResourceEnum::USER_CAN_STUDY)) {
+            throw new ClientError(ClientErrorType::USER_CAN_NOT_BE_TAUGHT);
+        }
         $user->setClassGroup($this);
         $this->users->add($user);
         return $user;

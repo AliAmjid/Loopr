@@ -1,0 +1,24 @@
+version: '3.4'
+
+x-cache-from:
+  - &api-cache-from
+    cache_from:
+      - ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+      - ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
+
+services:
+  php:
+    build:
+      context: ../api
+      target: api_platform_php
+      <<: *api-cache-from
+    image: ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+
+  api:
+    build:
+      context: ../api
+      target: api_platform_nginx
+      <<: *api-cache-from
+    image: ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
+    depends_on:
+      - php

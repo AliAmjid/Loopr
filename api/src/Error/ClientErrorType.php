@@ -50,4 +50,14 @@ class ClientErrorType
         'code' => 'EMPTY_GROUP_CLASS_GROUP',
         'msg' => 'Group or ClassGroup is empty.'
     ];
+
+    const USER_CAN_NOT_BE_TAUGHT = [
+        'code' => 'USER_CAN_NOT_BE_TAUGHT',
+        'msg' => 'User need resource USER_CAN_STUDY'
+    ];
+
+    const INVALID_IRI = [
+        'code' => 'INVALID_IRI',
+        'msg' => 'Invalid IRI'
+    ];
 }

@@ -1,25 +1,60 @@
 <?php
 
+namespace App\Command;
 
-namespace App\Tests\Helpers;
-
-
-use ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter;
 use App\Entity\AclResource;
 use App\Entity\AclRole;
 use App\Entity\User;
 use App\Enum\AclResourceEnum;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ManagerRegistry;
 use Nette\Utils\Random;
-use Softonic\GraphQL\Response;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
-trait TCreateEntityHelpers
+class AclAdminUserCommand extends Command
 {
 
-    protected $testingEntities = [];
-    protected ObjectManager $em;
+    protected $kernel;
+    protected $em;
+
+    protected static $defaultName = 'acl:admin-user';
+
+    public function __construct(
+        string $name = null,
+        ManagerRegistry $registry,
+        KernelInterface $kernel
+    ) {
+        parent::__construct($name);
+        $this->em = $registry->getManager();
+        $this->kernel = $kernel;
+    }
+
+    protected function configure()
+    {
+        $this
+            ->setDescription('Create user in database')
+            ->addArgument('email', InputArgument::REQUIRED, 'email')
+            ->addArgument('password', InputArgument::REQUIRED, 'password');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $io = new SymfonyStyle($input, $output);
+        $name = $input->getArgument('email');
+        $password = $input->getArgument('password');
+        $user = $this->createRandomUser($password, AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_ADMIN'], $name);
+
+
+        $io->success('login: ' . $user->getEmail());
+        $io->success('password: ' . $password);
+        $io->success('Generated user');
+        return Command::SUCCESS;
+    }
 
     protected function createRandomUser(
         $password = 'test',
@@ -37,7 +72,6 @@ trait TCreateEntityHelpers
         $user->setRole($this->createRoleWithResources($resources));
         $this->em->persist($user);
         $this->em->flush();
-        $this->testingEntities[] = $user;
         return $user;
     }
 
@@ -58,18 +92,11 @@ trait TCreateEntityHelpers
         }
         $this->em->persist($role);
         $this->em->flush();
-        $this->testingEntities[] = $role;
         return $role;
-    }
-
-
-    protected function deleteAllTestingEntities()
-    {
     }
 
     protected function randomRoleName(): string
     {
         return 'ROLE_' . strtoupper(Random::generate(5, 'a-z'));
     }
-
 }

@@ -10,6 +10,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
+use App\Enum\AclResourceEnum;
+use App\Error\ClientError;
+use App\Error\ClientErrorType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -105,6 +108,10 @@ class Group implements IGroup
 
     public function addUser(User $user): User
     {
+        if (!$user->getRole()->hasResource(AclResourceEnum::USER_CAN_STUDY)) {
+            throw new ClientError(ClientErrorType::USER_CAN_NOT_BE_TAUGHT);
+        }
+
         $this->users->add($user);
         return $user;
     }

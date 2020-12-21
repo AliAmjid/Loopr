@@ -13,6 +13,7 @@ use App\Tests\Helpers\TAssertsHelper;
 use App\Tests\Helpers\TCreateEntityHelpers;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Response;
@@ -21,8 +22,8 @@ abstract class BaseTestCase extends TestCase
 {
 
     protected Kernel $kernel;
-    /** @var EntityManagerInterface $em */
-    protected EntityManagerInterface $em;
+    /** @var ObjectManager $em */
+    protected \Doctrine\Persistence\ObjectManager $em;
     protected Registry $doctrine;
     use TCreateEntityHelpers;
     use TAssertsHelper;
@@ -87,12 +88,17 @@ abstract class BaseTestCase extends TestCase
         foreach ($errors as $error) {
             $loopr = $error['loopr-error'] ?? null;
             if (!$loopr) {
-                throw new \RuntimeException("Loopr secction is missing!!!");
+                throw new \RuntimeException("Loopr secction is missing!");
             }
             if ($loopr['code'] == $errorCode) {
                 $errorFounded = true;
             }
         }
         $this->assertTrue($errorFounded);
+    }
+
+    public function queryLibrary(GraphQLClient $client): QueryLibrary
+    {
+        return new QueryLibrary($client);
     }
 }
