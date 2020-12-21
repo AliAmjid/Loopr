@@ -6,11 +6,10 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import StudentsIndex from 'pages/classGroups/classGroup/students';
-import Teacher from 'pages/classGroups/classGroup/teacher';
 
 import Tabs from 'components/Tabs';
 
-import Students from './students/students';
+import TeacherIndex from './teacher';
 import { ClassGroupProps } from './types';
 
 const TabWrapper: React.FC = props => (
@@ -48,14 +47,7 @@ const ClassGroup: React.FC<ClassGroupProps> = props => {
         {
           id: 1,
           label: t('teacher'),
-          panel: (
-            <Teacher
-              teacher={props.teacher}
-              loading={props.teacherLoading}
-              onGetUsers={query => props.onGetUsers(query, true)}
-              onChange={props.onTeacherChange}
-            />
-          ),
+          panel: <TeacherIndex />,
         },
       ]}
     />

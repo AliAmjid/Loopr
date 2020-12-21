@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
-import { Simulate } from 'react-dom/test-utils';
-import { useTranslation } from 'react-i18next';
 
+import resources from 'config/resources';
+
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import {
@@ -118,7 +119,7 @@ const StudentsIndex: React.FC = () => {
           query: CLASS_GROUPS_USERS_QUERY,
           variables: {
             ...variables,
-            resourceName: undefined,
+            resourceName: resources.user.canStudy,
           },
         })
         .then(res => {

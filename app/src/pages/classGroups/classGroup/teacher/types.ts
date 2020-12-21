@@ -12,15 +12,9 @@ export type DetailClassGroupUser = {
     checked?: boolean;
   };
 };
-
 export interface GetUsersReturn {
   users: DetailClassGroupUser[];
   totalCount: number;
-}
-
-export interface SelectionChangeArgs {
-  id: string;
-  selected: boolean;
 }
 
 type GetUsers = (query: Query<DetailClassGroupUser>) => Promise<GetUsersReturn>;
@@ -30,8 +24,4 @@ export interface TeacherProps {
   loading: boolean;
   onGetUsers: GetUsers;
   onChange: (id: string) => Promise<boolean>;
-}
-
-export interface ClassGroupProps {
-  selectedClassGroup?: string;
 }

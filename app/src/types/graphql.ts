@@ -878,6 +878,36 @@ export interface GroupsUpdateGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: GroupsUpdateUsersGroupMutation
+// ====================================================
+
+export interface GroupsUpdateUsersGroupMutation_updateUsersGroup_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface GroupsUpdateUsersGroupMutation_updateUsersGroup {
+  __typename: "updateUsersGroupPayload";
+  group: GroupsUpdateUsersGroupMutation_updateUsersGroup_group | null;
+}
+
+export interface GroupsUpdateUsersGroupMutation {
+  /**
+   * UpdateUserss a Group.
+   */
+  updateUsersGroup: GroupsUpdateUsersGroupMutation_updateUsersGroup | null;
+}
+
+export interface GroupsUpdateUsersGroupMutationVariables {
+  input: updateUsersGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GroupsGroupQuery
 // ====================================================
 
@@ -956,11 +986,27 @@ export interface GroupsGroupsQuery {
 // GraphQL query operation: GroupsUsersQuery
 // ====================================================
 
+export interface GroupsUsersQuery_users_edges_node_groups_edges_node {
+  __typename: "Group";
+  id: string;
+}
+
+export interface GroupsUsersQuery_users_edges_node_groups_edges {
+  __typename: "GroupEdge";
+  node: GroupsUsersQuery_users_edges_node_groups_edges_node | null;
+}
+
+export interface GroupsUsersQuery_users_edges_node_groups {
+  __typename: "GroupConnection";
+  edges: (GroupsUsersQuery_users_edges_node_groups_edges | null)[] | null;
+}
+
 export interface GroupsUsersQuery_users_edges_node {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
+  groups: GroupsUsersQuery_users_edges_node_groups | null;
 }
 
 export interface GroupsUsersQuery_users_edges {
@@ -984,6 +1030,8 @@ export interface GroupsUsersQueryVariables {
   after?: string | null;
   last?: number | null;
   before?: string | null;
+  groupId: string;
+  resourceName?: string | null;
 }
 
 /* tslint:disable */
@@ -1697,6 +1745,13 @@ export interface updateUserInput {
 }
 
 export interface updateUsersClassGroupInput {
+  addUsers?: (string | null)[] | null;
+  clientMutationId?: string | null;
+  deleteUsers?: (string | null)[] | null;
+  id: string;
+}
+
+export interface updateUsersGroupInput {
   addUsers?: (string | null)[] | null;
   clientMutationId?: string | null;
   deleteUsers?: (string | null)[] | null;

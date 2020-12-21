@@ -101,6 +101,7 @@ const SideList: React.FC<SideListProps> = props => {
         <Box
           position="sticky"
           width="100%"
+          pt={2}
           bottom={theme.spacing(2)}
           display={props?.bottomAction ? 'flex' : 'none'}
           justifyContent="center"

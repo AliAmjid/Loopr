@@ -4,6 +4,8 @@ import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
+import resources from 'config/resources';
+
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -14,15 +16,15 @@ import useGroupsState from 'pages/groups/state';
 import {
   GroupsGroupQuery,
   GroupsGroupQueryVariables,
-  GroupsUpdateGroupMutation,
-  GroupsUpdateGroupMutationVariables,
+  GroupsUpdateUsersGroupMutation,
+  GroupsUpdateUsersGroupMutationVariables,
   GroupsUsersQuery,
   GroupsUsersQueryVariables,
 } from 'types/graphql';
 
 import usePagination from 'components/usePagination';
 
-import GROUPS_UPDATE_GROUP_MUTATION from '../mutations/updateGroup';
+import GROUPS_UPDATE_USERS_GROUP_MUTATION from '../mutations/updateUsersGroup';
 
 import Group from './group';
 import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
@@ -33,10 +35,10 @@ const GroupIndex: React.FC = () => {
     selectedGroup: state.selectedGroup,
   }));
   const client = useApolloClient();
-  const [updateGroup] = useMutation<
-    GroupsUpdateGroupMutation,
-    GroupsUpdateGroupMutationVariables
-  >(GROUPS_UPDATE_GROUP_MUTATION);
+  const [updateUsersGroup] = useMutation<
+    GroupsUpdateUsersGroupMutation,
+    GroupsUpdateUsersGroupMutationVariables
+  >(GROUPS_UPDATE_USERS_GROUP_MUTATION);
   const {
     getPagination: getGroupPagination,
     setPagination: setGroupPagination,
@@ -47,7 +49,12 @@ const GroupIndex: React.FC = () => {
     setPagination: setUserPagination,
     resetPagination: resetUserPagination,
   } = usePagination();
-  const [selected, setSelected] = useState<string[]>([]);
+  const [changedUsers, setChangedUsers] = useState<
+    {
+      id: string;
+      selected: boolean;
+    }[]
+  >([]);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -110,7 +117,11 @@ const GroupIndex: React.FC = () => {
       return client
         .query<GroupsUsersQuery, GroupsUsersQueryVariables>({
           query: GROUPS_USERS_QUERY,
-          variables,
+          variables: {
+            ...variables,
+            groupId: selectedGroup.substring('/groups/'.length),
+            resourceName: resources.user.canStudy,
+          },
         })
         .then(res => {
           const edges = res.data?.users?.edges;
@@ -125,7 +136,7 @@ const GroupIndex: React.FC = () => {
                 users.push({
                   ...node,
                   tableData: {
-                    checked: selected.some(id => id === node.id),
+                    checked: (node.groups?.edges?.length || 0) > 0,
                   },
                 });
               }
@@ -142,42 +153,49 @@ const GroupIndex: React.FC = () => {
   };
 
   const selectionChangeHandler = (args: SelectionChangeArgs): void => {
-    if (args.selected) {
-      setSelected(prevState => [...prevState, args.id]);
-    } else {
-      setSelected(prevState => {
-        prevState.splice(
-          prevState.findIndex(s => s === args.id),
-          1,
-        );
+    setChangedUsers(prevState => {
+      const index = prevState.findIndex(
+        changedUser => changedUser.id === args.id,
+      );
+      if (index !== -1) {
+        prevState.splice(index, 1);
+      } else {
+        prevState = [...prevState, { id: args.id, selected: args.selected }];
+      }
 
-        return prevState;
-      });
-    }
+      return prevState;
+    });
   };
 
   const submitHandler = (): Promise<boolean> => {
-    if (selectedGroup) {
-      return updateGroup({
-        variables: { input: { id: selectedGroup, users: selected } },
-      })
-        .then(() => {
-          enqueueSnackbar(t('snackbars.studentsEdit.success'), {
-            variant: 'success',
-          });
-
-          return true;
-        })
-        .catch(() => {
-          enqueueSnackbar(t('snackbars.studentsEdit.error'), {
-            variant: 'error',
-          });
-
-          return false;
+    return updateUsersGroup({
+      variables: {
+        input: {
+          id: `${selectedGroup}`,
+          addUsers: changedUsers
+            .filter(user => user.selected)
+            .map(user => user.id),
+          deleteUsers: changedUsers
+            .filter(user => !user.selected)
+            .map(user => user.id),
+        },
+      },
+    })
+      .then(() => {
+        enqueueSnackbar(t('snackbars.studentsEdit.success'), {
+          variant: 'success',
         });
-    }
+        setChangedUsers([]);
 
-    return Promise.resolve(false);
+        return true;
+      })
+      .catch(() => {
+        enqueueSnackbar(t('snackbars.studentsEdit.error'), {
+          variant: 'error',
+        });
+
+        return false;
+      });
   };
 
   return (
