@@ -6,6 +6,7 @@ namespace App\Tests\Features;
 
 use App\Entity\User;
 use App\Enum\AclResourceEnum;
+use App\Helper\IriHelper;
 use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 
@@ -33,7 +34,7 @@ class GroupTest extends BaseTestCase
             count($response->getData()['updateUsersClassGroup']['classGroup']['users']['edges'])
         );
         /** @var User $userEntity */
-        $userEntity = $this->em->find(User::class, explode('/', $users[0])[1]);
+        $userEntity = $this->em->find(User::class, IriHelper::getIdFromIri($users[0]));
         $this->em->refresh($userEntity);
         $this->assertSame($classGroupResponse->getData()['createClassGroup']['classGroup']['_id'],
             $userEntity->getClassGroup()->getId());
