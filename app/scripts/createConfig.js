@@ -8,3 +8,7 @@ fs.writeFileSync(
   configPath,
   `module.exports=${JSON.stringify(prefabConfig(process.env))}`,
 );
+console.log(
+  'config created',
+  `module.exports=${JSON.stringify(prefabConfig(process.env))}`,
+);
