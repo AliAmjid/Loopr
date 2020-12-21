@@ -6,6 +6,7 @@ namespace App\Tests\Features;
 
 use App\Entity\User;
 use App\Enum\AclResourceEnum;
+use App\Helper\IriHelper;
 use App\Tests\BaseTestCase;
 use Nette\Utils\Random;
 
@@ -23,8 +24,8 @@ class GroupTest extends BaseTestCase
         $this->assertNoErrors($classGroupResponse);
         $classGroupIri = $classGroupResponse->getData()['createClassGroup']['classGroup']['id'];
         $users = [
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId()
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId()
         ];
         $response = $this->queryLibrary($client)->updateUsersClassGroup($classGroupIri, $users, []);
         $this->assertNoErrors($response);
@@ -33,7 +34,7 @@ class GroupTest extends BaseTestCase
             count($response->getData()['updateUsersClassGroup']['classGroup']['users']['edges'])
         );
         /** @var User $userEntity */
-        $userEntity = $this->em->find(User::class, explode('/', $users[0])[1]);
+        $userEntity = $this->em->find(User::class, IriHelper::getIdFromIri($users[0]));
         $this->em->refresh($userEntity);
         $this->assertSame($classGroupResponse->getData()['createClassGroup']['classGroup']['_id'],
             $userEntity->getClassGroup()->getId());
@@ -52,10 +53,10 @@ class GroupTest extends BaseTestCase
         $createGroupResponse = $this->queryLibrary($client)->createGroup(Random::generate(8, 'a-z'));
         $groupUri = $createGroupResponse->getData()['createGroup']['group']['id'];
         $users = [
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
         ];
 
         $response = $this->queryLibrary($client)->updateUsersGroup($groupUri, $users, []);
