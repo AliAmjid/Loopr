@@ -24,7 +24,7 @@ import {
 
 import usePagination from 'components/usePagination';
 
-import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClass';
+import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClassGroup';
 import CLASS_GROUPS_CLASS_GROUP_USERS_QUERY from '../queries/classGroupUsers';
 import CLASS_GROUPS_USERS_QUERY from '../queries/users';
 import useClassGroupsState from '../state';

@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION from 'pages/classGroups/mutations/deleteClass';
+import CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION from 'pages/classGroups/mutations/deleteClassGroup';
 
 import {
   ClassGroupsAddClassGroupMutation,
@@ -18,8 +18,8 @@ import {
   ClassGroupsUpdateClassGroupMutationVariables,
 } from 'types/graphql';
 
-import CLASS_GROUPS_ADD_CLASS_GROUP_MUTATION from '../mutations/addClass';
-import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClass';
+import CLASS_GROUPS_ADD_CLASS_GROUP_MUTATION from '../mutations/addClassGroup';
+import CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION from '../mutations/updateClassGroup';
 import CLASS_GROUPS_CLASS_GROUPS_QUERY from '../queries/classGroups';
 import useClassGroupsState from '../state';
 

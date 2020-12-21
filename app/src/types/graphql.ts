@@ -591,6 +591,36 @@ export interface ClassGroupsUpdateClassGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ClassGroupsUpdateUsersClassGroupMutation
+// ====================================================
+
+export interface ClassGroupsUpdateUsersClassGroupMutation_updateUsersClassGroup_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface ClassGroupsUpdateUsersClassGroupMutation_updateUsersClassGroup {
+  __typename: "updateUsersClassGroupPayload";
+  classGroup: ClassGroupsUpdateUsersClassGroupMutation_updateUsersClassGroup_classGroup | null;
+}
+
+export interface ClassGroupsUpdateUsersClassGroupMutation {
+  /**
+   * UpdateUserss a ClassGroup.
+   */
+  updateUsersClassGroup: ClassGroupsUpdateUsersClassGroupMutation_updateUsersClassGroup | null;
+}
+
+export interface ClassGroupsUpdateUsersClassGroupMutationVariables {
+  input: updateUsersClassGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: ClassGroupsClassGroupsQuery
 // ====================================================
 
@@ -1664,6 +1694,13 @@ export interface updateUserInput {
   id: string;
   lastname?: string | null;
   role?: string | null;
+}
+
+export interface updateUsersClassGroupInput {
+  addUsers?: (string | null)[] | null;
+  clientMutationId?: string | null;
+  deleteUsers?: (string | null)[] | null;
+  id: string;
 }
 
 //==============================================================

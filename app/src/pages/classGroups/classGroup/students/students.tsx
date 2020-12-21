@@ -13,12 +13,14 @@ const Students: React.FC<StudentsProps> = props => {
   const { t } = useTranslation(namespaces.pages.classGroups.index);
 
   const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
       <MaterialTable
         key={`${props.selectedClassGroup}-${editing}`}
         uniqueName="pages/classGroups/classGroup/students"
+        isLoading={loading}
         title={t('students')}
         data={(query: Query<ClassGroupUser>) =>
           editing
@@ -77,8 +79,11 @@ const Students: React.FC<StudentsProps> = props => {
               color="primary"
               variant="contained"
               onClick={() => {
-                props.onSubmit();
-                setEditing(false);
+                setLoading(true);
+                props.onSubmit().then(success => {
+                  setLoading(false);
+                  if (success) setEditing(false);
+                });
               }}
             >
               {t('common:actions.save')}
