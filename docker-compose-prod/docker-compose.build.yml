@@ -5,6 +5,7 @@ x-cache-from:
     cache_from:
       - ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
       - ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
+      - ${APP_IMAGE}
 
 services:
   php:
@@ -22,3 +23,9 @@ services:
     image: ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
     depends_on:
       - php
+
+  app:
+    container_name: loopr_app_prod
+    build:
+      context: ../app
+      dockerfile: ../docker/app/prod/Dockerfile
