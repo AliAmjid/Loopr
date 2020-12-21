@@ -48,7 +48,6 @@ const Group: React.FC<GroupProps> = props => {
               }))
         }
         onSelectionChange={(data, row) => {
-          console.log('row', row);
           if (row) {
             props.onSelectionChange({
               id: row?.id,

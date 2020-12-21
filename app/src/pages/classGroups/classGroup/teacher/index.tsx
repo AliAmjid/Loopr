@@ -26,7 +26,7 @@ import CLASS_GROUPS_USERS_QUERY from '../../queries/users';
 import useClassGroupsState from '../../state';
 
 import Teacher from './teacher';
-import { DetailClassGroupUser, GetUsers, GetUsersReturn } from './types';
+import { DetailClassGroupUser, GetUsersReturn } from './types';
 
 const TeacherIndex: React.FC = () => {
   const { selectedClassGroup } = useClassGroupsState(state => ({

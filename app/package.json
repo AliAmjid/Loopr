@@ -14,7 +14,7 @@
     "eslint": "eslint '*/**/*.{ts,tsx,js}' --fix",
     "fix": "yarn ts && yarn eslint && yarn exports:check && yarn test",
     "storybook": "start-storybook --port 3002",
-    "test": "jest -o",
+    "test": "jest --all",
     "test:all": "jest",
     "test:coverage": "jest --coverage",
     "apollo:generate-types": "apollo codegen:generate --localSchemaFile=../schema.graphql --target=typescript --includes=src/**/*.{ts,tsx} --tagName=gql --addTypename --outputFlat ./src/types/graphql.ts",
