@@ -32,8 +32,8 @@ services:
       <<: *api-cache-from
     image: ${APP_IMAGE}
     environment:
-      - API_URL=https://app.loopr.cz/graphql
       - DISABLE_TOUR=1
+      - API_URL=https://app.loopr.cz/graphql
   docs:
     build:
       context: ../docs
