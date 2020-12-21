@@ -5,6 +5,7 @@ WORKDIR /docs
 
 COPY ./package.json ./
 COPY ./yarn.lock ./
+COPY ./src ./
 
 RUN yarn
 
