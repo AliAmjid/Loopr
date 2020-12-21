@@ -6,12 +6,11 @@ import MaterialTablePrefab, {
   MTableEditRow,
   MTableGroupbar,
 } from 'material-table';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import useGroupingState from 'lib/material-table/actions/grouping/state';
+import exportPDF from 'lib/material-table/exportPDF';
 import materialTableLocalization from 'lib/material-table/localization';
 
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -23,7 +22,7 @@ import groupingAction from './actions/grouping';
 import materialTableIcons from './icons';
 import { MaterialTableCustomProps } from './types';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+const exportPDFFunction = exportPDF;
 
 const useStyles = makeStyles((theme: Theme) => ({
   groupbar: {
@@ -169,6 +168,7 @@ const MaterialTable = <RowD extends {}>(
           options={{
             search: false,
             filtering: true,
+
             emptyRowsWhenPaging: false,
             pageSize: rowsPerPage,
             pageSizeOptions,
@@ -177,57 +177,12 @@ const MaterialTable = <RowD extends {}>(
             ...props.options,
             exportButton: props.options?.exportButton && !groupingActive,
             actionsCellStyle: { color: theme.palette.common.black },
+
             // TODO remove after upgrade
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
-            exportPdf: (columns: Column<any>[], data: any[]) => {
-              const filteredColumns: {
-                field: string;
-                title: string;
-              }[] = [];
-              columns.forEach(column => {
-                if (
-                  typeof column.field === 'string' &&
-                  typeof column.title === 'string'
-                ) {
-                  filteredColumns.push({
-                    field: column.field,
-                    title: column.title,
-                  });
-                }
-              });
 
-              const docDefinition = {
-                content: [
-                  {
-                    layout: 'lightHorizontalLines',
-                    table: {
-                      headerRows: 1,
-                      widths: filteredColumns.map(() => '*'),
-
-                      body: [
-                        filteredColumns.map(c => c.title),
-                        ...data.map(row =>
-                          filteredColumns.map(c => {
-                            const { field } = c;
-
-                            let value: any = '';
-                            const fieldSteps = field.split('.');
-                            value = row;
-                            fieldSteps.forEach(step => {
-                              value = value[step];
-                            });
-
-                            return value;
-                          }),
-                        ),
-                      ],
-                    },
-                  },
-                ],
-              };
-              pdfMake.createPdf(docDefinition).download(`${props.title}`);
-            },
+            exportPdf: exportPDFFunction,
           }}
           actions={[...actions, ...(props.actions || [])]}
         />
