@@ -29,7 +29,8 @@ services:
     build:
       context: ../app
       dockerfile: ../docker/app/prod/Dockerfile
-      <<: *api-cache-from
+      args:
+        - API_URL=${API_URL}
     image: ${APP_IMAGE}
     environment:
       - DISABLE_TOUR=1
@@ -38,5 +39,4 @@ services:
     build:
       context: ../docs
       dockerfile: ../docker/docs/Dockerfile
-      <<: *api-cache-from
     image: ${DOCS_IMAGE}
