@@ -154,6 +154,11 @@ class Subject
         }
     }
 
+    public function getClassGroup(): ?ClassGroup
+    {
+        return $this->classGroup;
+    }
+
 
     /**
      * @ORM\PrePersist()
