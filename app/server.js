@@ -6,15 +6,6 @@ const chalk = require('chalk');
 
 const prefabConfig = require('./src/config/prefab');
 
-const createConfig = () => {
-  const configPath = `${__dirname}/src/config/index.js`;
-  if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
-  fs.writeFileSync(
-    configPath,
-    `module.exports=${JSON.stringify(prefabConfig(process.env))}`,
-  );
-};
-
 (async () => {
   const app = next({ dev: process.env.NODE_ENV !== 'production' });
   const handle = app.getRequestHandler();
@@ -22,7 +13,8 @@ const createConfig = () => {
 
   await app.prepare();
 
-  createConfig();
+  // eslint-disable-next-line global-require
+  require('./scripts/createConfig');
 
   // eslint-disable-next-line global-require
   const config = require('./src/config');
