@@ -9,6 +9,7 @@ use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
 use App\Entity\Group;
 use App\Entity\IGroup;
 use App\Entity\User;
+use App\Helper\IriHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModifyUsersInGroupController extends AbstractController implements MutationResolverInterface
@@ -31,14 +32,16 @@ class ModifyUsersInGroupController extends AbstractController implements Mutatio
 
         $args = $context['args']['input'];
         foreach ($args['addUsers'] as $iri) {
-            $user = $em->find(User::class, explode('/', $iri)[1] ?? null);
+            $id = IriHelper::getIdFromIri($iri);
+            $user = $em->find(User::class, $id);
             if ($user instanceof User) {
                 $em->persist($item->addUser($user));
             }
         }
 
         foreach ($args['deleteUsers'] as $iri) {
-            $user = $em->find(User::class, explode('/', $iri)[1] ?? null);
+            $id = IriHelper::getIdFromIri($iri);
+            $user = $em->find(User::class, $id);
             if ($user instanceof User) {
                 $em->persist($item->deleteUser($user));
             }

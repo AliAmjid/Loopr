@@ -23,8 +23,8 @@ class GroupTest extends BaseTestCase
         $this->assertNoErrors($classGroupResponse);
         $classGroupIri = $classGroupResponse->getData()['createClassGroup']['classGroup']['id'];
         $users = [
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId()
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId()
         ];
         $response = $this->queryLibrary($client)->updateUsersClassGroup($classGroupIri, $users, []);
         $this->assertNoErrors($response);
@@ -52,10 +52,10 @@ class GroupTest extends BaseTestCase
         $createGroupResponse = $this->queryLibrary($client)->createGroup(Random::generate(8, 'a-z'));
         $groupUri = $createGroupResponse->getData()['createGroup']['group']['id'];
         $users = [
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
-            'users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
+            '/users/' . $this->createRandomUser('test', AclResourceEnum::PROP_DEFAULT_ROLES['ROLE_USER'])->getId(),
         ];
 
         $response = $this->queryLibrary($client)->updateUsersGroup($groupUri, $users, []);
