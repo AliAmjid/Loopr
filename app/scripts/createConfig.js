@@ -11,4 +11,5 @@ fs.writeFileSync(
 console.log(
   'config created',
   `module.exports=${JSON.stringify(prefabConfig(process.env))}`,
+  process.env,
 );
