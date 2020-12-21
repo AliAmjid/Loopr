@@ -45,11 +45,11 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
     volumes:
       - ../api/docker/db/data:/var/lib/postgresql/data:rw
-    app:
-      container_name: loopr_app_prod
-      image: ${APP_IMAGE}
-      ports:
-        - 3000:3000
+  app:
+    container_name: loopr_app_prod
+    image: ${APP_IMAGE}
+    ports:
+      - 3000:3000
 
   docs:
     image: ${DOCS_IMAGE}
