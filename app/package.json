@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "node server.js",
-    "build": "node scripts/createConfig.js && next build",
+    "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "exports:check": "node src/lib/ts-prune/index.js",
     "ts": "tsc",
