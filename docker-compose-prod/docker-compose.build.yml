@@ -26,6 +26,9 @@ services:
     build:
       context: ../app
       dockerfile: ../docker/app/prod/Dockerfile
+      args:
+        - NEXT_PUBLIC_DISABLE_TOUR=true
+        - NEXT_PUBLIC_API_URL=https://app.loopr.cz/graphql
     image: ${APP_IMAGE}    
     
   docs:

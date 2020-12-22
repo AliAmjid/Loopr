@@ -52,10 +52,7 @@ services:
     container_name: loopr_app_prod
     image: ${APP_IMAGE}
     ports:
-      - 3000:3000
-    environment:
-      - NEXT_PUBLIC_DISABLE_TOUR=true
-      - NEXT_PUBLIC_API_URL=https://app.loopr.cz/graphql
+      - 3000:3000    
   docs:
     image: ${DOCS_IMAGE}
     ports:
