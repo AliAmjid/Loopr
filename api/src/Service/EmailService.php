@@ -33,7 +33,6 @@ class EmailService
             'password' => $password
         ]);
         $response = $this->sendGrid->send($mail);
-
         if ($response->statusCode() > 299) {
             throw new \RuntimeException('Sendgrid reply to: ' . $response->statusCode());
         }
