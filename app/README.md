@@ -18,4 +18,4 @@ Frontend part of Loopr project
 - `yarn storybook`
 
 ## Config
-- You can edit config by environment variables in cli or in `.env` (see `src/config/prefab.js` for config options)
+- You can edit config by setting environment variables in cli or in `.env.local` (see `.env` for config options)

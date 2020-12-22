@@ -4,7 +4,7 @@ node_modules/
 yarn-error.log
 
 src/config/index.js
-.env
+.env.local
 
 coverage
 

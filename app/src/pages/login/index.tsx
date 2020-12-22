@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { compose } from 'recompose';
 
-import config from 'config';
 import routes from 'config/routes';
 
 import recognizeError from 'lib/apollo/recognizeError';
@@ -61,7 +60,7 @@ const LoginIndex: React.FC = () => {
   }, []);
 
   const submitHandler = (email: string, password: string): void => {
-    cookie.remove(config.tokenCookie);
+    cookie.remove(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
     getToken({ variables: { email, password } });
   };
 
@@ -102,7 +101,10 @@ const LoginIndex: React.FC = () => {
     }
     if (getTokenData?.getToken) {
       enqueueSnackbar(t('success'), { variant: 'success' });
-      cookie.set(config.tokenCookie, getTokenData.getToken.token);
+      cookie.set(
+        `${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`,
+        getTokenData.getToken.token,
+      );
       router.push(routes.dashboard.index);
     }
   }

@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { ReactourStep } from 'reactour';
 
-import config from 'config';
-
 import { useTranslation } from 'lib/i18n';
 
 import { ReactourProvider as ReactourProviderPrefab } from './context';
@@ -26,7 +24,9 @@ const ReactourProvider: React.FC<any> = props => {
       }}
     >
       <Tour
-        isOpen={Boolean(steps) && !config.disableTour}
+        isOpen={
+          Boolean(steps) && process.env.NEXT_PUBLIC_DISABLE_TOUR === 'false'
+        }
         steps={steps || []}
         onRequestClose={() => setSteps(null)}
       />

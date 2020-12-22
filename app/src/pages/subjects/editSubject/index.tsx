@@ -44,6 +44,7 @@ const EditSubjectIndex: React.FC = () => {
     return updateSubject({
       variables: {
         input: {
+          teacher: args.teacher,
           iGroupIri: args.classGroup || args.group,
           id: `${router.query.subjectId}`,
         },
