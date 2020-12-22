@@ -11,7 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class UserCreatedHandler implements MessageHandlerInterface {
+class UserCreatedHandler implements MessageHandlerInterface
+{
     private EmailService $emailService;
     private ObjectManager $em;
 
@@ -23,11 +24,12 @@ class UserCreatedHandler implements MessageHandlerInterface {
         $this->emailService = $emailService;
     }
 
-    public function __invoke(NewUserCreatedEvent $newUserCreatedEvent) {
-        //send email
-        /** @var User $user */
-        $user = $this->em->getRepository(User::class)->findOneBy(['email' => $newUserCreatedEvent->getEmail()]);
-        $this->emailService->sendAfterRegistrationEmail($user, $newUserCreatedEvent->getPassword());
+    public function __invoke(NewUserCreatedEvent $newUserCreatedEvent)
+    {
+        $this->emailService->sendAfterRegistrationEmail(
+            $newUserCreatedEvent->getEmail(),
+            $newUserCreatedEvent->getPassword()
+        );
 
         //todo: Implement welcome notification
     }
