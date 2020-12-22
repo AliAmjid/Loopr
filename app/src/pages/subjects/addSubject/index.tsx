@@ -34,6 +34,7 @@ const AddSubjectIndex: React.FC = () => {
     return createSubject({
       variables: {
         input: {
+          teacher: args.teacher,
           iGroupIri: args.classGroup || args.group || '',
           subjectType: `${router.query.subjectTypeId}`,
         },
