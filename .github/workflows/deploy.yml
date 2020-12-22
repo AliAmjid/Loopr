@@ -39,7 +39,7 @@ jobs:
         run: docker-compose -f docker-compose-prod/docker-compose.build.yml pull --ignore-pull-failures
 
       - name: Build
-        run: docker-compose -f docker-compose-prod/docker-compose.build.yml build --pull
+        run: docker-compose -f docker-compose-prod/docker-compose.build.yml build --pull --no-cache
 
       # Push the Docker image to Google Container Registry
       - name: Publish
