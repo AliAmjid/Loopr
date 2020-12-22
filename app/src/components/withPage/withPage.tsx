@@ -5,7 +5,6 @@ import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
-import config from 'config';
 import routes from 'config/routes';
 
 import recognizeError from 'lib/apollo/recognizeError';
@@ -43,7 +42,7 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     error && recognizeError(error) !== errors.network.failedToFetch;
 
   const logOutHandler = async (): Promise<void> => {
-    cookie.remove(config.tokenCookie);
+    cookie.remove(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
     await cachePersistor.purge();
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     await apolloClient.resetStore().catch(() => {});

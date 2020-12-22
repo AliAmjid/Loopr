@@ -12,8 +12,6 @@ import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
 import { getDisplayName } from 'recompose';
 
-import config from 'config';
-
 import { cachePersistorContext } from './useCachePersistor';
 
 const withApollo = <ComponentProps extends {} = any>(
@@ -23,12 +21,12 @@ const withApollo = <ComponentProps extends {} = any>(
 
   const newClient = (): ApolloClient<any> => {
     const httpLink = createHttpLink({
-      uri: config.apiURL,
+      uri: process.env.NEXT_PUBLIC_API_URL,
       fetch,
     });
 
     const authLink = setContext((_, { headers }) => {
-      const token = cookie.get(config.tokenCookie);
+      const token = cookie.get(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
 
       return {
         headers: {
@@ -68,7 +66,7 @@ const withApollo = <ComponentProps extends {} = any>(
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         storage: window.localStorage,
-        debug: !config.production,
+        debug: process.env.NODE_ENV !== 'production',
       })
     : ({} as CachePersistor<any>);
 
