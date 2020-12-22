@@ -29,12 +29,8 @@ services:
     build:
       context: ../app
       dockerfile: ../docker/app/prod/Dockerfile
-      args:
-        - API_URL=${API_URL}
-    image: ${APP_IMAGE}
-    environment:
-      - DISABLE_TOUR=1
-      - API_URL=https://app.loopr.cz/graphql
+    image: ${APP_IMAGE}    
+    
   docs:
     build:
       context: ../docs
