@@ -26,11 +26,16 @@ class EmailService
     ) {
         $mail = new Mail();
         $mail->setTemplateId(self::AFTER_REGISTRATION_EMAIL);
+        $mail->addTo($email);
+        $mail->setFrom('notification-bot@loopr.cz');
         $mail->addDynamicTemplateDatas([
             'email' => $email,
             'password' => $password
         ]);
+        $response = $this->sendGrid->send($mail);
 
-        $this->sendGrid->send($mail);
+        if ($response->statusCode() > 299) {
+            throw new \RuntimeException('Sendgrid reply to: ' . $response->statusCode());
+        }
     }
 }
