@@ -1,0 +1,16 @@
+<html>
+<body>
+<h1>testik</h1>
+<script>
+
+    const url = new URL('https://localhost:8082/.well-known/mercure');
+    url.searchParams.append('topic', 'https://localhost:1337/.well-known/mercure?topic=https://localhost:8082/subscriptions/fb393b8bcec90307946fdce9a6f4b3d9357869b2f1fdb3d817de203a436cfb6a');
+
+    const eventSource = new EventSource(url);
+
+    // The callback will be called every time an update is published
+    eventSource.onmessage = e => console.log(e); // do something with the payload
+
+</script>
+</body>
+</html>

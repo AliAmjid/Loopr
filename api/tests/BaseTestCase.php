@@ -47,7 +47,7 @@ abstract class BaseTestCase extends TestCase
 
     protected function clientFactory($token = null)
     {
-        return GraphQLClientBuilder::build('http://api:80/graphql', $token ? [
+        return GraphQLClientBuilder::build('http://caddy:80/graphql', $token ? [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token
             ]

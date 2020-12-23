@@ -1,10 +1,11 @@
 App\Entity\User:
+    mercure: true
     attributes:
         normalization_context:
             groups: [ exposed, read ]
         denormalization_context:
             groups: [ user:write ]
-
+        mercure: true
     collectionOperations: { }
     itemOperations:
         get:
@@ -31,8 +32,6 @@ App\Entity\User:
         delete:
             security: "is_granted('USER_DELETE')"
             security_message: "r: USER_DELETE"
-
-
         changePassword:
             security: "is_granted('USER_LOGGED')"
             security_message: "r USER_LOGGED"
@@ -42,7 +41,6 @@ App\Entity\User:
                     type: String!
                 newPassword:
                     type: String!
-
         update:
             security: "is_granted('USER_EDIT')"
             security_message: "r: USER_EDIT"

@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Entity\Attributes\Tid;
 use App\Error\ClientError;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Doctrine\Common\Collections\Collection;
@@ -93,6 +94,11 @@ class User implements UserInterface
      * @Groups({"read", "user:write", "exposed"})
      */
     private $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     public function getId(): string
     {

@@ -4,9 +4,7 @@
 namespace App\Service;
 
 
-use App\Entity\User;
 use SendGrid\Mail\Mail;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class EmailService

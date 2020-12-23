@@ -65,7 +65,7 @@ class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerA
 
     public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
-        if (isset($context[self::ALREADY_CALLED])) {
+        if (isset($context[self::ALREADY_CALLED]) || !isset($context['graphql_operation'])) {
             return false;
         }
         return $this->isEntity($this->managerRegistry->getManager(), $data);
