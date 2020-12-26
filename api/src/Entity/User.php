@@ -112,6 +112,13 @@ class User implements UserInterface
      */
     private $privateData;
 
+    /**
+     * @var Collection|Notification[]
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user")
+     * @Groups({"read:owner", "exposed"})
+     */
+    private Collection|array $notifications;
+
     #[Pure]
     public function __construct()
     {
@@ -292,5 +299,13 @@ class User implements UserInterface
     {
         $this->rawPassword = $rawPassword;
         return $this;
+    }
+
+    /**
+     * @return Notification[]|Collection
+     */
+    public function getNotifications(): Collection|array
+    {
+        return $this->notifications;
     }
 }

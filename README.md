@@ -19,10 +19,10 @@ Run `make` and appropriate command
 ## Bundle parts
 ### [Api](./api)
 > Backend
-- Default port: 4000
+- Default port: 433 (https://localhost/graphql)
 ### [App](./app)
 > Frontend web app
-- Default port: 3000
+- Default port: 433 (https://localhost)
 ### [Docs](./docs)
 > User documentation for `app` 
 - Default port: 3001

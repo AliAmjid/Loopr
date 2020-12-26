@@ -22,13 +22,7 @@ class UserPrivateData
      * @ORM\OneToOne(targetEntity="User", mappedBy="privateData")
      */
     private User $user;
-    /**
-     * @var Collection|Notification[]
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
-     * @Groups({"read:owner", "exposed"})
-     */
-    private Collection|array $notifications;
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -94,24 +88,6 @@ class UserPrivateData
     public function setUser(User $user): UserPrivateData
     {
         $this->user = $user;
-        return $this;
-    }
-
-    /**
-     * @return Notification[]|Collection
-     */
-    public function getNotifications(): ArrayCollection|Collection|array
-    {
-        return $this->notifications;
-    }
-
-    /**
-     * @param Notification[]|Collection $notifications
-     * @return UserPrivateData
-     */
-    public function setNotifications(ArrayCollection|Collection|array $notifications): UserPrivateData
-    {
-        $this->notifications = $notifications;
         return $this;
     }
 

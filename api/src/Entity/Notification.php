@@ -22,11 +22,12 @@ class Notification
 
     /** @var string
      * @Groups({"exposed", "read"})
+     * @ORM\Column(type="string")
      */
     private string $type;
 
     /** @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="notifications"))
+     * @ORM\ManyToOne(targetEntity="User"))
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * @Groups({"exposed", "read"})
      */

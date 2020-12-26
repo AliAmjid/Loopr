@@ -12,4 +12,4 @@ framework:
         routing:
             'App\Events\NewUserCreatedEvent': async
             'Symfony\Component\Mercure\Update': async
-            'App\Events\'
+            'App\Events\ProcessNotificationEvent': async
