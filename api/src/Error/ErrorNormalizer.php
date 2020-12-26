@@ -6,6 +6,8 @@ namespace App\Error;
 
 use ApiPlatform\Core\Bridge\Symfony\Validator\Exception\ValidationException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use GraphQL\Error\ClientAware;
+use GraphQL\Error\InvariantViolation;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
@@ -47,7 +49,8 @@ class ErrorNormalizer implements NormalizerInterface, NormalizerAwareInterface
                 $error['loopr-error']['payload']['violations'] = $violations;
             },
             UnexpectedValueException::class => ClientErrorType::UNEXPECTED_VALUE,
-            UniqueConstraintViolationException::class => ClientErrorType::DUPLICATE_VALUE
+            UniqueConstraintViolationException::class => ClientErrorType::DUPLICATE_VALUE,
+            InvariantViolation::class => ClientErrorType::CHECK_ACCESS
         ];
     }
 
@@ -79,6 +82,7 @@ class ErrorNormalizer implements NormalizerInterface, NormalizerAwareInterface
                 }
             }
         }
+
 
         if (!isset($error['loopr-error'])) {
             if ($exception instanceof \Throwable) {

@@ -1,10 +1,9 @@
-App\Entity\AclRole:
+App\Entity\UserPrivateData:
     attributes:
         denormalization_context:
-            groups: [ aclRole:write ]
+            groups: [ UserPrivateData:write ]
         normalization_context:
             groups: [ exposed ]
-        pagination_enabled: false
     #disable rest
     collectionOperations: { }
     itemOperations:
@@ -14,12 +13,8 @@ App\Entity\AclRole:
             read: false
             output: false
     graphql:
-        collection_query:
-            pagination_enabled: false
         item_query:
+            security: "is_granted('ENTITY_ACCESS', object)"
         update:
-            security: "is_granted('ACL_ROLE_EDIT')"
-        create:
-            security: "is_granted('ACL_ROLE_EDIT')"
-        delete:
-            security: "is_granted('ACL_ROLE_EDIT')"
+            security: "is_granted('ENTITY_ACCESS', object)"
+        

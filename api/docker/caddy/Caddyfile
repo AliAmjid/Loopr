@@ -41,7 +41,6 @@ route {
         subscriptions
         # Extra directives
         {$MERCURE_EXTRA_DIRECTIVES}
-        cors_origin *
     }
     vulcain
     push
@@ -54,8 +53,9 @@ route {
     file_server
 }
 
-#cors
-headers / {
-Access-Control-Allow-Origin *
--Server
+# Allow all cross origin requests
+header {
+    Access-Control-Allow-Origin *
+    -Server
 }
+

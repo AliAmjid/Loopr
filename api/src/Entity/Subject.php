@@ -42,6 +42,7 @@ class Subject
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(nullable=false)
      * @Groups({"read", "exposed", "subject:write"})
      */
     private User $teacher;

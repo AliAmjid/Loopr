@@ -19,6 +19,8 @@ App\Entity\User:
             security: "is_granted('USER_LOGGED')"
             item_query: App\Controller\GetMeController
             args: [ ]
+            normalization_context:
+                groups: [ read:owner, exposed, read ]
         item_query:
             security_message: "r: USER_SHOW_ALL"
             security: "is_granted('USER_SHOW_ALL')"

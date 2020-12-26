@@ -60,4 +60,9 @@ class ClientErrorType
         'code' => 'INVALID_IRI',
         'msg' => 'Invalid IRI'
     ];
+
+    const CHECK_ACCESS = [
+        'code' => 'CHECK_ACCESS',
+        'msg' => 'You probably dont have to access to some of field you are trying to access. '
+    ];
 }

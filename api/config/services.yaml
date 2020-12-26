@@ -45,3 +45,8 @@ services:
         decorates: 'api_platform.serializer.context_builder'
         arguments: [ '@App\Serializer\ResourceContextBuilder.inner' ]
         autoconfigure: false
+
+    Doctrine\Migrations\Version\DbalMigrationFactory: ~
+    App\Service\MigrationFactoryDecorator:
+        decorates: Doctrine\Migrations\Version\DbalMigrationFactory
+        arguments: [ '@App\Service\MigrationFactoryDecorator.inner', '@service_container' ]

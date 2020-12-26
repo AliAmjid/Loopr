@@ -72,14 +72,14 @@ services:
       - ./api/public:/srv/api/public:ro
     ports:
       - target: 80
-        published: 8081
+        published: 8082
         protocol: tcp
       - target: 443
-        published: 8082
+        published: 443
         protocol: tcp
       # HTTP/3
       - target: 443
-        published: 8082
+        published: 446
         protocol: udp
 
   app:

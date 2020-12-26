@@ -26,10 +26,10 @@ App\Entity\Subject:
                 groups: [ subject:write, subject:edit ]
 
         item_query:
-            security_message: "r: GROUP_SHOW_ALL"
-            security: "is_granted('GROUP_SHOW_ALL')"
+            security: "is_granted('ENTITY_ACCESS', object)"
 
         collection_query:
+            security_message: "collection query access denied"
             security: "is_granted('GROUP_SHOW_ALL')"
 
         delete:
