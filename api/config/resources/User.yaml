@@ -5,7 +5,6 @@ App\Entity\User:
             groups: [ exposed, read ]
         denormalization_context:
             groups: [ user:write ]
-        mercure: true
     collectionOperations: { }
     itemOperations:
         get:
