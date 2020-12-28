@@ -1,8 +1,5 @@
 {
-  "success": "",
-  "error": "",
-  "save": "",
-  "delete": "",
-  "cancel": "",
-  "name": ""
+  "success": "Role changed successfully",
+  "error": "Failed to change role",
+  "name": "Name"
 }

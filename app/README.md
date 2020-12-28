@@ -19,3 +19,10 @@ Frontend part of Loopr project
 
 ## Config
 - You can edit config by setting environment variables in cli or in `.env.local` (see `.env` for config options)
+
+## Translations
+### Export CSV 
+Run `yarn translations:export` and it will generate `translations.export.csv`.
+
+### Import CSV
+`yarn translations:import` will use `translations.import.csv` file. It uses default language translations files. It will not add or remove fields in default language files.

@@ -1,9 +1,9 @@
 {
-  "search": "",
-  "account": "",
-  "logOut": "",
-  "notifications": "",
-  "back": "",
-  "logOutDialogTitle": "",
-  "profileSettings": ""
+  "search": "Search",
+  "account": "Account",
+  "logOut": "Log out",
+  "notifications": "Notifications",
+  "back": "Back",
+  "logOutDialogTitle": "Are you sure you want to log out?",
+  "profileSettings": "Profile settings"
 }

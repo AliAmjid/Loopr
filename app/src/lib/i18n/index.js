@@ -11,6 +11,7 @@ const NextI18NextInstance = new NextI18Next({
   defaultLanguage,
   otherLanguages: Object.keys(languages),
   localePath: path.resolve('./public/static/locales'),
+  fallbackLng: defaultLanguage,
 });
 
 module.exports = {

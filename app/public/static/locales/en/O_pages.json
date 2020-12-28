@@ -1,26 +1,29 @@
 {
   "dashboard": {
-    "index": ""
+    "index": "Summary"
   },
   "users": {
-    "index": "",
-    "userDetail": "",
-    "addManual": "",
-    "addCSV": ""
+    "index": "Users",
+    "userDetail": "Detail",
+    "addManual": "Add manually",
+    "addCSV": "Add from CSV"
   },
   "acl": {
-    "index": ""
+    "index": "Role",
+    "editRole": "Edit the role"
   },
   "profile": {
-    "index": ""
+    "index": "Profile"
   },
   "classGroups": {
-    "index": ""
+    "index": "Classes"
   },
   "groups": {
-    "index": ""
+    "index": "Groups"
   },
   "subjects": {
-    "index": ""
+    "index": "Subjects",
+    "editSubject": "Edit the subject",
+    "addSubject": "Add a subject"
   }
 }

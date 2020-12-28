@@ -1,12 +1,12 @@
 {
-  "title": "",
-  "email": "",
-  "password": "",
-  "logIn": "",
-  "forgottenPassword": "",
-  "doNotHaveAccount": "",
-  "automaticLogin": "",
-  "noInternet": "",
-  "noMatch": "",
-  "success": ""
+  "title": "Login",
+  "email": "Email",
+  "password": "Password",
+  "logIn": "Log in",
+  "forgottenPassword": "Forgot password?",
+  "doNotHaveAccount": "Don't have an account yet?",
+  "automaticLogin": "You have been automatically logged in",
+  "noInternet": "No internet connection",
+  "noMatch": "These data do not match",
+  "success": "Successful login"
 }
