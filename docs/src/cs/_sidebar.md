@@ -2,6 +2,7 @@
 - Stránky
     - [Přihlášení](cs/pages/login/)
     - [Uživatelé](cs/pages/users/) 
+    - [Třídy](cs/pages/classes/)
 - Komponenty
     - [Datová tabulka](cs/components/materialTable/)
     - [Tlačítko](cs/components/button/)
