@@ -3,7 +3,7 @@
 ![](images/table.png)
 
 ## Globální akce
-Globální akce se vřdy vztahují k celé tabulce.  
+Globální akce se vždy vztahují k celé tabulce.  
 ![](images/globalActions.jpg)
 
 ### Exportovat
