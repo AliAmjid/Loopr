@@ -93,6 +93,10 @@ services:
       - ./app:/app
       - /app/node_modules
       - /app/.next
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
 
   storybook:
     container_name: loopr_storbook
