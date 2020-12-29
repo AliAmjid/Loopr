@@ -1,24 +1,26 @@
 {
   "gqlObjects": {
     "user": {
-      "firstname": "",
-      "lastname": "",
-      "email": ""
+      "firstname": "First name",
+      "lastname": "Last name",
+      "email": "Email",
+      "role": "Role",
+      "createdAt": "Singed up at"
     },
     "classGroup": {
-      "section": "",
-      "year": ""
+      "section": "Name",
+      "year": "Year"
     },
     "subjectType": {
-      "name": ""
+      "name": "Name"
     }
   },
   "actions": {
-    "add": "",
-    "edit": "",
-    "delete": "",
-    "cancel": "",
-    "save": "",
-    "select": ""
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "select": "Choose"
   }
 }

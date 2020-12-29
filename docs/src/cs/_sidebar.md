@@ -1,7 +1,6 @@
 - [Úvod](cs/)
 - Stránky
-    - [Přihlášení](cs/pages/login.md)
-    - [Uživatelé](cs/pages/users.md)
-    - [Přehled](cs/pages/dashboard.md) 
+    - [Přihlášení](cs/pages/login/)
+    - [Uživatelé](cs/pages/users/) 
 - Komponenty
     - [Datová tabulka](cs/components/materialTable/)

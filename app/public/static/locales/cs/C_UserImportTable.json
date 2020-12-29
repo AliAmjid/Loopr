@@ -6,6 +6,6 @@
   "lastName": "Příjmení",
   "email": "Email",
   "role": "Role",
-  "success": "Uživatelé úspěšně přidání",
+  "success": "Uživatelé úspěšně přidáni",
   "error": "Uživatele se nepovedlo přidat"
 }

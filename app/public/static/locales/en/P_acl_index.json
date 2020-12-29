@@ -1,9 +1,9 @@
 {
-  "tableTitle": "",
-  "resources": "",
-  "edit": "",
-  "add": "",
-  "failedToUpdate": "",
-  "addSuccess": "",
-  "addError": ""
+  "tableTitle": "Role",
+  "resources": "Resources",
+  "edit": "Edit the role",
+  "add": "Add a role",
+  "failedToUpdate": "Failed to change role",
+  "addSuccess": "Role changed successfully",
+  "addError": "Failed to add role"
 }

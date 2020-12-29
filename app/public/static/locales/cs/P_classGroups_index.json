@@ -18,7 +18,7 @@
     },
     "add": {
       "success": "Třída úspěšně přidána",
-      "error": "Nepovedlose přidat třídu"
+      "error": "Nepovedlo se přidat třídu"
     },
     "studentsEdit": {
       "success": "Studenti úspešně upraveni",

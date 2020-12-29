@@ -9,7 +9,7 @@
     "title": "Doopravdy chcete odstranit předmět?",
     "description": "Tato operace je nevratná"
   },
-  "addDialogTitle": "Přidat typ předměte",
+  "addDialogTitle": "Přidat typ předmětu",
   "subjects": "Předměty",
   "group": "Skupina",
   "classGroup": "Třída",
@@ -20,7 +20,7 @@
       "error": "Nepovedlo se přidat typ předmětu"
     },
     "typeEdit": {
-      "success": "Typ předměětu úspěšně upraven",
+      "success": "Typ předmětu úspěšně upraven",
       "error": "Nepovedlo se upravit typ předmětu"
     },
     "typeDelete": {

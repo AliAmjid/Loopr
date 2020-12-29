@@ -1,35 +1,35 @@
 {
-  "listTitle": "",
-  "nothingSelected": "",
+  "listTitle": "Subject types",
+  "nothingSelected": "No subject selected",
   "deleteTypeDialog": {
-    "title": "",
-    "description": ""
+    "title": "Are you sure you want to delete this subject type?",
+    "description": "This operation is irreversible"
   },
   "deleteDialog": {
-    "title": "",
-    "description": ""
+    "title": "Are you sure you want to delete this subject?",
+    "description": "This operation is irreversible"
   },
-  "addDialogTitle": "",
-  "subjects": "",
-  "group": "",
-  "classGroup": "",
-  "teacher": "",
+  "addDialogTitle": "Add a subject type",
+  "subjects": "Subjects",
+  "group": "Group",
+  "classGroup": "Class",
+  "teacher": "Teacher",
   "snackbars": {
     "typeAdd": {
-      "success": "",
-      "error": ""
+      "success": "Subject type added successfully",
+      "error": "Failed to add subject type"
     },
     "typeEdit": {
-      "success": "",
-      "error": ""
+      "success": "Subject type changed successfully",
+      "error": "Failed to edit subject type"
     },
     "typeDelete": {
-      "success": "",
-      "error": ""
+      "success": "Subject type deleted successfully",
+      "error": "Failed to delete subject type"
     },
     "delete": {
-      "success": "",
-      "error": ""
+      "success": "Subject deleted successfully",
+      "error": "Failed to delete subject"
     }
   }
 }
