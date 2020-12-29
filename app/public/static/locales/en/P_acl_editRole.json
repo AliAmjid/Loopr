@@ -1,0 +1,5 @@
+{
+  "success": "Role changed successfully",
+  "error": "Failed to change role",
+  "name": "Name"
+}

@@ -1,0 +1,8 @@
+{
+  "snackbars": {
+    "add": {
+      "success": "Subject added successfully",
+      "error": "Failed to add subject"
+    }
+  }
+}

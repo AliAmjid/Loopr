@@ -1,4 +1,3 @@
-const { withKnobs } = require('@storybook/addon-knobs');
 const prettierConfig = require('../.prettierrc.js');
 
 module.exports = {
@@ -7,6 +6,7 @@ module.exports = {
     '@storybook/addon-knobs/register',
     '@storybook/addon-a11y/register',
     '@storybook/addon-viewport/register',
+    'storybook-addon-material-ui/register',
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -16,7 +16,6 @@ module.exports = {
       },
     },
   ],
-  decorators: [withKnobs],
   webpackFinal: async config => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,

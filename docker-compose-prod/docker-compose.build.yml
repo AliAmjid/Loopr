@@ -1,0 +1,41 @@
+version: '3.4'
+
+x-cache-from:
+  - &api-cache-from
+    cache_from:
+      - ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+      - ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
+
+services:
+  php:
+    build:
+      context: ../api
+      target: api_platform_php
+    image: ${PHP_IMAGE:?PHP_IMAGE is not set or empty}
+
+  api:
+    build:
+      context: ../api
+      target: api_platform_nginx
+      <<: *api-cache-from
+    image: ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
+    depends_on:
+      - php
+
+  app:
+    build:
+      context: ../app
+      dockerfile: ../docker/app/prod/Dockerfile
+      args:
+        - NEXT_PUBLIC_DISABLE_TOUR=true
+        - NEXT_PUBLIC_API_URL=https://app.loopr.cz/graphql
+    image: ${APP_IMAGE}
+    environment:
+      - NEXT_PUBLIC_DISABLE_TOUR=true
+      - NEXT_PUBLIC_API_URL=https://app.loopr.cz/graphql
+    
+  docs:
+    build:
+      context: ../docs
+      dockerfile: ../docker/docs/Dockerfile
+    image: ${DOCS_IMAGE}

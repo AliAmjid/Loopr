@@ -1,0 +1,28 @@
+{
+  "listTitle": "Groups",
+  "nothingSelected": "No group selected",
+  "addModalTitle": "Add a group",
+  "students": "Students",
+  "deleteModal": {
+    "title": "Are you sure you want to delete this group?",
+    "description": "This operation is irreversible"
+  },
+  "snackbars": {
+    "add": {
+      "success": "Group added successfully",
+      "error": "Failed to add group"
+    },
+    "edit": {
+      "success": "Group edited successfully",
+      "error": "Failed to edit group"
+    },
+    "delete": {
+      "success": "Group deleted successfully",
+      "error": "Failed to delete group"
+    },
+    "studentsEdit": {
+      "success": "Students edited successfully",
+      "error": "Failed to edit students"
+    }
+  }
+}

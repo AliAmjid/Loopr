@@ -1,0 +1,8 @@
+{
+  "tableTitle": "List of the users",
+  "addUsers": {
+    "button": "Add a user",
+    "manual": "Manually",
+    "csv": "From a CSV file"
+  }
+}

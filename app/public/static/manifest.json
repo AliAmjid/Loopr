@@ -1,0 +1,16 @@
+{
+  "name": "Loopr",
+  "short_name": "Loopr",
+  "description": "Školníé systém nové generace",
+  "icons": [
+    {
+      "src": "/static/pwa.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#009688",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "display": "standalone"
+}

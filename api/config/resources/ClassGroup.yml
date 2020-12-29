@@ -1,0 +1,43 @@
+App\Entity\ClassGroup:
+    attributes:
+        denormalization_context:
+            groups: [ classGroup:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        create:
+            security_message: 'r: GROUP_EDIT'
+            security: "is_granted('GROUP_EDIT')"
+        update:
+            security: "is_granted('GROUP_EDIT')"
+            security_message: 'r: GROUP_EDIT'
+
+        updateUsers:
+            security: "is_granted('GROUP_EDIT')"
+            security_message: 'r: GROUP_EDIT'
+            mutation: App\Controller\ModifyUsersInGroupController
+            args:
+                id:
+                    type: 'ID!'
+                addUsers:
+                    type: '[ID]'
+                deleteUsers:
+                    type: '[ID]'
+
+        delete:
+            security: "is_granted('GROUP_DELETE')"
+
+        item_query:
+            security_message: "r: GROUP_SHOW_ALL"
+            security: "is_granted('GROUP_SHOW_ALL')"
+
+        collection_query:
+            security: "is_granted('GROUP_SHOW_ALL')"

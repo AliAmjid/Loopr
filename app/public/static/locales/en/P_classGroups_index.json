@@ -1,0 +1,32 @@
+{
+  "listTitle": "Classes",
+  "students": "Students",
+  "teacher": "Teacher",
+  "nothingSelected": "No class selected",
+  "addDialogTitle": "Add a class",
+  "editDialogTitle": "Edit the class",
+  "sureDelete": "Are you sure you want to delete this class?",
+  "irreversibleAction": "Irreversible operation",
+  "snackbars": {
+    "edit": {
+      "success": "Class edited successfully",
+      "error": "Failed to edit class"
+    },
+    "delete": {
+      "success": "Class deleted been",
+      "error": "Failed to delete class"
+    },
+    "add": {
+      "success": "Class added successfully",
+      "error": "Failed to add class"
+    },
+    "studentsEdit": {
+      "success": "Students edited successfully",
+      "error": "Failed to edit students"
+    },
+    "teacherEdit": {
+      "success": "Teacher changed successfully",
+      "error": "Failed to change the teacher"
+    }
+  }
+}

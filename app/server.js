@@ -1,22 +1,25 @@
+const path = require('path');
 const express = require('express');
 const next = require('next');
-const nextI18NextMiddleware = require('next-i18next/middleware').default;
-
-const nextI18next = require('./src/lib/i18n');
-
-const port = process.env.PORT || 3000;
-const app = next({ dev: process.env.NODE_ENV !== 'production' });
-const handle = app.getRequestHandler();
+const chalk = require('chalk');
 
 (async () => {
-  await app.prepare();
+  const app = next({ dev: process.env.NODE_ENV !== 'production' });
+  const handle = app.getRequestHandler();
   const server = express();
 
-  await nextI18next.initPromise;
-  server.use(nextI18NextMiddleware(nextI18next));
+  await app.prepare();
 
+  server.get('/service-worker.js', (req, res) => {
+    const filePath = path.join(__dirname, './', '.next', 'service-worker.js');
+    res.sendFile(filePath);
+  });
   server.get('*', (req, res) => handle(req, res));
 
-  await server.listen(port);
-  console.log(`> Ready on http://localhost:${port}`); // eslint-disable-line no-console
+  await server.listen(process.env.PORT);
+  // eslint-disable-next-line no-console
+  console.log(
+    chalk.green('ready'),
+    `- started server on http://localhost:${process.env.PORT}`,
+  );
 })();

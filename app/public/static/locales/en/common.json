@@ -1,3 +1,26 @@
 {
-  "changeLanguage": "change language"
+  "gqlObjects": {
+    "user": {
+      "firstname": "First name",
+      "lastname": "Last name",
+      "email": "Email",
+      "role": "Role",
+      "createdAt": "Singed up at"
+    },
+    "classGroup": {
+      "section": "Name",
+      "year": "Year"
+    },
+    "subjectType": {
+      "name": "Name"
+    }
+  },
+  "actions": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "select": "Choose"
+  }
 }

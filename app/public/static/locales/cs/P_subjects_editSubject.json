@@ -1,0 +1,8 @@
+{
+  "snackbars": {
+    "edit": {
+      "success": "Předmět úspěšně upraven",
+      "error": "Nepovedlo se upravit předmět"
+    }
+  }
+}

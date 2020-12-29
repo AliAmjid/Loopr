@@ -1,6 +1,11 @@
+const shared = { presets: ['next/babel'], plugins: ['inline-react-svg'] };
+
 const notTest = {
-  presets: ['next/babel'],
-  plugins: [['react-remove-properties', { properties: ['test-id'] }]],
+  ...shared,
+  plugins: [
+    ...shared.plugins,
+    ['react-remove-properties', { properties: ['test-id'] }],
+  ],
 };
 module.exports = {
   plugins: [
@@ -16,18 +21,7 @@ module.exports = {
     development: notTest,
     production: notTest,
     test: {
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            targets: {
-              esmodules: true,
-            },
-          },
-        ],
-        '@babel/preset-react',
-        '@babel/preset-typescript',
-      ],
+      ...shared,
     },
   },
 };

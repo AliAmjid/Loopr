@@ -1,0 +1,27 @@
+App\Entity\Notification:
+    attributes:
+        denormalization_context:
+            groups: [ notification:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        item_query:
+            security: "is_granted('ENTITY_ACCESS', object)"
+        markRead:
+            security: "is_granted('ENTITY_ACCESS', object)"
+            mutation: App\Controller\NotificationController
+            args:
+                id:
+                    type: 'ID!'
+        markReadAll:
+            security: "is_granted('ENTITY_ACCESS', object)"
+            mutation: App\Controller\NotificationController
+            args:

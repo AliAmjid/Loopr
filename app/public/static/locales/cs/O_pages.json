@@ -1,0 +1,29 @@
+{
+  "dashboard": {
+    "index": "Přehled"
+  },
+  "users": {
+    "index": "Uživatelé",
+    "userDetail": "Detail",
+    "addManual": "Přidat manuálně",
+    "addCSV": "Přidat z CSV"
+  },
+  "acl": {
+    "index": "Role",
+    "editRole": "Upravit roli"
+  },
+  "profile": {
+    "index": "Profil"
+  },
+  "classGroups": {
+    "index": "Třídy"
+  },
+  "groups": {
+    "index": "Skupiny"
+  },
+  "subjects": {
+    "index": "Předměty",
+    "editSubject": "Upravit předmět",
+    "addSubject": "Přidat předmět"
+  }
+}

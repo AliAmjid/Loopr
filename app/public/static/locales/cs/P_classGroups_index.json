@@ -1,0 +1,32 @@
+{
+  "listTitle": "Třídy",
+  "students": "Studenti",
+  "teacher": "Učitel",
+  "nothingSelected": "Není vybrána žádna třída",
+  "addDialogTitle": "Přidat třídu",
+  "editDialogTitle": "Upravit třídu",
+  "sureDelete": "Doopravdy chcete třídu odstranit?",
+  "irreversibleAction": "Nevratná operace",
+  "snackbars": {
+    "edit": {
+      "success": "Třída úspešně upravena",
+      "error": "Nepovedlo se upravit třídu"
+    },
+    "delete": {
+      "success": "Třída úspěšně odstraněna",
+      "error": "Nepovedlo se odstranit třídu"
+    },
+    "add": {
+      "success": "Třída úspěšně přidána",
+      "error": "Nepovedlo se přidat třídu"
+    },
+    "studentsEdit": {
+      "success": "Studenti úspešně upraveni",
+      "error": "Nepovedlo se upravit studenty"
+    },
+    "teacherEdit": {
+      "success": "Učitel úspěšně upraven",
+      "error": "Nepovedlo se upravit učitele"
+    }
+  }
+}

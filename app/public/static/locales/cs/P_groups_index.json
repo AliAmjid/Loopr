@@ -1,0 +1,28 @@
+{
+  "listTitle": "Skupiny",
+  "nothingSelected": "Neni vybrána žádná skupina",
+  "addModalTitle": "Přidat skupinu",
+  "students": "Studenti",
+  "deleteModal": {
+    "title": "Opravdu chcete odstranit skupinu?",
+    "description": "tato akce je nevratná"
+  },
+  "snackbars": {
+    "add": {
+      "success": "Skupina úspěšně přidána",
+      "error": "Nepovedlo se přidat skupinu"
+    },
+    "edit": {
+      "success": "Skupina úspěšně upravena",
+      "error": "Nepovedlo se upravit skupinu"
+    },
+    "delete": {
+      "success": "Skupina úspěšně odstraněna",
+      "error": "Nepovedlo se odstranit skupinu"
+    },
+    "studentsEdit": {
+      "success": "Studenti byli úspěšně upraveni",
+      "error": "Nepovedlo se upravit studenty"
+    }
+  }
+}

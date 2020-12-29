@@ -1,42 +1,88 @@
 import React, { useState } from 'react';
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-boost';
-import { persistCache } from 'apollo-cache-persist';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { CachePersistor } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
+import cookie from 'js-cookie';
+import { getDisplayName } from 'recompose';
 
-const withApollo = <ComponentProps extends {} = any>(Component: React.FC) => (
-  props: ComponentProps,
-) => {
+import { cachePersistorContext } from './useCachePersistor';
+
+const withApollo = <ComponentProps extends {} = any>(
+  Component: React.ComponentType<ComponentProps>,
+): React.FC<ComponentProps> => props => {
   const cache = new InMemoryCache();
 
-  const newClient = (): ApolloClient<{}> => {
+  const newClient = (): ApolloClient<any> => {
+    const httpLink = createHttpLink({
+      uri: process.env.NEXT_PUBLIC_API_URL,
+      fetch,
+    });
+
+    const authLink = setContext((_, { headers }) => {
+      const token = cookie.get(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
+
+      return {
+        headers: {
+          ...headers,
+          authorization: token ? `Bearer ${token}` : '',
+        },
+      };
+    });
+
     return new ApolloClient({
-      link: createHttpLink({
-        uri: 'https://smeny.krystof-rezac.cz/graphql',
-        fetch,
-      }),
+      link: authLink.concat(httpLink),
       cache,
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: 'cache-and-network',
+        },
+        query: {
+          fetchPolicy: 'no-cache',
+        },
+        mutate: {
+          fetchPolicy: 'no-cache',
+        },
+      },
     });
   };
 
   const [updated, setUpdated] = useState(false);
-  const [client, setClient] = useState(newClient());
+  const [client, setClient] = useState<ApolloClient<any> | undefined>(
+    undefined,
+  );
+
+  const cachePersistor: CachePersistor<any> = process.browser
+    ? new CachePersistor({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        cache,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        storage: window.localStorage,
+        debug: process.env.NODE_ENV !== 'production',
+      })
+    : ({} as CachePersistor<any>);
 
   if (process.browser && !updated) {
     setUpdated(true);
-    persistCache({
-      cache,
-      storage: window.localStorage,
-      debug: true,
-    }).then(() => setClient(newClient()));
+    cachePersistor.restore().then(() => setClient(newClient()));
   }
+  if (!client) return <>Loading</>;
+
+  Component.displayName = `${getDisplayName(Component)}-withApollo`;
 
   return (
     <ApolloProvider client={client}>
-      <Component {...props} />
+      <cachePersistorContext.Provider value={cachePersistor}>
+        <Component {...props} />
+      </cachePersistorContext.Provider>
     </ApolloProvider>
   );
 };

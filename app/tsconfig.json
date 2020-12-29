@@ -8,22 +8,36 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "components/*": ["components/*"],
-      "pages/*": ["pages/*"],
-      "redux/*": ["redux/*"],
-      "lib/*": ["lib/*"]
-    }
+      "config": [
+        "src/config/index.js"
+      ],
+      "config/*": [
+        "src/config/*"
+      ],
+      "lib/*": [
+        "src/lib/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "types/*": [
+        "src/types/*"
+      ]
+    },
+    "isolatedModules": true
   },
   "exclude": [
     "node_modules"

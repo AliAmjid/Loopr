@@ -1,0 +1,36 @@
+App\Entity\Subject:
+    attributes:
+        denormalization_context:
+            groups: [ subject:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        create:
+            security_message: 'r: GROUP_EDIT'
+            security: "is_granted('GROUP_EDIT')"
+            denormalization_context:
+                groups: [ subject:write, subject:create ]
+
+        update:
+            security_message: 'r: GROUP_EDIT'
+            security: "is_granted('GROUP_EDIT')"
+            denormalization_context:
+                groups: [ subject:write, subject:edit ]
+
+        item_query:
+            security: "is_granted('ENTITY_ACCESS', object)"
+
+        collection_query:
+            security_message: "collection query access denied"
+            security: "is_granted('GROUP_SHOW_ALL')"
+
+        delete:
+            security: "is_granted('SUBJECT_DELETE')"

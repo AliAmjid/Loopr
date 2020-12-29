@@ -1,9 +1,6 @@
 import React from 'react';
 
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import { NextComponentType } from 'next';
-import { NextRouter } from 'next/dist/next-server/lib/router/router';
-import { AppContextType } from 'next/dist/next-server/lib/utils';
 import Document, {
   DocumentContext,
   Head,
@@ -12,20 +9,11 @@ import Document, {
   NextScript,
 } from 'next/document';
 
-import theme from 'lib/material-ui/theme';
-
 class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html lang="en">
-        <Head>
-          {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
-        </Head>
+      <Html lang="en" translate="no">
+        <Head />
         <body>
           <Main />
           <NextScript />
@@ -41,16 +29,13 @@ MyDocument.getInitialProps = async (ctx: DocumentContext): Promise<any> => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App: NextComponentType<AppContextType<NextRouter>>) => (
-        props: any,
-      ) => sheets.collect(<App {...props} />),
+      enhanceApp: App => props => sheets.collect(<App {...props} />),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),

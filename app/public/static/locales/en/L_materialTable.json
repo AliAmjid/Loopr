@@ -1,0 +1,26 @@
+{
+  "nextTooltip": "Next page",
+  "previousTooltip": "Previous page",
+  "lastTooltip": "Last page",
+  "firstTooltip": "First page",
+  "labelRowsSelect": "rows",
+  "from": "from",
+  "actions": "Actions",
+  "emptyDataSourceMessage": "No data available",
+  "exportTitle": "Export",
+  "exportCSVName": "Export as CSV",
+  "exportPDFName": "Export as PDF",
+  "groupingPlaceholder": "To group, move item from the header",
+  "groupedBy": "Grouped by",
+  "nRowsSelected": "rows selected",
+  "deleteText": "Are you sure you want to delete this row?",
+  "defaultActions": {
+    "grouping": {
+      "tooltip": "Group"
+    },
+    "columnFiltering": {
+      "tooltip": "Columns",
+      "dialogTitle": "Select columns you want to display"
+    }
+  }
+}

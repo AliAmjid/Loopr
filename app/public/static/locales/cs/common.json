@@ -1,3 +1,26 @@
 {
-  "changeLanguage": "změnit jazyk"
+  "gqlObjects": {
+    "user": {
+      "firstname": "Jméno",
+      "lastname": "Příjmení",
+      "email": "Email",
+      "role": "Role",
+      "createdAt": "Registrován v"
+    },
+    "classGroup": {
+      "section": "Název",
+      "year": "Rok"
+    },
+    "subjectType": {
+      "name": "Název"
+    }
+  },
+  "actions": {
+    "add": "Přidat",
+    "edit": "Upravit",
+    "delete": "Odstranit",
+    "cancel": "Zrušit",
+    "save": "Uložit",
+    "select": "Zvolit"
+  }
 }

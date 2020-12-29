@@ -1,0 +1,657 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+"A node, according to the Relay specification."
+interface Node {
+    "The id of this node."
+    id: ID!
+}
+
+type AclResource implements Node {
+    dependsOn: [AclResource]
+    id: ID!
+    name: String!
+}
+
+type AclRole implements Node {
+    _id: String!
+    id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
+    name: String!
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
+    resources: [AclResource]
+}
+
+type ClassGroup implements Node {
+    _id: String!
+    id: ID!
+    section: String!
+    subjects(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectConnection
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: User
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        classGroup_id: String,
+        classGroup_id_list: [String],
+        createdAt: [UserFilter_createdAt],
+        email: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        firstname: String,
+        groups_id: String,
+        groups_id_list: [String],
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        lastname: String,
+        role_resources_id: String,
+        role_resources_id_list: [String],
+        role_resources_name: String,
+        role_resources_name_list: [String]
+    ): UserConnection
+    year: Int!
+}
+
+"Connection for ClassGroup."
+type ClassGroupConnection {
+    edges: [ClassGroupEdge]
+    pageInfo: ClassGroupPageInfo!
+    totalCount: Int!
+}
+
+"Edge of ClassGroup."
+type ClassGroupEdge {
+    cursor: String!
+    node: ClassGroup
+}
+
+"Information about the current page."
+type ClassGroupPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type Group implements Node {
+    _id: String!
+    createdAt: String!
+    createdBy: User
+    id: ID!
+    section: String!
+    subjects(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectConnection
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        classGroup_id: String,
+        classGroup_id_list: [String],
+        createdAt: [UserFilter_createdAt],
+        email: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        firstname: String,
+        groups_id: String,
+        groups_id_list: [String],
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        lastname: String,
+        role_resources_id: String,
+        role_resources_id_list: [String],
+        role_resources_name: String,
+        role_resources_name_list: [String]
+    ): UserConnection
+}
+
+"Connection for Group."
+type GroupConnection {
+    edges: [GroupEdge]
+    pageInfo: GroupPageInfo!
+    totalCount: Int!
+}
+
+"Edge of Group."
+type GroupEdge {
+    cursor: String!
+    node: Group
+}
+
+"Information about the current page."
+type GroupPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type Mutation {
+    "ChangePasswords a User."
+    changePasswordUser(input: changePasswordUserInput!): changePasswordUserPayload
+    "Creates a AclRole."
+    createAclRole(input: createAclRoleInput!): createAclRolePayload
+    "Creates a ClassGroup."
+    createClassGroup(input: createClassGroupInput!): createClassGroupPayload
+    "Creates a Group."
+    createGroup(input: createGroupInput!): createGroupPayload
+    "Creates a Subject."
+    createSubject(input: createSubjectInput!): createSubjectPayload
+    "Creates a SubjectType."
+    createSubjectType(input: createSubjectTypeInput!): createSubjectTypePayload
+    "Creates a User."
+    createUser(input: createUserInput!): createUserPayload
+    "Deletes a ClassGroup."
+    deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
+    "Deletes a Group."
+    deleteGroup(input: deleteGroupInput!): deleteGroupPayload
+    "Deletes a Subject."
+    deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
+    "Deletes a SubjectType."
+    deleteSubjectType(input: deleteSubjectTypeInput!): deleteSubjectTypePayload
+    "Deletes a User."
+    deleteUser(input: deleteUserInput!): deleteUserPayload
+    "Updates a AclRole."
+    updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
+    "Updates a ClassGroup."
+    updateClassGroup(input: updateClassGroupInput!): updateClassGroupPayload
+    "Updates a Group."
+    updateGroup(input: updateGroupInput!): updateGroupPayload
+    "Updates a Subject."
+    updateSubject(input: updateSubjectInput!): updateSubjectPayload
+    "Updates a SubjectType."
+    updateSubjectType(input: updateSubjectTypeInput!): updateSubjectTypePayload
+    "Updates a User."
+    updateUser(input: updateUserInput!): updateUserPayload
+    "UpdateUserss a ClassGroup."
+    updateUsersClassGroup(input: updateUsersClassGroupInput!): updateUsersClassGroupPayload
+    "UpdateUserss a Group."
+    updateUsersGroup(input: updateUsersGroupInput!): updateUsersGroupPayload
+}
+
+type Query {
+    aclResources: [AclResource]
+    aclRole(id: ID!): AclRole
+    aclRoles: [AclRole]
+    classGroup(id: ID!): ClassGroup
+    classGroups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): ClassGroupConnection
+    getToken(email: String!, password: String!): Token
+    group(id: ID!): Group
+    groups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        section: String
+    ): GroupConnection
+    meUser: User
+    node(id: ID!): Node
+    subject(id: ID!): Subject
+    subjectType(id: ID!): SubjectType
+    subjectTypes(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectTypeConnection
+    subjects(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectConnection
+    user(id: ID!): User
+    users(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        classGroup_id: String,
+        classGroup_id_list: [String],
+        createdAt: [UserFilter_createdAt],
+        email: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        firstname: String,
+        groups_id: String,
+        groups_id_list: [String],
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        lastname: String,
+        role_resources_id: String,
+        role_resources_id_list: [String],
+        role_resources_name: String,
+        role_resources_name_list: [String]
+    ): UserConnection
+}
+
+type Subject implements Node {
+    _id: String!
+    classGroup: ClassGroup
+    group: Group
+    id: ID!
+    subjectType: SubjectType
+    teacher: User
+}
+
+"Connection for Subject."
+type SubjectConnection {
+    edges: [SubjectEdge]
+    pageInfo: SubjectPageInfo!
+    totalCount: Int!
+}
+
+"Edge of Subject."
+type SubjectEdge {
+    cursor: String!
+    node: Subject
+}
+
+"Information about the current page."
+type SubjectPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type SubjectType implements Node {
+    _id: String!
+    id: ID!
+    name: String!
+    subjects(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        "Returns the last n elements from the list."
+        last: Int
+    ): SubjectConnection
+}
+
+"Connection for SubjectType."
+type SubjectTypeConnection {
+    edges: [SubjectTypeEdge]
+    pageInfo: SubjectTypePageInfo!
+    totalCount: Int!
+}
+
+"Edge of SubjectType."
+type SubjectTypeEdge {
+    cursor: String!
+    node: SubjectType
+}
+
+"Information about the current page."
+type SubjectTypePageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type Token implements Node {
+    id: ID!
+    "Use token in header like this: 'Authorization: Bearer {token}'"
+    token: String!
+    user: User!
+}
+
+type User implements Node {
+    _id: String!
+    classGroup: ClassGroup
+    createdAt: String!
+    "email of user"
+    email: String!
+    firstname: String!
+    groups(
+        "Returns the elements in the list that come after the specified cursor."
+        after: String,
+        "Returns the elements in the list that come before the specified cursor."
+        before: String,
+        "Returns the first n elements from the list."
+        first: Int,
+        id: String,
+        id_list: [String],
+        "Returns the last n elements from the list."
+        last: Int,
+        section: String
+    ): GroupConnection
+    id: ID!
+    lastname: String!
+    role: AclRole!
+}
+
+"Connection for User."
+type UserConnection {
+    edges: [UserEdge]
+    pageInfo: UserPageInfo!
+    totalCount: Int!
+}
+
+"Edge of User."
+type UserEdge {
+    cursor: String!
+    node: User
+}
+
+"Information about the current page."
+type UserPageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type changePasswordUserPayload {
+    clientMutationId: String
+    user: User
+}
+
+type createAclRolePayload {
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+type createClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+type createGroupPayload {
+    clientMutationId: String
+    group: Group
+}
+
+type createSubjectPayload {
+    clientMutationId: String
+    subject: Subject
+}
+
+type createSubjectTypePayload {
+    clientMutationId: String
+    subjectType: SubjectType
+}
+
+type createUserPayload {
+    clientMutationId: String
+    user: User
+}
+
+type deleteClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+type deleteGroupPayload {
+    clientMutationId: String
+    group: Group
+}
+
+type deleteSubjectPayload {
+    clientMutationId: String
+    subject: Subject
+}
+
+type deleteSubjectTypePayload {
+    clientMutationId: String
+    subjectType: SubjectType
+}
+
+type deleteUserPayload {
+    clientMutationId: String
+    user: User
+}
+
+type updateAclRolePayload {
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+type updateClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+type updateGroupPayload {
+    clientMutationId: String
+    group: Group
+}
+
+type updateSubjectPayload {
+    clientMutationId: String
+    subject: Subject
+}
+
+type updateSubjectTypePayload {
+    clientMutationId: String
+    subjectType: SubjectType
+}
+
+type updateUserPayload {
+    clientMutationId: String
+    user: User
+}
+
+type updateUsersClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+type updateUsersGroupPayload {
+    clientMutationId: String
+    group: Group
+}
+
+input UserFilter_createdAt {
+    after: String
+    before: String
+    strictly_after: String
+    strictly_before: String
+}
+
+input changePasswordUserInput {
+    clientMutationId: String
+    newPassword: String!
+    oldPassword: String!
+}
+
+input createAclRoleInput {
+    clientMutationId: String
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
+    name: String!
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
+    resources: [String]
+}
+
+input createClassGroupInput {
+    clientMutationId: String
+    section: String!
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: String
+    year: Int!
+}
+
+input createGroupInput {
+    clientMutationId: String
+    section: String!
+}
+
+input createSubjectInput {
+    clientMutationId: String
+    iGroupIri: String!
+    subjectType: String
+    teacher: String
+}
+
+input createSubjectTypeInput {
+    clientMutationId: String
+    name: String!
+}
+
+input createUserInput {
+    classGroup: String
+    clientMutationId: String
+    "email of user"
+    email: String!
+    firstname: String!
+    lastname: String!
+    role: String!
+}
+
+input deleteClassGroupInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input deleteGroupInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input deleteSubjectInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input deleteSubjectTypeInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input deleteUserInput {
+    clientMutationId: String
+    id: ID!
+}
+
+input updateAclRoleInput {
+    clientMutationId: String
+    id: ID!
+    """
+
+    Example format: ROLE_ADMIN.
+    Must start with 'ROLE_' and name cant be longer than 20 letters.
+    (regex: ^ROLE_[A-Z]{1,20}$/m)
+    """
+    name: String
+    "Must be an array IRIs (acl_resources/<uuid>) of existing resources"
+    resources: [String]
+}
+
+input updateClassGroupInput {
+    clientMutationId: String
+    id: ID!
+    section: String
+    "Teacher needs to be user with resource GROUP_TEACHER"
+    teacher: String
+    year: Int
+}
+
+input updateGroupInput {
+    clientMutationId: String
+    id: ID!
+    section: String
+}
+
+input updateSubjectInput {
+    clientMutationId: String
+    iGroupIri: String
+    id: ID!
+    subjectType: String
+    teacher: String
+}
+
+input updateSubjectTypeInput {
+    clientMutationId: String
+    id: ID!
+    name: String
+}
+
+input updateUserInput {
+    classGroup: String
+    clientMutationId: String
+    "email of user"
+    email: String
+    firstname: String
+    id: ID!
+    lastname: String
+    role: String
+}
+
+input updateUsersClassGroupInput {
+    addUsers: [ID]
+    clientMutationId: String
+    deleteUsers: [ID]
+    id: ID!
+}
+
+input updateUsersGroupInput {
+    addUsers: [ID]
+    clientMutationId: String
+    deleteUsers: [ID]
+    id: ID!
+}

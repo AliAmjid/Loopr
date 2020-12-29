@@ -1,0 +1,29 @@
+{
+  "dashboard": {
+    "index": "Summary"
+  },
+  "users": {
+    "index": "Users",
+    "userDetail": "Detail",
+    "addManual": "Add manually",
+    "addCSV": "Add from CSV"
+  },
+  "acl": {
+    "index": "Role",
+    "editRole": "Edit the role"
+  },
+  "profile": {
+    "index": "Profile"
+  },
+  "classGroups": {
+    "index": "Classes"
+  },
+  "groups": {
+    "index": "Groups"
+  },
+  "subjects": {
+    "index": "Subjects",
+    "editSubject": "Edit the subject",
+    "addSubject": "Add a subject"
+  }
+}

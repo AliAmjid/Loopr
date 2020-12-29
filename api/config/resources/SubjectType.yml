@@ -1,0 +1,31 @@
+App\Entity\SubjectType:
+    attributes:
+        denormalization_context:
+            groups: [ subjectType:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        create:
+            security_message: 'r: SUBJECT_TYPE_EDIT'
+            security: "is_granted('SUBJECT_TYPE_EDIT')"
+        update:
+            security: "is_granted('SUBJECT_TYPE_EDIT')"
+            security_message: 'r: SUBJECT_TYPE_EDIT'
+
+        item_query:
+            security_message: "r: SUBJECT_TYPE_SHOW_ALL"
+            security: "is_granted('SUBJECT_TYPE_SHOW_ALL')"
+
+        collection_query:
+            security: "is_granted('SUBJECT_TYPE_SHOW_ALL')"
+
+        delete:
+            security: "is_granted('SUBJECT_TYPE_DELETE')"

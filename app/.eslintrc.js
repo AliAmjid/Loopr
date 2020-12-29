@@ -3,12 +3,12 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    jest: true,
   },
   extends: [
+    'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'airbnb',
-    'prettier',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
@@ -22,7 +22,11 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'simple-import-sort'],
   settings: {
-    'import/resolver': 'babel-module',
+    'import/resolver': {
+      typescript: {
+        // alwaysTryTypes: true,
+      },
+    },
   },
   rules: {
     'no-plusplus': 'off',
@@ -30,6 +34,12 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'newline-before-return': 'warn',
     'no-param-reassign': 'off',
+    'no-prototype-builtins': 'off',
+    'no-shadow': 'off',
+    'no-alert': 'error',
+    'no-console': 'error',
+    'no-unused-expressions': 'off',
+    'no-underscore-dangle': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -46,8 +56,11 @@ module.exports = {
         groups: [
           ['^react$'],
           ['^@?\\w'],
-          ['^components'],
+          ['^config'],
           ['^lib'],
+          ['^pages'],
+          ['^types'],
+          ['^components'],
           ['^\\u0000'],
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
@@ -63,6 +76,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react/destructuring-assignment': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/jsx-curly-newline': 'off',
+    'react/no-array-index-key': 'off',
     'react/jsx-filename-extension': [
       'error',
       { extensions: ['.js', '.jsx', '.tsx'] },
@@ -79,11 +94,15 @@ module.exports = {
     '@typescript-eslint/typedef': [
       'error',
       {
-        arrowParameter: true,
+        arrowParameter: false,
         parameter: true,
       },
     ],
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-expressions': ['error'],
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   overrides: [
     {
@@ -91,6 +110,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/typedef': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
     {
@@ -99,7 +119,8 @@ module.exports = {
         '.storybook/*',
         'src/lib/storybook/*',
         '*.test*',
-        'src/lib/jest/*',
+        'src/lib/jest/**',
+        'scripts/**',
       ],
       rules: {
         'import/no-extraneous-dependencies': [
