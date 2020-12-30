@@ -119,6 +119,12 @@ class User implements UserInterface
      */
     private Collection|array $notifications;
 
+    /**
+     * @var Collection|Subject[]
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="teacher")
+     */
+    private Collection|array $taughtSubjects;
+
     #[Pure]
     public function __construct()
     {
