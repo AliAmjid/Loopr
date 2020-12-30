@@ -25,9 +25,9 @@ use App\Filter\ResourceFilter;
  * @ORM\Table(name="`user`")
  * @ApiFilter(SearchFilter::class, properties={
  *     "id": "exact",
- *      "firstname": "ipartial",
- *      "lastname": "ipartial",
- *      "email": "ipartial",
+ *     "firstname": "ipartial",
+ *     "lastname": "ipartial",
+ *     "email": "ipartial",
  *     "role.resources.name": "exact",
  *     "role.resources.id": "exact",
  *     "classGroup.id": "exact",
@@ -200,9 +200,6 @@ class User implements UserInterface
     {
     }
 
-    /**
-     * @return string
-     */
     public function getLastname(): string
     {
         return $this->lastname;
@@ -212,14 +209,6 @@ class User implements UserInterface
     {
         $this->lastname = $lastname;
         return $this;
-    }
-
-    /**
-     * @ApiProperty(deprecationReason="Replaced with firstname and lastname")
-     */
-    public function getName(): ?string
-    {
-        return $this->firstname . " " . $this->lastname;
     }
 
     public function setFirstname(string $firstname): self
@@ -238,18 +227,11 @@ class User implements UserInterface
         return $this->createdAt;
     }
 
-    /**
-     * @return ClassGroup|null
-     */
     public function getClassGroup(): ?ClassGroup
     {
         return $this->classGroup;
     }
 
-    /**
-     * @param ClassGroup|null $classGroup
-     * @return User
-     */
     public function setClassGroup(?ClassGroup $classGroup): User
     {
         $this->classGroup = $classGroup;
@@ -272,36 +254,22 @@ class User implements UserInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return UserPrivateData
-     */
     public function getPrivateData(): UserPrivateData
     {
         return $this->privateData;
     }
 
-    /**
-     * @param UserPrivateData $privateData
-     * @return User
-     */
     public function setPrivateData(UserPrivateData $privateData): User
     {
         $this->privateData = $privateData;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getRawPassword(): ?string
     {
         return $this->rawPassword;
     }
 
-    /**
-     * @param string $rawPassword
-     * @return User
-     */
     public function setRawPassword(?string $rawPassword): User
     {
         $this->rawPassword = $rawPassword;
@@ -314,5 +282,10 @@ class User implements UserInterface
     public function getNotifications(): Collection|array
     {
         return $this->notifications;
+    }
+
+    public function getTaughtSubjects(): Collection|array
+    {
+        return $this->taughtSubjects;
     }
 }
