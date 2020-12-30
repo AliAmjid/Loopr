@@ -11,7 +11,7 @@ use App\Entity\Subject;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Security;
 
-class SubjectExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+class LearntSubjectsExtension implements QueryCollectionExtensionInterface
 {
     private Security $security;
 
@@ -28,21 +28,10 @@ class SubjectExtension implements QueryCollectionExtensionInterface, QueryItemEx
     ) {
         $this->addWhere($queryBuilder, $resourceClass, $operationName);
     }
-
-    public function applyToItem(
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        string $resourceClass,
-        array $identifiers,
-        string $operationName = null,
-        array $context = []
-    ) {
-        $this->addWhere($queryBuilder, $resourceClass, $operationName);
-    }
-
+    
     private function addWhere(QueryBuilder $qb, string $resourceClass, ?string $operationName)
     {
-        if ($resourceClass === Subject::class && $operationName === 'tough') {
+        if ($resourceClass === Subject::class && $operationName === 'learnt') {
             $rootAlias = $qb->getRootAliases()[0];
             $qb
                 ->leftJoin(sprintf('%s.group', $rootAlias), 'group')

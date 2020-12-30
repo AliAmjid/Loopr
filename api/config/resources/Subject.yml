@@ -31,7 +31,7 @@ App\Entity\Subject:
         collection_query:
             security_message: "collection query access denied"
             security: "is_granted('GROUP_SHOW_ALL')"
-        tough:
+        learnt:
             security_message: "r: USER_CAN_STUDY"
             security: "is_granted('USER_CAN_STUDY')"
             collection_query: App\Controller\SimpleCollectionController
