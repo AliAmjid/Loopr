@@ -1,0 +1,23 @@
+App\Entity\SchoolPeriod:
+    attributes:
+        denormalization_context:
+            groups: [ schoolPeriod:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        create:
+            security: "is_granted('GROUP_EDIT')"
+            security_message: "r: GROUP_EDIT"
+        delete:
+            security: "is_granted('GROUP_DELETE')"
+        getCurrent:
+            item_query: App\Controller\GetCurrentSchoolPeriodController
+            args: []

@@ -32,7 +32,7 @@ class NotificationService
             $user,
             NotificationType::USER_WELCOME,
             [
-                'name' => $user->getName()
+                'name' => $user->getFirstname() . " " . $user->getLastname()
             ]
         );
     }

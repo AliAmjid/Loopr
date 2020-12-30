@@ -8,6 +8,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInter
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\Subject;
+use App\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Security;
 
@@ -28,7 +29,7 @@ class LearntSubjectsExtension implements QueryCollectionExtensionInterface
     ) {
         $this->addWhere($queryBuilder, $resourceClass, $operationName);
     }
-    
+
     private function addWhere(QueryBuilder $qb, string $resourceClass, ?string $operationName)
     {
         if ($resourceClass === Subject::class && $operationName === 'learnt') {

@@ -100,7 +100,7 @@ class User implements UserInterface
     /**
      * @var Collection|Groups[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"read", "user:write", "exposed"})
+     * @Groups({"read:owner","read:USER_SHOW_ALL", "user:write", "exposed"})
      */
     private $groups;
 
@@ -108,7 +108,7 @@ class User implements UserInterface
      * @var UserPrivateData
      * @ORM\OneToOne(targetEntity="UserPrivateData", inversedBy="user", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"read:owner"})
+     * @Groups({"read:owner", "read:USER_SHOW_ALL"})
      */
     private $privateData;
 
@@ -122,7 +122,7 @@ class User implements UserInterface
     /**
      * @var Collection|Subject[]
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="teacher")
-     * @Groups({"exposed", "read:owner"})
+     * @Groups({"exposed", "read:owner", "read:USER_SHOW_ALL"})
      */
     private Collection|array $taughtSubjects;
 

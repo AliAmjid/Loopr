@@ -10,6 +10,7 @@ use App\Error\ClientError;
 use App\Error\ClientErrorType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -46,6 +47,15 @@ class Subject
      * @Groups({"read", "exposed", "subject:write"})
      */
     private User $teacher;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"read:teacher","write:teacher", "exposed"})
+     * @Assert\Regex(pattern="/#([a-fA-F0-9]{3}){1,2}\b/", message="color regex not valid")
+     */
+    private ?string $teacherCardColor = null;
+
 
     /**
      * @Groups({"subject:write"})
@@ -158,6 +168,24 @@ class Subject
     public function getClassGroup(): ?ClassGroup
     {
         return $this->classGroup;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTeacherCardColor(): ?string
+    {
+        return $this->teacherCardColor;
+    }
+
+    /**
+     * @param string|null $teacherCardColor
+     * @return Subject
+     */
+    public function setTeacherCardColor(?string $teacherCardColor): Subject
+    {
+        $this->teacherCardColor = $teacherCardColor;
+        return $this;
     }
 
 

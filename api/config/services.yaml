@@ -37,6 +37,9 @@ services:
     App\DataPersister\SubjectDataPersister:
         decorates: 'api_platform.doctrine.orm.data_persister'
 
+    App\DataPersister\SchoolPeriodPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
+        
     App\Error\ErrorNormalizer:
         tags:
             - { name: 'serializer.normalizer', priority: 12 }
