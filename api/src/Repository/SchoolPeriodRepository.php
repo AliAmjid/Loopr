@@ -30,4 +30,20 @@ class SchoolPeriodRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findActive(): ?SchoolPeriod
+    {
+        try {
+            return $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('sp')
+                ->from(SchoolPeriod::class, 'sp')
+                ->where('sp.from < :date AND sp.to > :date')
+                ->setParameter('date', new \DateTime())
+                ->getQuery()
+                ->getSingleResult();
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
 }

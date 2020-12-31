@@ -20,4 +20,4 @@ App\Entity\SchoolPeriod:
             security: "is_granted('GROUP_DELETE')"
         getCurrent:
             item_query: App\Controller\GetCurrentSchoolPeriodController
-            args: []
+            args: [ ]
