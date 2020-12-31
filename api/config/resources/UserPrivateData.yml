@@ -1,0 +1,20 @@
+App\Entity\UserPrivateData:
+    attributes:
+        denormalization_context:
+            groups: [ UserPrivateData:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        item_query:
+            security: "is_granted('ENTITY_ACCESS', object)"
+        update:
+            security: "is_granted('ENTITY_ACCESS', object)"
+        

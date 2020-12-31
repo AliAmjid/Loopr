@@ -20,10 +20,11 @@ class SubjectVoter extends Voter
         $this->security = $security;
     }
 
+    const IS_SUBJECT_TEACHER = 'IS_SUBJECT_TEACHER';
+
     protected function supports(string $attribute, $subject)
     {
-        return $attribute === 'ENTITY_ACCESS' && $subject instanceof Subject;
-
+        return in_array($attribute, ['ENTITY_ACCESS', self::IS_SUBJECT_TEACHER]) && $subject instanceof Subject;
     }
 
     /**
@@ -32,6 +33,9 @@ class SubjectVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
     {
         $loggedUser = $token->getUser();
+        if ($attribute === self::IS_SUBJECT_TEACHER) {
+            return $loggedUser->getId() === $subject->getTeacher()->getId();
+        }
 
         if ($loggedUser->getId() === $subject->getTeacher()->getId()) {
             return true;

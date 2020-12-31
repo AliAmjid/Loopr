@@ -21,3 +21,5 @@ App\Entity\AclRole:
             security: "is_granted('ACL_ROLE_EDIT')"
         create:
             security: "is_granted('ACL_ROLE_EDIT')"
+        delete:
+            security: "is_granted('ACL_ROLE_EDIT')"

@@ -77,7 +77,8 @@ class AclResourceEnum
             self::SUBJECT_TYPE_SHOW_ALL,
             self::SUBJECT_TYPE_EDIT,
             self::SUBJECT_TYPE_DELETE,
-            self::SUBJECT_TEACHER
+            self::SUBJECT_TEACHER,
+            self::USER_CAN_STUDY
         ]
     ];
 

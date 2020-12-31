@@ -69,7 +69,7 @@ class ClassGroup implements IGroup
     private \DateTime $createdAt;
 
     /**
-     * @Groups({"read", "exposed"})
+     * @Groups({"read:always", "exposed"})
      * @var Collection
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="classGroup")
      */

@@ -37,6 +37,9 @@ services:
     App\DataPersister\SubjectDataPersister:
         decorates: 'api_platform.doctrine.orm.data_persister'
 
+    App\DataPersister\SchoolPeriodPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
+        
     App\Error\ErrorNormalizer:
         tags:
             - { name: 'serializer.normalizer', priority: 12 }
@@ -45,3 +48,8 @@ services:
         decorates: 'api_platform.serializer.context_builder'
         arguments: [ '@App\Serializer\ResourceContextBuilder.inner' ]
         autoconfigure: false
+
+    Doctrine\Migrations\Version\DbalMigrationFactory: ~
+    App\Service\MigrationFactoryDecorator:
+        decorates: Doctrine\Migrations\Version\DbalMigrationFactory
+        arguments: [ '@App\Service\MigrationFactoryDecorator.inner', '@service_container' ]

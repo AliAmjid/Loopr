@@ -19,10 +19,12 @@ Run `make` and appropriate command
 ## Bundle parts
 ### [Api](./api)
 > Backend
-- Default port: 4000
+- Default port: (no SSL) 4000
+- Alternative SSL: 4001 (https://localhost:4001/graphql)
 ### [App](./app)
 > Frontend web app
 - Default port: 3000
+- Alternative SSL: (https://localhost:4001/)
 ### [Docs](./docs)
 > User documentation for `app` 
 - Default port: 3001

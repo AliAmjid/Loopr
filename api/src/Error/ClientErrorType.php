@@ -60,4 +60,14 @@ class ClientErrorType
         'code' => 'INVALID_IRI',
         'msg' => 'Invalid IRI'
     ];
+
+    const CHECK_ACCESS = [
+        'code' => 'CHECK_ACCESS',
+        'msg' => 'You probably dont have to access to some of field you are trying to access. '
+    ];
+
+    const SCHOOL_PERIOD_VALIDATION_ERROR = [
+        'code' => 'SCHOOL_PERIOD_VALIDATION_ERROR',
+        'msg' => 'Some of configuration for school period is wrong.'
+    ];
 }
