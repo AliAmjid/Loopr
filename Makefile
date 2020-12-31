@@ -1,7 +1,7 @@
 args =
 
 
-dockerComposeDevFiles = -f docker-compose.yml -f docker-compose.dev.yml
+dockerComposeDevFiles = -f docker-compose.yml
 dockerComposeProdFiles = -f docker-compose.yml -f docker-compose.prod.yml
 
 dev-build:

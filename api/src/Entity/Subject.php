@@ -62,6 +62,14 @@ class Subject
      */
     private ?string $iGroupIri = null;
 
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", options={"default":"POINTS"})
+     * @Groups({"read", "exposed"})
+     */
+    private string $markSystem = 'POINTS';
+
     /**
      * subject constructor.
      * @param SubjectType $subjectType
@@ -84,18 +92,11 @@ class Subject
         return $this->group ?? $this->classGroup;
     }
 
-    /**
-     * @return SubjectType
-     */
     public function getSubjectType(): SubjectType
     {
         return $this->subjectType;
     }
 
-    /**
-     * @param SubjectType $subjectType
-     * @return Subject
-     */
     public function setSubjectType(
         SubjectType $subjectType
     ): Subject {
@@ -103,18 +104,11 @@ class Subject
         return $this;
     }
 
-    /**
-     * @return Group|null
-     */
     public function getGroup(): ?Group
     {
         return $this->group;
     }
 
-    /**
-     * @param ClassGroup|null $classGroup
-     * @return Subject
-     */
     public function setClassGroup(
         ?ClassGroup $classGroup
     ): Subject {
@@ -122,9 +116,6 @@ class Subject
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getTeacher(): User
     {
         return $this->teacher;
@@ -141,10 +132,6 @@ class Subject
         return $this->iGroupIri;
     }
 
-    /**
-     * @param User $teacher
-     * @return Subject
-     */
     public function setTeacher(
         User $teacher
     ): Subject {
@@ -170,24 +157,27 @@ class Subject
         return $this->classGroup;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTeacherCardColor(): ?string
     {
         return $this->teacherCardColor;
     }
 
-    /**
-     * @param string|null $teacherCardColor
-     * @return Subject
-     */
     public function setTeacherCardColor(?string $teacherCardColor): Subject
     {
         $this->teacherCardColor = $teacherCardColor;
         return $this;
     }
 
+    public function getMarkSystem(): string
+    {
+        return $this->markSystem;
+    }
+
+    public function setMarkSystem(string $markSystem): Subject
+    {
+        $this->markSystem = $markSystem;
+        return $this;
+    }
 
     /**
      * @ORM\PrePersist()

@@ -70,4 +70,9 @@ class ClientErrorType
         'code' => 'SCHOOL_PERIOD_VALIDATION_ERROR',
         'msg' => 'Some of configuration for school period is wrong.'
     ];
+
+    const NO_SCHOOL_PERIOD_ACTIVE = [
+        'code' => 'NO_SCHOOL_PERIOD_ACTIVE',
+        'msg' => 'No school period is active right now.. contact administrator'
+    ];
 }
