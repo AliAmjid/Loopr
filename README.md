@@ -11,10 +11,6 @@ Run `make` and appropriate command
 |dev-up|Starts bundle in **development** mode|
 |dev-up-build|Builds and then starts the bundle in **development** mode|
 |dev-down|Remove bundle in **development** mode|
-|prod-build|Builds bundle in **production** mode|
-|prod-up|Starts bundle in **production** mode|
-|prod-up-build|Builds and then starts the bundle in **production** mode|
-|prod-down|Remove bundle in **production** mode|
 
 ## Bundle parts
 ### [Api](./api)

@@ -1,26 +1,15 @@
 args =
 
-
-dockerComposeDevFiles = -f docker-compose.yml -f docker-compose.dev.yml
-dockerComposeProdFiles = -f docker-compose.yml -f docker-compose.prod.yml
+dockerComposeFiles = -f docker-compose.yml
 
 dev-build:
-	sudo docker-compose $(dockerComposeDevFiles) build $(args)
+	sudo docker-compose $(dockerComposeFiles) build $(args)
 dev-up:
-	sudo docker-compose $(dockerComposeDevFiles) up $(args)
+	sudo docker-compose $(dockerComposeFiles) up $(args)
 dev-up-build:
-	sudo docker-compose $(dockerComposeDevFiles) up --build $(args)
+	sudo docker-compose $(dockerComposeFiles) up --build $(args)
 dev-down:
-	sudo docker-compose $(dockerComposeDevFiles) down $(args)
-
-prod-build:
-	sudo docker-compose $(dockerComposeProdFiles) build $(args)
-prod-up:
-	sudo docker-compose $(dockerComposeProdFiles) up $(args)
-prod-up-build:
-	sudo docker-compose $(dockerComposeProdFiles) up --build $(args)
-prod-down:
-	sudo docker-compose $(dockerComposeProdFiles) down $(args)
+	sudo docker-compose $(dockerComposeFiles) down $(args)
 
 api-generate-jwt:
 	sudo docker-compose $(dockerComposeDevFiles) exec php sh -c 'set -e apk add openssl mkdir -p config/jwt jwt_passphrase=${JWT_PASSPHRASE:-$(grep ''^JWT_PASSPHRASE='' .env | cut -f 2 -d ''='')} echo "$jwt_passphrase" | openssl genpkey -out config/jwt/private.pem -pass stdin -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096 echo "$jwt_passphrase" | openssl pkey -in config/jwt/private.pem -passin stdin -out config/jwt/public.pem -pubout setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt '
