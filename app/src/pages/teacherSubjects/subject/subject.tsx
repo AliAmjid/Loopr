@@ -1,6 +1,7 @@
 import React, { MutableRefObject, useRef } from 'react';
 
 import {
+  Box,
   Grid,
   IconButton,
   makeStyles,
@@ -152,14 +153,10 @@ const Subject: React.FC = () => {
               return (
                 <StyledTableRow key={n.id}>
                   <StickyTableCell className="body">
-                    <Grid container>
-                      <Grid item xs={6}>
-                        basdksodfhofsdhf
-                      </Grid>
-                      <Grid item xs={6}>
-                        a
-                      </Grid>
-                    </Grid>
+                    <Box display="flex">
+                      <Box flex={1}>basdksodfhofsdhf</Box>
+                      <Box flex={1}>a</Box>
+                    </Box>
                   </StickyTableCell>
                   <StyledTableCell align="center" className={classes.cell}>
                     {n.fat}
