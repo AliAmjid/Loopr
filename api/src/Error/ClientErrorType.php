@@ -75,4 +75,14 @@ class ClientErrorType
         'code' => 'NO_SCHOOL_PERIOD_ACTIVE',
         'msg' => 'No school period is active right now.. contact administrator'
     ];
+
+    const BAD_MARK_SYSTEM = [
+        'code' => 'BAD_MARK_SYSTEM',
+        'msg' => 'Cant create mark system with this exam. Exam has different exam system'
+    ];
+
+    const USER_NOT_EXAM_MEMBER = [
+        'code' => 'USER_NOT_EXAM_MEMBER',
+        'msg' => 'User is not member of group of subject on which is exam created'
+    ];
 }

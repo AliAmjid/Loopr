@@ -8,7 +8,10 @@ use App\Entity\Attributes\Tid;
 use App\Enum\AclResourceEnum;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,12 +23,14 @@ class Subject
 {
     use Tid;
 
+    const MARK_SYSTEM_POINTS = 'POINTS';
+
     /**
      * @var SubjectType
      * @ORM\ManyToOne(targetEntity="SubjectType")
      * @Groups({"read", "exposed", "subject:write"})
      */
-    private $subjectType;
+    private SubjectType $subjectType;
 
     /**
      * @var Group|null
@@ -68,19 +73,29 @@ class Subject
      * @ORM\Column(type="string", options={"default":"POINTS"})
      * @Groups({"read", "exposed"})
      */
-    private string $markSystem = 'POINTS';
+    private string $markSystem = self::MARK_SYSTEM_POINTS;
+
+
+    /**
+     * @var Collection|array
+     * @ORM\OneToMany(targetEntity="Exam", mappedBy="subject")
+     * @Groups({"read", "exposed"})
+     */
+    private Collection|array $exams;
 
     /**
      * subject constructor.
      * @param SubjectType $subjectType
      * @param User $teacher
      */
+    #[Pure]
     public function __construct(
         SubjectType $subjectType,
         User $teacher
     ) {
         $this->subjectType = $subjectType;
         $this->teacher = $teacher;
+        $this->exams = new ArrayCollection();
     }
 
 

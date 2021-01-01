@@ -1,0 +1,21 @@
+App\Entity\Exam:
+    attributes:
+        denormalization_context:
+            groups: [ exam:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        create:
+            security_post_denormalize: "is_granted('CREATE_EXAM', object)"
+        update:
+            security: "is_granted('CREATE_EXAM', object)"
+        item_query:
+            security: "is_granted('ENTITY_ACCESS', object)"

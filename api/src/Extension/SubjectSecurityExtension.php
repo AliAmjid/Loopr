@@ -35,6 +35,7 @@ class SubjectSecurityExtension implements QueryCollectionExtensionInterface
 
     private function addWhere(QueryBuilder $qb)
     {
+        return;
         $rootAlias = $qb->getRootAliases()[0];
         $qb
             ->leftJoin(sprintf('%s.group', $rootAlias), 'group')

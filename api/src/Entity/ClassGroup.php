@@ -222,4 +222,9 @@ class ClassGroup implements IGroup
         $this->users->removeElement($user);
         return $user;
     }
+
+    public function isUserMember(User $user): bool
+    {
+        return $this->users->contains($user);
+    }
 }

@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Annotation\InjectSchoolPeriod;
@@ -11,9 +13,12 @@ use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ORM\Entity()
+ * @ApiFilter(OrderFilter::class, properties={"createdAt": {"default_direction": "DESC"}})
+ * @ORM\HasLifecycleCallbacks()
  */
 class Exam
 {
@@ -22,7 +27,7 @@ class Exam
     /** @var string
      * @ORM\Column(type="string")
      * @Assert\Length(max="255")
-     * @Groups({"read", "exposed"})
+     * @Groups({"read", "exposed", "exam:write"})
      */
     private string $name;
 
@@ -47,11 +52,23 @@ class Exam
 
     /**
      * @var Subject
-     * @ORM\ManyToOne(targetEntity="Subject")
-     * @Groups({"exposed", "read"})
+     * @ORM\ManyToOne(targetEntity="Subject", inversedBy="exams")
+     * @Groups({"exposed", "read", "exam:write"})
      */
     private Subject $subject;
 
+    /**
+     * @var PointSystem|null
+     * @ORM\OneToOne(targetEntity="PointSystem", mappedBy="exam")
+     * @Groups({"exposed", "read"})
+     * @ApiSubresource()
+     */
+    private ?PointSystem $pointSystem;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * @return string
@@ -115,6 +132,42 @@ class Exam
         SchoolPeriod $schoolPeriod
     ): Exam {
         $this->schoolPeriod = $schoolPeriod;
+        return $this;
+    }
+
+    /**
+     * @return Subject
+     */
+    public function getSubject(): Subject
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param Subject $subject
+     * @return Exam
+     */
+    public function setSubject(Subject $subject): Exam
+    {
+        $this->subject = $subject;
+        return $this;
+    }
+
+    /**
+     * @return PointSystem|null
+     */
+    public function getPointSystem(): ?PointSystem
+    {
+        return $this->pointSystem;
+    }
+
+    /**
+     * @param PointSystem|null $pointSystem
+     * @return Exam
+     */
+    public function setPointSystem(?PointSystem $pointSystem): Exam
+    {
+        $this->pointSystem = $pointSystem;
         return $this;
     }
 }

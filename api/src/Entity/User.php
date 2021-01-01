@@ -109,7 +109,7 @@ class User implements UserInterface
      * @var UserPrivateData
      * @ORM\OneToOne(targetEntity="UserPrivateData", inversedBy="user", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"read:owner", "read:USER_SHOW_ALL"})
+     * @Groups({"read:always","exposed", "read:USER_SHOW_ALL"})
      */
     private $privateData;
 

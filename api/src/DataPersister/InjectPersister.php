@@ -96,8 +96,8 @@ class InjectPersister implements ContextAwareDataPersisterInterface
         foreach ($reflectionClass->getMethods() as $method) {
             foreach ($method->getAttributes($attribute) as $attributeRef) {
                 /** @var InjectSchoolPeriod $attribute */
-                $attribute = $attributeRef->newInstance();
-                foreach ($attribute->operations as $operation) {
+                $attributeInstance = $attributeRef->newInstance();
+                foreach ($attributeInstance->operations as $operation) {
                     if ($operation === $context['graphql_operation_name']) {
                         if (is_callable($injectItem)) {
                             $injectItem = call_user_func($injectItem);

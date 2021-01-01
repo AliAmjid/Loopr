@@ -169,4 +169,11 @@ class Group implements IGroup
         $this->createdAt = $createdAt;
         return $this;
     }
+
+    public function isUserMember(User $user): bool
+    {
+        return $this->users->contains($user);
+    }
+
+
 }
