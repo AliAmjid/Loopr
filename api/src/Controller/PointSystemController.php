@@ -13,7 +13,6 @@ use App\Error\ClientError;
 use App\Error\ClientErrorType;
 use App\Helper\IriHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Uid\Uuid;
 
 class PointSystemController extends AbstractController implements MutationResolverInterface
 {
@@ -28,8 +27,15 @@ class PointSystemController extends AbstractController implements MutationResolv
         $points = $context['args']['input']['points'];
         $em = $this->getDoctrine()->getManager();
         $pointRepository = $this->getDoctrine()->getRepository(Point::class);
+        $pointSystemRepository = $this->getDoctrine()->getRepository(PointSystem::class);
         /** @var PointSystem $pointSystem */
         $pointSystem = $item;
+        $ptEntity = $em->getRepository(PointSystem::class)->findOneBy(['exam' => $pointSystem->getExam()->getId()]);
+        if ($ptEntity) {
+            $pointSystem = $ptEntity;
+        } else {
+            $pointSystem = $item;
+        }
 
         $em->persist($pointSystem);
 
