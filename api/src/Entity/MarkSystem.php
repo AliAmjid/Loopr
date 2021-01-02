@@ -13,7 +13,7 @@ abstract class MarkSystem
 
     abstract function getMarkSystemType(): string;
 
-    abstract function getId(): string;
+    abstract function getId(): ?string;
 
     abstract function getExam(): Exam;
 

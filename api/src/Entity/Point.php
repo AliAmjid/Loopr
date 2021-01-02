@@ -31,7 +31,7 @@ class Point
      * @var PointSystem
      * @ORM\ManyToOne(targetEntity="PointSystem", inversedBy="points")
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
-     * @Groups({"read", "exposed", "exam:write"})
+     * @Groups({"read", "exposed"})
      */
     private PointSystem $pointSystem;
 

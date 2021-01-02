@@ -38,7 +38,6 @@ class PointVoter extends Voter
                 return true;
             }
         }
-
         return false;
     }
 

@@ -13,9 +13,16 @@ App\Entity\PointSystem:
             read: false
             output: false
     graphql:
-        create:
+        createOrUpdate:
             security_post_denormalize: "is_granted('CREATE_EXAM', object.getExam())"
-        update:
-            security: "is_granted('CREATE_EXAM', object.getExam())"
+            mutation: App\Controller\PointSystemController
+            write: false
+            args:
+                exam:
+                    type: 'ID!'
+                maxPoints:
+                    type: 'Int!'
+                points:
+                    type: '[createPointInput]'
         delete:
             security: "is_granted('CREATE_EXAM', object.getExam())"
