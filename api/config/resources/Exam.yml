@@ -19,3 +19,6 @@ App\Entity\Exam:
             security: "is_granted('CREATE_EXAM', object)"
         item_query:
             security: "is_granted('ENTITY_ACCESS', object)"
+        written:
+            collection_query: App\Controller\SimpleCollectionController
+            security: "is_granted('USER_CAN_STUDY')"

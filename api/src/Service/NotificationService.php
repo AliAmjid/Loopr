@@ -4,7 +4,9 @@
 namespace App\Service;
 
 
+use App\Entity\Exam;
 use App\Entity\Notification;
+use App\Entity\Point;
 use App\Entity\User;
 use App\Enum\NotificationType;
 use App\Events\ProcessNotificationEvent;
@@ -36,6 +38,37 @@ class NotificationService
             ]
         );
     }
+
+    public function sendPointEditedNotification(
+        Point $point,
+        int $old
+    ) {
+        $this->createNDispatchNotification(
+            $point->getUser(),
+            NotificationType::POINT_CHANGED,
+            [
+                'old' => $old,
+                'exam' => $point->getPointSystem()->getExam()->getId(),
+                'examName' => $point->getPointSystem()->getExam()->getName(),
+                'new' => $point->getPoints(),
+            ]
+        );
+    }
+
+    public function sendPointCreatedNotification(
+        Point $point,
+    ) {
+        $this->createNDispatchNotification(
+            $point->getUser(),
+            NotificationType::POINT_CHANGED,
+            [
+                'exam' => $point->getPointSystem()->getExam()->getId(),
+                'examName' => $point->getPointSystem()->getExam()->getName(),
+                'new' => $point->getPoints(),
+            ]
+        );
+    }
+
 
     private function createNDispatchNotification(
         User $user,

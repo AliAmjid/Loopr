@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity()
  * @UniqueEntity({"user", "pointSystem"})
+ * @ORM\HasLifecycleCallbacks()
  */
 class Point
 {
