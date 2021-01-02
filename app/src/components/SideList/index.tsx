@@ -86,7 +86,7 @@ const SideList: React.FC<SideListProps> = props => {
 
   if (process.browser) {
     const toolbarHeight = 64;
-    style = { maxHeight: window.innerHeight - toolbarHeight * 2 };
+    style = { maxHeight: window.innerHeight - toolbarHeight * 3 };
   }
 
   return (

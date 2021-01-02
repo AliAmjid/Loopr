@@ -2,6 +2,7 @@ import React, { MutableRefObject, useRef } from 'react';
 
 import {
   Box,
+  fade,
   Grid,
   IconButton,
   makeStyles,
@@ -17,19 +18,23 @@ import {
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
+import Edit from './edit';
+
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-  },
-  tableContainer: {
-    maxHeight: '400px',
-  },
-  cell: {
-    minWidth: '100px',
-  },
   studentCell: {
     minWidth: '200px',
+  },
+  paper: {
+    padding: 0,
+    position: 'relative',
+  },
+  whiteCell: {
+    backgroundColor: theme.palette.common.white,
+  },
+  grayCell: { backgroundColor: theme.palette.grey['100'] },
+  cellWithoutBorder: { borderColor: theme.palette.common.white },
+  cellWithRightBorder: {
+    borderRight: '1px solid #E0E0E0',
   },
 }));
 
@@ -40,30 +45,11 @@ const StickyTableCell = withStyles(theme => ({
     zIndex: theme.zIndex.appBar + 2,
   },
   body: {
-    backgroundColor: '#ddd',
     left: 0,
     position: 'sticky',
     zIndex: theme.zIndex.appBar + 1,
   },
 }))(TableCell);
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
 
 const Subject: React.FC = () => {
   let id = 0;
@@ -97,127 +83,149 @@ const Subject: React.FC = () => {
   ];
 
   const classes = useStyles();
-  const headerRef = useRef<HTMLTableRowElement>() as MutableRefObject<
-    HTMLTableRowElement
-  >;
+  const headerRef = useRef() as MutableRefObject<HTMLTableRowElement>;
+
+  let tableContainerStyle = {};
+
+  if (process.browser) {
+    const toolbarHeight = 64;
+    tableContainerStyle = {
+      maxHeight: window.innerHeight - toolbarHeight * 3,
+    };
+  }
+
+  const test1 = (
+    <TableCell
+      colSpan={2}
+      align="center"
+      className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder}`}
+    >
+      <Typography>Test1</Typography>
+      <Typography>27. 7. 2020</Typography>
+      <Typography>10 bodů</Typography>
+      <IconButton color="primary">
+        <EditIcon />
+      </IconButton>
+    </TableCell>
+  );
+  const test2 = (
+    <>
+      <TableCell
+        className={classes.whiteCell}
+        align="center"
+        style={{ top: headerRef.current?.clientHeight }}
+      >
+        <Typography>BODY</Typography>
+      </TableCell>
+      <TableCell
+        className={`${classes.whiteCell} ${classes.cellWithRightBorder}`}
+        align="center"
+        style={{ top: headerRef.current?.clientHeight }}
+      >
+        <Typography>PROCENTA</Typography>
+      </TableCell>
+    </>
+  );
 
   return (
-    <Paper>
-      <TableContainer className={classes.tableContainer}>
+    <Paper className={classes.paper}>
+      <TableContainer style={tableContainerStyle}>
         <Table stickyHeader>
           <TableHead>
-            <TableRow ref={headerRef}>
+            <TableRow ref={headerRef} style={{ backgroundColor: 'white' }}>
               <StickyTableCell
                 rowSpan={2}
-                className={`${'head' + ' '}${classes.studentCell}`}
+                className={`${'head'} ${classes.studentCell} ${
+                  classes.whiteCell
+                } ${classes.cellWithRightBorder}`}
               >
                 <Grid container>
                   <Grid item xs={6}>
-                    Jméno
+                    <Box display="flex" justifyContent="center">
+                      Jméno
+                    </Box>
                   </Grid>
                   <Grid item xs={6}>
-                    Příjmení
+                    <Box display="flex" justifyContent="center">
+                      Příjmení
+                    </Box>
                   </Grid>
                 </Grid>
               </StickyTableCell>
-
-              <TableCell
-                colSpan={2}
-                align="center"
-                // className={classes.withoutBorders}
-              >
-                <Typography>Test1</Typography>
-                <Typography>10 bodů</Typography>
-                <IconButton color="primary">
-                  <EditIcon />
-                </IconButton>
-              </TableCell>
+              {test1}
+              {test1}
+              {test1}
+              {test1}
+              {test1}
+              {test1}
+              {test1}
+              {test1}
             </TableRow>
             <TableRow>
-              <TableCell
-                align="center"
-                style={{ top: headerRef.current?.clientHeight }}
-              >
-                <Typography>BODY</Typography>
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{ top: headerRef.current?.clientHeight }}
-              >
-                <Typography>PROCENTA</Typography>
-              </TableCell>
+              {test2}
+              {test2}
+              {test2}
+              {test2}
+              {test2}
+              {test2}
+              {test2}
+              {test2}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
+            {data.map((n, index) => {
+              const backgroundColor =
+                index % 2 === 0 ? classes.whiteCell : classes.grayCell;
+              const points = (
+                <>
+                  {' '}
+                  <TableCell align="center" className={backgroundColor}>
+                    {n.fat}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    className={`${classes.cellWithRightBorder} ${backgroundColor}`}
+                  >
+                    {n.carbs}
+                  </TableCell>
+                </>
+              );
+
               return (
-                <StyledTableRow key={n.id}>
-                  <StickyTableCell className="body">
-                    <Box display="flex">
-                      <Box flex={1}>basdksodfhofsdhf</Box>
-                      <Box flex={1}>a</Box>
+                <TableRow key={n.id}>
+                  <StickyTableCell
+                    className={`body ${classes.cellWithRightBorder} ${backgroundColor}`}
+                  >
+                    <Box width={300}>
+                      <Grid container>
+                        <Grid item xs={6}>
+                          <Box display="flex" justifyContent="center">
+                            Name
+                          </Box>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Box display="flex" justifyContent="center">
+                            Surname
+                          </Box>
+                        </Grid>
+                      </Grid>
                     </Box>
                   </StickyTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.fat}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.carbs}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.protein}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.calories}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.fat}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.carbs}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.protein}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.calories}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.fat}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.carbs}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.protein}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.carbs}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.protein}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.calories}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.fat}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.carbs}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.protein}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.cell}>
-                    {n.protein}
-                  </StyledTableCell>
-                </StyledTableRow>
+                  {points}
+                  {points}
+                  {points}
+                  {points}
+                  {points}
+                  {points}
+                  {points}
+                  {points}
+                </TableRow>
               );
             })}
           </TableBody>
         </Table>
       </TableContainer>
+      <Edit />
     </Paper>
   );
 };
