@@ -54,10 +54,6 @@ services:
     build:
       context: api/
       target: api_platform_caddy
-    depends_on:
-      - app
-    links:
-      - app
     environment:
       PWA_UPSTREAM: app:3000
       SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}

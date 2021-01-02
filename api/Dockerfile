@@ -76,7 +76,7 @@ ARG APP_ENV=prod
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.json composer.lock symfony.lock ./
 RUN set -eux; \
-	composer install --ignore-platform-req=php --prefer-dist --no-dev --no-scripts --no-progress; \
+	composer install --prefer-dist --no-dev --no-scripts --no-progress; \
 	composer clear-cache
 
 # do not use .env files in production
