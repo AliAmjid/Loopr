@@ -127,6 +127,12 @@ class User implements UserInterface
      */
     private Collection|array $taughtSubjects;
 
+    /**
+     * @var Collection|array
+     * @ORM\OneToMany(targetEntity="WebPushSubscribe", mappedBy="user")
+     */
+    private Collection|array $wepPushSubscribes;
+
     #[Pure]
     public function __construct()
     {

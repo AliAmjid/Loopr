@@ -60,12 +60,6 @@ class UserPrivateData
      */
     private bool $newMarkNotificationEmail = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"read:owner", "exposed", "UserPrivateData:write"})
-     */
-    private bool $groupModifyNotificationEmail = false;
-
 
     #[Pure]
     public function __construct()
