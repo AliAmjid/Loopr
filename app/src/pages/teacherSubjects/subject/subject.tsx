@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
 
 import {
   Box,
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: 0,
     position: 'relative',
+    scrollBehavior: 'smooth',
   },
   whiteCell: {
     backgroundColor: theme.palette.common.white,
@@ -84,6 +85,15 @@ const Subject: React.FC = () => {
 
   const classes = useStyles();
   const headerRef = useRef() as MutableRefObject<HTMLTableRowElement>;
+  const tableContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    if (process.browser) {
+      setTimeout(() => {
+        tableContainerRef.current.scrollTo(1000000, 0);
+      }, 200);
+    }
+  }, []);
 
   let tableContainerStyle = {};
 
@@ -129,7 +139,7 @@ const Subject: React.FC = () => {
 
   return (
     <Paper className={classes.paper}>
-      <TableContainer style={tableContainerStyle}>
+      <TableContainer style={tableContainerStyle} ref={tableContainerRef}>
         <Table stickyHeader>
           <TableHead>
             <TableRow ref={headerRef} style={{ backgroundColor: 'white' }}>
