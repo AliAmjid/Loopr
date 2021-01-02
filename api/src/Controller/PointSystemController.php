@@ -30,7 +30,7 @@ class PointSystemController extends AbstractController implements MutationResolv
         $pointSystemRepository = $this->getDoctrine()->getRepository(PointSystem::class);
         /** @var PointSystem $pointSystem */
         $pointSystem = $item;
-        $ptEntity = $em->getRepository(PointSystem::class)->findOneBy(['exam' => $pointSystem->getExam()->getId()]);
+        $ptEntity = $pointSystemRepository->findOneBy(['exam' => $pointSystem->getExam()->getId()]);
         if ($ptEntity) {
             $pointSystem = $ptEntity;
         } else {
