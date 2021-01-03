@@ -6,6 +6,7 @@ namespace App\Security\Voter;
 
 use App\Entity\IGroup;
 use App\Entity\Subject;
+use App\Enum\AclResourceEnum;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
@@ -35,6 +36,10 @@ class SubjectVoter extends Voter
         $loggedUser = $token->getUser();
         if ($attribute === self::IS_SUBJECT_TEACHER) {
             return $loggedUser->getId() === $subject->getTeacher()->getId();
+        }
+
+        if ($this->security->isGranted(AclResourceEnum::SUBJECT_SHOW_ALL)) {
+            return true;
         }
 
         if ($loggedUser->getId() === $subject->getTeacher()->getId()) {
