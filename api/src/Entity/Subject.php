@@ -27,7 +27,7 @@ class Subject
 
     /**
      * @var SubjectType
-     * @ORM\ManyToOne(targetEntity="SubjectType")
+     * @ORM\ManyToOne(targetEntity="SubjectType", inversedBy="subjects")
      * @Groups({"read", "exposed", "subject:write"})
      */
     private SubjectType $subjectType;

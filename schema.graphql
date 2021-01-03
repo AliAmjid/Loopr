@@ -1,60 +1,86 @@
-type AclResource implements Node {
-    id: ID!
-    name: String!
-    dependsOn: [AclResource]
-}
-
-type AclRole implements Node {
-    id: ID!
-
-    """
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String!
-
-    """Must be an array IRIs (acl_resources/<uuid>) of existing resources"""
-    resources: [AclResource]
-    _id: String!
-}
-
-type ClassGroup implements Node {
-    id: ID!
-    subjects(
-        """Returns the first n elements from the list."""
+type Query {
+    node(id: ID!): Node
+    group(id: ID!): Group
+    groups(
+        # Returns the first n elements from the list.
         first: Int
 
-        """Returns the last n elements from the list."""
+        # Returns the last n elements from the list.
         last: Int
 
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
+        # Returns the elements in the list that come before the specified cursor.
         before: String
 
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
+        # Returns the elements in the list that come after the specified cursor.
         after: String
-    ): SubjectConnection
-    year: Int!
-    section: String!
-    users(
-        """Returns the first n elements from the list."""
+        id: String
+        id_list: [String]
+        section: String
+    ): GroupConnection
+    aclRoles: [AclRole]
+    aclRole(id: ID!): AclRole
+    classGroups(
+        # Returns the first n elements from the list.
         first: Int
 
-        """Returns the last n elements from the list."""
+        # Returns the last n elements from the list.
         last: Int
 
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
+        # Returns the elements in the list that come before the specified cursor.
         before: String
 
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): ClassGroupConnection
+    classGroup(id: ID!): ClassGroup
+    userPrivateData(id: ID!): UserPrivateData
+    exam(id: ID!): Exam
+    writtenExams(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+        schoolPeriod_id: String
+        schoolPeriod_id_list: [String]
+        schoolPeriod_schoolYear: Int
+        schoolPeriod_schoolYear_list: [Int]
+        order: [ExamFilter_order]
+    ): ExamConnection
+    subjectType(id: ID!): SubjectType
+    subjectTypes(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectTypeConnection
+    getToken(email: String!, password: String!): Token
+    meUser: User
+    user(id: ID!): User
+    users(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
         after: String
         id: String
         id_list: [String]
@@ -71,103 +97,72 @@ type ClassGroup implements Node {
         groups_id_list: [String]
         createdAt: [UserFilter_createdAt]
     ): UserConnection
+    subject(id: ID!): Subject
+    subjects(
+        # Returns the first n elements from the list.
+        first: Int
 
-    """Teacher needs to be user with resource GROUP_TEACHER"""
-    teacher: User
-    _id: String!
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectConnection
+    learntSubjects(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectConnection
+    notification(id: ID!): Notification
+    getCurrentSchoolPeriod: SchoolPeriod
+    aclResources: [AclResource]
 }
 
-"""Connection for ClassGroup."""
-type ClassGroupConnection {
-    edges: [ClassGroupEdge]
-    pageInfo: ClassGroupPageInfo!
-    totalCount: Int!
-}
-
-"""Edge of ClassGroup."""
-type ClassGroupEdge {
-    node: ClassGroup
-    cursor: String!
-}
-
-"""Information about the current page."""
-type ClassGroupPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
-type Exam implements Node {
+# A node, according to the Relay specification.
+interface Node {
+    # The id of this node.
     id: ID!
-    name: String!
-    createdAt: String!
-    schoolPeriod: SchoolPeriod
-    subject: Subject
-    pointSystem: PointSystem
-    _id: String!
 }
 
-"""Connection for Exam."""
-type ExamConnection {
-    edges: [ExamEdge]
-    pageInfo: ExamPageInfo!
-    totalCount: Int!
-}
-
-"""Edge of Exam."""
-type ExamEdge {
-    node: Exam
-    cursor: String!
-}
-
-input ExamFilter_order {
-    createdAt: String
-}
-
-"""Information about the current page."""
-type ExamPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
+#
 type Group implements Node {
     id: ID!
     subjects(
-        """Returns the first n elements from the list."""
+        # Returns the first n elements from the list.
         first: Int
 
-        """Returns the last n elements from the list."""
+        # Returns the last n elements from the list.
         last: Int
 
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
+        # Returns the elements in the list that come before the specified cursor.
         before: String
 
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
+        # Returns the elements in the list that come after the specified cursor.
         after: String
     ): SubjectConnection
     section: String!
     users(
-        """Returns the first n elements from the list."""
+        # Returns the first n elements from the list.
         first: Int
 
-        """Returns the last n elements from the list."""
+        # Returns the last n elements from the list.
         last: Int
 
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
+        # Returns the elements in the list that come before the specified cursor.
         before: String
 
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
+        # Returns the elements in the list that come after the specified cursor.
         after: String
         id: String
         id_list: [String]
@@ -189,336 +184,60 @@ type Group implements Node {
     _id: String!
 }
 
-"""Connection for Group."""
-type GroupConnection {
-    edges: [GroupEdge]
-    pageInfo: GroupPageInfo!
+# Connection for Subject.
+type SubjectConnection {
+    edges: [SubjectEdge]
+    pageInfo: SubjectPageInfo!
     totalCount: Int!
 }
 
-"""Edge of Group."""
-type GroupEdge {
-    node: Group
+# Edge of Subject.
+type SubjectEdge {
+    node: Subject
     cursor: String!
 }
 
-"""Information about the current page."""
-type GroupPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
-"""
-The `Iterable` scalar type represents an array or a Traversable with any kind of data.
-"""
-scalar Iterable
-
-type Mutation {
-    """Creates a Group."""
-    createGroup(input: createGroupInput!): createGroupPayload
-
-    """Updates a Group."""
-    updateGroup(input: updateGroupInput!): updateGroupPayload
-
-    """Deletes a Group."""
-    deleteGroup(input: deleteGroupInput!): deleteGroupPayload
-
-    """UpdateUserss a Group."""
-    updateUsersGroup(input: updateUsersGroupInput!): updateUsersGroupPayload
-
-    """Updates a AclRole."""
-    updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
-
-    """Creates a AclRole."""
-    createAclRole(input: createAclRoleInput!): createAclRolePayload
-
-    """Deletes a AclRole."""
-    deleteAclRole(input: deleteAclRoleInput!): deleteAclRolePayload
-
-    """Creates a ClassGroup."""
-    createClassGroup(input: createClassGroupInput!): createClassGroupPayload
-
-    """Updates a ClassGroup."""
-    updateClassGroup(input: updateClassGroupInput!): updateClassGroupPayload
-
-    """UpdateUserss a ClassGroup."""
-    updateUsersClassGroup(input: updateUsersClassGroupInput!): updateUsersClassGroupPayload
-
-    """Deletes a ClassGroup."""
-    deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
-
-    """Creates a WebPushSubscribe."""
-    createWebPushSubscribe(input: createWebPushSubscribeInput!): createWebPushSubscribePayload
-
-    """CreateOrUpdates a PointSystem."""
-    createOrUpdatePointSystem(input: createOrUpdatePointSystemInput!): createOrUpdatePointSystemPayload
-
-    """Updates a UserPrivateData."""
-    updateUserPrivateData(input: updateUserPrivateDataInput!): updateUserPrivateDataPayload
-
-    """Creates a Exam."""
-    createExam(input: createExamInput!): createExamPayload
-
-    """Updates a Exam."""
-    updateExam(input: updateExamInput!): updateExamPayload
-
-    """Creates a SubjectType."""
-    createSubjectType(input: createSubjectTypeInput!): createSubjectTypePayload
-
-    """Updates a SubjectType."""
-    updateSubjectType(input: updateSubjectTypeInput!): updateSubjectTypePayload
-
-    """Deletes a SubjectType."""
-    deleteSubjectType(input: deleteSubjectTypeInput!): deleteSubjectTypePayload
-
-    """Creates a User."""
-    createUser(input: createUserInput!): createUserPayload
-
-    """Deletes a User."""
-    deleteUser(input: deleteUserInput!): deleteUserPayload
-
-    """ChangePasswords a User."""
-    changePasswordUser(input: changePasswordUserInput!): changePasswordUserPayload
-
-    """Updates a User."""
-    updateUser(input: updateUserInput!): updateUserPayload
-
-    """Creates a Subject."""
-    createSubject(input: createSubjectInput!): createSubjectPayload
-
-    """Updates a Subject."""
-    updateSubject(input: updateSubjectInput!): updateSubjectPayload
-
-    """SetColors a Subject."""
-    setColorSubject(input: setColorSubjectInput!): setColorSubjectPayload
-
-    """Deletes a Subject."""
-    deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
-
-    """MarkReads a Notification."""
-    markReadNotification(input: markReadNotificationInput!): markReadNotificationPayload
-
-    """MarkReadAlls a Notification."""
-    markReadAllNotification(input: markReadAllNotificationInput!): markReadAllNotificationPayload
-
-    """Creates a Point."""
-    createPoint(input: createPointInput!): createPointPayload
-
-    """Edits a Point."""
-    editPoint(input: editPointInput!): editPointPayload
-
-    """Deletes a Point."""
-    deletePoint(input: deletePointInput!): deletePointPayload
-
-    """Creates a SchoolPeriod."""
-    createSchoolPeriod(input: createSchoolPeriodInput!): createSchoolPeriodPayload
-
-    """Deletes a SchoolPeriod."""
-    deleteSchoolPeriod(input: deleteSchoolPeriodInput!): deleteSchoolPeriodPayload
-}
-
-"""A node, according to the Relay specification."""
-interface Node {
-    """The id of this node."""
+#
+type Subject implements Node {
     id: ID!
-}
-
-type Notification implements Node {
-    id: ID!
-    type: String!
-    parameters: Iterable!
-    user: User!
+    subjectType: String!
+    group: Group
+    classGroup: ClassGroup
+    teacher: User!
+    teacherCardColor: String
+    markSystem: String!
     _id: String!
 }
 
-"""Connection for Notification."""
-type NotificationConnection {
-    edges: [NotificationEdge]
-    pageInfo: NotificationPageInfo!
-    totalCount: Int!
-}
-
-"""Edge of Notification."""
-type NotificationEdge {
-    node: Notification
-    cursor: String!
-}
-
-input NotificationFilter_exists {
-    viewAt: Boolean
-}
-
-input NotificationFilter_order {
-    createdAt: String
-}
-
-"""Information about the current page."""
-type NotificationPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
-type Point implements Node {
+#
+type ClassGroup implements Node {
     id: ID!
-    user: User!
-    pointSystem: PointSystem!
-    points: Int!
-    examWritten: Boolean!
-    _id: String!
-}
-
-"""Connection for Point."""
-type PointConnection {
-    edges: [PointEdge]
-    pageInfo: PointPageInfo!
-    totalCount: Int!
-}
-
-"""Edge of Point."""
-type PointEdge {
-    node: Point
-    cursor: String!
-}
-
-"""Information about the current page."""
-type PointPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
-type PointSystem implements Node {
-    id: ID!
-    maxPoints: Int!
-    points(
-        """Returns the first n elements from the list."""
+    subjects(
+        # Returns the first n elements from the list.
         first: Int
 
-        """Returns the last n elements from the list."""
+        # Returns the last n elements from the list.
         last: Int
 
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
+        # Returns the elements in the list that come before the specified cursor.
         before: String
 
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
+        # Returns the elements in the list that come after the specified cursor.
         after: String
-    ): PointConnection
-    exam: Exam!
-    _id: String!
-}
-
-type Query {
-    node(id: ID!): Node
-    group(id: ID!): Group
-    groups(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-        id: String
-        id_list: [String]
-        section: String
-    ): GroupConnection
-    aclRoles: [AclRole]
-    aclRole(id: ID!): AclRole
-    classGroups(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-    ): ClassGroupConnection
-    classGroup(id: ID!): ClassGroup
-    userPrivateData(id: ID!): UserPrivateData
-    exam(id: ID!): Exam
-    writtenExams(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-        schoolPeriod_id: String
-        schoolPeriod_id_list: [String]
-        schoolPeriod_schoolYear: Int
-        schoolPeriod_schoolYear_list: [Int]
-        order: [ExamFilter_order]
-    ): ExamConnection
-    subjectType(id: ID!): SubjectType
-    subjectTypes(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-    ): SubjectTypeConnection
-    getToken(email: String!, password: String!): Token
-    meUser: User
-    user(id: ID!): User
+    ): SubjectConnection
+    year: Int!
+    section: String!
     users(
-        """Returns the first n elements from the list."""
+        # Returns the first n elements from the list.
         first: Int
 
-        """Returns the last n elements from the list."""
+        # Returns the last n elements from the list.
         last: Int
 
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
+        # Returns the elements in the list that come before the specified cursor.
         before: String
 
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
+        # Returns the elements in the list that come after the specified cursor.
         after: String
         id: String
         id_list: [String]
@@ -535,228 +254,10 @@ type Query {
         groups_id_list: [String]
         createdAt: [UserFilter_createdAt]
     ): UserConnection
-    subject(id: ID!): Subject
-    subjects(
-        """Returns the first n elements from the list."""
-        first: Int
 
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-    ): SubjectConnection
-    learntSubjects(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-    ): SubjectConnection
-    notification(id: ID!): Notification
-    getCurrentSchoolPeriod: SchoolPeriod
-    aclResources: [AclResource]
-}
-
-type SchoolPeriod implements Node {
-    id: ID!
-
-    """quarter of year from 1 to 4"""
-    quarter: Int!
-
-    """from when quarter is started"""
-    from: String!
-
-    """when quarter ends"""
-    to: String!
-
-    """1st year of school (ex. 2020/21 so school year will be 2020)"""
-    schoolYear: Int!
+    # Teacher needs to be user with resource GROUP_TEACHER
+    teacher: User
     _id: String!
-}
-
-type Subject implements Node {
-    id: ID!
-    subjectType: SubjectType
-    group: Group
-    classGroup: ClassGroup
-    teacher: User!
-    teacherCardColor: String
-    markSystem: String!
-    _id: String!
-}
-
-"""Connection for Subject."""
-type SubjectConnection {
-    edges: [SubjectEdge]
-    pageInfo: SubjectPageInfo!
-    totalCount: Int!
-}
-
-"""Edge of Subject."""
-type SubjectEdge {
-    node: Subject
-    cursor: String!
-}
-
-"""Information about the current page."""
-type SubjectPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
-type SubjectType implements Node {
-    id: ID!
-    name: String!
-    subjects(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-    ): SubjectConnection
-    _id: String!
-}
-
-"""Connection for SubjectType."""
-type SubjectTypeConnection {
-    edges: [SubjectTypeEdge]
-    pageInfo: SubjectTypePageInfo!
-    totalCount: Int!
-}
-
-"""Edge of SubjectType."""
-type SubjectTypeEdge {
-    node: SubjectType
-    cursor: String!
-}
-
-"""Information about the current page."""
-type SubjectTypePageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-}
-
-type Token implements Node {
-    id: ID!
-
-    """Use token in header like this: 'Authorization: Bearer {token}'"""
-    token: String!
-    user: User!
-}
-
-type User implements Node {
-    id: ID!
-    _id: String!
-    groups(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-        id: String
-        id_list: [String]
-        section: String
-    ): GroupConnection
-
-    """email of user"""
-    email: String!
-    role: AclRole!
-    lastname: String!
-    firstname: String!
-    createdAt: String!
-    classGroup: ClassGroup
-    privateData: UserPrivateData!
-    notifications(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-        order: [NotificationFilter_order]
-        exists: [NotificationFilter_exists]
-    ): NotificationConnection
-    taughtSubjects(
-        """Returns the first n elements from the list."""
-        first: Int
-
-        """Returns the last n elements from the list."""
-        last: Int
-
-        """
-        Returns the elements in the list that come before the specified cursor.
-        """
-        before: String
-
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
-    ): SubjectConnection
-}
-
-"""Connection for User."""
-type UserConnection {
-    edges: [UserEdge]
-    pageInfo: UserPageInfo!
-    totalCount: Int!
-}
-
-"""Edge of User."""
-type UserEdge {
-    node: User
-    cursor: String!
 }
 
 input UserFilter_createdAt {
@@ -766,14 +267,121 @@ input UserFilter_createdAt {
     strictly_after: String
 }
 
-"""Information about the current page."""
-type UserPageInfo {
+# Connection for User.
+type UserConnection {
+    edges: [UserEdge]
+    pageInfo: UserPageInfo!
+    totalCount: Int!
+}
+
+# Edge of User.
+type UserEdge {
+    node: User
+    cursor: String!
+}
+
+#
+type User implements Node {
+    id: ID!
+    _id: String!
+    groups(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+        id: String
+        id_list: [String]
+        section: String
+    ): GroupConnection
+
+    # email of user
+    email: String!
+    role: AclRole!
+    lastname: String!
+    firstname: String!
+    createdAt: String!
+    classGroup: ClassGroup
+    privateData: UserPrivateData!
+    notifications(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+        order: [NotificationFilter_order]
+        exists: [NotificationFilter_exists]
+    ): NotificationConnection
+    taughtSubjects(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectConnection
+}
+
+# Connection for Group.
+type GroupConnection {
+    edges: [GroupEdge]
+    pageInfo: GroupPageInfo!
+    totalCount: Int!
+}
+
+# Edge of Group.
+type GroupEdge {
+    node: Group
+    cursor: String!
+}
+
+# Information about the current page.
+type GroupPageInfo {
     endCursor: String
     startCursor: String
     hasNextPage: Boolean!
     hasPreviousPage: Boolean!
 }
 
+#
+type AclRole implements Node {
+    id: ID!
+
+    # Example format: ROLE_ADMIN.
+    # Must start with 'ROLE_' and name cant be longer than 20 letters.
+    # (regex: ^ROLE_[A-Z]{1,20}$/m)
+    name: String!
+
+    # Must be an array IRIs (acl_resources/<uuid>) of existing resources
+    resources: [AclResource]
+    _id: String!
+}
+
+#
+type AclResource implements Node {
+    id: ID!
+    name: String!
+    dependsOn: [AclResource]
+}
+
+#
 type UserPrivateData implements Node {
     id: ID!
     tourHomepage: Boolean!
@@ -785,75 +393,535 @@ type UserPrivateData implements Node {
     _id: String!
 }
 
-type WebPushSubscribe implements Node {
+input NotificationFilter_order {
+    createdAt: String
+}
+
+input NotificationFilter_exists {
+    viewAt: Boolean
+}
+
+# Connection for Notification.
+type NotificationConnection {
+    edges: [NotificationEdge]
+    pageInfo: NotificationPageInfo!
+    totalCount: Int!
+}
+
+# Edge of Notification.
+type NotificationEdge {
+    node: Notification
+    cursor: String!
+}
+
+#
+type Notification implements Node {
     id: ID!
+    type: String!
+    parameters: Iterable!
+    user: User!
     _id: String!
 }
 
-input changePasswordUserInput {
-    oldPassword: String!
-    newPassword: String!
-    clientMutationId: String
+# The `Iterable` scalar type represents an array or a Traversable with any kind of data.
+scalar Iterable
+
+# Information about the current page.
+type NotificationPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
 }
 
-type changePasswordUserPayload {
-    user: User
-    clientMutationId: String
+# Information about the current page.
+type UserPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
 }
 
-input createAclRoleInput {
-    """
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
+# Information about the current page.
+type SubjectPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+# Connection for ClassGroup.
+type ClassGroupConnection {
+    edges: [ClassGroupEdge]
+    pageInfo: ClassGroupPageInfo!
+    totalCount: Int!
+}
+
+# Edge of ClassGroup.
+type ClassGroupEdge {
+    node: ClassGroup
+    cursor: String!
+}
+
+# Information about the current page.
+type ClassGroupPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+#
+type Exam implements Node {
+    id: ID!
     name: String!
-
-    """Must be an array IRIs (acl_resources/<uuid>) of existing resources"""
-    resources: [String]
-    clientMutationId: String
+    createdAt: String!
+    schoolPeriod: SchoolPeriod
+    subject: Subject
+    pointSystem: PointSystem
+    _id: String!
 }
 
-type createAclRolePayload {
-    aclRole: AclRole
-    clientMutationId: String
+#
+type SchoolPeriod implements Node {
+    id: ID!
+
+    # quarter of year from 1 to 4
+    quarter: Int!
+
+    # from when quarter is started
+    from: String!
+
+    # when quarter ends
+    to: String!
+
+    # 1st year of school (ex. 2020/21 so school year will be 2020)
+    schoolYear: Int!
+    _id: String!
 }
 
-input createClassGroupInput {
-    year: Int!
-    section: String!
+#
+type PointSystem implements Node {
+    id: ID!
+    maxPoints: Int!
+    points(
+        # Returns the first n elements from the list.
+        first: Int
 
-    """Teacher needs to be user with resource GROUP_TEACHER"""
-    teacher: String
-    clientMutationId: String
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): PointConnection
+    exam: Exam!
+    _id: String!
 }
 
-type createClassGroupPayload {
-    classGroup: ClassGroup
-    clientMutationId: String
+# Connection for Point.
+type PointConnection {
+    edges: [PointEdge]
+    pageInfo: PointPageInfo!
+    totalCount: Int!
 }
 
-input createExamInput {
+# Edge of Point.
+type PointEdge {
+    node: Point
+    cursor: String!
+}
+
+#
+type Point implements Node {
+    id: ID!
+    user: User!
+    pointSystem: PointSystem!
+    points: Int!
+    examWritten: Boolean!
+    _id: String!
+}
+
+# Information about the current page.
+type PointPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+input ExamFilter_order {
+    createdAt: String
+}
+
+# Connection for Exam.
+type ExamConnection {
+    edges: [ExamEdge]
+    pageInfo: ExamPageInfo!
+    totalCount: Int!
+}
+
+# Edge of Exam.
+type ExamEdge {
+    node: Exam
+    cursor: String!
+}
+
+# Information about the current page.
+type ExamPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+#
+type SubjectType implements Node {
+    id: ID!
     name: String!
-    subject: String
-    clientMutationId: String
+    subjects(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectConnection
+    _id: String!
 }
 
-type createExamPayload {
-    exam: Exam
-    clientMutationId: String
+# Connection for SubjectType.
+type SubjectTypeConnection {
+    edges: [SubjectTypeEdge]
+    pageInfo: SubjectTypePageInfo!
+    totalCount: Int!
 }
 
+# Edge of SubjectType.
+type SubjectTypeEdge {
+    node: SubjectType
+    cursor: String!
+}
+
+# Information about the current page.
+type SubjectTypePageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
+
+type Token implements Node {
+    id: ID!
+
+    # Use token in header like this: 'Authorization: Bearer {token}'
+    token: String!
+    user: User!
+}
+
+type Mutation {
+    # Creates a Group.
+    createGroup(input: createGroupInput!): createGroupPayload
+
+    # Updates a Group.
+    updateGroup(input: updateGroupInput!): updateGroupPayload
+
+    # Deletes a Group.
+    deleteGroup(input: deleteGroupInput!): deleteGroupPayload
+
+    # UpdateUserss a Group.
+    updateUsersGroup(input: updateUsersGroupInput!): updateUsersGroupPayload
+
+    # Updates a AclRole.
+    updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
+
+    # Creates a AclRole.
+    createAclRole(input: createAclRoleInput!): createAclRolePayload
+
+    # Deletes a AclRole.
+    deleteAclRole(input: deleteAclRoleInput!): deleteAclRolePayload
+
+    # Creates a ClassGroup.
+    createClassGroup(input: createClassGroupInput!): createClassGroupPayload
+
+    # Updates a ClassGroup.
+    updateClassGroup(input: updateClassGroupInput!): updateClassGroupPayload
+
+    # UpdateUserss a ClassGroup.
+    updateUsersClassGroup(
+        input: updateUsersClassGroupInput!
+    ): updateUsersClassGroupPayload
+
+    # Deletes a ClassGroup.
+    deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
+
+    # Creates a WebPushSubscribe.
+    createWebPushSubscribe(
+        input: createWebPushSubscribeInput!
+    ): createWebPushSubscribePayload
+
+    # CreateOrUpdates a PointSystem.
+    createOrUpdatePointSystem(
+        input: createOrUpdatePointSystemInput!
+    ): createOrUpdatePointSystemPayload
+
+    # Updates a UserPrivateData.
+    updateUserPrivateData(
+        input: updateUserPrivateDataInput!
+    ): updateUserPrivateDataPayload
+
+    # Creates a Exam.
+    createExam(input: createExamInput!): createExamPayload
+
+    # Updates a Exam.
+    updateExam(input: updateExamInput!): updateExamPayload
+
+    # Creates a SubjectType.
+    createSubjectType(input: createSubjectTypeInput!): createSubjectTypePayload
+
+    # Updates a SubjectType.
+    updateSubjectType(input: updateSubjectTypeInput!): updateSubjectTypePayload
+
+    # Deletes a SubjectType.
+    deleteSubjectType(input: deleteSubjectTypeInput!): deleteSubjectTypePayload
+
+    # Creates a User.
+    createUser(input: createUserInput!): createUserPayload
+
+    # Deletes a User.
+    deleteUser(input: deleteUserInput!): deleteUserPayload
+
+    # ChangePasswords a User.
+    changePasswordUser(input: changePasswordUserInput!): changePasswordUserPayload
+
+    # Updates a User.
+    updateUser(input: updateUserInput!): updateUserPayload
+
+    # Creates a Subject.
+    createSubject(input: createSubjectInput!): createSubjectPayload
+
+    # Updates a Subject.
+    updateSubject(input: updateSubjectInput!): updateSubjectPayload
+
+    # SetColors a Subject.
+    setColorSubject(input: setColorSubjectInput!): setColorSubjectPayload
+
+    # Deletes a Subject.
+    deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
+
+    # MarkReads a Notification.
+    markReadNotification(
+        input: markReadNotificationInput!
+    ): markReadNotificationPayload
+
+    # MarkReadAlls a Notification.
+    markReadAllNotification(
+        input: markReadAllNotificationInput!
+    ): markReadAllNotificationPayload
+
+    # Creates a Point.
+    createPoint(input: createPointInput!): createPointPayload
+
+    # Edits a Point.
+    editPoint(input: editPointInput!): editPointPayload
+
+    # Deletes a Point.
+    deletePoint(input: deletePointInput!): deletePointPayload
+
+    # Creates a SchoolPeriod.
+    createSchoolPeriod(input: createSchoolPeriodInput!): createSchoolPeriodPayload
+
+    # Deletes a SchoolPeriod.
+    deleteSchoolPeriod(input: deleteSchoolPeriodInput!): deleteSchoolPeriodPayload
+}
+
+#
 input createGroupInput {
     section: String!
     clientMutationId: String
 }
 
+#
 type createGroupPayload {
     group: Group
     clientMutationId: String
 }
 
+#
+input updateGroupInput {
+    id: ID!
+    section: String
+    clientMutationId: String
+}
+
+#
+type updateGroupPayload {
+    group: Group
+    clientMutationId: String
+}
+
+#
+input deleteGroupInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteGroupPayload {
+    group: Group
+    clientMutationId: String
+}
+
+#
+input updateUsersGroupInput {
+    id: ID!
+    addUsers: [ID]
+    deleteUsers: [ID]
+    clientMutationId: String
+}
+
+#
+type updateUsersGroupPayload {
+    group: Group
+    clientMutationId: String
+}
+
+#
+input updateAclRoleInput {
+    id: ID!
+
+    # Example format: ROLE_ADMIN.
+    # Must start with 'ROLE_' and name cant be longer than 20 letters.
+    # (regex: ^ROLE_[A-Z]{1,20}$/m)
+    name: String
+
+    # Must be an array IRIs (acl_resources/<uuid>) of existing resources
+    resources: [String]
+    clientMutationId: String
+}
+
+#
+type updateAclRolePayload {
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+#
+input createAclRoleInput {
+    # Example format: ROLE_ADMIN.
+    # Must start with 'ROLE_' and name cant be longer than 20 letters.
+    # (regex: ^ROLE_[A-Z]{1,20}$/m)
+    name: String!
+
+    # Must be an array IRIs (acl_resources/<uuid>) of existing resources
+    resources: [String]
+    clientMutationId: String
+}
+
+#
+type createAclRolePayload {
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+#
+input deleteAclRoleInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteAclRolePayload {
+    aclRole: AclRole
+    clientMutationId: String
+}
+
+#
+input createClassGroupInput {
+    year: Int!
+    section: String!
+
+    # Teacher needs to be user with resource GROUP_TEACHER
+    teacher: String
+    clientMutationId: String
+}
+
+#
+type createClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+#
+input updateClassGroupInput {
+    id: ID!
+    year: Int
+    section: String
+
+    # Teacher needs to be user with resource GROUP_TEACHER
+    teacher: String
+    clientMutationId: String
+}
+
+#
+type updateClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+#
+input updateUsersClassGroupInput {
+    id: ID!
+    addUsers: [ID]
+    deleteUsers: [ID]
+    clientMutationId: String
+}
+
+#
+type updateUsersClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+#
+input deleteClassGroupInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+#
+input createWebPushSubscribeInput {
+    user: String
+    data: Iterable!
+    clientMutationId: String
+}
+
+#
+type createWebPushSubscribePayload {
+    webPushSubscribe: WebPushSubscribe
+    clientMutationId: String
+}
+
+#
+type WebPushSubscribe implements Node {
+    id: ID!
+    _id: String!
+}
+
+#
 input createOrUpdatePointSystemInput {
     exam: ID!
     maxPoints: Int!
@@ -861,11 +929,7 @@ input createOrUpdatePointSystemInput {
     clientMutationId: String
 }
 
-type createOrUpdatePointSystemPayload {
-    pointSystem: PointSystem
-    clientMutationId: String
-}
-
+#
 input createPointInput {
     user: String!
     points: Int!
@@ -873,304 +937,13 @@ input createPointInput {
     clientMutationId: String
 }
 
-type createPointPayload {
-    point: Point
+#
+type createOrUpdatePointSystemPayload {
+    pointSystem: PointSystem
     clientMutationId: String
 }
 
-input createSchoolPeriodInput {
-    """quarter of year from 1 to 4"""
-    quarter: Int!
-
-    """from when quarter is started"""
-    from: String!
-
-    """when quarter ends"""
-    to: String!
-
-    """1st year of school (ex. 2020/21 so school year will be 2020)"""
-    schoolYear: Int!
-    clientMutationId: String
-}
-
-type createSchoolPeriodPayload {
-    schoolPeriod: SchoolPeriod
-    clientMutationId: String
-}
-
-input createSubjectInput {
-    subjectType: String
-    teacher: String!
-    iGroupIri: String!
-    clientMutationId: String
-}
-
-type createSubjectPayload {
-    subject: Subject
-    clientMutationId: String
-}
-
-input createSubjectTypeInput {
-    name: String!
-    clientMutationId: String
-}
-
-type createSubjectTypePayload {
-    subjectType: SubjectType
-    clientMutationId: String
-}
-
-input createUserInput {
-    """email of user"""
-    email: String!
-    role: String!
-    lastname: String!
-    firstname: String!
-    classGroup: String
-    rawPassword: String
-    clientMutationId: String
-}
-
-type createUserPayload {
-    user: User
-    clientMutationId: String
-}
-
-input createWebPushSubscribeInput {
-    user: String
-    data: Iterable!
-    clientMutationId: String
-}
-
-type createWebPushSubscribePayload {
-    webPushSubscribe: WebPushSubscribe
-    clientMutationId: String
-}
-
-input deleteAclRoleInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteAclRolePayload {
-    aclRole: AclRole
-    clientMutationId: String
-}
-
-input deleteClassGroupInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteClassGroupPayload {
-    classGroup: ClassGroup
-    clientMutationId: String
-}
-
-input deleteGroupInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteGroupPayload {
-    group: Group
-    clientMutationId: String
-}
-
-input deletePointInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deletePointPayload {
-    point: Point
-    clientMutationId: String
-}
-
-input deleteSchoolPeriodInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteSchoolPeriodPayload {
-    schoolPeriod: SchoolPeriod
-    clientMutationId: String
-}
-
-input deleteSubjectInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteSubjectPayload {
-    subject: Subject
-    clientMutationId: String
-}
-
-input deleteSubjectTypeInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteSubjectTypePayload {
-    subjectType: SubjectType
-    clientMutationId: String
-}
-
-input deleteUserInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type deleteUserPayload {
-    user: User
-    clientMutationId: String
-}
-
-input editPointInput {
-    id: ID!
-    user: String!
-    points: Int!
-    examWritten: Boolean!
-    clientMutationId: String
-}
-
-type editPointPayload {
-    point: Point
-    clientMutationId: String
-}
-
-input markReadAllNotificationInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type markReadAllNotificationPayload {
-    notification: Notification
-    clientMutationId: String
-}
-
-input markReadNotificationInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type markReadNotificationPayload {
-    notification: Notification
-    clientMutationId: String
-}
-
-input setColorSubjectInput {
-    id: ID!
-    teacherCardColor: String
-    clientMutationId: String
-}
-
-type setColorSubjectPayload {
-    subject: Subject
-    clientMutationId: String
-}
-
-input updateAclRoleInput {
-    id: ID!
-
-    """
-    Example format: ROLE_ADMIN.
-    Must start with 'ROLE_' and name cant be longer than 20 letters.
-    (regex: ^ROLE_[A-Z]{1,20}$/m)
-    """
-    name: String
-
-    """Must be an array IRIs (acl_resources/<uuid>) of existing resources"""
-    resources: [String]
-    clientMutationId: String
-}
-
-type updateAclRolePayload {
-    aclRole: AclRole
-    clientMutationId: String
-}
-
-input updateClassGroupInput {
-    id: ID!
-    year: Int
-    section: String
-
-    """Teacher needs to be user with resource GROUP_TEACHER"""
-    teacher: String
-    clientMutationId: String
-}
-
-type updateClassGroupPayload {
-    classGroup: ClassGroup
-    clientMutationId: String
-}
-
-input updateExamInput {
-    id: ID!
-    name: String
-    subject: String
-    clientMutationId: String
-}
-
-type updateExamPayload {
-    exam: Exam
-    clientMutationId: String
-}
-
-input updateGroupInput {
-    id: ID!
-    section: String
-    clientMutationId: String
-}
-
-type updateGroupPayload {
-    group: Group
-    clientMutationId: String
-}
-
-input updateSubjectInput {
-    id: ID!
-    subjectType: String
-    teacher: String
-    iGroupIri: String
-    clientMutationId: String
-}
-
-type updateSubjectPayload {
-    subject: Subject
-    clientMutationId: String
-}
-
-input updateSubjectTypeInput {
-    id: ID!
-    name: String
-    clientMutationId: String
-}
-
-type updateSubjectTypePayload {
-    subjectType: SubjectType
-    clientMutationId: String
-}
-
-input updateUserInput {
-    id: ID!
-
-    """email of user"""
-    email: String
-    role: String
-    lastname: String
-    firstname: String
-    classGroup: String
-    rawPassword: String
-    clientMutationId: String
-}
-
-type updateUserPayload {
-    user: User
-    clientMutationId: String
-}
-
+#
 input updateUserPrivateDataInput {
     id: ID!
     tourHomepage: Boolean
@@ -1182,31 +955,282 @@ input updateUserPrivateDataInput {
     clientMutationId: String
 }
 
+#
 type updateUserPrivateDataPayload {
     userPrivateData: UserPrivateData
     clientMutationId: String
 }
 
-input updateUsersClassGroupInput {
+#
+input createExamInput {
+    name: String!
+    subject: String
+    clientMutationId: String
+}
+
+#
+type createExamPayload {
+    exam: Exam
+    clientMutationId: String
+}
+
+#
+input updateExamInput {
     id: ID!
-    addUsers: [ID]
-    deleteUsers: [ID]
+    name: String
+    subject: String
     clientMutationId: String
 }
 
-type updateUsersClassGroupPayload {
-    classGroup: ClassGroup
+#
+type updateExamPayload {
+    exam: Exam
     clientMutationId: String
 }
 
-input updateUsersGroupInput {
+#
+input createSubjectTypeInput {
+    name: String!
+    clientMutationId: String
+}
+
+#
+type createSubjectTypePayload {
+    subjectType: SubjectType
+    clientMutationId: String
+}
+
+#
+input updateSubjectTypeInput {
     id: ID!
-    addUsers: [ID]
-    deleteUsers: [ID]
+    name: String
     clientMutationId: String
 }
 
-type updateUsersGroupPayload {
-    group: Group
+#
+type updateSubjectTypePayload {
+    subjectType: SubjectType
     clientMutationId: String
 }
+
+#
+input deleteSubjectTypeInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteSubjectTypePayload {
+    subjectType: SubjectType
+    clientMutationId: String
+}
+
+#
+input createUserInput {
+    # email of user
+    email: String!
+    role: String!
+    lastname: String!
+    firstname: String!
+    classGroup: String
+    rawPassword: String
+    clientMutationId: String
+}
+
+#
+type createUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input deleteUserInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input changePasswordUserInput {
+    oldPassword: String!
+    newPassword: String!
+    clientMutationId: String
+}
+
+#
+type changePasswordUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input updateUserInput {
+    id: ID!
+
+    # email of user
+    email: String
+    role: String
+    lastname: String
+    firstname: String
+    classGroup: String
+    rawPassword: String
+    clientMutationId: String
+}
+
+#
+type updateUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input createSubjectInput {
+    subjectType: String!
+    teacher: String!
+    iGroupIri: String!
+    clientMutationId: String
+}
+
+#
+type createSubjectPayload {
+    subject: Subject
+    clientMutationId: String
+}
+
+#
+input updateSubjectInput {
+    id: ID!
+    subjectType: String
+    teacher: String
+    iGroupIri: String
+    clientMutationId: String
+}
+
+#
+type updateSubjectPayload {
+    subject: Subject
+    clientMutationId: String
+}
+
+#
+input setColorSubjectInput {
+    id: ID!
+    teacherCardColor: String
+    clientMutationId: String
+}
+
+#
+type setColorSubjectPayload {
+    subject: Subject
+    clientMutationId: String
+}
+
+#
+input deleteSubjectInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteSubjectPayload {
+    subject: Subject
+    clientMutationId: String
+}
+
+#
+input markReadNotificationInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type markReadNotificationPayload {
+    notification: Notification
+    clientMutationId: String
+}
+
+#
+input markReadAllNotificationInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type markReadAllNotificationPayload {
+    notification: Notification
+    clientMutationId: String
+}
+
+#
+type createPointPayload {
+    point: Point
+    clientMutationId: String
+}
+
+#
+input editPointInput {
+    id: ID!
+    user: String!
+    points: Int!
+    examWritten: Boolean!
+    clientMutationId: String
+}
+
+#
+type editPointPayload {
+    point: Point
+    clientMutationId: String
+}
+
+#
+input deletePointInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deletePointPayload {
+    point: Point
+    clientMutationId: String
+}
+
+#
+input createSchoolPeriodInput {
+    # quarter of year from 1 to 4
+    quarter: Int!
+
+    # from when quarter is started
+    from: String!
+
+    # when quarter ends
+    to: String!
+
+    # 1st year of school (ex. 2020/21 so school year will be 2020)
+    schoolYear: Int!
+    clientMutationId: String
+}
+
+#
+type createSchoolPeriodPayload {
+    schoolPeriod: SchoolPeriod
+    clientMutationId: String
+}
+
+#
+input deleteSchoolPeriodInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteSchoolPeriodPayload {
+    schoolPeriod: SchoolPeriod
+    clientMutationId: String
+}
+
+query SubjectsSubjectTypeQuery($id: ID!, $subjectsFirst: Int, $subjectsLast: Int, $subjectsAfter: String, $subjectsBefore: String) {  subjectType(id: $id) {    id    subjects(first: $subjectsFirst, last: $subjectsLast, after: $subjectsAfter, before: $subjectsBefore) {      edges {        node {          id          group {            id            section            __typename          }          classGroup {            id            year            section            __typename          }          teacher {            id            firstname            lastname            __typename          }          __typename        }        cursor        __typename      }      totalCount      __typename    }    __typename  }}
