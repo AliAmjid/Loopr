@@ -1,7 +1,7 @@
-App\Entity\UserPrivateData:
+App\Entity\WebPushSubscribe:
     attributes:
         denormalization_context:
-            groups: [ UserPrivateData:write ]
+            groups: [ webPushSubscribe:write ]
         normalization_context:
             groups: [ exposed ]
     #disable rest
@@ -13,7 +13,6 @@ App\Entity\UserPrivateData:
             read: false
             output: false
     graphql:
-        item_query:
-            security: "is_granted('ENTITY_ACCESS', object)"
-        update:
-            security: "is_granted('ENTITY_ACCESS', object)"
+        create:
+            security_post_denormalize: "is_granted('IS_SAME_USER', object.getUser())"
+        

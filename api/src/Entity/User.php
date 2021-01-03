@@ -4,21 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Entity\Attributes\Tid;
-use App\Error\ClientError;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Doctrine\Common\Collections\Collection;
 use JetBrains\PhpStorm\Pure;
-use phpDocumentor\Reflection\Type;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use App\Filter\ResourceFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -39,7 +35,6 @@ use App\Filter\ResourceFilter;
 class User implements UserInterface
 {
     use Tid;
-
 
     /** @var string email of user
      * @Assert\Email()
@@ -126,6 +121,12 @@ class User implements UserInterface
      * @Groups({"exposed", "read:owner", "read:USER_SHOW_ALL"})
      */
     private Collection|array $taughtSubjects;
+
+    /**
+     * @var Collection|array
+     * @ORM\OneToMany(targetEntity="WebPushSubscribe", mappedBy="user")
+     */
+    private Collection|array $wepPushSubscribes;
 
     #[Pure]
     public function __construct()

@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Annotation\InjectSchoolPeriod;
@@ -17,9 +18,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ORM\Entity()
- * @ApiFilter(OrderFilter::class, properties={"createdAt": {"default_direction": "DESC"}})
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiFilter(filterClass: SearchFilter::class, properties: [
+    'schoolPeriod.id' => 'exact',
+    'schoolPeriod.schoolYear' => 'exact'
+])]
+#[ApiFilter(filterClass: OrderFilter::class, properties: ['createdAt' => ['default_direction' => 'DESC']])]
+
 class Exam
 {
     use Tid;

@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity()
  * @UniqueEntity({"user", "pointSystem"})
+ * @ORM\HasLifecycleCallbacks()
  */
 class Point
 {
@@ -44,7 +45,8 @@ class Point
     private int $points;
 
 
-    /** @var bool
+    /**
+     * @var bool
      * @ORM\Column(type="boolean")
      * @Groups({"exam:write", "read", "exposed"})
      */
@@ -80,6 +82,17 @@ class Point
     public function setPoints(int $points): Point
     {
         $this->points = $points;
+        return $this;
+    }
+
+    public function isExamWritten(): bool
+    {
+        return $this->examWritten;
+    }
+
+    public function setExamWritten(bool $examWritten): Point
+    {
+        $this->examWritten = $examWritten;
         return $this;
     }
 

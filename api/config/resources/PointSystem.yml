@@ -24,5 +24,3 @@ App\Entity\PointSystem:
                     type: 'Int!'
                 points:
                     type: '[createPointInput]'
-        delete:
-            security: "is_granted('CREATE_EXAM', object.getExam())"
