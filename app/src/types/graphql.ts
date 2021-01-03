@@ -1235,7 +1235,7 @@ export interface SubjectsEditSubjectSubjectQuery_subject {
   id: string;
   group: SubjectsEditSubjectSubjectQuery_subject_group | null;
   classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
-  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
+  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher;
 }
 
 export interface SubjectsEditSubjectSubjectQuery {
@@ -1401,7 +1401,7 @@ export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node {
   id: string;
   group: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_group | null;
   classGroup: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_classGroup | null;
-  teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher | null;
+  teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher;
 }
 
 export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges {
@@ -1461,6 +1461,60 @@ export interface SubjectsSubjectTypesQuery_subjectTypes {
 
 export interface SubjectsSubjectTypesQuery {
   subjectTypes: SubjectsSubjectTypesQuery_subjectTypes | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: TeacherSubjectsSubjectsQuery
+// ====================================================
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group {
+  __typename: "Group";
+  id: string;
+  section: string;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node {
+  __typename: "Subject";
+  group: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group | null;
+  classGroup: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup | null;
+  subjectType: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges {
+  __typename: "SubjectEdge";
+  node: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects {
+  __typename: "SubjectConnection";
+  edges: (TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser {
+  __typename: "User";
+  taughtSubjects: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery {
+  meUser: TeacherSubjectsSubjectsQuery_meUser | null;
 }
 
 /* tslint:disable */
@@ -1633,127 +1687,129 @@ export interface UsersUserDetailUserQueryVariables {
 //==============================================================
 
 export interface changePasswordUserInput {
-  clientMutationId?: string | null;
-  newPassword: string;
   oldPassword: string;
+  newPassword: string;
+  clientMutationId?: string | null;
 }
 
 export interface createAclRoleInput {
-  clientMutationId?: string | null;
   name: string;
   resources?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 export interface createClassGroupInput {
-  clientMutationId?: string | null;
+  year: number;
   section: string;
   teacher?: string | null;
-  year: number;
+  clientMutationId?: string | null;
 }
 
 export interface createGroupInput {
-  clientMutationId?: string | null;
   section: string;
+  clientMutationId?: string | null;
 }
 
 export interface createSubjectInput {
-  clientMutationId?: string | null;
-  iGroupIri: string;
   subjectType?: string | null;
-  teacher?: string | null;
+  teacher: string;
+  iGroupIri: string;
+  clientMutationId?: string | null;
 }
 
 export interface createSubjectTypeInput {
-  clientMutationId?: string | null;
   name: string;
+  clientMutationId?: string | null;
 }
 
 export interface createUserInput {
-  classGroup?: string | null;
-  clientMutationId?: string | null;
   email: string;
-  firstname: string;
-  lastname: string;
   role: string;
+  lastname: string;
+  firstname: string;
+  classGroup?: string | null;
+  rawPassword?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface deleteClassGroupInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
 }
 
 export interface deleteGroupInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
 }
 
 export interface deleteSubjectInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
 }
 
 export interface deleteSubjectTypeInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
 }
 
 export interface updateAclRoleInput {
-  clientMutationId?: string | null;
   id: string;
   name?: string | null;
   resources?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateClassGroupInput {
-  clientMutationId?: string | null;
   id: string;
+  year?: number | null;
   section?: string | null;
   teacher?: string | null;
-  year?: number | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateGroupInput {
-  clientMutationId?: string | null;
   id: string;
   section?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateSubjectInput {
-  clientMutationId?: string | null;
-  iGroupIri?: string | null;
   id: string;
   subjectType?: string | null;
   teacher?: string | null;
+  iGroupIri?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateSubjectTypeInput {
-  clientMutationId?: string | null;
   id: string;
   name?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateUserInput {
-  classGroup?: string | null;
-  clientMutationId?: string | null;
-  email?: string | null;
-  firstname?: string | null;
   id: string;
-  lastname?: string | null;
+  email?: string | null;
   role?: string | null;
+  lastname?: string | null;
+  firstname?: string | null;
+  classGroup?: string | null;
+  rawPassword?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateUsersClassGroupInput {
-  addUsers?: (string | null)[] | null;
-  clientMutationId?: string | null;
-  deleteUsers?: (string | null)[] | null;
   id: string;
+  addUsers?: (string | null)[] | null;
+  deleteUsers?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateUsersGroupInput {
-  addUsers?: (string | null)[] | null;
-  clientMutationId?: string | null;
-  deleteUsers?: (string | null)[] | null;
   id: string;
+  addUsers?: (string | null)[] | null;
+  deleteUsers?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 //==============================================================

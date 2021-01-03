@@ -1,3 +1,22 @@
+export interface Subject {
+  group?: {
+    id: string;
+    section: string;
+  } | null;
+  classGroup?: {
+    id: string;
+    section: string;
+  } | null;
+  subjectType: {
+    id: string;
+    name: string;
+  };
+}
+
+export interface TeacherSubjectsProps {
+  subjects: Subject[];
+}
+
 export interface ColorChangeDialogProps {
   open: boolean;
 }

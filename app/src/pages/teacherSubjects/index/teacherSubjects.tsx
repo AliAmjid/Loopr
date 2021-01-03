@@ -21,6 +21,8 @@ import ColorChangeDialog from 'pages/teacherSubjects/index/colorChangeDialog';
 
 import ThickDivider from 'components/thickDivider';
 
+import { Subject, TeacherSubjectsProps } from './types';
+
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
     padding: 0,
@@ -44,48 +46,74 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TeacherSubjects: React.FC = () => {
+const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const classes = useStyles();
 
-  const card = (
-    <Grid item xs={3}>
-      <Card variant="outlined" className={classes.card}>
-        <Box
-          className={classes.colorStrip}
-          style={{ backgroundColor: 'red' }}
-          display="flex"
-          justifyContent="flex-end"
-          alignItems="center"
-        >
-          <EditIcon className={classes.editIcon} />
+  const subjectTypes = new Map<string, Subject[]>();
+
+  props.subjects.forEach(subject => {
+    const entry = subjectTypes.get(subject.subjectType.id);
+    if (entry) {
+      entry.push(subject);
+      subjectTypes.set(subject.subjectType.id, entry);
+    } else {
+      subjectTypes.set(subject.subjectType.id, [subject]);
+    }
+  });
+
+  console.log(subjectTypes, props.subjects);
+  const mappedSubjects: JSX.Element[] = [];
+  subjectTypes.forEach(subjectType => {
+    mappedSubjects.push(
+      <>
+        <Typography variant="h6">Český jazyk</Typography>
+        <ThickDivider />
+        <Box pt={2}> </Box>
+        <Grid container spacing={2}>
+          {subjectType.map(subject => (
+            <Grid item xs={3}>
+              <Card variant="outlined" className={classes.card}>
+                <Box
+                  className={classes.colorStrip}
+                  style={{ backgroundColor: 'red' }}
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                >
+                  <EditIcon className={classes.editIcon} />
+                </Box>
+                <div className={classes.cardInnerSpacer}>
+                  <CardContent>
+                    <Typography variant="h5">1.B</Typography>
+                  </CardContent>
+                  <CardActions className={classes.cardActions}>
+                    <Link href={routes.teacherSubjects.subject.index} passHref>
+                      <Button color="primary">Evaluation</Button>
+                    </Link>
+                  </CardActions>
+                </div>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </>,
+    );
+  });
+
+  if (mappedSubjects.length === 0) {
+    return (
+      <Paper>
+        <Box display="flex" justifyContent="center">
+          <Typography>Nemáte přiřazené žádné předměty</Typography>
         </Box>
-        <div className={classes.cardInnerSpacer}>
-          <CardContent>
-            <Typography variant="h5">1.B</Typography>
-          </CardContent>
-          <CardActions className={classes.cardActions}>
-            <Link href={routes.teacherSubjects.subject.index} passHref>
-              <Button color="primary">Evaluation</Button>
-            </Link>
-          </CardActions>
-        </div>
-      </Card>
-    </Grid>
-  );
+      </Paper>
+    );
+  }
 
   return (
     <>
       <ColorChangeDialog open={false} />
-      <Paper>
-        <Typography variant="h6">Český jazyk</Typography>
-        <ThickDivider />
-        <Box pt={2}> </Box>
-
-        <Grid container spacing={2}>
-          {card}
-          {card}
-        </Grid>
-      </Paper>
+      <Paper>{mappedSubjects}</Paper>
     </>
   );
 };
