@@ -6,6 +6,8 @@ const TEACHER_SUBJECTS_SUBJECTS_QUERY = gql`
       taughtSubjects {
         edges {
           node {
+            id
+            teacherCardColor
             group {
               id
               section
