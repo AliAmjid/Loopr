@@ -1232,3 +1232,5 @@ type deleteSchoolPeriodPayload {
     schoolPeriod: SchoolPeriod
     clientMutationId: String
 }
+
+query SubjectsSubjectTypeQuery($id: ID!, $subjectsFirst: Int, $subjectsLast: Int, $subjectsAfter: String, $subjectsBefore: String) {  subjectType(id: $id) {    id    subjects(first: $subjectsFirst, last: $subjectsLast, after: $subjectsAfter, before: $subjectsBefore) {      edges {        node {          id          group {            id            section            __typename          }          classGroup {            id            year            section            __typename          }          teacher {            id            firstname            lastname            __typename          }          __typename        }        cursor        __typename      }      totalCount      __typename    }    __typename  }}
