@@ -17,4 +17,3 @@ App\Entity\UserPrivateData:
             security: "is_granted('ENTITY_ACCESS', object)"
         update:
             security: "is_granted('ENTITY_ACCESS', object)"
-        
