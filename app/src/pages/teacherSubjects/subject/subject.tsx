@@ -235,7 +235,7 @@ const Subject: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Edit />
+      <Edit open={false} />
     </Paper>
   );
 };

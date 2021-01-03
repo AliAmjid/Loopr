@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { setInterval } from 'timers';
 
+import { EditProps } from 'pages/teacherSubjects/subject/edit/types';
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: 'red',
@@ -16,25 +18,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Edit: React.FC = () => {
+const Edit: React.FC<EditProps> = props => {
   const classes = useStyles();
   const [style, setStyle] = useState({ width: 400, opacity: 1 });
 
   useEffect(() => {
     setStyle({ width: 400, opacity: 0 });
-    /* setInterval(() => {
-      console.log(
-        'ahoj',
-        { width: style.width === 400 ? 0 : 400 },
-        style.width === 400,
-      );
+    if (props.open) {
       setStyle(prevState => ({
-        width: prevState.width === 400 ? 0 : 400,
-        opacity: prevState.width === 400 ? 0 : 1,
+        width: 400,
+        opacity: 1,
       }));
-    }, 2000);
- */
-  }, []);
+    } else {
+      setStyle(prevState => ({
+        width: 0,
+        opacity: 0,
+      }));
+    }
+  }, [props.open]);
 
   return (
     <div className={classes.root} style={style}>

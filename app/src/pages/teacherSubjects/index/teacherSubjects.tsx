@@ -75,7 +75,7 @@ const TeacherSubjects: React.FC = () => {
 
   return (
     <>
-      <ColorChangeDialog open />
+      <ColorChangeDialog open={false} />
       <Paper>
         <Typography variant="h6">Český jazyk</Typography>
         <ThickDivider />
