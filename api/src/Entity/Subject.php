@@ -29,6 +29,7 @@ class Subject
      * @var SubjectType
      * @ORM\ManyToOne(targetEntity="SubjectType")
      * @Groups({"read", "exposed", "subject:write"})
+     * @ORM\Column(nullable=false)
      */
     private SubjectType $subjectType;
 
