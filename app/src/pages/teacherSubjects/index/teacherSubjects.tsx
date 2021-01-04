@@ -121,11 +121,11 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
     );
   });
 
-  if (mappedSubjects.length === 0) {
+  if (mappedSubjects.length === 0 && props.loading) {
     return (
       <Paper>
         <Box display="flex" justifyContent="center">
-          <Typography>Nemáte přiřazené žádné předměty</Typography>
+          <Typography>No subjects</Typography>
         </Box>
       </Paper>
     );

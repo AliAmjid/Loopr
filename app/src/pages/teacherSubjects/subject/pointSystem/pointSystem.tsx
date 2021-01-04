@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import {
   Box,
@@ -86,6 +86,7 @@ const PointSystem: React.FC = () => {
   const classes = useStyles();
   const headerRef = useRef() as MutableRefObject<HTMLTableRowElement>;
   const tableContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const [editing, setEditing] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (process.browser) {
@@ -113,7 +114,7 @@ const PointSystem: React.FC = () => {
       <Typography>Test1</Typography>
       <Typography>27. 7. 2020</Typography>
       <Typography>10 bodů</Typography>
-      <IconButton color="primary">
+      <IconButton color="primary" onClick={() => setEditing('')}>
         <EditIcon />
       </IconButton>
     </TableCell>
@@ -235,7 +236,12 @@ const PointSystem: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Edit open={false} />
+      <Edit
+        open={editing !== undefined}
+        onClose={() => {
+          setEditing(undefined);
+        }}
+      />
     </Paper>
   );
 };
