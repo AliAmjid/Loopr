@@ -60,11 +60,19 @@ class UserPrivateData
      */
     private bool $newMarkNotificationEmail = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity="PercentToMarkConvert", cascade={"persist"})
+     * @Groups({"read:owner", "exposed"})
+     * @ORM\JoinColumn(nullable=false, name="default_percent_to_mark_id")
+     */
+    private PercentToMarkConvert $defaultPercentToMark;
+
 
     #[Pure]
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
+        $this->defaultPercentToMark = new PercentToMarkConvert();
     }
 
     /**
@@ -208,6 +216,17 @@ class UserPrivateData
     public function setGroupModifyNotificationEmail(bool $groupModifyNotificationEmail): UserPrivateData
     {
         $this->groupModifyNotificationEmail = $groupModifyNotificationEmail;
+        return $this;
+    }
+
+    public function getDefaultPercentToMark(): PercentToMarkConvert
+    {
+        return $this->defaultPercentToMark;
+    }
+
+    public function setDefaultPercentToMark(PercentToMarkConvert $defaultPercentToMark): UserPrivateData
+    {
+        $this->defaultPercentToMark = $defaultPercentToMark;
         return $this;
     }
 }

@@ -62,6 +62,13 @@ class PointSystem extends MarkSystem
         return $this->points;
     }
 
+    public function getPointsOnlyWritten(): Collection
+    {
+        return $this->points->filter(function (Point $point) {
+            return $point->isExamWritten();
+        });
+    }
+
     public function setPoints(Collection|array $points): PointSystem
     {
         $this->points = $points;
@@ -70,7 +77,7 @@ class PointSystem extends MarkSystem
 
     function getMarkSystemType(): string
     {
-        return Subject::MARK_SYSTEM_POINTS;
+        return Subject::EVALUATION_SYSTEM_POINTS;
     }
 
     public function getExam(): Exam
@@ -83,5 +90,28 @@ class PointSystem extends MarkSystem
     {
         $this->exam = $exam;
         return $this;
+    }
+
+    /**
+     * @Groups({"exposed", "read"})
+     * @return int[]
+     */
+    public function getAnonymizedResults(): array
+    {
+        return array_filter($this->points->map(function (Point $point) {
+            if ($point->isExamWritten()) {
+                return (int)$point->getPoints();
+            }
+            return null;
+        })->toArray());
+    }
+
+    /**
+     * @Groups({"exposed", "read"})
+     */
+    public function getAverage(): float
+    {
+        $results = $this->getAnonymizedResults();
+        return array_sum($results) / count($results);
     }
 }
