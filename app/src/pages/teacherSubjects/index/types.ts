@@ -1,6 +1,7 @@
 export interface Subject {
   id: string;
-  teacherCardColor: string;
+  teacherCardColor?: string | null;
+  markSystem: string;
   group?: {
     id: string;
     section: string;
@@ -18,6 +19,7 @@ export interface Subject {
 
 export interface TeacherSubjectsProps {
   subjects: Subject[];
+  loading: boolean;
 }
 
 export interface ColorChangeDialogProps {

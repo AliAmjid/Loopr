@@ -11,9 +11,9 @@ import teacherSubjectsPageOptions from './pageOptions';
 import TeacherSubjects from './teacherSubjects';
 
 const TeacherSubjectsIndex: React.FC = () => {
-  const { data: subjectsData } = useQuery<TeacherSubjectsSubjectsQuery>(
-    TEACHER_SUBJECTS_SUBJECTS_QUERY,
-  );
+  const { data: subjectsData, loading: subjectsLoading } = useQuery<
+    TeacherSubjectsSubjectsQuery
+  >(TEACHER_SUBJECTS_SUBJECTS_QUERY);
 
   const subjects = [];
   for (const taughtSubject of subjectsData?.meUser?.taughtSubjects?.edges ||
@@ -21,7 +21,7 @@ const TeacherSubjectsIndex: React.FC = () => {
     if (taughtSubject?.node) subjects.push(taughtSubject?.node);
   }
 
-  return <TeacherSubjects subjects={subjects} />;
+  return <TeacherSubjects subjects={subjects} loading={subjectsLoading} />;
 };
 
 export default withPage(teacherSubjectsPageOptions)(TeacherSubjectsIndex);

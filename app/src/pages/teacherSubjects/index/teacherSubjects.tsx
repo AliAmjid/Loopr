@@ -19,6 +19,8 @@ import routes from 'config/routes';
 
 import ColorChangeDialog from 'pages/teacherSubjects/index/colorChangeDialog';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import ThickDivider from 'components/thickDivider';
 
 import { Subject, TeacherSubjectsProps } from './types';
@@ -78,12 +80,19 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
               name = `${subject.classGroup.year} ${subject.classGroup.section}`;
             }
 
+            let redirect = '';
+            if (subject.markSystem === 'POINTS') {
+              redirect = routes.teacherSubjects.subject.points;
+            }
+
             return (
               <Grid item xs={12} sm={6} md={4} lg={3} key={subject.id}>
                 <Card variant="outlined" className={classes.card}>
                   <Box
                     className={classes.colorStrip}
-                    style={{ backgroundColor: subject.teacherCardColor }}
+                    style={{
+                      backgroundColor: subject.teacherCardColor || 'white',
+                    }}
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"
@@ -96,7 +105,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                     </CardContent>
                     <CardActions className={classes.cardActions}>
                       <Link
-                        href={routes.teacherSubjects.subject.index}
+                        href={{ pathname: redirect, query: { id: subject.id } }}
                         passHref
                       >
                         <Button color="primary">Evaluation</Button>
@@ -125,7 +134,12 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   return (
     <>
       <ColorChangeDialog open={false} />
-      <Paper>{mappedSubjects}</Paper>
+      <Paper>
+        <OverlayLoadingContainer>
+          <OverlayLoading loading={props.loading} />
+          {mappedSubjects}
+        </OverlayLoadingContainer>
+      </Paper>
     </>
   );
 };

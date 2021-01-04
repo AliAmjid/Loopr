@@ -52,7 +52,7 @@ const StickyTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-const Subject: React.FC = () => {
+const PointSystem: React.FC = () => {
   let id = 0;
   function createData(name, calories, fat, carbs, protein) {
     id += 1;
@@ -140,7 +140,7 @@ const Subject: React.FC = () => {
   return (
     <Paper className={classes.paper}>
       <TableContainer style={tableContainerStyle} ref={tableContainerRef}>
-        <Table stickyHeader>
+        <Table stickyHeader size="small">
           <TableHead>
             <TableRow ref={headerRef} style={{ backgroundColor: 'white' }}>
               <StickyTableCell
@@ -240,4 +240,4 @@ const Subject: React.FC = () => {
   );
 };
 
-export default Subject;
+export default PointSystem;

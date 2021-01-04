@@ -32,7 +32,7 @@ const routes = {
   teacherSubjects: {
     index: '/teacherSubjects',
     subject: {
-      index: '/teacherSubjects/subject',
+      points: '/teacherSubjects/subject/pointSystem',
     },
   },
 };
