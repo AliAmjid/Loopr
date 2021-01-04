@@ -105,4 +105,22 @@ class Point
             throw new ClientError(ClientErrorType::USER_NOT_EXAM_MEMBER);
         }
     }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
+    public function getBetterThan(): int
+    {
+        return $this->getPointSystem()->getPointsOnlyWritten()->filter(function (Point $point) {
+            return ($point->getId() !== $this->id && $point->getPoints() <= $point->points);
+        })->count();
+    }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
+    public function getPercentil(): float
+    {
+        return $this->pointSystem->getPointsOnlyWritten()->count() / 100 * $this->getBetterThan();
+    }
 }

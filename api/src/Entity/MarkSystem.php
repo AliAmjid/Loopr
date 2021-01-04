@@ -22,10 +22,10 @@ abstract class MarkSystem
      */
     public function assert()
     {
-        if ($this->getExam()->getSubject()->getMarkSystem() !== $this->getMarkSystemType()) {
+        if ($this->getExam()->getSubject()->getEvaluationSystem() !== $this->getMarkSystemType()) {
             throw new ClientError(
                 ClientErrorType::BAD_MARK_SYSTEM,
-                ['got' => $this->getMarkSystemType(), 'expected' => $this->getExam()->getSubject()->getMarkSystem()]
+                ['got' => $this->getMarkSystemType(), 'expected' => $this->getExam()->getSubject()->getEvaluationSystem()]
             );
         }
     }

@@ -23,7 +23,7 @@ class Subject
 {
     use Tid;
 
-    const MARK_SYSTEM_POINTS = 'POINTS';
+    const EVALUATION_SYSTEM_POINTS = 'POINTS';
 
     /**
      * @var SubjectType
@@ -73,7 +73,7 @@ class Subject
      * @ORM\Column(type="string", options={"default":"POINTS"})
      * @Groups({"read", "exposed"})
      */
-    private string $markSystem = self::MARK_SYSTEM_POINTS;
+    private string $evaluationSystem = self::EVALUATION_SYSTEM_POINTS;
 
 
     /**
@@ -82,6 +82,15 @@ class Subject
      * @Groups({"read", "exposed"})
      */
     private Collection|array $exams;
+
+
+    /**
+     * @var PercentToMarkConvert|null
+     * @ORM\OneToOne(targetEntity="PercentToMarkConvert", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, name="percents_to_mark_convert_id")
+     * @Groups({"read", "exposed"})
+     */
+    private ?PercentToMarkConvert $percentsToMarkConvert;
 
     /**
      * subject constructor.
@@ -95,7 +104,6 @@ class Subject
     ) {
         $this->subjectType = $subjectType;
         $this->teacher = $teacher;
-        $this->exams = new ArrayCollection();
     }
 
 
@@ -183,16 +191,62 @@ class Subject
         return $this;
     }
 
-    public function getMarkSystem(): string
+    public function getEvaluationSystem(): string
     {
-        return $this->markSystem;
+        return $this->evaluationSystem;
     }
 
-    public function setMarkSystem(string $markSystem): Subject
+    public function setEvaluationSystem(string $evaluationSystem): Subject
     {
-        $this->markSystem = $markSystem;
+        $this->evaluationSystem = $evaluationSystem;
         return $this;
     }
+
+    /**
+     * @Groups({"read:teacher", "exposed"})
+     */
+    public function getPointSystemAverages(): float
+    {
+        $array = $this->getAnonymizedPointSystemResults();
+        return array_sum($array) / count($array);
+    }
+
+    /**
+     * @Groups({"read:teacher", "exposed"})
+     */
+    public function getAnonymizedPointSystemResults(): array
+    {
+        return $this->exams->map(fn(Exam $exam) => $exam->getPointSystem()->getAverage())->toArray();
+    }
+
+    public function getExams(): Collection|array
+    {
+        return $this->exams;
+    }
+
+    public function getPercentsToMarkConvert(): ?PercentToMarkConvert
+    {
+        return $this->percentsToMarkConvert;
+    }
+
+    public function setGroup(?Group $group): Subject
+    {
+        $this->group = $group;
+        return $this;
+    }
+
+    public function setExams(Collection|array $exams): Subject
+    {
+        $this->exams = $exams;
+        return $this;
+    }
+
+    public function setPercentsToMarkConvert(?PercentToMarkConvert $percentsToMarkConvert): Subject
+    {
+        $this->percentsToMarkConvert = $percentsToMarkConvert;
+        return $this;
+    }
+
 
     /**
      * @ORM\PrePersist()
@@ -209,6 +263,17 @@ class Subject
 
         if ($this->classGroup && $this->group) {
             throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
+        }
+
+        if ($this->percentsToMarkConvert == null) {
+            $percentToMarkConvert = new PercentToMarkConvert();
+            $percentToMarkConvertTeacher = $this->teacher?->getPrivateData()?->getDefaultPercentToMark() ?? throw new \RuntimeException("No default percent to mark on user..");
+            $percentToMarkConvert->setOne($percentToMarkConvertTeacher->getOne());
+            $percentToMarkConvert->setTwo($percentToMarkConvertTeacher->getTwo());
+            $percentToMarkConvert->setThree($percentToMarkConvertTeacher->getThree());
+            $percentToMarkConvert->setFour($percentToMarkConvertTeacher->getFour());
+
+            $this->percentsToMarkConvert = $percentToMarkConvert;
         }
     }
 }
