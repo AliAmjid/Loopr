@@ -36,7 +36,7 @@ class PointSystemController extends AbstractController implements MutationResolv
         } else {
             $pointSystem = $item;
         }
-
+        $pointSystem->setMaxPoints($context['args']['input']['maxPoints']);
         $em->persist($pointSystem);
 
         foreach ($points as $pointArray) {
@@ -55,6 +55,8 @@ class PointSystemController extends AbstractController implements MutationResolv
                 $em->persist($point);
             }
             $point->setPoints($pointArray['points']);
+            $point->setExamWritten($pointArray['examWritten'] ?? true);
+
         }
         $em->flush();
         $em->refresh($pointSystem);
