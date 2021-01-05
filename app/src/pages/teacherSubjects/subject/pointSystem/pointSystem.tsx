@@ -2,6 +2,7 @@ import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import {
   Box,
+  Button,
   fade,
   Grid,
   IconButton,
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...bottomShadow,
     zIndex: 103,
   },
+  examCell: {},
 }));
 
 const StickyTableCell = withStyles((theme: Theme) => ({
@@ -88,7 +90,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   if (process.browser) {
     const toolbarHeight = 64;
     tableContainerStyle = {
-      height: window.innerHeight - toolbarHeight * 3.6,
+      height: window.innerHeight - toolbarHeight * 3.7,
     };
   }
 
@@ -96,8 +98,18 @@ const PointSystem: React.FC<PointSystemProps> = props => {
     <Paper className={classes.paper}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
-        <Box className={classes.header} p={2} position="relative">
+        <Box
+          className={classes.header}
+          p={2}
+          position="relative"
+          display="flex"
+        >
           <Typography variant="subtitle1">Subject</Typography>
+          <Box display="flex" justifyContent="flex-end" width="100%">
+            <Button color="primary" onClick={props.onExamCreate}>
+              Add test
+            </Button>
+          </Box>
         </Box>
         <TableContainer style={tableContainerStyle} ref={tableContainerRef}>
           <Table stickyHeader size="small">
@@ -128,7 +140,8 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     key={exam.id}
                     colSpan={2}
                     align="center"
-                    className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder}`}
+                    className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder} `}
+                    width={200}
                   >
                     <Typography>{exam.name}</Typography>
                     <Typography>{`${exam.maxPoints} points`}</Typography>
@@ -144,31 +157,34 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     </IconButton>
                   </TableCell>
                 ))}
-                <TableCell className={classes.whiteCell}>
-                  <IconButton color="primary" onClick={props.onExamCreate}>
-                    <AddIcon />
-                  </IconButton>
-                </TableCell>
+                <TableCell
+                  className={`${classes.whiteCell} ${classes.cellWithoutBorder}  `}
+                />
               </TableRow>
               <TableRow>
                 {props.exams.map(exam => (
                   <React.Fragment key={exam.id}>
                     <TableCell
-                      className={classes.whiteCell}
+                      className={`${classes.whiteCell} ${classes.examCell}`}
                       align="center"
                       style={{ top: headerRef.current?.clientHeight }}
+                      width={100}
                     >
                       <Typography>BODY</Typography>
                     </TableCell>
                     <TableCell
-                      className={`${classes.whiteCell} ${classes.cellWithRightBorder}`}
+                      className={`${classes.whiteCell} ${classes.examCell} ${classes.cellWithRightBorder}`}
                       align="center"
                       style={{ top: headerRef.current?.clientHeight }}
+                      width={100}
                     >
                       <Typography>PROCENTA</Typography>
                     </TableCell>
                   </React.Fragment>
                 ))}
+                <TableCell
+                  className={`${classes.whiteCell} ${classes.examCell} `}
+                />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -203,18 +219,24 @@ const PointSystem: React.FC<PointSystemProps> = props => {
 
                       return (
                         <>
-                          <TableCell align="center" className={backgroundColor}>
+                          <TableCell
+                            align="center"
+                            className={backgroundColor}
+                            width={100}
+                          >
                             {points}
                           </TableCell>
                           <TableCell
                             align="center"
                             className={`${classes.cellWithRightBorder} ${backgroundColor}`}
+                            width={100}
                           >
                             IDK
                           </TableCell>
                         </>
                       );
                     })}
+                    <TableCell className={backgroundColor} />
                   </TableRow>
                 );
               })}
