@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   header: {
     ...bottomShadow,
-    zIndex: 10000,
+    zIndex: 103,
   },
 }));
 
@@ -56,14 +56,14 @@ const StickyTableCell = withStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       left: 0,
       position: 'sticky',
-      zIndex: theme.zIndex.appBar + 2,
+      zIndex: 102,
     },
   },
   body: {
     [theme.breakpoints.up('md')]: {
       left: 0,
       position: 'sticky',
-      zIndex: theme.zIndex.appBar + 1,
+      zIndex: 101,
     },
   },
 }))(TableCell);

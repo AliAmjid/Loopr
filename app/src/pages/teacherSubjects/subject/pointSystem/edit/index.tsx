@@ -145,7 +145,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     } else {
       createOrUpdatePointSystem({
         variables: {
-          input: {
+          pointSystemInput: {
             exam: exam.id,
             maxPoints: exam.maxPoints,
             points: students.map(student => {
@@ -158,6 +158,10 @@ const EditIndex: React.FC<EditIndexProps> = props => {
                 examWritten,
               };
             }),
+          },
+          examInput: {
+            id: exam.id,
+            name: exam.name,
           },
         },
       })

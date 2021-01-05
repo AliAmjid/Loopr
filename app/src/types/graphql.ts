@@ -1527,12 +1527,24 @@ export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMuta
   pointSystem: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem_pointSystem | null;
 }
 
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam_exam {
+  __typename: "Exam";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam {
+  __typename: "updateExamPayload";
+  exam: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam_exam | null;
+}
+
 export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation {
   createOrUpdatePointSystem: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem | null;
+  updateExam: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam | null;
 }
 
 export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables {
-  input: createOrUpdatePointSystemInput;
+  pointSystemInput: createOrUpdatePointSystemInput;
+  examInput: updateExamInput;
 }
 
 /* tslint:disable */
@@ -1923,6 +1935,13 @@ export interface updateClassGroupInput {
   year?: number | null;
   section?: string | null;
   teacher?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updateExamInput {
+  id: string;
+  name?: string | null;
+  subject?: string | null;
   clientMutationId?: string | null;
 }
 
