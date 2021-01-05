@@ -66,7 +66,8 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   const classes = useStyles();
   const headerRef = useRef() as MutableRefObject<HTMLTableRowElement>;
   const tableContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const [editing, setEditing] = useState<string | undefined>(undefined);
+  const [editing, setEditing] = useState<boolean>(false);
+  const [editingId, setEditingId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (process.browser) {
@@ -81,7 +82,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   if (process.browser) {
     const toolbarHeight = 64;
     tableContainerStyle = {
-      maxHeight: window.innerHeight - toolbarHeight * 3,
+      height: window.innerHeight - toolbarHeight * 3,
     };
   }
 
@@ -121,9 +122,15 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder}`}
                   >
                     <Typography>{exam.name}</Typography>
-                    <Typography>27. 7. 2020</Typography>
                     <Typography>10 bodů</Typography>
-                    <IconButton color="primary" onClick={() => setEditing('')}>
+                    <Typography>27. 7. 2020</Typography>
+                    <IconButton
+                      color="primary"
+                      onClick={() => {
+                        setEditing(true);
+                        setEditingId(exam.id);
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
                   </TableCell>
@@ -181,19 +188,24 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                       </Box>
                     </StickyTableCell>
 
-                    {student.exams.map(exam => (
-                      <>
-                        <TableCell align="center" className={backgroundColor}>
-                          {exam.points}
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          className={`${classes.cellWithRightBorder} ${backgroundColor}`}
-                        >
-                          IDK
-                        </TableCell>
-                      </>
-                    ))}
+                    {student.exams.map(exam => {
+                      let points = 'N';
+                      if (exam.examWritten) points = `${exam.points}`;
+
+                      return (
+                        <>
+                          <TableCell align="center" className={backgroundColor}>
+                            {points}
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            className={`${classes.cellWithRightBorder} ${backgroundColor}`}
+                          >
+                            IDK
+                          </TableCell>
+                        </>
+                      );
+                    })}
                   </TableRow>
                 );
               })}
@@ -202,9 +214,12 @@ const PointSystem: React.FC<PointSystemProps> = props => {
         </TableContainer>
       </OverlayLoadingContainer>
       <Edit
-        open={editing !== undefined}
+        open={editing}
+        examId={`${editingId}`}
+        exams={props.exams}
+        students={props.students}
         onClose={() => {
-          setEditing(undefined);
+          setEditing(false);
         }}
       />
     </Paper>

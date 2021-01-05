@@ -7,9 +7,13 @@ import { useSnackbar } from 'notistack';
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
 
+import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_OR_UPDATE_POINT_SYSTEM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/createOrUpdatePointSystem';
+
 import {
   TeacherSubejctsSubjectPointSystemCreateExamMutation,
   TeacherSubejctsSubjectPointSystemCreateExamMutationVariables,
+  TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation,
+  TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables,
   TeacherSubjectsSubjectPointSystemSubjectQuery,
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
@@ -37,6 +41,7 @@ const PointSystemIndex: React.FC = () => {
     refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
     awaitRefetchQueries: true,
   });
+
   const { enqueueSnackbar } = useSnackbar();
 
   const examCreateHandler = (): void => {
@@ -62,11 +67,6 @@ const PointSystemIndex: React.FC = () => {
   };
 
   const exams: Exams = [];
-  for (const exam of subjectData?.subject?.exams?.edges || []) {
-    if (exam?.node) {
-      exams.push({ id: exam.node.id, name: exam.node.name });
-    }
-  }
 
   const students: Students = [];
   // Set students basic info
@@ -91,6 +91,41 @@ const PointSystemIndex: React.FC = () => {
           exams: [],
         });
       }
+    }
+  }
+
+  // Set exams and studentExams
+  for (const exam of subjectData?.subject?.exams?.edges || []) {
+    const examNode = exam?.node;
+    if (examNode) {
+      exams.push({
+        id: examNode.id,
+        name: examNode.name,
+        maxPoints: examNode.pointSystem?.maxPoints || 0,
+      });
+
+      const examPoints: {
+        user: { id: string };
+        points: number;
+        examWritten: boolean;
+      }[] = [];
+
+      examNode.pointSystem?.points?.edges?.forEach(point => {
+        if (point?.node) {
+          examPoints.push(point.node);
+        }
+      });
+
+      students.forEach(student => {
+        const studentExam = examPoints.find(
+          examPoint => examPoint.user.id === student.id,
+        );
+        student.exams.push({
+          id: examNode.id,
+          points: studentExam?.points || 0,
+          examWritten: studentExam?.examWritten || false,
+        });
+      });
     }
   }
 

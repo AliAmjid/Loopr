@@ -1514,6 +1514,33 @@ export interface TeacherSubejctsSubjectPointSystemCreateExamMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem_pointSystem {
+  __typename: "PointSystem";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem {
+  __typename: "createOrUpdatePointSystemPayload";
+  pointSystem: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem_pointSystem | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation {
+  createOrUpdatePointSystem: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables {
+  input: createOrUpdatePointSystemInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
 // ====================================================
 
@@ -1570,6 +1597,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edg
   __typename: "Point";
   user: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node_user;
   points: number;
+  examWritten: boolean;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges {
@@ -1584,6 +1612,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edg
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem {
   __typename: "PointSystem";
+  maxPoints: number;
   points: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points | null;
 }
 
@@ -1810,6 +1839,20 @@ export interface createExamInput {
 
 export interface createGroupInput {
   section: string;
+  clientMutationId?: string | null;
+}
+
+export interface createOrUpdatePointSystemInput {
+  exam: string;
+  maxPoints: number;
+  points?: createPointInput[] | null;
+  clientMutationId?: string | null;
+}
+
+export interface createPointInput {
+  user: string;
+  points: number;
+  examWritten: boolean;
   clientMutationId?: string | null;
 }
 

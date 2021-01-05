@@ -111,12 +111,12 @@ const Edit: React.FC<EditProps> = props => {
               className={classes.headerInfo}
             >
               <Box>
-                <Typography>Anglický jazyk</Typography>
-                <Typography variant="h5">Test1</Typography>
+                <Typography variant="h5">{props.exam.name}</Typography>
+                <Typography>{`${props.exam.maxPoints} bodů`}</Typography>
                 <Typography>27.12.2020</Typography>
               </Box>
               <Box pl={4}>
-                <IconButton color="primary">
+                <IconButton color="primary" onClick={props.onExamInfoEdit}>
                   <EditIcon />
                 </IconButton>
               </Box>
@@ -140,11 +140,8 @@ const Edit: React.FC<EditProps> = props => {
               </Box>
             </Box>
           </Box>
-          <Box>
-            <Box p={2}>
-              <TextField label="Max points" type="number" />
-            </Box>
-            <Table>
+          <Box pt={2}>
+            <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell width={250}>Name</TableCell>
@@ -155,28 +152,46 @@ const Edit: React.FC<EditProps> = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>Jméno</TableCell>
-                  <TableCell>Příjení</TableCell>
-                  <TableCell />
-                  <TableCell>
-                    <TextField />
-                  </TableCell>
-                  <TableCell>
-                    <TextField />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Jméno</TableCell>
-                  <TableCell>Příjení</TableCell>
-                  <TableCell />
-                  <TableCell>
-                    <TextField />
-                  </TableCell>
-                  <TableCell>
-                    <TextField />
-                  </TableCell>
-                </TableRow>
+                {props.students?.map(student => {
+                  return (
+                    <TableRow key={student.id}>
+                      <TableCell>{student.firstname}</TableCell>
+                      <TableCell>{student.lastname}</TableCell>
+                      <TableCell />
+                      <TableCell>
+                        <TextField
+                          value={student.pointsValue}
+                          error={student.pointsError}
+                          color={
+                            student.pointsWarning ? 'secondary' : 'primary'
+                          }
+                          onChange={e =>
+                            props.onStudentExamChange({
+                              studentId: student.id,
+                              points: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <TextField
+                          disabled={props.exam.maxPoints === 0}
+                          value={student.percentsValue}
+                          error={student.percentsError}
+                          color={
+                            student.percentsWarning ? 'secondary' : 'primary'
+                          }
+                          onChange={e =>
+                            props.onStudentExamChange({
+                              studentId: student.id,
+                              percents: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </Box>

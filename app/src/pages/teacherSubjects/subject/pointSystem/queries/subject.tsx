@@ -29,6 +29,7 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
             id
             name
             pointSystem {
+              maxPoints
               points {
                 edges {
                   node {
@@ -36,6 +37,7 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
                       id
                     }
                     points
+                    examWritten
                   }
                 }
               }
