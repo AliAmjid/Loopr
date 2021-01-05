@@ -3,6 +3,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -13,6 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\SchoolPeriodRepository")
  * @UniqueEntity({"quarter", "schoolYear"})
  */
+#[ApiFilter(filterClass: SearchFilter::class, properties: [
+    'id' => 'exact',
+    'schoolYear' => 'exact',
+    'quarter' => 'exact'
+])]
 class SchoolPeriod
 {
     use Tid;
