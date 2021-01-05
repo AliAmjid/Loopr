@@ -21,3 +21,4 @@ App\Entity\SchoolPeriod:
         getCurrent:
             item_query: App\Controller\GetCurrentSchoolPeriodController
             args: [ ]
+        collection_query:
