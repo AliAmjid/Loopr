@@ -29,6 +29,7 @@ export interface EditProps {
   open: boolean;
   exam: Exam;
   students?: EditStudents;
+  loading: boolean;
   onSubmit: () => void;
   onCancel: () => void;
   onStudentExamChange: (values: StudentExamChangeValues) => void;

@@ -22,6 +22,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import { bottomShadow } from 'components/shadows';
 
 import Edit from './edit';
 import { PointSystemProps } from './types';
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: 0,
     position: 'relative',
     scrollBehavior: 'smooth',
+    overflowX: 'hidden',
   },
   whiteCell: {
     backgroundColor: theme.palette.common.white,
@@ -42,6 +44,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   cellWithoutBorder: { borderColor: theme.palette.common.white },
   cellWithRightBorder: {
     borderRight: '1px solid #E0E0E0',
+  },
+  header: {
+    ...bottomShadow,
+    zIndex: 10000,
   },
 }));
 
@@ -82,7 +88,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   if (process.browser) {
     const toolbarHeight = 64;
     tableContainerStyle = {
-      height: window.innerHeight - toolbarHeight * 3,
+      height: window.innerHeight - toolbarHeight * 3.6,
     };
   }
 
@@ -90,6 +96,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
     <Paper className={classes.paper}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
+        <Box className={classes.header} p={2} position="relative">
+          <Typography variant="subtitle1">Subject</Typography>
+        </Box>
         <TableContainer style={tableContainerStyle} ref={tableContainerRef}>
           <Table stickyHeader size="small">
             <TableHead>
@@ -122,7 +131,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder}`}
                   >
                     <Typography>{exam.name}</Typography>
-                    <Typography>10 bodů</Typography>
+                    <Typography>{`${exam.maxPoints} points`}</Typography>
                     <Typography>27. 7. 2020</Typography>
                     <IconButton
                       color="primary"

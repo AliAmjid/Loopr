@@ -190,6 +190,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         open={props.open}
         exam={exam}
         students={students}
+        loading={createOrUpdatePointSystemLoading}
         onCancel={props.onClose}
         onSubmit={submitHandler}
         onStudentExamChange={studentExamChangeHandler}
