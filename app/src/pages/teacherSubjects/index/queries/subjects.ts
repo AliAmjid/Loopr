@@ -8,7 +8,7 @@ const TEACHER_SUBJECTS_SUBJECTS_QUERY = gql`
           node {
             id
             teacherCardColor
-            markSystem
+            evaluationSystem
             group {
               id
               section

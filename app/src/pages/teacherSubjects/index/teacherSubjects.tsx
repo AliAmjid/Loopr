@@ -81,7 +81,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
             }
 
             let redirect = '';
-            if (subject.markSystem === 'POINTS') {
+            if (subject.evaluationSystem === 'POINTS') {
               redirect = routes.teacherSubjects.subject.points;
             }
 

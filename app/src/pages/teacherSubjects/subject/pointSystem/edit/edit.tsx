@@ -75,7 +75,7 @@ const Edit: React.FC<EditProps> = props => {
           setPhase('visible');
         }, transitionDuration);
       });
-    } else {
+    } else if (phase !== 'hidden') {
       setPhase('withoutContent');
       setTimeout(() => {
         setPhase('reduced');

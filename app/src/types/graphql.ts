@@ -1361,7 +1361,7 @@ export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node {
   __typename: "Subject";
   id: string;
   teacherCardColor: string | null;
-  markSystem: string;
+  evaluationSystem: string;
   group: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group | null;
   classGroup: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup | null;
   subjectType: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType | null;
@@ -1384,6 +1384,145 @@ export interface TeacherSubjectsSubjectsQuery_meUser {
 
 export interface TeacherSubjectsSubjectsQuery {
   meUser: TeacherSubjectsSubjectsQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: TeacherSubejctsSubjectPointSystemCreateExamMutation
+// ====================================================
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam_exam {
+  __typename: "Exam";
+  id: string;
+}
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam {
+  __typename: "createExamPayload";
+  exam: TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam_exam | null;
+}
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutation {
+  createExam: TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam | null;
+}
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutationVariables {
+  input: createExamInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges_node {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges {
+  __typename: "UserEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users {
+  __typename: "UserConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group {
+  __typename: "Group";
+  users: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges_node {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges {
+  __typename: "UserEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users {
+  __typename: "UserConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup {
+  __typename: "ClassGroup";
+  users: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  user: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node_user;
+  points: number;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  points: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node {
+  __typename: "Exam";
+  id: string;
+  name: string;
+  pointSystem: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges {
+  __typename: "ExamEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams {
+  __typename: "ExamConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
+  __typename: "Subject";
+  id: string;
+  group: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group | null;
+  classGroup: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup | null;
+  exams: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
+  subject: TeacherSubjectsSubjectPointSystemSubjectQuery_subject | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
+  id: string;
 }
 
 /* tslint:disable */
@@ -1519,6 +1658,32 @@ export interface UsersUserDetailUserQueryVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: TeacherSubjectsSubjectPointSystemSubectUserFragment
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointSystemSubectUserFragment_edges_node {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubectUserFragment_edges {
+  __typename: "UserEdge";
+  node: TeacherSubjectsSubjectPointSystemSubectUserFragment_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
+  __typename: "UserConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubectUserFragment_edges | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
@@ -1539,6 +1704,12 @@ export interface createClassGroupInput {
   year: number;
   section: string;
   teacher?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface createExamInput {
+  name: string;
+  subject?: string | null;
   clientMutationId?: string | null;
 }
 

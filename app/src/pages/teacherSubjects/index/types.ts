@@ -1,7 +1,7 @@
 export interface Subject {
   id: string;
   teacherCardColor?: string | null;
-  markSystem: string;
+  evaluationSystem: string;
   group?: {
     id: string;
     section: string;
