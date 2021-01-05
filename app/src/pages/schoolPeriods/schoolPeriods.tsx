@@ -17,6 +17,7 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
     <Paper>
       <AddDialogIndex open={add} onClose={() => setAdd(false)} />
       <MaterialTable
+        key={add}
         uniqueName="pages/schoolPeriods"
         title="schoolPeriods"
         columns={[

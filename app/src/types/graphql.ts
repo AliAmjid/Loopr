@@ -1036,6 +1036,33 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SchoolPeriodsCreateSchoolPeriodMutation
+// ====================================================
+
+export interface SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod_schoolPeriod {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
+export interface SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod {
+  __typename: "createSchoolPeriodPayload";
+  schoolPeriod: SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod_schoolPeriod | null;
+}
+
+export interface SchoolPeriodsCreateSchoolPeriodMutation {
+  createSchoolPeriod: SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod | null;
+}
+
+export interface SchoolPeriodsCreateSchoolPeriodMutationVariables {
+  input: createSchoolPeriodInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SchollPeriodsSchollPeriodsQuery
 // ====================================================
 
@@ -1756,6 +1783,14 @@ export interface createExamInput {
 
 export interface createGroupInput {
   section: string;
+  clientMutationId?: string | null;
+}
+
+export interface createSchoolPeriodInput {
+  quarter: number;
+  from: string;
+  to: string;
+  schoolYear: number;
   clientMutationId?: string | null;
 }
 

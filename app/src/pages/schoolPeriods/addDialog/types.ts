@@ -7,6 +7,7 @@ export interface SubmitValues {
 
 export interface AddDialogProps {
   open: boolean;
+  loading: boolean;
   onSubmit: (values: SubmitValues) => void;
   onCancel: () => void;
 }
