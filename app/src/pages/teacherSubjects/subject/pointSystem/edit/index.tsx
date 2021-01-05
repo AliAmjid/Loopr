@@ -11,7 +11,7 @@ import {
   TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables,
 } from 'types/graphql';
 
-import countPercents from 'components/countPercents';
+import { getPercents, getPoints } from 'components/percents';
 
 import { Exam } from '../types';
 
@@ -51,12 +51,17 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     if (foundExam) {
       setStudents(
         props.students.map(student => {
-          const exam = student.exams.find(exam => exam.id === props.examId);
+          const studentExam = student.exams.find(
+            exam => exam.id === props.examId,
+          );
           let pointsValue = 'N';
           let percentsValue = 'N';
-          if (exam?.examWritten) {
-            pointsValue = `${exam.points}`;
-            percentsValue = countPercents(exam.points);
+          if (studentExam?.examWritten) {
+            pointsValue = `${studentExam.points}`;
+            percentsValue = `${getPercents({
+              value: studentExam.points,
+              max: exam.maxPoints,
+            })}`;
           }
 
           return {
@@ -91,6 +96,44 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           !Number.isNaN(+values.points) &&
           (+values.points < 0 ||
             (exam?.maxPoints !== undefined && +values.points > exam.maxPoints));
+
+        if (
+          !Number.isNaN(+values.points) &&
+          exam.maxPoints !== 0 &&
+          values.points !== ''
+        ) {
+          student.percentsValue = `${getPercents({
+            value: +values.points,
+            max: exam.maxPoints,
+          })}`;
+        } else if (values.points === 'n' || values.points === 'N') {
+          student.percentsValue = values.points;
+        } else {
+          student.percentsValue = '-';
+        }
+      }
+      if (values.percents !== undefined) {
+        student.percentsValue = values.percents;
+        student.percentsError =
+          values.percents !== 'N' &&
+          values.percents !== 'n' &&
+          Number.isNaN(+values.percents);
+        student.percentsWarning =
+          !Number.isNaN(+values.percents) &&
+          (+values.percents < 0 || +values.percents > 100);
+
+        if (!Number.isNaN(+values.percents) && values.percents !== '') {
+          student.pointsValue = `${Math.round(
+            getPoints({
+              max: exam.maxPoints,
+              percents: +values.percents,
+            }),
+          )}`;
+        } else if (values.percents === 'n' || values.percents === 'N') {
+          student.pointsValue = values.percents;
+        } else {
+          student.pointsValue = '-';
+        }
       }
     }
     setStudents(newStudents);
@@ -105,12 +148,16 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           input: {
             exam: exam.id,
             maxPoints: exam.maxPoints,
-            points: students.map(student => ({
-              user: student.id,
-              points: +student.pointsValue,
-              examWritten:
-                student.pointsValue !== 'N' && student.pointsValue !== 'n',
-            })),
+            points: students.map(student => {
+              const examWritten =
+                student.pointsValue !== 'N' && student.pointsValue !== 'n';
+
+              return {
+                user: student.id,
+                points: examWritten ? +student.pointsValue : 0,
+                examWritten,
+              };
+            }),
           },
         },
       })
