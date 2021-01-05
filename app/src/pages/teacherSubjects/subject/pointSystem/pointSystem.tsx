@@ -13,6 +13,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Theme,
   Typography,
   withStyles,
 } from '@material-ui/core';
@@ -25,7 +26,7 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import Edit from './edit';
 import { PointSystemProps } from './types';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   studentCell: {
     minWidth: '200px',
   },
@@ -44,16 +45,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const StickyTableCell = withStyles(theme => ({
+const StickyTableCell = withStyles((theme: Theme) => ({
   head: {
-    left: 0,
-    position: 'sticky',
-    zIndex: theme.zIndex.appBar + 2,
+    [theme.breakpoints.up('md')]: {
+      left: 0,
+      position: 'sticky',
+      zIndex: theme.zIndex.appBar + 2,
+    },
   },
   body: {
-    left: 0,
-    position: 'sticky',
-    zIndex: theme.zIndex.appBar + 1,
+    [theme.breakpoints.up('md')]: {
+      left: 0,
+      position: 'sticky',
+      zIndex: theme.zIndex.appBar + 1,
+    },
   },
 }))(TableCell);
 
