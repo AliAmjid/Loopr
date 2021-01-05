@@ -1036,6 +1036,47 @@ export interface ProfileUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: SchollPeriodsSchollPeriodsQuery
+// ====================================================
+
+export interface SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  from: string;
+  to: string;
+  quarter: number;
+  schoolYear: number;
+}
+
+export interface SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges_node | null;
+  cursor: string;
+}
+
+export interface SchollPeriodsSchollPeriodsQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SchollPeriodsSchollPeriodsQuery {
+  schoolPeriods: SchollPeriodsSchollPeriodsQuery_schoolPeriods | null;
+}
+
+export interface SchollPeriodsSchollPeriodsQueryVariables {
+  first?: number | null;
+  last?: number | null;
+  before?: string | null;
+  after?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsAddSubjectCreateSubjectMutataion
 // ====================================================
 

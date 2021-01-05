@@ -1,12 +1,65 @@
 import React from 'react';
 
+import { useApolloClient } from '@apollo/client';
+import { Query } from 'material-table';
+
+import {
+  SchollPeriodsSchollPeriodsQuery,
+  SchollPeriodsSchollPeriodsQueryVariables,
+} from 'types/graphql';
+
+import usePagination from 'components/usePagination';
 import withPage from 'components/withPage';
 
+import SCHOOL_PERIODS_SCHOOL_PERIODS_QUERY from './queries/schoolPeriods';
 import schoolPeriodsPageOptions from './pageOptions';
 import SchoolPeriods from './schoolPeriods';
+import { GetSchoolPeriodsReturn, SchoolPeriod } from './types';
 
 const SchoolPeriodsIndex: React.FC = () => {
-  return <SchoolPeriods />;
+  const client = useApolloClient();
+  const { getPagination, setPagination } = usePagination();
+
+  const getSchoolPeriods = (
+    query: Query<SchoolPeriod>,
+  ): Promise<GetSchoolPeriodsReturn> => {
+    return client
+      .query<
+        SchollPeriodsSchollPeriodsQuery,
+        SchollPeriodsSchollPeriodsQueryVariables
+      >({
+        query: SCHOOL_PERIODS_SCHOOL_PERIODS_QUERY,
+        variables: {
+          ...getPagination({ page: query.page, pageSize: query.pageSize }),
+        },
+      })
+      .then(res => {
+        const edges = res.data?.schoolPeriods?.edges;
+        const totalCount = res.data?.schoolPeriods?.totalCount;
+        if (edges && totalCount) {
+          setPagination({ edges, totalCount });
+
+          const schoolPeriods = [];
+          for (const schoolPeriod of edges) {
+            if (schoolPeriod?.node) {
+              schoolPeriods.push(schoolPeriod.node);
+            }
+          }
+
+          return {
+            totalCount,
+            schoolPeriods,
+          };
+        }
+
+        return { totalCount: 0, schoolPeriods: [] };
+      })
+      .catch(() => {
+        return { totalCount: 0, schoolPeriods: [] };
+      });
+  };
+
+  return <SchoolPeriods getSchoolPeriods={getSchoolPeriods} />;
 };
 
 export default withPage(schoolPeriodsPageOptions)(SchoolPeriodsIndex);

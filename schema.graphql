@@ -127,6 +127,25 @@ type Query {
     getToken(email: String!, password: String!): Token
     notification(id: ID!): Notification
     getCurrentSchoolPeriod: SchoolPeriod
+    schoolPeriods(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+        id: String
+        id_list: [String]
+        schoolYear: Int
+        schoolYear_list: [Int]
+        quarter: Int
+        quarter_list: [Int]
+    ): SchoolPeriodConnection
 }
 
 # A node, according to the Relay specification.
@@ -648,6 +667,27 @@ type Token implements Node {
     # Use token in header like this: 'Authorization: Bearer {token}'
     token: String!
     user: User!
+}
+
+# Connection for SchoolPeriod.
+type SchoolPeriodConnection {
+    edges: [SchoolPeriodEdge]
+    pageInfo: SchoolPeriodPageInfo!
+    totalCount: Int!
+}
+
+# Edge of SchoolPeriod.
+type SchoolPeriodEdge {
+    node: SchoolPeriod
+    cursor: String!
+}
+
+# Information about the current page.
+type SchoolPeriodPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
 }
 
 type Mutation {

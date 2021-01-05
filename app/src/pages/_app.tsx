@@ -1,7 +1,9 @@
 import React from 'react';
 
+import dayjsUtils from '@date-io/dayjs';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import App, { AppContext } from 'next/app';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
@@ -46,7 +48,9 @@ const MyApp: AppType = props => {
           onClose={() => {}}
         >
           <ReactourProvider>
-            <Component {...pageProps} />
+            <MuiPickersUtilsProvider utils={dayjsUtils}>
+              <Component {...pageProps} />
+            </MuiPickersUtilsProvider>
           </ReactourProvider>
         </SnackbarProvider>
       </ThemeProvider>
