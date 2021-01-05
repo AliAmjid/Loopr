@@ -1063,6 +1063,33 @@ export interface SchoolPeriodsCreateSchoolPeriodMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SchoolPeriodsDeleteSchoolPeriodMutation
+// ====================================================
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod_schoolPeriod {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod {
+  __typename: "deleteSchoolPeriodPayload";
+  schoolPeriod: SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod_schoolPeriod | null;
+}
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutation {
+  deleteSchoolPeriod: SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod | null;
+}
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutationVariables {
+  input: deleteSchoolPeriodInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SchollPeriodsSchollPeriodsQuery
 // ====================================================
 
@@ -1822,6 +1849,11 @@ export interface deleteClassGroupInput {
 }
 
 export interface deleteGroupInput {
+  id: string;
+  clientMutationId?: string | null;
+}
+
+export interface deleteSchoolPeriodInput {
   id: string;
   clientMutationId?: string | null;
 }

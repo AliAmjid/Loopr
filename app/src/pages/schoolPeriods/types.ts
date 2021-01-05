@@ -17,4 +17,5 @@ export interface SchoolPeriodsProps {
   getSchoolPeriods: (
     query: Query<SchoolPeriod>,
   ) => Promise<GetSchoolPeriodsReturn>;
+  onDelete: (id: string) => void;
 }

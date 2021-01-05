@@ -1,23 +1,50 @@
 import React, { useState } from 'react';
 
 import { Box, Button, Paper } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Query, QueryResult } from 'material-table';
 
 import MaterialTable from 'lib/material-table';
 
 import { formatDateToDay } from 'components/formatDate';
+import SimpleDialog from 'components/SimpleDialog';
 
 import AddDialogIndex from './addDialog';
 import { SchoolPeriod, SchoolPeriodsProps } from './types';
 
 const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
   const [add, setAdd] = useState(false);
+  const [deleting, setDeleting] = useState<string | undefined>(undefined);
 
   return (
     <Paper>
       <AddDialogIndex open={add} onClose={() => setAdd(false)} />
+      <SimpleDialog
+        open={deleting !== undefined}
+        title="Sure?"
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setDeleting(undefined)}
+          >
+            Cancel
+          </Button>,
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              props.onDelete(`${deleting}`);
+              setDeleting(undefined);
+            }}
+          >
+            Delete
+          </Button>,
+        ]}
+      />
       <MaterialTable
-        key={add}
+        key={`${add}`}
         uniqueName="pages/schoolPeriods"
         title="schoolPeriods"
         columns={[
@@ -50,6 +77,16 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
               });
           })
         }
+        actions={[
+          {
+            icon: DeleteIcon,
+            tooltip: 'delete',
+            onClick: (_, row) => {
+              row = row as SchoolPeriod;
+              setDeleting(row.id);
+            },
+          },
+        ]}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         <Button
