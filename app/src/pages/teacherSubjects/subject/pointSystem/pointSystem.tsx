@@ -3,7 +3,6 @@ import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Button,
-  fade,
   Grid,
   IconButton,
   makeStyles,
@@ -18,7 +17,6 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 
 import OverlayLoading from 'components/OverlayLoading';
@@ -46,11 +44,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   cellWithRightBorder: {
     borderRight: '1px solid #E0E0E0',
   },
+  cellWithLeftBorder: {
+    borderLeft: '1px solid #E0E0E0',
+  },
   header: {
     ...bottomShadow,
     zIndex: 103,
   },
-  examCell: {},
 }));
 
 const StickyTableCell = withStyles((theme: Theme) => ({
@@ -64,6 +64,23 @@ const StickyTableCell = withStyles((theme: Theme) => ({
   body: {
     [theme.breakpoints.up('md')]: {
       left: 0,
+      position: 'sticky',
+      zIndex: 101,
+    },
+  },
+}))(TableCell);
+
+const StickyTableCellRight = withStyles((theme: Theme) => ({
+  head: {
+    [theme.breakpoints.up('md')]: {
+      right: 0,
+      position: 'sticky',
+      zIndex: 102,
+    },
+  },
+  body: {
+    [theme.breakpoints.up('md')]: {
+      right: 0,
       position: 'sticky',
       zIndex: 101,
     },
@@ -121,6 +138,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     classes.whiteCell
                   } ${classes.cellWithRightBorder}`}
                   width={300}
+                  style={{ minWidth: 300 }}
                 >
                   <Grid container>
                     <Grid item xs={6}>
@@ -141,7 +159,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     colSpan={2}
                     align="center"
                     className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder} `}
-                    width={200}
+                    width={140}
                   >
                     <Typography>{exam.name}</Typography>
                     <Typography>{`${exam.maxPoints} points`}</Typography>
@@ -157,34 +175,52 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     </IconButton>
                   </TableCell>
                 ))}
-                <TableCell
-                  className={`${classes.whiteCell} ${classes.cellWithoutBorder}  `}
-                />
+                <TableCell rowSpan={2} className={`${classes.whiteCell}`} />
+                <StickyTableCellRight
+                  rowSpan={2}
+                  className={`${classes.whiteCell} ${classes.cellWithLeftBorder}`}
+                  align="center"
+                  width={300}
+                  style={{ minWidth: 300 }}
+                >
+                  <Grid container>
+                    <Grid item xs={4}>
+                      Body
+                    </Grid>
+                    <Grid item xs={4}>
+                      Procenta
+                    </Grid>
+                    <Grid item xs={4}>
+                      Známka
+                    </Grid>
+                  </Grid>
+                </StickyTableCellRight>
               </TableRow>
               <TableRow>
                 {props.exams.map(exam => (
                   <React.Fragment key={exam.id}>
                     <TableCell
-                      className={`${classes.whiteCell} ${classes.examCell}`}
+                      className={`${classes.whiteCell}`}
                       align="center"
-                      style={{ top: headerRef.current?.clientHeight }}
-                      width={100}
+                      style={{
+                        top: headerRef.current?.clientHeight,
+                      }}
+                      width={70}
                     >
                       <Typography>BODY</Typography>
                     </TableCell>
                     <TableCell
-                      className={`${classes.whiteCell} ${classes.examCell} ${classes.cellWithRightBorder}`}
+                      className={`${classes.whiteCell} ${classes.cellWithRightBorder}`}
                       align="center"
-                      style={{ top: headerRef.current?.clientHeight }}
-                      width={100}
+                      style={{
+                        top: headerRef.current?.clientHeight,
+                      }}
+                      width={70}
                     >
                       <Typography>PROCENTA</Typography>
                     </TableCell>
                   </React.Fragment>
                 ))}
-                <TableCell
-                  className={`${classes.whiteCell} ${classes.examCell} `}
-                />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -196,6 +232,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                   <TableRow key={student.id}>
                     <StickyTableCell
                       className={`body ${classes.cellWithRightBorder} ${backgroundColor}`}
+                      width={300}
                     >
                       <Box>
                         <Grid container>
@@ -222,21 +259,37 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                           <TableCell
                             align="center"
                             className={backgroundColor}
-                            width={100}
+                            width={70}
                           >
                             {points}
                           </TableCell>
                           <TableCell
                             align="center"
                             className={`${classes.cellWithRightBorder} ${backgroundColor}`}
-                            width={100}
+                            width={70}
                           >
                             IDK
                           </TableCell>
                         </>
                       );
                     })}
-                    <TableCell className={backgroundColor} />
+                    <TableCell className={`${backgroundColor}`} />
+                    <StickyTableCellRight
+                      className={`${backgroundColor} ${classes.cellWithLeftBorder}`}
+                      align="center"
+                    >
+                      <Grid container>
+                        <Grid item xs={4}>
+                          110
+                        </Grid>
+                        <Grid item xs={4}>
+                          90%
+                        </Grid>
+                        <Grid item xs={4}>
+                          1
+                        </Grid>
+                      </Grid>
+                    </StickyTableCellRight>
                   </TableRow>
                 );
               })}
