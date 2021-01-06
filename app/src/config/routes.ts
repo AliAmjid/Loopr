@@ -38,6 +38,9 @@ const routes = {
       points: '/teacherSubjects/subject/pointSystem',
     },
   },
+  studentSubjects: {
+    index: '/studentSubjects',
+  },
 };
 
 export default routes;
