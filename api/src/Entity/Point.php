@@ -123,4 +123,12 @@ class Point
     {
         return $this->pointSystem->getPointsOnlyWritten()->count() / 100 * $this->getBetterThan();
     }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
+    public function getConvertedToMark(): int
+    {
+
+    }
 }

@@ -1,0 +1,19 @@
+App\Entity\PercentToMarkConvert:
+    attributes:
+        denormalization_context:
+            groups: [ percentToMarkConvert:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        item_query:
+            security: "is_granted('ENTITY_ACCESS', object)"
+        update:
+            security: "is_granted('UPDATE_PERCENT_TO_MARK_CONVERT', object)"
