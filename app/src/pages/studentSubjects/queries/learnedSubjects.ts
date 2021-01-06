@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
   query StudentSubjectsLearnedSubjectsQuery {
-    learndSubjects {
+    learnedSubjects {
       edges {
         node {
           id

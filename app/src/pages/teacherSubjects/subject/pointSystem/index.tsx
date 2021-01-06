@@ -8,6 +8,8 @@ import { useSnackbar } from 'notistack';
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
 
+import PercentsToMarkDialogIndex from 'pages/teacherSubjects/subject/pointSystem/percentsToMarkDialog';
+
 import {
   TeacherSubejctsSubjectPointSystemCreateExamMutation,
   TeacherSubejctsSubjectPointSystemCreateExamMutationVariables,
@@ -166,14 +168,27 @@ const PointSystemIndex: React.FC = () => {
   }
 
   return (
-    <PointSystem
-      loading={subjectLoading || createExamLoading}
-      exams={exams}
-      students={students}
-      maxPoints={maxPoints}
-      subjectTitle={subjectTitle}
-      onExamCreate={examCreateHandler}
-    />
+    <>
+      <PercentsToMarkDialogIndex
+        open
+        percentsToMarkConvert={
+          subjectData?.subject?.percentsToMarkConvert || {
+            one: 0,
+            two: 0,
+            three: 0,
+            four: 0,
+          }
+        }
+      />
+      <PointSystem
+        loading={subjectLoading || createExamLoading}
+        exams={exams}
+        students={students}
+        maxPoints={maxPoints}
+        subjectTitle={subjectTitle}
+        onExamCreate={examCreateHandler}
+      />
+    </>
   );
 };
 

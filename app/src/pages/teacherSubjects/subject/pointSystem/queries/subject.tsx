@@ -52,6 +52,13 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
           }
         }
       }
+      percentsToMarkConvert {
+        id
+        one
+        two
+        three
+        four
+      }
     }
   }
 `;
