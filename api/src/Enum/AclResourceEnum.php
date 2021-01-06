@@ -24,7 +24,8 @@ class AclResourceEnum
         self::SUBJECT_TYPE_EDIT => '07ddfa12-82da-46c6-afbf-cf8043ebed55',
         self::GROUP_DELETE => 'fd6cc009-f1c3-43c5-a1ae-33ad12f2b907',
         self::SUBJECT_TEACHER => '961fca80-a758-4dff-873a-09d428323943',
-        self::USER_CAN_STUDY => 'd31f7b05-192e-4d5b-a40c-5036cdf30224'
+        self::USER_CAN_STUDY => 'd31f7b05-192e-4d5b-a40c-5036cdf30224',
+        self::SCHOOL_PERIOD_EDIT => 'f225b86c-0dc1-4f41-b6f2-314f3efbd591'
     ];
 
     const PROP_DEPENDENT_ON = [
@@ -78,7 +79,8 @@ class AclResourceEnum
             self::SUBJECT_TYPE_EDIT,
             self::SUBJECT_TYPE_DELETE,
             self::SUBJECT_TEACHER,
-            self::USER_CAN_STUDY
+            self::USER_CAN_STUDY,
+            self::SCHOOL_PERIOD_EDIT
         ]
     ];
 
@@ -108,5 +110,7 @@ class AclResourceEnum
     const SUBJECT_TYPE_SHOW_ALL = 'SUBJECT_TYPE_SHOW_ALL';
     const SUBJECT_TYPE_EDIT = 'SUBJECT_TYPE_EDIT';
     const SUBJECT_TYPE_DELETE = 'SUBJECT_TYPE_DELETE';
+
+    const SCHOOL_PERIOD_EDIT = 'SCHOOL_PERIOD_EDIT';
 
 }

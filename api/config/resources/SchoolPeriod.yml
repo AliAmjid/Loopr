@@ -14,10 +14,13 @@ App\Entity\SchoolPeriod:
             output: false
     graphql:
         create:
-            security: "is_granted('GROUP_EDIT')"
-            security_message: "r: GROUP_EDIT"
+            security: "is_granted('SCHOOL_PERIOD_EDIT')"
+            security_message: "r: SCHOOL_PERIOD_EDIT"
+        update:
+            security: "is_granted('SCHOOL_PERIOD_EDIT')"
+            security_message: "r: SCHOOL_PERIOD_EDIT"           
         delete:
-            security: "is_granted('GROUP_DELETE')"
+            security: "is_granted('SCHOOL_PERIOD_EDIT')"
         getCurrent:
             item_query: App\Controller\GetCurrentSchoolPeriodController
             args: [ ]

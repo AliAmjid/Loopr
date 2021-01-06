@@ -25,7 +25,7 @@ class PointSystem extends MarkSystem
      * @var Exam
      * @ORM\OneToOne(targetEntity="Exam", inversedBy="pointSystem")
      * @Groups({"read", "exposed", "exam:write"})
-     * @ORM\JoinColumn(nullable=false, name="exam_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=false, name="exam_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Exam $exam;
 
