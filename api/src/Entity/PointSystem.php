@@ -5,6 +5,7 @@ namespace App\Entity;
 
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -98,7 +99,7 @@ class PointSystem extends MarkSystem
      * @Groups({"exposed", "read"})
      * @return int[]
      */
-    public function getAnonymizedResults(): array
+    public function getAnonymizedResults(): iterable
     {
         return array_filter($this->points->map(function (Point $point) {
             if ($point->isExamWritten()) {
