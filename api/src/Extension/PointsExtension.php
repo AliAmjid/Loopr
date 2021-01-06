@@ -7,6 +7,7 @@ namespace App\Extension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\Point;
+use App\Enum\AclResourceEnum;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Security;
 
@@ -26,8 +27,10 @@ class PointsExtension implements ContextAwareQueryCollectionExtensionInterface
     ) {
         if ($resourceClass === Point::class) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf("%s.user = :current_user", $rootAlias))
-                ->setParameter('current_user', $this->security->getUser()->getId());
+            if (!$this->security->isGranted(AclResourceEnum::SUBJECT_TEACHER)) {
+                $queryBuilder->andWhere(sprintf("%s.user = :current_user", $rootAlias))
+                    ->setParameter('current_user', $this->security->getUser()->getId());
+            }
         }
     }
 
