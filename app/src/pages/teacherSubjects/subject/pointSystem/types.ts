@@ -28,6 +28,7 @@ export interface PointSystemProps {
   loading: boolean;
   exams: Exams;
   students: Students;
+  subjectTitle: string;
   maxPoints: number;
   onExamCreate: () => void;
 }

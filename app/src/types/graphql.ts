@@ -1556,6 +1556,12 @@ export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMuta
 // GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
 // ====================================================
 
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges_node {
   __typename: "User";
   id: string;
@@ -1575,6 +1581,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_use
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group {
   __typename: "Group";
+  section: string;
   users: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users | null;
 }
 
@@ -1597,6 +1604,8 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGrou
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup {
   __typename: "ClassGroup";
+  section: string;
+  year: number;
   users: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users | null;
 }
 
@@ -1648,6 +1657,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams {
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
   __typename: "Subject";
   id: string;
+  subjectType: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_subjectType | null;
   group: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group | null;
   classGroup: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup | null;
   exams: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams | null;

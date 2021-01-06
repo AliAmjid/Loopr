@@ -13,12 +13,19 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
   query TeacherSubjectsSubjectPointSystemSubjectQuery($id: ID!) {
     subject(id: $id) {
       id
+      subjectType {
+        id
+        name
+      }
       group {
+        section
         users {
           ...TeacherSubjectsSubjectPointSystemSubectUserFragment
         }
       }
       classGroup {
+        section
+        year
         users {
           ...TeacherSubjectsSubjectPointSystemSubectUserFragment
         }

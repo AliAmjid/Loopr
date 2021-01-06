@@ -155,12 +155,21 @@ const PointSystemIndex: React.FC = () => {
     return { ...student, totalPoints, totalPercents };
   });
 
+  let subjectTitle = `${subjectData?.subject?.subjectType?.name} - `;
+  if (subjectData?.subject?.group) {
+    subjectTitle += subjectData.subject.group.section;
+  }
+  if (subjectData?.subject?.classGroup) {
+    subjectTitle += `${subjectData.subject.classGroup.year} ${subjectData.subject.classGroup.section}`;
+  }
+
   return (
     <PointSystem
       loading={subjectLoading || createExamLoading}
       exams={exams}
       students={students}
       maxPoints={maxPoints}
+      subjectTitle={subjectTitle}
       onExamCreate={examCreateHandler}
     />
   );

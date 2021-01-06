@@ -3,6 +3,7 @@ import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Button,
+  fade,
   Grid,
   IconButton,
   makeStyles,
@@ -51,6 +52,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   header: {
     ...bottomShadow,
     zIndex: 103,
+  },
+  headCell: {
+    paddingTop: theme.spacing(2),
+  },
+  date: {
+    color: fade(theme.palette.common.black, 0.7),
+    fontSize: '0.8rem',
+  },
+  points: {
+    fontSize: '0.9rem',
+  },
+  testName: {
+    fontWeight: 500,
   },
 }));
 
@@ -121,8 +135,11 @@ const PointSystem: React.FC<PointSystemProps> = props => {
           p={2}
           position="relative"
           display="flex"
+          alignItems="center"
         >
-          <Typography variant="subtitle1">Subject</Typography>
+          <Box minWidth={300}>
+            <Typography variant="subtitle1">{props.subjectTitle}</Typography>
+          </Box>
           <Box display="flex" justifyContent="flex-end" width="100%">
             <Button color="primary" onClick={props.onExamCreate}>
               Add test
@@ -132,24 +149,24 @@ const PointSystem: React.FC<PointSystemProps> = props => {
         <TableContainer style={tableContainerStyle} ref={tableContainerRef}>
           <Table stickyHeader size="small">
             <TableHead>
-              <TableRow ref={headerRef} style={{ backgroundColor: 'white' }}>
+              <TableRow ref={headerRef}>
                 <StickyTableCell
                   rowSpan={2}
                   className={`${'head'} ${classes.studentCell} ${
                     classes.whiteCell
-                  } ${classes.cellWithRightBorder}`}
+                  } ${classes.cellWithRightBorder} ${classes.headCell}`}
                   width={200}
                   style={{ minWidth: 200 }}
                 >
                   <Grid container>
                     <Grid item xs={6}>
                       <Box display="flex" justifyContent="center">
-                        Jméno
+                        <Typography variant="body2">JMÉNO</Typography>
                       </Box>
                     </Grid>
                     <Grid item xs={6}>
                       <Box display="flex" justifyContent="center">
-                        Příjmení
+                        <Typography variant="body2">PŘÍJMENÍ</Typography>
                       </Box>
                     </Grid>
                   </Grid>
@@ -159,12 +176,18 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     key={exam.id}
                     colSpan={2}
                     align="center"
-                    className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder} `}
+                    className={`${classes.whiteCell} ${classes.cellWithoutBorder} ${classes.cellWithRightBorder} ${classes.headCell}`}
                     width={140}
                   >
-                    <Typography>{exam.name}</Typography>
-                    <Typography>{`${exam.maxPoints} points`}</Typography>
-                    <Typography>27. 7. 2020</Typography>
+                    <Typography className={classes.testName}>
+                      {exam.name}
+                    </Typography>
+                    <Typography className={classes.points}>
+                      {`${exam.maxPoints} points`}
+                    </Typography>
+                    <Typography className={classes.date}>
+                      27. 7. 2020
+                    </Typography>
                     <IconButton
                       color="primary"
                       onClick={() => {
@@ -176,24 +199,27 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     </IconButton>
                   </TableCell>
                 ))}
-                <TableCell rowSpan={2} className={`${classes.whiteCell}`} />
+                <TableCell
+                  rowSpan={2}
+                  className={`${classes.whiteCell} ${classes.headCell}`}
+                />
                 <StickyTableCellRight
                   rowSpan={2}
-                  className={`${classes.whiteCell} ${classes.cellWithLeftBorder}`}
+                  className={`${classes.whiteCell} ${classes.cellWithLeftBorder} ${classes.headCell}`}
                   align="center"
                   width={300}
                   style={{ minWidth: 300 }}
                 >
                   <Grid container>
                     <Grid item xs={4}>
-                      <div>Body</div>
-                      <div>{`(${props.maxPoints})`}</div>
+                      <Typography variant="body2">BODY</Typography>
+                      <Typography variant="body2">{`(${props.maxPoints})`}</Typography>
                     </Grid>
                     <Grid item xs={4}>
-                      Procenta
+                      <Typography variant="body2">PROCENTA</Typography>
                     </Grid>
                     <Grid item xs={4}>
-                      Známka
+                      <Typography variant="body2">ZNÁMKA</Typography>
                     </Grid>
                   </Grid>
                 </StickyTableCellRight>
@@ -209,7 +235,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                       }}
                       width={70}
                     >
-                      <Typography>BODY</Typography>
+                      <Typography variant="body2">BODY</Typography>
                     </TableCell>
                     <TableCell
                       className={`${classes.whiteCell} ${classes.cellWithRightBorder}`}
@@ -219,7 +245,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                       }}
                       width={70}
                     >
-                      <Typography>PROCENTA</Typography>
+                      <Typography variant="body2">PROCENTA</Typography>
                     </TableCell>
                   </React.Fragment>
                 ))}
