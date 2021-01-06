@@ -24,13 +24,21 @@ App\Entity\Subject:
             security: "is_granted('GROUP_EDIT')"
             denormalization_context:
                 groups: [ subject:write, subject:edit ]
+        setColor:
+            security: "is_granted('IS_SUBJECT_TEACHER', object)"
+            mutation: App\Controller\SimpleUpdateController
+            denormalization_context:
+                groups: [ write:teacher ]
 
         item_query:
             security: "is_granted('ENTITY_ACCESS', object)"
 
         collection_query:
             security_message: "collection query access denied"
-            security: "is_granted('GROUP_SHOW_ALL')"
-
+            security: "is_granted('SUBJECT_SHOW_ALL')"
+        learnt:
+            security_message: "r: USER_CAN_STUDY"
+            security: "is_granted('USER_CAN_STUDY')"
+            collection_query: App\Controller\SimpleCollectionController
         delete:
             security: "is_granted('SUBJECT_DELETE')"

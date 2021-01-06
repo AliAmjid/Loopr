@@ -2,10 +2,12 @@
 
 namespace App\Serializer\Normalizer;
 
+use App\Entity\Subject;
 use App\Entity\User;
 use App\Entity\UserPrivateData;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
+use App\Security\Voter\SubjectVoter;
 use App\Security\Voter\UserVoter;
 use Doctrine\Common\Proxy\Proxy;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,7 +18,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
-class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+class SecurityNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -64,6 +66,12 @@ class ResourceNormalizer implements ContextAwareNormalizerInterface, NormalizerA
 
             if ($this->security->isGranted(UserVoter::IS_SAME_USER, $object)) {
                 $context['groups'][] = 'read:owner';
+            }
+        }
+
+        if ($object instanceof Subject) {
+            if ($this->security->isGranted(SubjectVoter::IS_SUBJECT_TEACHER, $object)) {
+                $context['groups'][] = 'read:teacher';
             }
         }
 

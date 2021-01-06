@@ -8,8 +8,12 @@ use App\Entity\Attributes\Tid;
 use App\Enum\AclResourceEnum;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -19,12 +23,14 @@ class Subject
 {
     use Tid;
 
+    const EVALUATION_SYSTEM_POINTS = 'POINTS';
+
     /**
      * @var SubjectType
-     * @ORM\ManyToOne(targetEntity="SubjectType")
+     * @ORM\ManyToOne(targetEntity="SubjectType", inversedBy="subjects")
      * @Groups({"read", "exposed", "subject:write"})
      */
-    private $subjectType;
+    private SubjectType $subjectType;
 
     /**
      * @var Group|null
@@ -41,22 +47,57 @@ class Subject
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="taughtSubjects")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"read", "exposed", "subject:write"})
      */
     private User $teacher;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"read:teacher","write:teacher", "exposed"})
+     * @Assert\Regex(pattern="/#([a-fA-F0-9]{3}){1,2}\b/", message="color regex not valid")
+     */
+    private ?string $teacherCardColor = null;
+
+
+    /**
      * @Groups({"subject:write"})
      */
     private ?string $iGroupIri = null;
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", options={"default":"POINTS"})
+     * @Groups({"read", "exposed"})
+     */
+    private string $evaluationSystem = self::EVALUATION_SYSTEM_POINTS;
+
+
+    /**
+     * @var Collection|array
+     * @ORM\OneToMany(targetEntity="Exam", mappedBy="subject")
+     * @Groups({"read", "exposed"})
+     */
+    private Collection|array $exams;
+
+
+    /**
+     * @var PercentToMarkConvert|null
+     * @ORM\OneToOne(targetEntity="PercentToMarkConvert", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, name="percents_to_mark_convert_id")
+     * @Groups({"read", "exposed"})
+     */
+    private ?PercentToMarkConvert $percentsToMarkConvert;
 
     /**
      * subject constructor.
      * @param SubjectType $subjectType
      * @param User $teacher
      */
+    #[Pure]
     public function __construct(
         SubjectType $subjectType,
         User $teacher
@@ -74,18 +115,11 @@ class Subject
         return $this->group ?? $this->classGroup;
     }
 
-    /**
-     * @return SubjectType
-     */
     public function getSubjectType(): SubjectType
     {
         return $this->subjectType;
     }
 
-    /**
-     * @param SubjectType $subjectType
-     * @return Subject
-     */
     public function setSubjectType(
         SubjectType $subjectType
     ): Subject {
@@ -93,18 +127,11 @@ class Subject
         return $this;
     }
 
-    /**
-     * @return Group|null
-     */
     public function getGroup(): ?Group
     {
         return $this->group;
     }
 
-    /**
-     * @param ClassGroup|null $classGroup
-     * @return Subject
-     */
     public function setClassGroup(
         ?ClassGroup $classGroup
     ): Subject {
@@ -112,9 +139,6 @@ class Subject
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getTeacher(): User
     {
         return $this->teacher;
@@ -131,10 +155,6 @@ class Subject
         return $this->iGroupIri;
     }
 
-    /**
-     * @param User $teacher
-     * @return Subject
-     */
     public function setTeacher(
         User $teacher
     ): Subject {
@@ -160,6 +180,73 @@ class Subject
         return $this->classGroup;
     }
 
+    public function getTeacherCardColor(): ?string
+    {
+        return $this->teacherCardColor;
+    }
+
+    public function setTeacherCardColor(?string $teacherCardColor): Subject
+    {
+        $this->teacherCardColor = $teacherCardColor;
+        return $this;
+    }
+
+    public function getEvaluationSystem(): string
+    {
+        return $this->evaluationSystem;
+    }
+
+    public function setEvaluationSystem(string $evaluationSystem): Subject
+    {
+        $this->evaluationSystem = $evaluationSystem;
+        return $this;
+    }
+
+    /**
+     * @Groups({"read:teacher", "exposed"})
+     */
+    public function getPointSystemAverages(): float
+    {
+        $array = $this->getAnonymizedPointSystemResults();
+        return array_sum($array) / count($array);
+    }
+
+    /**
+     * @Groups({"read:teacher", "exposed"})
+     */
+    public function getAnonymizedPointSystemResults(): array
+    {
+        return $this->exams->map(fn(Exam $exam) => $exam->getPointSystem()->getAverage())->toArray();
+    }
+
+    public function getExams(): Collection|array
+    {
+        return $this->exams;
+    }
+
+    public function getPercentsToMarkConvert(): ?PercentToMarkConvert
+    {
+        return $this->percentsToMarkConvert;
+    }
+
+    public function setGroup(?Group $group): Subject
+    {
+        $this->group = $group;
+        return $this;
+    }
+
+    public function setExams(Collection|array $exams): Subject
+    {
+        $this->exams = $exams;
+        return $this;
+    }
+
+    public function setPercentsToMarkConvert(?PercentToMarkConvert $percentsToMarkConvert): Subject
+    {
+        $this->percentsToMarkConvert = $percentsToMarkConvert;
+        return $this;
+    }
+
 
     /**
      * @ORM\PrePersist()
@@ -176,6 +263,17 @@ class Subject
 
         if ($this->classGroup && $this->group) {
             throw new ClientError(ClientErrorType::EMPTY_GROUP_CLASS_GROUP);
+        }
+
+        if ($this->percentsToMarkConvert == null) {
+            $percentToMarkConvert = new PercentToMarkConvert();
+            $percentToMarkConvertTeacher = $this->teacher?->getPrivateData()?->getDefaultPercentToMark() ?? throw new \RuntimeException("No default percent to mark on user..");
+            $percentToMarkConvert->setOne($percentToMarkConvertTeacher->getOne());
+            $percentToMarkConvert->setTwo($percentToMarkConvertTeacher->getTwo());
+            $percentToMarkConvert->setThree($percentToMarkConvertTeacher->getThree());
+            $percentToMarkConvert->setFour($percentToMarkConvertTeacher->getFour());
+
+            $this->percentsToMarkConvert = $percentToMarkConvert;
         }
     }
 }

@@ -17,13 +17,14 @@ import {
 import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import { rightShadow } from 'components/shadows';
 
 import { SideListProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
+    ...rightShadow,
     height: '100%',
-    boxShadow: '5px 0px 4px -1px rgba(0,0,0,0.2)',
     padding: theme.spacing(2),
     paddingTop: 0,
     overflowY: 'scroll',
@@ -86,7 +87,7 @@ const SideList: React.FC<SideListProps> = props => {
 
   if (process.browser) {
     const toolbarHeight = 64;
-    style = { maxHeight: window.innerHeight - toolbarHeight * 2 };
+    style = { maxHeight: window.innerHeight - toolbarHeight * 3 };
   }
 
   return (

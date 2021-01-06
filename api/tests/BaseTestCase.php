@@ -14,6 +14,7 @@ use App\Tests\Helpers\TCreateEntityHelpers;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use PHPUnit\Framework\TestCase;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Response;

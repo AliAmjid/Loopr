@@ -54,10 +54,6 @@ services:
     build:
       context: api/
       target: api_platform_caddy
-    depends_on:
-      - app
-    links:
-      - app
     environment:
       PWA_UPSTREAM: app:3000
       SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
@@ -74,14 +70,14 @@ services:
       - ./api/public:/srv/api/public:ro
     ports:
       - target: 80
-        published: 8082
+        published: 4000
         protocol: tcp
       - target: 443
-        published: 443
+        published: 4001
         protocol: tcp
       # HTTP/3
       - target: 443
-        published: 446
+        published: 4001
         protocol: udp
 
   app:
@@ -93,6 +89,10 @@ services:
       - ./app:/app
       - /app/node_modules
       - /app/.next
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
 
   storybook:
     container_name: loopr_storbook

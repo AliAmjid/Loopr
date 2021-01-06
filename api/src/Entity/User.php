@@ -4,9 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Entity\Attributes\Tid;
-use App\Error\ClientError;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,7 +15,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use App\Filter\ResourceFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -25,9 +22,9 @@ use App\Filter\ResourceFilter;
  * @ORM\Table(name="`user`")
  * @ApiFilter(SearchFilter::class, properties={
  *     "id": "exact",
- *      "firstname": "ipartial",
- *      "lastname": "ipartial",
- *      "email": "ipartial",
+ *     "firstname": "ipartial",
+ *     "lastname": "ipartial",
+ *     "email": "ipartial",
  *     "role.resources.name": "exact",
  *     "role.resources.id": "exact",
  *     "classGroup.id": "exact",
@@ -38,7 +35,6 @@ use App\Filter\ResourceFilter;
 class User implements UserInterface
 {
     use Tid;
-
 
     /** @var string email of user
      * @Assert\Email()
@@ -100,7 +96,7 @@ class User implements UserInterface
     /**
      * @var Collection|Groups[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"read", "user:write", "exposed"})
+     * @Groups({"read:owner","read:USER_SHOW_ALL", "user:write", "exposed"})
      */
     private $groups;
 
@@ -108,7 +104,7 @@ class User implements UserInterface
      * @var UserPrivateData
      * @ORM\OneToOne(targetEntity="UserPrivateData", inversedBy="user", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"read:owner"})
+     * @Groups({"read:always","exposed", "read:USER_SHOW_ALL"})
      */
     private $privateData;
 
@@ -118,6 +114,19 @@ class User implements UserInterface
      * @Groups({"read:owner", "exposed"})
      */
     private Collection|array $notifications;
+
+    /**
+     * @var Collection|Subject[]
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="teacher")
+     * @Groups({"exposed", "read:owner", "read:USER_SHOW_ALL"})
+     */
+    private Collection|array $taughtSubjects;
+
+    /**
+     * @var Collection|array
+     * @ORM\OneToMany(targetEntity="WebPushSubscribe", mappedBy="user")
+     */
+    private Collection|array $wepPushSubscribes;
 
     #[Pure]
     public function __construct()
@@ -193,9 +202,6 @@ class User implements UserInterface
     {
     }
 
-    /**
-     * @return string
-     */
     public function getLastname(): string
     {
         return $this->lastname;
@@ -205,14 +211,6 @@ class User implements UserInterface
     {
         $this->lastname = $lastname;
         return $this;
-    }
-
-    /**
-     * @ApiProperty(deprecationReason="Replaced with firstname and lastname")
-     */
-    public function getName(): ?string
-    {
-        return $this->firstname . " " . $this->lastname;
     }
 
     public function setFirstname(string $firstname): self
@@ -231,18 +229,11 @@ class User implements UserInterface
         return $this->createdAt;
     }
 
-    /**
-     * @return ClassGroup|null
-     */
     public function getClassGroup(): ?ClassGroup
     {
         return $this->classGroup;
     }
 
-    /**
-     * @param ClassGroup|null $classGroup
-     * @return User
-     */
     public function setClassGroup(?ClassGroup $classGroup): User
     {
         $this->classGroup = $classGroup;
@@ -265,36 +256,22 @@ class User implements UserInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return UserPrivateData
-     */
     public function getPrivateData(): UserPrivateData
     {
         return $this->privateData;
     }
 
-    /**
-     * @param UserPrivateData $privateData
-     * @return User
-     */
     public function setPrivateData(UserPrivateData $privateData): User
     {
         $this->privateData = $privateData;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getRawPassword(): ?string
     {
         return $this->rawPassword;
     }
 
-    /**
-     * @param string $rawPassword
-     * @return User
-     */
     public function setRawPassword(?string $rawPassword): User
     {
         $this->rawPassword = $rawPassword;
@@ -307,5 +284,10 @@ class User implements UserInterface
     public function getNotifications(): Collection|array
     {
         return $this->notifications;
+    }
+
+    public function getTaughtSubjects(): Collection|array
+    {
+        return $this->taughtSubjects;
     }
 }

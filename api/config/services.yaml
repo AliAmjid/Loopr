@@ -37,6 +37,9 @@ services:
     App\DataPersister\SubjectDataPersister:
         decorates: 'api_platform.doctrine.orm.data_persister'
 
+    App\DataPersister\SchoolPeriodPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'
+
     App\Error\ErrorNormalizer:
         tags:
             - { name: 'serializer.normalizer', priority: 12 }
@@ -50,3 +53,11 @@ services:
     App\Service\MigrationFactoryDecorator:
         decorates: Doctrine\Migrations\Version\DbalMigrationFactory
         arguments: [ '@App\Service\MigrationFactoryDecorator.inner', '@service_container' ]
+
+    App\Events\Listener\PointSubscriber:
+        autowire: true
+        tags:
+            - { name: 'doctrine.orm.entity_listener', priority: 10, entity: 'App\Entity\Point', event: 'preUpdate' }
+            - { name: 'doctrine.orm.entity_listener', priority: 10, entity: 'App\Entity\Point', event: 'postUpdate' }
+            - { name: 'doctrine.orm.entity_listener', priority: 10, entity: 'App\Entity\Point', event: 'postPersist' }
+

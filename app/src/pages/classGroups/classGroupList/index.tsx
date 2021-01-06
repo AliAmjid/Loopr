@@ -102,7 +102,7 @@ const ClassGroupListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.delete.success'), { variant: 'error' });
+        enqueueSnackbar(t('snackbars.delete.error'), { variant: 'error' });
 
         return false;
       });

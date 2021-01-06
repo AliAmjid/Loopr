@@ -13,6 +13,7 @@ export interface User {
     name: string;
   };
 }
+
 export interface UsersProps {
   getUsers: (query: Query<User>) => Promise<ApolloQueryResult<UsersUsersQuery>>;
 }
