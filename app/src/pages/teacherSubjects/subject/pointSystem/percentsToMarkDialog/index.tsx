@@ -1,16 +1,66 @@
 import React from 'react';
 
+import { useMutation } from '@apollo/client';
+import { useSnackbar } from 'notistack';
+
+import {
+  TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert,
+  TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvertVariables,
+} from 'types/graphql';
+
+import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_UPDATE_PERCENT_TO_MARK_COVERT from '../mutation/updatePercentToMarkConvert';
+
 import PercentsToMarkDialog from './percentsToMarkDialog';
 import { PercentsToMarkDialogIndexProps, PercentsValues } from './types';
 
 const PercentsToMarkDialogIndex: React.FC<PercentsToMarkDialogIndexProps> = props => {
-  const submitHandler = (values: PercentsValues): void => {};
+  const [
+    updatePercentToMarkConvert,
+    { loading: updatePercentToMarkConvertLoading },
+  ] = useMutation<
+    TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert,
+    TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvertVariables
+  >(TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_UPDATE_PERCENT_TO_MARK_COVERT, {
+    refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
+    awaitRefetchQueries: true,
+  });
+  const { enqueueSnackbar } = useSnackbar();
+
+  const submitHandler = (values: PercentsValues): void => {
+    updatePercentToMarkConvert({
+      variables: {
+        input: {
+          id: props.percentsToMarkConvert.id,
+          one: +values.one,
+          two: +values.two,
+          three: +values.three,
+          four: +values.four,
+        },
+      },
+    })
+      .then(() => {
+        enqueueSnackbar('s', { variant: 'success' });
+        props.onClose();
+      })
+      .catch(() => {
+        enqueueSnackbar('e', { variant: 'error' });
+      });
+  };
+
+  const { percentsToMarkConvert } = props;
 
   return (
     <PercentsToMarkDialog
       open={props.open}
-      defaultValues={props.percentsToMarkConvert}
+      defaultValues={{
+        one: `${percentsToMarkConvert.one}`,
+        two: `${percentsToMarkConvert.two}`,
+        three: `${percentsToMarkConvert.three}`,
+        four: `${percentsToMarkConvert.four}`,
+      }}
+      loading={updatePercentToMarkConvertLoading}
       onSubmit={submitHandler}
+      onCancel={props.onClose}
     />
   );
 };

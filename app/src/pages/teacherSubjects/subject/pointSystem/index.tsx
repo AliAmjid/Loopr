@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
@@ -41,7 +41,7 @@ const PointSystemIndex: React.FC = () => {
     refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
     awaitRefetchQueries: true,
   });
-
+  const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const examCreateHandler = (): void => {
@@ -170,15 +170,17 @@ const PointSystemIndex: React.FC = () => {
   return (
     <>
       <PercentsToMarkDialogIndex
-        open
+        open={percentsToMarkOpen}
         percentsToMarkConvert={
           subjectData?.subject?.percentsToMarkConvert || {
+            id: '',
             one: 0,
             two: 0,
             three: 0,
             four: 0,
           }
         }
+        onClose={() => setPercentsToMarkOpen(false)}
       />
       <PointSystem
         loading={subjectLoading || createExamLoading}
@@ -187,6 +189,7 @@ const PointSystemIndex: React.FC = () => {
         maxPoints={maxPoints}
         subjectTitle={subjectTitle}
         onExamCreate={examCreateHandler}
+        onPercentsToMarkEdit={() => setPercentsToMarkOpen(true)}
       />
     </>
   );

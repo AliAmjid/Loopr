@@ -1158,6 +1158,82 @@ export interface SchollPeriodsSchollPeriodsQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: StudentSubjectsLearnedSubjectsQuery
+// ====================================================
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  id: string;
+  points: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  id: string;
+  maxPoints: number;
+  points: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node {
+  __typename: "Exam";
+  id: string;
+  pointSystem: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges {
+  __typename: "ExamEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams {
+  __typename: "ExamConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node {
+  __typename: "Subject";
+  id: string;
+  subjectType: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_subjectType | null;
+  evaluationSystem: string;
+  exams: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges {
+  __typename: "SubjectEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects {
+  __typename: "SubjectConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery {
+  learntSubjects: StudentSubjectsLearnedSubjectsQuery_learntSubjects | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsAddSubjectCreateSubjectMutataion
 // ====================================================
 
@@ -1607,6 +1683,33 @@ export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert
+// ====================================================
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert_percentToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert {
+  __typename: "updatePercentToMarkConvertPayload";
+  percentToMarkConvert: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert_percentToMarkConvert | null;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert {
+  updatePercentToMarkConvert: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert | null;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvertVariables {
+  input: updatePercentToMarkConvertInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
 // ====================================================
 
@@ -1708,6 +1811,15 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams {
   edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges | null)[] | null;
 }
 
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
   __typename: "Subject";
   id: string;
@@ -1715,6 +1827,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
   group: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group | null;
   classGroup: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup | null;
   exams: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams | null;
+  percentsToMarkConvert: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
@@ -2019,6 +2132,15 @@ export interface updateExamInput {
 export interface updateGroupInput {
   id: string;
   section?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updatePercentToMarkConvertInput {
+  id: string;
+  one?: number | null;
+  two?: number | null;
+  three?: number | null;
+  four?: number | null;
   clientMutationId?: string | null;
 }
 

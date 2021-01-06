@@ -31,4 +31,5 @@ export interface PointSystemProps {
   subjectTitle: string;
   maxPoints: number;
   onExamCreate: () => void;
+  onPercentsToMarkEdit: () => void;
 }

@@ -112,7 +112,7 @@ type Query {
         # Returns the elements in the list that come after the specified cursor.
         after: String
     ): SubjectConnection
-    learntSubjects(
+    learnedSubjects(
         # Returns the first n elements from the list.
         first: Int
 
