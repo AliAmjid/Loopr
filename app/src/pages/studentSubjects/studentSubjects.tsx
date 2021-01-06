@@ -1,6 +1,19 @@
 import React from 'react';
 
-import { Paper, Table, TableBody } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  Theme,
+  Typography,
+} from '@material-ui/core';
 
 import withPage from 'components/withPage';
 
@@ -10,11 +23,35 @@ import PointSystem from './pointSystem';
 const StudentSubjects: React.FC = () => {
   return (
     <Paper>
-      <Table size="small">
-        <TableBody>
-          <PointSystem />
-        </TableBody>
-      </Table>
+      <Box display="flex">
+        <Grid container spacing={2}>
+          <Grid item xs={3}>
+            <Card variant="outlined">
+              <PointSystem />
+            </Card>
+          </Grid>
+          <Grid item xs={3}>
+            <Card variant="outlined">
+              <PointSystem />
+            </Card>
+          </Grid>
+          <Grid item xs={3}>
+            <Card variant="outlined">
+              <PointSystem />
+            </Card>
+          </Grid>
+          <Grid item xs={3}>
+            <Card variant="outlined">
+              <PointSystem />
+            </Card>
+          </Grid>
+          <Grid item xs={3}>
+            <Card variant="outlined">
+              <PointSystem />
+            </Card>
+          </Grid>
+        </Grid>
+      </Box>
     </Paper>
   );
 };

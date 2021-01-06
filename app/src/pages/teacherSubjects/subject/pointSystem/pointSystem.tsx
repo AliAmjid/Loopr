@@ -220,6 +220,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     </Grid>
                     <Grid item xs={4}>
                       <Typography variant="body2">ZNÁMKA</Typography>
+                      <IconButton color="primary">
+                        <EditIcon />
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </StickyTableCellRight>
