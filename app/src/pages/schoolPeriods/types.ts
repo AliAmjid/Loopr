@@ -14,8 +14,9 @@ export interface GetSchoolPeriodsReturn {
 }
 
 export interface SchoolPeriodsProps {
+  loading: boolean;
   getSchoolPeriods: (
     query: Query<SchoolPeriod>,
   ) => Promise<GetSchoolPeriodsReturn>;
-  onDelete: (id: string) => void;
+  onDelete: (id: string) => Promise<boolean>;
 }

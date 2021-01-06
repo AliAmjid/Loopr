@@ -16,10 +16,12 @@ const SimpleDialog: React.FC<SimpleDialogProps> = props => {
   return (
     <Dialog open={props.open} onClose={props.onClose}>
       <OverlayLoadingContainer>
-        <OverlayLoading loading={props.loading || false} />
-        {props.title && <DialogTitle>{props.title}</DialogTitle>}
-        {props.content && <DialogContent>{props.content}</DialogContent>}
-        {props.actions && <DialogActions>{props.actions}</DialogActions>}
+        <form>
+          <OverlayLoading loading={props.loading || false} />
+          {props.title && <DialogTitle>{props.title}</DialogTitle>}
+          {props.content && <DialogContent>{props.content}</DialogContent>}
+          {props.actions && <DialogActions>{props.actions}</DialogActions>}
+        </form>
       </OverlayLoadingContainer>
     </Dialog>
   );

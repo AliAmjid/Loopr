@@ -7,6 +7,8 @@ import { Query, QueryResult } from 'material-table';
 import MaterialTable from 'lib/material-table';
 
 import { formatDateToDay } from 'components/formatDate';
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import SimpleDialog from 'components/SimpleDialog';
 
 import AddDialogIndex from './addDialog';
@@ -18,85 +20,91 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
 
   return (
     <Paper>
-      <AddDialogIndex open={add} onClose={() => setAdd(false)} />
-      <SimpleDialog
-        open={deleting !== undefined}
-        title="Sure?"
-        actions={[
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={props.loading} />
+        <AddDialogIndex open={add} onClose={() => setAdd(false)} />
+        <SimpleDialog
+          open={deleting !== undefined}
+          title="Sure?"
+          actions={[
+            <Button
+              key={0}
+              color="primary"
+              onClick={() => setDeleting(undefined)}
+            >
+              Cancel
+            </Button>,
+            <Button
+              key={1}
+              type="submit"
+              color="primary"
+              variant="contained"
+              onClick={e => {
+                e.preventDefault();
+                props
+                  .onDelete(`${deleting}`)
+                  .then(() => setDeleting(undefined));
+              }}
+            >
+              Delete
+            </Button>,
+          ]}
+        />
+        <MaterialTable
+          key={`${add} ${deleting}`}
+          uniqueName="pages/schoolPeriods"
+          title="schoolPeriods"
+          columns={[
+            {
+              title: 'From',
+              field: 'from',
+              render: (data: SchoolPeriod) => formatDateToDay(data.from),
+            },
+            {
+              title: 'to',
+              field: 'to',
+              render: (data: SchoolPeriod) => formatDateToDay(data.to),
+            },
+            { title: 'quarter', field: 'quarter' },
+            { title: 'schoolYear', field: 'schoolYear' },
+          ]}
+          data={(query: Query<SchoolPeriod>) =>
+            new Promise<QueryResult<SchoolPeriod>>((resolve, reject) => {
+              props
+                .getSchoolPeriods(query)
+                .then(res => {
+                  resolve({
+                    page: query.page,
+                    totalCount: res.totalCount,
+                    data: res.schoolPeriods,
+                  });
+                })
+                .catch(() => {
+                  reject();
+                });
+            })
+          }
+          actions={[
+            {
+              icon: DeleteIcon,
+              tooltip: 'delete',
+              onClick: (_, row) => {
+                row = row as SchoolPeriod;
+                setDeleting(row.id);
+              },
+            },
+          ]}
+        />
+        <Box pt={2} display="flex" justifyContent="flex-end">
           <Button
-            key={0}
-            color="primary"
-            onClick={() => setDeleting(undefined)}
-          >
-            Cancel
-          </Button>,
-          <Button
-            key={1}
             color="primary"
             variant="contained"
-            onClick={() => {
-              props.onDelete(`${deleting}`);
-              setDeleting(undefined);
-            }}
+            onClick={() => setAdd(true)}
           >
-            Delete
-          </Button>,
-        ]}
-      />
-      <MaterialTable
-        key={`${add}`}
-        uniqueName="pages/schoolPeriods"
-        title="schoolPeriods"
-        columns={[
-          {
-            title: 'From',
-            field: 'from',
-            render: (data: SchoolPeriod) => formatDateToDay(data.from),
-          },
-          {
-            title: 'to',
-            field: 'to',
-            render: (data: SchoolPeriod) => formatDateToDay(data.to),
-          },
-          { title: 'quarter', field: 'quarter' },
-          { title: 'schoolYear', field: 'schoolYear' },
-        ]}
-        data={(query: Query<SchoolPeriod>) =>
-          new Promise<QueryResult<SchoolPeriod>>((resolve, reject) => {
-            props
-              .getSchoolPeriods(query)
-              .then(res => {
-                resolve({
-                  page: query.page,
-                  totalCount: res.totalCount,
-                  data: res.schoolPeriods,
-                });
-              })
-              .catch(() => {
-                reject();
-              });
-          })
-        }
-        actions={[
-          {
-            icon: DeleteIcon,
-            tooltip: 'delete',
-            onClick: (_, row) => {
-              row = row as SchoolPeriod;
-              setDeleting(row.id);
-            },
-          },
-        ]}
-      />
-      <Box pt={2} display="flex" justifyContent="flex-end">
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => setAdd(true)}
-        >
-          Add
-        </Button>
-      </Box>
+            Add
+          </Button>
+        </Box>
+      </OverlayLoadingContainer>
     </Paper>
   );
 };

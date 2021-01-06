@@ -22,6 +22,7 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
     SchoolPeriodsCreateSchoolPeriodMutationVariables
   >(SCHOOL_PERIODS_CREATE_SCHOOL_PERIOD_MUTATION, {
     refetchQueries: ['SchollPeriodsSchollPeriodsQuery'],
+    awaitRefetchQueries: true,
   });
   const { enqueueSnackbar } = useSnackbar();
 

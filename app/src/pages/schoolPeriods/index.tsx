@@ -71,18 +71,23 @@ const SchoolPeriodsIndex: React.FC = () => {
       });
   };
 
-  const deleteHandler = (id: string): void => {
-    deleteSchoolPeriod({ variables: { input: { id } } })
+  const deleteHandler = (id: string): Promise<boolean> => {
+    return deleteSchoolPeriod({ variables: { input: { id } } })
       .then(() => {
         enqueueSnackbar('S', { variant: 'success' });
+
+        return true;
       })
       .catch(() => {
         enqueueSnackbar('E', { variant: 'error' });
+
+        return false;
       });
   };
 
   return (
     <SchoolPeriods
+      loading={deleteSchoolPeriodLoading}
       getSchoolPeriods={getSchoolPeriods}
       onDelete={deleteHandler}
     />
