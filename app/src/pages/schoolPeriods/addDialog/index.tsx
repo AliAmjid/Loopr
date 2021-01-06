@@ -3,15 +3,17 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import EditDialogShared from 'pages/schoolPeriods/editDialogShared';
+
 import {
   SchoolPeriodsCreateSchoolPeriodMutation,
   SchoolPeriodsCreateSchoolPeriodMutationVariables,
 } from 'types/graphql';
 
+import { SubmitValues } from '../editDialogShared/types';
 import SCHOOL_PERIODS_CREATE_SCHOOL_PERIOD_MUTATION from '../mutation/creteSchoolPeriod';
 
-import AddDialog from './addDialog';
-import { AddDialogIndexProps, SubmitValues } from './types';
+import { AddDialogIndexProps } from './types';
 
 const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
   const [
@@ -47,9 +49,11 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
   };
 
   return (
-    <AddDialog
+    <EditDialogShared
       open={props.open}
       loading={createSchoolPeriodLoading}
+      title="Add"
+      submitActionLabel="Add"
       onSubmit={submitHandler}
       onCancel={props.onClose}
     />

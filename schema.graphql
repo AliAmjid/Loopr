@@ -502,6 +502,7 @@ type UserPageInfo {
 }
 
 input ExamFilter_order {
+    writtenAt: String
     createdAt: String
 }
 
@@ -526,6 +527,7 @@ type Exam implements Node {
     schoolPeriod: SchoolPeriod
     subject: Subject
     pointSystem: PointSystem
+    writtenAt: String!
     _id: String!
 }
 
@@ -741,6 +743,9 @@ type Mutation {
     # Updates a Exam.
     updateExam(input: updateExamInput!): updateExamPayload
 
+    # Deletes a Exam.
+    deleteExam(input: deleteExamInput!): deleteExamPayload
+
     # Creates a User.
     createUser(input: createUserInput!): createUserPayload
 
@@ -801,6 +806,9 @@ type Mutation {
 
     # Creates a SchoolPeriod.
     createSchoolPeriod(input: createSchoolPeriodInput!): createSchoolPeriodPayload
+
+    # Updates a SchoolPeriod.
+    updateSchoolPeriod(input: updateSchoolPeriodInput!): updateSchoolPeriodPayload
 
     # Deletes a SchoolPeriod.
     deleteSchoolPeriod(input: deleteSchoolPeriodInput!): deleteSchoolPeriodPayload
@@ -1007,6 +1015,7 @@ type deleteSubjectTypePayload {
 input createExamInput {
     name: String!
     subject: String
+    writtenAt: String!
     clientMutationId: String
 }
 
@@ -1021,11 +1030,24 @@ input updateExamInput {
     id: ID!
     name: String
     subject: String
+    writtenAt: String
     clientMutationId: String
 }
 
 #
 type updateExamPayload {
+    exam: Exam
+    clientMutationId: String
+}
+
+#
+input deleteExamInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteExamPayload {
     exam: Exam
     clientMutationId: String
 }
@@ -1281,6 +1303,30 @@ input createSchoolPeriodInput {
 
 #
 type createSchoolPeriodPayload {
+    schoolPeriod: SchoolPeriod
+    clientMutationId: String
+}
+
+#
+input updateSchoolPeriodInput {
+    id: ID!
+
+    # quarter of year from 1 to 4
+    quarter: Int
+
+    # from when quarter is started
+    from: String
+
+    # when quarter ends
+    to: String
+
+    # 1st year of school (ex. 2020/21 so school year will be 2020)
+    schoolYear: Int
+    clientMutationId: String
+}
+
+#
+type updateSchoolPeriodPayload {
     schoolPeriod: SchoolPeriod
     clientMutationId: String
 }

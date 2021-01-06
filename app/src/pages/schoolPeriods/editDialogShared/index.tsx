@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -15,13 +15,22 @@ import dayjs from 'dayjs';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
-import { AddDialogProps } from './types';
+import { EditDialogSharedProps } from './types';
 
-const AddDialog: React.FC<AddDialogProps> = props => {
+const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
   const [from, setFrom] = useState(dayjs());
   const [to, setTo] = useState(dayjs().add(1, 'd'));
   const [quarter, setQuarter] = useState('1');
   const [year, setYear] = useState(`${dayjs().year()}`);
+
+  useEffect(() => {
+    if (props.defaultValues) {
+      setFrom(dayjs(props.defaultValues.from));
+      setTo(dayjs(props.defaultValues.to));
+      setQuarter(`${props.defaultValues.quarter}`);
+      setYear(`${props.defaultValues.schoolYear}`);
+    }
+  }, [props.defaultValues]);
 
   return (
     <Dialog open={props.open}>
@@ -29,7 +38,7 @@ const AddDialog: React.FC<AddDialogProps> = props => {
         <OverlayLoading loading={props.loading} />
 
         <form>
-          <DialogTitle>Add</DialogTitle>
+          <DialogTitle>{props.title}</DialogTitle>
           <DialogContent>
             <Box>
               <KeyboardDatePicker
@@ -90,7 +99,7 @@ const AddDialog: React.FC<AddDialogProps> = props => {
                 });
               }}
             >
-              Add
+              {props.submitActionLabel}
             </Button>
           </DialogActions>
         </form>
@@ -99,4 +108,4 @@ const AddDialog: React.FC<AddDialogProps> = props => {
   );
 };
 
-export default AddDialog;
+export default EditDialogShared;

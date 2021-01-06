@@ -1090,6 +1090,33 @@ export interface SchoolPeriodsDeleteSchoolPeriodMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SchoolPeriodsUpdateSchoolPeriodMutation
+// ====================================================
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod_schoolPeriod {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod {
+  __typename: "updateSchoolPeriodPayload";
+  schoolPeriod: SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod_schoolPeriod | null;
+}
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutation {
+  updateSchoolPeriod: SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod | null;
+}
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutationVariables {
+  input: updateSchoolPeriodInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: SchollPeriodsSchollPeriodsQuery
 // ====================================================
 
@@ -1856,6 +1883,7 @@ export interface createClassGroupInput {
 export interface createExamInput {
   name: string;
   subject?: string | null;
+  writtenAt: string;
   clientMutationId?: string | null;
 }
 
@@ -1952,12 +1980,22 @@ export interface updateExamInput {
   id: string;
   name?: string | null;
   subject?: string | null;
+  writtenAt?: string | null;
   clientMutationId?: string | null;
 }
 
 export interface updateGroupInput {
   id: string;
   section?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updateSchoolPeriodInput {
+  id: string;
+  quarter?: number | null;
+  from?: string | null;
+  to?: string | null;
+  schoolYear?: number | null;
   clientMutationId?: string | null;
 }
 
