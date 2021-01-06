@@ -139,4 +139,22 @@ class PercentToMarkConvert
         return $this;
     }
 
+
+    public function convert(float $percents): int
+    {
+        if ($percents >= $this->one) {
+            return 1;
+        }
+        if ($percents >= $this->two) {
+            return 2;
+        }
+        if ($percents >= $this->three) {
+            return 3;
+        }
+        if ($percents >= $this->four) {
+            return 4;
+        }
+        return 5;
+    }
+
 }

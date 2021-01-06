@@ -127,8 +127,16 @@ class Point
     /**
      * @Groups({"read", "exposed"})
      */
+    public function getPercents()
+    {
+        return $this->pointSystem->getMaxPoints() / 100 * $this->points;
+    }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
     public function getConvertedToMark(): int
     {
-
+        return $this->pointSystem->getExam()->getSubject()->getPercentsToMarkConvert()->convert($this->getPercents());
     }
 }
