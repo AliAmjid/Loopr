@@ -32,7 +32,7 @@ class LearntSubjectsExtension implements QueryCollectionExtensionInterface
 
     private function addWhere(QueryBuilder $qb, string $resourceClass, ?string $operationName)
     {
-        if ($resourceClass === Subject::class && $operationName === 'learnt') {
+        if ($resourceClass === Subject::class && $operationName === 'learned') {
             $rootAlias = $qb->getRootAliases()[0];
             $qb
                 ->leftJoin(sprintf('%s.group', $rootAlias), 'group')
