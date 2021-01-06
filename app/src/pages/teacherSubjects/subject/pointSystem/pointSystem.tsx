@@ -21,6 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import { getPercents } from 'components/percents';
 import { bottomShadow } from 'components/shadows';
 
 import Edit from './edit';
@@ -137,8 +138,8 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                   className={`${'head'} ${classes.studentCell} ${
                     classes.whiteCell
                   } ${classes.cellWithRightBorder}`}
-                  width={300}
-                  style={{ minWidth: 300 }}
+                  width={200}
+                  style={{ minWidth: 200 }}
                 >
                   <Grid container>
                     <Grid item xs={6}>
@@ -185,7 +186,8 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                 >
                   <Grid container>
                     <Grid item xs={4}>
-                      Body
+                      <div>Body</div>
+                      <div>{`(${props.maxPoints})`}</div>
                     </Grid>
                     <Grid item xs={4}>
                       Procenta
@@ -232,7 +234,6 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                   <TableRow key={student.id}>
                     <StickyTableCell
                       className={`body ${classes.cellWithRightBorder} ${backgroundColor}`}
-                      width={300}
                     >
                       <Box>
                         <Grid container>
@@ -252,7 +253,18 @@ const PointSystem: React.FC<PointSystemProps> = props => {
 
                     {student.exams.map(exam => {
                       let points = 'N';
-                      if (exam.examWritten) points = `${exam.points}`;
+                      let percents = 'N';
+                      if (exam.examWritten) {
+                        points = `${exam.points}`;
+                        if (exam.maxPoints === 0) {
+                          percents = '-';
+                        } else {
+                          percents = `${getPercents({
+                            max: exam.maxPoints,
+                            value: exam.points,
+                          })}%`;
+                        }
+                      }
 
                       return (
                         <>
@@ -268,7 +280,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                             className={`${classes.cellWithRightBorder} ${backgroundColor}`}
                             width={70}
                           >
-                            IDK
+                            {percents}
                           </TableCell>
                         </>
                       );
@@ -280,13 +292,13 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     >
                       <Grid container>
                         <Grid item xs={4}>
-                          110
+                          {student.totalPoints}
                         </Grid>
                         <Grid item xs={4}>
-                          90%
+                          {student.totalPercents}
                         </Grid>
                         <Grid item xs={4}>
-                          1
+                          {student.totalMark}
                         </Grid>
                       </Grid>
                     </StickyTableCellRight>

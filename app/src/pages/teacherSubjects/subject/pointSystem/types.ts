@@ -2,6 +2,7 @@ export interface StudentExam {
   id: string;
   points: number;
   examWritten: boolean;
+  maxPoints: number;
 }
 
 export interface Student {
@@ -9,6 +10,9 @@ export interface Student {
   firstname: string;
   lastname: string;
   exams: StudentExam[];
+  totalPoints: number;
+  totalPercents: string;
+  totalMark: number;
 }
 
 export interface Exam {
@@ -24,5 +28,6 @@ export interface PointSystemProps {
   loading: boolean;
   exams: Exams;
   students: Students;
+  maxPoints: number;
   onExamCreate: () => void;
 }

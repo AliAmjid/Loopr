@@ -7,17 +7,14 @@ import { useSnackbar } from 'notistack';
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
 
-import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_OR_UPDATE_POINT_SYSTEM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/createOrUpdatePointSystem';
-
 import {
   TeacherSubejctsSubjectPointSystemCreateExamMutation,
   TeacherSubejctsSubjectPointSystemCreateExamMutationVariables,
-  TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation,
-  TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables,
   TeacherSubjectsSubjectPointSystemSubjectQuery,
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
+import { getPercents } from 'components/percents';
 import withPage from 'components/withPage';
 
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutation/addExam';
@@ -68,7 +65,7 @@ const PointSystemIndex: React.FC = () => {
 
   const exams: Exams = [];
 
-  const students: Students = [];
+  let students: Students = [];
   // Set students basic info
   if (subjectData?.subject?.classGroup?.users?.edges) {
     for (const groupUser of subjectData.subject.classGroup.users.edges) {
@@ -78,6 +75,9 @@ const PointSystemIndex: React.FC = () => {
           firstname: groupUser.node.firstname,
           lastname: groupUser.node.lastname,
           exams: [],
+          totalPoints: 0,
+          totalPercents: '',
+          totalMark: 0,
         });
       }
     }
@@ -89,15 +89,21 @@ const PointSystemIndex: React.FC = () => {
           firstname: groupUser.node.firstname,
           lastname: groupUser.node.lastname,
           exams: [],
+          totalPoints: 0,
+          totalPercents: '',
+          totalMark: 0,
         });
       }
     }
   }
 
+  let maxPoints = 0;
+
   // Set exams and studentExams
   for (const exam of subjectData?.subject?.exams?.edges || []) {
     const examNode = exam?.node;
     if (examNode) {
+      maxPoints += examNode.pointSystem?.maxPoints || 0;
       exams.push({
         id: examNode.id,
         name: examNode.name,
@@ -124,16 +130,37 @@ const PointSystemIndex: React.FC = () => {
           id: examNode.id,
           points: studentExam?.points || 0,
           examWritten: studentExam?.examWritten || false,
+          maxPoints: examNode?.pointSystem?.maxPoints || 0,
         });
       });
     }
   }
+
+  // Set total values
+  students = students.map(student => {
+    let totalPoints = 0;
+    student.exams.forEach(exam => {
+      if (exam.examWritten) {
+        totalPoints += exam.points;
+      }
+    });
+
+    let totalPercents = '-';
+    if (maxPoints !== 0) {
+      totalPercents = `${Math.round(
+        getPercents({ max: maxPoints, value: totalPoints }),
+      )}%`;
+    }
+
+    return { ...student, totalPoints, totalPercents };
+  });
 
   return (
     <PointSystem
       loading={subjectLoading || createExamLoading}
       exams={exams}
       students={students}
+      maxPoints={maxPoints}
       onExamCreate={examCreateHandler}
     />
   );
