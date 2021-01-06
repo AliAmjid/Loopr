@@ -1580,6 +1580,33 @@ export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMuta
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeacherSubjectsSubjectPointsSystemDeleteExamMutation
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam_exam {
+  __typename: "Exam";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam {
+  __typename: "deleteExamPayload";
+  exam: TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam_exam | null;
+}
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutation {
+  deleteExam: TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam | null;
+}
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutationVariables {
+  input: deleteExamInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
 // ====================================================
 
@@ -1937,6 +1964,11 @@ export interface createUserInput {
 }
 
 export interface deleteClassGroupInput {
+  id: string;
+  clientMutationId?: string | null;
+}
+
+export interface deleteExamInput {
   id: string;
   clientMutationId?: string | null;
 }

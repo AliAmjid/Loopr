@@ -34,6 +34,7 @@ export interface EditProps {
   onCancel: () => void;
   onStudentExamChange: (values: StudentExamChangeValues) => void;
   onExamInfoEdit: () => void;
+  onDelete: () => void;
 }
 
 export interface ExamInfoDialogSubmitValues {

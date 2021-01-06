@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
@@ -47,6 +48,7 @@ const PointSystemIndex: React.FC = () => {
         input: {
           name: 'new test',
           subject: `${router.query.id}`,
+          writtenAt: dayjs().toISOString(),
         },
       },
     })

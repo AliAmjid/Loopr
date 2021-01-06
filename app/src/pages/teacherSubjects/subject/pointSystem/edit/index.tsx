@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
 import { useMutation } from '@apollo/client';
+import { Button, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
 import ExamInfoDialog from 'pages/teacherSubjects/subject/pointSystem/edit/examInfoDialog';
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_OR_UPDATE_POINT_SYSTEM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/createOrUpdatePointSystem';
+import TEACHER_SUBJECTS_SUBJECT_POINTS_SYSTEM_DELETE_EXAM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/deleteExam';
 
 import {
+  TeacherSubjectsSubjectPointsSystemDeleteExamMutation,
+  TeacherSubjectsSubjectPointsSystemDeleteExamMutationVariables,
   TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation,
   TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables,
 } from 'types/graphql';
 
 import { getPercents, getPoints } from 'components/percents';
+import SimpleDialog from 'components/SimpleDialog';
 
 import { Exam } from '../types';
 
@@ -31,6 +36,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     maxPoints: 0,
   });
   const [examInfoDialog, setExamInfoDialog] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState(false);
   const [
     createOrUpdatePointSystem,
     { loading: createOrUpdatePointSystemLoading },
@@ -44,6 +50,13 @@ const EditIndex: React.FC<EditIndexProps> = props => {
       awaitRefetchQueries: true,
     },
   );
+  const [deleteExam, { loading: deleteExamLoading }] = useMutation<
+    TeacherSubjectsSubjectPointsSystemDeleteExamMutation,
+    TeacherSubjectsSubjectPointsSystemDeleteExamMutationVariables
+  >(TEACHER_SUBJECTS_SUBJECT_POINTS_SYSTEM_DELETE_EXAM_MUTATION, {
+    refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
+    awaitRefetchQueries: true,
+  });
   const { enqueueSnackbar } = useSnackbar();
 
   const foundExam = props.exams.find(exam => exam.id === props.examId);
@@ -179,6 +192,18 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     }
   };
 
+  const deleteHandler = (): void => {
+    deleteExam({ variables: { input: { id: props.examId } } })
+      .then(() => {
+        enqueueSnackbar('S', { variant: 'success' });
+        setDeleteDialog(false);
+        props.onClose();
+      })
+      .catch(() => {
+        enqueueSnackbar('E', { variant: 'error' });
+      });
+  };
+
   return (
     <>
       <ExamInfoDialog
@@ -194,6 +219,29 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         }}
         onClose={() => setExamInfoDialog(false)}
       />
+      <SimpleDialog
+        open={deleteDialog}
+        loading={deleteExamLoading}
+        title="Delete???"
+        content={<Typography>Irreversable</Typography>}
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setDeleteDialog(false)}
+          >
+            Cancel
+          </Button>,
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={deleteHandler}
+          >
+            Delete
+          </Button>,
+        ]}
+      />
       <Edit
         open={props.open}
         exam={exam}
@@ -205,6 +253,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         onExamInfoEdit={() => {
           setExamInfoDialog(true);
         }}
+        onDelete={() => setDeleteDialog(true)}
       />
     </>
   );

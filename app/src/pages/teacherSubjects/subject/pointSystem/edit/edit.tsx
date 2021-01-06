@@ -15,6 +15,7 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 import OverlayLoading from 'components/OverlayLoading';
@@ -74,6 +75,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     transitionDuration: `${transitionDuration / 2}ms`,
     height: '100%',
   },
+  examName: {
+    whiteSpace: 'nowrap',
+  },
 }));
 
 const Edit: React.FC<EditProps> = props => {
@@ -130,14 +134,21 @@ const Edit: React.FC<EditProps> = props => {
                 className={classes.headerInfo}
               >
                 <Box>
-                  <Typography variant="h5">{props.exam.name}</Typography>
+                  <Typography variant="h5" className={classes.examName}>
+                    {props.exam.name}
+                  </Typography>
                   <Typography>{`${props.exam.maxPoints} bodů`}</Typography>
                   <Typography>27.12.2020</Typography>
                 </Box>
-                <Box pl={4}>
+                <Box pl={4} display="flex">
                   <IconButton color="primary" onClick={props.onExamInfoEdit}>
                     <EditIcon />
                   </IconButton>
+                  <Box pl={1}>
+                    <IconButton color="primary" onClick={props.onDelete}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
                 </Box>
               </Box>
               <Box
