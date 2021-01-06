@@ -24,7 +24,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
     'schoolPeriod.id' => 'exact',
     'schoolPeriod.schoolYear' => 'exact'
 ])]
-#[ApiFilter(filterClass: OrderFilter::class, properties: ['createdAt' => ['default_direction' => 'DESC']])]
+#[ApiFilter(filterClass: OrderFilter::class, properties: ['writtenAt' => ['default_direction' => 'DESC'], 'createdAt'])]
 
 class Exam
 {
@@ -62,6 +62,13 @@ class Exam
      * @Groups({"exposed", "read", "exam:write"})
      */
     private Subject $subject;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     * @Groups({"read", "exposed", "exam:write"})
+     */
+    private \DateTime $writtenAt;
 
     /**
      * @var PointSystem|null
@@ -174,6 +181,24 @@ class Exam
     public function setPointSystem(?PointSystem $pointSystem): Exam
     {
         $this->pointSystem = $pointSystem;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getWrittenAt(): \DateTime
+    {
+        return $this->writtenAt;
+    }
+
+    /**
+     * @param \DateTime $writtenAt
+     * @return Exam
+     */
+    public function setWrittenAt(\DateTime $writtenAt): Exam
+    {
+        $this->writtenAt = $writtenAt;
         return $this;
     }
 }

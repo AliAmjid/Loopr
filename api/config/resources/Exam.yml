@@ -22,3 +22,5 @@ App\Entity\Exam:
         written:
             collection_query: App\Controller\SimpleCollectionController
             security: "is_granted('USER_CAN_STUDY')"
+        delete:
+            security: "is_granted('CREATE_EXAM', object)"
