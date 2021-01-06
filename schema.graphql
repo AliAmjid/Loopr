@@ -33,7 +33,21 @@ type Query {
         after: String
     ): ClassGroupConnection
     classGroup(id: ID!): ClassGroup
-    userPrivateData(id: ID!): UserPrivateData
+    aclResources: [AclResource]
+    subjectType(id: ID!): SubjectType
+    subjectTypes(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectTypeConnection
     exam(id: ID!): Exam
     writtenExams(
         # Returns the first n elements from the list.
@@ -53,21 +67,6 @@ type Query {
         schoolPeriod_schoolYear_list: [Int]
         order: [ExamFilter_order]
     ): ExamConnection
-    subjectType(id: ID!): SubjectType
-    subjectTypes(
-        # Returns the first n elements from the list.
-        first: Int
-
-        # Returns the last n elements from the list.
-        last: Int
-
-        # Returns the elements in the list that come before the specified cursor.
-        before: String
-
-        # Returns the elements in the list that come after the specified cursor.
-        after: String
-    ): SubjectTypeConnection
-    getToken(email: String!, password: String!): Token
     meUser: User
     user(id: ID!): User
     users(
@@ -97,6 +96,7 @@ type Query {
         groups_id_list: [String]
         createdAt: [UserFilter_createdAt]
     ): UserConnection
+    userPrivateData(id: ID!): UserPrivateData
     subject(id: ID!): Subject
     subjects(
         # Returns the first n elements from the list.
@@ -124,9 +124,28 @@ type Query {
         # Returns the elements in the list that come after the specified cursor.
         after: String
     ): SubjectConnection
+    getToken(email: String!, password: String!): Token
     notification(id: ID!): Notification
     getCurrentSchoolPeriod: SchoolPeriod
-    aclResources: [AclResource]
+    schoolPeriods(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+        id: String
+        id_list: [String]
+        schoolYear: Int
+        schoolYear_list: [Int]
+        quarter: Int
+        quarter_list: [Int]
+    ): SchoolPeriodConnection
 }
 
 # A node, according to the Relay specification.
@@ -200,12 +219,52 @@ type SubjectEdge {
 #
 type Subject implements Node {
     id: ID!
-    subjectType: String!
+    subjectType: SubjectType
     group: Group
     classGroup: ClassGroup
     teacher: User!
     teacherCardColor: String
-    markSystem: String!
+    evaluationSystem: String!
+    pointSystemAverages: Float!
+    anonymizedPointSystemResults: Iterable!
+    exams(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+        schoolPeriod_id: String
+        schoolPeriod_id_list: [String]
+        schoolPeriod_schoolYear: Int
+        schoolPeriod_schoolYear_list: [Int]
+        order: [ExamFilter_order]
+    ): ExamConnection
+    _id: String!
+}
+
+#
+type SubjectType implements Node {
+    id: ID!
+    name: String!
+    subjects(
+        # Returns the first n elements from the list.
+        first: Int
+
+        # Returns the last n elements from the list.
+        last: Int
+
+        # Returns the elements in the list that come before the specified cursor.
+        before: String
+
+        # Returns the elements in the list that come after the specified cursor.
+        after: String
+    ): SubjectConnection
     _id: String!
 }
 
@@ -442,33 +501,22 @@ type UserPageInfo {
     hasPreviousPage: Boolean!
 }
 
-# Information about the current page.
-type SubjectPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
+input ExamFilter_order {
+    writtenAt: String
+    createdAt: String
 }
 
-# Connection for ClassGroup.
-type ClassGroupConnection {
-    edges: [ClassGroupEdge]
-    pageInfo: ClassGroupPageInfo!
+# Connection for Exam.
+type ExamConnection {
+    edges: [ExamEdge]
+    pageInfo: ExamPageInfo!
     totalCount: Int!
 }
 
-# Edge of ClassGroup.
-type ClassGroupEdge {
-    node: ClassGroup
+# Edge of Exam.
+type ExamEdge {
+    node: Exam
     cursor: String!
-}
-
-# Information about the current page.
-type ClassGroupPageInfo {
-    endCursor: String
-    startCursor: String
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
 }
 
 #
@@ -479,6 +527,7 @@ type Exam implements Node {
     schoolPeriod: SchoolPeriod
     subject: Subject
     pointSystem: PointSystem
+    writtenAt: String!
     _id: String!
 }
 
@@ -518,6 +567,8 @@ type PointSystem implements Node {
         after: String
     ): PointConnection
     exam: Exam!
+    anonymizedResults: Iterable!
+    average: Float!
     _id: String!
 }
 
@@ -541,6 +592,8 @@ type Point implements Node {
     pointSystem: PointSystem!
     points: Int!
     examWritten: Boolean!
+    betterThan: Int!
+    percentil: Float!
     _id: String!
 }
 
@@ -552,23 +605,6 @@ type PointPageInfo {
     hasPreviousPage: Boolean!
 }
 
-input ExamFilter_order {
-    createdAt: String
-}
-
-# Connection for Exam.
-type ExamConnection {
-    edges: [ExamEdge]
-    pageInfo: ExamPageInfo!
-    totalCount: Int!
-}
-
-# Edge of Exam.
-type ExamEdge {
-    node: Exam
-    cursor: String!
-}
-
 # Information about the current page.
 type ExamPageInfo {
     endCursor: String
@@ -577,24 +613,33 @@ type ExamPageInfo {
     hasPreviousPage: Boolean!
 }
 
-#
-type SubjectType implements Node {
-    id: ID!
-    name: String!
-    subjects(
-        # Returns the first n elements from the list.
-        first: Int
+# Information about the current page.
+type SubjectPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+}
 
-        # Returns the last n elements from the list.
-        last: Int
+# Connection for ClassGroup.
+type ClassGroupConnection {
+    edges: [ClassGroupEdge]
+    pageInfo: ClassGroupPageInfo!
+    totalCount: Int!
+}
 
-        # Returns the elements in the list that come before the specified cursor.
-        before: String
+# Edge of ClassGroup.
+type ClassGroupEdge {
+    node: ClassGroup
+    cursor: String!
+}
 
-        # Returns the elements in the list that come after the specified cursor.
-        after: String
-    ): SubjectConnection
-    _id: String!
+# Information about the current page.
+type ClassGroupPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
 }
 
 # Connection for SubjectType.
@@ -624,6 +669,27 @@ type Token implements Node {
     # Use token in header like this: 'Authorization: Bearer {token}'
     token: String!
     user: User!
+}
+
+# Connection for SchoolPeriod.
+type SchoolPeriodConnection {
+    edges: [SchoolPeriodEdge]
+    pageInfo: SchoolPeriodPageInfo!
+    totalCount: Int!
+}
+
+# Edge of SchoolPeriod.
+type SchoolPeriodEdge {
+    node: SchoolPeriod
+    cursor: String!
+}
+
+# Information about the current page.
+type SchoolPeriodPageInfo {
+    endCursor: String
+    startCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
 }
 
 type Mutation {
@@ -662,27 +728,6 @@ type Mutation {
     # Deletes a ClassGroup.
     deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
 
-    # Creates a WebPushSubscribe.
-    createWebPushSubscribe(
-        input: createWebPushSubscribeInput!
-    ): createWebPushSubscribePayload
-
-    # CreateOrUpdates a PointSystem.
-    createOrUpdatePointSystem(
-        input: createOrUpdatePointSystemInput!
-    ): createOrUpdatePointSystemPayload
-
-    # Updates a UserPrivateData.
-    updateUserPrivateData(
-        input: updateUserPrivateDataInput!
-    ): updateUserPrivateDataPayload
-
-    # Creates a Exam.
-    createExam(input: createExamInput!): createExamPayload
-
-    # Updates a Exam.
-    updateExam(input: updateExamInput!): updateExamPayload
-
     # Creates a SubjectType.
     createSubjectType(input: createSubjectTypeInput!): createSubjectTypePayload
 
@@ -691,6 +736,15 @@ type Mutation {
 
     # Deletes a SubjectType.
     deleteSubjectType(input: deleteSubjectTypeInput!): deleteSubjectTypePayload
+
+    # Creates a Exam.
+    createExam(input: createExamInput!): createExamPayload
+
+    # Updates a Exam.
+    updateExam(input: updateExamInput!): updateExamPayload
+
+    # Deletes a Exam.
+    deleteExam(input: deleteExamInput!): deleteExamPayload
 
     # Creates a User.
     createUser(input: createUserInput!): createUserPayload
@@ -703,6 +757,16 @@ type Mutation {
 
     # Updates a User.
     updateUser(input: updateUserInput!): updateUserPayload
+
+    # Creates a WebPushSubscribe.
+    createWebPushSubscribe(
+        input: createWebPushSubscribeInput!
+    ): createWebPushSubscribePayload
+
+    # Updates a UserPrivateData.
+    updateUserPrivateData(
+        input: updateUserPrivateDataInput!
+    ): updateUserPrivateDataPayload
 
     # Creates a Subject.
     createSubject(input: createSubjectInput!): createSubjectPayload
@@ -735,8 +799,16 @@ type Mutation {
     # Deletes a Point.
     deletePoint(input: deletePointInput!): deletePointPayload
 
+    # CreateOrUpdates a PointSystem.
+    createOrUpdatePointSystem(
+        input: createOrUpdatePointSystemInput!
+    ): createOrUpdatePointSystemPayload
+
     # Creates a SchoolPeriod.
     createSchoolPeriod(input: createSchoolPeriodInput!): createSchoolPeriodPayload
+
+    # Updates a SchoolPeriod.
+    updateSchoolPeriod(input: updateSchoolPeriodInput!): updateSchoolPeriodPayload
 
     # Deletes a SchoolPeriod.
     deleteSchoolPeriod(input: deleteSchoolPeriodInput!): deleteSchoolPeriodPayload
@@ -903,92 +975,6 @@ type deleteClassGroupPayload {
 }
 
 #
-input createWebPushSubscribeInput {
-    user: String
-    data: Iterable!
-    clientMutationId: String
-}
-
-#
-type createWebPushSubscribePayload {
-    webPushSubscribe: WebPushSubscribe
-    clientMutationId: String
-}
-
-#
-type WebPushSubscribe implements Node {
-    id: ID!
-    _id: String!
-}
-
-#
-input createOrUpdatePointSystemInput {
-    exam: ID!
-    maxPoints: Int!
-    points: [createPointInput!]
-    clientMutationId: String
-}
-
-#
-input createPointInput {
-    user: String!
-    points: Int!
-    examWritten: Boolean!
-    clientMutationId: String
-}
-
-#
-type createOrUpdatePointSystemPayload {
-    pointSystem: PointSystem
-    clientMutationId: String
-}
-
-#
-input updateUserPrivateDataInput {
-    id: ID!
-    tourHomepage: Boolean
-    tourClassGroup: Boolean
-    tourGroup: Boolean
-    tourCreateUsers: Boolean
-    darkMode: Boolean
-    newMarkNotificationEmail: Boolean
-    clientMutationId: String
-}
-
-#
-type updateUserPrivateDataPayload {
-    userPrivateData: UserPrivateData
-    clientMutationId: String
-}
-
-#
-input createExamInput {
-    name: String!
-    subject: String
-    clientMutationId: String
-}
-
-#
-type createExamPayload {
-    exam: Exam
-    clientMutationId: String
-}
-
-#
-input updateExamInput {
-    id: ID!
-    name: String
-    subject: String
-    clientMutationId: String
-}
-
-#
-type updateExamPayload {
-    exam: Exam
-    clientMutationId: String
-}
-
-#
 input createSubjectTypeInput {
     name: String!
     clientMutationId: String
@@ -1022,6 +1008,47 @@ input deleteSubjectTypeInput {
 #
 type deleteSubjectTypePayload {
     subjectType: SubjectType
+    clientMutationId: String
+}
+
+#
+input createExamInput {
+    name: String!
+    subject: String
+    writtenAt: String!
+    clientMutationId: String
+}
+
+#
+type createExamPayload {
+    exam: Exam
+    clientMutationId: String
+}
+
+#
+input updateExamInput {
+    id: ID!
+    name: String
+    subject: String
+    writtenAt: String
+    clientMutationId: String
+}
+
+#
+type updateExamPayload {
+    exam: Exam
+    clientMutationId: String
+}
+
+#
+input deleteExamInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type deleteExamPayload {
+    exam: Exam
     clientMutationId: String
 }
 
@@ -1089,8 +1116,45 @@ type updateUserPayload {
 }
 
 #
+input createWebPushSubscribeInput {
+    user: String
+    data: Iterable!
+    clientMutationId: String
+}
+
+#
+type createWebPushSubscribePayload {
+    webPushSubscribe: WebPushSubscribe
+    clientMutationId: String
+}
+
+#
+type WebPushSubscribe implements Node {
+    id: ID!
+    _id: String!
+}
+
+#
+input updateUserPrivateDataInput {
+    id: ID!
+    tourHomepage: Boolean
+    tourClassGroup: Boolean
+    tourGroup: Boolean
+    tourCreateUsers: Boolean
+    darkMode: Boolean
+    newMarkNotificationEmail: Boolean
+    clientMutationId: String
+}
+
+#
+type updateUserPrivateDataPayload {
+    userPrivateData: UserPrivateData
+    clientMutationId: String
+}
+
+#
 input createSubjectInput {
-    subjectType: String!
+    subjectType: String
     teacher: String!
     iGroupIri: String!
     clientMutationId: String
@@ -1167,6 +1231,14 @@ type markReadAllNotificationPayload {
 }
 
 #
+input createPointInput {
+    user: String!
+    points: Int!
+    examWritten: Boolean!
+    clientMutationId: String
+}
+
+#
 type createPointPayload {
     point: Point
     clientMutationId: String
@@ -1200,6 +1272,20 @@ type deletePointPayload {
 }
 
 #
+input createOrUpdatePointSystemInput {
+    exam: ID!
+    maxPoints: Int!
+    points: [createPointInput!]
+    clientMutationId: String
+}
+
+#
+type createOrUpdatePointSystemPayload {
+    pointSystem: PointSystem
+    clientMutationId: String
+}
+
+#
 input createSchoolPeriodInput {
     # quarter of year from 1 to 4
     quarter: Int!
@@ -1222,6 +1308,30 @@ type createSchoolPeriodPayload {
 }
 
 #
+input updateSchoolPeriodInput {
+    id: ID!
+
+    # quarter of year from 1 to 4
+    quarter: Int
+
+    # from when quarter is started
+    from: String
+
+    # when quarter ends
+    to: String
+
+    # 1st year of school (ex. 2020/21 so school year will be 2020)
+    schoolYear: Int
+    clientMutationId: String
+}
+
+#
+type updateSchoolPeriodPayload {
+    schoolPeriod: SchoolPeriod
+    clientMutationId: String
+}
+
+#
 input deleteSchoolPeriodInput {
     id: ID!
     clientMutationId: String
@@ -1232,5 +1342,3 @@ type deleteSchoolPeriodPayload {
     schoolPeriod: SchoolPeriod
     clientMutationId: String
 }
-
-query SubjectsSubjectTypeQuery($id: ID!, $subjectsFirst: Int, $subjectsLast: Int, $subjectsAfter: String, $subjectsBefore: String) {  subjectType(id: $id) {    id    subjects(first: $subjectsFirst, last: $subjectsLast, after: $subjectsAfter, before: $subjectsBefore) {      edges {        node {          id          group {            id            section            __typename          }          classGroup {            id            year            section            __typename          }          teacher {            id            firstname            lastname            __typename          }          __typename        }        cursor        __typename      }      totalCount      __typename    }    __typename  }}

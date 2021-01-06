@@ -29,10 +29,13 @@ const routes = {
     editSubject: '/subjects/editSubject',
     addSubject: '/subjects/addSubject',
   },
+  schoolPeriods: {
+    index: '/schoolPeriods',
+  },
   teacherSubjects: {
     index: '/teacherSubjects',
     subject: {
-      index: '/teacherSubjects/subject',
+      points: '/teacherSubjects/subject/pointSystem',
     },
   },
 };
