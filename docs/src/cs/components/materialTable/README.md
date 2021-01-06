@@ -4,18 +4,19 @@
 
 ## Globální akce
 Globální akce se vždy vztahují k celé tabulce.  
+Nachází se zde 3 akce - Exportovat, Sloupce, Seskupit
 ![](images/globalActions.jpg)
 
 ### Exportovat
-Tlačítko `Exporotvat` se nachází nejvíce vlevo a po kliknutí otevře menu, které váž vyzve k vybrání formátu uložení.  
+Tlačítko `Exportovat` se nachází nejvíce vlevo a po kliknutí otevře menu, které vás vyzve k vybrání formátu uložení.  
 ![](images/exportPopup.jpg)
 
 ### Sloupce
-Tlačítko `sloupce` slouží pro vybrání sloupců, které chete zobrazit v tabulce. PO kliknutí se zobrazí okno s výběrem.  
+Tlačítko `Sloupce` slouží pro vybrání sloupců, které chete zobrazit v tabulce. Po kliknutí se zobrazí okno s výběrem.  
 ![](images/columnsPopup.jpg)
 
-### Sloupce
-Tlačítko `seskupit` slouží k seskupení dat podle sloupce. Po kliknutí se vám zobrazí lišta nad tabulkou. 
+### Seskupit
+Tlačítko `Seskupit` slouží k seskupení dat podle sloupce. Po kliknutí se vám zobrazí lišta nad tabulkou. 
 Do této lišty přetáhněte název sloupce, podle kterého chcete data seskupit. Poté se data seskupí.  
 ![](images/group.jpg)  
 ![](images/grouped.jpg)
