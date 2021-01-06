@@ -259,10 +259,12 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         if (exam.maxPoints === 0) {
                           percents = '-';
                         } else {
-                          percents = `${getPercents({
-                            max: exam.maxPoints,
-                            value: exam.points,
-                          })}%`;
+                          percents = `${Math.round(
+                            getPercents({
+                              max: exam.maxPoints,
+                              value: exam.points,
+                            }),
+                          )}%`;
                         }
                       }
 
