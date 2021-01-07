@@ -153,7 +153,7 @@ const PointSystemIndex: React.FC = () => {
     let numberTotalPercents = 0;
     if (maxPoints !== 0) {
       numberTotalPercents = getPercents({ max: maxPoints, value: totalPoints });
-      totalPercents = `${Math.round(numberTotalPercents)}%`;
+      totalPercents = `${numberTotalPercents}%`;
     }
 
     let totalMark = 5;

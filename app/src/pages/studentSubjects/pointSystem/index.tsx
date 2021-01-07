@@ -22,6 +22,7 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
         value: exam.pointSystem?.points || 0,
         max: maxPoints,
       });
+
       percents = `${numberPercents}%`;
     }
 

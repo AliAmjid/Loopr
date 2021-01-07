@@ -142,12 +142,10 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           (+values.percents < 0 || +values.percents > 100);
 
         if (!Number.isNaN(+values.percents) && values.percents !== '') {
-          student.pointsValue = `${Math.round(
-            getPoints({
-              max: exam.maxPoints,
-              percents: +values.percents,
-            }),
-          )}`;
+          student.pointsValue = `${getPoints({
+            max: exam.maxPoints,
+            percents: +values.percents,
+          })}`;
         } else if (values.percents === 'n' || values.percents === 'N') {
           student.pointsValue = values.percents;
         } else {

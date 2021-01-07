@@ -29,10 +29,6 @@ const useStyles = makeStyles(() => ({
   headerActions: {
     width: '100%',
   },
-
-  examName: {
-    whiteSpace: 'nowrap',
-  },
 }));
 
 const Edit: React.FC<EditProps> = props => {
@@ -43,9 +39,7 @@ const Edit: React.FC<EditProps> = props => {
       <Box p={2} display="flex" alignItems="center" className={classes.header}>
         <Box display="flex" alignItems="center" className={classes.headerInfo}>
           <Box>
-            <Typography variant="h5" className={classes.examName}>
-              {props.exam.name}
-            </Typography>
+            <Typography variant="h5">{props.exam.name}</Typography>
             <Typography>{`${props.exam.maxPoints} bodů`}</Typography>
             <Typography>27.12.2020</Typography>
           </Box>

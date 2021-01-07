@@ -24,9 +24,6 @@ const useStyles = makeStyles(() => ({
   headerActions: {
     width: '100%',
   },
-  examName: {
-    whiteSpace: 'nowrap',
-  },
 }));
 const Detail: React.FC<DetailProps> = props => {
   const classes = useStyles();
@@ -48,9 +45,7 @@ const Detail: React.FC<DetailProps> = props => {
       <Box p={2} display="flex" alignItems="center" className={classes.header}>
         <Box className={classes.headerInfo}>
           <Typography>{subject?.subjectType}</Typography>
-          <Typography variant="h5" className={classes.examName}>
-            {exam?.name}
-          </Typography>
+          <Typography variant="h5"> {exam?.name}</Typography>
           <Typography>27.12.2020</Typography>
         </Box>
 
