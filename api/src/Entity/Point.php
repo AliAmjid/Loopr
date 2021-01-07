@@ -121,7 +121,11 @@ class Point
      */
     public function getPercentil(): float
     {
-        return $this->pointSystem->getPointsOnlyWritten()->count() / 100 * $this->getBetterThan();
+        if ($this->pointSystem->getPointsOnlyWritten()->count() === 0) {
+            return 100;
+        }
+        
+        return 100 / $this->pointSystem->getPointsOnlyWritten()->count() * $this->getBetterThan();
     }
 
     /**

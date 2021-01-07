@@ -115,6 +115,9 @@ class PointSystem extends MarkSystem
     public function getAverage(): float
     {
         $results = $this->getAnonymizedResults();
+        if (count($results) === 0) {
+            return 0;
+        }
         return array_sum($results) / count($results);
     }
 }
