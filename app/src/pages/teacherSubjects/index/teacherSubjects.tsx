@@ -54,20 +54,20 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const subjectTypes = new Map<string, Subject[]>();
 
   props.subjects.forEach(subject => {
-    const entry = subjectTypes.get(subject.subjectType.id);
-    if (entry) {
-      entry.push(subject);
-      subjectTypes.set(subject.subjectType.id, entry);
-    } else {
-      subjectTypes.set(subject.subjectType.id, [subject]);
+    if (subject.subjectType) {
+      const entry = subjectTypes.get(subject.subjectType.id);
+      if (entry) {
+        entry.push(subject);
+        subjectTypes.set(subject.subjectType.id, entry);
+      } else subjectTypes.set(subject.subjectType.id, [subject]);
     }
   });
 
   const mappedSubjects: JSX.Element[] = [];
   subjectTypes.forEach(subjectType => {
     mappedSubjects.push(
-      <Box key={subjectType[0].subjectType.id} pb={2}>
-        <Typography variant="h6">{subjectType[0].subjectType.name}</Typography>
+      <Box key={subjectType[0].subjectType?.id} pb={2}>
+        <Typography variant="h6">{subjectType[0].subjectType?.name}</Typography>
         <ThickDivider />
         <Box pt={2}> </Box>
         <Grid container spacing={2}>

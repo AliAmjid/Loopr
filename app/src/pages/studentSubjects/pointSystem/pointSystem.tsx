@@ -30,7 +30,11 @@ const PointSystem: React.FC<PointSystemProps> = props => {
         <Typography variant="body2">{exam.writtenAt}</Typography>
       </Box>
       <Box display="flex" justifyContent="center">
-        <IconButton color="primary">
+        <IconButton
+          color="primary"
+          onClick={() => props.onDetail(exam.id)}
+          disabled={!exam.examWritten}
+        >
           <VisibilityIcon />
         </IconButton>
       </Box>

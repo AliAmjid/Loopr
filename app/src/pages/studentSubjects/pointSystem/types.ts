@@ -4,6 +4,7 @@ export interface PointSystemIndexProps {
   subject: Subject;
   maxExams: number;
   color: string;
+  onDetail: (examId: string) => void;
 }
 
 export interface Exam {
@@ -13,6 +14,7 @@ export interface Exam {
   maxPoints: number;
   percents: string;
   writtenAt: string;
+  examWritten: boolean;
 }
 
 export type Exams = Exam[];
@@ -26,4 +28,5 @@ export interface PointSystemProps {
   totalPercents: string;
   totalMark: string;
   color: string;
+  onDetail: (examId: string) => void;
 }

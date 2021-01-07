@@ -32,6 +32,7 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
                         examWritten
                         id
                         points
+                        percentil
                       }
                     }
                   }

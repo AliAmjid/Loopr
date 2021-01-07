@@ -91,7 +91,7 @@ const SideDialog: React.FC<SideDialogProps> = props => {
     <div className={rootClass}>
       <div className={sideClass}>
         <OverlayLoadingContainer>
-          <OverlayLoading loading={props.loading} />
+          <OverlayLoading loading={props.loading || false} />
           <div
             className={classes.content}
             style={phase === 'visible' ? { opacity: 1 } : { opacity: 0 }}

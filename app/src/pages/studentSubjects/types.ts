@@ -1,3 +1,15 @@
+export interface Exam {
+  id: string;
+  name: string;
+  pointSystem?: {
+    points: number;
+    maxPoints: number;
+    examWritten: boolean;
+    average: number;
+    percentil: number;
+  };
+}
+
 export interface Subject {
   id: string;
   subjectType: string;
@@ -9,15 +21,7 @@ export interface Subject {
     three: number;
     four: number;
   };
-  exams: {
-    id: string;
-    name: string;
-    pointSystem?: {
-      points: number;
-      maxPoints: number;
-      examWritten: boolean;
-    };
-  }[];
+  exams: Exam[];
 }
 
 export type Subjects = Subject[];
@@ -26,3 +30,15 @@ export interface StudentSubjectsProps {
   subjects: Subjects;
   maxExams: number;
 }
+export interface DetailProps {
+  subject?: Subject;
+  examId?: string;
+  onCancel: () => void;
+}
+
+export type DetailState =
+  | {
+      subject?: Subject;
+      examId?: string;
+    }
+  | undefined;

@@ -35,6 +35,7 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
       maxPoints,
       percents,
       writtenAt: '10. 20. 2020',
+      examWritten: exam.pointSystem?.examWritten || false,
     };
   });
 
@@ -66,6 +67,7 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
       totalPercents={totalPercents}
       totalMark={totalMark}
       color={props.color}
+      onDetail={props.onDetail}
     />
   );
 };
