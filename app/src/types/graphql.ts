@@ -1811,6 +1811,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edg
   __typename: "Exam";
   id: string;
   name: string;
+  writtenAt: string;
   pointSystem: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem | null;
 }
 

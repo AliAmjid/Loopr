@@ -17,6 +17,9 @@ import Link from 'next/link';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import ThickDivider from 'components/thickDivider';
@@ -50,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const classes = useStyles();
   const [colorChange, setColorChange] = useState<string | undefined>(undefined);
+  const { t } = useTranslation(namespaces.pages.teacherSubjects.index);
 
   const subjectTypes = new Map<string, Subject[]>();
 
@@ -109,7 +113,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                         href={{ pathname: redirect, query: { id: subject.id } }}
                         passHref
                       >
-                        <Button color="primary">Evaluation</Button>
+                        <Button color="primary">{t('evaluation')}</Button>
                       </Link>
                     </CardActions>
                   </div>
@@ -126,7 +130,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
     return (
       <Paper>
         <Box display="flex" justifyContent="center">
-          <Typography>No subjects</Typography>
+          <Typography>{t('noSubjects')}</Typography>
         </Box>
       </Paper>
     );

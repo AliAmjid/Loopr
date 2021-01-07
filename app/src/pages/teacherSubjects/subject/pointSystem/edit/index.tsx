@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Button, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import ExamInfoDialog from 'pages/teacherSubjects/subject/pointSystem/edit/examInfoDialog';
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_OR_UPDATE_POINT_SYSTEM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/createOrUpdatePointSystem';
@@ -58,6 +61,9 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     awaitRefetchQueries: true,
   });
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   useEffect(() => {
     if (exam) {
@@ -160,7 +166,9 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     if (
       students.some(student => student.pointsError || student.percentsError)
     ) {
-      enqueueSnackbar('No no no', { variant: 'warning' });
+      enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.invalid'), {
+        variant: 'warning',
+      });
     } else {
       createOrUpdatePointSystem({
         variables: {
@@ -185,11 +193,15 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         },
       })
         .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
+          enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.success'), {
+            variant: 'success',
+          });
           props.onClose();
         })
         .catch(() => {
-          enqueueSnackbar('E', { variant: 'error' });
+          enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.error'), {
+            variant: 'error',
+          });
         });
     }
   };
@@ -197,12 +209,14 @@ const EditIndex: React.FC<EditIndexProps> = props => {
   const deleteHandler = (): void => {
     deleteExam({ variables: { input: { id: props.examId } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.deleteExam.success'), {
+          variant: 'success',
+        });
         setDeleteDialog(false);
         props.onClose();
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.deleteExam.error'), { variant: 'error' });
       });
   };
 
@@ -224,15 +238,15 @@ const EditIndex: React.FC<EditIndexProps> = props => {
       <SimpleDialog
         open={deleteDialog}
         loading={deleteExamLoading}
-        title="Delete???"
-        content={<Typography>Irreversable</Typography>}
+        title={t('deleteExam')}
+        content={<Typography>{t('irreversible')}</Typography>}
         actions={[
           <Button
             key={0}
             color="primary"
             onClick={() => setDeleteDialog(false)}
           >
-            Cancel
+            {t('common:actions.cancel')}
           </Button>,
           <Button
             key={1}
@@ -240,7 +254,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
             variant="contained"
             onClick={deleteHandler}
           >
-            Delete
+            {t('common:actions.delete')}
           </Button>,
         ]}
       />

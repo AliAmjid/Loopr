@@ -1,0 +1,27 @@
+{
+  "newTest": "Nový test",
+  "addTest": "Přidat test",
+  "deleteExam": "Doopravdy chcete odstranit test?",
+  "irreversible":"Tato operace je nevratná",
+  "examEdit": "Úprava testu",
+  "snackbars": {
+    "createExam": {
+      "success": "Nový test úspěšně přidán",
+      "noSchoolPeriod": "Není aktivní žádné známkovací období",
+      "error": "Nepovedlo se vytvořit nový test"
+    },
+    "updatePercentToMarkConvert": {
+      "success": "Převodní hodnoty úspěšně upraveny",
+      "error": "Nepovedlo se upravit předvodní hodnoty"
+    },
+    "createOrUpdatePointSystem": {
+      "success": "Test úspěšně upraven",
+      "invalid": "Zadané hodnoty nejsou validní",
+      "error": "Nepovedlo se upravit test"
+    },
+    "deleteExam": {
+      "success": "Test úspěšně odstraněn",
+      "error": "Nepovedlo se odstranit test"
+    }
+  }
+}

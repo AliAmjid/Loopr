@@ -7,6 +7,8 @@ import { useSnackbar } from 'notistack';
 
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import PercentsToMarkDialogIndex from 'pages/teacherSubjects/subject/pointSystem/percentsToMarkDialog';
 
@@ -17,6 +19,7 @@ import {
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
+import { formatDateToDay } from 'components/formatDate';
 import { getMark, getPercents } from 'components/percents';
 import withPage from 'components/withPage';
 
@@ -43,26 +46,35 @@ const PointSystemIndex: React.FC = () => {
   });
   const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   const examCreateHandler = (): void => {
     createExam({
       variables: {
         input: {
-          name: 'new test',
+          name: t('newTest'),
           subject: `${router.query.id}`,
           writtenAt: dayjs().toISOString(),
         },
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.createExam.success'), {
+          variant: 'success',
+        });
       })
       .catch(err => {
         const recognizedError = recognizeError(err);
         if (recognizedError === errors.looprError.noSchoolPeriodActive) {
-          enqueueSnackbar('NO SCHOOL PERIOD', { variant: 'warning' });
+          enqueueSnackbar(t('snackbars.createExam.noSchoolPeriod'), {
+            variant: 'warning',
+          });
         } else {
-          enqueueSnackbar('E', { variant: 'error' });
+          enqueueSnackbar(t('snackbars.createExam.error'), {
+            variant: 'error',
+          });
         }
       });
   };
@@ -112,6 +124,7 @@ const PointSystemIndex: React.FC = () => {
         id: examNode.id,
         name: examNode.name,
         maxPoints: examNode.pointSystem?.maxPoints || 0,
+        writtenAt: formatDateToDay(examNode.writtenAt),
       });
 
       const examPoints: {

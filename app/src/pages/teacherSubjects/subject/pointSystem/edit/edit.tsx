@@ -11,20 +11,26 @@ import {
   TableHead,
   TableRow,
   TextField,
+  Theme,
   Typography,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import { bottomShadow } from 'components/shadows';
 import SideDialog from 'components/SideDialog';
 
 import { EditProps } from './types';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   header: { ...bottomShadow },
   headerInfo: {
-    minWidth: 200,
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 300,
+    },
   },
   headerActions: {
     width: '100%',
@@ -33,6 +39,9 @@ const useStyles = makeStyles(() => ({
 
 const Edit: React.FC<EditProps> = props => {
   const classes = useStyles();
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   return (
     <SideDialog open={props.open} loading={props.loading}>
@@ -40,8 +49,12 @@ const Edit: React.FC<EditProps> = props => {
         <Box display="flex" alignItems="center" className={classes.headerInfo}>
           <Box>
             <Typography variant="h5">{props.exam.name}</Typography>
-            <Typography>{`${props.exam.maxPoints} bodů`}</Typography>
-            <Typography>27.12.2020</Typography>
+            <Typography>
+              {`${props.exam.maxPoints} ${t(
+                'common:gqlObjects.point.points.accusative',
+              )}`}
+            </Typography>
+            <Typography>{props.exam.writtenAt}</Typography>
           </Box>
           <Box pl={4} display="flex">
             <IconButton color="primary" onClick={props.onExamInfoEdit}>
@@ -60,7 +73,7 @@ const Edit: React.FC<EditProps> = props => {
           justifyContent="flex-end"
         >
           <Button color="primary" onClick={props.onCancel}>
-            Cancel
+            {t('common:actions.cancel')}
           </Button>
           <Box pl={2}>
             <Button
@@ -68,7 +81,7 @@ const Edit: React.FC<EditProps> = props => {
               variant="contained"
               onClick={props.onSubmit}
             >
-              Save and close
+              {t('common:actions.save')}
             </Button>
           </Box>
         </Box>
@@ -77,11 +90,19 @@ const Edit: React.FC<EditProps> = props => {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell width={250}>Name</TableCell>
-              <TableCell width={250}>Lastname</TableCell>
+              <TableCell width={250}>
+                {t('common:gqlObjects.user.firstname')}
+              </TableCell>
+              <TableCell width={250}>
+                {t('common:gqlObjects.user.lastname')}
+              </TableCell>
               <TableCell />
-              <TableCell width={100}>Points</TableCell>
-              <TableCell width={100}>Percents</TableCell>
+              <TableCell width={100}>
+                {t('common:gqlObjects.point.points.nominative')}
+              </TableCell>
+              <TableCell width={100}>
+                {t('common:gqlObjects.point.percents')}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

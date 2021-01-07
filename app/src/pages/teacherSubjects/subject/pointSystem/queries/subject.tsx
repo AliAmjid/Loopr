@@ -35,6 +35,7 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
           node {
             id
             name
+            writtenAt
             pointSystem {
               maxPoints
               points {

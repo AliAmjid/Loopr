@@ -19,6 +19,9 @@ import {
   withStyles,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -108,6 +111,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   const tableContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const [editing, setEditing] = useState<boolean>(false);
   const [editingId, setEditingId] = useState<string | undefined>(undefined);
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   useEffect(() => {
     if (process.browser) {
@@ -139,7 +145,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
             </Box>
             <Box display="flex" justifyContent="flex-end" width="100%">
               <Button color="primary" onClick={props.onExamCreate}>
-                Add test
+                {t('addTest')}
               </Button>
             </Box>
           </Box>
@@ -158,12 +164,16 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     <Grid container>
                       <Grid item xs={6}>
                         <Box display="flex" justifyContent="center">
-                          <Typography variant="body2">JMÉNO</Typography>
+                          <Typography variant="body2">
+                            {t('common:gqlObjects.user.firstname')}
+                          </Typography>
                         </Box>
                       </Grid>
                       <Grid item xs={6}>
                         <Box display="flex" justifyContent="center">
-                          <Typography variant="body2">PŘÍJMENÍ</Typography>
+                          <Typography variant="body2">
+                            {t('common:gqlObjects.user.lastname')}
+                          </Typography>
                         </Box>
                       </Grid>
                     </Grid>
@@ -180,10 +190,12 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         {exam.name}
                       </Typography>
                       <Typography className={classes.points}>
-                        {`${exam.maxPoints} points`}
+                        {`${exam.maxPoints} ${t(
+                          'common:gqlObjects.point.points.accusative',
+                        )}`}
                       </Typography>
                       <Typography className={classes.date}>
-                        27. 7. 2020
+                        {exam.writtenAt}
                       </Typography>
                       <IconButton
                         color="primary"
@@ -209,14 +221,20 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                   >
                     <Grid container>
                       <Grid item xs={4}>
-                        <Typography variant="body2">BODY</Typography>
+                        <Typography variant="body2">
+                          {t('common:gqlObjects.point.points.nominative')}
+                        </Typography>
                         <Typography variant="body2">{`(${props.maxPoints})`}</Typography>
                       </Grid>
                       <Grid item xs={4}>
-                        <Typography variant="body2">PROCENTA</Typography>
+                        <Typography variant="body2">
+                          {t('common:gqlObjects.point.percents')}
+                        </Typography>
                       </Grid>
                       <Grid item xs={4}>
-                        <Typography variant="body2">ZNÁMKA</Typography>
+                        <Typography variant="body2">
+                          {t('common:gqlObjects.point.mark')}
+                        </Typography>
                         <IconButton
                           color="primary"
                           onClick={props.onPercentsToMarkEdit}
@@ -238,7 +256,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         }}
                         width={70}
                       >
-                        <Typography variant="body2">BODY</Typography>
+                        <Typography variant="body2">
+                          {t('common:gqlObjects.point.points.nominative')}
+                        </Typography>
                       </TableCell>
                       <TableCell
                         className={`${classes.whiteCell} ${classes.cellWithRightBorder}`}
@@ -248,7 +268,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         }}
                         width={70}
                       >
-                        <Typography variant="body2">PROCENTA</Typography>
+                        <Typography variant="body2">
+                          {t('common:gqlObjects.point.percents')}
+                        </Typography>
                       </TableCell>
                     </React.Fragment>
                   ))}

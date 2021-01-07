@@ -19,6 +19,7 @@ export interface Exam {
   id: string;
   name: string;
   maxPoints: number;
+  writtenAt: string;
 }
 
 export type Students = Student[];

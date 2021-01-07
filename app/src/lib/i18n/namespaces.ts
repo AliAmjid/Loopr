@@ -24,6 +24,12 @@ export default {
       editSubject: 'P_subjects_editSubject',
       addSubject: 'P_subjects_addSubject',
     },
+    teacherSubjects: {
+      index: 'P_teacherSubjects_index',
+      subject: {
+        pointSystem: 'P_teacherSubjects_subject_pointSystem',
+      },
+    },
   },
   components: {
     withPage: 'C_withPage',

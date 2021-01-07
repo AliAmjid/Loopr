@@ -13,6 +13,20 @@
     },
     "subjectType": {
       "name": "Název"
+    },
+    "point": {
+      "points": {
+        "nominative": "Body",
+        "accusative": "Bodů"
+      },
+      "percents": "Procenta",
+      "mark": "Známka"
+    },
+    "exam": {
+      "name": "Název"
+    },
+    "pointSystem": {
+      "maxPoints": "Maximum bodů"
     }
   },
   "actions": {
@@ -21,6 +35,7 @@
     "delete": "Odstranit",
     "cancel": "Zrušit",
     "save": "Uložit",
-    "select": "Zvolit"
+    "select": "Zvolit",
+    "submit": "Potvrdit"
   }
 }

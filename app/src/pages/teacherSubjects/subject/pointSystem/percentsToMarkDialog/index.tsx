@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import {
   TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert,
@@ -25,6 +28,9 @@ const PercentsToMarkDialogIndex: React.FC<PercentsToMarkDialogIndexProps> = prop
     awaitRefetchQueries: true,
   });
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   const submitHandler = (values: PercentsValues): void => {
     updatePercentToMarkConvert({
@@ -39,11 +45,15 @@ const PercentsToMarkDialogIndex: React.FC<PercentsToMarkDialogIndexProps> = prop
       },
     })
       .then(() => {
-        enqueueSnackbar('s', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.updatePercentToMarkConvert.success'), {
+          variant: 'success',
+        });
         props.onClose();
       })
       .catch(() => {
-        enqueueSnackbar('e', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.updatePercentToMarkConvert.error'), {
+          variant: 'error',
+        });
       });
   };
 

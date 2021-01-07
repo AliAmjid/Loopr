@@ -9,12 +9,18 @@ import {
   DialogTitle,
   TextField,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import { ExamInfoDialogProps } from './types';
 
 const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
   const [name, setName] = useState('');
   const [maxPoints, setMaxPoints] = useState('');
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   useEffect(() => {
     setName(props.defaultValues.name);
@@ -24,17 +30,17 @@ const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
   return (
     <Dialog open={props.open}>
       <form>
-        <DialogTitle>Exam</DialogTitle>
+        <DialogTitle>{t('examEdit')}</DialogTitle>
         <DialogContent>
           <TextField
-            label="Name"
+            label={t('common:gqlObjects.exam.name')}
             fullWidth
             value={name}
             onChange={e => setName(e.target.value)}
           />
           <Box pt={2}>
             <TextField
-              label="Max points"
+              label={t('common:gqlObjects.pointSystem.maxPoints')}
               fullWidth
               type="number"
               value={maxPoints}
@@ -45,7 +51,7 @@ const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={props.onClose}>
-            close
+            {t('common:actions.cancel')}
           </Button>
           <Button
             color="primary"
@@ -57,7 +63,7 @@ const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
             disabled={+maxPoints < 0}
             type="submit"
           >
-            Submit
+            {t('common:actions.submit')}
           </Button>
         </DialogActions>
       </form>
