@@ -15,7 +15,7 @@ import usePageState from 'components/withPage/Page/state';
 import Navigation from './Navigation';
 import { DrawerProps } from './types';
 
-export const drawerWidth = 260;
+export const drawerWidth = 280;
 const useStyles = makeStyles({
   drawerPaper: {
     width: drawerWidth,
