@@ -17,7 +17,7 @@ import {
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
-import { getPercents } from 'components/percents';
+import { getMark, getPercents } from 'components/percents';
 import withPage from 'components/withPage';
 
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutation/addExam';
@@ -150,13 +150,20 @@ const PointSystemIndex: React.FC = () => {
     });
 
     let totalPercents = '-';
+    let numberTotalPercents = 0;
     if (maxPoints !== 0) {
-      totalPercents = `${Math.round(
-        getPercents({ max: maxPoints, value: totalPoints }),
-      )}%`;
+      numberTotalPercents = getPercents({ max: maxPoints, value: totalPoints });
+      totalPercents = `${Math.round(numberTotalPercents)}%`;
     }
 
-    return { ...student, totalPoints, totalPercents };
+    let totalMark = 5;
+    if (subjectData?.subject?.percentsToMarkConvert)
+      totalMark = getMark({
+        percents: numberTotalPercents,
+        percentsToMarkConvert: subjectData?.subject?.percentsToMarkConvert,
+      });
+
+    return { ...student, totalPoints, totalPercents, totalMark };
   });
 
   let subjectTitle = `${subjectData?.subject?.subjectType?.name} - `;

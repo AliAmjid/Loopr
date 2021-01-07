@@ -59,9 +59,8 @@ const EditIndex: React.FC<EditIndexProps> = props => {
   });
   const { enqueueSnackbar } = useSnackbar();
 
-  const foundExam = props.exams.find(exam => exam.id === props.examId);
   useEffect(() => {
-    if (foundExam) {
+    if (exam) {
       setStudents(
         props.students.map(student => {
           const studentExam = student.exams.find(
@@ -92,10 +91,13 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           };
         }),
       );
-
-      setExam(foundExam);
     }
-  }, [props.students, props.examId, props.exams]);
+  }, [props.students, props.exams, exam]);
+
+  const foundExam = props.exams.find(exam => exam.id === props.examId);
+  useEffect(() => {
+    if (foundExam) setExam(foundExam);
+  }, [props.exams, props.examId]);
 
   const studentExamChangeHandler = (values: StudentExamChangeValues): void => {
     const newStudents = [...students];
