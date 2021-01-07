@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -11,7 +12,14 @@ import {
 import PointSystemIndex from './pointSystem';
 import { StudentSubjectsProps } from './types';
 
+const useStyles = makeStyles({
+  root: {
+    padding: 0,
+  },
+});
+
 const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
+  const classes = useStyles();
   const theme = useTheme();
   const toolbarHeight = 64;
   const tableContainerStyle = {
@@ -19,7 +27,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
   };
 
   return (
-    <Paper>
+    <Paper className={classes.root}>
       <TableContainer style={tableContainerStyle}>
         <Table>
           <TableBody>
