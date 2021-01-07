@@ -17,10 +17,10 @@ import { PointSystemProps } from './types';
 
 const PointSystem: React.FC<PointSystemProps> = props => {
   const mappedExams = props.exams.map(exam => (
-    <TestCell key={exam.id}>
+    <TestCell key={exam.id} backgroundColor={props.color}>
       <Box display="flex" alignItems="center" justifyContent="center">
         <Typography variant="subtitle1">
-          {`${exam.points}/${exam.maxPoints} b`}
+          {`${exam.points}/${exam.maxPoints}b`}
         </Typography>
         <Box pl={2}>
           <Typography variant="body2">{exam.percents}</Typography>
@@ -38,13 +38,15 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   ));
 
   const additionalCells: JSX.Element[] = [];
-  for (let i = props.exams.length; i < props.maxExams; i++) {
-    additionalCells.push(<TableCell key={i} />);
+  for (let i = props.exams.length; i <= props.maxExams; i++) {
+    additionalCells.push(
+      <TableCell key={i} style={{ backgroundColor: props.color }} />,
+    );
   }
 
   return (
     <TableRow>
-      <SubjectCell>
+      <SubjectCell backgroundColor={props.color}>
         <Box display="flex" justifyContent="center">
           <Typography variant="subtitle1">{props.subjectType}</Typography>
         </Box>
@@ -62,7 +64,6 @@ const PointSystem: React.FC<PointSystemProps> = props => {
       </SubjectCell>
       {mappedExams}
       {additionalCells}
-      <TableCell />
     </TableRow>
   );
 };

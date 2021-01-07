@@ -65,6 +65,7 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
       totalMaxPoints={totalMaxPoints}
       totalPercents={totalPercents}
       totalMark={totalMark}
+      color={props.color}
     />
   );
 };

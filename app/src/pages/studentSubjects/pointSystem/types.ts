@@ -3,6 +3,7 @@ import { Subject } from '../types';
 export interface PointSystemIndexProps {
   subject: Subject;
   maxExams: number;
+  color: string;
 }
 
 export interface Exam {
@@ -24,4 +25,5 @@ export interface PointSystemProps {
   totalMaxPoints: number;
   totalPercents: string;
   totalMark: string;
+  color: string;
 }
