@@ -9,7 +9,8 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   stickyCell: {
-    width: 200,
+    width: theme.spacing(30),
+    borderRight: '1px solid #E0E0E0',
     [theme.breakpoints.up('md')]: {
       left: 0,
       position: 'sticky',

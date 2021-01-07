@@ -1,71 +1,72 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  makeStyles,
-  TableCell,
-  TableRow,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { getMark, getPercents } from 'components/percents';
 
-import SubjectCell from '../components/subjectCell';
+import PointSystem from './pointSystem';
+import { Exams, PointSystemIndexProps } from './types';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  cellWithoutBorder: {
-    border: 'none',
-  },
-  cellSmallPadding: {
-    padding: theme.spacing(0.2),
-  },
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-}));
+const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
+  let totalPoints = 0;
+  let totalMaxPoints = 0;
+  const exams: Exams = props.subject.exams.map(exam => {
+    const maxPoints = exam.pointSystem?.maxPoints || 0;
+    let points = 'N';
+    if (exam.pointSystem?.examWritten) {
+      points = `${exam.pointSystem.points}`;
+    }
 
-const PointSystem: React.FC = () => {
-  const classes = useStyles();
+    let percents = '-';
+    let numberPercents = 0;
+    if (maxPoints !== 0 && exam.pointSystem?.examWritten) {
+      numberPercents = getPercents({
+        value: exam.pointSystem?.points || 0,
+        max: maxPoints,
+      });
+      percents = `${numberPercents}%`;
+    }
+
+    totalPoints += exam.pointSystem?.points || 0;
+    totalMaxPoints += maxPoints;
+
+    return {
+      id: exam.id,
+      name: exam.name,
+      points,
+      maxPoints,
+      percents,
+      writtenAt: '10. 20. 2020',
+    };
+  });
+
+  let totalPercents = '-';
+  let numberTotalPercents = 0;
+  if (totalMaxPoints !== 0) {
+    numberTotalPercents = getPercents({
+      max: totalMaxPoints,
+      value: totalPoints,
+    });
+    totalPercents = `${numberTotalPercents}%`;
+  }
+
+  let totalMark = '-';
+  if (totalMaxPoints > 0 && props.subject.percentsToMarkConvert) {
+    totalMark = `${getMark({
+      percentsToMarkConvert: props.subject.percentsToMarkConvert,
+      percents: numberTotalPercents,
+    })}`;
+  }
 
   return (
-    <>
-      <Box display="flex" justifyContent="center">
-        <Typography variant="subtitle1">Anglický jazyk</Typography>
-      </Box>
-      <Grid container>
-        <Grid item xs={6}>
-          <Typography>Celkové body</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Box display="flex" justifyContent="flex-end">
-            <Typography>20/100</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography>Celkové procenta</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Box display="flex" justifyContent="flex-end">
-            <Typography>20%</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography>Známka</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Box display="flex" justifyContent="flex-end">
-            <Typography>5</Typography>
-          </Box>
-        </Grid>
-      </Grid>
-      <Box display="flex" justifyContent="center" pt={2}>
-        <Button color="primary">zobrazit</Button>
-      </Box>
-    </>
+    <PointSystem
+      subjectType={props.subject.subjectType}
+      exams={exams}
+      maxExams={props.maxExams}
+      totalPoints={totalPoints}
+      totalMaxPoints={totalMaxPoints}
+      totalPercents={totalPercents}
+      totalMark={totalMark}
+    />
   );
 };
 
-export default PointSystem;
+export default PointSystemIndex;

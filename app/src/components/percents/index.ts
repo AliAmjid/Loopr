@@ -21,6 +21,7 @@ export const getMark = ({
     four: number;
   };
 }): number => {
+  console.log(percents, percentsToMarkConvert.one);
   if (percents >= percentsToMarkConvert.one) return 1;
   if (percents >= percentsToMarkConvert.two) return 2;
   if (percents >= percentsToMarkConvert.three) return 3;

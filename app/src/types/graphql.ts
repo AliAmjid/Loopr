@@ -1161,71 +1161,83 @@ export interface SchollPeriodsSchollPeriodsQueryVariables {
 // GraphQL query operation: StudentSubjectsLearnedSubjectsQuery
 // ====================================================
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_subjectType {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_subjectType {
   __typename: "SubjectType";
   id: string;
   name: string;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node {
   __typename: "Point";
+  examWritten: boolean;
   id: string;
   points: number;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges {
   __typename: "PointEdge";
-  node: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node | null;
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points {
   __typename: "PointConnection";
-  edges: (StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points_edges | null)[] | null;
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges | null)[] | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem {
   __typename: "PointSystem";
   id: string;
   maxPoints: number;
-  points: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem_points | null;
+  points: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node {
   __typename: "Exam";
   id: string;
-  pointSystem: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node_pointSystem | null;
+  name: string;
+  pointSystem: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges {
   __typename: "ExamEdge";
-  node: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges_node | null;
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams {
   __typename: "ExamConnection";
-  edges: (StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams_edges | null)[] | null;
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges | null)[] | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node {
   __typename: "Subject";
   id: string;
-  subjectType: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_subjectType | null;
+  percentsToMarkConvert: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_percentsToMarkConvert;
+  subjectType: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_subjectType | null;
   evaluationSystem: string;
-  exams: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node_exams | null;
+  exams: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges {
   __typename: "SubjectEdge";
-  node: StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges_node | null;
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_learntSubjects {
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects {
   __typename: "SubjectConnection";
-  edges: (StudentSubjectsLearnedSubjectsQuery_learntSubjects_edges | null)[] | null;
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges | null)[] | null;
 }
 
 export interface StudentSubjectsLearnedSubjectsQuery {
-  learntSubjects: StudentSubjectsLearnedSubjectsQuery_learntSubjects | null;
+  learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
 }
 
 /* tslint:disable */

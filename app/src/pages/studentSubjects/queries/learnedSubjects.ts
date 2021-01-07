@@ -6,6 +6,13 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
       edges {
         node {
           id
+          percentsToMarkConvert {
+            id
+            one
+            two
+            three
+            four
+          }
           subjectType {
             id
             name
@@ -15,12 +22,14 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
             edges {
               node {
                 id
+                name
                 pointSystem {
                   id
                   maxPoints
                   points {
                     edges {
                       node {
+                        examWritten
                         id
                         points
                       }

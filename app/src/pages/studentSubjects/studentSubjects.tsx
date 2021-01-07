@@ -1,59 +1,28 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  makeStyles,
-  Paper,
-  Table,
-  TableBody,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Paper, Table, TableBody } from '@material-ui/core';
 
-import withPage from 'components/withPage';
+import PointSystemIndex from './pointSystem';
+import { StudentSubjectsProps } from './types';
 
-import studentSubjectPageOptions from './pageOptions';
-import PointSystem from './pointSystem';
-
-const StudentSubjects: React.FC = () => {
+const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
   return (
     <Paper>
-      <Box display="flex">
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <Card variant="outlined">
-              <PointSystem />
-            </Card>
-          </Grid>
-          <Grid item xs={3}>
-            <Card variant="outlined">
-              <PointSystem />
-            </Card>
-          </Grid>
-          <Grid item xs={3}>
-            <Card variant="outlined">
-              <PointSystem />
-            </Card>
-          </Grid>
-          <Grid item xs={3}>
-            <Card variant="outlined">
-              <PointSystem />
-            </Card>
-          </Grid>
-          <Grid item xs={3}>
-            <Card variant="outlined">
-              <PointSystem />
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
+      <Table>
+        <TableBody>
+          {props.subjects.map(subject => {
+            if (subject.evaluationSystem === 'POINTS') {
+              return (
+                <PointSystemIndex subject={subject} maxExams={props.maxExams} />
+              );
+            }
+
+            return <></>;
+          })}
+        </TableBody>
+      </Table>
     </Paper>
   );
 };
 
-export default withPage(studentSubjectPageOptions)(StudentSubjects);
+export default StudentSubjects;
