@@ -34,15 +34,17 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
     );
   };
 
-  const percents = getPercents({
+  const numberPercents = getPercents({
     value: props.exam.pointSystem?.points || 0,
     max: props.exam.pointSystem?.maxPoints || 0,
   });
+  let percents = '-';
+  if (props.exam.pointSystem?.maxPoints !== 0) percents = `${numberPercents}%`;
 
   let mark = 5;
   if (props.subject.percentsToMarkConvert) {
     mark = getMark({
-      percents,
+      percents: numberPercents,
       percentsToMarkConvert: props.subject.percentsToMarkConvert,
     });
   }
@@ -72,7 +74,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
           <CustomCard>
             <Typography>Procentuálně</Typography>
             <Box display="flex" justifyContent="flex-end">
-              <Typography variant="h6">{`${percents}%`}</Typography>
+              <Typography variant="h6">{percents}</Typography>
             </Box>
           </CustomCard>
         </Grid>
