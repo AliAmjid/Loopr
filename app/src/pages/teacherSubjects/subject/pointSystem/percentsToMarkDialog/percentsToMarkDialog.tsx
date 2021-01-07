@@ -55,7 +55,7 @@ const PercentsToMarkDialog: React.FC<PercentsToMarkDialogProps> = props => {
                 <Typography>Spodní hranice</Typography>
               </td>
               <td className={classes.cell}>
-                <Typography>Spodní hranice</Typography>
+                <Typography>Odpovídající známka</Typography>
               </td>
             </tr>
             <tr>

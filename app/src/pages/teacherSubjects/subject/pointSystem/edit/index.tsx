@@ -110,7 +110,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         student.pointsError =
           values.points !== 'N' &&
           values.points !== 'n' &&
-          Number.isNaN(+values.points);
+          !Number.isInteger(+values.points);
         student.pointsWarning =
           !Number.isNaN(+values.points) &&
           (+values.points < 0 ||
@@ -159,7 +159,9 @@ const EditIndex: React.FC<EditIndexProps> = props => {
   };
 
   const submitHandler = (): void => {
-    if (students.some(student => student.pointsError)) {
+    if (
+      students.some(student => student.pointsError || student.percentsError)
+    ) {
       enqueueSnackbar('No no no', { variant: 'warning' });
     } else {
       createOrUpdatePointSystem({
