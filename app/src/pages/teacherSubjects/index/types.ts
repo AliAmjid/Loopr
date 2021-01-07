@@ -21,7 +21,3 @@ export interface TeacherSubjectsProps {
   subjects: Subject[];
   loading: boolean;
 }
-
-export interface ColorChangeDialogProps {
-  open: boolean;
-}

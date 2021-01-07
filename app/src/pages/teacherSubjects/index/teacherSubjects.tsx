@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -17,12 +17,11 @@ import Link from 'next/link';
 
 import routes from 'config/routes';
 
-import ColorChangeDialog from 'pages/teacherSubjects/index/colorChangeDialog';
-
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import ThickDivider from 'components/thickDivider';
 
+import ColorChangeDialogIndex from './colorChangeDialog';
 import { Subject, TeacherSubjectsProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const classes = useStyles();
+  const [colorChange, setColorChange] = useState<string | undefined>(undefined);
 
   const subjectTypes = new Map<string, Subject[]>();
 
@@ -96,6 +96,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"
+                    onClick={() => setColorChange(subject.id)}
                   >
                     <EditIcon className={classes.editIcon} />
                   </Box>
@@ -133,7 +134,10 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
 
   return (
     <>
-      <ColorChangeDialog open={false} />
+      <ColorChangeDialogIndex
+        open={colorChange !== undefined}
+        onClose={() => setColorChange(undefined)}
+      />
       <Paper>
         <OverlayLoadingContainer>
           <OverlayLoading loading={props.loading} />
