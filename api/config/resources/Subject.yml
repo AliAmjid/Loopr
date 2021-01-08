@@ -24,7 +24,7 @@ App\Entity\Subject:
             security: "is_granted('GROUP_EDIT')"
             denormalization_context:
                 groups: [ subject:write, subject:edit ]
-        setColor:
+        updateColor:
             security: "is_granted('IS_SUBJECT_TEACHER', object)"
             mutation: App\Controller\SimpleUpdateController
             denormalization_context:
