@@ -117,14 +117,25 @@ class Point
     }
 
     /**
+     * @return int
+     * @Groups({"read", "exposed"})
+     */
+    public function getWorstThan(): int
+    {
+        return $this->getPointSystem()->getPointsOnlyWritten()->filter(function (Point $point) {
+            return ($point->getId() !== $this->id && $point->getPoints() > $point->points);
+        })->count();
+    }
+
+    /**
      * @Groups({"read", "exposed"})
      */
     public function getPercentil(): float
     {
-        if ($this->pointSystem->getPointsOnlyWritten()->count() === 0) {
+        if ($this->pointSystem->getPointsOnlyWritten()->count() < 1) {
             return 100;
         }
-        
+
         return 100 / $this->pointSystem->getPointsOnlyWritten()->count() * $this->getBetterThan();
     }
 
