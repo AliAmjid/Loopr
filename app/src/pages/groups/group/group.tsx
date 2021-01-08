@@ -59,32 +59,28 @@ const Group: React.FC<GroupProps> = props => {
           { title: t('common:gqlObjects.user.firstname'), field: 'firstname' },
           { title: t('common:gqlObjects.user.lastname'), field: 'lastname' },
         ]}
-        options={{ selection: editing }}
+        options={{ selection: editing, exportButton: true }}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         {editing ? (
           <>
             <Box pr={2}>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {
-                  setLoading(true);
-                  props.onSubmit().then(success => {
-                    setLoading(false);
-                    if (success) setEditing(false);
-                  });
-                }}
-              >
-                {t('common:actions.save')}
+              <Button color="primary" onClick={() => setEditing(false)}>
+                {t('common:actions.cancel')}
               </Button>
             </Box>
             <Button
-              color="secondary"
+              color="primary"
               variant="contained"
-              onClick={() => setEditing(false)}
+              onClick={() => {
+                setLoading(true);
+                props.onSubmit().then(success => {
+                  setLoading(false);
+                  if (success) setEditing(false);
+                });
+              }}
             >
-              {t('common:actions.cancel')}
+              {t('common:actions.save')}
             </Button>
           </>
         ) : (
