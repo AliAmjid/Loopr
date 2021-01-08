@@ -30,6 +30,9 @@ export default {
         pointSystem: 'P_teacherSubjects_subject_pointSystem',
       },
     },
+    studentSubjects: {
+      index: 'P_studentSubjects_index',
+    },
   },
   components: {
     withPage: 'C_withPage',

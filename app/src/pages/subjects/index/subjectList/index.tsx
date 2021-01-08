@@ -41,7 +41,6 @@ const SubjectListIndex: React.FC = () => {
     refetchQueries: ['SubjectsSubjectTypesQuery'],
     awaitRefetchQueries: true,
   });
-  // TODO typename
   const [updateSubjectType] = useMutation<
     SubjectsUpdateSubjectTypeMutation,
     SubjectsUpdateSubjectTypeMutationVariables

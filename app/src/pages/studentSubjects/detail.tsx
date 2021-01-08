@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { useTranslation } from 'react-i18next';
 
 import { bottomShadow } from 'components/shadows';
 import SideDialog from 'components/SideDialog';
@@ -29,6 +30,7 @@ const Detail: React.FC<DetailProps> = props => {
   const classes = useStyles();
   const [exam, setExam] = useState<Exam | undefined>(undefined);
   const [subject, setSubject] = useState<Subject | undefined>(undefined);
+  const { t } = useTranslation();
 
   const currentExam = props.subject?.exams.find(
     exam => exam.id === props.examId,
@@ -55,7 +57,7 @@ const Detail: React.FC<DetailProps> = props => {
           justifyContent="flex-end"
         >
           <Button color="primary" variant="contained" onClick={props.onCancel}>
-            Cancel
+            {t('actions.cancel')}
           </Button>
         </Box>
       </Box>

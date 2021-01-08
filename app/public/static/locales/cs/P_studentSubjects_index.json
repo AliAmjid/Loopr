@@ -1,0 +1,9 @@
+{
+  "pointSystem": {
+    "personalEvaluation": "Osobní hodnocení",
+    "comparisonToClass": "Porovnání v rámci třídy",
+    "studentsBetterThanYou": "Žáci lepší než ty",
+    "classPointAverage": "Třídní bodový průměr"
+  },
+  "a": "ahoj"
+}

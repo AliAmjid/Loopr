@@ -10,6 +10,9 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import { getMark, getPercents } from 'components/percents';
 import ThickDivider from 'components/thickDivider';
 
@@ -23,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
   const classes = useStyles();
+  const { t } = useTranslation(namespaces.pages.studentSubjects.index);
 
   const CustomCard: React.FC = props => {
     return (
@@ -51,13 +55,17 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
 
   return (
     <>
-      <Typography variant="h6">Osobní hodnocení</Typography>
+      <Typography variant="h6">
+        {t('pointSystem.personalEvaluation')}
+      </Typography>
       <ThickDivider />
       <Box pt={2} />
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <CustomCard>
-            <Typography>Bodové hodnocení</Typography>
+            <Typography>
+              {t('common:gqlObjects.point.points.nominative')}
+            </Typography>
             <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
               <Typography variant="h6">
                 {props.exam.pointSystem?.points}
@@ -72,7 +80,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
         </Grid>
         <Grid item xs={4}>
           <CustomCard>
-            <Typography>Procentuálně</Typography>
+            <Typography>{t('common:gqlObjects.point.percents')}</Typography>
             <Box display="flex" justifyContent="flex-end">
               <Typography variant="h6">{percents}</Typography>
             </Box>
@@ -80,7 +88,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
         </Grid>
         <Grid item xs={4}>
           <CustomCard>
-            <Typography>Známka</Typography>
+            <Typography>{t('common:gqlObjects.point.mark')}</Typography>
             <Box display="flex" justifyContent="flex-end">
               <Typography variant="h6">{`${mark}`}</Typography>
             </Box>
@@ -88,14 +96,16 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
         </Grid>
       </Grid>
       <Box pt={2}>
-        <Typography variant="h6">Porovnání v rámci třídy</Typography>
+        <Typography variant="h6">
+          {t('pointSystem.comparisonToClass')}
+        </Typography>
         <ThickDivider />
         <Box pt={2} />
 
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <CustomCard>
-              <Typography>Třídní bodový průměr</Typography>
+              <Typography>{t('pointSystem.classPointAverage')}</Typography>
               <Box
                 display="flex"
                 justifyContent="flex-end"
@@ -114,7 +124,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
           </Grid>
           <Grid item xs={4}>
             <CustomCard>
-              <Typography>Percentil</Typography>
+              <Typography>{t('common:gqlObjects.point.percentil')}</Typography>
               <Box display="flex" justifyContent="flex-end">
                 <Typography variant="h6">{`${props.exam.pointSystem?.percentil}`}</Typography>
               </Box>
@@ -122,7 +132,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
           </Grid>
           <Grid item xs={4}>
             <CustomCard>
-              <Typography>žáci lepší než ty</Typography>
+              <Typography>{t('pointSystem.studentsBetterThanYou')}</Typography>
               <Box display="flex" justifyContent="flex-end">
                 <Typography variant="h6">?</Typography>
               </Box>

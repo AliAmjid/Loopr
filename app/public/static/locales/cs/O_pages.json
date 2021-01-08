@@ -31,5 +31,8 @@
     "subject": {
       "index": "Vyučovaný předmět"
     }
+  },
+  "studentSubjects": {
+    "index": "Učené předměty"
   }
 }
