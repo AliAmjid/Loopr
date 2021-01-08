@@ -26,6 +26,7 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
                 pointSystem {
                   id
                   maxPoints
+                  average
                   points {
                     edges {
                       node {

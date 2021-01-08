@@ -1198,6 +1198,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_
   __typename: "PointSystem";
   id: string;
   maxPoints: number;
+  average: number;
   points: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points | null;
 }
 
