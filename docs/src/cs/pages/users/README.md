@@ -8,4 +8,5 @@ V tabulce můžete pracovat s těmito daty:
 *  Datum registrace
 *  Role
 
+Popis práce s tabulkou je popsán v níže uvedeném odkazu:
 > [Datová tabulka](cs/components/materialTable/)
