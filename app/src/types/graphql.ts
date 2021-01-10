@@ -1547,6 +1547,33 @@ export interface SubjectsSubjectTypesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeacherSubjectsUpdateColorSubjectMutation
+// ====================================================
+
+export interface TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject {
+  __typename: "updateColorSubjectPayload";
+  subject: TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject_subject | null;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutation {
+  updateColorSubject: TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject | null;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutationVariables {
+  input: updateColorSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: TeacherSubjectsSubjectsQuery
 // ====================================================
 
@@ -2133,6 +2160,12 @@ export interface updateClassGroupInput {
   year?: number | null;
   section?: string | null;
   teacher?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updateColorSubjectInput {
+  id: string;
+  teacherCardColor?: string | null;
   clientMutationId?: string | null;
 }
 

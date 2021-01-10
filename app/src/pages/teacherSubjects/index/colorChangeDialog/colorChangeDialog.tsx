@@ -18,6 +18,9 @@ import {
   Theme,
 } from '@material-ui/core';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+
 import { ColorChangeDialogProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -83,6 +86,12 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
           }`}
           style={{ backgroundColor: color, height }}
           onClick={() => setSelectedColor(color)}
+          role="button"
+          aria-label="change color"
+          tabIndex={Math.random()}
+          onKeyDown={e => {
+            if (e.key === 'Enter') setSelectedColor(color);
+          }}
         />
       </Grid>
     );
@@ -96,23 +105,31 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
 
   return (
     <Dialog open={props.open}>
-      <DialogTitle>Change color</DialogTitle>
-      <DialogContent>
-        <Box display="flex" flexWrap="wrap">
-          <Grid container spacing={2}>
-            {firsColor}
-            {mappedColors}
-          </Grid>
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button color="primary" onClick={props.onCancel}>
-          Cancel
-        </Button>
-        <Button color="primary" variant="contained">
-          Save
-        </Button>
-      </DialogActions>
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={props.loading} />
+
+        <DialogTitle>Change color</DialogTitle>
+        <DialogContent>
+          <Box display="flex" flexWrap="wrap">
+            <Grid container spacing={2}>
+              {firsColor}
+              {mappedColors}
+            </Grid>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={props.onCancel}>
+            Cancel
+          </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => props.onSubmit(`${selectedColor}`)}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </OverlayLoadingContainer>
     </Dialog>
   );
 };

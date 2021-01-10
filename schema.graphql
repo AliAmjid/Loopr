@@ -793,8 +793,8 @@ type Mutation {
     # Updates a Subject.
     updateSubject(input: updateSubjectInput!): updateSubjectPayload
 
-    # SetColors a Subject.
-    setColorSubject(input: setColorSubjectInput!): setColorSubjectPayload
+    # UpdateColors a Subject.
+    updateColorSubject(input: updateColorSubjectInput!): updateColorSubjectPayload
 
     # Deletes a Subject.
     deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
@@ -1217,14 +1217,14 @@ type updateSubjectPayload {
 }
 
 #
-input setColorSubjectInput {
+input updateColorSubjectInput {
     id: ID!
     teacherCardColor: String
     clientMutationId: String
 }
 
 #
-type setColorSubjectPayload {
+type updateColorSubjectPayload {
     subject: Subject
     clientMutationId: String
 }
