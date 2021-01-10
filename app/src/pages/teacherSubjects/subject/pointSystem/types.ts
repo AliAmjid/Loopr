@@ -1,4 +1,4 @@
-export interface StudentExam {
+interface StudentExam {
   id: string;
   points: number;
   examWritten: boolean;
@@ -25,7 +25,7 @@ export interface Exam {
 export type Students = Student[];
 export type Exams = Exam[];
 
-export interface SchoolPeriod {
+interface SchoolPeriod {
   id: string;
   quarter: number;
   schoolYear: number;

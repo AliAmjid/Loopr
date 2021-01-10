@@ -7,7 +7,7 @@ export interface PointSystemIndexProps {
   onDetail: (examId: string) => void;
 }
 
-export interface Exam {
+interface Exam {
   id: string;
   name: string;
   points: string;

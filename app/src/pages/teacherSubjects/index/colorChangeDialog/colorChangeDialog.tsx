@@ -1,10 +1,4 @@
-import React, {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import {
   Box,
@@ -53,30 +47,18 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
   }, []);
 
   const colors = [
-    '#FF5757',
-    '#FFAB57',
-    '#D3FF57',
-    '#57FF84',
-    '#57DCFF',
-    '#6C57FF',
-    '#FF2A2A',
-    '#FF6329',
-    '#FEF735',
-    '#2BFE39',
-    '#2A86FF',
-    '#FF57FF',
-    '#000000',
-    '#636363',
-    '#A4A4A4',
-    '#C4C4C4',
-    '#E6E6E6',
-    '#FFFFFF',
-    '#CFBE79',
-    '#774084',
-    '#094B8E',
+    '#181E19',
     '#7E522B',
-    '#009688',
-    '#FFC107',
+    '#FF0F0F',
+    '#FF6F00',
+    '#FFC917',
+    '#FFF600',
+    '#26BF45',
+    '#7DFE3E',
+    '#6C57FF',
+    '#0E76FF',
+    '#2AD3FF',
+    '#FF50FF',
   ];
 
   const getColorItem = (color: string, ref?: any): JSX.Element => {

@@ -1,6 +1,6 @@
 import { Exam, Exams, Student, Students } from '../types';
 
-export interface EditStudent extends Student {
+interface EditStudent extends Student {
   pointsValue: string;
   percentsValue: string;
   pointsError: boolean;

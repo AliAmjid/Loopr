@@ -6,7 +6,6 @@ import {
   CardContent,
   Grid,
   makeStyles,
-  Theme,
   Typography,
 } from '@material-ui/core';
 
@@ -18,7 +17,7 @@ import ThickDivider from 'components/thickDivider';
 
 import { PointSystemDetailProps } from './types';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   cardContent: {
     padding: `0px !important`,
   },

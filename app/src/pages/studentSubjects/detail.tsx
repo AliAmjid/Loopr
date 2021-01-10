@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-  Box,
-  Button,
-  IconButton,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
 
@@ -48,7 +40,7 @@ const Detail: React.FC<DetailProps> = props => {
       <Box p={2} display="flex" alignItems="center" className={classes.header}>
         <Box className={classes.headerInfo}>
           <Typography>{subject?.subjectType}</Typography>
-          <Typography variant="h5"> {exam?.name}</Typography>
+          <Typography variant="h5">{exam?.name}</Typography>
           <Typography>27.12.2020</Typography>
         </Box>
 

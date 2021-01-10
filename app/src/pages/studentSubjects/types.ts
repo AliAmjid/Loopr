@@ -26,7 +26,7 @@ export interface Subject {
 
 export type Subjects = Subject[];
 
-export interface SchoolPeriod {
+interface SchoolPeriod {
   id: string;
   quarter: number;
   schoolYear: number;
