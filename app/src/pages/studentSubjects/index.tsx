@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useQuery } from '@apollo/client';
 
-import { StudentSubjectsLearnedSubjectsQuery } from 'types/graphql';
+import {
+  StudentSubjectsLearnedSubjectsQuery,
+  StudentSubjectsLearnedSubjectsQueryVariables,
+} from 'types/graphql';
 
 import withPage from 'components/withPage';
 
 import STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY from './queries/learnedSubjects';
 import studentSubjectPageOptions from './pageOptions';
 import StudentSubjects from './studentSubjects';
-import { Subject, Subjects } from './types';
+import { SchoolPeriods, Subject, Subjects } from './types';
 
 const StudentSubjectIndex: React.FC = () => {
+  const [selectedSchoolPeriods, setSelectedSchoolPeriods] = useState<string[]>(
+    [],
+  );
   const { data: learnedSubjectsData } = useQuery<
-    StudentSubjectsLearnedSubjectsQuery
-  >(STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY);
+    StudentSubjectsLearnedSubjectsQuery,
+    StudentSubjectsLearnedSubjectsQueryVariables
+  >(STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY, {
+    variables: {
+      schoolPeriods:
+        selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
+    },
+  });
 
   const subjects: Subjects = [];
   let maxExams = 0;
@@ -63,7 +75,24 @@ const StudentSubjectIndex: React.FC = () => {
     }
   });
 
-  return <StudentSubjects subjects={subjects} maxExams={maxExams} />;
+  const schoolPeriods: SchoolPeriods = [];
+  learnedSubjectsData?.schoolPeriods?.edges?.forEach(schoolPeriodEdge => {
+    if (schoolPeriodEdge?.node) {
+      schoolPeriods.push({ ...schoolPeriodEdge?.node });
+    }
+  });
+
+  return (
+    <StudentSubjects
+      subjects={subjects}
+      maxExams={maxExams}
+      schoolPeriods={schoolPeriods}
+      selectedSchoolPeriods={selectedSchoolPeriods}
+      onSchoolPeriodsChange={schoolPeriods => {
+        setSelectedSchoolPeriods(schoolPeriods);
+      }}
+    />
+  );
 };
 
 export default withPage(studentSubjectPageOptions)(StudentSubjectIndex);

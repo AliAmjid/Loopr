@@ -1238,8 +1238,30 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects {
   edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges | null)[] | null;
 }
 
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  schoolYear: number;
+  quarter: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
+}
+
 export interface StudentSubjectsLearnedSubjectsQuery {
   learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
+  schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQueryVariables {
+  schoolPeriods?: string[] | null;
 }
 
 /* tslint:disable */
@@ -1872,12 +1894,31 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
   percentsToMarkConvert: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert;
 }
 
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  schoolYear: number;
+  quarter: number;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges | null)[] | null;
+}
+
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
   subject: TeacherSubjectsSubjectPointSystemSubjectQuery_subject | null;
+  schoolPeriods: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods | null;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
   id: string;
+  schoolPeriods?: string[] | null;
 }
 
 /* tslint:disable */

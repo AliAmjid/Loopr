@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
-  query StudentSubjectsLearnedSubjectsQuery {
+  query StudentSubjectsLearnedSubjectsQuery($schoolPeriods: [String!]) {
     learnedSubjects {
       edges {
         node {
@@ -18,7 +18,7 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
             name
           }
           evaluationSystem
-          exams {
+          exams(schoolPeriod_id_list: $schoolPeriods) {
             edges {
               node {
                 id
@@ -41,6 +41,15 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
               }
             }
           }
+        }
+      }
+    }
+    schoolPeriods {
+      edges {
+        node {
+          id
+          schoolYear
+          quarter
         }
       }
     }

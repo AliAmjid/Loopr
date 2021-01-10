@@ -42,6 +42,10 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
     undefined,
   );
 
+  useEffect(() => {
+    setSelectedColor(props.defaultColor);
+  }, [props.defaultColor]);
+
   const colorBoxRef = useCallback(node => {
     if (node !== null) {
       setHeight(node.getBoundingClientRect().width);

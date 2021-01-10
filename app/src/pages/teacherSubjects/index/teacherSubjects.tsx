@@ -140,6 +140,9 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
     <>
       <ColorChangeDialogIndex
         open={colorChange !== undefined}
+        defaultColor={`${
+          props.subjects.find(s => s.id === colorChange)?.teacherCardColor
+        }`}
         subjectId={`${colorChange}`}
         onClose={() => setColorChange(undefined)}
       />

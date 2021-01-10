@@ -25,12 +25,22 @@ export interface Exam {
 export type Students = Student[];
 export type Exams = Exam[];
 
+export interface SchoolPeriod {
+  id: string;
+  quarter: number;
+  schoolYear: number;
+}
+export type SchoolPeriods = SchoolPeriod[];
+
 export interface PointSystemProps {
   loading: boolean;
   exams: Exams;
   students: Students;
   subjectTitle: string;
   maxPoints: number;
+  schoolPeriods: SchoolPeriods;
+  selectedSchoolPeriods: string[];
+  onSchoolPeriodsChange: (schoolPeriods: string[]) => void;
   onExamCreate: () => void;
   onPercentsToMarkEdit: () => void;
 }

@@ -4,10 +4,14 @@ import {
   Box,
   Button,
   fade,
+  FormControl,
   Grid,
   IconButton,
+  InputLabel,
   makeStyles,
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -69,6 +73,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   testName: {
     fontWeight: 500,
   },
+  schoolPeriodSelect: {
+    minWidth: theme.spacing(20),
+  },
 }));
 
 const StickyTableCell = withStyles((theme: Theme) => ({
@@ -127,6 +134,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   const tableContainerStyle = {
     height: window.innerHeight - toolbarHeight * 3.7,
   };
+  console.log(props.schoolPeriods);
 
   return (
     <Paper className={classes.paper}>
@@ -144,6 +152,37 @@ const PointSystem: React.FC<PointSystemProps> = props => {
               <Typography variant="subtitle1">{props.subjectTitle}</Typography>
             </Box>
             <Box display="flex" justifyContent="flex-end" width="100%">
+              <Box pr={8}>
+                <FormControl>
+                  <InputLabel id="schoolPeriodsSelectLabel">
+                    School periods
+                  </InputLabel>
+                  <Select
+                    className={classes.schoolPeriodSelect}
+                    labelId="schoolPeriodSelectLabel"
+                    multiple
+                    value={
+                      props.selectedSchoolPeriods.length > 0
+                        ? props.selectedSchoolPeriods
+                        : ['all']
+                    }
+                    onChange={e =>
+                      props.onSchoolPeriodsChange(
+                        (e.target.value as string[]).filter(i => i !== 'all'),
+                      )
+                    }
+                  >
+                    {props.schoolPeriods.map(schoolPeriod => (
+                      <MenuItem key={schoolPeriod.id} value={schoolPeriod.id}>
+                        {`${schoolPeriod.quarter}. ${schoolPeriod.schoolYear}`}
+                      </MenuItem>
+                    ))}
+                    {props.selectedSchoolPeriods.length === 0 && (
+                      <MenuItem value="all">All</MenuItem>
+                    )}
+                  </Select>
+                </FormControl>
+              </Box>
               <Button color="primary" onClick={props.onExamCreate}>
                 {t('addTest')}
               </Button>

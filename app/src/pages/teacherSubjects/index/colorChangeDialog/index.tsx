@@ -43,6 +43,7 @@ const ColorChangeDialogIndex: React.FC<ColorChangeDialogIndexProps> = props => {
     <ColorChangeDialog
       open={props.open}
       loading={updateColorSubjectLoading}
+      defaultColor={props.defaultColor}
       onCancel={props.onClose}
       onSubmit={submitHandler}
     />

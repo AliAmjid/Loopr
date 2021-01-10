@@ -27,15 +27,22 @@ import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutati
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY from './queries/subject';
 import subjectPageOptions from './pageOptions';
 import PointSystem from './pointSystem';
-import { Exams, Students } from './types';
+import { Exams, SchoolPeriods, Students } from './types';
 
 const PointSystemIndex: React.FC = () => {
   const router = useRouter();
+  const [selectedSchoolPeriods, setSelectedSchoolPeriods] = useState<string[]>(
+    [],
+  );
   const { data: subjectData, loading: subjectLoading } = useQuery<
     TeacherSubjectsSubjectPointSystemSubjectQuery,
     TeacherSubjectsSubjectPointSystemSubjectQueryVariables
   >(TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY, {
-    variables: { id: `${router.query.id}` },
+    variables: {
+      id: `${router.query.id}`,
+      schoolPeriods:
+        selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
+    },
   });
   const [createExam, { loading: createExamLoading }] = useMutation<
     TeacherSubejctsSubjectPointSystemCreateExamMutation,
@@ -187,6 +194,11 @@ const PointSystemIndex: React.FC = () => {
     subjectTitle += `${subjectData.subject.classGroup.year} ${subjectData.subject.classGroup.section}`;
   }
 
+  const schoolPeriods: SchoolPeriods = [];
+  subjectData?.schoolPeriods?.edges?.forEach(schoolPeriodEdge => {
+    if (schoolPeriodEdge?.node) schoolPeriods.push(schoolPeriodEdge.node);
+  });
+
   return (
     <>
       <PercentsToMarkDialogIndex
@@ -208,6 +220,11 @@ const PointSystemIndex: React.FC = () => {
         students={students}
         maxPoints={maxPoints}
         subjectTitle={subjectTitle}
+        schoolPeriods={schoolPeriods}
+        selectedSchoolPeriods={selectedSchoolPeriods}
+        onSchoolPeriodsChange={schoolPeriods =>
+          setSelectedSchoolPeriods(schoolPeriods)
+        }
         onExamCreate={examCreateHandler}
         onPercentsToMarkEdit={() => setPercentsToMarkOpen(true)}
       />
