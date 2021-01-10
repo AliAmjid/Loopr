@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Button, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import ExamInfoDialog from 'pages/teacherSubjects/subject/pointSystem/edit/examInfoDialog';
@@ -37,6 +37,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     id: '',
     name: '',
     maxPoints: 0,
+    writtenAt: '',
   });
   const [examInfoDialog, setExamInfoDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);

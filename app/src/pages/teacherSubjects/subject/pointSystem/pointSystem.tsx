@@ -19,8 +19,8 @@ import {
   withStyles,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import OverlayLoading from 'components/OverlayLoading';

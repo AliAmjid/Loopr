@@ -51,7 +51,7 @@ const StudentSubjectIndex: React.FC = () => {
                   points: pointsNode.points,
                   maxPoints: examNode.pointSystem?.maxPoints || 0,
                   examWritten: pointsNode.examWritten,
-                  average: examNode.pointSystem?.average,
+                  average: examNode.pointSystem?.average || 0,
                   percentil: pointsNode.percentil,
                 },
               });
