@@ -16,7 +16,7 @@ services:
   api:
     build:
       context: ../api
-      target: api_platform_nginx
+      target: api_platform_caddy
       <<: *api-cache-from
     image: ${NGINX_IMAGE:?NGINX_IMAGE is not set or empty}
     depends_on:
