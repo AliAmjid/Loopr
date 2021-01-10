@@ -28,6 +28,9 @@
     },
     "pointSystem": {
       "maxPoints": "Maximum bodů"
+    },
+    "schoolPeriod": {
+      "name": "Známkovací období"
     }
   },
   "actions": {

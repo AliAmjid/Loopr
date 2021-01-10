@@ -155,7 +155,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
               <Box pr={8}>
                 <FormControl>
                   <InputLabel id="schoolPeriodsSelectLabel">
-                    School periods
+                    {t('common:gqlObjects.schoolPeriod.name')}
                   </InputLabel>
                   <Select
                     className={classes.schoolPeriodSelect}
@@ -178,7 +178,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                       </MenuItem>
                     ))}
                     {props.selectedSchoolPeriods.length === 0 && (
-                      <MenuItem value="all">All</MenuItem>
+                      <MenuItem value="all">{t('allSchoolPeriods')}</MenuItem>
                     )}
                   </Select>
                 </FormControl>

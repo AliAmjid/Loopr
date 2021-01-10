@@ -14,6 +14,9 @@ import {
   Theme,
   useTheme,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import { bottomShadow } from 'components/shadows';
 import SideDialogContainer from 'components/SideDialog/SideDialogContainer';
@@ -39,6 +42,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [detail, setDetail] = useState<DetailState>(undefined);
+  const { t } = useTranslation(namespaces.pages.studentSubjects.index);
 
   const toolbarHeight = 64;
   const tableContainerStyle = {
@@ -64,7 +68,9 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
           p={2}
         >
           <FormControl>
-            <InputLabel id="schoolPeriodSelectLabel">Period</InputLabel>
+            <InputLabel id="schoolPeriodSelectLabel">
+              {t('common:gqlObjects.schoolPeriod.name')}
+            </InputLabel>
             <Select
               className={classes.periodSelect}
               labelId="schoolPeriodSelectLabel"
@@ -82,7 +88,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
             >
               {mappedSchoolPeriods}
               {props.selectedSchoolPeriods.length === 0 && (
-                <MenuItem value="all">All</MenuItem>
+                <MenuItem value="all">{t('schoolPeriodsAll')}</MenuItem>
               )}
             </Select>
           </FormControl>
