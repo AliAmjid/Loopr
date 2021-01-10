@@ -95,7 +95,7 @@ const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
                   from: from.toISOString(),
                   to: to.toISOString(),
                   quarter: +quarter,
-                  year: +year,
+                  schoolYear: +year,
                 });
               }}
             >

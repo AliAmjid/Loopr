@@ -35,7 +35,7 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
           from: values.from,
           to: values.to,
           quarter: values.quarter,
-          schoolYear: values.year,
+          schoolYear: values.schoolYear,
         },
       },
     })
