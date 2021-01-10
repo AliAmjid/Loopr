@@ -19,7 +19,8 @@ Každou třídu lze přejmenovat (upravit třídu a rok nástupu) pomocí `ikony
 Pro otevření nějaké třídy vyberte třídu v sekci "Seznam tříd" a klikněte na ní. V této pravé sekci se otevře tabulka se studenty. <br> Lze přepínat mezi tabulkou se studenty a tabulkou s třídním učitelem.
 
 #### Operace se studenty
-Všechny ovládací prvky a práce s tabulkou je popsána zde: [Datová tabulka](cs/components/materialTable/)
+Všechny ovládací prvky a práce s tabulkou jsou popsány zde: 
+> [Datová tabulka](cs/components/materialTable/)
 
 Pro úpravu studentů ve třídě klikněte na zelené tlačítko `upravit`.
 ![](images/students-list.png)

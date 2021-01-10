@@ -20,7 +20,7 @@ Každou skupinu lze přejmenovat pomocí `ikony tužky` a odstranit pomocí `iko
 ### Sekce s uživatelskými daty
 Pro otevření nějaké skupiny vyberte třídu v sekci "Seznam skupin" a klikněte na ní. V této pravé sekci se otevře tabulka se studenty.
 
-Všechny ovládací prvky a práce s tabulkou je popsána zde: 
+Všechny ovládací prvky a práce s tabulkou jsou popsány zde: 
 > [Datová tabulka](cs/components/materialTable/)
 
 Pro úpravu studentů ve skupině klikněte na zelené tlačítko `upravit`.
