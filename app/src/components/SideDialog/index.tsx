@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
 
     position: 'absolute',
-    zIndex: 104,
+    zIndex: 501,
     transition: `${transitionDuration}ms`,
     top: 0,
     right: 0,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     right: 0,
     bottom: 0,
-    zIndex: 105,
+    zIndex: 502,
     transitionDuration: `${transitionDuration}ms`,
   },
   sideHidden: {
