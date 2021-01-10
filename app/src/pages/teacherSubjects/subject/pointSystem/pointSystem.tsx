@@ -132,9 +132,8 @@ const PointSystem: React.FC<PointSystemProps> = props => {
 
   const toolbarHeight = 64;
   const tableContainerStyle = {
-    height: window.innerHeight - toolbarHeight * 3.7,
+    height: window.innerHeight - toolbarHeight * 3.9,
   };
-  console.log(props.schoolPeriods);
 
   return (
     <Paper className={classes.paper}>

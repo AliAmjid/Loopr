@@ -46,7 +46,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
 
   const toolbarHeight = 64;
   const tableContainerStyle = {
-    height: window.innerHeight - toolbarHeight * 2.7,
+    height: window.innerHeight - toolbarHeight * 3.9,
   };
 
   const mappedSchoolPeriods = props.schoolPeriods.map(schoolPeriod => {
