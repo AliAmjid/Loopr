@@ -48,6 +48,4 @@ class ExamVoter extends Voter
         }
         return false;
     }
-
-
 }

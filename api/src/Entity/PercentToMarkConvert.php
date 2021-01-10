@@ -60,6 +60,11 @@ class PercentToMarkConvert
      */
     private ?Subject $subject;
 
+    /** @var UserPrivateData|null
+     * @ORM\OneToOne(targetEntity="UserPrivateData", mappedBy="defaultPercentToMark")
+     */
+    private ?UserPrivateData $user;
+
 
     public function getOne(): int
     {
@@ -115,4 +120,41 @@ class PercentToMarkConvert
         $this->subject = $subject;
         return $this;
     }
+
+    /**
+     * @return UserPrivateData|null
+     */
+    public function getUser(): ?UserPrivateData
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param UserPrivateData|null $user
+     * @return PercentToMarkConvert
+     */
+    public function setUser(?UserPrivateData $user): PercentToMarkConvert
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+
+    public function convert(float $percents): int
+    {
+        if ($percents >= $this->one) {
+            return 1;
+        }
+        if ($percents >= $this->two) {
+            return 2;
+        }
+        if ($percents >= $this->three) {
+            return 3;
+        }
+        if ($percents >= $this->four) {
+            return 4;
+        }
+        return 5;
+    }
+
 }

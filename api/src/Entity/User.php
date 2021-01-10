@@ -81,7 +81,7 @@ class User implements UserInterface
 
     /** @var \DateTimeInterface
      * @ORM\Column(type="datetime")
-     * @Groups({"read:owner", "read:USER_SHOW_ALL", "exposed"})
+     * @Groups({"read", "exposed"})
      */
     private \DateTimeInterface $createdAt;
 

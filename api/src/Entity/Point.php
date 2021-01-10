@@ -117,10 +117,41 @@ class Point
     }
 
     /**
+     * @return int
+     * @Groups({"read", "exposed"})
+     */
+    public function getWorstThan(): int
+    {
+        return $this->getPointSystem()->getPointsOnlyWritten()->filter(function (Point $point) {
+            return ($point->getId() !== $this->id && $point->getPoints() > $point->points);
+        })->count();
+    }
+
+    /**
      * @Groups({"read", "exposed"})
      */
     public function getPercentil(): float
     {
-        return $this->pointSystem->getPointsOnlyWritten()->count() / 100 * $this->getBetterThan();
+        if ($this->pointSystem->getPointsOnlyWritten()->count() < 1) {
+            return 100;
+        }
+
+        return 100 / $this->pointSystem->getPointsOnlyWritten()->count() * $this->getBetterThan();
+    }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
+    public function getPercents()
+    {
+        return $this->pointSystem->getMaxPoints() / 100 * $this->points;
+    }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
+    public function getConvertedToMark(): int
+    {
+        return $this->pointSystem->getExam()->getSubject()->getPercentsToMarkConvert()->convert($this->getPercents());
     }
 }
