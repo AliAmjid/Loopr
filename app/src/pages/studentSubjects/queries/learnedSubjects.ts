@@ -34,6 +34,7 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
                         id
                         points
                         percentil
+                        worstThan
                       }
                     }
                   }

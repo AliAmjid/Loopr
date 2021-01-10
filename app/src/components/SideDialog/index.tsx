@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: 0,
     height: '100%',
-
     position: 'absolute',
     zIndex: 501,
     transition: `${transitionDuration}ms`,

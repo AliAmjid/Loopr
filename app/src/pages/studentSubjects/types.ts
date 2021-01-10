@@ -7,6 +7,7 @@ export interface Exam {
     examWritten: boolean;
     average: number;
     percentil: number;
+    worstThan: number;
   };
 }
 

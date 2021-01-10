@@ -1182,6 +1182,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_
   id: string;
   points: number;
   percentil: number;
+  worstThan: number;
 }
 
 export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges {

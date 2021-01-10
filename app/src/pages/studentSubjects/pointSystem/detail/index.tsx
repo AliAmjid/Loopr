@@ -133,7 +133,9 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
             <CustomCard>
               <Typography>{t('pointSystem.studentsBetterThanYou')}</Typography>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h6">?</Typography>
+                <Typography variant="h6">
+                  {`${props.exam.pointSystem?.worstThan}`}
+                </Typography>
               </Box>
             </CustomCard>
           </Grid>

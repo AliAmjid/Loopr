@@ -606,6 +606,7 @@ type Point implements Node {
     points: Int!
     examWritten: Boolean!
     betterThan: Int!
+    worstThan: Int!
     percentil: Float!
     convertedToMark: Int!
     _id: String!
