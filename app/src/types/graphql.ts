@@ -1176,6 +1176,11 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_
   name: string;
 }
 
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
 export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node {
   __typename: "Point";
   examWritten: boolean;
@@ -1183,6 +1188,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_
   points: number;
   percentil: number;
   worstThan: number;
+  user: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node_user;
 }
 
 export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges {
@@ -1256,9 +1262,15 @@ export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
   edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
 }
 
+export interface StudentSubjectsLearnedSubjectsQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
 export interface StudentSubjectsLearnedSubjectsQuery {
   learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
   schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
+  meUser: StudentSubjectsLearnedSubjectsQuery_meUser | null;
 }
 
 export interface StudentSubjectsLearnedSubjectsQueryVariables {

@@ -55,7 +55,10 @@ const StudentSubjectIndex: React.FC = () => {
         if (examNode) {
           examNode.pointSystem?.points?.edges?.forEach(pointsEdge => {
             const pointsNode = pointsEdge?.node;
-            if (pointsNode) {
+            if (
+              pointsNode &&
+              pointsNode.user.id === learnedSubjectsData?.meUser?.id
+            ) {
               subject.exams.push({
                 id: examNode.id,
                 name: examNode.name,

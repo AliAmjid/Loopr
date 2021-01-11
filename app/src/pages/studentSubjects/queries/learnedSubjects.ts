@@ -35,6 +35,9 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
                         points
                         percentil
                         worstThan
+                        user {
+                          id
+                        }
                       }
                     }
                   }
@@ -53,6 +56,9 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
           quarter
         }
       }
+    }
+    meUser {
+      id
     }
   }
 `;
