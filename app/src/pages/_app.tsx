@@ -9,6 +9,7 @@ import App, { AppContext } from 'next/app';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
 
+import dayjsLocale from 'lib/dayjs/locale';
 import { appWithTranslation } from 'lib/i18n';
 import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';
@@ -49,7 +50,7 @@ const MyApp: AppType = props => {
           onClose={() => {}}
         >
           <ReactourProvider>
-            <MuiPickersUtilsProvider utils={dayjsUtils}>
+            <MuiPickersUtilsProvider utils={dayjsUtils} locale={dayjsLocale}>
               <Component {...pageProps} />
             </MuiPickersUtilsProvider>
           </ReactourProvider>
