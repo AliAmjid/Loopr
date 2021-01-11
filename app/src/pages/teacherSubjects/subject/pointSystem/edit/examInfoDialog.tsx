@@ -15,6 +15,8 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import { dateToDayFormat } from 'components/formatDate';
+
 import { ExamInfoDialogProps } from './types';
 
 const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
@@ -55,7 +57,7 @@ const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
           <Box pt={2}>
             <KeyboardDatePicker
               label={t('common:gqlObjects.exam.writtenAt')}
-              format="DD. MM. YYYY"
+              format={dateToDayFormat}
               fullWidth
               onChange={date => {
                 if (date) setWrittenAt(date);

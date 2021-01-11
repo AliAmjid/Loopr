@@ -12,6 +12,7 @@ import {
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import dayjs from 'dayjs';
 
+import { dateToDayFormat } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
@@ -43,7 +44,7 @@ const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
             <Box>
               <KeyboardDatePicker
                 label="from"
-                format="DD. MM. YYYY"
+                format={dateToDayFormat}
                 fullWidth
                 value={from}
                 onChange={from => {
@@ -54,7 +55,7 @@ const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
             <Box pt={2}>
               <KeyboardDatePicker
                 label="from"
-                format="DD. MM. YYYY"
+                format={dateToDayFormat}
                 fullWidth
                 value={to}
                 onChange={to => {
