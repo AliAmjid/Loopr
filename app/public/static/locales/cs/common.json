@@ -31,7 +31,11 @@
       "maxPoints": "Maximum bodů"
     },
     "schoolPeriod": {
-      "name": "Známkovací období"
+      "name": "Známkovací období",
+      "from": "Od",
+      "to": "Do",
+      "quarter": "Čtvrtletí",
+      "schoolYear": "Školní rok"
     }
   },
   "actions": {

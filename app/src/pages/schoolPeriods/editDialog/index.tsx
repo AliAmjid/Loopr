@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import {
   SchoolPeriodsUpdateSchoolPeriodMutation,
@@ -23,15 +26,16 @@ const EditDialogIndex: React.FC<EditDialogIndexProps> = props => {
     SchoolPeriodsUpdateSchoolPeriodMutationVariables
   >(SCHOOL_PERIODS_UPDATE_SCHOOL_PERIOD_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.schoolPeriods.index);
 
   const submitHandler = (values: SubmitValues): void => {
     updateSchoolPeriod({ variables: { input: { id: props.id, ...values } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
         props.onClose();
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
       });
   };
 
@@ -39,8 +43,8 @@ const EditDialogIndex: React.FC<EditDialogIndexProps> = props => {
     <EditDialogShared
       open={props.open}
       loading={updateSchoolPeriodLoading}
-      submitActionLabel="Edit"
-      title="Edit"
+      submitActionLabel={t('common:actions.edit')}
+      title={t('editDialogTitle')}
       defaultValues={props.defaultValues}
       onCancel={props.onClose}
       onSubmit={submitHandler}

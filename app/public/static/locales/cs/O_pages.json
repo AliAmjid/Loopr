@@ -34,5 +34,8 @@
   },
   "studentSubjects": {
     "index": "Studované předměty"
+  },
+  "schoolPeriods": {
+    "index": "Známkovací období"
   }
 }

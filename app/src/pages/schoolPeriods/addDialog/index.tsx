@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import EditDialogShared from 'pages/schoolPeriods/editDialogShared';
 
@@ -27,6 +30,7 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
     awaitRefetchQueries: true,
   });
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.schoolPeriods.index);
 
   const submitHandler = (values: SubmitValues): void => {
     createSchoolPeriod({
@@ -40,11 +44,11 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
         props.onClose();
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
       });
   };
 
@@ -52,8 +56,8 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
     <EditDialogShared
       open={props.open}
       loading={createSchoolPeriodLoading}
-      title="Add"
-      submitActionLabel="Add"
+      title={t('addDialogTitle')}
+      submitActionLabel={t('common:actions.add')}
       onSubmit={submitHandler}
       onCancel={props.onClose}
     />

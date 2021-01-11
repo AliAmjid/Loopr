@@ -33,6 +33,9 @@ export default {
     studentSubjects: {
       index: 'P_studentSubjects_index',
     },
+    schoolPeriods: {
+      index: 'P_schoolPeriods_index',
+    },
   },
   components: {
     withPage: 'C_withPage',
