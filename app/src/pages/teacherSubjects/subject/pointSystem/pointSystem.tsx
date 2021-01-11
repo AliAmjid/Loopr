@@ -27,6 +27,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import { formatDateToDay } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import { getPercents } from 'components/percents';
@@ -233,7 +234,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         )}`}
                       </Typography>
                       <Typography className={classes.date}>
-                        {exam.writtenAt}
+                        {formatDateToDay(exam.writtenAt)}
                       </Typography>
                       <IconButton
                         color="primary"

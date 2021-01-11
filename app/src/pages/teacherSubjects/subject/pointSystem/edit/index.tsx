@@ -190,6 +190,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           examInput: {
             id: exam.id,
             name: exam.name,
+            writtenAt: exam.writtenAt,
           },
         },
       })
@@ -225,13 +226,18 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     <>
       <ExamInfoDialog
         open={examInfoDialog}
-        defaultValues={{ name: exam.name, maxPoints: exam.maxPoints }}
+        defaultValues={{
+          name: exam.name,
+          maxPoints: exam.maxPoints,
+          writtenAt: exam.writtenAt,
+        }}
         onSubmit={(values: ExamInfoDialogSubmitValues) => {
           setExamInfoDialog(false);
           setExam(prevState => ({
             ...prevState,
             name: values.name,
             maxPoints: +values.maxPoints,
+            writtenAt: values.writtenAt,
           }));
         }}
         onClose={() => setExamInfoDialog(false)}

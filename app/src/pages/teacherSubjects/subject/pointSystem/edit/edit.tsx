@@ -20,6 +20,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import { formatDateToDay } from 'components/formatDate';
 import { bottomShadow } from 'components/shadows';
 import SideDialog from 'components/SideDialog';
 
@@ -54,7 +55,7 @@ const Edit: React.FC<EditProps> = props => {
                 'common:gqlObjects.point.points.accusative',
               )}`}
             </Typography>
-            <Typography>{props.exam.writtenAt}</Typography>
+            <Typography>{formatDateToDay(props.exam.writtenAt)}</Typography>
           </Box>
           <Box pl={4} display="flex">
             <IconButton color="primary" onClick={props.onExamInfoEdit}>

@@ -24,7 +24,8 @@
       "percentil": "Percentil"
     },
     "exam": {
-      "name": "Název"
+      "name": "Název",
+      "writtenAt": "Datum"
     },
     "pointSystem": {
       "maxPoints": "Maximum bodů"

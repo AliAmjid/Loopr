@@ -1213,6 +1213,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_
   __typename: "Exam";
   id: string;
   name: string;
+  writtenAt: string;
   pointSystem: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem | null;
 }
 

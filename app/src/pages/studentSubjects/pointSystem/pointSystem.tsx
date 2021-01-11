@@ -11,6 +11,8 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import TestCell from 'pages/studentSubjects/components/testCell';
 
+import { formatDateToDay } from 'components/formatDate';
+
 import SubjectCell from '../components/subjectCell';
 
 import { PointSystemProps } from './types';
@@ -27,7 +29,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
         </Box>
       </Box>
       <Box display="flex" justifyContent="center">
-        <Typography variant="body2">{exam.writtenAt}</Typography>
+        <Typography variant="body2">
+          {formatDateToDay(exam.writtenAt)}
+        </Typography>
       </Box>
       <Box display="flex" justifyContent="center">
         <IconButton

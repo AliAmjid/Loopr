@@ -40,6 +40,7 @@ export interface EditProps {
 export interface ExamInfoDialogSubmitValues {
   maxPoints: string;
   name: string;
+  writtenAt: string;
 }
 
 export interface ExamInfoDialogProps {
@@ -47,6 +48,7 @@ export interface ExamInfoDialogProps {
   defaultValues: {
     name: string;
     maxPoints: number;
+    writtenAt: string;
   };
   onSubmit: (values: ExamInfoDialogSubmitValues) => void;
   onClose: () => void;

@@ -23,6 +23,7 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
               node {
                 id
                 name
+                writtenAt
                 pointSystem {
                   id
                   maxPoints

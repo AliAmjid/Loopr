@@ -131,7 +131,7 @@ const PointSystemIndex: React.FC = () => {
         id: examNode.id,
         name: examNode.name,
         maxPoints: examNode.pointSystem?.maxPoints || 0,
-        writtenAt: formatDateToDay(examNode.writtenAt),
+        writtenAt: examNode.writtenAt,
       });
 
       const examPoints: {

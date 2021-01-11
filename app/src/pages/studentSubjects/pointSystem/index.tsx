@@ -35,7 +35,7 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
       points,
       maxPoints,
       percents,
-      writtenAt: '10. 20. 2020',
+      writtenAt: exam.writtenAt,
       examWritten: exam.pointSystem?.examWritten || false,
     };
   });

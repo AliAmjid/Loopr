@@ -1,6 +1,7 @@
 export interface Exam {
   id: string;
   name: string;
+  writtenAt: string;
   pointSystem?: {
     points: number;
     maxPoints: number;

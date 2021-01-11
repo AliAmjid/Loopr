@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 
 export const formatDateToDay = (date: string | Date): string => {
-  return dayjs(date).format('DD.MM. YYYY');
+  return dayjs(date).format('DD. MM. YYYY');
 };
 
 export const formatDateToMinute = (date: string | Date): string => {
-  return dayjs(date).format('DD.MM. YYYY HH:mm');
+  return dayjs(date).format('DD. MM. YYYY HH:mm');
 };

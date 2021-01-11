@@ -62,6 +62,7 @@ const StudentSubjectIndex: React.FC = () => {
               subject.exams.push({
                 id: examNode.id,
                 name: examNode.name,
+                writtenAt: examNode.writtenAt,
                 pointSystem: {
                   points: pointsNode.points,
                   maxPoints: examNode.pointSystem?.maxPoints || 0,
