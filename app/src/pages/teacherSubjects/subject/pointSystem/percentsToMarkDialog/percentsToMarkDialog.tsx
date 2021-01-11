@@ -11,6 +11,9 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -33,7 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const PercentsToMarkDialog: React.FC<PercentsToMarkDialogProps> = props => {
   const classes = useStyles();
   const [percents, setPercents] = useState(props.defaultValues);
-
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
   useEffect(() => {
     setPercents(props.defaultValues);
   }, [props.defaultValues]);
@@ -52,10 +57,10 @@ const PercentsToMarkDialog: React.FC<PercentsToMarkDialogProps> = props => {
           <table className={classes.table}>
             <tr>
               <td className={classes.cell}>
-                <Typography>Spodní hranice</Typography>
+                <Typography>{t('lowerLimit')}</Typography>
               </td>
               <td className={classes.cell}>
-                <Typography>Odpovídající známka</Typography>
+                <Typography>{t('correspondingMark')}</Typography>
               </td>
             </tr>
             <tr>
@@ -157,7 +162,7 @@ const PercentsToMarkDialog: React.FC<PercentsToMarkDialogProps> = props => {
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={props.onCancel}>
-            cancel
+            {t('common:actions.cancel')}
           </Button>
           <Button
             color="primary"
@@ -165,7 +170,7 @@ const PercentsToMarkDialog: React.FC<PercentsToMarkDialogProps> = props => {
             disabled={oneError || twoError || threeError || fourError}
             onClick={() => props.onSubmit(percents)}
           >
-            save
+            {t('common:actions.save')}
           </Button>
         </DialogActions>
       </OverlayLoadingContainer>

@@ -5,6 +5,8 @@
   "irreversible":"Tato operace je nevratná",
   "examEdit": "Úprava testu",
   "allSchoolPeriods": "Všechna",
+  "lowerLimit":"Spodní hranice",
+  "correspondingMark": "Odpovídající známka",
   "snackbars": {
     "createExam": {
       "success": "Nový test úspěšně přidán",
