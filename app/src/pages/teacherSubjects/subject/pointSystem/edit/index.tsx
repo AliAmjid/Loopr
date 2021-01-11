@@ -77,7 +77,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           let percentsValue = 'N';
           if (studentExam?.examWritten) {
             pointsValue = `${studentExam.points}`;
-            if (studentExam.maxPoints === 0) {
+            if (exam.maxPoints === 0) {
               percentsValue = '-';
             } else {
               percentsValue = `${getPercents({
