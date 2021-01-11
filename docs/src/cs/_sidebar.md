@@ -5,6 +5,8 @@
     - [Třídy](cs/pages/classes/)
     - [Skupiny](cs/pages/groups/)
     - [Předměty](cs/pages/subjects/)
+    - [Hodnocení - pohled studenta](cs/pages/grading-userside/)
+    - [Hodnocení - pohled učitele](cs/pages/grading-teacherside/)
 - Komponenty
     - [Datová tabulka](cs/components/materialTable/)
     
