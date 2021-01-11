@@ -12,6 +12,8 @@ import {
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import dayjs from 'dayjs';
 
+import { useTranslation } from 'lib/i18n';
+
 import { dateToDayFormat } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -23,6 +25,7 @@ const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
   const [to, setTo] = useState(dayjs().add(1, 'd'));
   const [quarter, setQuarter] = useState('1');
   const [year, setYear] = useState(`${dayjs().year()}`);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (props.defaultValues) {
@@ -46,6 +49,8 @@ const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
                 label="from"
                 format={dateToDayFormat}
                 fullWidth
+                cancelLabel={t('common:actions.cancel')}
+                okLabel={t('common:actions.submit')}
                 value={from}
                 onChange={from => {
                   if (from) setFrom(from);
@@ -56,6 +61,8 @@ const EditDialogShared: React.FC<EditDialogSharedProps> = props => {
               <KeyboardDatePicker
                 label="from"
                 format={dateToDayFormat}
+                cancelLabel={t('common:actions.cancel')}
+                okLabel={t('common:actions.submit')}
                 fullWidth
                 value={to}
                 onChange={to => {

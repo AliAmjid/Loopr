@@ -8,9 +8,11 @@ import dayjs from 'dayjs';
 import App, { AppContext } from 'next/app';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
-import dayjsLocale from 'lib/dayjs/locale';
+import getDayjsLocales from 'lib/dayjs/locale';
 import { appWithTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';
 import ReactourProvider from 'lib/reactour/provider';
@@ -25,6 +27,8 @@ const MyApp: AppType = props => {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  const { t, i18n } = useTranslation(namespaces.lib.dayjs);
 
   return (
     <>
@@ -50,7 +54,10 @@ const MyApp: AppType = props => {
           onClose={() => {}}
         >
           <ReactourProvider>
-            <MuiPickersUtilsProvider utils={dayjsUtils} locale={dayjsLocale}>
+            <MuiPickersUtilsProvider
+              utils={dayjsUtils}
+              locale={getDayjsLocales(i18n.language, t)}
+            >
               <Component {...pageProps} />
             </MuiPickersUtilsProvider>
           </ReactourProvider>

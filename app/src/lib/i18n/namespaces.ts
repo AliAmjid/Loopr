@@ -48,5 +48,6 @@ export default {
   },
   lib: {
     materialTable: 'L_materialTable',
+    dayjs: 'L_dayjs',
   },
 };

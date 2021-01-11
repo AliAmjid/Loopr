@@ -59,6 +59,8 @@ const ExamInfoDialog: React.FC<ExamInfoDialogProps> = props => {
               label={t('common:gqlObjects.exam.writtenAt')}
               format={dateToDayFormat}
               fullWidth
+              cancelLabel={t('common:actions.cancel')}
+              okLabel={t('common:actions.submit')}
               onChange={date => {
                 if (date) setWrittenAt(date);
               }}
