@@ -66,7 +66,7 @@ class User implements UserInterface
      * @Groups({"user:write"})
      * @Assert\Length(min="8")
      */
-    private ?string $rawPassword;
+    private ?string $rawPassword = null;
 
 
     /**
