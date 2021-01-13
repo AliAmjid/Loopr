@@ -17,6 +17,7 @@ type Query {
         id_list: [String]
         section: String
     ): GroupConnection
+    percentToMarkConvert(id: ID!): PercentToMarkConvert
     aclRoles: [AclRole]
     aclRole(id: ID!): AclRole
     classGroups(
@@ -111,7 +112,7 @@ type Query {
         # Returns the elements in the list that come after the specified cursor.
         after: String
     ): SubjectConnection
-    learntSubjects(
+    learnedSubjects(
         # Returns the first n elements from the list.
         first: Int
 
@@ -245,6 +246,7 @@ type Subject implements Node {
         schoolPeriod_schoolYear_list: [Int]
         order: [ExamFilter_order]
     ): ExamConnection
+    percentsToMarkConvert: PercentToMarkConvert!
     _id: String!
 }
 
@@ -449,6 +451,17 @@ type UserPrivateData implements Node {
     tourCreateUsers: Boolean!
     darkMode: Boolean!
     newMarkNotificationEmail: Boolean!
+    defaultPercentToMark: PercentToMarkConvert!
+    _id: String!
+}
+
+#
+type PercentToMarkConvert implements Node {
+    id: ID!
+    one: Int!
+    two: Int!
+    three: Int!
+    four: Int!
     _id: String!
 }
 
@@ -593,7 +606,9 @@ type Point implements Node {
     points: Int!
     examWritten: Boolean!
     betterThan: Int!
+    worstThan: Int!
     percentil: Float!
+    convertedToMark: Int!
     _id: String!
 }
 
@@ -705,6 +720,11 @@ type Mutation {
     # UpdateUserss a Group.
     updateUsersGroup(input: updateUsersGroupInput!): updateUsersGroupPayload
 
+    # Updates a PercentToMarkConvert.
+    updatePercentToMarkConvert(
+        input: updatePercentToMarkConvertInput!
+    ): updatePercentToMarkConvertPayload
+
     # Updates a AclRole.
     updateAclRole(input: updateAclRoleInput!): updateAclRolePayload
 
@@ -774,8 +794,8 @@ type Mutation {
     # Updates a Subject.
     updateSubject(input: updateSubjectInput!): updateSubjectPayload
 
-    # SetColors a Subject.
-    setColorSubject(input: setColorSubjectInput!): setColorSubjectPayload
+    # UpdateColors a Subject.
+    updateColorSubject(input: updateColorSubjectInput!): updateColorSubjectPayload
 
     # Deletes a Subject.
     deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
@@ -862,6 +882,22 @@ input updateUsersGroupInput {
 #
 type updateUsersGroupPayload {
     group: Group
+    clientMutationId: String
+}
+
+#
+input updatePercentToMarkConvertInput {
+    id: ID!
+    one: Int
+    two: Int
+    three: Int
+    four: Int
+    clientMutationId: String
+}
+
+#
+type updatePercentToMarkConvertPayload {
+    percentToMarkConvert: PercentToMarkConvert
     clientMutationId: String
 }
 
@@ -1182,14 +1218,14 @@ type updateSubjectPayload {
 }
 
 #
-input setColorSubjectInput {
+input updateColorSubjectInput {
     id: ID!
     teacherCardColor: String
     clientMutationId: String
 }
 
 #
-type setColorSubjectPayload {
+type updateColorSubjectPayload {
     subject: Subject
     clientMutationId: String
 }

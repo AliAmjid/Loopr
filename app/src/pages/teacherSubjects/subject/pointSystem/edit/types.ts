@@ -1,6 +1,6 @@
 import { Exam, Exams, Student, Students } from '../types';
 
-export interface EditStudent extends Student {
+interface EditStudent extends Student {
   pointsValue: string;
   percentsValue: string;
   pointsError: boolean;
@@ -40,6 +40,7 @@ export interface EditProps {
 export interface ExamInfoDialogSubmitValues {
   maxPoints: string;
   name: string;
+  writtenAt: string;
 }
 
 export interface ExamInfoDialogProps {
@@ -47,6 +48,7 @@ export interface ExamInfoDialogProps {
   defaultValues: {
     name: string;
     maxPoints: number;
+    writtenAt: string;
   };
   onSubmit: (values: ExamInfoDialogSubmitValues) => void;
   onClose: () => void;

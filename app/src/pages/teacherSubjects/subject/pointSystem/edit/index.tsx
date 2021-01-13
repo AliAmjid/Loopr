@@ -4,6 +4,9 @@ import { useMutation } from '@apollo/client';
 import { Button, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import ExamInfoDialog from 'pages/teacherSubjects/subject/pointSystem/edit/examInfoDialog';
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_OR_UPDATE_POINT_SYSTEM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/createOrUpdatePointSystem';
 import TEACHER_SUBJECTS_SUBJECT_POINTS_SYSTEM_DELETE_EXAM_MUTATION from 'pages/teacherSubjects/subject/pointSystem/mutation/deleteExam';
@@ -34,6 +37,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     id: '',
     name: '',
     maxPoints: 0,
+    writtenAt: '',
   });
   const [examInfoDialog, setExamInfoDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
@@ -58,10 +62,12 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     awaitRefetchQueries: true,
   });
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
-  const foundExam = props.exams.find(exam => exam.id === props.examId);
   useEffect(() => {
-    if (foundExam) {
+    if (exam) {
       setStudents(
         props.students.map(student => {
           const studentExam = student.exams.find(
@@ -71,7 +77,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           let percentsValue = 'N';
           if (studentExam?.examWritten) {
             pointsValue = `${studentExam.points}`;
-            if (studentExam.maxPoints === 0) {
+            if (exam.maxPoints === 0) {
               percentsValue = '-';
             } else {
               percentsValue = `${getPercents({
@@ -92,10 +98,13 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           };
         }),
       );
-
-      setExam(foundExam);
     }
-  }, [props.students, props.examId, props.exams]);
+  }, [props.students, props.exams, exam]);
+
+  const foundExam = props.exams.find(exam => exam.id === props.examId);
+  useEffect(() => {
+    if (foundExam) setExam(foundExam);
+  }, [props.exams, props.examId]);
 
   const studentExamChangeHandler = (values: StudentExamChangeValues): void => {
     const newStudents = [...students];
@@ -108,7 +117,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         student.pointsError =
           values.points !== 'N' &&
           values.points !== 'n' &&
-          Number.isNaN(+values.points);
+          !Number.isInteger(+values.points);
         student.pointsWarning =
           !Number.isNaN(+values.points) &&
           (+values.points < 0 ||
@@ -140,12 +149,10 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           (+values.percents < 0 || +values.percents > 100);
 
         if (!Number.isNaN(+values.percents) && values.percents !== '') {
-          student.pointsValue = `${Math.round(
-            getPoints({
-              max: exam.maxPoints,
-              percents: +values.percents,
-            }),
-          )}`;
+          student.pointsValue = `${getPoints({
+            max: exam.maxPoints,
+            percents: +values.percents,
+          })}`;
         } else if (values.percents === 'n' || values.percents === 'N') {
           student.pointsValue = values.percents;
         } else {
@@ -157,8 +164,12 @@ const EditIndex: React.FC<EditIndexProps> = props => {
   };
 
   const submitHandler = (): void => {
-    if (students.some(student => student.pointsError)) {
-      enqueueSnackbar('No no no', { variant: 'warning' });
+    if (
+      students.some(student => student.pointsError || student.percentsError)
+    ) {
+      enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.invalid'), {
+        variant: 'warning',
+      });
     } else {
       createOrUpdatePointSystem({
         variables: {
@@ -179,15 +190,20 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           examInput: {
             id: exam.id,
             name: exam.name,
+            writtenAt: exam.writtenAt,
           },
         },
       })
         .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
+          enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.success'), {
+            variant: 'success',
+          });
           props.onClose();
         })
         .catch(() => {
-          enqueueSnackbar('E', { variant: 'error' });
+          enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.error'), {
+            variant: 'error',
+          });
         });
     }
   };
@@ -195,12 +211,14 @@ const EditIndex: React.FC<EditIndexProps> = props => {
   const deleteHandler = (): void => {
     deleteExam({ variables: { input: { id: props.examId } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.deleteExam.success'), {
+          variant: 'success',
+        });
         setDeleteDialog(false);
         props.onClose();
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.deleteExam.error'), { variant: 'error' });
       });
   };
 
@@ -208,13 +226,18 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     <>
       <ExamInfoDialog
         open={examInfoDialog}
-        defaultValues={{ name: exam.name, maxPoints: exam.maxPoints }}
+        defaultValues={{
+          name: exam.name,
+          maxPoints: exam.maxPoints,
+          writtenAt: exam.writtenAt,
+        }}
         onSubmit={(values: ExamInfoDialogSubmitValues) => {
           setExamInfoDialog(false);
           setExam(prevState => ({
             ...prevState,
             name: values.name,
             maxPoints: +values.maxPoints,
+            writtenAt: values.writtenAt,
           }));
         }}
         onClose={() => setExamInfoDialog(false)}
@@ -222,15 +245,15 @@ const EditIndex: React.FC<EditIndexProps> = props => {
       <SimpleDialog
         open={deleteDialog}
         loading={deleteExamLoading}
-        title="Delete???"
-        content={<Typography>Irreversable</Typography>}
+        title={t('deleteExam')}
+        content={<Typography>{t('irreversible')}</Typography>}
         actions={[
           <Button
             key={0}
             color="primary"
             onClick={() => setDeleteDialog(false)}
           >
-            Cancel
+            {t('common:actions.cancel')}
           </Button>,
           <Button
             key={1}
@@ -238,7 +261,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
             variant="contained"
             onClick={deleteHandler}
           >
-            Delete
+            {t('common:actions.delete')}
           </Button>,
         ]}
       />

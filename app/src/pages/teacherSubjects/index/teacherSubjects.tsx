@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -17,12 +17,14 @@ import Link from 'next/link';
 
 import routes from 'config/routes';
 
-import ColorChangeDialog from 'pages/teacherSubjects/index/colorChangeDialog';
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import ThickDivider from 'components/thickDivider';
 
+import ColorChangeDialogIndex from './colorChangeDialog';
 import { Subject, TeacherSubjectsProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,24 +52,26 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const classes = useStyles();
+  const [colorChange, setColorChange] = useState<string | undefined>(undefined);
+  const { t } = useTranslation(namespaces.pages.teacherSubjects.index);
 
   const subjectTypes = new Map<string, Subject[]>();
 
   props.subjects.forEach(subject => {
-    const entry = subjectTypes.get(subject.subjectType.id);
-    if (entry) {
-      entry.push(subject);
-      subjectTypes.set(subject.subjectType.id, entry);
-    } else {
-      subjectTypes.set(subject.subjectType.id, [subject]);
+    if (subject.subjectType) {
+      const entry = subjectTypes.get(subject.subjectType.id);
+      if (entry) {
+        entry.push(subject);
+        subjectTypes.set(subject.subjectType.id, entry);
+      } else subjectTypes.set(subject.subjectType.id, [subject]);
     }
   });
 
   const mappedSubjects: JSX.Element[] = [];
   subjectTypes.forEach(subjectType => {
     mappedSubjects.push(
-      <Box key={subjectType[0].subjectType.id} pb={2}>
-        <Typography variant="h6">{subjectType[0].subjectType.name}</Typography>
+      <Box key={subjectType[0].subjectType?.id} pb={2}>
+        <Typography variant="h6">{subjectType[0].subjectType?.name}</Typography>
         <ThickDivider />
         <Box pt={2}> </Box>
         <Grid container spacing={2}>
@@ -96,6 +100,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"
+                    onClick={() => setColorChange(subject.id)}
                   >
                     <EditIcon className={classes.editIcon} />
                   </Box>
@@ -108,7 +113,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                         href={{ pathname: redirect, query: { id: subject.id } }}
                         passHref
                       >
-                        <Button color="primary">Evaluation</Button>
+                        <Button color="primary">{t('evaluation')}</Button>
                       </Link>
                     </CardActions>
                   </div>
@@ -125,7 +130,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
     return (
       <Paper>
         <Box display="flex" justifyContent="center">
-          <Typography>No subjects</Typography>
+          <Typography>{t('noSubjects')}</Typography>
         </Box>
       </Paper>
     );
@@ -133,7 +138,14 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
 
   return (
     <>
-      <ColorChangeDialog open={false} />
+      <ColorChangeDialogIndex
+        open={colorChange !== undefined}
+        defaultColor={`${
+          props.subjects.find(s => s.id === colorChange)?.teacherCardColor
+        }`}
+        subjectId={`${colorChange}`}
+        onClose={() => setColorChange(undefined)}
+      />
       <Paper>
         <OverlayLoadingContainer>
           <OverlayLoading loading={props.loading} />

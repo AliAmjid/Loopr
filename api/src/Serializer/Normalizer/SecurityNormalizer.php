@@ -49,7 +49,7 @@ class SecurityNormalizer implements ContextAwareNormalizerInterface, NormalizerA
 
         if ($this->user) {
             foreach ($this->user->getRole()->getResources() as $resource) {
-                $context['groups'] = 'read:' . $resource->getName();
+                $context['groups'][] = 'read:' . $resource->getName();
             }
         }
 

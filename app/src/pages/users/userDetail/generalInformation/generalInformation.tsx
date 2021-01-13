@@ -43,7 +43,7 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
         />
         <>
           <ListItemText
-            primary="registered in"
+            primary={t('gqlObjects.user.createdAt')}
             secondary={formatDateToMinute(props.user?.createdAt || '')}
           />
         </>

@@ -4,7 +4,7 @@ export interface SubmitValues {
   from: string;
   to: string;
   quarter: number;
-  year: number;
+  schoolYear: number;
 }
 
 export interface EditDialogSharedProps {

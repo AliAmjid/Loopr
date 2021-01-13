@@ -1,4 +1,4 @@
-export interface StudentExam {
+interface StudentExam {
   id: string;
   points: number;
   examWritten: boolean;
@@ -19,10 +19,18 @@ export interface Exam {
   id: string;
   name: string;
   maxPoints: number;
+  writtenAt: string;
 }
 
 export type Students = Student[];
 export type Exams = Exam[];
+
+interface SchoolPeriod {
+  id: string;
+  quarter: number;
+  schoolYear: number;
+}
+export type SchoolPeriods = SchoolPeriod[];
 
 export interface PointSystemProps {
   loading: boolean;
@@ -30,5 +38,9 @@ export interface PointSystemProps {
   students: Students;
   subjectTitle: string;
   maxPoints: number;
+  schoolPeriods: SchoolPeriods;
+  selectedSchoolPeriods: string[];
+  onSchoolPeriodsChange: (schoolPeriods: string[]) => void;
   onExamCreate: () => void;
+  onPercentsToMarkEdit: () => void;
 }

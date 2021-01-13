@@ -10,7 +10,10 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
       }
     }
   }
-  query TeacherSubjectsSubjectPointSystemSubjectQuery($id: ID!) {
+  query TeacherSubjectsSubjectPointSystemSubjectQuery(
+    $id: ID!
+    $schoolPeriods: [String!]
+  ) {
     subject(id: $id) {
       id
       subjectType {
@@ -30,11 +33,12 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
           ...TeacherSubjectsSubjectPointSystemSubectUserFragment
         }
       }
-      exams {
+      exams(schoolPeriod_id_list: $schoolPeriods) {
         edges {
           node {
             id
             name
+            writtenAt
             pointSystem {
               maxPoints
               points {
@@ -50,6 +54,22 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
               }
             }
           }
+        }
+      }
+      percentsToMarkConvert {
+        id
+        one
+        two
+        three
+        four
+      }
+    }
+    schoolPeriods {
+      edges {
+        node {
+          id
+          schoolYear
+          quarter
         }
       }
     }

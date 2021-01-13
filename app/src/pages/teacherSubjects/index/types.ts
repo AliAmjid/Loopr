@@ -11,17 +11,13 @@ export interface Subject {
     year: number;
     section: string;
   } | null;
-  subjectType: {
+  subjectType?: {
     id: string;
     name: string;
-  };
+  } | null;
 }
 
 export interface TeacherSubjectsProps {
   subjects: Subject[];
   loading: boolean;
-}
-
-export interface ColorChangeDialogProps {
-  open: boolean;
 }

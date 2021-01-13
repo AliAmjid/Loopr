@@ -83,7 +83,7 @@ const Subject: React.FC<SubjectProps> = props => {
               `${row.teacher?.firstname} ${row.teacher?.lastname}`,
           },
         ]}
-        options={{ filtering: false }}
+        options={{ filtering: false, exportButton: true }}
         data={(query: Query<SubjectT>) =>
           props.onGetSubjects(query).then(res => ({
             totalCount: res.totalCount,

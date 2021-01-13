@@ -1158,6 +1158,132 @@ export interface SchollPeriodsSchollPeriodsQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: StudentSubjectsLearnedSubjectsQuery
+// ====================================================
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  examWritten: boolean;
+  id: string;
+  points: number;
+  percentil: number;
+  worstThan: number;
+  user: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node_user;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  id: string;
+  maxPoints: number;
+  average: number;
+  points: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node {
+  __typename: "Exam";
+  id: string;
+  name: string;
+  writtenAt: string;
+  pointSystem: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges {
+  __typename: "ExamEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams {
+  __typename: "ExamConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node {
+  __typename: "Subject";
+  id: string;
+  percentsToMarkConvert: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_percentsToMarkConvert;
+  subjectType: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_subjectType | null;
+  evaluationSystem: string;
+  exams: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges {
+  __typename: "SubjectEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects {
+  __typename: "SubjectConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  schoolYear: number;
+  quarter: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery {
+  learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
+  schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
+  meUser: StudentSubjectsLearnedSubjectsQuery_meUser | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQueryVariables {
+  schoolPeriods?: string[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsAddSubjectCreateSubjectMutataion
 // ====================================================
 
@@ -1457,6 +1583,33 @@ export interface SubjectsSubjectTypesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeacherSubjectsUpdateColorSubjectMutation
+// ====================================================
+
+export interface TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject {
+  __typename: "updateColorSubjectPayload";
+  subject: TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject_subject | null;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutation {
+  updateColorSubject: TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject | null;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutationVariables {
+  input: updateColorSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: TeacherSubjectsSubjectsQuery
 // ====================================================
 
@@ -1607,6 +1760,33 @@ export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert
+// ====================================================
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert_percentToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert {
+  __typename: "updatePercentToMarkConvertPayload";
+  percentToMarkConvert: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert_percentToMarkConvert | null;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert {
+  updatePercentToMarkConvert: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert | null;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvertVariables {
+  input: updatePercentToMarkConvertInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
 // ====================================================
 
@@ -1695,6 +1875,7 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edg
   __typename: "Exam";
   id: string;
   name: string;
+  writtenAt: string;
   pointSystem: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem | null;
 }
 
@@ -1708,6 +1889,15 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams {
   edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges | null)[] | null;
 }
 
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
   __typename: "Subject";
   id: string;
@@ -1715,14 +1905,34 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
   group: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group | null;
   classGroup: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup | null;
   exams: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams | null;
+  percentsToMarkConvert: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  schoolYear: number;
+  quarter: number;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges | null)[] | null;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
   subject: TeacherSubjectsSubjectPointSystemSubjectQuery_subject | null;
+  schoolPeriods: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods | null;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
   id: string;
+  schoolPeriods?: string[] | null;
 }
 
 /* tslint:disable */
@@ -2008,6 +2218,12 @@ export interface updateClassGroupInput {
   clientMutationId?: string | null;
 }
 
+export interface updateColorSubjectInput {
+  id: string;
+  teacherCardColor?: string | null;
+  clientMutationId?: string | null;
+}
+
 export interface updateExamInput {
   id: string;
   name?: string | null;
@@ -2019,6 +2235,15 @@ export interface updateExamInput {
 export interface updateGroupInput {
   id: string;
   section?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updatePercentToMarkConvertInput {
+  id: string;
+  one?: number | null;
+  two?: number | null;
+  three?: number | null;
+  four?: number | null;
   clientMutationId?: string | null;
 }
 

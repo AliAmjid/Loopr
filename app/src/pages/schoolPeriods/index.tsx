@@ -4,6 +4,9 @@ import { useApolloClient, useMutation } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import {
   SchollPeriodsSchollPeriodsQuery,
   SchollPeriodsSchollPeriodsQueryVariables,
@@ -31,6 +34,7 @@ const SchoolPeriodsIndex: React.FC = () => {
     SchoolPeriodsDeleteSchoolPeriodMutationVariables
   >(SCHOOL_PERIODS_DELETE_SCHOOL_PERIOD_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.schoolPeriods.index);
 
   const getSchoolPeriods = (
     query: Query<SchoolPeriod>,
@@ -74,12 +78,12 @@ const SchoolPeriodsIndex: React.FC = () => {
   const deleteHandler = (id: string): Promise<boolean> => {
     return deleteSchoolPeriod({ variables: { input: { id } } })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.delete.success'), { variant: 'success' });
 
         return true;
       })
       .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
+        enqueueSnackbar(t('snackbars.delete.error'), { variant: 'error' });
 
         return false;
       });

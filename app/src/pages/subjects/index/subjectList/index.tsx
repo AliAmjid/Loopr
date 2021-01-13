@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
@@ -41,7 +41,6 @@ const SubjectListIndex: React.FC = () => {
     refetchQueries: ['SubjectsSubjectTypesQuery'],
     awaitRefetchQueries: true,
   });
-  // TODO typename
   const [updateSubjectType] = useMutation<
     SubjectsUpdateSubjectTypeMutation,
     SubjectsUpdateSubjectTypeMutationVariables
@@ -61,6 +60,10 @@ const SubjectListIndex: React.FC = () => {
   });
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    setSelectedSubject(undefined);
+  }, []);
 
   const subjects: Subjects = [];
   subjectTypesData?.subjectTypes?.edges?.forEach(subject => {

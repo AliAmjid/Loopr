@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
@@ -7,6 +7,10 @@ import { useSnackbar } from 'notistack';
 
 import recognizeError from 'lib/apollo/recognizeError';
 import errors from 'lib/apollo/recognizeError/errors';
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
+import PercentsToMarkDialogIndex from 'pages/teacherSubjects/subject/pointSystem/percentsToMarkDialog';
 
 import {
   TeacherSubejctsSubjectPointSystemCreateExamMutation,
@@ -15,22 +19,30 @@ import {
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
-import { getPercents } from 'components/percents';
+import { formatDateToDay } from 'components/formatDate';
+import { getMark, getPercents } from 'components/percents';
 import withPage from 'components/withPage';
 
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutation/addExam';
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY from './queries/subject';
 import subjectPageOptions from './pageOptions';
 import PointSystem from './pointSystem';
-import { Exams, Students } from './types';
+import { Exams, SchoolPeriods, Students } from './types';
 
 const PointSystemIndex: React.FC = () => {
   const router = useRouter();
+  const [selectedSchoolPeriods, setSelectedSchoolPeriods] = useState<string[]>(
+    [],
+  );
   const { data: subjectData, loading: subjectLoading } = useQuery<
     TeacherSubjectsSubjectPointSystemSubjectQuery,
     TeacherSubjectsSubjectPointSystemSubjectQueryVariables
   >(TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY, {
-    variables: { id: `${router.query.id}` },
+    variables: {
+      id: `${router.query.id}`,
+      schoolPeriods:
+        selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
+    },
   });
   const [createExam, { loading: createExamLoading }] = useMutation<
     TeacherSubejctsSubjectPointSystemCreateExamMutation,
@@ -39,28 +51,37 @@ const PointSystemIndex: React.FC = () => {
     refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
     awaitRefetchQueries: true,
   });
-
+  const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(
+    namespaces.pages.teacherSubjects.subject.pointSystem,
+  );
 
   const examCreateHandler = (): void => {
     createExam({
       variables: {
         input: {
-          name: 'new test',
+          name: t('newTest'),
           subject: `${router.query.id}`,
           writtenAt: dayjs().toISOString(),
         },
       },
     })
       .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
+        enqueueSnackbar(t('snackbars.createExam.success'), {
+          variant: 'success',
+        });
       })
       .catch(err => {
         const recognizedError = recognizeError(err);
         if (recognizedError === errors.looprError.noSchoolPeriodActive) {
-          enqueueSnackbar('NO SCHOOL PERIOD', { variant: 'warning' });
+          enqueueSnackbar(t('snackbars.createExam.noSchoolPeriod'), {
+            variant: 'warning',
+          });
         } else {
-          enqueueSnackbar('E', { variant: 'error' });
+          enqueueSnackbar(t('snackbars.createExam.error'), {
+            variant: 'error',
+          });
         }
       });
   };
@@ -110,6 +131,7 @@ const PointSystemIndex: React.FC = () => {
         id: examNode.id,
         name: examNode.name,
         maxPoints: examNode.pointSystem?.maxPoints || 0,
+        writtenAt: examNode.writtenAt,
       });
 
       const examPoints: {
@@ -148,13 +170,20 @@ const PointSystemIndex: React.FC = () => {
     });
 
     let totalPercents = '-';
+    let numberTotalPercents = 0;
     if (maxPoints !== 0) {
-      totalPercents = `${Math.round(
-        getPercents({ max: maxPoints, value: totalPoints }),
-      )}%`;
+      numberTotalPercents = getPercents({ max: maxPoints, value: totalPoints });
+      totalPercents = `${numberTotalPercents}%`;
     }
 
-    return { ...student, totalPoints, totalPercents };
+    let totalMark = 5;
+    if (subjectData?.subject?.percentsToMarkConvert)
+      totalMark = getMark({
+        percents: numberTotalPercents,
+        percentsToMarkConvert: subjectData?.subject?.percentsToMarkConvert,
+      });
+
+    return { ...student, totalPoints, totalPercents, totalMark };
   });
 
   let subjectTitle = `${subjectData?.subject?.subjectType?.name} - `;
@@ -165,15 +194,41 @@ const PointSystemIndex: React.FC = () => {
     subjectTitle += `${subjectData.subject.classGroup.year} ${subjectData.subject.classGroup.section}`;
   }
 
+  const schoolPeriods: SchoolPeriods = [];
+  subjectData?.schoolPeriods?.edges?.forEach(schoolPeriodEdge => {
+    if (schoolPeriodEdge?.node) schoolPeriods.push(schoolPeriodEdge.node);
+  });
+
   return (
-    <PointSystem
-      loading={subjectLoading || createExamLoading}
-      exams={exams}
-      students={students}
-      maxPoints={maxPoints}
-      subjectTitle={subjectTitle}
-      onExamCreate={examCreateHandler}
-    />
+    <>
+      <PercentsToMarkDialogIndex
+        open={percentsToMarkOpen}
+        percentsToMarkConvert={
+          subjectData?.subject?.percentsToMarkConvert || {
+            id: '',
+            one: 0,
+            two: 0,
+            three: 0,
+            four: 0,
+          }
+        }
+        onClose={() => setPercentsToMarkOpen(false)}
+      />
+      <PointSystem
+        loading={subjectLoading || createExamLoading}
+        exams={exams}
+        students={students}
+        maxPoints={maxPoints}
+        subjectTitle={subjectTitle}
+        schoolPeriods={schoolPeriods}
+        selectedSchoolPeriods={selectedSchoolPeriods}
+        onSchoolPeriodsChange={schoolPeriods =>
+          setSelectedSchoolPeriods(schoolPeriods)
+        }
+        onExamCreate={examCreateHandler}
+        onPercentsToMarkEdit={() => setPercentsToMarkOpen(true)}
+      />
+    </>
   );
 };
 

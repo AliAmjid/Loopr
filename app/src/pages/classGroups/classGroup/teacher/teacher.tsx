@@ -68,6 +68,7 @@ const Teacher: React.FC<TeacherProps> = props => {
 
             return {};
           },
+          exportButton: true,
         }}
         actions={
           editing
