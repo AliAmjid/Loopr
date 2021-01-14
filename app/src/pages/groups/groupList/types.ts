@@ -24,10 +24,12 @@ export interface GroupListProps {
   groupsLoading: boolean;
   addGroupLoading: boolean;
   deleteLoading: boolean;
+  filter: string;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
   onDelete: (group: string) => Promise<boolean>;
+  onFilterChange: (filter: string) => void;
 }
 
 export interface AddDialogProps {

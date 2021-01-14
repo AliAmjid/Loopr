@@ -885,6 +885,10 @@ export interface GroupsGroupsQuery {
   groups: GroupsGroupsQuery_groups | null;
 }
 
+export interface GroupsGroupsQueryVariables {
+  section?: string | null;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated

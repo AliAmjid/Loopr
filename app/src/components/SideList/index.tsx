@@ -14,6 +14,8 @@ import {
   useTheme,
 } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+
 import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SideList: React.FC<SideListProps> = props => {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [selected, setSelected] = useState<number | string | undefined>(
     undefined,
@@ -96,7 +99,16 @@ const SideList: React.FC<SideListProps> = props => {
         <OverlayLoading loading={props.loading || false} />
         <div className={classes.header}>
           <Typography variant="h6">{props.title}</Typography>
-          <TextField label="Find" fullWidth />
+          {props.filter !== undefined && (
+            <TextField
+              label={t('actions.search')}
+              fullWidth
+              value={props.filter}
+              onChange={e => {
+                if (props.onFilterChange) props.onFilterChange(e.target.value);
+              }}
+            />
+          )}
         </div>
         <List>{mappedItems}</List>
         <Box
