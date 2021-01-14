@@ -81,6 +81,7 @@ export interface EditSubjectGroupQueryVariables {
   after?: string | null;
   first?: number | null;
   last?: number | null;
+  section?: string | null;
 }
 
 /* tslint:disable */
