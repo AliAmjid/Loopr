@@ -8,6 +8,9 @@ const GROUPS_USERS_QUERY = gql`
     $before: String
     $groupId: String!
     $resourceName: String
+    $email: String
+    $firstname: String
+    $lastname: String
   ) {
     users(
       first: $first
@@ -15,6 +18,9 @@ const GROUPS_USERS_QUERY = gql`
       after: $after
       before: $before
       role_resources_name: $resourceName
+      email: $email
+      firstname: $firstname
+      lastname: $lastname
     ) {
       edges {
         node {

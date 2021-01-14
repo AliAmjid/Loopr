@@ -55,10 +55,27 @@ const Group: React.FC<GroupProps> = props => {
             });
           }
         }}
-        columns={[
-          { title: t('common:gqlObjects.user.firstname'), field: 'firstname' },
-          { title: t('common:gqlObjects.user.lastname'), field: 'lastname' },
-        ]}
+        columns={[]}
+        defaultActions={{
+          columnFiltering: {
+            active: true,
+            columns: [
+              {
+                title: t('common:gqlObjects.user.email'),
+                field: 'email',
+              },
+              {
+                title: t('common:gqlObjects.user.firstname'),
+                field: 'firstname',
+              },
+              {
+                title: t('common:gqlObjects.user.lastname'),
+                field: 'lastname',
+              },
+            ],
+            defaultColumns: ['firstname', 'lastname'],
+          },
+        }}
         options={{ selection: editing, exportButton: true }}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">

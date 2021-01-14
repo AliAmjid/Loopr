@@ -642,6 +642,9 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
   usersLast?: number | null;
   usersAfter?: string | null;
   usersBefore?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -689,6 +692,9 @@ export interface ClassGroupsUsersQueryVariables {
   last?: number | null;
   before?: string | null;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -812,6 +818,7 @@ export interface GroupsUpdateUsersGroupMutationVariables {
 export interface GroupsGroupQuery_group_users_edges_node {
   __typename: "User";
   id: string;
+  email: string;
   firstname: string;
   lastname: string;
 }
@@ -844,6 +851,9 @@ export interface GroupsGroupQueryVariables {
   usersLast?: number | null;
   usersAfter?: string | null;
   usersBefore?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -930,6 +940,9 @@ export interface GroupsUsersQueryVariables {
   before?: string | null;
   groupId: string;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */

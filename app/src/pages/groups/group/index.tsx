@@ -70,6 +70,16 @@ const GroupIndex: React.FC = () => {
       pageSize: query.pageSize,
     });
 
+    const emailFilter =
+      query.filters.find(filter => filter.column.field === 'email')?.value ||
+      '';
+    const firstnameFilter =
+      query.filters.find(filter => filter.column.field === 'firstname')
+        ?.value || '';
+    const lastnameFilter =
+      query.filters.find(filter => filter.column.field === 'lastname')?.value ||
+      '';
+
     const defaultValue = { users: [], totalCount: 0 };
 
     if (selectedGroup) {
@@ -82,6 +92,9 @@ const GroupIndex: React.FC = () => {
             usersLast: variables.last,
             usersBefore: variables.before,
             usersAfter: variables.after,
+            email: emailFilter,
+            firstname: firstnameFilter,
+            lastname: lastnameFilter,
           },
         })
         .then(res => {
@@ -111,6 +124,16 @@ const GroupIndex: React.FC = () => {
       pageSize: query.pageSize,
     });
 
+    const emailFilter =
+      query.filters.find(filter => filter.column.field === 'email')?.value ||
+      '';
+    const firstnameFilter =
+      query.filters.find(filter => filter.column.field === 'firstname')
+        ?.value || '';
+    const lastnameFilter =
+      query.filters.find(filter => filter.column.field === 'lastname')?.value ||
+      '';
+
     const defaultValue = { users: [], totalCount: 0 };
 
     if (selectedGroup) {
@@ -121,6 +144,9 @@ const GroupIndex: React.FC = () => {
             ...variables,
             groupId: selectedGroup.substring('/groups/'.length),
             resourceName: resources.user.canStudy,
+            email: emailFilter,
+            firstname: firstnameFilter,
+            lastname: lastnameFilter,
           },
         })
         .then(res => {

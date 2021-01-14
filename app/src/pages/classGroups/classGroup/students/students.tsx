@@ -62,7 +62,7 @@ const Students: React.FC<StudentsProps> = props => {
                 field: 'lastname',
               },
             ],
-            defaultColumns: ['firstname', 'lastname', 'email'],
+            defaultColumns: ['firstname', 'lastname'],
           },
         }}
         options={{ selection: editing, exportButton: true }}

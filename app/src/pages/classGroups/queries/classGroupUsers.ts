@@ -7,6 +7,9 @@ const CLASS_GROUPS_CLASS_GROUP_USERS_QUERY = gql`
     $usersLast: Int
     $usersAfter: String
     $usersBefore: String
+    $email: String
+    $firstname: String
+    $lastname: String
   ) {
     classGroup(id: $id) {
       id
@@ -15,6 +18,9 @@ const CLASS_GROUPS_CLASS_GROUP_USERS_QUERY = gql`
         last: $usersLast
         after: $usersAfter
         before: $usersBefore
+        email: $email
+        firstname: $firstname
+        lastname: $lastname
       ) {
         edges {
           node {
