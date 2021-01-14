@@ -27,13 +27,14 @@ services:
       - JWT_PASSPHRASE=${JWT_PASSPHRASE}
     links:
       - db
+    
     depends_on:
       - db
-  
+    volumes:
+      - php_socket:/var/run/php
+      
   caddy:
-    build:
-      context: api/
-      target: api_platform_caddy
+    image: ${NGINX_IMAGE}
     environment:
       PWA_UPSTREAM: app:3000
       SERVER_NAME: http://localhost
@@ -73,3 +74,6 @@ services:
       - 3001:3001
 volumes:
   db-data: { }
+  caddy_data:
+  caddy_config:
+  php_socket: 

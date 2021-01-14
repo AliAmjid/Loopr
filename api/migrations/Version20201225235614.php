@@ -26,18 +26,6 @@ final class Version20201225235614 extends AbstractMigration implements Container
 
     public function up(Schema $schema): void
     {
-        /** @var ObjectManager $em */
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        /** @var User $user */
-        foreach ($em->getRepository(User::class)->findAll() as $user) {
-            $privateData = new UserPrivateData();
-            $privateData->setUser($user);
-            $user->setPrivateData(new UserPrivateData());
-            $em->persist($privateData);
-            $em->persist($user);
-        }
-        $em->flush();
-
         $this->addSql('ALTER TABLE "user" ALTER private_data_id SET NOT NULL');
     }
 
