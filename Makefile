@@ -24,4 +24,7 @@ api-dump-env:
 api-messenger:
 	sudo docker-compose $(dockerComposeDevFiles) exec php php bin/console messenger:consume async
 api-generate-schema:
-	sudo docker-compose exec php bin/console api:graphql:export
+	sudo docker-compose $(dockerComposeDevFiles) exec php bin/console api:graphql:export
+api-clear-cache:
+	sudo docker-compose $(dockerComposeDevFiles) exec php bin/console cache:clear
+
