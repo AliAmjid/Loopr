@@ -7,6 +7,9 @@ const EDIT_SUBJECT_TEACHER_QUERY = gql`
     $first: Int
     $last: Int
     $resourceName: String
+    $email: String
+    $firstname: String
+    $lastname: String
   ) {
     users(
       before: $before
@@ -14,6 +17,9 @@ const EDIT_SUBJECT_TEACHER_QUERY = gql`
       first: $first
       last: $last
       role_resources_name: $resourceName
+      email: $email
+      firstname: $firstname
+      lastname: $lastname
     ) {
       edges {
         node {

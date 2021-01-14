@@ -188,6 +188,9 @@ export interface EditSubjectTeacherQueryVariables {
   first?: number | null;
   last?: number | null;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
