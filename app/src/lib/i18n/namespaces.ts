@@ -24,6 +24,18 @@ export default {
       editSubject: 'P_subjects_editSubject',
       addSubject: 'P_subjects_addSubject',
     },
+    teacherSubjects: {
+      index: 'P_teacherSubjects_index',
+      subject: {
+        pointSystem: 'P_teacherSubjects_subject_pointSystem',
+      },
+    },
+    studentSubjects: {
+      index: 'P_studentSubjects_index',
+    },
+    schoolPeriods: {
+      index: 'P_schoolPeriods_index',
+    },
   },
   components: {
     withPage: 'C_withPage',
@@ -39,5 +51,6 @@ export default {
   },
   lib: {
     materialTable: 'L_materialTable',
+    dayjs: 'L_dayjs',
   },
 };

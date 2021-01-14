@@ -1,5 +1,6 @@
 import React from 'react';
 
+import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
 
 import withPageNamespaces from 'components/withPage/namespaces';
@@ -9,7 +10,7 @@ import WithPageInternal from 'components/withPage/withPage';
 const withPage = <ComponentProps extends {}>(pageOptions: PageOptions) => (
   Component: React.ComponentType<ComponentProps>,
 ) => {
-  const { namespaces, ...rest } = pageOptions;
+  const { namespaces: pageNamespaces, ...rest } = pageOptions;
 
   const EndComponent: React.FC<ComponentProps> = props => {
     return (
@@ -21,11 +22,12 @@ const withPage = <ComponentProps extends {}>(pageOptions: PageOptions) => (
     );
   };
 
-  const pageNamespaces = namespaces || [];
-
-  return withNamespaces(['common', ...withPageNamespaces, ...pageNamespaces])(
-    EndComponent,
-  );
+  return withNamespaces([
+    'common',
+    namespaces.lib.dayjs,
+    ...withPageNamespaces,
+    ...(pageNamespaces || []),
+  ])(EndComponent);
 };
 
 export default withPage;

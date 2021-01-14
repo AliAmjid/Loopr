@@ -45,6 +45,21 @@ const navigationList: NavigationList = [
     icon: <ViewListIcon />,
     href: routes.subjects.index,
   },
+  {
+    label: 'schoolPeriods.index',
+    icon: <ViewListIcon />,
+    href: routes.schoolPeriods.index,
+  },
+  {
+    label: 'teacherSubjects.index',
+    icon: <ViewListIcon />,
+    href: routes.teacherSubjects.index,
+  },
+  {
+    label: 'studentSubjects.index',
+    icon: <ViewListIcon />,
+    href: routes.studentSubjects.index,
+  },
 ];
 
 export default navigationList;

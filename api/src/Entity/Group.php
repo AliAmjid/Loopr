@@ -49,14 +49,14 @@ class Group implements IGroup
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User")
-     * @Groups({"read", "exposed"})
+     * @Groups({"read:GROUP_SHOW_ALL", "exposed"})
      */
     private User $createdBy;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Groups({"read", "exposed"})
+     * @Groups({"read:GROUP_SHOW_ALL", "exposed"})
      */
     private \DateTime $createdAt;
 
@@ -169,4 +169,11 @@ class Group implements IGroup
         $this->createdAt = $createdAt;
         return $this;
     }
+
+    public function isUserMember(User $user): bool
+    {
+        return $this->users->contains($user);
+    }
+
+
 }

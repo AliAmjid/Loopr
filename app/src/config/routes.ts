@@ -29,6 +29,18 @@ const routes = {
     editSubject: '/subjects/editSubject',
     addSubject: '/subjects/addSubject',
   },
+  schoolPeriods: {
+    index: '/schoolPeriods',
+  },
+  teacherSubjects: {
+    index: '/teacherSubjects',
+    subject: {
+      points: '/teacherSubjects/subject/pointSystem',
+    },
+  },
+  studentSubjects: {
+    index: '/studentSubjects',
+  },
 };
 
 export default routes;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
@@ -17,6 +17,7 @@ import {
   GroupsDeleteMutation,
   GroupsDeleteMutationVariables,
   GroupsGroupsQuery,
+  GroupsGroupsQueryVariables,
   GroupsUpdateGroupMutation,
   GroupsUpdateGroupMutationVariables,
 } from 'types/graphql';
@@ -28,12 +29,16 @@ import GroupList from './groupList';
 
 const GroupListIndex: React.FC = () => {
   const { t } = useTranslation(namespaces.pages.groups.index);
+
+  const [filter, setFilter] = useState('');
   const { setSelectedGroup } = useGroupsState(state => ({
     setSelectedGroup: state.setSelectedGroup,
   }));
+
   const { data: groupsData, loading: groupsLoading } = useQuery<
-    GroupsGroupsQuery
-  >(GROUPS_GROUPS_QUERY);
+    GroupsGroupsQuery,
+    GroupsGroupsQueryVariables
+  >(GROUPS_GROUPS_QUERY, { variables: { section: filter } });
   const [addGroup, { loading: addGroupLoading }] = useMutation<
     GroupsAddGroupMutation,
     GroupsAddGroupMutationVariables
@@ -121,12 +126,14 @@ const GroupListIndex: React.FC = () => {
       onAdd={addHandler}
       groupsLoading={groupsLoading}
       deleteLoading={deleteGroupLoading}
+      filter={filter}
       addGroupLoading={addGroupLoading}
       onSelectedGroupChange={(group: string) => {
         setSelectedGroup(group);
       }}
       onUpdate={updateHandler}
       onDelete={deleteHandler}
+      onFilterChange={filter => setFilter(filter)}
     />
   );
 };

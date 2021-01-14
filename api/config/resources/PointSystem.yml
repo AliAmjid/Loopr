@@ -1,0 +1,26 @@
+App\Entity\PointSystem:
+    attributes:
+        denormalization_context:
+            groups: [ exam:write ]
+        normalization_context:
+            groups: [ exposed ]
+    #disable rest
+    collectionOperations: { }
+    itemOperations:
+        get:
+            method: GET
+            controller: ApiPlatform\Core\Action\NotFoundAction
+            read: false
+            output: false
+    graphql:
+        createOrUpdate:
+            security_post_denormalize: "is_granted('CREATE_EXAM', object.getExam())"
+            mutation: App\Controller\PointSystemController
+            write: false
+            args:
+                exam:
+                    type: 'ID!'
+                maxPoints:
+                    type: 'Int!'
+                points:
+                    type: '[createPointInput]'

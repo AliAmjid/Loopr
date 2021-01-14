@@ -1,0 +1,48 @@
+{
+  "weekdays": {
+    "1": "neděle",
+    "2": "pondělí",
+    "3": "úterý",
+    "4": "středa",
+    "5": "čtvrtek",
+    "6": "pátek",
+    "7": "sobota"
+  },
+  "months": {
+    "1": "leden",
+    "2": "únor",
+    "3": "březen",
+    "4": "duben",
+    "5": "květen",
+    "6": "červen",
+    "7": "červenec",
+    "8": "srpen",
+    "9": "září",
+    "10": "říjen",
+    "11": "listopad",
+    "12": "prosinec"
+  },
+  "weekdaysShort": {
+    "1": "ne",
+    "2": "po",
+    "3": "út",
+    "4": "st",
+    "5": "čt",
+    "6": "pá",
+    "7": "so"
+  },
+  "monthsShort": {
+    "1": "led",
+    "2": "úno",
+    "3": "bře",
+    "4": "dub",
+    "5": "kvě",
+    "6": "čvn",
+    "7": "čvc",
+    "8": "srp",
+    "9": "zář",
+    "10": "říj",
+    "11": "lis",
+    "12": "pro"
+  }
+}

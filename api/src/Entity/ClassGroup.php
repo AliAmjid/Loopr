@@ -69,7 +69,7 @@ class ClassGroup implements IGroup
     private \DateTime $createdAt;
 
     /**
-     * @Groups({"read", "exposed"})
+     * @Groups({"read:always", "exposed"})
      * @var Collection
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="classGroup")
      */
@@ -221,5 +221,10 @@ class ClassGroup implements IGroup
         $user->setClassGroup(null);
         $this->users->removeElement($user);
         return $user;
+    }
+
+    public function isUserMember(User $user): bool
+    {
+        return $this->users->contains($user);
     }
 }

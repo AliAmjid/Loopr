@@ -14,6 +14,9 @@ const typography: Overrides = {
       fontWeight: 500,
       paddingBottom: spacing,
     },
+    subtitle1: {
+      fontSize: '1.2rem',
+    },
   },
 };
 

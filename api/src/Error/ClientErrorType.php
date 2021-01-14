@@ -60,4 +60,29 @@ class ClientErrorType
         'code' => 'INVALID_IRI',
         'msg' => 'Invalid IRI'
     ];
+
+    const CHECK_ACCESS = [
+        'code' => 'CHECK_ACCESS',
+        'msg' => 'You probably dont have to access to some of field you are trying to access. '
+    ];
+
+    const SCHOOL_PERIOD_VALIDATION_ERROR = [
+        'code' => 'SCHOOL_PERIOD_VALIDATION_ERROR',
+        'msg' => 'Some of configuration for school period is wrong.'
+    ];
+
+    const NO_SCHOOL_PERIOD_ACTIVE = [
+        'code' => 'NO_SCHOOL_PERIOD_ACTIVE',
+        'msg' => 'No school period is active right now.. contact administrator'
+    ];
+
+    const BAD_MARK_SYSTEM = [
+        'code' => 'BAD_MARK_SYSTEM',
+        'msg' => 'Cant create mark system with this exam. Exam has different exam system'
+    ];
+
+    const USER_NOT_EXAM_MEMBER = [
+        'code' => 'USER_NOT_EXAM_MEMBER',
+        'msg' => 'User is not member of group of subject on which is exam created'
+    ];
 }

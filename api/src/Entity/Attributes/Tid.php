@@ -11,19 +11,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 trait Tid
 {
     /**
-     * @var string
+     * @var ?string
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Id()
      * @ORM\Column(type="guid")
      * @ApiProperty(identifier=true)
      * @Groups({"read", "exposed", "id", "read:always"})
      */
-    private string $id;
+    private ?string $id;
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }

@@ -4,18 +4,18 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use App\Entity\Attributes\Tid;
-use App\Error\ClientError;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Doctrine\Common\Collections\Collection;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use App\Filter\ResourceFilter;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -23,9 +23,9 @@ use App\Filter\ResourceFilter;
  * @ORM\Table(name="`user`")
  * @ApiFilter(SearchFilter::class, properties={
  *     "id": "exact",
- *      "firstname": "partial",
- *      "lastname": "partial",
- *      "email": "partial",
+ *     "firstname": "ipartial",
+ *     "lastname": "ipartial",
+ *     "email": "ipartial",
  *     "role.resources.name": "exact",
  *     "role.resources.id": "exact",
  *     "classGroup.id": "exact",
@@ -33,13 +33,13 @@ use App\Filter\ResourceFilter;
  * })
  * @ApiFilter(DateFilter::class, properties={"createdAt"})
  */
+#[ApiFilter(filterClass: ExistsFilter::class, properties: ['classGroup'])]
 class User implements UserInterface
 {
     use Tid;
 
-
     /** @var string email of user
-     * @Assert\Email()
+     * @Assert\Email(mode="loose")
      * @Assert\NotBlank()
      * @ORM\Column(type="string",unique=true)
      * @Groups({"exposed", "user:write", "read"})
@@ -62,6 +62,14 @@ class User implements UserInterface
 
 
     /**
+     * @var string|null
+     * @Groups({"user:write"})
+     * @Assert\Length(min="8")
+     */
+    private ?string $rawPassword = null;
+
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read", "user:write", "exposed"})
      */
@@ -81,7 +89,7 @@ class User implements UserInterface
 
     /**
      * @var ClassGroup|null
-     * @Groups({"read", "user:write", "exposed"})
+     * @Groups({"read:owner","read:GROUP_SHOW_ALL", "user:write", "exposed"})
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
      * @ORM\JoinColumn(name="class_group_id", referencedColumnName="id")
      */
@@ -90,9 +98,43 @@ class User implements UserInterface
     /**
      * @var Collection|Groups[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"read", "user:write", "exposed"})
+     * @Groups({"read:owner","read:USER_SHOW_ALL", "user:write", "exposed"})
      */
     private $groups;
+
+    /**
+     * @var UserPrivateData
+     * @ORM\OneToOne(targetEntity="UserPrivateData", inversedBy="user", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read:always","exposed", "read:USER_SHOW_ALL"})
+     */
+    private $privateData;
+
+    /**
+     * @var Collection|Notification[]
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user")
+     * @Groups({"read:owner", "exposed"})
+     */
+    private Collection|array $notifications;
+
+    /**
+     * @var Collection|Subject[]
+     * @ORM\OneToMany(targetEntity="Subject", mappedBy="teacher")
+     * @Groups({"exposed", "read:owner", "read:USER_SHOW_ALL"})
+     */
+    private Collection|array $taughtSubjects;
+
+    /**
+     * @var Collection|array
+     * @ORM\OneToMany(targetEntity="WebPushSubscribe", mappedBy="user")
+     */
+    private Collection|array $wepPushSubscribes;
+
+    #[Pure]
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     public function getId(): string
     {
@@ -110,7 +152,6 @@ class User implements UserInterface
     /**
      * @return string
      * @internal
-     * @deprecated
      * @ApiProperty(deprecationReason="use email instead")
      */
     public function getUsername(): string
@@ -163,9 +204,6 @@ class User implements UserInterface
     {
     }
 
-    /**
-     * @return string
-     */
     public function getLastname(): string
     {
         return $this->lastname;
@@ -175,14 +213,6 @@ class User implements UserInterface
     {
         $this->lastname = $lastname;
         return $this;
-    }
-
-    /**
-     * @ApiProperty(deprecationReason="Replaced with firstname and lastname")
-     */
-    public function getName(): ?string
-    {
-        return $this->firstname . " " . $this->lastname;
     }
 
     public function setFirstname(string $firstname): self
@@ -201,18 +231,11 @@ class User implements UserInterface
         return $this->createdAt;
     }
 
-    /**
-     * @return ClassGroup|null
-     */
     public function getClassGroup(): ?ClassGroup
     {
         return $this->classGroup;
     }
 
-    /**
-     * @param ClassGroup|null $classGroup
-     * @return User
-     */
     public function setClassGroup(?ClassGroup $classGroup): User
     {
         $this->classGroup = $classGroup;
@@ -233,5 +256,40 @@ class User implements UserInterface
     public function setCreatedAt(): void
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function getPrivateData(): UserPrivateData
+    {
+        return $this->privateData;
+    }
+
+    public function setPrivateData(UserPrivateData $privateData): User
+    {
+        $this->privateData = $privateData;
+        return $this;
+    }
+
+    public function getRawPassword(): ?string
+    {
+        return $this->rawPassword;
+    }
+
+    public function setRawPassword(?string $rawPassword): User
+    {
+        $this->rawPassword = $rawPassword;
+        return $this;
+    }
+
+    /**
+     * @return Notification[]|Collection
+     */
+    public function getNotifications(): Collection|array
+    {
+        return $this->notifications;
+    }
+
+    public function getTaughtSubjects(): Collection|array
+    {
+        return $this->taughtSubjects;
     }
 }

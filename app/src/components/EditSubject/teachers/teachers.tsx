@@ -11,7 +11,6 @@ import useSelectedBackground from 'lib/material-table/useSelectedBackground';
 import { Teacher, TeacherProps } from './types';
 
 const Teachers: React.FC<TeacherProps> = props => {
-  const selectedBackground = useSelectedBackground();
   const { t } = useTranslation(namespaces.components.EditSubject);
 
   return (
@@ -40,15 +39,6 @@ const Teachers: React.FC<TeacherProps> = props => {
           data: res.teachers,
         }))
       }
-      options={{
-        rowStyle: (row: Teacher) => {
-          if (row.id === props.selectedTeacher) {
-            return { backgroundColor: selectedBackground };
-          }
-
-          return {};
-        },
-      }}
       actions={[
         {
           icon: AddIcon,

@@ -1,4 +1,4 @@
 export interface SubjectsState {
   selectedSubject?: string;
-  setSelectedSubject: (subject: string) => void;
+  setSelectedSubject: (subject?: string) => void;
 }

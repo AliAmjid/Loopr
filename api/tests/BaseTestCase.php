@@ -14,6 +14,7 @@ use App\Tests\Helpers\TCreateEntityHelpers;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use PHPUnit\Framework\TestCase;
 use Softonic\GraphQL\ClientBuilder;
 use Softonic\GraphQL\Response;
@@ -47,7 +48,7 @@ abstract class BaseTestCase extends TestCase
 
     protected function clientFactory($token = null)
     {
-        return GraphQLClientBuilder::build('http://api:80/graphql', $token ? [
+        return GraphQLClientBuilder::build('http://caddy:80/graphql', $token ? [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token
             ]

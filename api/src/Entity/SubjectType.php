@@ -28,7 +28,8 @@ class SubjectType
     private string $name;
 
 
-    /** @var Collection
+    /**
+     * @var Collection
      * @Groups({"read", "exposed"})
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="subjectType")
      */

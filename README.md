@@ -11,18 +11,16 @@ Run `make` and appropriate command
 |dev-up|Starts bundle in **development** mode|
 |dev-up-build|Builds and then starts the bundle in **development** mode|
 |dev-down|Remove bundle in **development** mode|
-|prod-build|Builds bundle in **production** mode|
-|prod-up|Starts bundle in **production** mode|
-|prod-up-build|Builds and then starts the bundle in **production** mode|
-|prod-down|Remove bundle in **production** mode|
 
 ## Bundle parts
 ### [Api](./api)
 > Backend
-- Default port: 4000
+- Default port: (no SSL) 4000
+- Alternative SSL: 4001 (https://localhost:4001/graphql)
 ### [App](./app)
 > Frontend web app
 - Default port: 3000
+- Alternative SSL: (https://localhost:4001/)
 ### [Docs](./docs)
 > User documentation for `app` 
 - Default port: 3001

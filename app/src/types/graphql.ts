@@ -19,9 +19,6 @@ export interface EditSubjectClassGroupsQuery_classGroups_edges_node {
   id: string;
   section: string;
   year: number;
-  /**
-   * Teacher needs to be user with resource GROUP_TEACHER
-   */
   teacher: EditSubjectClassGroupsQuery_classGroups_edges_node_teacher | null;
 }
 
@@ -84,6 +81,7 @@ export interface EditSubjectGroupQueryVariables {
   after?: string | null;
   first?: number | null;
   last?: number | null;
+  section?: string | null;
 }
 
 /* tslint:disable */
@@ -163,9 +161,6 @@ export interface EditSubjectSummaryGroupQueryVariables {
 export interface EditSubjectTeacherQuery_users_edges_node {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -193,6 +188,9 @@ export interface EditSubjectTeacherQueryVariables {
   first?: number | null;
   last?: number | null;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -215,9 +213,6 @@ export interface UserImportTableCreateUserMutation_createUser {
 }
 
 export interface UserImportTableCreateUserMutation {
-  /**
-   * Creates a User.
-   */
   createUser: UserImportTableCreateUserMutation_createUser | null;
 }
 
@@ -237,11 +232,6 @@ export interface UserImportTableCreateUserMutationVariables {
 export interface UserImportTableAclRolesQuery_aclRoles {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
@@ -265,15 +255,7 @@ export interface WithPageMeUserQuery_meUser_role_resources {
 
 export interface WithPageMeUserQuery_meUser_role {
   __typename: "AclRole";
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
-  /**
-   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
-   */
   resources: (WithPageMeUserQuery_meUser_role_resources | null)[] | null;
 }
 
@@ -301,11 +283,6 @@ export interface WithPageMeUserQuery {
 export interface AclEditRoleUpdateRole_updateAclRole_aclRole {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
@@ -315,9 +292,6 @@ export interface AclEditRoleUpdateRole_updateAclRole {
 }
 
 export interface AclEditRoleUpdateRole {
-  /**
-   * Updates a AclRole.
-   */
   updateAclRole: AclEditRoleUpdateRole_updateAclRole | null;
 }
 
@@ -338,11 +312,6 @@ export interface AclEditRoleUpdateRoleVariables {
 export interface AclEditRoleAclRole_aclRole {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
@@ -371,15 +340,7 @@ export interface AclCreateAclRole_createAclRole_aclRole_resources {
 export interface AclCreateAclRole_createAclRole_aclRole {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
-  /**
-   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
-   */
   resources: (AclCreateAclRole_createAclRole_aclRole_resources | null)[] | null;
 }
 
@@ -389,9 +350,6 @@ export interface AclCreateAclRole_createAclRole {
 }
 
 export interface AclCreateAclRole {
-  /**
-   * Creates a AclRole.
-   */
   createAclRole: AclCreateAclRole_createAclRole | null;
 }
 
@@ -416,9 +374,6 @@ export interface AclUpdateAclMutation_updateAclRole_aclRole_resources {
 export interface AclUpdateAclMutation_updateAclRole_aclRole {
   __typename: "AclRole";
   id: string;
-  /**
-   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
-   */
   resources: (AclUpdateAclMutation_updateAclRole_aclRole_resources | null)[] | null;
 }
 
@@ -428,9 +383,6 @@ export interface AclUpdateAclMutation_updateAclRole {
 }
 
 export interface AclUpdateAclMutation {
-  /**
-   * Updates a AclRole.
-   */
   updateAclRole: AclUpdateAclMutation_updateAclRole | null;
 }
 
@@ -461,15 +413,7 @@ export interface AclTableQuery_aclRoles_resources {
 export interface AclTableQuery_aclRoles {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
-  /**
-   * Must be an array IRIs (acl_resources/<uuid>) of existing resources
-   */
   resources: (AclTableQuery_aclRoles_resources | null)[] | null;
 }
 
@@ -498,9 +442,6 @@ export interface ClassGroupsAddClassGroupMutation_createClassGroup {
 }
 
 export interface ClassGroupsAddClassGroupMutation {
-  /**
-   * Creates a ClassGroup.
-   */
   createClassGroup: ClassGroupsAddClassGroupMutation_createClassGroup | null;
 }
 
@@ -528,9 +469,6 @@ export interface ClassGroupsDeleteClassGroupMutation_deleteClassGroup {
 }
 
 export interface ClassGroupsDeleteClassGroupMutation {
-  /**
-   * Deletes a ClassGroup.
-   */
   deleteClassGroup: ClassGroupsDeleteClassGroupMutation_deleteClassGroup | null;
 }
 
@@ -550,9 +488,6 @@ export interface ClassGroupsDeleteClassGroupMutationVariables {
 export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup_teacher {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -563,9 +498,6 @@ export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup
   id: string;
   year: number;
   section: string;
-  /**
-   * Teacher needs to be user with resource GROUP_TEACHER
-   */
   teacher: ClassGroupsUpdateClassGroupMutation_updateClassGroup_classGroup_teacher | null;
 }
 
@@ -575,9 +507,6 @@ export interface ClassGroupsUpdateClassGroupMutation_updateClassGroup {
 }
 
 export interface ClassGroupsUpdateClassGroupMutation {
-  /**
-   * Updates a ClassGroup.
-   */
   updateClassGroup: ClassGroupsUpdateClassGroupMutation_updateClassGroup | null;
 }
 
@@ -605,9 +534,6 @@ export interface ClassGroupsUpdateUsersClassGroupMutation_updateUsersClassGroup 
 }
 
 export interface ClassGroupsUpdateUsersClassGroupMutation {
-  /**
-   * UpdateUserss a ClassGroup.
-   */
   updateUsersClassGroup: ClassGroupsUpdateUsersClassGroupMutation_updateUsersClassGroup | null;
 }
 
@@ -657,9 +583,6 @@ export interface ClassGroupsClassGroupsQuery {
 export interface ClassGroupsClassGroupTeacher_classGroup_teacher {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -667,9 +590,6 @@ export interface ClassGroupsClassGroupTeacher_classGroup_teacher {
 
 export interface ClassGroupsClassGroupTeacher_classGroup {
   __typename: "ClassGroup";
-  /**
-   * Teacher needs to be user with resource GROUP_TEACHER
-   */
   teacher: ClassGroupsClassGroupTeacher_classGroup_teacher | null;
 }
 
@@ -693,9 +613,6 @@ export interface ClassGroupsClassGroupTeacherVariables {
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -729,6 +646,9 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
   usersLast?: number | null;
   usersAfter?: string | null;
   usersBefore?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -748,9 +668,6 @@ export interface ClassGroupsUsersQuery_users_edges_node_classGroup {
 export interface ClassGroupsUsersQuery_users_edges_node {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -779,6 +696,10 @@ export interface ClassGroupsUsersQueryVariables {
   last?: number | null;
   before?: string | null;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  isInClassGroup?: boolean | null;
 }
 
 /* tslint:disable */
@@ -801,9 +722,6 @@ export interface GroupsAddGroupMutation_createGroup {
 }
 
 export interface GroupsAddGroupMutation {
-  /**
-   * Creates a Group.
-   */
   createGroup: GroupsAddGroupMutation_createGroup | null;
 }
 
@@ -831,9 +749,6 @@ export interface GroupsDeleteMutation_deleteGroup {
 }
 
 export interface GroupsDeleteMutation {
-  /**
-   * Deletes a Group.
-   */
   deleteGroup: GroupsDeleteMutation_deleteGroup | null;
 }
 
@@ -862,9 +777,6 @@ export interface GroupsUpdateGroupMutation_updateGroup {
 }
 
 export interface GroupsUpdateGroupMutation {
-  /**
-   * Updates a Group.
-   */
   updateGroup: GroupsUpdateGroupMutation_updateGroup | null;
 }
 
@@ -892,9 +804,6 @@ export interface GroupsUpdateUsersGroupMutation_updateUsersGroup {
 }
 
 export interface GroupsUpdateUsersGroupMutation {
-  /**
-   * UpdateUserss a Group.
-   */
   updateUsersGroup: GroupsUpdateUsersGroupMutation_updateUsersGroup | null;
 }
 
@@ -908,14 +817,53 @@ export interface GroupsUpdateUsersGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GroupsClassGroupsQuery
+// ====================================================
+
+export interface GroupsClassGroupsQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface GroupsClassGroupsQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: GroupsClassGroupsQuery_classGroups_edges_node | null;
+}
+
+export interface GroupsClassGroupsQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (GroupsClassGroupsQuery_classGroups_edges | null)[] | null;
+}
+
+export interface GroupsClassGroupsQuery {
+  classGroups: GroupsClassGroupsQuery_classGroups | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GroupsGroupQuery
 // ====================================================
+
+export interface GroupsGroupQuery_group_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
 
 export interface GroupsGroupQuery_group_users_edges_node {
   __typename: "User";
   id: string;
+  email: string;
   firstname: string;
   lastname: string;
+  classGroup: GroupsGroupQuery_group_users_edges_node_classGroup | null;
 }
 
 export interface GroupsGroupQuery_group_users_edges {
@@ -946,6 +894,10 @@ export interface GroupsGroupQueryVariables {
   usersLast?: number | null;
   usersAfter?: string | null;
   usersBefore?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  classGroups?: (string | null)[] | null;
 }
 
 /* tslint:disable */
@@ -977,6 +929,10 @@ export interface GroupsGroupsQuery {
   groups: GroupsGroupsQuery_groups | null;
 }
 
+export interface GroupsGroupsQueryVariables {
+  section?: string | null;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated
@@ -985,6 +941,13 @@ export interface GroupsGroupsQuery {
 // ====================================================
 // GraphQL query operation: GroupsUsersQuery
 // ====================================================
+
+export interface GroupsUsersQuery_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
 
 export interface GroupsUsersQuery_users_edges_node_groups_edges_node {
   __typename: "Group";
@@ -1006,6 +969,7 @@ export interface GroupsUsersQuery_users_edges_node {
   id: string;
   firstname: string;
   lastname: string;
+  classGroup: GroupsUsersQuery_users_edges_node_classGroup | null;
   groups: GroupsUsersQuery_users_edges_node_groups | null;
 }
 
@@ -1032,6 +996,10 @@ export interface GroupsUsersQueryVariables {
   before?: string | null;
   groupId: string;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  classGroups?: (string | null)[] | null;
 }
 
 /* tslint:disable */
@@ -1045,9 +1013,6 @@ export interface GroupsUsersQueryVariables {
 
 export interface LoginGetTokenQuery_getToken {
   __typename: "Token";
-  /**
-   * Use token in header like this: 'Authorization: Bearer {token}'
-   */
   token: string;
 }
 
@@ -1100,9 +1065,6 @@ export interface ProfileChangePassword_changePasswordUser {
 }
 
 export interface ProfileChangePassword {
-  /**
-   * ChangePasswords a User.
-   */
   changePasswordUser: ProfileChangePassword_changePasswordUser | null;
 }
 
@@ -1122,20 +1084,12 @@ export interface ProfileChangePasswordVariables {
 export interface ProfileUserQuery_meUser_role {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
 export interface ProfileUserQuery_meUser {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -1144,6 +1098,254 @@ export interface ProfileUserQuery_meUser {
 
 export interface ProfileUserQuery {
   meUser: ProfileUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SchoolPeriodsCreateSchoolPeriodMutation
+// ====================================================
+
+export interface SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod_schoolPeriod {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
+export interface SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod {
+  __typename: "createSchoolPeriodPayload";
+  schoolPeriod: SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod_schoolPeriod | null;
+}
+
+export interface SchoolPeriodsCreateSchoolPeriodMutation {
+  createSchoolPeriod: SchoolPeriodsCreateSchoolPeriodMutation_createSchoolPeriod | null;
+}
+
+export interface SchoolPeriodsCreateSchoolPeriodMutationVariables {
+  input: createSchoolPeriodInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SchoolPeriodsDeleteSchoolPeriodMutation
+// ====================================================
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod_schoolPeriod {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod {
+  __typename: "deleteSchoolPeriodPayload";
+  schoolPeriod: SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod_schoolPeriod | null;
+}
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutation {
+  deleteSchoolPeriod: SchoolPeriodsDeleteSchoolPeriodMutation_deleteSchoolPeriod | null;
+}
+
+export interface SchoolPeriodsDeleteSchoolPeriodMutationVariables {
+  input: deleteSchoolPeriodInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SchoolPeriodsUpdateSchoolPeriodMutation
+// ====================================================
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod_schoolPeriod {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod {
+  __typename: "updateSchoolPeriodPayload";
+  schoolPeriod: SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod_schoolPeriod | null;
+}
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutation {
+  updateSchoolPeriod: SchoolPeriodsUpdateSchoolPeriodMutation_updateSchoolPeriod | null;
+}
+
+export interface SchoolPeriodsUpdateSchoolPeriodMutationVariables {
+  input: updateSchoolPeriodInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SchollPeriodsSchollPeriodsQuery
+// ====================================================
+
+export interface SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  from: string;
+  to: string;
+  quarter: number;
+  schoolYear: number;
+}
+
+export interface SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges_node | null;
+  cursor: string;
+}
+
+export interface SchollPeriodsSchollPeriodsQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (SchollPeriodsSchollPeriodsQuery_schoolPeriods_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface SchollPeriodsSchollPeriodsQuery {
+  schoolPeriods: SchollPeriodsSchollPeriodsQuery_schoolPeriods | null;
+}
+
+export interface SchollPeriodsSchollPeriodsQueryVariables {
+  first?: number | null;
+  last?: number | null;
+  before?: string | null;
+  after?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: StudentSubjectsLearnedSubjectsQuery
+// ====================================================
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  examWritten: boolean;
+  id: string;
+  points: number;
+  percentil: number;
+  worstThan: number;
+  user: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node_user;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  id: string;
+  maxPoints: number;
+  average: number;
+  points: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem_points | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node {
+  __typename: "Exam";
+  id: string;
+  name: string;
+  writtenAt: string;
+  pointSystem: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node_pointSystem | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges {
+  __typename: "ExamEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams {
+  __typename: "ExamConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node {
+  __typename: "Subject";
+  id: string;
+  percentsToMarkConvert: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_percentsToMarkConvert;
+  subjectType: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_subjectType | null;
+  evaluationSystem: string;
+  exams: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node_exams | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges {
+  __typename: "SubjectEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects {
+  __typename: "SubjectConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_learnedSubjects_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  schoolYear: number;
+  quarter: number;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
+export interface StudentSubjectsLearnedSubjectsQuery {
+  learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
+  schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
+  meUser: StudentSubjectsLearnedSubjectsQuery_meUser | null;
+}
+
+export interface StudentSubjectsLearnedSubjectsQueryVariables {
+  schoolPeriods?: string[] | null;
 }
 
 /* tslint:disable */
@@ -1166,9 +1368,6 @@ export interface SubjectsAddSubjectCreateSubjectMutataion_createSubject {
 }
 
 export interface SubjectsAddSubjectCreateSubjectMutataion {
-  /**
-   * Creates a Subject.
-   */
   createSubject: SubjectsAddSubjectCreateSubjectMutataion_createSubject | null;
 }
 
@@ -1196,9 +1395,6 @@ export interface SubjectsEditSubjectUpdateSubjectMutation_updateSubject {
 }
 
 export interface SubjectsEditSubjectUpdateSubjectMutation {
-  /**
-   * Updates a Subject.
-   */
   updateSubject: SubjectsEditSubjectUpdateSubjectMutation_updateSubject | null;
 }
 
@@ -1235,7 +1431,7 @@ export interface SubjectsEditSubjectSubjectQuery_subject {
   id: string;
   group: SubjectsEditSubjectSubjectQuery_subject_group | null;
   classGroup: SubjectsEditSubjectSubjectQuery_subject_classGroup | null;
-  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher | null;
+  teacher: SubjectsEditSubjectSubjectQuery_subject_teacher;
 }
 
 export interface SubjectsEditSubjectSubjectQuery {
@@ -1266,9 +1462,6 @@ export interface SubjectsAddSubjectTypeMutation_createSubjectType {
 }
 
 export interface SubjectsAddSubjectTypeMutation {
-  /**
-   * Creates a SubjectType.
-   */
   createSubjectType: SubjectsAddSubjectTypeMutation_createSubjectType | null;
 }
 
@@ -1296,9 +1489,6 @@ export interface SubjectsDeleteSubjectMutation_deleteSubject {
 }
 
 export interface SubjectsDeleteSubjectMutation {
-  /**
-   * Deletes a Subject.
-   */
   deleteSubject: SubjectsDeleteSubjectMutation_deleteSubject | null;
 }
 
@@ -1326,9 +1516,6 @@ export interface SubjectsDeleteSubjectTypeMutation_deleteSubjectType {
 }
 
 export interface SubjectsDeleteSubjectTypeMutation {
-  /**
-   * Deletes a SubjectType.
-   */
   deleteSubjectType: SubjectsDeleteSubjectTypeMutation_deleteSubjectType | null;
 }
 
@@ -1357,9 +1544,6 @@ export interface SubjectsUpdateSubjectTypeMutation_updateSubjectType {
 }
 
 export interface SubjectsUpdateSubjectTypeMutation {
-  /**
-   * Updates a SubjectType.
-   */
   updateSubjectType: SubjectsUpdateSubjectTypeMutation_updateSubjectType | null;
 }
 
@@ -1401,7 +1585,7 @@ export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node {
   id: string;
   group: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_group | null;
   classGroup: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_classGroup | null;
-  teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher | null;
+  teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher;
 }
 
 export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges {
@@ -1469,26 +1653,376 @@ export interface SubjectsSubjectTypesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: TeacherSubjectsUpdateColorSubjectMutation
+// ====================================================
+
+export interface TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject {
+  __typename: "updateColorSubjectPayload";
+  subject: TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject_subject | null;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutation {
+  updateColorSubject: TeacherSubjectsUpdateColorSubjectMutation_updateColorSubject | null;
+}
+
+export interface TeacherSubjectsUpdateColorSubjectMutationVariables {
+  input: updateColorSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: TeacherSubjectsSubjectsQuery
+// ====================================================
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group {
+  __typename: "Group";
+  id: string;
+  section: string;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node {
+  __typename: "Subject";
+  id: string;
+  teacherCardColor: string | null;
+  evaluationSystem: string;
+  group: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group | null;
+  classGroup: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup | null;
+  subjectType: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges {
+  __typename: "SubjectEdge";
+  node: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects {
+  __typename: "SubjectConnection";
+  edges: (TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery_meUser {
+  __typename: "User";
+  taughtSubjects: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects | null;
+}
+
+export interface TeacherSubjectsSubjectsQuery {
+  meUser: TeacherSubjectsSubjectsQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: TeacherSubejctsSubjectPointSystemCreateExamMutation
+// ====================================================
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam_exam {
+  __typename: "Exam";
+  id: string;
+}
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam {
+  __typename: "createExamPayload";
+  exam: TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam_exam | null;
+}
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutation {
+  createExam: TeacherSubejctsSubjectPointSystemCreateExamMutation_createExam | null;
+}
+
+export interface TeacherSubejctsSubjectPointSystemCreateExamMutationVariables {
+  input: createExamInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem_pointSystem {
+  __typename: "PointSystem";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem {
+  __typename: "createOrUpdatePointSystemPayload";
+  pointSystem: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem_pointSystem | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam_exam {
+  __typename: "Exam";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam {
+  __typename: "updateExamPayload";
+  exam: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam_exam | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation {
+  createOrUpdatePointSystem: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_createOrUpdatePointSystem | null;
+  updateExam: TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutation_updateExam | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables {
+  pointSystemInput: createOrUpdatePointSystemInput;
+  examInput: updateExamInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: TeacherSubjectsSubjectPointsSystemDeleteExamMutation
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam_exam {
+  __typename: "Exam";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam {
+  __typename: "deleteExamPayload";
+  exam: TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam_exam | null;
+}
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutation {
+  deleteExam: TeacherSubjectsSubjectPointsSystemDeleteExamMutation_deleteExam | null;
+}
+
+export interface TeacherSubjectsSubjectPointsSystemDeleteExamMutationVariables {
+  input: deleteExamInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert
+// ====================================================
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert_percentToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert {
+  __typename: "updatePercentToMarkConvertPayload";
+  percentToMarkConvert: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert_percentToMarkConvert | null;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert {
+  updatePercentToMarkConvert: TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvert_updatePercentToMarkConvert | null;
+}
+
+export interface TeahcerSubjectsSubjectPointSystemUpdatePercentToMarkConvertVariables {
+  input: updatePercentToMarkConvertInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: TeacherSubjectsSubjectPointSystemSubjectQuery
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges_node {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges {
+  __typename: "UserEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users {
+  __typename: "UserConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group {
+  __typename: "Group";
+  section: string;
+  users: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group_users | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges_node {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges {
+  __typename: "UserEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users {
+  __typename: "UserConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup {
+  __typename: "ClassGroup";
+  section: string;
+  year: number;
+  users: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup_users | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  user: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node_user;
+  points: number;
+  examWritten: boolean;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  maxPoints: number;
+  points: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem_points | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node {
+  __typename: "Exam";
+  id: string;
+  name: string;
+  writtenAt: string;
+  pointSystem: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node_pointSystem | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges {
+  __typename: "ExamEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams {
+  __typename: "ExamConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_subject {
+  __typename: "Subject";
+  id: string;
+  subjectType: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_subjectType | null;
+  group: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_group | null;
+  classGroup: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_classGroup | null;
+  exams: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_exams | null;
+  percentsToMarkConvert: TeacherSubjectsSubjectPointSystemSubjectQuery_subject_percentsToMarkConvert;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges_node {
+  __typename: "SchoolPeriod";
+  id: string;
+  schoolYear: number;
+  quarter: number;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges {
+  __typename: "SchoolPeriodEdge";
+  node: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods {
+  __typename: "SchoolPeriodConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges | null)[] | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
+  subject: TeacherSubjectsSubjectPointSystemSubjectQuery_subject | null;
+  schoolPeriods: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
+  id: string;
+  schoolPeriods?: string[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UsersUsersQuery
 // ====================================================
 
 export interface UsersUsersQuery_users_edges_node_role {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
 export interface UsersUsersQuery_users_edges_node {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -1534,20 +2068,12 @@ export interface UsersUsersQueryVariables {
 export interface UsersUserDetailUpdateUserMutation_updateUser_user_role {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
 export interface UsersUserDetailUpdateUserMutation_updateUser_user {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -1560,9 +2086,6 @@ export interface UsersUserDetailUpdateUserMutation_updateUser {
 }
 
 export interface UsersUserDetailUpdateUserMutation {
-  /**
-   * Updates a User.
-   */
   updateUser: UsersUserDetailUpdateUserMutation_updateUser | null;
 }
 
@@ -1582,20 +2105,12 @@ export interface UsersUserDetailUpdateUserMutationVariables {
 export interface UsersUserDetailUserQuery_user_role {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
 export interface UsersUserDetailUserQuery_user {
   __typename: "User";
   id: string;
-  /**
-   * email of user
-   */
   email: string;
   firstname: string;
   lastname: string;
@@ -1606,11 +2121,6 @@ export interface UsersUserDetailUserQuery_user {
 export interface UsersUserDetailUserQuery_aclRoles {
   __typename: "AclRole";
   id: string;
-  /**
-   * Example format: ROLE_ADMIN.
-   * Must start with 'ROLE_' and name cant be longer than 20 letters.
-   * (regex: ^ROLE_[A-Z]{1,20}$/m)
-   */
   name: string;
 }
 
@@ -1628,132 +2138,231 @@ export interface UsersUserDetailUserQueryVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: TeacherSubjectsSubjectPointSystemSubectUserFragment
+// ====================================================
+
+export interface TeacherSubjectsSubjectPointSystemSubectUserFragment_edges_node {
+  __typename: "User";
+  id: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubectUserFragment_edges {
+  __typename: "UserEdge";
+  node: TeacherSubjectsSubjectPointSystemSubectUserFragment_edges_node | null;
+}
+
+export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
+  __typename: "UserConnection";
+  edges: (TeacherSubjectsSubjectPointSystemSubectUserFragment_edges | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
 
 export interface changePasswordUserInput {
-  clientMutationId?: string | null;
-  newPassword: string;
   oldPassword: string;
+  newPassword: string;
+  clientMutationId?: string | null;
 }
 
 export interface createAclRoleInput {
-  clientMutationId?: string | null;
   name: string;
   resources?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 export interface createClassGroupInput {
-  clientMutationId?: string | null;
+  year: number;
   section: string;
   teacher?: string | null;
-  year: number;
+  clientMutationId?: string | null;
+}
+
+export interface createExamInput {
+  name: string;
+  subject?: string | null;
+  writtenAt: string;
+  clientMutationId?: string | null;
 }
 
 export interface createGroupInput {
-  clientMutationId?: string | null;
   section: string;
+  clientMutationId?: string | null;
+}
+
+export interface createOrUpdatePointSystemInput {
+  exam: string;
+  maxPoints: number;
+  points?: createPointInput[] | null;
+  clientMutationId?: string | null;
+}
+
+export interface createPointInput {
+  user: string;
+  points: number;
+  examWritten: boolean;
+  clientMutationId?: string | null;
+}
+
+export interface createSchoolPeriodInput {
+  quarter: number;
+  from: string;
+  to: string;
+  schoolYear: number;
+  clientMutationId?: string | null;
 }
 
 export interface createSubjectInput {
-  clientMutationId?: string | null;
-  iGroupIri: string;
   subjectType?: string | null;
-  teacher?: string | null;
+  teacher: string;
+  iGroupIri: string;
+  clientMutationId?: string | null;
 }
 
 export interface createSubjectTypeInput {
-  clientMutationId?: string | null;
   name: string;
+  clientMutationId?: string | null;
 }
 
 export interface createUserInput {
-  classGroup?: string | null;
-  clientMutationId?: string | null;
   email: string;
-  firstname: string;
-  lastname: string;
   role: string;
+  lastname: string;
+  firstname: string;
+  classGroup?: string | null;
+  rawPassword?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface deleteClassGroupInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
+}
+
+export interface deleteExamInput {
+  id: string;
+  clientMutationId?: string | null;
 }
 
 export interface deleteGroupInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
+}
+
+export interface deleteSchoolPeriodInput {
+  id: string;
+  clientMutationId?: string | null;
 }
 
 export interface deleteSubjectInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
 }
 
 export interface deleteSubjectTypeInput {
-  clientMutationId?: string | null;
   id: string;
+  clientMutationId?: string | null;
 }
 
 export interface updateAclRoleInput {
-  clientMutationId?: string | null;
   id: string;
   name?: string | null;
   resources?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateClassGroupInput {
-  clientMutationId?: string | null;
   id: string;
+  year?: number | null;
   section?: string | null;
   teacher?: string | null;
-  year?: number | null;
+  clientMutationId?: string | null;
+}
+
+export interface updateColorSubjectInput {
+  id: string;
+  teacherCardColor?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updateExamInput {
+  id: string;
+  name?: string | null;
+  subject?: string | null;
+  writtenAt?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateGroupInput {
-  clientMutationId?: string | null;
   id: string;
   section?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface updatePercentToMarkConvertInput {
+  id: string;
+  one?: number | null;
+  two?: number | null;
+  three?: number | null;
+  four?: number | null;
+  clientMutationId?: string | null;
+}
+
+export interface updateSchoolPeriodInput {
+  id: string;
+  quarter?: number | null;
+  from?: string | null;
+  to?: string | null;
+  schoolYear?: number | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateSubjectInput {
-  clientMutationId?: string | null;
-  iGroupIri?: string | null;
   id: string;
   subjectType?: string | null;
   teacher?: string | null;
+  iGroupIri?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateSubjectTypeInput {
-  clientMutationId?: string | null;
   id: string;
   name?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateUserInput {
-  classGroup?: string | null;
-  clientMutationId?: string | null;
-  email?: string | null;
-  firstname?: string | null;
   id: string;
-  lastname?: string | null;
+  email?: string | null;
   role?: string | null;
+  lastname?: string | null;
+  firstname?: string | null;
+  classGroup?: string | null;
+  rawPassword?: string | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateUsersClassGroupInput {
-  addUsers?: (string | null)[] | null;
-  clientMutationId?: string | null;
-  deleteUsers?: (string | null)[] | null;
   id: string;
+  addUsers?: (string | null)[] | null;
+  deleteUsers?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 export interface updateUsersGroupInput {
-  addUsers?: (string | null)[] | null;
-  clientMutationId?: string | null;
-  deleteUsers?: (string | null)[] | null;
   id: string;
+  addUsers?: (string | null)[] | null;
+  deleteUsers?: (string | null)[] | null;
+  clientMutationId?: string | null;
 }
 
 //==============================================================

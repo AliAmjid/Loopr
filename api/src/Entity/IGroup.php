@@ -23,4 +23,6 @@ interface IGroup
     public function addUser(User $user): User;
 
     public function deleteUser(User $user): User;
+
+    public function isUserMember(User $user) : bool;
 }

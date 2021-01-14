@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Divider,
@@ -15,7 +15,7 @@ import usePageState from 'components/withPage/Page/state';
 import Navigation from './Navigation';
 import { DrawerProps } from './types';
 
-export const drawerWidth = 260;
+export const drawerWidth = 280;
 const useStyles = makeStyles({
   drawerPaper: {
     width: drawerWidth,
@@ -37,6 +37,10 @@ const Drawer: React.FC<DrawerProps> = props => {
     open: state.drawerOpen,
     setOpen: state.setDrawerOpen,
   }));
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <>

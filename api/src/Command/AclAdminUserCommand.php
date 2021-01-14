@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\AclResource;
 use App\Entity\AclRole;
 use App\Entity\User;
+use App\Entity\UserPrivateData;
 use App\Enum\AclResourceEnum;
 use Doctrine\Persistence\ManagerRegistry;
 use Nette\Utils\Random;
@@ -70,6 +71,7 @@ class AclAdminUserCommand extends Command
         $user->setFirstname(Random::generate());
         $user->setLastname(Random::generate());
         $user->setRole($this->createRoleWithResources($resources));
+        $user->setPrivateData(new UserPrivateData());
         $this->em->persist($user);
         $this->em->flush();
         return $user;

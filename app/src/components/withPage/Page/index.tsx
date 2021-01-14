@@ -16,10 +16,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     padding: theme.spacing(3),
     paddingTop: theme.spacing(2),
+    height: '100%',
     [theme.breakpoints.up('lg')]: {
       marginLeft: drawerWidth,
     },
-    height: '100%',
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,

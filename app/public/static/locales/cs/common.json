@@ -5,7 +5,8 @@
       "lastname": "Příjmení",
       "email": "Email",
       "role": "Role",
-      "createdAt": "Registrován v"
+      "createdAt": "Registrován v",
+      "classGroup": "Třída"
     },
     "classGroup": {
       "section": "Název",
@@ -13,6 +14,29 @@
     },
     "subjectType": {
       "name": "Název"
+    },
+    "point": {
+      "points": {
+        "nominative": "Body",
+        "accusative": "Bodů"
+      },
+      "percents": "Procenta",
+      "mark": "Známka",
+      "percentil": "Percentil"
+    },
+    "exam": {
+      "name": "Název",
+      "writtenAt": "Datum"
+    },
+    "pointSystem": {
+      "maxPoints": "Maximum bodů"
+    },
+    "schoolPeriod": {
+      "name": "Známkovací období",
+      "from": "Od",
+      "to": "Do",
+      "quarter": "Čtvrtletí",
+      "schoolYear": "Školní rok"
     }
   },
   "actions": {
@@ -21,6 +45,9 @@
     "delete": "Odstranit",
     "cancel": "Zrušit",
     "save": "Uložit",
-    "select": "Zvolit"
+    "select": "Zvolit",
+    "submit": "Potvrdit",
+    "search": "Vyhledat",
+    "upload": "Nahrát"
   }
 }

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     left: 0,
     height: '100%',
     width: '100%',
-    zIndex: 11,
+    zIndex: theme.zIndex.appBar + 10,
     borderRadius: 'inherit',
     transition: theme.transitions.create('opacity'),
   },

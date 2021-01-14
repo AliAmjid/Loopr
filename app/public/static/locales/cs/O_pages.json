@@ -25,5 +25,17 @@
     "index": "Předměty",
     "editSubject": "Upravit předmět",
     "addSubject": "Přidat předmět"
+  },
+  "teacherSubjects": {
+    "index": "Vyučované předměty",
+    "subject": {
+      "index": "Vyučovaný předmět"
+    }
+  },
+  "studentSubjects": {
+    "index": "Studované předměty"
+  },
+  "schoolPeriods": {
+    "index": "Známkovací období"
   }
 }

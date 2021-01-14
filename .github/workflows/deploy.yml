@@ -3,7 +3,7 @@ name: Build and deploy to app.loopr.cz
 on:
   push:
     branches:
-      - dev
+      - master
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
