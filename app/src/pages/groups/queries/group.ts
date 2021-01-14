@@ -10,6 +10,7 @@ const GROUPS_GROUP_QUERY = gql`
     $email: String
     $firstname: String
     $lastname: String
+    $classGroups: [String]
   ) {
     group(id: $id) {
       id
@@ -21,6 +22,7 @@ const GROUPS_GROUP_QUERY = gql`
         email: $email
         firstname: $firstname
         lastname: $lastname
+        classGroup_id_list: $classGroups
       ) {
         edges {
           node {
@@ -28,6 +30,11 @@ const GROUPS_GROUP_QUERY = gql`
             email
             firstname
             lastname
+            classGroup {
+              id
+              year
+              section
+            }
           }
           cursor
         }

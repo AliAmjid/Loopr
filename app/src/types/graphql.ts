@@ -699,6 +699,7 @@ export interface ClassGroupsUsersQueryVariables {
   email?: string | null;
   firstname?: string | null;
   lastname?: string | null;
+  isInClassGroup?: boolean | null;
 }
 
 /* tslint:disable */
@@ -816,8 +817,45 @@ export interface GroupsUpdateUsersGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GroupsClassGroupsQuery
+// ====================================================
+
+export interface GroupsClassGroupsQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface GroupsClassGroupsQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: GroupsClassGroupsQuery_classGroups_edges_node | null;
+}
+
+export interface GroupsClassGroupsQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (GroupsClassGroupsQuery_classGroups_edges | null)[] | null;
+}
+
+export interface GroupsClassGroupsQuery {
+  classGroups: GroupsClassGroupsQuery_classGroups | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GroupsGroupQuery
 // ====================================================
+
+export interface GroupsGroupQuery_group_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
 
 export interface GroupsGroupQuery_group_users_edges_node {
   __typename: "User";
@@ -825,6 +863,7 @@ export interface GroupsGroupQuery_group_users_edges_node {
   email: string;
   firstname: string;
   lastname: string;
+  classGroup: GroupsGroupQuery_group_users_edges_node_classGroup | null;
 }
 
 export interface GroupsGroupQuery_group_users_edges {
@@ -858,6 +897,7 @@ export interface GroupsGroupQueryVariables {
   email?: string | null;
   firstname?: string | null;
   lastname?: string | null;
+  classGroups?: (string | null)[] | null;
 }
 
 /* tslint:disable */
@@ -902,6 +942,13 @@ export interface GroupsGroupsQueryVariables {
 // GraphQL query operation: GroupsUsersQuery
 // ====================================================
 
+export interface GroupsUsersQuery_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
 export interface GroupsUsersQuery_users_edges_node_groups_edges_node {
   __typename: "Group";
   id: string;
@@ -922,6 +969,7 @@ export interface GroupsUsersQuery_users_edges_node {
   id: string;
   firstname: string;
   lastname: string;
+  classGroup: GroupsUsersQuery_users_edges_node_classGroup | null;
   groups: GroupsUsersQuery_users_edges_node_groups | null;
 }
 
@@ -951,6 +999,7 @@ export interface GroupsUsersQueryVariables {
   email?: string | null;
   firstname?: string | null;
   lastname?: string | null;
+  classGroups?: (string | null)[] | null;
 }
 
 /* tslint:disable */

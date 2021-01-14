@@ -32,7 +32,7 @@ const Group: React.FC<GroupProps> = props => {
       <MaterialTable
         key={props.selectedGroup + editing}
         uniqueName="pages/groups/group"
-        isLoading={loading}
+        isLoading={loading || props.loading}
         title={t('students')}
         data={(query: Query<DetailGroupUser>) =>
           editing
@@ -71,6 +71,11 @@ const Group: React.FC<GroupProps> = props => {
               {
                 title: t('common:gqlObjects.user.lastname'),
                 field: 'lastname',
+              },
+              {
+                title: t('common:gqlObjects.user.classGroup'),
+                field: 'classGroup',
+                lookup: props.classGroupLookup,
               },
             ],
             defaultColumns: ['firstname', 'lastname'],

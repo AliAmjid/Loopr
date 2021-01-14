@@ -146,6 +146,7 @@ const StudentsIndex: React.FC = () => {
             email: emailFilter,
             firstname: firstnameFilter,
             lastname: lastnameFilter,
+            isInClassGroup: undefined,
           },
         })
         .then(res => {

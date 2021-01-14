@@ -82,6 +82,7 @@ type Query {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [UserFilter_exists]
         id: String
         id_list: [String]
         firstname: String
@@ -184,6 +185,7 @@ type Group implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [UserFilter_exists]
         id: String
         id_list: [String]
         firstname: String
@@ -300,6 +302,7 @@ type ClassGroup implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [UserFilter_exists]
         id: String
         id_list: [String]
         firstname: String
@@ -319,6 +322,10 @@ type ClassGroup implements Node {
     # Teacher needs to be user with resource GROUP_TEACHER
     teacher: User
     _id: String!
+}
+
+input UserFilter_exists {
+    classGroup: Boolean
 }
 
 input UserFilter_createdAt {
