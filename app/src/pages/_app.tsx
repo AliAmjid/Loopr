@@ -43,7 +43,7 @@ const MyApp: AppType = props => {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <link rel="manifest" href="/static/manifest.json" />
+        <link rel="manifest" href={`/static/${i18n.language}.manifest.json`} />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
