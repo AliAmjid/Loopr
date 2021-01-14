@@ -11,7 +11,7 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 COPY package.json ./
 COPY yarn.lock ./
-RUN yarn install --prod
+RUN yarn install
 
 COPY ./ ./
 

@@ -2,5 +2,12 @@
 - Stránky
     - [Přihlášení](cs/pages/login/)
     - [Uživatelé](cs/pages/users/) 
+    - [Třídy](cs/pages/classGroups/)
+    - [Skupiny](cs/pages/groups/)
+    - [Předměty](cs/pages/subjects/)
+    - [Studované předměty](cs/pages/studentSubjects/)        
+    - [Vyučované předměty](cs/pages/teacherSubjects/index/)
+        - [Bodový systém](cs/pages/teacherSubjects/pointSystem/)
 - Komponenty
     - [Datová tabulka](cs/components/materialTable/)
+    
