@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
@@ -14,6 +14,7 @@ import GROUPS_USERS_QUERY from 'pages/groups/queries/users';
 import useGroupsState from 'pages/groups/state';
 
 import {
+  GroupsClassGroupsQuery,
   GroupsGroupQuery,
   GroupsGroupQueryVariables,
   GroupsUpdateUsersGroupMutation,
@@ -25,6 +26,7 @@ import {
 import usePagination from 'components/usePagination';
 
 import GROUPS_UPDATE_USERS_GROUP_MUTATION from '../mutations/updateUsersGroup';
+import GROUPS_CLASS_GROUPS_QUERY from '../queries/classGroups';
 
 import Group from './group';
 import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
@@ -35,6 +37,9 @@ const GroupIndex: React.FC = () => {
     selectedGroup: state.selectedGroup,
   }));
   const client = useApolloClient();
+  const { data: classGroupsData, loading: classGroupsLoading } = useQuery<
+    GroupsClassGroupsQuery
+  >(GROUPS_CLASS_GROUPS_QUERY);
   const [updateUsersGroup] = useMutation<
     GroupsUpdateUsersGroupMutation,
     GroupsUpdateUsersGroupMutationVariables
@@ -70,6 +75,19 @@ const GroupIndex: React.FC = () => {
       pageSize: query.pageSize,
     });
 
+    const emailFilter =
+      query.filters.find(filter => filter.column.field === 'email')?.value ||
+      '';
+    const firstnameFilter =
+      query.filters.find(filter => filter.column.field === 'firstname')
+        ?.value || '';
+    const lastnameFilter =
+      query.filters.find(filter => filter.column.field === 'lastname')?.value ||
+      '';
+    const classGroupsFilter =
+      query.filters.find(filter => filter.column.field === 'classGroup')
+        ?.value || [];
+
     const defaultValue = { users: [], totalCount: 0 };
 
     if (selectedGroup) {
@@ -82,6 +100,10 @@ const GroupIndex: React.FC = () => {
             usersLast: variables.last,
             usersBefore: variables.before,
             usersAfter: variables.after,
+            email: emailFilter,
+            firstname: firstnameFilter,
+            lastname: lastnameFilter,
+            classGroups: classGroupsFilter,
           },
         })
         .then(res => {
@@ -92,7 +114,12 @@ const GroupIndex: React.FC = () => {
 
             const users = [];
             for (const user of res.data?.group?.users?.edges || []) {
-              if (user?.node) users.push(user.node);
+              if (user?.node) {
+                users.push({
+                  ...user.node,
+                  classGroup: user.node.classGroup?.id,
+                });
+              }
             }
 
             return { users, totalCount };
@@ -111,6 +138,19 @@ const GroupIndex: React.FC = () => {
       pageSize: query.pageSize,
     });
 
+    const emailFilter =
+      query.filters.find(filter => filter.column.field === 'email')?.value ||
+      '';
+    const firstnameFilter =
+      query.filters.find(filter => filter.column.field === 'firstname')
+        ?.value || '';
+    const lastnameFilter =
+      query.filters.find(filter => filter.column.field === 'lastname')?.value ||
+      '';
+    const classGroupsFilter =
+      query.filters.find(filter => filter.column.field === 'classGroup')
+        ?.value || [];
+
     const defaultValue = { users: [], totalCount: 0 };
 
     if (selectedGroup) {
@@ -121,6 +161,10 @@ const GroupIndex: React.FC = () => {
             ...variables,
             groupId: selectedGroup.substring('/groups/'.length),
             resourceName: resources.user.canStudy,
+            email: emailFilter,
+            firstname: firstnameFilter,
+            lastname: lastnameFilter,
+            classGroups: classGroupsFilter,
           },
         })
         .then(res => {
@@ -135,6 +179,7 @@ const GroupIndex: React.FC = () => {
                 const node = user?.node;
                 users.push({
                   ...node,
+                  classGroup: node?.classGroup?.id,
                   tableData: {
                     checked: (node.groups?.edges?.length || 0) > 0,
                   },
@@ -198,11 +243,22 @@ const GroupIndex: React.FC = () => {
       });
   };
 
+  const classGroupLookup: Record<string, string> = {};
+  classGroupsData?.classGroups?.edges?.forEach(classGroupEdge => {
+    if (classGroupEdge?.node) {
+      classGroupLookup[
+        classGroupEdge.node.id
+      ] = `${classGroupEdge.node.year} ${classGroupEdge.node.section}`;
+    }
+  });
+
   return (
     <Group
       selectedGroup={selectedGroup}
       getUsers={getUsers}
       getGroupUsers={getGroupUsers}
+      classGroupLookup={classGroupLookup}
+      loading={classGroupsLoading}
       onSelectionChange={selectionChangeHandler}
       onSubmit={submitHandler}
     />

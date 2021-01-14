@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     padding: 0,
     scrollBehavior: 'smooth',
-    overflowX: 'hidden',
   },
   whiteCell: {
     backgroundColor: theme.palette.common.white,

@@ -21,10 +21,14 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
         uniqueName="components/UserImportTable/UserImportTableUI"
         isLoading={props.loading}
         columns={[
-          { title: t('firstName'), field: 'firstname' },
-          { title: t('lastName'), field: 'lastname' },
-          { title: t('email'), field: 'email' },
-          { title: t('role'), field: 'role', lookup: props.rolesLookup },
+          { title: t('common:gqlObjects.user.firstname'), field: 'firstname' },
+          { title: t('common:gqlObjects.user.lastname'), field: 'lastname' },
+          { title: t('common:gqlObjects.user.email'), field: 'email' },
+          {
+            title: t('common:gqlObjects.user.role'),
+            field: 'role',
+            lookup: props.rolesLookup,
+          },
         ]}
         data={props.users.map(u => u)}
         options={{
@@ -54,17 +58,13 @@ const UserImportTableUI: React.FC<UserImportTableUIProps> = props => {
       <Box display="flex" justifyContent="flex-end" pt={2}>
         <Box pr={2}>
           <Link href={routes.users.index} passHref>
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={props.onSubmit}
-            >
-              {t('finish')}
+            <Button color="primary" onClick={props.onSubmit}>
+              {t('common:actions.cancel')}
             </Button>
           </Link>
         </Box>
         <Button color="primary" variant="contained" onClick={props.onSubmit}>
-          {t('upload')}
+          {t('common:actions.upload')}
         </Button>
       </Box>
     </>

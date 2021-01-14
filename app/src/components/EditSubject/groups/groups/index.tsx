@@ -16,7 +16,7 @@ import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const GroupsIndex: React.FC = () => {
-  const { group, setGroup } = useEditSubjectState(state => ({
+  const { setGroup } = useEditSubjectState(state => ({
     group: state.group,
     setGroup: state.setGroup,
   }));
@@ -26,11 +26,16 @@ const GroupsIndex: React.FC = () => {
   const { getPagination, setPagination } = usePagination();
 
   const getGroupsHandler = (query: Query<Group>): OnGetGroupsReturn => {
+    const sectionFilter =
+      query.filters.find(filter => filter.column.field === 'section')?.value ||
+      '';
+
     return client
       .query<EditSubjectGroupQuery, EditSubjectGroupQueryVariables>({
         query: EDIT_SUBJECT_GROUP_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
+          section: sectionFilter,
         },
       })
       .then(res => {
@@ -58,7 +63,6 @@ const GroupsIndex: React.FC = () => {
 
   return (
     <GroupTable
-      selectedGroup={group}
       onSelectedGroupChange={(group: string) => setGroup(group)}
       onGetGroups={getGroupsHandler}
     />

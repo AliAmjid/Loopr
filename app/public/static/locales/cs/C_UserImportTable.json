@@ -1,11 +1,5 @@
 {
   "tableTitle": "Nový uživatelé",
-  "upload": "Přidat",
-  "finish": "Dokončit",
-  "firstName": "Jméno",
-  "lastName": "Příjmení",
-  "email": "Email",
-  "role": "Role",
   "success": "Uživatelé úspěšně přidáni",
   "error": "Uživatele se nepovedlo přidat"
 }

@@ -5,7 +5,8 @@
       "lastname": "Příjmení",
       "email": "Email",
       "role": "Role",
-      "createdAt": "Registrován v"
+      "createdAt": "Registrován v",
+      "classGroup": "Třída"
     },
     "classGroup": {
       "section": "Název",
@@ -45,6 +46,8 @@
     "cancel": "Zrušit",
     "save": "Uložit",
     "select": "Zvolit",
-    "submit": "Potvrdit"
+    "submit": "Potvrdit",
+    "search": "Vyhledat",
+    "upload": "Nahrát"
   }
 }

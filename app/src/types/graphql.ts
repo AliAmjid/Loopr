@@ -81,6 +81,7 @@ export interface EditSubjectGroupQueryVariables {
   after?: string | null;
   first?: number | null;
   last?: number | null;
+  section?: string | null;
 }
 
 /* tslint:disable */
@@ -187,6 +188,9 @@ export interface EditSubjectTeacherQueryVariables {
   first?: number | null;
   last?: number | null;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -642,6 +646,9 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
   usersLast?: number | null;
   usersAfter?: string | null;
   usersBefore?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
 }
 
 /* tslint:disable */
@@ -689,6 +696,10 @@ export interface ClassGroupsUsersQueryVariables {
   last?: number | null;
   before?: string | null;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  isInClassGroup?: boolean | null;
 }
 
 /* tslint:disable */
@@ -806,14 +817,53 @@ export interface GroupsUpdateUsersGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GroupsClassGroupsQuery
+// ====================================================
+
+export interface GroupsClassGroupsQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface GroupsClassGroupsQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: GroupsClassGroupsQuery_classGroups_edges_node | null;
+}
+
+export interface GroupsClassGroupsQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (GroupsClassGroupsQuery_classGroups_edges | null)[] | null;
+}
+
+export interface GroupsClassGroupsQuery {
+  classGroups: GroupsClassGroupsQuery_classGroups | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GroupsGroupQuery
 // ====================================================
+
+export interface GroupsGroupQuery_group_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
 
 export interface GroupsGroupQuery_group_users_edges_node {
   __typename: "User";
   id: string;
+  email: string;
   firstname: string;
   lastname: string;
+  classGroup: GroupsGroupQuery_group_users_edges_node_classGroup | null;
 }
 
 export interface GroupsGroupQuery_group_users_edges {
@@ -844,6 +894,10 @@ export interface GroupsGroupQueryVariables {
   usersLast?: number | null;
   usersAfter?: string | null;
   usersBefore?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  classGroups?: (string | null)[] | null;
 }
 
 /* tslint:disable */
@@ -875,6 +929,10 @@ export interface GroupsGroupsQuery {
   groups: GroupsGroupsQuery_groups | null;
 }
 
+export interface GroupsGroupsQueryVariables {
+  section?: string | null;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated
@@ -883,6 +941,13 @@ export interface GroupsGroupsQuery {
 // ====================================================
 // GraphQL query operation: GroupsUsersQuery
 // ====================================================
+
+export interface GroupsUsersQuery_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
 
 export interface GroupsUsersQuery_users_edges_node_groups_edges_node {
   __typename: "Group";
@@ -904,6 +969,7 @@ export interface GroupsUsersQuery_users_edges_node {
   id: string;
   firstname: string;
   lastname: string;
+  classGroup: GroupsUsersQuery_users_edges_node_classGroup | null;
   groups: GroupsUsersQuery_users_edges_node_groups | null;
 }
 
@@ -930,6 +996,10 @@ export interface GroupsUsersQueryVariables {
   before?: string | null;
   groupId: string;
   resourceName?: string | null;
+  email?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  classGroups?: (string | null)[] | null;
 }
 
 /* tslint:disable */

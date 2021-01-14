@@ -7,6 +7,7 @@ export type DetailGroupUser = {
   tableData?: {
     checked?: boolean;
   };
+  classGroup?: string;
 };
 
 export interface GetUsersReturn {
@@ -23,6 +24,8 @@ export interface GroupProps {
   getGroupUsers: (query: Query<DetailGroupUser>) => Promise<GetUsersReturn>;
   getUsers: (query: Query<DetailGroupUser>) => Promise<GetUsersReturn>;
   selectedGroup?: string;
+  classGroupLookup: Record<string, string>;
+  loading: boolean;
   onSelectionChange: (args: SelectionChangeArgs) => void;
   onSubmit: () => Promise<boolean>;
 }

@@ -62,10 +62,10 @@ const Students: React.FC<StudentsProps> = props => {
                 field: 'lastname',
               },
             ],
-            defaultColumns: ['firstname', 'lastname', 'email'],
+            defaultColumns: ['firstname', 'lastname'],
           },
         }}
-        options={{ selection: editing, exportButton: true }}
+        options={{ selection: editing, exportButton: !editing }}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">
         {editing ? (
