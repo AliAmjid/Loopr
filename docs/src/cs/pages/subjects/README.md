@@ -7,7 +7,8 @@ Stránka je složená ze dvou sekcí. Z levé sekce "Typy předmětů" a pravé 
 ![](images/subjects.png)
 
 ### Sekce Typy předmětů
-Typy předmětů lze vytvořit pomocí `zeleného tlačítka +`. <br> Otevře se dialog, do kterého je potřeba napsat jeho název.
+Typy předmětů lze vytvořit pomocí `zeleného tlačítka +`.   
+Otevře se dialog, do kterého je potřeba napsat jeho název.
 ![](images/subject-adding.png)
 
 Každý předmět lze přejmenovat pomocí `ikony tužky` a odstranit pomocí `ikony koše`.
@@ -15,7 +16,8 @@ Každý předmět lze přejmenovat pomocí `ikony tužky` a odstranit pomocí `i
 ![](images/subject-editing.png)
 
 ### Sekce s uživatelskými daty
-Pro otevření nějakého předmětu vyberte předmět v sekci "Typy předmětů" a klikněte na něj. V této pravé sekci se otevře tabulka s přiřazenímy. <br> Každé přiřazení lze upravit pomocí `ikony tužky` a odstranit pomocí `ikony koše`.
+Pro otevření nějakého předmětu vyberte předmět v sekci "Typy předmětů" a klikněte na něj. V této pravé sekci se otevře tabulka s přiřazenímy.   
+Každé přiřazení lze upravit pomocí `ikony tužky` a odstranit pomocí `ikony koše`.
 
 Všechny ovládací prvky a práce s tabulkou jsou popsány zde: 
 > [Datová tabulka](cs/components/materialTable/)

@@ -9,14 +9,17 @@ Stránka je složená ze dvou sekcí. Z levé sekce "Seznam tříd" a pravé sek
 ### Sekce Seznam tříd
 Tato sekce funguje jako přehled vytvořených tříd. 
 
-Třídy lze vytvořit pomocí `zeleného tlačítka +`. <br> Otevře se dialog, do kterého je potřeba napsat rok nástupu třídy a její název.
+Třídy lze vytvořit pomocí `zeleného tlačítka +`.   
+Otevře se dialog, do kterého je potřeba napsat rok nástupu třídy a její název.
 ![](images/class-adding.png)
 
-Každou třídu lze přejmenovat (upravit třídu a rok nástupu) pomocí `ikony tužky` a odstranit pomocí `ikony koše`. <br> Při kliknutí na ikonu tužky se otevře nové okno, ve kterém lze třídu upravit po stránce jejího jména a roku nástupu.
+Každou třídu lze přejmenovat (upravit třídu a rok nástupu) pomocí `ikony tužky` a odstranit pomocí `ikony koše`.   
+Při kliknutí na ikonu tužky se otevře nové okno, ve kterém lze třídu upravit po stránce jejího jména a roku nástupu.
 ![](images/class-editing.png)
 
 ### Sekce s uživatelskými daty
-Pro otevření nějaké třídy vyberte třídu v sekci "Seznam tříd" a klikněte na ní. V této pravé sekci se otevře tabulka se studenty. <br> Lze přepínat mezi tabulkou se studenty a tabulkou s třídním učitelem.
+Pro otevření nějaké třídy vyberte třídu v sekci "Seznam tříd" a klikněte na ní. V této pravé sekci se otevře tabulka se studenty.   
+Lze přepínat mezi tabulkou se studenty a tabulkou s třídním učitelem.
 
 #### Operace se studenty
 Všechny ovládací prvky a práce s tabulkou jsou popsány zde: 
