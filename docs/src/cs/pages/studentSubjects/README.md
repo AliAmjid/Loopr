@@ -5,7 +5,7 @@ Stránka plní funkci přehledu klasifikace psaných testů.
 Obsah je rozdělen do levého sloupce, ve kterém se nachází předměty, horní lišty, která obsahuje tlačítko filtru zobrazení a části s hodnocením. <br> Hodnocení je rozděleno podle řádků, všechny buňky hodnocení v daném řádku patří pro odpovídající předmět v levém sloupci.
 
 ### Levý sloupec s předměty
-Každá bunňka předmětu obsahuje:
+Každá buňka předmětu obsahuje:
 * Název předmětu
 * Celkový počet získaných bodů a jejich možné maximum
 * Celkový počet získaných bodů převedený na procenta

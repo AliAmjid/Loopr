@@ -1,25 +1,11 @@
-# Hodnocení z pohledu učitele
-## Přehled vyučovaných předmětů
-Zde jsou zobrazeny všechny vyučované skupiny/třídy, rozděleny podle předmětů.
-Každý předmět obsahuje: 
-* Název skupiny/třídy 
-* Obsažené třídy v něm
-* Ikonu tužky pro změnu barvy horního pruhu buňky
-* Tlačítko `hodnocení` pro přesun do hodnocení předmětu
-
-![](images/grading-overview.png)
-
-Pro změnu barvy horního pruhu buňky, klikněte na `ikonu tužku`.
-![](images/grading-overview-colors.png)
-
-## Stránka s hodnocením
-Karta plní funkci přehledu a úpravy klasifikace žáků v daném předmětu. 
+# Bodový systém
+Stránka plní funkci přehledu a úpravy klasifikace žáků v daném předmětu.
 
 Na stránce se nachází horní lišta, která obsahuje název rozkliklého předmětu, filtr zobrazení hodnocení a tlačítko `přidat test` pro vytvoření nového testu. <br>
-Pod ní tabulka rozdělena do 3 částí. 
+Pod ní tabulka rozdělena do 3 částí.
 
 ### První část
-První část obsahuje jména a příjmení žáků. <br> 
+První část obsahuje jména a příjmení žáků. <br>
 ### Druhá část
 Druhá část jsou vytvořené testy a jejich hodnocení rozdělené na body a procenta. <br>
 Test lze upravit pomocí `ikony tužky` v jeho hlavičce, kde se také nachází jeho jméno, datum vytvoření a počet maximálně získatelných bodů.

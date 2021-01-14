@@ -4,7 +4,7 @@
 
 ## Globální akce
 Globální akce se vždy vztahují k celé tabulce.  
-Nachází se zde 3 akce - Exportovat, Sloupce, Seskupit
+Nachází se zde 3 akce - Exportovat, Sloupce, Seskupit.   
 ![](images/globalActions.jpg)
 
 ### Exportovat

@@ -1,5 +1,5 @@
 # Předměty
-Karta Předměty slouží k přiřazení jedné nebo více skupin k určitému předmětu.
+Stránka `Předměty` slouží k přiřazení jedné nebo více skupin k určitému předmětu.
 
 ## Rozdělení stránky
 Stránka je složená ze dvou sekcí. Z levé sekce "Typy předmětů" a pravé sekce s obsaženými daty o přiřazených skupinách a učiteli.
