@@ -90,7 +90,7 @@ class Subject
      * @ORM\JoinColumn(nullable=false, name="percents_to_mark_convert_id")
      * @Groups({"read", "exposed"})
      */
-    private ?PercentToMarkConvert $percentsToMarkConvert;
+    private ?PercentToMarkConvert $percentsToMarkConvert = null;
 
     /**
      * subject constructor.

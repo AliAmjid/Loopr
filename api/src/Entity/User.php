@@ -39,7 +39,7 @@ class User implements UserInterface
     use Tid;
 
     /** @var string email of user
-     * @Assert\Email()
+     * @Assert\Email(mode="loose")
      * @Assert\NotBlank()
      * @ORM\Column(type="string",unique=true)
      * @Groups({"exposed", "user:write", "read"})
