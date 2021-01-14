@@ -86,6 +86,8 @@ const GroupList: React.FC<GroupListProps> = props => {
             </Tooltip>,
           ],
         }))}
+        filter={props.filter}
+        onFilterChange={props.onFilterChange}
       />
     </>
   );

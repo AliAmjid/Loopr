@@ -16,6 +16,8 @@ export interface SideListProps {
     onClick: MouseEventHandler<HTMLElement>;
     tooltip?: string;
   };
+  filter?: string;
+  onFilterChange?: (filter: string) => void;
 }
 
 export interface SideListGridProps {

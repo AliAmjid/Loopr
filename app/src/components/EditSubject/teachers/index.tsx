@@ -27,12 +27,24 @@ const TeachersIndex: React.FC = () => {
   const { getPagination, setPagination } = usePagination();
 
   const teacherGetHandler = (query: TeacherGetArgs): TeacherGetReturn => {
+    const emailFilter = query.filters.find(f => f.column.field === 'email')
+      ?.value;
+    const firstNameFilter = query.filters.find(
+      f => f.column.field === 'firstname',
+    )?.value;
+    const lastNameFilter = query.filters.find(
+      f => f.column.field === 'lastname',
+    )?.value;
+
     return client
       .query<EditSubjectTeacherQuery, EditSubjectTeacherQueryVariables>({
         query: EDIT_SUBJECT_TEACHER_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
           resourceName: resources.group.teacher,
+          email: emailFilter,
+          lastname: lastNameFilter,
+          firstname: firstNameFilter,
         },
       })
       .then(res => {

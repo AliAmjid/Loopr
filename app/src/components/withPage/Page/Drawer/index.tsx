@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Divider,
@@ -37,6 +37,10 @@ const Drawer: React.FC<DrawerProps> = props => {
     open: state.drawerOpen,
     setOpen: state.setDrawerOpen,
   }));
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <>

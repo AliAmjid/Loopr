@@ -32,7 +32,7 @@ const Group: React.FC<GroupProps> = props => {
       <MaterialTable
         key={props.selectedGroup + editing}
         uniqueName="pages/groups/group"
-        isLoading={loading}
+        isLoading={loading || props.loading}
         title={t('students')}
         data={(query: Query<DetailGroupUser>) =>
           editing
@@ -55,10 +55,32 @@ const Group: React.FC<GroupProps> = props => {
             });
           }
         }}
-        columns={[
-          { title: t('common:gqlObjects.user.firstname'), field: 'firstname' },
-          { title: t('common:gqlObjects.user.lastname'), field: 'lastname' },
-        ]}
+        columns={[]}
+        defaultActions={{
+          columnFiltering: {
+            active: true,
+            columns: [
+              {
+                title: t('common:gqlObjects.user.email'),
+                field: 'email',
+              },
+              {
+                title: t('common:gqlObjects.user.firstname'),
+                field: 'firstname',
+              },
+              {
+                title: t('common:gqlObjects.user.lastname'),
+                field: 'lastname',
+              },
+              {
+                title: t('common:gqlObjects.user.classGroup'),
+                field: 'classGroup',
+                lookup: props.classGroupLookup,
+              },
+            ],
+            defaultColumns: ['firstname', 'lastname'],
+          },
+        }}
         options={{ selection: editing, exportButton: true }}
       />
       <Box pt={2} display="flex" justifyContent="flex-end">

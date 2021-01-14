@@ -7,6 +7,10 @@ const CLASS_GROUPS_USERS_QUERY = gql`
     $last: Int
     $before: String
     $resourceName: String
+    $email: String
+    $firstname: String
+    $lastname: String
+    $isInClassGroup: Boolean
   ) {
     users(
       first: $first
@@ -14,6 +18,10 @@ const CLASS_GROUPS_USERS_QUERY = gql`
       after: $after
       before: $before
       role_resources_name: $resourceName
+      email: $email
+      firstname: $firstname
+      lastname: $lastname
+      exists: { classGroup: $isInClassGroup }
     ) {
       edges {
         node {

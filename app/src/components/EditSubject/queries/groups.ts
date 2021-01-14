@@ -6,8 +6,15 @@ const EDIT_SUBJECT_GROUP_QUERY = gql`
     $after: String
     $first: Int
     $last: Int
+    $section: String
   ) {
-    groups(before: $before, after: $after, first: $first, last: $last) {
+    groups(
+      before: $before
+      after: $after
+      first: $first
+      last: $last
+      section: $section
+    ) {
       edges {
         node {
           id

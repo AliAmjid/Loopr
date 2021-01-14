@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 const GROUPS_GROUPS_QUERY = gql`
-  query GroupsGroupsQuery {
-    groups {
+  query GroupsGroupsQuery($section: String) {
+    groups(section: $section) {
       edges {
         node {
           id
