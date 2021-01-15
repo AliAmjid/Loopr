@@ -107,8 +107,27 @@ const PointSystemIndex: React.FC = () => {
 
   let maxPoints = 0;
 
+  let sortedExams = subjectData?.subject?.exams?.edges;
+  if (subjectData?.subject?.exams?.edges) {
+    sortedExams = [...(subjectData?.subject?.exams?.edges || [])].sort(
+      (edge1, edge2) => {
+        const written1 = dayjs(edge1?.node?.writtenAt);
+        const written2 = dayjs(edge2?.node?.writtenAt);
+
+        if (written2.isBefore(written1)) {
+          return 1;
+        }
+        if (written1.isBefore(written2)) {
+          return -1;
+        }
+
+        return 0;
+      },
+    );
+  }
+
   // Set exams and studentExams
-  for (const exam of subjectData?.subject?.exams?.edges || []) {
+  for (const exam of sortedExams || []) {
     const examNode = exam?.node;
     if (examNode) {
       maxPoints += examNode.pointSystem?.maxPoints || 0;
