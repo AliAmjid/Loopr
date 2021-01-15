@@ -89,7 +89,7 @@ class User implements UserInterface
 
     /**
      * @var ClassGroup|null
-     * @Groups({"read:owner","read:GROUP_SHOW_ALL", "user:write", "exposed"})
+     * @Groups({"read:always", "exposed"})
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
      * @ORM\JoinColumn(name="class_group_id", referencedColumnName="id")
      */

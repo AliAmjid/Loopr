@@ -4,6 +4,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,6 +20,10 @@ use Symfony\Component\Validator\Constraints as Assert;
     'id' => 'exact',
     'schoolYear' => 'exact',
     'quarter' => 'exact'
+])]
+#[ApiFilter(filterClass: OrderFilter::class, properties: [
+    "schoolYear" => "DESC",
+    "quarter" => "ASC"
 ])]
 class SchoolPeriod
 {
