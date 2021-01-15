@@ -139,7 +139,7 @@ class Exam
         return $this->schoolPeriod;
     }
 
-    #[InjectSchoolPeriod(operations: ["create"], dateProperty: "writtenAt")]
+    #[InjectSchoolPeriod(operations: ["create", "edit", "update"], dateProperty: "writtenAt")]
     public function setSchoolPeriod(
         SchoolPeriod $schoolPeriod
     ): Exam {
