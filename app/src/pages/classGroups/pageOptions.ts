@@ -1,3 +1,4 @@
+import helpPaths from 'config/helpPaths';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -14,6 +15,7 @@ const classGroupsPageOptions: PageOptions = {
     ...materialTableNamespaces,
     namespaces.pages.classGroups.index,
   ],
+  helpPath: helpPaths.classGroups.index,
 };
 
 export default classGroupsPageOptions;

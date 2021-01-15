@@ -1,3 +1,4 @@
+import helpPaths from 'config/helpPaths';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -10,6 +11,7 @@ const studentSubjectPageOptions: PageOptions = {
     { label: 'studentSubjects.index', href: routes.studentSubjects.index },
   ],
   namespaces: [namespaces.pages.studentSubjects.index],
+  helpPath: helpPaths.studentSubjects.index,
 };
 
 export default studentSubjectPageOptions;

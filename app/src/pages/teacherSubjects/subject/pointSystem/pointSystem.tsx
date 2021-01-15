@@ -38,9 +38,6 @@ import Edit from './edit';
 import { PointSystemProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  studentCell: {
-    minWidth: '200px',
-  },
   paper: {
     padding: 0,
     scrollBehavior: 'smooth',
@@ -58,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   header: {
     ...bottomShadow,
-    zIndex: 103,
+    zIndex: 104,
   },
   headCell: {
     paddingTop: theme.spacing(2),
@@ -76,15 +73,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   schoolPeriodSelect: {
     minWidth: theme.spacing(20),
   },
+  nameCell: {
+    left: 'unset',
+    [theme.breakpoints.up('md')]: {
+      left: 0,
+    },
+    minWidth: 200,
+    zIndex: 103,
+  },
 }));
 
 const StickyTableCell = withStyles((theme: Theme) => ({
   head: {
     [theme.breakpoints.up('md')]: {
-      left: 0,
       position: 'sticky',
       zIndex: 102,
     },
+    left: 'unset',
   },
   body: {
     [theme.breakpoints.up('md')]: {
@@ -121,19 +126,22 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   const { t } = useTranslation(
     namespaces.pages.teacherSubjects.subject.pointSystem,
   );
+  const [tableContainerStyle, setTableContainerStyle] = useState({
+    height: 1000,
+  });
 
   useEffect(() => {
     if (process.browser) {
       setTimeout(() => {
         tableContainerRef.current.scrollTo(1000000, 0);
       }, 200);
+
+      const toolbarHeight = 64;
+      setTableContainerStyle({
+        height: window.innerHeight - toolbarHeight * 3.9,
+      });
     }
   }, []);
-
-  const toolbarHeight = 64;
-  const tableContainerStyle = {
-    height: window.innerHeight - toolbarHeight * 3.9,
-  };
 
   return (
     <Paper className={classes.paper}>
@@ -157,7 +165,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                     {t('common:gqlObjects.schoolPeriod.name')}
                   </InputLabel>
                   <Select
-                    className={classes.schoolPeriodSelect}
+                    className={`${classes.schoolPeriodSelect}`}
                     labelId="schoolPeriodSelectLabel"
                     multiple
                     value={
@@ -191,13 +199,10 @@ const PointSystem: React.FC<PointSystemProps> = props => {
             <Table stickyHeader size="small">
               <TableHead>
                 <TableRow ref={headerRef}>
-                  <StickyTableCell
+                  <TableCell
                     rowSpan={2}
-                    className={`${'head'} ${classes.studentCell} ${
-                      classes.whiteCell
-                    } ${classes.cellWithRightBorder} ${classes.headCell}`}
+                    className={`${classes.whiteCell} ${classes.cellWithRightBorder} ${classes.headCell} ${classes.nameCell}`}
                     width={200}
-                    style={{ minWidth: 200 }}
                   >
                     <Grid container>
                       <Grid item xs={6}>
@@ -215,9 +220,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         </Box>
                       </Grid>
                     </Grid>
-                  </StickyTableCell>
+                  </TableCell>
                   {props.exams.map(exam => (
-                    <TableCell
+                    <StickyTableCell
                       key={exam.id}
                       colSpan={2}
                       align="center"
@@ -244,7 +249,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                       >
                         <EditIcon />
                       </IconButton>
-                    </TableCell>
+                    </StickyTableCell>
                   ))}
                   <TableCell
                     rowSpan={2}
@@ -291,6 +296,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         align="center"
                         style={{
                           top: headerRef.current?.clientHeight,
+                          left: 'unset',
                         }}
                         width={70}
                       >
@@ -303,6 +309,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         align="center"
                         style={{
                           top: headerRef.current?.clientHeight,
+                          left: 'unset',
                         }}
                         width={70}
                       >

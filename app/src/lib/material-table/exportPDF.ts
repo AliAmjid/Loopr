@@ -24,7 +24,7 @@ const exportPDF = (columns: Column<any>[], data: any[]): void => {
         layout: 'lightHorizontalLines',
         table: {
           headerRows: 1,
-          widths: filteredColumns.map(() => '*'),
+          widths: filteredColumns.map(() => 'auto'),
 
           body: [
             filteredColumns.map(c => c.title),
