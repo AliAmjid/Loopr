@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     'quarter' => 'exact'
 ])]
 #[ApiFilter(filterClass: OrderFilter::class, properties: [
-    "schoolYear" => "DESC",
-    "quarter" => "ASC"
+    "schoolYear" => ['default_direction' => 'DESC'],
+    "quarter" => ['default_direction' => 'ASC']
 ])]
 class SchoolPeriod
 {

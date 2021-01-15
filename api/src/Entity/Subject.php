@@ -4,11 +4,12 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use App\Entity\Attributes\Tid;
 use App\Enum\AclResourceEnum;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
@@ -19,6 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiFilter(filterClass: BooleanFilter::class, properties: [
+    'archived' => false
+])]
 class Subject
 {
     use Tid;
@@ -91,6 +95,13 @@ class Subject
      * @Groups({"read", "exposed"})
      */
     private ?PercentToMarkConvert $percentsToMarkConvert = null;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", nullable=false)
+     * @Groups({"read", "exposed", "subject:edit"})
+     */
+    private bool $archived = false;
 
     /**
      * subject constructor.
@@ -247,6 +258,16 @@ class Subject
         return $this;
     }
 
+    public function isArchived(): bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(bool $archived): Subject
+    {
+        $this->archived = $archived;
+        return $this;
+    }
 
     /**
      * @ORM\PrePersist()
