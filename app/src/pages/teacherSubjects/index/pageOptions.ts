@@ -1,3 +1,4 @@
+import helpPaths from 'config/helpPaths';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -13,6 +14,7 @@ const teacherSubjectsPageOptions: PageOptions = {
   title: 'teacherSubjects.index',
   breadcrumbs: teacherSubjectsBreadcrumbs,
   namespaces: [namespaces.pages.teacherSubjects.index],
+  helpPath: helpPaths.teacherSubjects.index,
 };
 
 export default teacherSubjectsPageOptions;

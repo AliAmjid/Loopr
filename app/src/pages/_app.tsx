@@ -4,14 +4,13 @@ import dayjsUtils from '@date-io/dayjs';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import dayjs from 'dayjs';
 import App, { AppContext } from 'next/app';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 
+import { AccessContextProvider } from 'lib/apollo/accessContext';
 import getDayjsLocales from 'lib/dayjs/locale';
-import { appWithTranslation } from 'lib/i18n';
+import { appWithTranslation, useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';
@@ -58,7 +57,9 @@ const MyApp: AppType = props => {
               utils={dayjsUtils}
               locale={getDayjsLocales(i18n.language, t)}
             >
-              <Component {...pageProps} />
+              <AccessContextProvider>
+                <Component {...pageProps} />
+              </AccessContextProvider>
             </MuiPickersUtilsProvider>
           </ReactourProvider>
         </SnackbarProvider>

@@ -5,8 +5,6 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
-import recognizeError from 'lib/apollo/recognizeError';
-import errors from 'lib/apollo/recognizeError/errors';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -66,24 +64,11 @@ const PointSystemIndex: React.FC = () => {
           writtenAt: dayjs().toISOString(),
         },
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.createExam.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(err => {
-        const recognizedError = recognizeError(err);
-        if (recognizedError === errors.looprError.noSchoolPeriodActive) {
-          enqueueSnackbar(t('snackbars.createExam.noSchoolPeriod'), {
-            variant: 'warning',
-          });
-        } else {
-          enqueueSnackbar(t('snackbars.createExam.error'), {
-            variant: 'error',
-          });
-        }
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.createExam.success'), {
+        variant: 'success',
       });
+    });
   };
 
   const exams: Exams = [];

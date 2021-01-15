@@ -39,9 +39,7 @@ const LoginIndex: React.FC = () => {
       fetchPolicy: 'no-cache',
     },
   );
-  const { data: meUserData, error: meUserDataError } = useQuery<
-    LoginMeUserQuery
-  >(LOGIN_ME_USER_QUERY, {
+  const { data: meUserData } = useQuery<LoginMeUserQuery>(LOGIN_ME_USER_QUERY, {
     fetchPolicy: 'no-cache',
   });
   const { data: meUserDataCached } = useQuery<LoginMeUserQuery>(
@@ -80,25 +78,11 @@ const LoginIndex: React.FC = () => {
     if (!automaticallyLogged) {
       automaticallyLogIn();
     }
-  } else if (
-    recognizeError(meUserDataError) === errors.network.failedToFetch &&
-    meUserDataCached
-  ) {
+  } else if (meUserDataCached) {
     automaticallyLogIn();
   }
 
   if (!getTokenLoading) {
-    if (getTokenError) {
-      if (recognizeError(getTokenError) === errors.network.failedToFetch) {
-        enqueueSnackbar(t('noInternet'), {
-          variant: 'warning',
-        });
-      } else {
-        enqueueSnackbar(t('noMatch'), {
-          variant: 'error',
-        });
-      }
-    }
     if (getTokenData?.getToken) {
       enqueueSnackbar(t('success'), { variant: 'success' });
       cookie.set(
