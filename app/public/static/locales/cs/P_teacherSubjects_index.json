@@ -1,4 +1,7 @@
 {
   "evaluation": "Hodnocení",
-  "noSubjects": "Nevyučujete žádné předměty"
+  "noSubjects": "Nevyučujete žádné předměty",
+  "snackbars": {
+    "updateColor": "Barva předmětu úspěšně upravena"
+  }
 }

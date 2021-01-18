@@ -43,18 +43,12 @@ const PercentsToMarkDialogIndex: React.FC<PercentsToMarkDialogIndexProps> = prop
           four: +values.four,
         },
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.updatePercentToMarkConvert.success'), {
-          variant: 'success',
-        });
-        props.onClose();
-      })
-      .catch(() => {
-        enqueueSnackbar(t('snackbars.updatePercentToMarkConvert.error'), {
-          variant: 'error',
-        });
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.updatePercentToMarkConvert.success'), {
+        variant: 'success',
       });
+      props.onClose();
+    });
   };
 
   const { percentsToMarkConvert } = props;

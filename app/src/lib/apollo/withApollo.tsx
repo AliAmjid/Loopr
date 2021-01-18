@@ -21,6 +21,7 @@ import accessContext, {
 import recognizeError from 'lib/apollo/recognizeError';
 import { ACCESS_DENIED } from 'lib/apollo/recognizeError/errors';
 import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 const withApollo = <ComponentProps extends {} = any>(
   Component: React.ComponentType<ComponentProps>,
@@ -30,7 +31,7 @@ const withApollo = <ComponentProps extends {} = any>(
   const cache = new InMemoryCache();
 
   const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation();
+  const { t } = useTranslation(namespaces.lib.apollo);
 
   const errorLink = onError(error => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -61,7 +62,7 @@ const withApollo = <ComponentProps extends {} = any>(
         enqueueSnackbar(t('errors.unauthorized'), { variant: 'warning' });
       }
     } else {
-      const snackbar = recognizeError(error);
+      const snackbar = recognizeError(error, t);
       enqueueSnackbar(snackbar.message, { variant: snackbar.variant });
     }
   });

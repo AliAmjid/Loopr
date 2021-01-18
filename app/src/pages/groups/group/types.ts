@@ -26,6 +26,6 @@ export interface GroupProps {
   selectedGroup?: string;
   classGroupLookup: Record<string, string>;
   loading: boolean;
-  onSelectionChange: (args: SelectionChangeArgs) => void;
+  onSelectionChange: (data: DetailGroupUser[]) => void;
   onSubmit: () => Promise<boolean>;
 }

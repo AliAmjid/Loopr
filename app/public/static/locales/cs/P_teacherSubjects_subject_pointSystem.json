@@ -14,17 +14,14 @@
       "error": "Nepovedlo se vytvořit nový test"
     },
     "updatePercentToMarkConvert": {
-      "success": "Převodní hodnoty úspěšně upraveny",
-      "error": "Nepovedlo se upravit předvodní hodnoty"
+      "success": "Převodní hodnoty úspěšně upraveny"
     },
     "createOrUpdatePointSystem": {
       "success": "Test úspěšně upraven",
-      "invalid": "Zadané hodnoty nejsou validní",
-      "error": "Nepovedlo se upravit test"
+      "invalid": "Zadané hodnoty nejsou validní"
     },
     "deleteExam": {
-      "success": "Test úspěšně odstraněn",
-      "error": "Nepovedlo se odstranit test"
+      "success": "Test úspěšně odstraněn"
     }
   }
 }

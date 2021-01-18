@@ -42,14 +42,10 @@ const AddDialogIndex: React.FC<AddDialogIndexProps> = props => {
           schoolYear: values.schoolYear,
         },
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
-        props.onClose();
-      })
-      .catch(() => {
-        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
-      });
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
+      props.onClose();
+    });
   };
 
   return (

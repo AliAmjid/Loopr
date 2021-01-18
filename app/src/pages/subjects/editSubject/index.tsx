@@ -49,14 +49,10 @@ const EditSubjectIndex: React.FC = () => {
           id: `${router.query.subjectId}`,
         },
       },
-    })
-      .then(() => {
-        router.push(routes.subjects.index);
-        enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
-      })
-      .catch(() => {
-        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
-      });
+    }).then(() => {
+      router.push(routes.subjects.index);
+      enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
+    });
   };
 
   return (

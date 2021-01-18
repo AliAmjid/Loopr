@@ -8,8 +8,6 @@ import { compose } from 'recompose';
 
 import routes from 'config/routes';
 
-import recognizeError from 'lib/apollo/recognizeError';
-import errors from 'lib/apollo/recognizeError/errors';
 import withApollo from 'lib/apollo/withApollo';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -32,7 +30,7 @@ import loginTour from './tour';
 const LoginIndex: React.FC = () => {
   const [
     getToken,
-    { data: getTokenData, error: getTokenError, loading: getTokenLoading },
+    { data: getTokenData, loading: getTokenLoading },
   ] = useLazyQuery<LoginGetTokenQuery, LoginGetTokenQueryVariables>(
     LOGIN_GET_TOKEN_QUERY,
     {

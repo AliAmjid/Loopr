@@ -1,4 +1,5 @@
 import { ErrorResponse } from '@apollo/client/link/error';
+import { TFunction } from 'i18next';
 import { VariantType } from 'notistack';
 
 import { GraphqlErrorWithLooprError } from 'lib/apollo/recognizeError/types';
@@ -13,7 +14,7 @@ import {
   INVALID_ROLE_CONFIG,
   NO_SCHOOL_PERIOD_ACTIVE,
   OLD_PASSWORD_IS_WRONG,
-  SCHOOL_PERIODS_VALIDATION_ERROR,
+  SCHOOL_PERIOD_VALIDATION_ERROR,
   UNEXPECTED_VALUE,
   USER_CAN_NOT_BE_TAUGHT,
   USER_IS_NOT_TEACHER,
@@ -24,6 +25,7 @@ import {
 
 const recognizeError = (
   error: ErrorResponse,
+  t: TFunction,
 ): {
   message: string;
   variant: VariantType;
@@ -31,7 +33,7 @@ const recognizeError = (
   const { networkError } = error;
   if (networkError) {
     if (networkError.message === FAILED_TO_FETCH) {
-      return { message: 'No internet', variant: 'warning' };
+      return { message: t('noInternet'), variant: 'warning' };
     }
   }
 
@@ -41,44 +43,46 @@ const recognizeError = (
   ): boolean => {
     return errors.some(error => error['loopr-error']?.code === code);
   };
-
   const graphqlErrors: ReadonlyArray<GraphqlErrorWithLooprError> | undefined =
     error.graphQLErrors;
 
   if (graphqlErrors) {
     if (hasErrorCode(graphqlErrors, INVALID_ROLE_CONFIG))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.invalidRoleConfig'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, USER_NOT_FOUND))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.userNotFound'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, VALIDATION_ERROR))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.commonError'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, UNEXPECTED_VALUE))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.commonError'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, DUPLICATE_VALUE))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.duplicateValue'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, OLD_PASSWORD_IS_WRONG))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.oldPasswordIsWrong'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, USER_IS_NOT_TEACHER))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.userIsNotTeacher'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, EMPTY_GROUP_CLASS_GROUP))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.emptyGroupClassGroup'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, USER_CAN_NOT_BE_TAUGHT))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.commonError'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, INVALID_IRI))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.commonError'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, CHECK_ACCESS))
-      return { message: '', variant: 'error' };
-    if (hasErrorCode(graphqlErrors, SCHOOL_PERIODS_VALIDATION_ERROR))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.checkAccess'), variant: 'warning' };
+    if (hasErrorCode(graphqlErrors, SCHOOL_PERIOD_VALIDATION_ERROR))
+      return {
+        message: t('errors.schoolPeriodValidationError'),
+        variant: 'error',
+      };
     if (hasErrorCode(graphqlErrors, NO_SCHOOL_PERIOD_ACTIVE))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.noSchoolPeriodActive'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, BAD_MARK_SYSTEM))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.commonError'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, USER_NOT_EXAM_MEMBER))
-      return { message: '', variant: 'error' };
+      return { message: t('errors.commonError'), variant: 'error' };
   }
 
-  return { message: 'unexpected error', variant: 'error' };
+  return { message: t('errors.unexpectedError'), variant: 'error' };
 };
 
 export default recognizeError;

@@ -216,10 +216,6 @@ const StudentsIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.studentsEdit.error'), {
-          variant: 'error',
-        });
-
         return false;
       });
   };

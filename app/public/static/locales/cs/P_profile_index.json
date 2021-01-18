@@ -3,5 +3,8 @@
   "firstname": "Jméno",
   "lastname": "Příjmení",
   "email": "Email",
-  "role": "Role"
+  "role": "Role",
+  "snackbars": {
+    "changePassword": "Heslo úspěšně upraveno"
+  }
 }

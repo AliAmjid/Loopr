@@ -9,20 +9,16 @@
   },
   "snackbars": {
     "add": {
-      "success": "Skupina úspěšně přidána",
-      "error": "Nepovedlo se přidat skupinu"
+      "success": "Skupina úspěšně přidána"
     },
     "edit": {
-      "success": "Skupina úspěšně upravena",
-      "error": "Nepovedlo se upravit skupinu"
+      "success": "Skupina úspěšně upravena"
     },
     "delete": {
-      "success": "Skupina úspěšně odstraněna",
-      "error": "Nepovedlo se odstranit skupinu"
+      "success": "Skupina úspěšně odstraněna"
     },
     "studentsEdit": {
-      "success": "Studenti byli úspěšně upraveni",
-      "error": "Nepovedlo se upravit studenty"
+      "success": "Studenti byli úspěšně upraveni"
     }
   }
 }

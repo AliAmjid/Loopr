@@ -277,6 +277,33 @@ export interface WithPageMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AclEditRoleDeleteAclRoleMutation
+// ====================================================
+
+export interface AclEditRoleDeleteAclRoleMutation_deleteAclRole_aclRole {
+  __typename: "AclRole";
+  id: string;
+}
+
+export interface AclEditRoleDeleteAclRoleMutation_deleteAclRole {
+  __typename: "deleteAclRolePayload";
+  aclRole: AclEditRoleDeleteAclRoleMutation_deleteAclRole_aclRole | null;
+}
+
+export interface AclEditRoleDeleteAclRoleMutation {
+  deleteAclRole: AclEditRoleDeleteAclRoleMutation_deleteAclRole | null;
+}
+
+export interface AclEditRoleDeleteAclRoleMutationVariables {
+  input: deleteAclRoleInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: AclEditRoleUpdateRole
 // ====================================================
 
@@ -2240,6 +2267,11 @@ export interface createUserInput {
   firstname: string;
   classGroup?: string | null;
   rawPassword?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface deleteAclRoleInput {
+  id: string;
   clientMutationId?: string | null;
 }
 

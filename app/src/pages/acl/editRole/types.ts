@@ -8,4 +8,5 @@ export interface EditRoleProps {
     name: string;
   };
   onSubmit: (values: FormValues) => void;
+  onDelete: () => Promise<boolean>;
 }
