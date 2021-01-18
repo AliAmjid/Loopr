@@ -47,13 +47,8 @@ const Group: React.FC<GroupProps> = props => {
                 data: res.users,
               }))
         }
-        onSelectionChange={(data, row) => {
-          if (row) {
-            props.onSelectionChange({
-              id: row?.id,
-              selected: row?.tableData?.checked || false,
-            });
-          }
+        onSelectionChange={data => {
+          props.onSelectionChange(data);
         }}
         columns={[]}
         defaultActions={{

@@ -197,19 +197,22 @@ const GroupIndex: React.FC = () => {
     return Promise.resolve(defaultValue);
   };
 
-  const selectionChangeHandler = (args: SelectionChangeArgs): void => {
-    setChangedUsers(prevState => {
-      const index = prevState.findIndex(
-        changedUser => changedUser.id === args.id,
-      );
-      if (index !== -1) {
-        prevState.splice(index, 1);
-      } else {
-        prevState = [...prevState, { id: args.id, selected: args.selected }];
-      }
+  const selectionChangeHandler = (users: DetailGroupUser[]): void => {
+    let prevState = [...changedUsers];
 
-      return prevState;
+    const newUsers = users.filter(
+      user => !prevState.some(u => u.id === user.id),
+    );
+    prevState = prevState.filter(user => users.some(u => u.id === user.id));
+
+    newUsers.forEach(user => {
+      prevState.push({
+        id: user.id,
+        selected: user.tableData?.checked || false,
+      });
     });
+
+    setChangedUsers(prevState);
   };
 
   const submitHandler = (): Promise<boolean> => {
