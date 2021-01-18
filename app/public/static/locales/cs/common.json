@@ -49,8 +49,5 @@
     "submit": "Potvrdit",
     "search": "Vyhledat",
     "upload": "Nahrát"
-  },
-  "errors": {
-    "unauthorized": "K této akci nemáte práva"
   }
 }

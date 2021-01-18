@@ -25,6 +25,7 @@ const withPage = <ComponentProps extends {}>(pageOptions: PageOptions) => (
   return withNamespaces([
     'common',
     namespaces.lib.dayjs,
+    namespaces.lib.apollo,
     ...withPageNamespaces,
     ...(pageNamespaces || []),
   ])(EndComponent);
