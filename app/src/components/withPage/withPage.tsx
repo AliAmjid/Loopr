@@ -38,10 +38,12 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   const { enqueueSnackbar } = useSnackbar();
   const apolloClient = useApolloClient();
   const access = useContext(accessContext);
-  const unauthorized = !hasAccess({
-    requiredResources: props.resources,
-    role: data?.meUser?.role,
-  });
+  const unauthorized =
+    data &&
+    !hasAccess({
+      requiredResources: props.resources,
+      role: data?.meUser?.role,
+    });
 
   useEffect(() => {
     access.set(HAS_ACCESS);
@@ -54,6 +56,8 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     await router.push(routes.login.index);
     enqueueSnackbar(t('logOutSuccess'), { variant: 'success' });
   };
+
+  console.log(unauthorized, access.value);
 
   if (
     unauthorized ||
