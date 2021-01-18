@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -39,9 +39,7 @@ const Page: React.FC<PageProps> = props => {
       <div className={classes.toolbar} />
       <div className={classes.content}>
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        <Typography variant="h5" component="h1">
-          {t(title)}
-        </Typography>
+        <Typography variant="h1">{t(title)}</Typography>
         {children}
       </div>
     </>

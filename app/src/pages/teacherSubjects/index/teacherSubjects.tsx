@@ -71,7 +71,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   subjectTypes.forEach(subjectType => {
     mappedSubjects.push(
       <Box key={subjectType[0].subjectType?.id} pb={2}>
-        <Typography variant="h6">{subjectType[0].subjectType?.name}</Typography>
+        <Typography variant="h2">{subjectType[0].subjectType?.name}</Typography>
         <ThickDivider />
         <Box pt={2}> </Box>
         <Grid container spacing={2}>

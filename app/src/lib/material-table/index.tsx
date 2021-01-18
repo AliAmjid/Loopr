@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-import { fade, makeStyles, Theme, useTheme } from '@material-ui/core';
+import {
+  Box,
+  fade,
+  makeStyles,
+  Theme,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 import MaterialTablePrefab, {
   Column,
   MTableEditRow,
   MTableGroupbar,
+  MTableToolbar,
 } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -35,6 +43,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderRadius: theme.shape.borderRadius,
       },
     },
+  },
+  toolbar: {
+    backgroundColor: fade(theme.palette.primary.main, 0.3),
+  },
+  toolbarTitle: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -124,6 +138,7 @@ const MaterialTable = <RowD extends {}>(
           props.defaultActions?.columnFiltering?.defaultColumns || []
         }
       />
+
       <OverlayLoadingContainer>
         <MaterialTablePrefab
           key={rowsPerPage}
@@ -133,7 +148,14 @@ const MaterialTable = <RowD extends {}>(
           icons={materialTableIcons}
           localization={materialTableLocalization(t)}
           components={{
+            // Toolbar: () => <div>ahoj</div>,
             Container,
+            Toolbar: props => (
+              <MTableToolbar
+                {...props}
+                classes={{ root: classes.toolbar, title: classes.toolbarTitle }}
+              />
+            ),
             // eslint-disable-next-line react/display-name
             Groupbar: p => {
               return (

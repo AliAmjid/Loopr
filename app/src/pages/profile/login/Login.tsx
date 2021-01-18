@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = props => {
     <OverlayLoadingContainer>
       <OverlayLoading loading={props.loading} />
       <Box pt={2}>
-        <Typography variant="h6">Změna hesla</Typography>
+        <Typography variant="h2">Změna hesla</Typography>
         <form onSubmit={handleSubmit(submitHandler)}>
           <Box display="flex" alignItems="center" flexWrap="wrap">
             <Box pr={2} pt={2}>

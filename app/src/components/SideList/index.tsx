@@ -98,7 +98,7 @@ const SideList: React.FC<SideListProps> = props => {
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading || false} />
         <div className={classes.header}>
-          <Typography variant="h6">{props.title}</Typography>
+          <Typography variant="h2">{props.title}</Typography>
           {props.filter !== undefined && (
             <TextField
               label={t('actions.search')}

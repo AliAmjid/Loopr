@@ -19,13 +19,13 @@ const Summary: React.FC<SummaryProps> = props => {
   return (
     <OverlayLoadingContainer>
       <OverlayLoading loading={props.loading} />
-      <Typography variant="h6">
+      <Typography variant="h2">
         {props.classGroup ? t('classGroup') : t('group')}
       </Typography>
       <Typography>
         {`${props.group?.year || ''} ${props.group?.section}`}
       </Typography>
-      <Typography variant="h6">{t('teacher')}</Typography>
+      <Typography variant="h2">{t('teacher')}</Typography>
       <Typography>
         {`${props.teacher?.firstname || ''} ${props.teacher?.lastname}`}
       </Typography>
