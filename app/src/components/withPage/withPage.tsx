@@ -26,17 +26,13 @@ import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal: React.FC<WithPageInternalProps> = props => {
-  const { data, error } = useQuery<WithPageMeUserQuery>(
-    WITH_PAGE_ME_USER_QUERY,
-    {
-      fetchPolicy: 'cache-and-network',
-      pollInterval: 1000 * 60,
-    },
-  );
+  const { data } = useQuery<WithPageMeUserQuery>(WITH_PAGE_ME_USER_QUERY, {
+    fetchPolicy: 'cache-and-network',
+    pollInterval: 1000 * 60,
+  });
   const { t } = useTranslation(namespaces.components.withPage);
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-  const apolloClient = useApolloClient();
   const access = useContext(accessContext);
   const unauthorized =
     data &&
@@ -51,13 +47,12 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
 
   const logOutHandler = async (): Promise<void> => {
     cookie.remove(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    await apolloClient.resetStore().catch(() => {});
-    await router.push(routes.login.index);
-    enqueueSnackbar(t('logOutSuccess'), { variant: 'success' });
+    setTimeout(() => {
+      router.push(routes.login.index).then(() => {
+        enqueueSnackbar(t('logOutSuccess'), { variant: 'success' });
+      });
+    });
   };
-
-  console.log(unauthorized, access.value);
 
   if (
     unauthorized ||

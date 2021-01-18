@@ -30,7 +30,7 @@ import loginTour from './tour';
 const LoginIndex: React.FC = () => {
   const [
     getToken,
-    { data: getTokenData, error: getTokenError, loading: getTokenLoading },
+    { data: getTokenData, loading: getTokenLoading },
   ] = useLazyQuery<LoginGetTokenQuery, LoginGetTokenQueryVariables>(
     LOGIN_GET_TOKEN_QUERY,
     {
