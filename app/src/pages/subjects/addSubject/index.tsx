@@ -39,14 +39,10 @@ const AddSubjectIndex: React.FC = () => {
           subjectType: `${router.query.subjectTypeId}`,
         },
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
-        router.push(routes.subjects.index);
-      })
-      .catch(() => {
-        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
-      });
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.add.success'), { variant: 'success' });
+      router.push(routes.subjects.index);
+    });
   };
 
   return (

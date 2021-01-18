@@ -16,20 +16,16 @@
   "teacher": "Učitel",
   "snackbars": {
     "typeAdd": {
-      "success": "Typ předmětu úspěšně přidán",
-      "error": "Nepovedlo se přidat typ předmětu"
+      "success": "Typ předmětu úspěšně přidán"
     },
     "typeEdit": {
-      "success": "Typ předmětu úspěšně upraven",
-      "error": "Nepovedlo se upravit typ předmětu"
+      "success": "Typ předmětu úspěšně upraven"
     },
     "typeDelete": {
-      "success": "Typ předmětu úspěšně odstraněn",
-      "error": "Nepovedlo se odstranit typ předmětu"
+      "success": "Typ předmětu úspěšně odstraněn"
     },
     "delete": {
-      "success": "Předmět úspěšně odstraněn",
-      "error": "Nepovedlo se odstranit přemět"
+      "success": "Předmět úspěšně odstraněn"
     }
   }
 }

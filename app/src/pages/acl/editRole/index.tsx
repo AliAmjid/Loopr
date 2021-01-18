@@ -46,14 +46,10 @@ const EditRoleIndex: React.FC = () => {
         id: router.query.id?.toString() || '',
         name: values.name,
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('success'), { variant: 'success' });
-        router.push(routes.acl.index);
-      })
-      .catch(() => {
-        enqueueSnackbar(t('error'), { variant: 'error' });
-      });
+    }).then(() => {
+      enqueueSnackbar(t('success'), { variant: 'success' });
+      router.push(routes.acl.index);
+    });
   };
 
   return (
