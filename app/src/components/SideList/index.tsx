@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -52,6 +52,10 @@ const SideList: React.FC<SideListProps> = props => {
   const [selected, setSelected] = useState<number | string | undefined>(
     undefined,
   );
+  const [maxHeight, setMaxHeight] = useState(100);
+  useEffect(() => {
+    setMaxHeight(getSideListMaxHeight());
+  }, []);
 
   const mappedItems = props.items.map(item => {
     const itemSelected = item.id === selected;
@@ -88,10 +92,7 @@ const SideList: React.FC<SideListProps> = props => {
   });
 
   return (
-    <div
-      className={classes.container}
-      style={{ maxHeight: getSideListMaxHeight() }}
-    >
+    <div className={classes.container} style={{ maxHeight }}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading || false} />
         <div className={classes.header}>

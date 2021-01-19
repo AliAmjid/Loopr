@@ -637,12 +637,20 @@ export interface ClassGroupsClassGroupTeacherVariables {
 // GraphQL query operation: ClassGroupsClassGroupUsersQuery
 // ====================================================
 
+export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  section: string;
+  year: number;
+}
+
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
   __typename: "User";
   id: string;
   email: string;
   firstname: string;
   lastname: string;
+  classGroup: ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node_classGroup | null;
 }
 
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges {
@@ -690,6 +698,8 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
 export interface ClassGroupsUsersQuery_users_edges_node_classGroup {
   __typename: "ClassGroup";
   id: string;
+  section: string;
+  year: number;
 }
 
 export interface ClassGroupsUsersQuery_users_edges_node {

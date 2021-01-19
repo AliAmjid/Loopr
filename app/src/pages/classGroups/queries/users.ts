@@ -31,6 +31,8 @@ const CLASS_GROUPS_USERS_QUERY = gql`
           lastname
           classGroup {
             id
+            section
+            year
           }
         }
         cursor

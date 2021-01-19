@@ -62,6 +62,10 @@ const Students: React.FC<StudentsProps> = props => {
                 title: t('common:gqlObjects.user.lastname'),
                 field: 'lastname',
               },
+              {
+                title: t('common:gqlObjects.user.classGroup'),
+                field: 'classGroup.name',
+              },
             ],
             defaultColumns: ['firstname', 'lastname'],
           },

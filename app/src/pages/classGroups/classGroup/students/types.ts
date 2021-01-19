@@ -5,12 +5,13 @@ export interface ClassGroupUser {
   email: string;
   firstname: string;
   lastname: string;
+  classGroup?: {
+    id: string;
+    name: string;
+  } | null;
 }
 
 export interface User extends ClassGroupUser {
-  classGroup?: {
-    id: string;
-  } | null;
   tableData?: {
     checked?: boolean;
   };

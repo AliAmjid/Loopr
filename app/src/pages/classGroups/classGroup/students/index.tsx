@@ -108,7 +108,18 @@ const StudentsIndex: React.FC = () => {
 
             const users = [];
             for (const user of res.data?.classGroup?.users?.edges || []) {
-              if (user?.node) users.push(user.node);
+              if (user?.node)
+                users.push({
+                  ...user.node,
+                  classGroup: user.node?.classGroup
+                    ? {
+                        id: user.node.classGroup.id,
+                        name: `${user.node.classGroup.year || ''} ${
+                          user.node.classGroup.section || ''
+                        }`,
+                      }
+                    : undefined,
+                });
             }
 
             return { users, totalCount };
@@ -161,8 +172,17 @@ const StudentsIndex: React.FC = () => {
             for (const user of res.data?.users?.edges || []) {
               if (user?.node) {
                 const node = user?.node;
+
                 users.push({
                   ...node,
+                  classGroup: node?.classGroup
+                    ? {
+                        id: node.classGroup.id,
+                        name: `${node.classGroup.year || ''} ${
+                          node.classGroup.section || ''
+                        }`,
+                      }
+                    : undefined,
                   tableData: {
                     checked: node.classGroup?.id === selectedClassGroup,
                   },
