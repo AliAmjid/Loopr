@@ -11,6 +11,7 @@ const CLASS_GROUPS_USERS_QUERY = gql`
     $firstname: String
     $lastname: String
     $isInClassGroup: Boolean
+    $classGroups: [String!]
   ) {
     users(
       first: $first
@@ -22,6 +23,7 @@ const CLASS_GROUPS_USERS_QUERY = gql`
       firstname: $firstname
       lastname: $lastname
       exists: { classGroup: $isInClassGroup }
+      classGroup_id_list: $classGroups
     ) {
       edges {
         node {

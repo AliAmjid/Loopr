@@ -26,7 +26,7 @@ const Students: React.FC<StudentsProps> = props => {
       <MaterialTable
         key={`${props.selectedClassGroup}-${editing}`}
         uniqueName="pages/classGroups/classGroup/students"
-        isLoading={loading}
+        isLoading={loading || props.loading}
         title={t('students')}
         data={(query: Query<ClassGroupUser>) =>
           editing
@@ -64,7 +64,8 @@ const Students: React.FC<StudentsProps> = props => {
               },
               {
                 title: t('common:gqlObjects.user.classGroup'),
-                field: 'classGroup.name',
+                field: 'classGroup.id',
+                lookup: props.classGroupsLookup,
               },
             ],
             defaultColumns: ['firstname', 'lastname'],

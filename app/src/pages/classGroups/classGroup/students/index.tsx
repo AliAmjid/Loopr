@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
@@ -10,7 +10,10 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import useSelectionChange from 'lib/material-table/useSelectionChange';
 
+import CLASS_GROUPS_CLASS_GROUPS_QUERY from 'pages/classGroups/queries/classGroups';
+
 import {
+  ClassGroupsClassGroupsQuery,
   ClassGroupsClassGroupUsersQuery,
   ClassGroupsClassGroupUsersQueryVariables,
   ClassGroupsUpdateUsersClassGroupMutation,
@@ -31,7 +34,6 @@ import {
   ClassGroupUser,
   GetClassGroupUsersReturn,
   GetUsersReturn,
-  SelectionChangeArgs,
   User,
 } from './types';
 
@@ -43,6 +45,10 @@ const StudentsIndex: React.FC = () => {
     ClassGroupsUpdateUsersClassGroupMutation,
     ClassGroupsUpdateUsersClassGroupMutationVariables
   >(CLASS_GROUPS_UPDATE_USERS_CLASS_GROUP_MUTATION);
+  const { data: classGroupsData, loading: classGroupsLoading } = useQuery<
+    ClassGroupsClassGroupsQuery,
+    ClassGroupsClassGroupUsersQueryVariables
+  >(CLASS_GROUPS_CLASS_GROUPS_QUERY);
 
   const {
     getPagination: getClassGroupPagination,
@@ -111,14 +117,6 @@ const StudentsIndex: React.FC = () => {
               if (user?.node)
                 users.push({
                   ...user.node,
-                  classGroup: user.node?.classGroup
-                    ? {
-                        id: user.node.classGroup.id,
-                        name: `${user.node.classGroup.year || ''} ${
-                          user.node.classGroup.section || ''
-                        }`,
-                      }
-                    : undefined,
                 });
             }
 
@@ -146,6 +144,12 @@ const StudentsIndex: React.FC = () => {
     const lastnameFilter =
       query.filters.find(filter => filter.column.field === 'lastname')?.value ||
       '';
+    const classGroupsFilter =
+      query.filters.find(filter => filter.column.field === 'classGroup.id')
+        ?.value || [];
+    const isInClassGroupFilter = classGroupsFilter.some(
+      (f: string) => f === 'none',
+    );
 
     const defaultValue = { users: [], totalCount: 0 };
 
@@ -159,7 +163,8 @@ const StudentsIndex: React.FC = () => {
             email: emailFilter,
             firstname: firstnameFilter,
             lastname: lastnameFilter,
-            isInClassGroup: undefined,
+            isInClassGroup: !isInClassGroupFilter,
+            classGroups: !isInClassGroupFilter ? classGroupsFilter : [],
           },
         })
         .then(res => {
@@ -175,14 +180,7 @@ const StudentsIndex: React.FC = () => {
 
                 users.push({
                   ...node,
-                  classGroup: node?.classGroup
-                    ? {
-                        id: node.classGroup.id,
-                        name: `${node.classGroup.year || ''} ${
-                          node.classGroup.section || ''
-                        }`,
-                      }
-                    : undefined,
+
                   tableData: {
                     checked: node.classGroup?.id === selectedClassGroup,
                   },
@@ -233,9 +231,20 @@ const StudentsIndex: React.FC = () => {
       });
   };
 
+  const classGroupsLookup: Record<string, string> = { none: t('noClassGroup') };
+  classGroupsData?.classGroups?.edges?.forEach(edge => {
+    if (edge?.node) {
+      classGroupsLookup[
+        edge.node.id
+      ] = `${edge.node.year} ${edge.node.section}`;
+    }
+  });
+
   return (
     <Students
       selectedClassGroup={selectedClassGroup}
+      classGroupsLookup={classGroupsLookup}
+      loading={classGroupsLoading}
       onGetClassGroupUsers={getClassGroupUsersHandler}
       onGetUsers={getUsersHandler}
       onSelectionChange={changeUsers}

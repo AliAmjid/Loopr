@@ -7,7 +7,6 @@ export interface ClassGroupUser {
   lastname: string;
   classGroup?: {
     id: string;
-    name: string;
   } | null;
 }
 
@@ -27,13 +26,10 @@ export interface GetUsersReturn {
   totalCount: number;
 }
 
-export interface SelectionChangeArgs {
-  id: string;
-  selected: boolean;
-}
-
 export interface StudentsProps {
   selectedClassGroup?: string;
+  loading: boolean;
+  classGroupsLookup: Record<string, string>;
   onGetClassGroupUsers: (
     query: Query<ClassGroupUser>,
   ) => Promise<GetUsersReturn>;

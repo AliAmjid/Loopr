@@ -737,6 +737,7 @@ export interface ClassGroupsUsersQueryVariables {
   firstname?: string | null;
   lastname?: string | null;
   isInClassGroup?: boolean | null;
+  classGroups?: string[] | null;
 }
 
 /* tslint:disable */
