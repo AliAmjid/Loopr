@@ -4,6 +4,17 @@ import { Grid, Hidden } from '@material-ui/core';
 
 import { SideListGridProps } from './types';
 
+export const getSideListMaxHeight = (): number => {
+  let maxHeight = 100;
+
+  if (process.browser) {
+    const toolbarHeight = 64;
+    maxHeight = window.innerHeight - toolbarHeight * 3;
+  }
+
+  return maxHeight;
+};
+
 const SideListGrid: React.FC<SideListGridProps> = props => {
   return (
     <Grid container>
@@ -12,7 +23,11 @@ const SideListGrid: React.FC<SideListGridProps> = props => {
       </Grid>
       <Hidden xsDown>
         <Grid item sm={6} md={7} lg={8} xl={9}>
-          {props.body}
+          <div
+            style={{ maxHeight: getSideListMaxHeight(), overflowY: 'scroll' }}
+          >
+            {props.body}
+          </div>
         </Grid>
       </Hidden>
     </Grid>

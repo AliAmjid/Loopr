@@ -20,6 +20,7 @@ import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import { rightShadow } from 'components/shadows';
+import { getSideListMaxHeight } from 'components/SideList/grid';
 
 import { SideListProps } from './types';
 
@@ -86,15 +87,11 @@ const SideList: React.FC<SideListProps> = props => {
     );
   });
 
-  let style = {};
-
-  if (process.browser) {
-    const toolbarHeight = 64;
-    style = { maxHeight: window.innerHeight - toolbarHeight * 3 };
-  }
-
   return (
-    <div className={classes.container} style={style}>
+    <div
+      className={classes.container}
+      style={{ maxHeight: getSideListMaxHeight() }}
+    >
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading || false} />
         <div className={classes.header}>
