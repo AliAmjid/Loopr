@@ -6,17 +6,6 @@ const useSelectionChange = (): UseSelectionChange => {
   const [defaultItems, setDefaultItems] = useState<ChangedState>([]);
   const [changed, setChanged] = useState<ChangedState>([]);
 
-  /* default
-  [{1,true},{2,false},{3,false}]
-
-  items
-  [{1,true},{2,true}]
-
-  [{3,true}]
-
-  [{1,true}]
-   */
-
   const change = (items: ChangeItems): void => {
     setChanged(prevState => {
       const removeItems = defaultItems.filter(
@@ -54,8 +43,6 @@ const useSelectionChange = (): UseSelectionChange => {
           selected: !addItem.selected,
         })),
       );
-
-      console.log('prevState', prevState);
 
       return prevState;
     });

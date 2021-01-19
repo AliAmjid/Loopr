@@ -8,6 +8,7 @@ import resources from 'config/resources';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
+import useSelectionChange from 'lib/material-table/useSelectionChange';
 
 import {
   ClassGroupsClassGroupUsersQuery,
@@ -42,12 +43,7 @@ const StudentsIndex: React.FC = () => {
     ClassGroupsUpdateUsersClassGroupMutation,
     ClassGroupsUpdateUsersClassGroupMutationVariables
   >(CLASS_GROUPS_UPDATE_USERS_CLASS_GROUP_MUTATION);
-  const [changedUsers, setChangedUsers] = useState<
-    {
-      id: string;
-      selected: boolean;
-    }[]
-  >([]);
+
   const {
     getPagination: getClassGroupPagination,
     setPagination: setClassGroupPagination,
@@ -59,6 +55,12 @@ const StudentsIndex: React.FC = () => {
   const client = useApolloClient();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(namespaces.pages.classGroups.index);
+  const {
+    changed: changedUsers,
+    change: changeUsers,
+    reset: resetChangedUsers,
+    setDefault: setDefaultChangedUsers,
+  } = useSelectionChange();
 
   const getClassGroupUsersHandler = (
     query: Query<ClassGroupUser>,
@@ -167,6 +169,12 @@ const StudentsIndex: React.FC = () => {
                 });
               }
             }
+            setDefaultChangedUsers(
+              users.map(user => ({
+                id: user.id,
+                selected: user.tableData?.checked || false,
+              })),
+            );
 
             return { users, totalCount };
           }
@@ -176,21 +184,6 @@ const StudentsIndex: React.FC = () => {
     }
 
     return Promise.resolve(defaultValue);
-  };
-
-  const selectionChangeHandler = (args: SelectionChangeArgs): void => {
-    setChangedUsers(prevState => {
-      const index = prevState.findIndex(
-        changedUser => changedUser.id === args.id,
-      );
-      if (index !== -1) {
-        prevState.splice(index, 1);
-      } else {
-        prevState = [...prevState, { id: args.id, selected: args.selected }];
-      }
-
-      return prevState;
-    });
   };
 
   const submitHandler = (): Promise<boolean> => {
@@ -211,7 +204,7 @@ const StudentsIndex: React.FC = () => {
         enqueueSnackbar(t('snackbars.studentsEdit.success'), {
           variant: 'success',
         });
-        setChangedUsers([]);
+        resetChangedUsers();
 
         return true;
       })
@@ -225,7 +218,7 @@ const StudentsIndex: React.FC = () => {
       selectedClassGroup={selectedClassGroup}
       onGetClassGroupUsers={getClassGroupUsersHandler}
       onGetUsers={getUsersHandler}
-      onSelectionChange={selectionChangeHandler}
+      onSelectionChange={changeUsers}
       onSubmit={submitHandler}
     />
   );

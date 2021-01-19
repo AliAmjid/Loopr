@@ -37,6 +37,6 @@ export interface StudentsProps {
     query: Query<ClassGroupUser>,
   ) => Promise<GetUsersReturn>;
   onGetUsers: (query: Query<User>) => Promise<GetUsersReturn>;
-  onSelectionChange: (args: SelectionChangeArgs) => void;
+  onSelectionChange: (users: User[]) => void;
   onSubmit: () => Promise<boolean>;
 }
