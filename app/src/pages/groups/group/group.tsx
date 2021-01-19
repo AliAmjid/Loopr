@@ -82,7 +82,13 @@ const Group: React.FC<GroupProps> = props => {
         {editing ? (
           <>
             <Box pr={2}>
-              <Button color="primary" onClick={() => setEditing(false)}>
+              <Button
+                color="primary"
+                onClick={() => {
+                  setEditing(false);
+                  props.onSelectionCancel();
+                }}
+              >
                 {t('common:actions.cancel')}
               </Button>
             </Box>

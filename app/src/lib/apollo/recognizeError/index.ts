@@ -33,7 +33,7 @@ const recognizeError = (
   const { networkError } = error;
   if (networkError) {
     if (networkError.message === FAILED_TO_FETCH) {
-      return { message: t('noInternet'), variant: 'warning' };
+      return { message: t('errors.noInternet'), variant: 'warning' };
     }
   }
 

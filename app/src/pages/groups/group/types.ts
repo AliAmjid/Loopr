@@ -27,5 +27,6 @@ export interface GroupProps {
   classGroupLookup: Record<string, string>;
   loading: boolean;
   onSelectionChange: (data: DetailGroupUser[]) => void;
+  onSelectionCancel: () => void;
   onSubmit: () => Promise<boolean>;
 }

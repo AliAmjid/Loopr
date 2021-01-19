@@ -84,6 +84,7 @@ const Students: React.FC<StudentsProps> = props => {
             icon: Close,
             onClick: () => setEditing(false),
             hidden: !editing,
+            isFreeAction: true,
           },
           {
             tooltip: t('common:actions.save'),
@@ -96,6 +97,7 @@ const Students: React.FC<StudentsProps> = props => {
               });
             },
             hidden: !editing,
+            isFreeAction: true,
           },
         ]}
         options={{ selection: editing, exportButton: !editing }}
