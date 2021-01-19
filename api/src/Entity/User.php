@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use TheCodingMachine\GraphQLite\Annotations\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
