@@ -9,9 +9,9 @@ import {
   Toolbar,
 } from '@material-ui/core';
 
-import SVGLogo from 'components/SVGLogo';
 import usePageState from 'components/withPage/Page/state';
 
+import SVGLogo from './images/logo.svg';
 import Navigation from './Navigation';
 import { DrawerProps } from './types';
 
