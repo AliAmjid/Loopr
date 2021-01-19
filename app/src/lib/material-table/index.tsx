@@ -134,7 +134,7 @@ const MaterialTable = <RowD extends {}>(
       if (typeof action === 'object') {
         mappedActions.push(action);
 
-        if (action.isFreeAction) {
+        if (action.isFreeAction && props.options?.selection) {
           mappedActions.push({
             ...action,
             hidden: action.hidden || !props.options?.selection,

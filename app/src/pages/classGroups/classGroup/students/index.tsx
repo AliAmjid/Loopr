@@ -219,6 +219,7 @@ const StudentsIndex: React.FC = () => {
       onGetClassGroupUsers={getClassGroupUsersHandler}
       onGetUsers={getUsersHandler}
       onSelectionChange={changeUsers}
+      onSelectionClose={resetChangedUsers}
       onSubmit={submitHandler}
     />
   );

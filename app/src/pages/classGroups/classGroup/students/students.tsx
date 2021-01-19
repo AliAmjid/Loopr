@@ -45,13 +45,8 @@ const Students: React.FC<StudentsProps> = props => {
                 data: res.users,
               }))
         }
-        onSelectionChange={(data, row) => {
-          if (row) {
-            props.onSelectionChange({
-              id: row?.id,
-              selected: row?.tableData?.checked || false,
-            });
-          }
+        onSelectionChange={data => {
+          props.onSelectionChange(data);
         }}
         columns={[]}
         defaultActions={{
@@ -82,7 +77,10 @@ const Students: React.FC<StudentsProps> = props => {
           {
             tooltip: t('common:actions.cancel'),
             icon: Close,
-            onClick: () => setEditing(false),
+            onClick: () => {
+              setEditing(false);
+              props.onSelectionClose();
+            },
             hidden: !editing,
             isFreeAction: true,
           },

@@ -38,5 +38,6 @@ export interface StudentsProps {
   ) => Promise<GetUsersReturn>;
   onGetUsers: (query: Query<User>) => Promise<GetUsersReturn>;
   onSelectionChange: (users: User[]) => void;
+  onSelectionClose: () => void;
   onSubmit: () => Promise<boolean>;
 }
