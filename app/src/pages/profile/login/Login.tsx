@@ -26,7 +26,6 @@ const Login: React.FC<LoginProps> = props => {
           <Box display="flex" alignItems="center" flexWrap="wrap">
             <Box pr={2} pt={2}>
               <TextField
-                variant="outlined"
                 label="currentPassword"
                 type="password"
                 name="oldPassword"
@@ -35,7 +34,6 @@ const Login: React.FC<LoginProps> = props => {
             </Box>
             <Box pr={2} pt={2}>
               <TextField
-                variant="outlined"
                 label="newPassword"
                 type="password"
                 error={props.notMatch}
@@ -45,7 +43,6 @@ const Login: React.FC<LoginProps> = props => {
             </Box>
             <Box pr={2} pt={2}>
               <TextField
-                variant="outlined"
                 label="newPasswordAgain"
                 type="password"
                 error={props.notMatch}
