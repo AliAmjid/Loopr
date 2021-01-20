@@ -10,6 +10,7 @@ import routes from 'config/routes';
 import accessContext, {
   HAS_ACCESS,
   INVALID_COOKIE,
+  NO_INTERNET,
   UNAUTHORIZED,
 } from 'lib/apollo/accessContext';
 import withApollo from 'lib/apollo/withApollo';
@@ -58,7 +59,8 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   if (
     unauthorized ||
     access.value === INVALID_COOKIE ||
-    access.value === UNAUTHORIZED
+    access.value === UNAUTHORIZED ||
+    access.value === NO_INTERNET
   ) {
     return <Unauthorized />;
   }

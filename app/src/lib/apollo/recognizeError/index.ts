@@ -1,5 +1,5 @@
 import { ErrorResponse } from '@apollo/client/link/error';
-import { TFunction } from 'i18next';
+import { TFunction } from 'next-i18next';
 import { VariantType } from 'notistack';
 
 import { GraphqlErrorWithLooprError } from 'lib/apollo/recognizeError/types';
