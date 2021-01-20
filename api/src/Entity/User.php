@@ -99,7 +99,7 @@ class User implements UserInterface
     /**
      * @var Collection|Groups[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"read:owner","read:USER_SHOW_ALL", "user:write", "exposed"})
+     * @Groups({"read:always", "exposed"})
      */
     private $groups;
 
