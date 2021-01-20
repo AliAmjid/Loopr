@@ -7,8 +7,10 @@ const WITH_PAGE_ME_USER_QUERY = gql`
       firstname
       lastname
       role {
+        id
         name
         resources {
+          id
           name
         }
       }

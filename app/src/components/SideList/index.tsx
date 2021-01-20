@@ -52,9 +52,9 @@ const SideList: React.FC<SideListProps> = props => {
   const [selected, setSelected] = useState<number | string | undefined>(
     undefined,
   );
-  const [maxHeight, setMaxHeight] = useState(100);
+  const [height, setHeight] = useState(100);
   useEffect(() => {
-    setMaxHeight(getSideListMaxHeight());
+    setHeight(getSideListMaxHeight());
   }, []);
 
   const mappedItems = props.items.map(item => {
@@ -92,11 +92,13 @@ const SideList: React.FC<SideListProps> = props => {
   });
 
   return (
-    <div className={classes.container} style={{ maxHeight }}>
+    <div className={classes.container} style={{ height }}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading || false} />
         <div className={classes.header}>
-          <Typography variant="h2">{props.title}</Typography>
+          <Box pl={2}>
+            <Typography variant="h2">{props.title}</Typography>
+          </Box>
           {props.filter !== undefined && (
             <TextField
               label={t('actions.search')}

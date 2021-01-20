@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
     backgroundColor: fade(theme.palette.primary.main, 0.3),
   },
-  toolbarTitle: {
+  toolbarTitleGreen: {
     color: theme.palette.primary.main,
   },
 }));
@@ -186,7 +186,9 @@ const MaterialTable = <RowD extends {}>(
                 {...toolbarProps}
                 classes={{
                   root: props.options?.selection ? classes.toolbar : undefined,
-                  title: props.options?.selection ? classes.toolbarTitle : '',
+                  title: `${
+                    props.options?.selection && classes.toolbarTitleGreen
+                  }`,
                 }}
               />
             ),

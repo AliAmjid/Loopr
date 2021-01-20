@@ -24,9 +24,9 @@ const useStyles = makeStyles({
 
 const SideListGrid: React.FC<SideListGridProps> = props => {
   const classes = useStyles();
-  const [maxHeight, setMaxHeight] = useState(100);
+  const [height, setHeight] = useState(100);
   useEffect(() => {
-    setMaxHeight(getSideListMaxHeight());
+    setHeight(getSideListMaxHeight());
   }, []);
 
   return (
@@ -36,7 +36,7 @@ const SideListGrid: React.FC<SideListGridProps> = props => {
       </Grid>
       <Hidden xsDown>
         <Grid item sm={6} md={7} lg={8} xl={9}>
-          <Box className={classes.content} style={{ maxHeight }}>
+          <Box className={classes.content} style={{ height }}>
             {props.body}
           </Box>
         </Grid>

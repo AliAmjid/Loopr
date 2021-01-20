@@ -34,7 +34,7 @@ const ColorChangeDialogIndex: React.FC<ColorChangeDialogIndexProps> = props => {
     updateColorSubject({
       variables: { input: { id: props.subjectId, teacherCardColor: color } },
     }).then(() => {
-      enqueueSnackbar(t('snakbars.updateColor'), { variant: 'success' });
+      enqueueSnackbar(t('snackbars.updateColor'), { variant: 'success' });
       props.onClose();
     });
   };
