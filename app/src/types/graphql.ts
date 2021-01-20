@@ -250,13 +250,32 @@ export interface UserImportTableAclRolesQuery {
 
 export interface WithPageMeUserQuery_meUser_role_resources {
   __typename: "AclResource";
+  id: string;
   name: string;
 }
 
 export interface WithPageMeUserQuery_meUser_role {
   __typename: "AclRole";
+  id: string;
   name: string;
   resources: (WithPageMeUserQuery_meUser_role_resources | null)[] | null;
+}
+
+export interface WithPageMeUserQuery_meUser_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  type: string;
+  parameters: any;
+}
+
+export interface WithPageMeUserQuery_meUser_notifications_edges {
+  __typename: "NotificationEdge";
+  node: WithPageMeUserQuery_meUser_notifications_edges_node | null;
+}
+
+export interface WithPageMeUserQuery_meUser_notifications {
+  __typename: "NotificationConnection";
+  edges: (WithPageMeUserQuery_meUser_notifications_edges | null)[] | null;
 }
 
 export interface WithPageMeUserQuery_meUser {
@@ -265,6 +284,7 @@ export interface WithPageMeUserQuery_meUser {
   firstname: string;
   lastname: string;
   role: WithPageMeUserQuery_meUser_role;
+  notifications: WithPageMeUserQuery_meUser_notifications | null;
 }
 
 export interface WithPageMeUserQuery {

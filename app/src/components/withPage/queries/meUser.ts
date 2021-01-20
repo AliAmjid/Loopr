@@ -14,6 +14,15 @@ const WITH_PAGE_ME_USER_QUERY = gql`
           name
         }
       }
+      notifications {
+        edges {
+          node {
+            id
+            type
+            parameters
+          }
+        }
+      }
     }
   }
 `;

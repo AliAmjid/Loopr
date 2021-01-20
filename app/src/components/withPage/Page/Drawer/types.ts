@@ -1,11 +1,11 @@
-import { User } from '../types';
+import { NullableUser } from '../types';
 
 export interface DrawerProps {
-  user: User;
+  user: NullableUser;
 }
 
 export interface NavigationProps {
-  user: User;
+  user: NullableUser;
 }
 
 interface NavigationItem {

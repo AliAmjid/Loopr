@@ -20,6 +20,7 @@ import { WithPageMeUserQuery } from 'types/graphql';
 
 import hasAccess from 'components/hasAccess';
 
+import { User } from './Page/types';
 import WITH_PAGE_ME_USER_QUERY from './queries/meUser';
 import Page from './Page';
 import { WithPageInternalProps } from './types';
@@ -64,9 +65,23 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
 
   const { componentProps, ...rest } = props;
 
+  const user: User = {
+    ...(data?.meUser || {}),
+    notifications: [],
+    firstname: '',
+    lastname: '',
+    role: undefined,
+  };
+  data?.meUser?.notifications?.edges?.forEach(edge => {
+    const node = edge?.node;
+    if (node) {
+      user.notifications.push({ ...node });
+    }
+  });
+
   return (
     <>
-      <Page onLogOut={logOutHandler} {...rest} user={data?.meUser}>
+      <Page onLogOut={logOutHandler} {...rest} user={user}>
         <props.Component {...componentProps} />
       </Page>
     </>

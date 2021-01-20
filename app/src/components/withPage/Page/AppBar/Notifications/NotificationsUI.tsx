@@ -2,16 +2,14 @@ import React from 'react';
 
 import {
   Badge,
-  Button,
+  fade,
   IconButton,
   List,
-  ListItem as ListItemPrefab,
-  ListSubheader,
   makeStyles,
   Popover,
+  Theme,
   Tooltip,
 } from '@material-ui/core';
-import ChatBubble from '@material-ui/icons/ChatBubble';
 import GradeIcon from '@material-ui/icons/Grade';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
@@ -26,6 +24,7 @@ const listWidth = 300;
 const useStyles = makeStyles({
   list: {
     width: listWidth,
+    maxHeight: 400,
   },
 });
 
@@ -55,23 +54,29 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
           horizontal: 'right',
         }}
       >
-        <List
-          className={classes.list}
-          subheader={<ListSubheader>Upozornění</ListSubheader>}
-        >
-          <ListItem
-            icon={<GradeIcon />}
-            primaryText="Nová známka"
-            secondaryText="Matematika"
-          />
-          <ListItem
-            icon={<ChatBubble />}
-            primaryText="Nová zpráva"
-            secondaryText="Radko Sáblík"
-          />
-          <ListItemPrefab>
-            <Button fullWidth>Odstranit vše</Button>
-          </ListItemPrefab>
+        <List className={classes.list}>
+          {props.notifications.map(notification => {
+            let primary = '';
+            let secondary = '';
+
+            switch (notification.type) {
+              case 'POINT_CHANGED':
+                primary = 'pointsChanged';
+                secondary = notification.parameters.examName;
+                break;
+              default:
+                break;
+            }
+
+            return (
+              <ListItem
+                key={notification.id}
+                icon={<GradeIcon />}
+                primaryText={primary}
+                secondaryText={secondary}
+              />
+            );
+          })}
         </List>
       </Popover>
     </>
