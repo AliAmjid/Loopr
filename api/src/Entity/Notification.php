@@ -12,10 +12,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 
 /**
- * @ORM\Entity()
- * @ApiFilter(OrderFilter::class, properties={"createdAt": "DESC"})
- * @ApiFilter(ExistsFilter::class, properties={"viewAt"})
+ * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  */
+#[ApiFilter(filterClass: ExistsFilter::class, properties: ['viewAt' => false])]
+#[ApiFilter(filterClass: OrderFilter::class, properties: ['createdAt' => ['default_direction' => 'DESC']])]
 class Notification
 {
     use Tid;
@@ -101,6 +101,60 @@ class Notification
     public function setUser(User $user): Notification
     {
         $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return Notification
+     */
+    public function setCreatedAt(\DateTime $createdAt): Notification
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getViewAt(): ?\DateTime
+    {
+        return $this->viewAt;
+    }
+
+    /**
+     * @param \DateTime|null $viewAt
+     * @return Notification
+     */
+    public function setViewAt(?\DateTime $viewAt): Notification
+    {
+        $this->viewAt = $viewAt;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmail(): bool
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param bool $email
+     * @return Notification
+     */
+    public function setEmail(bool $email): Notification
+    {
+        $this->email = $email;
         return $this;
     }
 }
