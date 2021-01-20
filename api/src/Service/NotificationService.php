@@ -51,6 +51,7 @@ class NotificationService
                 'exam' => $point->getPointSystem()->getExam()->getId(),
                 'examName' => $point->getPointSystem()->getExam()->getName(),
                 'new' => $point->getPoints(),
+                'subjectName' => $point->getPointSystem()->getExam()->getSubject()->getSubjectType()->getName()
             ]
         );
     }
@@ -65,6 +66,7 @@ class NotificationService
                 'exam' => $point->getPointSystem()->getExam()->getId(),
                 'examName' => $point->getPointSystem()->getExam()->getName(),
                 'new' => $point->getPoints(),
+                'subjectName' => $point->getPointSystem()->getExam()->getSubject()->getSubjectType()->getName()
             ]
         );
     }
