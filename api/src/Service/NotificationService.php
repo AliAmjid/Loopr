@@ -60,7 +60,7 @@ class NotificationService
     ) {
         $this->createNDispatchNotification(
             $point->getUser(),
-            NotificationType::POINT_CHANGED,
+            NotificationType::NEW_POINT,
             [
                 'exam' => $point->getPointSystem()->getExam()->getId(),
                 'examName' => $point->getPointSystem()->getExam()->getName(),
