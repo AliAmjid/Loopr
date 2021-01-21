@@ -2,12 +2,10 @@ import React from 'react';
 
 import {
   Badge,
-  fade,
   IconButton,
   List,
   makeStyles,
   Popover,
-  Theme,
   Tooltip,
 } from '@material-ui/core';
 import GradeIcon from '@material-ui/icons/Grade';

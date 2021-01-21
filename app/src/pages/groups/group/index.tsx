@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
@@ -30,7 +30,7 @@ import GROUPS_UPDATE_USERS_GROUP_MUTATION from '../mutations/updateUsersGroup';
 import GROUPS_CLASS_GROUPS_QUERY from '../queries/classGroups';
 
 import Group from './group';
-import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
+import { DetailGroupUser, GetUsersReturn } from './types';
 
 const GroupIndex: React.FC = () => {
   const { t } = useTranslation(namespaces.pages.groups.index);

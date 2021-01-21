@@ -15,7 +15,7 @@ export interface GetUsersReturn {
   totalCount: number;
 }
 
-export interface SelectionChangeArgs {
+interface SelectionChangeArgs {
   id: string;
   selected: boolean;
 }

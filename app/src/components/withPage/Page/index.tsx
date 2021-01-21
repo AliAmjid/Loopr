@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';

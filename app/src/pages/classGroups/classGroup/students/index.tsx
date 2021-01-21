@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';

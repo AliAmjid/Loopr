@@ -11,8 +11,8 @@ import {
   makeStyles,
   Theme,
 } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import OverlayLoading from 'components/OverlayLoading';

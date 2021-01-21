@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { useApolloClient, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';

@@ -17,7 +17,6 @@ import {
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
-import { formatDateToDay } from 'components/formatDate';
 import { getMark, getPercents } from 'components/percents';
 import withPage from 'components/withPage';
 
