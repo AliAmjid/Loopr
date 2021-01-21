@@ -29,7 +29,6 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import AstronautIllustration from './images/astronaut.svg';
 import LaptopIllustration from './images/laptop.svg';
 import Logo from './images/logo.svg';
-import MinionsIllustration from './images/minions.svg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -62,11 +61,7 @@ const Login: React.FC<LoginProps> = props => {
         </Box>
         <Typography variant="h1">Jednoduchý školní online systém</Typography>
       </Box>
-      <Box display="flex" flexDirection="column">
-        <Box height={200} width={300} mb={-6} ml={2}>
-          <MinionsIllustration height="100%" width="100%" />
-        </Box>
-
+      <Box display="flex" flexDirection="column" pt={20}>
         <Paper className={classes.paper}>
           <OverlayLoadingContainer>
             <OverlayLoading loading={props.loading} />

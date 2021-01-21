@@ -38,6 +38,13 @@ const withApollo = <ComponentProps extends {} = any>(
   const { t } = useTranslation(namespaces.lib.apollo);
 
   const errorLink = onError(error => {
+    const ignoreQueries = ['LoginMeUserQuery'];
+    if (
+      ignoreQueries.some(ignore => ignore === error.operation.operationName)
+    ) {
+      return;
+    }
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     if (error.networkError?.statusCode === 401) access.set(INVALID_COOKIE);
