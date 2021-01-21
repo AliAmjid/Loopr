@@ -41,7 +41,7 @@ const withApollo = <ComponentProps extends {} = any>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     if (error.networkError?.statusCode === 401) access.set(INVALID_COOKIE);
-    else if (error.networkError.message === FAILED_TO_FETCH)
+    else if (error.networkError?.message === FAILED_TO_FETCH)
       access.set(NO_INTERNET);
     else if (
       error.graphQLErrors?.some(

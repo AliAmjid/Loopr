@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
@@ -118,44 +118,6 @@ const Group: React.FC<GroupProps> = props => {
           },
         ]}
       />
-      <Box pt={2} display="flex" justifyContent="flex-end">
-        {editing ? (
-          <>
-            <Box pr={2}>
-              <Button
-                color="primary"
-                onClick={() => {
-                  setEditing(false);
-                  props.onSelectionCancel();
-                }}
-              >
-                {t('common:actions.cancel')}
-              </Button>
-            </Box>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={() => {
-                setLoading(true);
-                props.onSubmit().then(success => {
-                  setLoading(false);
-                  if (success) setEditing(false);
-                });
-              }}
-            >
-              {t('common:actions.save')}
-            </Button>
-          </>
-        ) : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setEditing(true)}
-          >
-            {t('common:actions.edit')}
-          </Button>
-        )}
-      </Box>
     </Box>
   );
 };

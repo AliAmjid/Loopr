@@ -68,11 +68,11 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   const { componentProps, ...rest } = props;
 
   const user: User = {
-    ...(data?.meUser || {}),
-    notifications: [],
     firstname: '',
     lastname: '',
     role: undefined,
+    ...(data?.meUser || {}),
+    notifications: [],
   };
   data?.meUser?.notifications?.edges?.forEach(edge => {
     const node = edge?.node;
