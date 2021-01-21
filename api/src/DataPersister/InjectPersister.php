@@ -16,6 +16,8 @@ use App\Repository\SchoolPeriodRepository;
 use App\Service\AnnotationReaderHelperService;
 use Doctrine\Persistence\ManagerRegistry;
 use ReflectionClass;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class InjectPersister implements ContextAwareDataPersisterInterface
@@ -24,6 +26,8 @@ class InjectPersister implements ContextAwareDataPersisterInterface
     private ContextAwareDataPersisterInterface $decorated;
     private AnnotationReaderHelperService $annotationReaderHelperService;
     private User $loggedUser;
+    private PropertyAccessor $propertyAccess;
+
 
     public function __construct(
         ContextAwareDataPersisterInterface $decorated,
@@ -36,6 +40,7 @@ class InjectPersister implements ContextAwareDataPersisterInterface
         $this->annotationReaderHelperService = $annotationReaderHelperService;
         $this->loggedUser = $tokenStorage->getToken()->getUser();
         $this->schoolPeriodRepository = $registry->getRepository(SchoolPeriod::class);
+        $this->propertyAccess = PropertyAccess::createPropertyAccessor();
     }
 
     public function supports($data, array $context = []): bool
@@ -52,8 +57,12 @@ class InjectPersister implements ContextAwareDataPersisterInterface
         $this->injectViaAttribute(
             $data,
             InjectSchoolPeriod::class,
-            function () {
-                return $this->schoolPeriodRepository->findActive()
+            function (object $item, InjectSchoolPeriod $injectSchoolPeriod) {
+                return $this->schoolPeriodRepository->findForDate(
+                        $injectSchoolPeriod->dateProperty
+                            ? $this->propertyAccess->getValue($item, $injectSchoolPeriod->dateProperty)
+                            : new \DateTime()
+                    )
                     ?? throw new ClientError(ClientErrorType::NO_SCHOOL_PERIOD_ACTIVE);
             },
             $context
@@ -82,7 +91,7 @@ class InjectPersister implements ContextAwareDataPersisterInterface
             foreach ($annotation->operations as $operation) {
                 if ($operation === $context['graphql_operation_name']) {
                     if (is_callable($injectItem)) {
-                        $injectItem = call_user_func($injectItem);
+                        $injectItem = call_user_func($injectItem, $data, $annotation, $context);
                     }
                     $data->{$method->getName()}($injectItem);
                 }
@@ -100,7 +109,7 @@ class InjectPersister implements ContextAwareDataPersisterInterface
                 foreach ($attributeInstance->operations as $operation) {
                     if ($operation === $context['graphql_operation_name']) {
                         if (is_callable($injectItem)) {
-                            $injectItem = call_user_func($injectItem);
+                            $injectItem = call_user_func($injectItem, $data, $attributeInstance, $context);
                         }
                         $data->{$method->getName()}($injectItem);
                     }

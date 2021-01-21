@@ -53,6 +53,11 @@ services:
     App\Service\MigrationFactoryDecorator:
         decorates: Doctrine\Migrations\Version\DbalMigrationFactory
         arguments: [ '@App\Service\MigrationFactoryDecorator.inner', '@service_container' ]
+    
+    App\Schema\SchemaBuilder:
+        decorates: 'api_platform.graphql.schema_builder'
+        arguments: ['@.inner']
+        
 
     App\Events\Listener\PointSubscriber:
         autowire: true

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { useApolloClient, useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
@@ -7,10 +7,14 @@ import { useSnackbar } from 'notistack';
 
 import routes from 'config/routes';
 
-import recognizeError from 'lib/apollo/recognizeError';
-import errors from 'lib/apollo/recognizeError/errors';
-import useCachePersistor from 'lib/apollo/useCachePersistor';
+import accessContext, {
+  HAS_ACCESS,
+  INVALID_COOKIE,
+  UNAUTHORIZED,
+} from 'lib/apollo/accessContext';
 import withApollo from 'lib/apollo/withApollo';
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import { WithPageMeUserQuery } from 'types/graphql';
 
@@ -22,35 +26,39 @@ import { WithPageInternalProps } from './types';
 import Unauthorized from './Unauthorized';
 
 const WithPageInternal: React.FC<WithPageInternalProps> = props => {
-  const { data, error } = useQuery<WithPageMeUserQuery>(
-    WITH_PAGE_ME_USER_QUERY,
-    {
-      fetchPolicy: 'cache-and-network',
-      pollInterval: 1000 * 60,
-    },
-  );
+  const { data } = useQuery<WithPageMeUserQuery>(WITH_PAGE_ME_USER_QUERY, {
+    fetchPolicy: 'cache-and-network',
+    pollInterval: 1000 * 60,
+  });
+  const { t } = useTranslation(namespaces.components.withPage);
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-  const apolloClient = useApolloClient();
-  const cachePersistor = useCachePersistor();
+  const access = useContext(accessContext);
+  const unauthorized =
+    data &&
+    !hasAccess({
+      requiredResources: props.resources,
+      role: data?.meUser?.role,
+    });
 
-  const unauthorized = !hasAccess({
-    requiredResources: props.resources,
-    role: data?.meUser?.role,
-  });
-  const notLoggedIn =
-    error && recognizeError(error) !== errors.network.failedToFetch;
+  useEffect(() => {
+    access.set(HAS_ACCESS);
+  }, []);
 
   const logOutHandler = async (): Promise<void> => {
     cookie.remove(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
-    await cachePersistor.purge();
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    await apolloClient.resetStore().catch(() => {});
-    await router.push(routes.login.index);
-    enqueueSnackbar('Uživatel úspěšně odhlášen', { variant: 'success' });
+    setTimeout(() => {
+      router.push(routes.login.index).then(() => {
+        enqueueSnackbar(t('logOutSuccess'), { variant: 'success' });
+      });
+    });
   };
 
-  if (notLoggedIn || unauthorized) {
+  if (
+    unauthorized ||
+    access.value === INVALID_COOKIE ||
+    access.value === UNAUTHORIZED
+  ) {
     return <Unauthorized />;
   }
 

@@ -18,7 +18,7 @@ const CSVUpload: React.FC = () => {
 
   const dropHandler = (data: any, file: any): void => {
     if (file.type !== 'text/csv') {
-      enqueueSnackbar('NOT CSV', { variant: 'error' });
+      enqueueSnackbar(t('notCSV'), { variant: 'error' });
       setUploadNext(false);
 
       return;

@@ -1,3 +1,5 @@
+import helpPaths from 'config/helpPaths';
+
 import namespaces from 'lib/i18n/namespaces';
 
 import { teacherSubjectsBreadcrumbs } from 'pages/teacherSubjects/index/pageOptions';
@@ -11,5 +13,6 @@ const subjectPageOptions: PageOptions = {
     { label: 'teacherSubjects.subject.index' },
   ],
   namespaces: [namespaces.pages.teacherSubjects.subject.pointSystem],
+  helpPath: helpPaths.teacherSubjects.pointSystem,
 };
 export default subjectPageOptions;

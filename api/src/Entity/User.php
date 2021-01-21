@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use TheCodingMachine\GraphQLite\Annotations\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -89,7 +90,7 @@ class User implements UserInterface
 
     /**
      * @var ClassGroup|null
-     * @Groups({"read:owner","read:GROUP_SHOW_ALL", "user:write", "exposed"})
+     * @Groups({"read:always", "exposed"})
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
      * @ORM\JoinColumn(name="class_group_id", referencedColumnName="id")
      */
@@ -98,7 +99,7 @@ class User implements UserInterface
     /**
      * @var Collection|Groups[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"read:owner","read:USER_SHOW_ALL", "user:write", "exposed"})
+     * @Groups({"read:always", "exposed"})
      */
     private $groups;
 

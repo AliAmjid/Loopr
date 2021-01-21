@@ -1,7 +1,7 @@
 {
   "name": "Loopr",
   "short_name": "Loopr",
-  "description": "Školníé systém nové generace",
+  "description": "Školní systém nové generace",
   "icons": [
     {
       "src": "/static/pwa.png",

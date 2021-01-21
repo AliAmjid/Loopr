@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 0,
     bottom: 0,
     zIndex: 502,
+    overflowY: 'scroll',
+
     transitionDuration: `${transitionDuration}ms`,
   },
   sideHidden: {

@@ -15,13 +15,3 @@ App\Entity\Notification:
     graphql:
         item_query:
             security: "is_granted('ENTITY_ACCESS', object)"
-        markRead:
-            security: "is_granted('ENTITY_ACCESS', object)"
-            mutation: App\Controller\NotificationController
-            args:
-                id:
-                    type: 'ID!'
-        markReadAll:
-            security: "is_granted('ENTITY_ACCESS', object)"
-            mutation: App\Controller\NotificationController
-            args:

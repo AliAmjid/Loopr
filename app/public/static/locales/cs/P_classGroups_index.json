@@ -9,24 +9,19 @@
   "irreversibleAction": "Nevratná operace",
   "snackbars": {
     "edit": {
-      "success": "Třída úspešně upravena",
-      "error": "Nepovedlo se upravit třídu"
+      "success": "Třída úspešně upravena"
     },
     "delete": {
-      "success": "Třída úspěšně odstraněna",
-      "error": "Nepovedlo se odstranit třídu"
+      "success": "Třída úspěšně odstraněna"
     },
     "add": {
-      "success": "Třída úspěšně přidána",
-      "error": "Nepovedlo se přidat třídu"
+      "success": "Třída úspěšně přidána"
     },
     "studentsEdit": {
-      "success": "Studenti úspešně upraveni",
-      "error": "Nepovedlo se upravit studenty"
+      "success": "Studenti úspešně upraveni"
     },
     "teacherEdit": {
       "success": "Učitel úspěšně upraven",
-      "error": "Nepovedlo se upravit učitele"
     }
   }
 }

@@ -109,18 +109,14 @@ const AclIndex: React.FC = () => {
     })
       .then(() => true)
       .catch(() => {
-        enqueueSnackbar(t('failedToUpdate'), { variant: 'error' });
-
         return false;
       });
   };
 
   const roleAddHandler = (): void => {
-    addRole({ variables: { input: { name: 'ROLE_NEW' } } })
-      .then(() => enqueueSnackbar(t('addSuccess'), { variant: 'success' }))
-      .catch(() => {
-        enqueueSnackbar(t('addError'), { variant: 'error' });
-      });
+    addRole({ variables: { input: { name: 'ROLE_NEW' } } }).then(() =>
+      enqueueSnackbar(t('addSuccess'), { variant: 'success' }),
+    );
   };
 
   return (

@@ -1,3 +1,4 @@
+import helpPaths from 'config/helpPaths';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -19,6 +20,7 @@ const subjectsPageOptions: PageOptions = {
     ...sideListNamespaces,
     namespaces.pages.subjects.index,
   ],
+  helpPath: helpPaths.subjects.index,
 };
 
 export default subjectsPageOptions;

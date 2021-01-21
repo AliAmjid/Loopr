@@ -5,8 +5,6 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
-import recognizeError from 'lib/apollo/recognizeError';
-import errors from 'lib/apollo/recognizeError/errors';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -66,24 +64,11 @@ const PointSystemIndex: React.FC = () => {
           writtenAt: dayjs().toISOString(),
         },
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.createExam.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(err => {
-        const recognizedError = recognizeError(err);
-        if (recognizedError === errors.looprError.noSchoolPeriodActive) {
-          enqueueSnackbar(t('snackbars.createExam.noSchoolPeriod'), {
-            variant: 'warning',
-          });
-        } else {
-          enqueueSnackbar(t('snackbars.createExam.error'), {
-            variant: 'error',
-          });
-        }
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.createExam.success'), {
+        variant: 'success',
       });
+    });
   };
 
   const exams: Exams = [];
@@ -122,8 +107,27 @@ const PointSystemIndex: React.FC = () => {
 
   let maxPoints = 0;
 
+  let sortedExams = subjectData?.subject?.exams?.edges;
+  if (subjectData?.subject?.exams?.edges) {
+    sortedExams = [...(subjectData?.subject?.exams?.edges || [])].sort(
+      (edge1, edge2) => {
+        const written1 = dayjs(edge1?.node?.writtenAt);
+        const written2 = dayjs(edge2?.node?.writtenAt);
+
+        if (written2.isBefore(written1)) {
+          return 1;
+        }
+        if (written1.isBefore(written2)) {
+          return -1;
+        }
+
+        return 0;
+      },
+    );
+  }
+
   // Set exams and studentExams
-  for (const exam of subjectData?.subject?.exams?.edges || []) {
+  for (const exam of sortedExams || []) {
     const examNode = exam?.node;
     if (examNode) {
       maxPoints += examNode.pointSystem?.maxPoints || 0;

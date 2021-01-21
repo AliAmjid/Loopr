@@ -1,6 +1,6 @@
 const resources = {
   user: {
-    seeAll: 'USER_SEE_ALL',
+    showAll: 'USER_SHOW_ALL',
     edit: 'USER_EDIT',
     show: 'USER_SHOW',
     create: 'USER_CREATE',

@@ -193,33 +193,23 @@ const EditIndex: React.FC<EditIndexProps> = props => {
             writtenAt: exam.writtenAt,
           },
         },
-      })
-        .then(() => {
-          enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.success'), {
-            variant: 'success',
-          });
-          props.onClose();
-        })
-        .catch(() => {
-          enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.error'), {
-            variant: 'error',
-          });
+      }).then(() => {
+        enqueueSnackbar(t('snackbars.createOrUpdatePointSystem.success'), {
+          variant: 'success',
         });
+        props.onClose();
+      });
     }
   };
 
   const deleteHandler = (): void => {
-    deleteExam({ variables: { input: { id: props.examId } } })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.deleteExam.success'), {
-          variant: 'success',
-        });
-        setDeleteDialog(false);
-        props.onClose();
-      })
-      .catch(() => {
-        enqueueSnackbar(t('snackbars.deleteExam.error'), { variant: 'error' });
+    deleteExam({ variables: { input: { id: props.examId } } }).then(() => {
+      enqueueSnackbar(t('snackbars.deleteExam.success'), {
+        variant: 'success',
       });
+      setDeleteDialog(false);
+      props.onClose();
+    });
   };
 
   return (

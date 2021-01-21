@@ -29,14 +29,12 @@ const EditDialogIndex: React.FC<EditDialogIndexProps> = props => {
   const { t } = useTranslation(namespaces.pages.schoolPeriods.index);
 
   const submitHandler = (values: SubmitValues): void => {
-    updateSchoolPeriod({ variables: { input: { id: props.id, ...values } } })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
-        props.onClose();
-      })
-      .catch(() => {
-        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
-      });
+    updateSchoolPeriod({
+      variables: { input: { id: props.id, ...values } },
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.edit.success'), { variant: 'success' });
+      props.onClose();
+    });
   };
 
   return (

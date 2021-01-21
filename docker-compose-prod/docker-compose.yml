@@ -25,6 +25,9 @@ services:
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
       - JWT_PUBLIC_KEY=${JWT_PUBLIC_KEY}
       - JWT_PASSPHRASE=${JWT_PASSPHRASE}
+      - MERCURE_PUBLISHER_JWT_KEY=${MERCURE_PUBLISHER_JWT_KEY:-!ChangeMe!}
+      - MERCURE_SUBSCRIBER_JWT_KEY=${MERCURE_SUBSCRIBER_JWT_KEY:-!ChangeMe!}
+  
     links:
       - db
     
@@ -59,7 +62,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_USER=${POSTGRES_USER}
     volumes:
-      - ../api/docker/db/data:/var/lib/postgresql/data:rw
+      - /var/www/loopr/db:/var/lib/postgresql/data:rw
     ports:
       - 5432:5432
   app:

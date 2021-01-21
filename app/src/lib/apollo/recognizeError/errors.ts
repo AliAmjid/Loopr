@@ -1,10 +1,17 @@
-const errors = {
-  network: {
-    failedToFetch: 'Failed to fetch',
-  },
-  looprError: {
-    noSchoolPeriodActive: 'NO_SCHOOL_PERIOD_ACTIVE',
-  },
-};
-
-export default errors;
+export const FAILED_TO_FETCH = 'Failed to fetch';
+export const ACCESS_DENIED = 'ACCESS_DENIED';
+export const INVALID_ROLE_CONFIG = 'INVALID_ROLE_CONFIG';
+export const USER_NOT_FOUND = 'USER_NOT_FOUND';
+export const VALIDATION_ERROR = 'VALIDATION_ERROR';
+export const UNEXPECTED_VALUE = 'UNEXPECTED_VALUE';
+export const DUPLICATE_VALUE = 'DUPLICATE_VALUE';
+export const OLD_PASSWORD_IS_WRONG = 'OLD_PASSWORD_IS_WRONG';
+export const USER_IS_NOT_TEACHER = 'USER_IS_NOT_TEACHER';
+export const EMPTY_GROUP_CLASS_GROUP = 'EMPTY_GROUP_CLASS_GROUP';
+export const USER_CAN_NOT_BE_TAUGHT = 'USER_CAN_NOT_BE_TAUGHT';
+export const INVALID_IRI = 'INVALID_IRI';
+export const CHECK_ACCESS = 'CHECK_ACCESS';
+export const SCHOOL_PERIOD_VALIDATION_ERROR = 'SCHOOL_PERIOD_VALIDATION_ERROR';
+export const NO_SCHOOL_PERIOD_ACTIVE = 'NO_SCHOOL_PERIOD_ACTIVE';
+export const BAD_MARK_SYSTEM = 'BAD_MARK_SYSTEM';
+export const USER_NOT_EXAM_MEMBER = 'USER_NOT_EXAM_MEMBER';

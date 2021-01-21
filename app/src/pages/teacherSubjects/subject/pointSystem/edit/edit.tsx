@@ -27,11 +27,17 @@ import SideDialog from 'components/SideDialog';
 import { EditProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  header: { ...bottomShadow },
+  header: { ...bottomShadow, display: 'sticky', top: 0 },
   headerInfo: {
     [theme.breakpoints.up('sm')]: {
       minWidth: 300,
     },
+  },
+  headerContainer: {
+    position: 'sticky',
+    backgroundColor: theme.palette.common.white,
+    zIndex: 503,
+    top: 0,
   },
   headerActions: {
     width: '100%',
@@ -46,44 +52,55 @@ const Edit: React.FC<EditProps> = props => {
 
   return (
     <SideDialog open={props.open} loading={props.loading}>
-      <Box p={2} display="flex" alignItems="center" className={classes.header}>
-        <Box display="flex" alignItems="center" className={classes.headerInfo}>
-          <Box>
-            <Typography variant="h5">{props.exam.name}</Typography>
-            <Typography>
-              {`${props.exam.maxPoints} ${t(
-                'common:gqlObjects.point.points.accusative',
-              )}`}
-            </Typography>
-            <Typography>{formatDateToDay(props.exam.writtenAt)}</Typography>
-          </Box>
-          <Box pl={4} display="flex">
-            <IconButton color="primary" onClick={props.onExamInfoEdit}>
-              <EditIcon />
-            </IconButton>
-            <Box pl={1}>
-              <IconButton color="primary" onClick={props.onDelete}>
-                <DeleteIcon />
+      <Box className={classes.headerContainer}>
+        <Box
+          p={2}
+          display="flex"
+          alignItems="center"
+          className={classes.header}
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            className={classes.headerInfo}
+          >
+            <Box>
+              <Typography variant="h5">{props.exam.name}</Typography>
+              <Typography>
+                {`${props.exam.maxPoints} ${t(
+                  'common:gqlObjects.point.points.accusative',
+                )}`}
+              </Typography>
+              <Typography>{formatDateToDay(props.exam.writtenAt)}</Typography>
+            </Box>
+            <Box pl={4} display="flex">
+              <IconButton color="primary" onClick={props.onExamInfoEdit}>
+                <EditIcon />
               </IconButton>
+              <Box pl={1}>
+                <IconButton color="primary" onClick={props.onDelete}>
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Box
-          className={classes.headerActions}
-          display="flex"
-          justifyContent="flex-end"
-        >
-          <Button color="primary" onClick={props.onCancel}>
-            {t('common:actions.cancel')}
-          </Button>
-          <Box pl={2}>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={props.onSubmit}
-            >
-              {t('common:actions.save')}
+          <Box
+            className={classes.headerActions}
+            display="flex"
+            justifyContent="flex-end"
+          >
+            <Button color="primary" onClick={props.onCancel}>
+              {t('common:actions.cancel')}
             </Button>
+            <Box pl={2}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={props.onSubmit}
+              >
+                {t('common:actions.save')}
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
