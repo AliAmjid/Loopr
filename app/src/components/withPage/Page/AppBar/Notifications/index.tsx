@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-import NotificationsUI from 'components/withPage/Page/AppBar/Notifications/NotificationsUI';
+import NotificationsUI from './NotificationsUI';
+import { NotificationsIndexProps } from './types';
 
-const Notifications: React.FC = () => {
+const Notifications: React.FC<NotificationsIndexProps> = props => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -18,6 +19,7 @@ const Notifications: React.FC = () => {
       anchorEl={anchorEl}
       onClick={clickHandler}
       onClose={closeHandler}
+      notifications={props.user?.notifications || []}
     />
   );
 };

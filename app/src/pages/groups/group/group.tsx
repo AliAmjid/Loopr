@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done';
+import EditIcon from '@material-ui/icons/Edit';
 import { Query } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -9,6 +12,9 @@ import MaterialTable from 'lib/material-table';
 
 import { DetailGroupUser, GroupProps } from './types';
 
+const Edit = (): JSX.Element => <EditIcon color="primary" />;
+const Done = (): JSX.Element => <DoneIcon color="primary" />;
+const Close = (): JSX.Element => <CloseIcon color="error" />;
 const Group: React.FC<GroupProps> = props => {
   const { t } = useTranslation(namespaces.pages.groups.index);
   const [editing, setEditing] = useState(false);
@@ -77,39 +83,41 @@ const Group: React.FC<GroupProps> = props => {
           },
         }}
         options={{ selection: editing, exportButton: true }}
+        actions={[
+          {
+            tooltip: t('common:actions.edit'),
+            icon: Edit,
+            onClick: () => {
+              setEditing(true);
+            },
+            hidden: editing,
+            isFreeAction: true,
+          },
+          {
+            tooltip: t('common:actions.cancel'),
+            icon: Close,
+            onClick: () => {
+              setEditing(false);
+              props.onSelectionCancel();
+            },
+            hidden: !editing,
+            isFreeAction: true,
+          },
+          {
+            tooltip: t('common:actions.save'),
+            icon: Done,
+            onClick: () => {
+              setLoading(true);
+              props.onSubmit().then(success => {
+                setLoading(false);
+                if (success) setEditing(false);
+              });
+            },
+            hidden: !editing,
+            isFreeAction: true,
+          },
+        ]}
       />
-      <Box pt={2} display="flex" justifyContent="flex-end">
-        {editing ? (
-          <>
-            <Box pr={2}>
-              <Button color="primary" onClick={() => setEditing(false)}>
-                {t('common:actions.cancel')}
-              </Button>
-            </Box>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={() => {
-                setLoading(true);
-                props.onSubmit().then(success => {
-                  setLoading(false);
-                  if (success) setEditing(false);
-                });
-              }}
-            >
-              {t('common:actions.save')}
-            </Button>
-          </>
-        ) : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setEditing(true)}
-          >
-            {t('common:actions.edit')}
-          </Button>
-        )}
-      </Box>
     </Box>
   );
 };

@@ -16,10 +16,14 @@ import { getDisplayName } from 'recompose';
 
 import accessContext, {
   INVALID_COOKIE,
+  NO_INTERNET,
   UNAUTHORIZED,
 } from 'lib/apollo/accessContext';
 import recognizeError from 'lib/apollo/recognizeError';
-import { ACCESS_DENIED } from 'lib/apollo/recognizeError/errors';
+import {
+  ACCESS_DENIED,
+  FAILED_TO_FETCH,
+} from 'lib/apollo/recognizeError/errors';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -34,9 +38,18 @@ const withApollo = <ComponentProps extends {} = any>(
   const { t } = useTranslation(namespaces.lib.apollo);
 
   const errorLink = onError(error => {
+    const ignoreQueries = ['LoginMeUserQuery'];
+    if (
+      ignoreQueries.some(ignore => ignore === error.operation.operationName)
+    ) {
+      return;
+    }
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     if (error.networkError?.statusCode === 401) access.set(INVALID_COOKIE);
+    else if (error.networkError?.message === FAILED_TO_FETCH)
+      access.set(NO_INTERNET);
     else if (
       error.graphQLErrors?.some(
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore

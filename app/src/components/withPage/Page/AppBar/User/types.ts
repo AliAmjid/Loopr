@@ -1,5 +1,5 @@
-import { User } from '../../types';
+import { NullableUser } from '../../types';
 
 export interface UserProps {
-  user: User;
+  user: NullableUser;
 }

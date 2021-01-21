@@ -49,8 +49,8 @@ const User: React.FC<UserProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
 
   const initials = getInitials(
-    props.user?.firstname || '',
-    props.user?.lastname || '',
+    props.user?.firstname || ' ',
+    props.user?.lastname || ' ',
   );
 
   return (

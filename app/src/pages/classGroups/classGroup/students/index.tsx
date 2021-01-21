@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
 import { useSnackbar } from 'notistack';
 
@@ -8,8 +8,12 @@ import resources from 'config/resources';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
+import useSelectionChange from 'lib/material-table/useSelectionChange';
+
+import CLASS_GROUPS_CLASS_GROUPS_QUERY from 'pages/classGroups/queries/classGroups';
 
 import {
+  ClassGroupsClassGroupsQuery,
   ClassGroupsClassGroupUsersQuery,
   ClassGroupsClassGroupUsersQueryVariables,
   ClassGroupsUpdateUsersClassGroupMutation,
@@ -30,7 +34,6 @@ import {
   ClassGroupUser,
   GetClassGroupUsersReturn,
   GetUsersReturn,
-  SelectionChangeArgs,
   User,
 } from './types';
 
@@ -42,12 +45,11 @@ const StudentsIndex: React.FC = () => {
     ClassGroupsUpdateUsersClassGroupMutation,
     ClassGroupsUpdateUsersClassGroupMutationVariables
   >(CLASS_GROUPS_UPDATE_USERS_CLASS_GROUP_MUTATION);
-  const [changedUsers, setChangedUsers] = useState<
-    {
-      id: string;
-      selected: boolean;
-    }[]
-  >([]);
+  const { data: classGroupsData, loading: classGroupsLoading } = useQuery<
+    ClassGroupsClassGroupsQuery,
+    ClassGroupsClassGroupUsersQueryVariables
+  >(CLASS_GROUPS_CLASS_GROUPS_QUERY);
+
   const {
     getPagination: getClassGroupPagination,
     setPagination: setClassGroupPagination,
@@ -59,6 +61,12 @@ const StudentsIndex: React.FC = () => {
   const client = useApolloClient();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(namespaces.pages.classGroups.index);
+  const {
+    changed: changedUsers,
+    change: changeUsers,
+    reset: resetChangedUsers,
+    setDefault: setDefaultChangedUsers,
+  } = useSelectionChange();
 
   const getClassGroupUsersHandler = (
     query: Query<ClassGroupUser>,
@@ -106,7 +114,10 @@ const StudentsIndex: React.FC = () => {
 
             const users = [];
             for (const user of res.data?.classGroup?.users?.edges || []) {
-              if (user?.node) users.push(user.node);
+              if (user?.node)
+                users.push({
+                  ...user.node,
+                });
             }
 
             return { users, totalCount };
@@ -133,6 +144,12 @@ const StudentsIndex: React.FC = () => {
     const lastnameFilter =
       query.filters.find(filter => filter.column.field === 'lastname')?.value ||
       '';
+    const classGroupsFilter =
+      query.filters.find(filter => filter.column.field === 'classGroup.id')
+        ?.value || [];
+    const isInClassGroupFilter = classGroupsFilter.some(
+      (f: string) => f === 'none',
+    );
 
     const defaultValue = { users: [], totalCount: 0 };
 
@@ -146,7 +163,8 @@ const StudentsIndex: React.FC = () => {
             email: emailFilter,
             firstname: firstnameFilter,
             lastname: lastnameFilter,
-            isInClassGroup: undefined,
+            isInClassGroup: !isInClassGroupFilter,
+            classGroups: !isInClassGroupFilter ? classGroupsFilter : [],
           },
         })
         .then(res => {
@@ -159,14 +177,22 @@ const StudentsIndex: React.FC = () => {
             for (const user of res.data?.users?.edges || []) {
               if (user?.node) {
                 const node = user?.node;
+
                 users.push({
                   ...node,
+
                   tableData: {
                     checked: node.classGroup?.id === selectedClassGroup,
                   },
                 });
               }
             }
+            setDefaultChangedUsers(
+              users.map(user => ({
+                id: user.id,
+                selected: user.tableData?.checked || false,
+              })),
+            );
 
             return { users, totalCount };
           }
@@ -176,21 +202,6 @@ const StudentsIndex: React.FC = () => {
     }
 
     return Promise.resolve(defaultValue);
-  };
-
-  const selectionChangeHandler = (args: SelectionChangeArgs): void => {
-    setChangedUsers(prevState => {
-      const index = prevState.findIndex(
-        changedUser => changedUser.id === args.id,
-      );
-      if (index !== -1) {
-        prevState.splice(index, 1);
-      } else {
-        prevState = [...prevState, { id: args.id, selected: args.selected }];
-      }
-
-      return prevState;
-    });
   };
 
   const submitHandler = (): Promise<boolean> => {
@@ -211,7 +222,7 @@ const StudentsIndex: React.FC = () => {
         enqueueSnackbar(t('snackbars.studentsEdit.success'), {
           variant: 'success',
         });
-        setChangedUsers([]);
+        resetChangedUsers();
 
         return true;
       })
@@ -220,12 +231,24 @@ const StudentsIndex: React.FC = () => {
       });
   };
 
+  const classGroupsLookup: Record<string, string> = { none: t('noClassGroup') };
+  classGroupsData?.classGroups?.edges?.forEach(edge => {
+    if (edge?.node) {
+      classGroupsLookup[
+        edge.node.id
+      ] = `${edge.node.year} ${edge.node.section}`;
+    }
+  });
+
   return (
     <Students
       selectedClassGroup={selectedClassGroup}
+      classGroupsLookup={classGroupsLookup}
+      loading={classGroupsLoading}
       onGetClassGroupUsers={getClassGroupUsersHandler}
       onGetUsers={getUsersHandler}
-      onSelectionChange={selectionChangeHandler}
+      onSelectionChange={changeUsers}
+      onSelectionClose={resetChangedUsers}
       onSubmit={submitHandler}
     />
   );

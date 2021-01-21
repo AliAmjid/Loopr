@@ -15,7 +15,7 @@ export interface GetUsersReturn {
   totalCount: number;
 }
 
-export interface SelectionChangeArgs {
+interface SelectionChangeArgs {
   id: string;
   selected: boolean;
 }
@@ -27,5 +27,6 @@ export interface GroupProps {
   classGroupLookup: Record<string, string>;
   loading: boolean;
   onSelectionChange: (data: DetailGroupUser[]) => void;
+  onSelectionCancel: () => void;
   onSubmit: () => Promise<boolean>;
 }

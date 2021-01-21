@@ -1,4 +1,4 @@
-import { Column, MaterialTableProps } from 'material-table';
+import { Action, Column, MaterialTableProps } from 'material-table';
 
 export type ColumnFilteringColumns<RowData extends {} = any> = (
   | Column<RowData>
@@ -21,3 +21,8 @@ export interface MaterialTableCustomProps<RowData extends {}>
     };
   };
 }
+
+export type Actions<RowData extends {}> = (
+  | Action<RowData>
+  | ((rowData: RowData) => Action<RowData>)
+)[];

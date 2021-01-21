@@ -1,5 +1,4 @@
 import helpPaths from 'config/helpPaths';
-import resources from 'config/resources';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';

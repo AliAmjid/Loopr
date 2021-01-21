@@ -250,13 +250,32 @@ export interface UserImportTableAclRolesQuery {
 
 export interface WithPageMeUserQuery_meUser_role_resources {
   __typename: "AclResource";
+  id: string;
   name: string;
 }
 
 export interface WithPageMeUserQuery_meUser_role {
   __typename: "AclRole";
+  id: string;
   name: string;
   resources: (WithPageMeUserQuery_meUser_role_resources | null)[] | null;
+}
+
+export interface WithPageMeUserQuery_meUser_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  type: string;
+  parameters: any;
+}
+
+export interface WithPageMeUserQuery_meUser_notifications_edges {
+  __typename: "NotificationEdge";
+  node: WithPageMeUserQuery_meUser_notifications_edges_node | null;
+}
+
+export interface WithPageMeUserQuery_meUser_notifications {
+  __typename: "NotificationConnection";
+  edges: (WithPageMeUserQuery_meUser_notifications_edges | null)[] | null;
 }
 
 export interface WithPageMeUserQuery_meUser {
@@ -265,6 +284,7 @@ export interface WithPageMeUserQuery_meUser {
   firstname: string;
   lastname: string;
   role: WithPageMeUserQuery_meUser_role;
+  notifications: WithPageMeUserQuery_meUser_notifications | null;
 }
 
 export interface WithPageMeUserQuery {
@@ -637,12 +657,20 @@ export interface ClassGroupsClassGroupTeacherVariables {
 // GraphQL query operation: ClassGroupsClassGroupUsersQuery
 // ====================================================
 
+export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  section: string;
+  year: number;
+}
+
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
   __typename: "User";
   id: string;
   email: string;
   firstname: string;
   lastname: string;
+  classGroup: ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node_classGroup | null;
 }
 
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges {
@@ -690,6 +718,8 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
 export interface ClassGroupsUsersQuery_users_edges_node_classGroup {
   __typename: "ClassGroup";
   id: string;
+  section: string;
+  year: number;
 }
 
 export interface ClassGroupsUsersQuery_users_edges_node {
@@ -727,6 +757,7 @@ export interface ClassGroupsUsersQueryVariables {
   firstname?: string | null;
   lastname?: string | null;
   isInClassGroup?: boolean | null;
+  classGroups?: string[] | null;
 }
 
 /* tslint:disable */

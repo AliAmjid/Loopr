@@ -39,9 +39,7 @@ const Page: React.FC<PageProps> = props => {
       <div className={classes.toolbar} />
       <div className={classes.content}>
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        <Typography variant="h5" component="h1">
-          {t(title)}
-        </Typography>
+        <Typography variant="h1">{t(title)}</Typography>
         {children}
       </div>
     </>
