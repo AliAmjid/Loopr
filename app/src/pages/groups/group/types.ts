@@ -15,11 +15,6 @@ export interface GetUsersReturn {
   totalCount: number;
 }
 
-interface SelectionChangeArgs {
-  id: string;
-  selected: boolean;
-}
-
 export interface GroupProps {
   getGroupUsers: (query: Query<DetailGroupUser>) => Promise<GetUsersReturn>;
   getUsers: (query: Query<DetailGroupUser>) => Promise<GetUsersReturn>;
