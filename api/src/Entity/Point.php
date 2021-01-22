@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use App\Entity\Attributes\Tid;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
@@ -16,6 +18,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @UniqueEntity({"user", "pointSystem"})
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiFilter(filterClass: ExistsFilter::class, properties: [
+    'user.archivedAt' => false
+])]
 class Point
 {
     use Tid;
@@ -97,16 +102,6 @@ class Point
     }
 
     /**
-     * @ORM\PrePersist()
-     */
-    public function assert()
-    {
-        if (!$this->getPointSystem()->getExam()->getSubject()->getIGroup()->isUserMember($this->getUser())) {
-            throw new ClientError(ClientErrorType::USER_NOT_EXAM_MEMBER);
-        }
-    }
-
-    /**
      * @Groups({"read", "exposed"})
      */
     public function getBetterThan(): int
@@ -136,7 +131,7 @@ class Point
             return 100;
         }
 
-        return 100 / $this->pointSystem->getPointsOnlyWritten()->count() * $this->getBetterThan();
+        return round(100 / $this->pointSystem->getPointsOnlyWritten()->count() * $this->getBetterThan(), 2);
     }
 
     /**
@@ -144,7 +139,7 @@ class Point
      */
     public function getPercents()
     {
-        return $this->pointSystem->getMaxPoints() / 100 * $this->points;
+        return round($this->pointSystem->getMaxPoints() / 100 * $this->points, 2);
     }
 
     /**
@@ -153,5 +148,15 @@ class Point
     public function getConvertedToMark(): int
     {
         return $this->pointSystem->getExam()->getSubject()->getPercentsToMarkConvert()->convert($this->getPercents());
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function assert()
+    {
+        if (!$this->getPointSystem()->getExam()->getSubject()->getIGroup()->isUserMember($this->getUser())) {
+            throw new ClientError(ClientErrorType::USER_NOT_EXAM_MEMBER);
+        }
     }
 }

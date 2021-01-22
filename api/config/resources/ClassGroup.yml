@@ -38,3 +38,12 @@ App\Entity\ClassGroup:
         collection_query:
             security: "is_granted('GROUP_SHOW_ALL')"
         item_query:
+
+        archive:
+            security: "is_granted('GROUP_EDIT')"
+            mutation: App\Controller\IGroupArchiveController
+            args:
+                id:
+                    type: 'ID!'
+                archive:
+                    type: 'Boolean!'

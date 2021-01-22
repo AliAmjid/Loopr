@@ -8,7 +8,7 @@ use GraphQL\Error\ClientAware;
 use GraphQL\Error\Error;
 use Throwable;
 
-class ClientError extends \Exception implements ClientAware
+class ClientError extends \RuntimeException implements ClientAware
 {
     protected string $codeMsg;
     protected ?array $payload = null;
@@ -35,7 +35,7 @@ class ClientError extends \Exception implements ClientAware
 
     public function isClientSafe()
     {
-        return $this->getPayload();
+        return true;
     }
 
     public function getCategory()

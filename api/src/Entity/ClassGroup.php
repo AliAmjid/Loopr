@@ -4,6 +4,8 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
@@ -22,6 +24,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\UniqueConstraint(name="name_unique_cg", columns={"year", "section"})
  *     })
  */
+#[ApiFilter(filterClass: OrderFilter::class, properties: [
+    'year' => [
+        'default_direction' => 'DESC'
+    ],
+    'section'
+])]
 class ClassGroup implements IGroup
 {
     use Tid;
@@ -74,6 +82,11 @@ class ClassGroup implements IGroup
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="classGroup")
      */
     private Collection $subjects;
+
+    /** @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTime $archivedAt;
 
     public function __construct()
     {
@@ -226,5 +239,16 @@ class ClassGroup implements IGroup
     public function isUserMember(User $user): bool
     {
         return $this->users->contains($user);
+    }
+
+    public function getArchivedAt(): ?\DateTime
+    {
+        return $this->archivedAt;
+    }
+
+    public function setArchivedAt(?\DateTime $archivedAt): ClassGroup
+    {
+        $this->archivedAt = $archivedAt;
+        return $this;
     }
 }

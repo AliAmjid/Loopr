@@ -42,3 +42,12 @@ App\Entity\Subject:
             collection_query: App\Controller\SimpleCollectionController
         delete:
             security: "is_granted('SUBJECT_DELETE')"
+        archive:
+            security: "is_granted('SUBJECT_EDIT')"
+            mutation: App\Controller\SubjectArchiveController
+            args:
+                id:
+                    type: 'ID!'
+                archive:
+                    type: 'Boolean!'
+        

@@ -101,7 +101,7 @@ class PointSystem extends MarkSystem
      */
     public function getAnonymizedResults(): iterable
     {
-        return array_filter($this->points->map(function (Point $point) {
+        return array_filter($this->getPointsOnlyWritten()->map(function (Point $point) {
             if ($point->isExamWritten()) {
                 return (int)$point->getPoints();
             }
@@ -118,6 +118,6 @@ class PointSystem extends MarkSystem
         if (count($results) === 0) {
             return 0;
         }
-        return array_sum($results) / count($results);
+        return round(array_sum($results) / count($results), 2);
     }
 }
