@@ -3,7 +3,6 @@ import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { bool } from 'prop-types';
 
 import routes from 'config/routes';
 
@@ -75,7 +74,7 @@ const EditRoleIndex: React.FC = () => {
 
   return (
     <EditRole
-      loading={aclRoleLoading || updateRoleLoading}
+      loading={aclRoleLoading || updateRoleLoading || deleteRoleLoading}
       role={{ name: aclRoleData?.aclRole?.name || '' }}
       onSubmit={submitHandler}
       onDelete={deleteHandler}

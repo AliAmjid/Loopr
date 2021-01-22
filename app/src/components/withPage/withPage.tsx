@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { useApolloClient, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
@@ -10,6 +10,7 @@ import routes from 'config/routes';
 import accessContext, {
   HAS_ACCESS,
   INVALID_COOKIE,
+  NO_INTERNET,
   UNAUTHORIZED,
 } from 'lib/apollo/accessContext';
 import withApollo from 'lib/apollo/withApollo';
@@ -20,6 +21,7 @@ import { WithPageMeUserQuery } from 'types/graphql';
 
 import hasAccess from 'components/hasAccess';
 
+import { User } from './Page/types';
 import WITH_PAGE_ME_USER_QUERY from './queries/meUser';
 import Page from './Page';
 import { WithPageInternalProps } from './types';
@@ -57,16 +59,31 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   if (
     unauthorized ||
     access.value === INVALID_COOKIE ||
-    access.value === UNAUTHORIZED
+    access.value === UNAUTHORIZED ||
+    access.value === NO_INTERNET
   ) {
     return <Unauthorized />;
   }
 
   const { componentProps, ...rest } = props;
 
+  const user: User = {
+    firstname: '',
+    lastname: '',
+    role: undefined,
+    ...(data?.meUser || {}),
+    notifications: [],
+  };
+  data?.meUser?.notifications?.edges?.forEach(edge => {
+    const node = edge?.node;
+    if (node) {
+      user.notifications.push({ ...node });
+    }
+  });
+
   return (
     <>
-      <Page onLogOut={logOutHandler} {...rest} user={data?.meUser}>
+      <Page onLogOut={logOutHandler} {...rest} user={user}>
         <props.Component {...componentProps} />
       </Page>
     </>

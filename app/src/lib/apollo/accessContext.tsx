@@ -3,15 +3,18 @@ import React, { useState } from 'react';
 export const HAS_ACCESS = 'hasAccess';
 export const INVALID_COOKIE = 'invalidCookie';
 export const UNAUTHORIZED = 'unauthorized';
+export const NO_INTERNET = 'noInternet';
 
 type AccessState =
   | typeof HAS_ACCESS
   | typeof INVALID_COOKIE
-  | typeof UNAUTHORIZED;
+  | typeof UNAUTHORIZED
+  | typeof NO_INTERNET;
 
-export const accessContext = React.createContext<{
+const accessContext = React.createContext<{
   set: (state: AccessState) => void;
   value: AccessState;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
 }>({ set: (): void => {}, value: HAS_ACCESS });
 
 export const AccessContextProvider: React.FC = props => {

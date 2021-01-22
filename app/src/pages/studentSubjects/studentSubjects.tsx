@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -18,6 +18,8 @@ import {
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import { bottomShadow } from 'components/shadows';
 import SideDialogContainer from 'components/SideDialog/SideDialogContainer';
 
@@ -43,11 +45,14 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
   const theme = useTheme();
   const [detail, setDetail] = useState<DetailState>(undefined);
   const { t } = useTranslation(namespaces.pages.studentSubjects.index);
+  const [height, setHeight] = useState(100);
 
-  const toolbarHeight = 64;
-  const tableContainerStyle = {
-    height: window.innerHeight - toolbarHeight * 3.9,
-  };
+  useEffect(() => {
+    const toolbarHeight = 64;
+    if (process.browser) {
+      setHeight(window.innerHeight - toolbarHeight * 3.9);
+    }
+  }, []);
 
   const mappedSchoolPeriods = props.schoolPeriods.map(schoolPeriod => {
     return (
@@ -59,72 +64,75 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
 
   return (
     <Paper className={classes.root}>
-      <SideDialogContainer>
-        <Box
-          className={classes.header}
-          position="relative"
-          display="flex"
-          justifyContent="flex-end"
-          p={2}
-        >
-          <FormControl>
-            <InputLabel id="schoolPeriodSelectLabel">
-              {t('common:gqlObjects.schoolPeriod.name')}
-            </InputLabel>
-            <Select
-              className={classes.periodSelect}
-              labelId="schoolPeriodSelectLabel"
-              multiple
-              value={
-                props.selectedSchoolPeriods.length > 0
-                  ? props.selectedSchoolPeriods
-                  : ['all']
-              }
-              onChange={e =>
-                props.onSchoolPeriodsChange(
-                  (e.target.value as string[]).filter(i => i !== 'all'),
-                )
-              }
-            >
-              {mappedSchoolPeriods}
-              {props.selectedSchoolPeriods.length === 0 && (
-                <MenuItem value="all">{t('schoolPeriodsAll')}</MenuItem>
-              )}
-            </Select>
-          </FormControl>
-        </Box>
-        <TableContainer style={tableContainerStyle}>
-          <Table>
-            <TableBody>
-              {props.subjects.map((subject, index) => {
-                const color =
-                  index % 2 === 0
-                    ? theme.palette.common.white
-                    : theme.palette.grey['100'];
-
-                if (subject.evaluationSystem === 'POINTS') {
-                  return (
-                    <PointSystemIndex
-                      subject={subject}
-                      maxExams={props.maxExams}
-                      color={color}
-                      onDetail={examId => {
-                        setDetail({
-                          examId,
-                          subject,
-                        });
-                      }}
-                    />
-                  );
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={props.loading} />
+        <SideDialogContainer>
+          <Box
+            className={classes.header}
+            position="relative"
+            display="flex"
+            justifyContent="flex-end"
+            p={2}
+          >
+            <FormControl>
+              <InputLabel id="schoolPeriodSelectLabel">
+                {t('common:gqlObjects.schoolPeriod.name')}
+              </InputLabel>
+              <Select
+                className={classes.periodSelect}
+                labelId="schoolPeriodSelectLabel"
+                multiple
+                value={
+                  props.selectedSchoolPeriods.length > 0
+                    ? props.selectedSchoolPeriods
+                    : ['all']
                 }
+                onChange={e =>
+                  props.onSchoolPeriodsChange(
+                    (e.target.value as string[]).filter(i => i !== 'all'),
+                  )
+                }
+              >
+                {mappedSchoolPeriods}
+                {props.selectedSchoolPeriods.length === 0 && (
+                  <MenuItem value="all">{t('schoolPeriodsAll')}</MenuItem>
+                )}
+              </Select>
+            </FormControl>
+          </Box>
+          <TableContainer style={{ height }}>
+            <Table>
+              <TableBody>
+                {props.subjects.map((subject, index) => {
+                  const color =
+                    index % 2 === 0
+                      ? theme.palette.common.white
+                      : theme.palette.grey['100'];
 
-                return <></>;
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Detail {...detail} onCancel={() => setDetail(undefined)} />
-      </SideDialogContainer>
+                  if (subject.evaluationSystem === 'POINTS') {
+                    return (
+                      <PointSystemIndex
+                        subject={subject}
+                        maxExams={props.maxExams}
+                        color={color}
+                        onDetail={examId => {
+                          setDetail({
+                            examId,
+                            subject,
+                          });
+                        }}
+                      />
+                    );
+                  }
+
+                  return <></>;
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Detail {...detail} onCancel={() => setDetail(undefined)} />
+        </SideDialogContainer>
+      </OverlayLoadingContainer>
     </Paper>
   );
 };

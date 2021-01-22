@@ -6,7 +6,6 @@ import { Query } from 'material-table';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
-import useSelectedBackground from 'lib/material-table/useSelectedBackground';
 
 import { Teacher, TeacherProps } from './types';
 

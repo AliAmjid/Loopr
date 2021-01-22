@@ -39,6 +39,7 @@ const LoginIndex: React.FC = () => {
   );
   const { data: meUserData } = useQuery<LoginMeUserQuery>(LOGIN_ME_USER_QUERY, {
     fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
   });
   const { data: meUserDataCached } = useQuery<LoginMeUserQuery>(
     LOGIN_ME_USER_QUERY,

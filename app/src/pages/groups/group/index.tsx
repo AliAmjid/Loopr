@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
@@ -8,6 +8,7 @@ import resources from 'config/resources';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
+import useSelectionChange from 'lib/material-table/useSelectionChange';
 
 import GROUPS_GROUP_QUERY from 'pages/groups/queries/group';
 import GROUPS_USERS_QUERY from 'pages/groups/queries/users';
@@ -29,7 +30,7 @@ import GROUPS_UPDATE_USERS_GROUP_MUTATION from '../mutations/updateUsersGroup';
 import GROUPS_CLASS_GROUPS_QUERY from '../queries/classGroups';
 
 import Group from './group';
-import { DetailGroupUser, GetUsersReturn, SelectionChangeArgs } from './types';
+import { DetailGroupUser, GetUsersReturn } from './types';
 
 const GroupIndex: React.FC = () => {
   const { t } = useTranslation(namespaces.pages.groups.index);
@@ -54,13 +55,14 @@ const GroupIndex: React.FC = () => {
     setPagination: setUserPagination,
     resetPagination: resetUserPagination,
   } = usePagination();
-  const [changedUsers, setChangedUsers] = useState<
-    {
-      id: string;
-      selected: boolean;
-    }[]
-  >([]);
+
   const { enqueueSnackbar } = useSnackbar();
+  const {
+    changed: changedUsers,
+    change: changeSelectedUsers,
+    reset: resetSelectedUsers,
+    setDefault: setSelectedUsersDefault,
+  } = useSelectionChange();
 
   useEffect(() => {
     resetGroupPagination();
@@ -186,6 +188,12 @@ const GroupIndex: React.FC = () => {
                 });
               }
             }
+            setSelectedUsersDefault(
+              users.map(u => ({
+                id: u.id,
+                selected: u.tableData?.checked || false,
+              })),
+            );
 
             return { users, totalCount };
           }
@@ -195,24 +203,6 @@ const GroupIndex: React.FC = () => {
     }
 
     return Promise.resolve(defaultValue);
-  };
-
-  const selectionChangeHandler = (users: DetailGroupUser[]): void => {
-    let prevState = [...changedUsers];
-
-    const newUsers = users.filter(
-      user => !prevState.some(u => u.id === user.id),
-    );
-    prevState = prevState.filter(user => users.some(u => u.id === user.id));
-
-    newUsers.forEach(user => {
-      prevState.push({
-        id: user.id,
-        selected: user.tableData?.checked || false,
-      });
-    });
-
-    setChangedUsers(prevState);
   };
 
   const submitHandler = (): Promise<boolean> => {
@@ -233,7 +223,7 @@ const GroupIndex: React.FC = () => {
         enqueueSnackbar(t('snackbars.studentsEdit.success'), {
           variant: 'success',
         });
-        setChangedUsers([]);
+        resetSelectedUsers();
 
         return true;
       })
@@ -258,7 +248,8 @@ const GroupIndex: React.FC = () => {
       getGroupUsers={getGroupUsers}
       classGroupLookup={classGroupLookup}
       loading={classGroupsLoading}
-      onSelectionChange={selectionChangeHandler}
+      onSelectionChange={changeSelectedUsers}
+      onSelectionCancel={resetSelectedUsers}
       onSubmit={submitHandler}
     />
   );

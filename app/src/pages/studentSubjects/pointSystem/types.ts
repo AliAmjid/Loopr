@@ -15,6 +15,7 @@ interface Exam {
   percents: string;
   writtenAt: string;
   examWritten: boolean;
+  color: string;
 }
 
 export type Exams = Exam[];

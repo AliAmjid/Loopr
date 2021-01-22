@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import {
@@ -34,7 +34,7 @@ const ColorChangeDialogIndex: React.FC<ColorChangeDialogIndexProps> = props => {
     updateColorSubject({
       variables: { input: { id: props.subjectId, teacherCardColor: color } },
     }).then(() => {
-      enqueueSnackbar(t('snakbars.updateColor'), { variant: 'success' });
+      enqueueSnackbar(t('snackbars.updateColor'), { variant: 'success' });
       props.onClose();
     });
   };

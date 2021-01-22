@@ -45,6 +45,12 @@ const overrides: Overrides = {
       minWidth: spacing * 50,
     },
   },
+  MuiCardContent: {
+    root: {
+      paddingTop: spacing,
+      paddingBottom: spacing,
+    },
+  },
 };
 
 export default overrides;

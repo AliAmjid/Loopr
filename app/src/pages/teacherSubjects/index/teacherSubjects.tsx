@@ -11,8 +11,8 @@ import {
   Paper,
   Theme,
   Typography,
+  useTheme,
 } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
 import Link from 'next/link';
 
 import routes from 'config/routes';
@@ -40,8 +40,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   colorStrip: {
     width: '100%',
-    height: theme.spacing(2),
+    height: theme.spacing(2.5),
     cursor: 'pointer',
+    borderBottom: `1px solid ${theme.palette.grey['300']}`,
   },
   editIcon: {
     width: theme.spacing(1.5),
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const classes = useStyles();
+  const theme = useTheme();
   const [colorChange, setColorChange] = useState<string | undefined>(undefined);
   const { t } = useTranslation(namespaces.pages.teacherSubjects.index);
 
@@ -70,58 +72,64 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const mappedSubjects: JSX.Element[] = [];
   subjectTypes.forEach(subjectType => {
     mappedSubjects.push(
-      <Box key={subjectType[0].subjectType?.id} pb={2}>
-        <Typography variant="h6">{subjectType[0].subjectType?.name}</Typography>
+      <Box key={subjectType[0].subjectType?.id} pb={4}>
+        <Typography variant="h3">{subjectType[0].subjectType?.name}</Typography>
         <ThickDivider />
-        <Box pt={2}> </Box>
-        <Grid container spacing={2}>
-          {subjectType.map(subject => {
-            let name = '';
-            if (subject.group) {
-              name = subject.group.section;
-            }
-            if (subject.classGroup) {
-              name = `${subject.classGroup.year} ${subject.classGroup.section}`;
-            }
+        <Box p={2}>
+          <Grid container spacing={2}>
+            {subjectType.map(subject => {
+              let name = '';
+              if (subject.group) {
+                name = subject.group.section;
+              }
+              if (subject.classGroup) {
+                name = `${subject.classGroup.year} ${subject.classGroup.section}`;
+              }
 
-            let redirect = '';
-            if (subject.evaluationSystem === 'POINTS') {
-              redirect = routes.teacherSubjects.subject.points;
-            }
+              let redirect = '';
+              if (subject.evaluationSystem === 'POINTS') {
+                redirect = routes.teacherSubjects.subject.points;
+              }
 
-            return (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={subject.id}>
-                <Card variant="outlined" className={classes.card}>
-                  <Box
-                    className={classes.colorStrip}
-                    style={{
-                      backgroundColor: subject.teacherCardColor || 'white',
-                    }}
-                    display="flex"
-                    justifyContent="flex-end"
-                    alignItems="center"
-                    onClick={() => setColorChange(subject.id)}
-                  >
-                    <EditIcon className={classes.editIcon} />
-                  </Box>
-                  <div className={classes.cardInnerSpacer}>
-                    <CardContent>
-                      <Typography variant="h5">{name}</Typography>
-                    </CardContent>
-                    <CardActions className={classes.cardActions}>
-                      <Link
-                        href={{ pathname: redirect, query: { id: subject.id } }}
-                        passHref
-                      >
-                        <Button color="primary">{t('evaluation')}</Button>
-                      </Link>
-                    </CardActions>
-                  </div>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={subject.id}>
+                  <Card variant="outlined" className={classes.card}>
+                    <Box
+                      className={classes.colorStrip}
+                      style={{
+                        backgroundColor:
+                          subject.teacherCardColor || theme.palette.grey['400'],
+                      }}
+                      onClick={() => setColorChange(subject.id)}
+                    />
+                    <div className={classes.cardInnerSpacer}>
+                      <CardContent>
+                        <Typography variant="h2">{name}</Typography>
+
+                        <Typography variant="subtitle1">
+                          Třídy: až to Ali dodělá
+                        </Typography>
+                      </CardContent>
+                      <CardActions className={classes.cardActions}>
+                        <Link
+                          href={{
+                            pathname: redirect,
+                            query: { id: subject.id },
+                          }}
+                          passHref
+                        >
+                          <Button color="primary" fullWidth>
+                            {t('evaluation')}
+                          </Button>
+                        </Link>
+                      </CardActions>
+                    </div>
+                  </Card>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
       </Box>,
     );
   });
