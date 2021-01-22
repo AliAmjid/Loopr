@@ -23,14 +23,15 @@ const useSelectionChange = (): UseSelectionChange => {
       const addItems = defaultItems.filter(
         defaultItem =>
           // add unchecked
-          (!items.some(item => defaultItem.id === item.id) &&
+          !changed.some(ch => ch.id === defaultItem.id) &&
+          ((!items.some(item => defaultItem.id === item.id) &&
             defaultItem.selected) ||
-          // add checked
-          items.some(
-            item =>
-              defaultItem.id === item.id &&
-              defaultItem.selected !== item.tableData?.checked,
-          ),
+            // add checked
+            items.some(
+              item =>
+                defaultItem.id === item.id &&
+                defaultItem.selected !== item.tableData?.checked,
+            )),
       );
 
       prevState = prevState.filter(

@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,25 +17,33 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use TheCodingMachine\GraphQLite\Annotations\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
- * @ApiFilter(SearchFilter::class, properties={
- *     "id": "exact",
- *     "firstname": "ipartial",
- *     "lastname": "ipartial",
- *     "email": "ipartial",
- *     "role.resources.name": "exact",
- *     "role.resources.id": "exact",
- *     "classGroup.id": "exact",
- *     "groups.id": "exact"
- * })
- * @ApiFilter(DateFilter::class, properties={"createdAt"})
  */
-#[ApiFilter(filterClass: ExistsFilter::class, properties: ['classGroup'])]
+#[ApiFilter(filterClass: ExistsFilter::class, properties: [
+    'classGroup',
+    'archivedAt' => false
+])]
+#[ApiFilter(filterClass: DateFilter::class, properties: [
+    'createdAt',
+    'archivedAt'
+])]
+#[ApiFilter(filterClass: SearchFilter::class, properties: [
+    'id' => 'exact',
+    'firstname' => 'ipartial',
+    'lastname' => 'ipartial',
+    'role.resources.name' => 'exact',
+    'role.resources.id' => 'exact',
+    'classGroup.id' => 'exact',
+    'group.id' => 'exact'
+])]
+#[ApiFilter(filterClass: OrderFilter::class, properties: [
+    'email',
+    'lastname'
+])]
 class User implements UserInterface
 {
     use Tid;
@@ -97,7 +106,7 @@ class User implements UserInterface
     private ?ClassGroup $classGroup = null;
 
     /**
-     * @var Collection|Groups[]
+     * @var Collection|Group[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
      * @Groups({"read:always", "exposed"})
      */
@@ -131,6 +140,13 @@ class User implements UserInterface
      */
     private Collection|array $wepPushSubscribes;
 
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read", "exposed"})
+     */
+    private ?\DateTime $archivedAt;
+
     #[Pure]
     public function __construct()
     {
@@ -143,7 +159,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Groups[]
+     * @return Collection|Group[]
      */
     public function getGroups(): Collection
     {
@@ -292,5 +308,16 @@ class User implements UserInterface
     public function getTaughtSubjects(): Collection|array
     {
         return $this->taughtSubjects;
+    }
+
+    public function getArchivedAt(): ?\DateTime
+    {
+        return $this->archivedAt;
+    }
+
+    public function setArchivedAt(?\DateTime $archivedAt): User
+    {
+        $this->archivedAt = $archivedAt;
+        return $this;
     }
 }

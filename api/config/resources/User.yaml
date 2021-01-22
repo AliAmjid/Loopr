@@ -58,3 +58,11 @@ App\Entity\User:
             deserialize: false
             read: false
             args: {}
+        archive:
+            security: "is_granted('SUBJECT_EDIT')"
+            mutation: App\Controller\UserArchiveController
+            args:
+                id:
+                    type: 'ID!'
+                archive:
+                    type: 'Boolean!'

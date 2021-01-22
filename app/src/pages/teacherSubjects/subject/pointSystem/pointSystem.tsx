@@ -27,10 +27,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import ColorDot from 'components/colorDot';
 import { formatDateToDay } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
-import { getPercents } from 'components/percents';
+import { getPercents } from 'components/percentMark';
 import { bottomShadow } from 'components/shadows';
 import SideDialogContainer from 'components/SideDialog/SideDialogContainer';
 
@@ -141,7 +142,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
         height: window.innerHeight - toolbarHeight * 3.9,
       });
     }
-  }, []);
+  }, [props.exams]);
 
   return (
     <Paper className={classes.paper}>
@@ -348,37 +349,30 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                       </StickyTableCell>
 
                       {student.exams.map(exam => {
-                        let points = 'N';
-                        let percents = 'N';
-                        if (exam.examWritten) {
-                          points = `${exam.points}`;
-                          if (exam.maxPoints === 0) {
-                            percents = '-';
-                          } else {
-                            percents = `${Math.round(
-                              getPercents({
-                                max: exam.maxPoints,
-                                value: exam.points,
-                              }),
-                            )}%`;
-                          }
-                        }
-
                         return (
                           <>
                             <TableCell
-                              align="center"
+                              align="left"
                               className={backgroundColor}
                               width={70}
                             >
-                              {points}
+                              {exam.points}
                             </TableCell>
                             <TableCell
-                              align="center"
+                              align="right"
                               className={`${classes.cellWithRightBorder} ${backgroundColor}`}
                               width={70}
                             >
-                              {percents}
+                              <Box
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="right"
+                              >
+                                <Box pr={1.5}>
+                                  <ColorDot color={exam.color} />
+                                </Box>
+                                {exam.percents}
+                              </Box>
                             </TableCell>
                           </>
                         );
@@ -396,7 +390,16 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                             {student.totalPercents}
                           </Grid>
                           <Grid item xs={4}>
-                            {student.totalMark}
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
+                            >
+                              <Box pr={1.5}>
+                                <ColorDot color={student.totalColor} />
+                              </Box>
+                              {student.totalMark}
+                            </Box>
                           </Grid>
                         </Grid>
                       </StickyTableCellRight>

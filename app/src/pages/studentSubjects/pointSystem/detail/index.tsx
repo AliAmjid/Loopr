@@ -12,7 +12,7 @@ import {
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import { getMark, getPercents } from 'components/percents';
+import { getMark, getPercents } from 'components/percentMark';
 import ThickDivider from 'components/thickDivider';
 
 import { PointSystemDetailProps } from './types';

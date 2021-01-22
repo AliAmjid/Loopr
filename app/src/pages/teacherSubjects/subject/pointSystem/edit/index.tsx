@@ -18,7 +18,7 @@ import {
   TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables,
 } from 'types/graphql';
 
-import { getPercents, getPoints } from 'components/percents';
+import { getPercents, getPoints } from 'components/percentMark';
 import SimpleDialog from 'components/SimpleDialog';
 
 import { Exam } from '../types';
@@ -81,7 +81,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
               percentsValue = '-';
             } else {
               percentsValue = `${getPercents({
-                value: studentExam.points,
+                value: studentExam.pointsNumber,
                 max: exam.maxPoints,
               })}`;
             }

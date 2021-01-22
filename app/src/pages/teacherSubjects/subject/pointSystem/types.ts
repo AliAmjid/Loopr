@@ -1,8 +1,10 @@
 interface StudentExam {
   id: string;
-  points: number;
+  points: string;
+  percents: string;
   examWritten: boolean;
-  maxPoints: number;
+  pointsNumber: number;
+  color: string;
 }
 
 export interface Student {
@@ -13,6 +15,7 @@ export interface Student {
   totalPoints: number;
   totalPercents: string;
   totalMark: number;
+  totalColor: string;
 }
 
 export interface Exam {

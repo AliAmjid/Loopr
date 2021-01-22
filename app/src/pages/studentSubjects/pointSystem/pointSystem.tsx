@@ -11,6 +11,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import TestCell from 'pages/studentSubjects/components/testCell';
 
+import ColorDot from 'components/colorDot';
 import { formatDateToDay } from 'components/formatDate';
 
 import SubjectCell from '../components/subjectCell';
@@ -26,6 +27,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
         </Typography>
         <Box pl={2}>
           <Typography variant="body2">{exam.percents}</Typography>
+        </Box>
+        <Box pl={1.5}>
+          <ColorDot color={exam.color} />
         </Box>
       </Box>
       <Box display="flex" justifyContent="center">

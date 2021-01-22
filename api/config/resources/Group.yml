@@ -39,3 +39,11 @@ App\Entity\Group:
                     type: '[ID]'
                 deleteUsers:
                     type: '[ID]'
+        archive:
+            security: "is_granted('GROUP_EDIT')"
+            mutation: App\Controller\IGroupArchiveController
+            args:
+                id:
+                    type: 'ID!'
+                archive:
+                    type: 'Boolean!'

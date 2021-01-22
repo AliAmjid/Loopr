@@ -56,7 +56,7 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
     '#FF6F00',
     '#FFC917',
     '#FFF600',
-    '#26BF45',
+    '#08C62E',
     '#7DFE3E',
     '#6C57FF',
     '#0E76FF',
