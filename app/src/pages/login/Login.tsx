@@ -42,6 +42,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   form: {
     width: '100%',
   },
+  root: {
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'center',
+    },
+  },
 }));
 
 const Login: React.FC<LoginProps> = props => {
@@ -54,13 +59,16 @@ const Login: React.FC<LoginProps> = props => {
   };
 
   return (
-    <Box display="flex" justifyContent="flex-end">
-      <Box position="absolute" top={0} left={0} p={10}>
-        <Box width={350} height={100}>
-          <Logo width="100%" height="100%" />
+    <Box display="flex" justifyContent="flex-end" className={classes.root}
+    >
+      <Hidden mdDown>
+        <Box position="absolute" top={0} left={0} p={10}>
+          <Box width={350} height={100}>
+            <Logo width="100%" height="100%" />
+          </Box>
+          <Typography variant="h1">Jednoduchý školní online systém</Typography>
         </Box>
-        <Typography variant="h1">Jednoduchý školní online systém</Typography>
-      </Box>
+      </Hidden>
       <Box display="flex" flexDirection="column" pt={20}>
         <Paper className={classes.paper}>
           <OverlayLoadingContainer>
