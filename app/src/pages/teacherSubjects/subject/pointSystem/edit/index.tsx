@@ -18,7 +18,7 @@ import {
   TeacherSubjectsSubjectPointSystemCreateOrUpdatePointsSystemMutationVariables,
 } from 'types/graphql';
 
-import { getPercents, getPoints } from 'components/percents';
+import { getPercents, getPoints } from 'components/percentMark';
 import SimpleDialog from 'components/SimpleDialog';
 
 import { Exam } from '../types';
