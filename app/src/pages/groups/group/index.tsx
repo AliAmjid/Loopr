@@ -64,6 +64,8 @@ const GroupIndex: React.FC = () => {
     setDefault: setSelectedUsersDefault,
   } = useSelectionChange();
 
+  console.log('chenged', changedUsers);
+
   useEffect(() => {
     resetGroupPagination();
     resetUserPagination();
