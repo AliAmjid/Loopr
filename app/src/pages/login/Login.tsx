@@ -59,8 +59,7 @@ const Login: React.FC<LoginProps> = props => {
   };
 
   return (
-    <Box display="flex" justifyContent="flex-end" className={classes.root}
-    >
+    <Box display="flex" justifyContent="flex-end" className={classes.root}>
       <Hidden mdDown>
         <Box position="absolute" top={0} left={0} p={10}>
           <Box width={350} height={100}>
