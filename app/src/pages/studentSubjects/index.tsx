@@ -18,7 +18,10 @@ const StudentSubjectIndex: React.FC = () => {
   const [selectedSchoolPeriods, setSelectedSchoolPeriods] = useState<string[]>(
     [],
   );
-  const { data: learnedSubjectsData } = useQuery<
+  const {
+    data: learnedSubjectsData,
+    loading: learnedSubjectsLoading,
+  } = useQuery<
     StudentSubjectsLearnedSubjectsQuery,
     StudentSubjectsLearnedSubjectsQueryVariables
   >(STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY, {
@@ -93,6 +96,7 @@ const StudentSubjectIndex: React.FC = () => {
       maxExams={maxExams}
       schoolPeriods={schoolPeriods}
       selectedSchoolPeriods={selectedSchoolPeriods}
+      loading={learnedSubjectsLoading}
       onSchoolPeriodsChange={schoolPeriods => {
         setSelectedSchoolPeriods(schoolPeriods);
       }}
