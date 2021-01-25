@@ -14,11 +14,6 @@ import { Errors502MeUserQuery } from 'types/graphql';
 import ERRORS_502_ME_USER_QUERY from './queries/meUser';
 
 const BadGatewayErrorIndex: React.FC = () => {
-  const {
-    data: meUserData,
-    error: meUserError,
-    loading: meUserLoading,
-  } = useQuery<Errors502MeUserQuery>(ERRORS_502_ME_USER_QUERY, {});
   const router = useRouter();
 
   return <BadGatewayError />;

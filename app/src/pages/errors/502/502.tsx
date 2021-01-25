@@ -1,14 +1,22 @@
 import React from 'react';
 
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { Box, makeStyles, Theme, Typography } from '@material-ui/core';
+
+import Worker from './images/worker.svg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
     width: '100vw',
     height: '100vh',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: theme.palette.common.white,
+    padding: theme.spacing(2),
+  },
+  image: {
+    maxWidth: '100%',
   },
 }));
 
@@ -17,7 +25,15 @@ const BadGatewayError: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h1">Aplikace je momentálně mimo provoz</Typography>
+      <Typography variant="h1" align="center">
+        Aplikace je momentálně mimo provoz
+      </Typography>
+      <Box p={4}>
+        <Worker className={classes.image} />
+      </Box>
+      <Typography variant="h2" align="center">
+        Pokud aplikace do pár minut nenaběhne, kontaktujte kompetentní osobu
+      </Typography>
     </div>
   );
 };
