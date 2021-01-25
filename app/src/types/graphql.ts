@@ -2069,6 +2069,25 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: UsersRolesQuery
+// ====================================================
+
+export interface UsersRolesQuery_aclRoles {
+  __typename: "AclRole";
+  id: string;
+  name: string;
+}
+
+export interface UsersRolesQuery {
+  aclRoles: (UsersRolesQuery_aclRoles | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UsersUsersQuery
 // ====================================================
 

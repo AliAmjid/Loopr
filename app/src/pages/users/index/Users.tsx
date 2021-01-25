@@ -32,6 +32,7 @@ const Users: React.FC<UsersProps> = props => {
       <MaterialTable
         uniqueName="pages/users/index"
         title={t('tableTitle')}
+        isLoading={props.loading}
         columns={[]}
         data={(query: Query<User>) =>
           new Promise<QueryResult<User>>((resolve, reject) => {
@@ -43,7 +44,6 @@ const Users: React.FC<UsersProps> = props => {
                   totalCount: res.data.users.totalCount,
                   data: (res.data.users.edges?.map(e => ({
                     ...e?.node,
-                    role: { name: stripRolePrefix(e?.node?.role?.name || '') },
                     createdAt: dayjs(e?.node?.createdAt).format('DD.MM. YYYY'),
                   })) || []) as User[],
                 });
@@ -80,8 +80,8 @@ const Users: React.FC<UsersProps> = props => {
               },
               {
                 title: t('common:gqlObjects.user.role'),
-                field: 'role.name',
-                filtering: false,
+                field: 'role.id',
+                lookup: props.rolesLookup,
               },
             ],
           },

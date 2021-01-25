@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
@@ -20,6 +20,7 @@ import namespaces from 'lib/i18n/namespaces';
 import { WithPageMeUserQuery } from 'types/graphql';
 
 import hasAccess from 'components/hasAccess';
+import userContext from 'components/userContext';
 
 import { User } from './Page/types';
 import WITH_PAGE_ME_USER_QUERY from './queries/meUser';
@@ -32,20 +33,29 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });
+
   const { t } = useTranslation(namespaces.components.withPage);
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const access = useContext(accessContext);
+  const contextUser = useContext(userContext);
+
+  useEffect(() => {
+    access.set(HAS_ACCESS);
+  }, []);
+
+  useEffect(() => {
+    if (data?.meUser) {
+      contextUser.set(data.meUser);
+    }
+  }, [data]);
+
   const unauthorized =
     data &&
     !hasAccess({
       requiredResources: props.resources,
       role: data?.meUser?.role,
     });
-
-  useEffect(() => {
-    access.set(HAS_ACCESS);
-  }, []);
 
   const logOutHandler = async (): Promise<void> => {
     cookie.remove(`${process.env.NEXT_PUBLIC_TOKEN_COOKIE}`);
@@ -71,10 +81,10 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     firstname: '',
     lastname: '',
     role: undefined,
-    ...(data?.meUser || {}),
+    ...(contextUser.value || {}),
     notifications: [],
   };
-  data?.meUser?.notifications?.edges?.forEach(edge => {
+  contextUser?.value?.notifications?.edges?.forEach(edge => {
     const node = edge?.node;
     if (node) {
       user.notifications.push({ ...node });

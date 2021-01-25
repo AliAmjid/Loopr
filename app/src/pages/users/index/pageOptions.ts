@@ -1,4 +1,5 @@
 import helpPaths from 'config/helpPaths';
+import resources from 'config/resources';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -16,7 +17,7 @@ const usersNamespaces = [
   ...materialTableNamespaces,
 ];
 
-const usersResources: string[][] = [[]];
+export const usersResources: string[][] = [[resources.user.showAll]];
 
 const usersPageOptions: PageOptions = {
   breadcrumbs: usersBreadcrumbs,
