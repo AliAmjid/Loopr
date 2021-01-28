@@ -38,7 +38,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
     'role.resources.name' => 'exact',
     'role.resources.id' => 'exact',
     'classGroup.id' => 'exact',
-    'group.id' => 'exact'
+    'group.id' => 'exact',
+    'role.id' => 'exact',
+    'role.name' => 'exact'
 ])]
 #[ApiFilter(filterClass: OrderFilter::class, properties: [
     'email',
