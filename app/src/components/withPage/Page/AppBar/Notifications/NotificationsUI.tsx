@@ -14,7 +14,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import ListItem from './ListItem';
+import Notification from './notification';
 import { NotificationsUIProps } from './types';
 
 const listWidth = 300;
@@ -53,28 +53,17 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
         }}
       >
         <List className={classes.list}>
-          {props.notifications.map(notification => {
-            let primary = '';
-            let secondary = '';
-
-            switch (notification.type) {
-              case 'POINT_CHANGED':
-                primary = 'pointsChanged';
-                secondary = notification.parameters.examName;
-                break;
-              default:
-                break;
-            }
-
-            return (
-              <ListItem
-                key={notification.id}
-                icon={<GradeIcon />}
-                primaryText={primary}
-                secondaryText={secondary}
-              />
-            );
-          })}
+          {props.notifications.map((notification, index) => (
+            <Notification
+              key={notification.id}
+              notification={notification}
+              fetchMore={
+                index !== props.notifications.length - 1
+                  ? undefined
+                  : props.onFetchMore
+              }
+            />
+          ))}
         </List>
       </Popover>
     </>

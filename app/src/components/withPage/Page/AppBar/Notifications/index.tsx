@@ -20,6 +20,7 @@ const Notifications: React.FC<NotificationsIndexProps> = props => {
       onClick={clickHandler}
       onClose={closeHandler}
       notifications={props.user?.notifications || []}
+      onFetchMore={props.onFetchMore}
     />
   );
 };

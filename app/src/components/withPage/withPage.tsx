@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { useQuery } from '@apollo/client';
+import { useApolloClient, useQuery } from '@apollo/client';
 import cookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
@@ -16,10 +16,17 @@ import withApollo from 'lib/apollo/withApollo';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import { WithPageMeUserQuery } from 'types/graphql';
+import {
+  WithPageMeUserQuery,
+  WithPageNotificationsQuery,
+  WithPageNotificationsQuery_meUser_notifications_edges,
+  WithPageNotificationsQueryVariables,
+} from 'types/graphql';
 
 import hasAccess from 'components/hasAccess';
+import usePagination from 'components/usePagination';
 import userContext from 'components/userContext';
+import WITH_PAGE_NOTIFICATIONS_QUERY from 'components/withPage/queries/notifications';
 
 import { User } from './Page/types';
 import WITH_PAGE_ME_USER_QUERY from './queries/meUser';
@@ -32,6 +39,12 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     fetchPolicy: 'cache-and-network',
     pollInterval: 1000 * 60,
   });
+  const client = useApolloClient();
+  const { getPagination, setPagination } = usePagination();
+  const [notificationsPage, setNotificationsPage] = useState(0);
+  const [notifications, setNotifications] = useState<
+    (WithPageNotificationsQuery_meUser_notifications_edges | null)[]
+  >([]);
 
   const { t } = useTranslation(namespaces.components.withPage);
   const router = useRouter();
@@ -45,9 +58,12 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
 
   useEffect(() => {
     if (data?.meUser) {
-      contextUser.set(data.meUser);
+      contextUser.set({
+        ...data.meUser,
+        notifications: { edges: notifications },
+      });
     }
-  }, [data]);
+  }, [data, notifications]);
 
   const unauthorized =
     data &&
@@ -73,6 +89,31 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     return <Unauthorized />;
   }
 
+  const fetchMoreNotificationsHandler = (): void => {
+    const paginationVariables = getPagination({
+      page: notificationsPage,
+      pageSize: 10,
+    });
+    client
+      .query<WithPageNotificationsQuery, WithPageNotificationsQueryVariables>({
+        query: WITH_PAGE_NOTIFICATIONS_QUERY,
+        variables: { ...paginationVariables },
+      })
+      .then(res => {
+        const totalCount = res.data?.meUser?.notifications?.totalCount;
+        const edges = res.data?.meUser?.notifications?.edges;
+        if (totalCount && edges) {
+          setPagination({ edges, totalCount });
+          setNotificationsPage(notificationsPage + 1);
+          setNotifications([...notifications, ...edges]);
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchMoreNotificationsHandler();
+  }, []);
+
   const { componentProps, ...rest } = props;
 
   const user: User = {
@@ -91,7 +132,12 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
 
   return (
     <>
-      <Page onLogOut={logOutHandler} {...rest} user={user}>
+      <Page
+        onLogOut={logOutHandler}
+        {...rest}
+        user={user}
+        onFetchMoreNotifications={fetchMoreNotificationsHandler}
+      >
         <props.Component {...componentProps} />
       </Page>
     </>
