@@ -10,7 +10,7 @@ import {
 import withPage from 'components/withPage';
 
 import STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY from './queries/learnedSubjects';
-import studentSubjectPageOptions from './pageOptions';
+import studentSubjectsPageOptions from './pageOptions';
 import StudentSubjects from './studentSubjects';
 import { SchoolPeriods, Subject, Subjects } from './types';
 
@@ -104,4 +104,4 @@ const StudentSubjectIndex: React.FC = () => {
   );
 };
 
-export default withPage(studentSubjectPageOptions)(StudentSubjectIndex);
+export default withPage(studentSubjectsPageOptions)(StudentSubjectIndex);

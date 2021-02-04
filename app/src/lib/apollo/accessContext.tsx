@@ -3,13 +3,11 @@ import React, { useState } from 'react';
 export const HAS_ACCESS = 'hasAccess';
 export const INVALID_COOKIE = 'invalidCookie';
 export const UNAUTHORIZED = 'unauthorized';
-export const NO_INTERNET = 'noInternet';
 
 type AccessState =
   | typeof HAS_ACCESS
   | typeof INVALID_COOKIE
-  | typeof UNAUTHORIZED
-  | typeof NO_INTERNET;
+  | typeof UNAUTHORIZED;
 
 const accessContext = React.createContext<{
   set: (state: AccessState) => void;

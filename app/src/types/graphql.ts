@@ -766,6 +766,24 @@ export interface ClassGroupsUsersQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Errors502MeUserQuery
+// ====================================================
+
+export interface Errors502MeUserQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
+export interface Errors502MeUserQuery {
+  meUser: Errors502MeUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: GroupsAddGroupMutation
 // ====================================================
 
@@ -2061,6 +2079,25 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
 export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
   id: string;
   schoolPeriods?: string[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: UsersRolesQuery
+// ====================================================
+
+export interface UsersRolesQuery_aclRoles {
+  __typename: "AclRole";
+  id: string;
+  name: string;
+}
+
+export interface UsersRolesQuery {
+  aclRoles: (UsersRolesQuery_aclRoles | null)[] | null;
 }
 
 /* tslint:disable */
