@@ -40,7 +40,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
     'classGroup.id' => 'exact',
     'group.id' => 'exact',
     'role.id' => 'exact',
-    'role.name' => 'exact'
+    'role.name' => 'exact',
+    'email' => 'ipartial'
 ])]
 #[ApiFilter(filterClass: OrderFilter::class, properties: [
     'email',
@@ -71,7 +72,6 @@ class User implements UserInterface
      * @Groups({"user:password"})
      */
     private string $password;
-
 
     /**
      * @var string|null
