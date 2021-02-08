@@ -13,7 +13,7 @@ import { ListItemProps } from './types';
 const ListItem: React.FC<ListItemProps> = props => {
   return (
     <>
-      <ListItemPrefab button>
+      <ListItemPrefab ref={props.innerRef} button>
         <ListItemAvatar>
           <IconButton color="primary">{props.icon}</IconButton>
         </ListItemAvatar>

@@ -41,6 +41,11 @@ const routes = {
   studentSubjects: {
     index: '/studentSubjects',
   },
+  errors: {
+    '5O2': {
+      index: '/errors/502',
+    },
+  },
 };
 
 export default routes;

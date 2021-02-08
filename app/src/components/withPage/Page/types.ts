@@ -26,6 +26,7 @@ export type PageProps = PropsWithChildren<{
   title: string;
   helpPath?: string;
   user: NullableUser;
+  onFetchMoreNotifications: () => void;
 }>;
 
 export interface PageState {

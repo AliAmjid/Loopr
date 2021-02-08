@@ -261,34 +261,60 @@ export interface WithPageMeUserQuery_meUser_role {
   resources: (WithPageMeUserQuery_meUser_role_resources | null)[] | null;
 }
 
-export interface WithPageMeUserQuery_meUser_notifications_edges_node {
-  __typename: "Notification";
-  id: string;
-  type: string;
-  parameters: any;
-}
-
-export interface WithPageMeUserQuery_meUser_notifications_edges {
-  __typename: "NotificationEdge";
-  node: WithPageMeUserQuery_meUser_notifications_edges_node | null;
-}
-
-export interface WithPageMeUserQuery_meUser_notifications {
-  __typename: "NotificationConnection";
-  edges: (WithPageMeUserQuery_meUser_notifications_edges | null)[] | null;
-}
-
 export interface WithPageMeUserQuery_meUser {
   __typename: "User";
   id: string;
   firstname: string;
   lastname: string;
   role: WithPageMeUserQuery_meUser_role;
-  notifications: WithPageMeUserQuery_meUser_notifications | null;
 }
 
 export interface WithPageMeUserQuery {
   meUser: WithPageMeUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: WithPageNotificationsQuery
+// ====================================================
+
+export interface WithPageNotificationsQuery_meUser_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  type: string;
+  parameters: any;
+}
+
+export interface WithPageNotificationsQuery_meUser_notifications_edges {
+  __typename: "NotificationEdge";
+  node: WithPageNotificationsQuery_meUser_notifications_edges_node | null;
+  cursor: string;
+}
+
+export interface WithPageNotificationsQuery_meUser_notifications {
+  __typename: "NotificationConnection";
+  edges: (WithPageNotificationsQuery_meUser_notifications_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface WithPageNotificationsQuery_meUser {
+  __typename: "User";
+  notifications: WithPageNotificationsQuery_meUser_notifications | null;
+}
+
+export interface WithPageNotificationsQuery {
+  meUser: WithPageNotificationsQuery_meUser | null;
+}
+
+export interface WithPageNotificationsQueryVariables {
+  first?: number | null;
+  last?: number | null;
+  before?: string | null;
+  after?: string | null;
 }
 
 /* tslint:disable */
@@ -758,6 +784,24 @@ export interface ClassGroupsUsersQueryVariables {
   lastname?: string | null;
   isInClassGroup?: boolean | null;
   classGroups?: string[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: Errors502MeUserQuery
+// ====================================================
+
+export interface Errors502MeUserQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
+export interface Errors502MeUserQuery {
+  meUser: Errors502MeUserQuery_meUser | null;
 }
 
 /* tslint:disable */
@@ -2061,6 +2105,25 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
 export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
   id: string;
   schoolPeriods?: string[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: UsersRolesQuery
+// ====================================================
+
+export interface UsersRolesQuery_aclRoles {
+  __typename: "AclRole";
+  id: string;
+  name: string;
+}
+
+export interface UsersRolesQuery {
+  aclRoles: (UsersRolesQuery_aclRoles | null)[] | null;
 }
 
 /* tslint:disable */

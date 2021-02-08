@@ -41,7 +41,7 @@ const TeachersIndex: React.FC = () => {
         query: EDIT_SUBJECT_TEACHER_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
-          resourceName: resources.group.teacher,
+          resourceName: resources.subject.teacher,
           email: emailFilter,
           lastname: lastNameFilter,
           firstname: firstNameFilter,

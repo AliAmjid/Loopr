@@ -11,10 +11,14 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
+import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { getDisplayName } from 'recompose';
 
+import routes from 'config/routes';
+
 import accessContext, {
+  BAD_GATEWAY,
   INVALID_COOKIE,
   NO_INTERNET,
   UNAUTHORIZED,
@@ -31,6 +35,7 @@ const withApollo = <ComponentProps extends {} = any>(
   Component: React.ComponentType<ComponentProps>,
 ): React.FC<ComponentProps> => props => {
   const access = useContext(accessContext);
+  const router = useRouter();
 
   const cache = new InMemoryCache();
 
@@ -48,9 +53,14 @@ const withApollo = <ComponentProps extends {} = any>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     if (error.networkError?.statusCode === 401) access.set(INVALID_COOKIE);
-    else if (error.networkError?.message === FAILED_TO_FETCH)
-      access.set(NO_INTERNET);
     else if (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      error.networkError?.statusCode === 502 ||
+      error.networkError?.message === FAILED_TO_FETCH
+    ) {
+      router.push(routes.errors['5O2'].index);
+    } else if (
       error.graphQLErrors?.some(
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
