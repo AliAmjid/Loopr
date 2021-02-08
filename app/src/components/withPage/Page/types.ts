@@ -5,6 +5,7 @@ import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
 export interface Notification {
   id: string;
   type: string;
+  viewAt: string | null;
   parameters: Record<string, any>;
 }
 

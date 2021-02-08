@@ -245,6 +245,33 @@ export interface UserImportTableAclRolesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: WithPageMarkReadNotificationsUserMutation
+// ====================================================
+
+export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser {
+  __typename: "markReadNotificationUserPayload";
+  user: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user | null;
+}
+
+export interface WithPageMarkReadNotificationsUserMutation {
+  markReadNotificationUser: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser | null;
+}
+
+export interface WithPageMarkReadNotificationsUserMutationVariables {
+  input: markReadNotificationUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: WithPageMeUserQuery
 // ====================================================
 
@@ -286,6 +313,7 @@ export interface WithPageNotificationsQuery_meUser_notifications_edges_node {
   __typename: "Notification";
   id: string;
   type: string;
+  viewAt: string | null;
   parameters: any;
 }
 
@@ -2359,7 +2387,6 @@ export interface createUserInput {
   role: string;
   lastname: string;
   firstname: string;
-  classGroup?: string | null;
   rawPassword?: string | null;
   clientMutationId?: string | null;
 }
@@ -2395,6 +2422,11 @@ export interface deleteSubjectInput {
 }
 
 export interface deleteSubjectTypeInput {
+  id: string;
+  clientMutationId?: string | null;
+}
+
+export interface markReadNotificationUserInput {
   id: string;
   clientMutationId?: string | null;
 }
@@ -2472,7 +2504,6 @@ export interface updateUserInput {
   role?: string | null;
   lastname?: string | null;
   firstname?: string | null;
-  classGroup?: string | null;
   rawPassword?: string | null;
   clientMutationId?: string | null;
 }

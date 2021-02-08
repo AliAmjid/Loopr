@@ -2,13 +2,14 @@ import React from 'react';
 
 import {
   Badge,
+  Box,
   IconButton,
   List,
   makeStyles,
   Popover,
   Tooltip,
+  Typography,
 } from '@material-ui/core';
-import GradeIcon from '@material-ui/icons/Grade';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { useTranslation } from 'lib/i18n';
@@ -52,19 +53,25 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
           horizontal: 'right',
         }}
       >
-        <List className={classes.list}>
-          {props.notifications.map((notification, index) => (
-            <Notification
-              key={notification.id}
-              notification={notification}
-              fetchMore={
-                index !== props.notifications.length - 1
-                  ? undefined
-                  : props.onFetchMore
-              }
-            />
-          ))}
-        </List>
+        {props.notifications.length === 0 ? (
+          <Box p={2}>
+            <Typography>No notifications</Typography>
+          </Box>
+        ) : (
+          <List className={classes.list}>
+            {props.notifications.map((notification, index) => (
+              <Notification
+                key={notification.id}
+                notification={notification}
+                fetchMore={
+                  index !== props.notifications.length - 1
+                    ? undefined
+                    : props.onFetchMore
+                }
+              />
+            ))}
+          </List>
+        )}
       </Popover>
     </>
   );

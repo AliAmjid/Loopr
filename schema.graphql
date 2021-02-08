@@ -32,6 +32,7 @@ type Query {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        order: [ClassGroupFilter_order]
     ): ClassGroupConnection
     classGroup(id: ID!): ClassGroup
     aclResources: [AclResource]
@@ -83,20 +84,23 @@ type Query {
         # Returns the elements in the list that come after the specified cursor.
         after: String
         exists: [UserFilter_exists]
+        createdAt: [UserFilter_createdAt]
+        archivedAt: [UserFilter_archivedAt]
         id: String
         id_list: [String]
         firstname: String
         lastname: String
-        email: String
         role_resources_name: String
         role_resources_name_list: [String]
         role_resources_id: String
         role_resources_id_list: [String]
         classGroup_id: String
         classGroup_id_list: [String]
-        groups_id: String
-        groups_id_list: [String]
-        createdAt: [UserFilter_createdAt]
+        role_id: String
+        role_id_list: [String]
+        role_name: String
+        role_name_list: [String]
+        order: [UserFilter_order]
     ): UserConnection
     userPrivateData(id: ID!): UserPrivateData
     subject(id: ID!): Subject
@@ -112,6 +116,8 @@ type Query {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [SubjectFilter_exists]
+        archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
     learnedSubjects(
         # Returns the first n elements from the list.
@@ -125,6 +131,8 @@ type Query {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [SubjectFilter_exists]
+        archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
     getToken(email: String!, password: String!): Token
     notification(id: ID!): Notification
@@ -147,7 +155,12 @@ type Query {
         schoolYear_list: [Int]
         quarter: Int
         quarter_list: [Int]
+        order: [SchoolPeriodFilter_order]
     ): SchoolPeriodConnection
+
+    #
+    #
+    me: SymfonyUserInterface
 }
 
 # A node, according to the Relay specification.
@@ -171,6 +184,8 @@ type Group implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [SubjectFilter_exists]
+        archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
     section: String!
     users(
@@ -186,24 +201,38 @@ type Group implements Node {
         # Returns the elements in the list that come after the specified cursor.
         after: String
         exists: [UserFilter_exists]
+        createdAt: [UserFilter_createdAt]
+        archivedAt: [UserFilter_archivedAt]
         id: String
         id_list: [String]
         firstname: String
         lastname: String
-        email: String
         role_resources_name: String
         role_resources_name_list: [String]
         role_resources_id: String
         role_resources_id_list: [String]
         classGroup_id: String
         classGroup_id_list: [String]
-        groups_id: String
-        groups_id_list: [String]
-        createdAt: [UserFilter_createdAt]
+        role_id: String
+        role_id_list: [String]
+        role_name: String
+        role_name_list: [String]
+        order: [UserFilter_order]
     ): UserConnection
     createdBy: User
     createdAt: String!
     _id: String!
+}
+
+input SubjectFilter_exists {
+    archivedAt: Boolean
+}
+
+input SubjectFilter_archivedAt {
+    before: String
+    strictly_before: String
+    after: String
+    strictly_after: String
 }
 
 # Connection for Subject.
@@ -249,6 +278,7 @@ type Subject implements Node {
         order: [ExamFilter_order]
     ): ExamConnection
     percentsToMarkConvert: PercentToMarkConvert!
+    archivedAt: String
     _id: String!
 }
 
@@ -268,6 +298,8 @@ type SubjectType implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [SubjectFilter_exists]
+        archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
     _id: String!
 }
@@ -287,6 +319,8 @@ type ClassGroup implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [SubjectFilter_exists]
+        archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
     year: Int!
     section: String!
@@ -303,20 +337,23 @@ type ClassGroup implements Node {
         # Returns the elements in the list that come after the specified cursor.
         after: String
         exists: [UserFilter_exists]
+        createdAt: [UserFilter_createdAt]
+        archivedAt: [UserFilter_archivedAt]
         id: String
         id_list: [String]
         firstname: String
         lastname: String
-        email: String
         role_resources_name: String
         role_resources_name_list: [String]
         role_resources_id: String
         role_resources_id_list: [String]
         classGroup_id: String
         classGroup_id_list: [String]
-        groups_id: String
-        groups_id_list: [String]
-        createdAt: [UserFilter_createdAt]
+        role_id: String
+        role_id_list: [String]
+        role_name: String
+        role_name_list: [String]
+        order: [UserFilter_order]
     ): UserConnection
 
     # Teacher needs to be user with resource GROUP_TEACHER
@@ -326,6 +363,7 @@ type ClassGroup implements Node {
 
 input UserFilter_exists {
     classGroup: Boolean
+    archivedAt: Boolean
 }
 
 input UserFilter_createdAt {
@@ -333,6 +371,18 @@ input UserFilter_createdAt {
     strictly_before: String
     after: String
     strictly_after: String
+}
+
+input UserFilter_archivedAt {
+    before: String
+    strictly_before: String
+    after: String
+    strictly_after: String
+}
+
+input UserFilter_order {
+    email: String
+    lastname: String
 }
 
 # Connection for User.
@@ -389,8 +439,8 @@ type User implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
-        order: [NotificationFilter_order]
         exists: [NotificationFilter_exists]
+        order: [NotificationFilter_order]
     ): NotificationConnection
     taughtSubjects(
         # Returns the first n elements from the list.
@@ -404,7 +454,10 @@ type User implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [SubjectFilter_exists]
+        archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
+    archivedAt: String
 }
 
 # Connection for Group.
@@ -472,12 +525,12 @@ type PercentToMarkConvert implements Node {
     _id: String!
 }
 
-input NotificationFilter_order {
-    createdAt: String
-}
-
 input NotificationFilter_exists {
     viewAt: Boolean
+}
+
+input NotificationFilter_order {
+    createdAt: String
 }
 
 # Connection for Notification.
@@ -499,6 +552,9 @@ type Notification implements Node {
     type: String!
     parameters: Iterable!
     user: User!
+    createdAt: String!
+    viewAt: String
+    email: Boolean!
     _id: String!
 }
 
@@ -585,11 +641,16 @@ type PointSystem implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [PointFilter_exists]
     ): PointConnection
     exam: Exam!
     anonymizedResults: Iterable!
     average: Float!
     _id: String!
+}
+
+input PointFilter_exists {
+    user_archivedAt: Boolean
 }
 
 # Connection for Point.
@@ -643,6 +704,11 @@ type SubjectPageInfo {
     hasPreviousPage: Boolean!
 }
 
+input ClassGroupFilter_order {
+    year: String
+    section: String
+}
+
 # Connection for ClassGroup.
 type ClassGroupConnection {
     edges: [ClassGroupEdge]
@@ -693,6 +759,11 @@ type Token implements Node {
     user: User!
 }
 
+input SchoolPeriodFilter_order {
+    schoolYear: String
+    quarter: String
+}
+
 # Connection for SchoolPeriod.
 type SchoolPeriodConnection {
     edges: [SchoolPeriodEdge]
@@ -714,7 +785,19 @@ type SchoolPeriodPageInfo {
     hasPreviousPage: Boolean!
 }
 
+interface SymfonyUserInterface {
+    #
+    #
+    roles: [String!]!
+
+    # Returns the username used to authenticate the user.
+    userName: String!
+}
+
 type Mutation {
+    # A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations.
+    dummyMutation: String
+
     # Creates a Group.
     createGroup(input: createGroupInput!): createGroupPayload
 
@@ -726,6 +809,9 @@ type Mutation {
 
     # UpdateUserss a Group.
     updateUsersGroup(input: updateUsersGroupInput!): updateUsersGroupPayload
+
+    # Archives a Group.
+    archiveGroup(input: archiveGroupInput!): archiveGroupPayload
 
     # Updates a PercentToMarkConvert.
     updatePercentToMarkConvert(
@@ -754,6 +840,9 @@ type Mutation {
 
     # Deletes a ClassGroup.
     deleteClassGroup(input: deleteClassGroupInput!): deleteClassGroupPayload
+
+    # Archives a ClassGroup.
+    archiveClassGroup(input: archiveClassGroupInput!): archiveClassGroupPayload
 
     # Creates a SubjectType.
     createSubjectType(input: createSubjectTypeInput!): createSubjectTypePayload
@@ -785,6 +874,19 @@ type Mutation {
     # Updates a User.
     updateUser(input: updateUserInput!): updateUserPayload
 
+    # MarkReadNotifications a User.
+    markReadNotificationUser(
+        input: markReadNotificationUserInput!
+    ): markReadNotificationUserPayload
+
+    # MarkReadAllNotificationss a User.
+    markReadAllNotificationsUser(
+        input: markReadAllNotificationsUserInput!
+    ): markReadAllNotificationsUserPayload
+
+    # Archives a User.
+    archiveUser(input: archiveUserInput!): archiveUserPayload
+
     # Creates a WebPushSubscribe.
     createWebPushSubscribe(
         input: createWebPushSubscribeInput!
@@ -807,15 +909,8 @@ type Mutation {
     # Deletes a Subject.
     deleteSubject(input: deleteSubjectInput!): deleteSubjectPayload
 
-    # MarkReads a Notification.
-    markReadNotification(
-        input: markReadNotificationInput!
-    ): markReadNotificationPayload
-
-    # MarkReadAlls a Notification.
-    markReadAllNotification(
-        input: markReadAllNotificationInput!
-    ): markReadAllNotificationPayload
+    # Archives a Subject.
+    archiveSubject(input: archiveSubjectInput!): archiveSubjectPayload
 
     # Creates a Point.
     createPoint(input: createPointInput!): createPointPayload
@@ -888,6 +983,19 @@ input updateUsersGroupInput {
 
 #
 type updateUsersGroupPayload {
+    group: Group
+    clientMutationId: String
+}
+
+#
+input archiveGroupInput {
+    id: ID!
+    archive: Boolean!
+    clientMutationId: String
+}
+
+#
+type archiveGroupPayload {
     group: Group
     clientMutationId: String
 }
@@ -1018,6 +1126,19 @@ type deleteClassGroupPayload {
 }
 
 #
+input archiveClassGroupInput {
+    id: ID!
+    archive: Boolean!
+    clientMutationId: String
+}
+
+#
+type archiveClassGroupPayload {
+    classGroup: ClassGroup
+    clientMutationId: String
+}
+
+#
 input createSubjectTypeInput {
     name: String!
     clientMutationId: String
@@ -1102,7 +1223,6 @@ input createUserInput {
     role: String!
     lastname: String!
     firstname: String!
-    classGroup: String
     rawPassword: String
     clientMutationId: String
 }
@@ -1147,13 +1267,48 @@ input updateUserInput {
     role: String
     lastname: String
     firstname: String
-    classGroup: String
     rawPassword: String
     clientMutationId: String
 }
 
 #
 type updateUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input markReadNotificationUserInput {
+    id: ID!
+    clientMutationId: String
+}
+
+#
+type markReadNotificationUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input markReadAllNotificationsUserInput {
+    clientMutationId: String
+}
+
+#
+type markReadAllNotificationsUserPayload {
+    user: User
+    clientMutationId: String
+}
+
+#
+input archiveUserInput {
+    id: ID!
+    archive: Boolean!
+    clientMutationId: String
+}
+
+#
+type archiveUserPayload {
     user: User
     clientMutationId: String
 }
@@ -1250,26 +1405,15 @@ type deleteSubjectPayload {
 }
 
 #
-input markReadNotificationInput {
+input archiveSubjectInput {
     id: ID!
+    archive: Boolean!
     clientMutationId: String
 }
 
 #
-type markReadNotificationPayload {
-    notification: Notification
-    clientMutationId: String
-}
-
-#
-input markReadAllNotificationInput {
-    id: ID!
-    clientMutationId: String
-}
-
-#
-type markReadAllNotificationPayload {
-    notification: Notification
+type archiveSubjectPayload {
+    subject: Subject
     clientMutationId: String
 }
 
@@ -1384,4 +1528,13 @@ input deleteSchoolPeriodInput {
 type deleteSchoolPeriodPayload {
     schoolPeriod: SchoolPeriod
     clientMutationId: String
+}
+
+type SymfonyUserImpl implements SymfonyUserInterface {
+    #
+    #
+    roles: [String!]!
+
+    # Returns the username used to authenticate the user.
+    userName: String!
 }

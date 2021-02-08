@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { UrlObject } from 'url';
+
 import { Notification, NullableUser } from '../../types';
 
 export interface NotificationsUIProps {
@@ -10,11 +12,16 @@ export interface NotificationsUIProps {
   onFetchMore: () => void;
 }
 
+export type Href = undefined | string | (UrlObject & string);
+
 export interface ListItemProps {
   innerRef?: any;
   icon: JSX.Element;
   primaryText: string;
   secondaryText: string;
+  href: Href;
+  viewAt: boolean;
+  onClick: () => void;
 }
 
 export interface NotificationsIndexProps {
