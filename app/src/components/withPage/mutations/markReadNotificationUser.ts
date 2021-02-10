@@ -7,6 +7,14 @@ const WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION = gql`
     markReadNotificationUser(input: $input) {
       user {
         id
+        notifications {
+          edges {
+            node {
+              id
+              viewAt
+            }
+          }
+        }
       }
     }
   }
