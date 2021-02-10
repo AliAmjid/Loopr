@@ -30,11 +30,13 @@ class NotificationController extends AbstractController implements MutationResol
                 throw new ClientError(ClientErrorType::ACCESS_DENIED);
             }
             $notification->setViewAt(new \DateTime());
+            $em->persist($notification);
         } else {
             /** @var NotificationRepository $notificationRepository */
             $notificationRepository = $em->getRepository(Notification::class);
             $notificationRepository->setAllUnreadNotificationRead($user);
         }
+        $em->flush();
         $em->refresh($user);
         return $user;
     }
