@@ -14,6 +14,7 @@ const WITH_PAGE_ME_USER_QUERY = gql`
           name
         }
       }
+      notificationViewAtNullCount
     }
   }
 `;

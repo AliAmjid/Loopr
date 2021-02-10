@@ -245,12 +245,56 @@ export interface UserImportTableAclRolesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: WithPageMarkReadAllNotificationUserMutation
+// ====================================================
+
+export interface WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser {
+  __typename: "markReadAllNotificationsUserPayload";
+  user: WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser_user | null;
+}
+
+export interface WithPageMarkReadAllNotificationUserMutation {
+  markReadAllNotificationsUser: WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser | null;
+}
+
+export interface WithPageMarkReadAllNotificationUserMutationVariables {
+  input: markReadAllNotificationsUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: WithPageMarkReadNotificationsUserMutation
 // ====================================================
+
+export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  viewAt: string | null;
+}
+
+export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges {
+  __typename: "NotificationEdge";
+  node: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node | null;
+}
+
+export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications {
+  __typename: "NotificationConnection";
+  edges: (WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges | null)[] | null;
+}
 
 export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user {
   __typename: "User";
   id: string;
+  notifications: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications | null;
 }
 
 export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser {
@@ -294,6 +338,7 @@ export interface WithPageMeUserQuery_meUser {
   firstname: string;
   lastname: string;
   role: WithPageMeUserQuery_meUser_role;
+  notificationViewAtNullCount: number;
 }
 
 export interface WithPageMeUserQuery {
@@ -2423,6 +2468,10 @@ export interface deleteSubjectInput {
 
 export interface deleteSubjectTypeInput {
   id: string;
+  clientMutationId?: string | null;
+}
+
+export interface markReadAllNotificationsUserInput {
   clientMutationId?: string | null;
 }
 

@@ -100,6 +100,7 @@ type Query {
         role_id_list: [String]
         role_name: String
         role_name_list: [String]
+        email: String
         order: [UserFilter_order]
     ): UserConnection
     userPrivateData(id: ID!): UserPrivateData
@@ -217,6 +218,7 @@ type Group implements Node {
         role_id_list: [String]
         role_name: String
         role_name_list: [String]
+        email: String
         order: [UserFilter_order]
     ): UserConnection
     createdBy: User
@@ -353,6 +355,7 @@ type ClassGroup implements Node {
         role_id_list: [String]
         role_name: String
         role_name_list: [String]
+        email: String
         order: [UserFilter_order]
     ): UserConnection
 
@@ -458,6 +461,7 @@ type User implements Node {
         archivedAt: [SubjectFilter_archivedAt]
     ): SubjectConnection
     archivedAt: String
+    notificationViewAtNullCount: Int!
 }
 
 # Connection for Group.

@@ -16,6 +16,7 @@ const usePagination = (): UsePaginationReturn => {
   });
 
   const getPagination = (args: GetPaginationArgs): PaginationVariables => {
+    console.log(state, args);
     const variables: PaginationVariables = {};
     if (args.page === state.page + 1 || args.page === state.page) {
       variables.first = args.pageSize;
@@ -49,7 +50,12 @@ const usePagination = (): UsePaginationReturn => {
   };
 
   const resetPagination = (): void => {
-    setState({ page: 0, firstCursor: '', lastCursor: '', totalCount: 0 });
+    setState({
+      page: 0,
+      firstCursor: '',
+      lastCursor: '',
+      totalCount: 0,
+    });
   };
 
   return { getPagination, setPagination, resetPagination };

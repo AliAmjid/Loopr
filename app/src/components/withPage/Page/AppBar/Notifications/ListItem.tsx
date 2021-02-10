@@ -31,7 +31,7 @@ const ListItem: React.FC<ListItemProps> = props => {
         ref={props.innerRef}
         className={props.viewAt ? '' : classes.selectedItem}
         button
-        selected={props.viewAt}
+        selected={!props.viewAt}
         onClick={props.onClick}
       >
         <ListItemAvatar>

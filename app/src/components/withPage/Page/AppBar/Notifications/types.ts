@@ -9,7 +9,10 @@ export interface NotificationsUIProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose: () => void;
   notifications: Notification[];
+  newNotifications: number;
+  loading: boolean;
   onFetchMore: () => void;
+  onReadAll: () => void;
 }
 
 export type Href = undefined | string | (UrlObject & string);
@@ -27,9 +30,11 @@ export interface ListItemProps {
 export interface NotificationsIndexProps {
   user: NullableUser;
   onFetchMore: () => void;
+  onResetFetched: () => void;
 }
 
 export interface NotificationProps {
   notification: Notification;
+  onClose: () => void;
   fetchMore?: () => void;
 }

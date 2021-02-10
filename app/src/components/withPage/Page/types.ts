@@ -17,6 +17,7 @@ export interface User {
     resources?: ({ name: string } | undefined | null)[] | null;
   } | null;
   notifications: Notification[];
+  notificationViewAtNullCount: number;
 }
 
 export type NullableUser = User | null | undefined;
@@ -28,6 +29,7 @@ export type PageProps = PropsWithChildren<{
   helpPath?: string;
   user: NullableUser;
   onFetchMoreNotifications: () => void;
+  onResetFetchedMoreNotifications: () => void;
 }>;
 
 export interface PageState {

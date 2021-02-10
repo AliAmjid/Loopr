@@ -19,6 +19,7 @@ export interface User {
             id: string;
             type: string;
             parameters: any;
+            viewAt: string | null;
           } | null;
         } | null)[]
       | null;

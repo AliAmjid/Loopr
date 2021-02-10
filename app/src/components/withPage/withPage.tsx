@@ -40,11 +40,12 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     pollInterval: 1000 * 60,
   });
   const client = useApolloClient();
-  const { getPagination, setPagination } = usePagination();
+  const { getPagination, setPagination, resetPagination } = usePagination();
   const [notificationsPage, setNotificationsPage] = useState(0);
   const [notifications, setNotifications] = useState<
     (WithPageNotificationsQuery_meUser_notifications_edges | null)[]
   >([]);
+  const [fetchingNotifications, setFetchingNotifications] = useState(false);
 
   const { t } = useTranslation(namespaces.components.withPage);
   const router = useRouter();
@@ -90,6 +91,8 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   }
 
   const fetchMoreNotificationsHandler = (): void => {
+    console.log('fetching', notificationsPage);
+    setFetchingNotifications(true);
     const paginationVariables = getPagination({
       page: notificationsPage,
       pageSize: 10,
@@ -107,12 +110,20 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
           setNotificationsPage(notificationsPage + 1);
           setNotifications([...notifications, ...edges]);
         }
+        setFetchingNotifications(false);
       });
   };
 
+  const resetFetchedMoreNotificationsHandler = (): void => {
+    resetPagination();
+    setNotifications([]);
+    setNotificationsPage(0);
+  };
+
   useEffect(() => {
-    fetchMoreNotificationsHandler();
-  }, []);
+    if (!fetchingNotifications && notificationsPage === 0)
+      fetchMoreNotificationsHandler();
+  }, [notificationsPage]);
 
   const { componentProps, ...rest } = props;
 
@@ -120,6 +131,7 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     firstname: '',
     lastname: '',
     role: undefined,
+    notificationViewAtNullCount: 0,
     ...(contextUser.value || {}),
     notifications: [],
   };
@@ -137,6 +149,7 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
         {...rest}
         user={user}
         onFetchMoreNotifications={fetchMoreNotificationsHandler}
+        onResetFetchedMoreNotifications={resetFetchedMoreNotificationsHandler}
       >
         <props.Component {...componentProps} />
       </Page>

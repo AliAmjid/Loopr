@@ -123,6 +123,7 @@ const AppBar: React.FC<AppBarProps> = props => {
             <Notifications
               user={props.user}
               onFetchMore={props.onFetchMoreNotifications}
+              onResetFetched={props.onResetFetchedMoreNotifications}
             />
             <LogOut onLogOut={props.onLogOut} />
             <User user={props.user} />

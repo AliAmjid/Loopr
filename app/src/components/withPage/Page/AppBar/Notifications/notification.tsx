@@ -60,7 +60,10 @@ const Notification: React.FC<NotificationProps> = props => {
     markAsRead({
       variables: { input: { id: props.notification.id } },
     }).then(() => {
-      if (href) router.push(href);
+      if (href) {
+        props.onClose();
+        router.push(href);
+      }
     });
   };
 
