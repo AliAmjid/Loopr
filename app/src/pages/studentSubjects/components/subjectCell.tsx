@@ -19,18 +19,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SubjectCell: React.FC<
-  TableCellProps & { backgroundColor?: string }
-> = props => {
+const SubjectCell: React.FC<TableCellProps & { backgroundColor?: string }> = ({
+  backgroundColor,
+  children,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
     <TableCell
       className={classes.stickyCell}
-      style={{ backgroundColor: props.backgroundColor }}
-      {...props}
+      style={{ backgroundColor }}
+      {...rest}
     >
-      {props.children}
+      {children}
     </TableCell>
   );
 };

@@ -91,7 +91,6 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
   }
 
   const fetchMoreNotificationsHandler = (): void => {
-    console.log('fetching', notificationsPage);
     setFetchingNotifications(true);
     const paginationVariables = getPagination({
       page: notificationsPage,

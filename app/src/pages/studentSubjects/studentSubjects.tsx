@@ -112,6 +112,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                   if (subject.evaluationSystem === 'POINTS') {
                     return (
                       <PointSystemIndex
+                        key={subject.id}
                         subject={subject}
                         maxExams={props.maxExams}
                         color={color}
@@ -125,7 +126,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                     );
                   }
 
-                  return <></>;
+                  return <React.Fragment key={index} />;
                 })}
               </TableBody>
             </Table>

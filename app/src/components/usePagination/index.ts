@@ -16,7 +16,6 @@ const usePagination = (): UsePaginationReturn => {
   });
 
   const getPagination = (args: GetPaginationArgs): PaginationVariables => {
-    console.log(state, args);
     const variables: PaginationVariables = {};
     if (args.page === state.page + 1 || args.page === state.page) {
       variables.first = args.pageSize;
