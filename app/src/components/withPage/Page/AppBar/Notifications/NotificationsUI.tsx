@@ -61,7 +61,7 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
           <OverlayLoading loading={props.loading} />
           {props.notifications.length === 0 ? (
             <Box p={2}>
-              <Typography>No notifications</Typography>
+              <Typography>{t('noNotifications')}</Typography>
             </Box>
           ) : (
             <List className={classes.list}>
@@ -79,7 +79,7 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
               ))}
               <Box pt={0.5}>
                 <Button fullWidth color="primary" onClick={props.onReadAll}>
-                  Read all
+                  {t('readAllNotifications')}
                 </Button>
               </Box>
             </List>

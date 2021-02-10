@@ -6,5 +6,7 @@
   "back": "Zpět",
   "logOutDialogTitle": "Opravdu se chcete odhlásit?",
   "profileSettings": "Nastavení profilu",
-  "logOutSuccess": "Uživatel úspěšně odhlášen"
+  "logOutSuccess": "Uživatel úspěšně odhlášen",
+  "noNotifications": "Žádné notifikace",
+  "readAllNotifications": "Označit všechny jako přečtené"
 }
