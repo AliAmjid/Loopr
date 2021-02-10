@@ -1,5 +1,5 @@
 # Třídy
-Stránka Třídy slouží k vytváření a upravování tříd. Třídy zde můžete naplnit studenty a přiřadit jim třídního učitele.
+Stránka `Třídy` slouží k vytváření a upravování tříd. Třídy zde můžete naplnit studenty a přiřadit jim třídního učitele.
 
 ## Rozdělení stránky
 Stránka je složená ze dvou sekcí. Z levé sekce "Seznam tříd" a pravé sekce s obsaženými daty o přiřazených studentech a učiteli. 
@@ -13,8 +13,9 @@ Třídy lze vytvořit pomocí `zeleného tlačítka +`.
 Otevře se dialog, do kterého je potřeba napsat rok nástupu třídy a její název.
 ![](images/class-adding.png)
 
-Každou třídu lze přejmenovat (upravit třídu a rok nástupu) pomocí `ikony tužky` a odstranit pomocí `ikony koše`.   
-Při kliknutí na ikonu tužky se otevře nové okno, ve kterém lze třídu upravit po stránce jejího jména a roku nástupu.
+Každou třídu lze přejmenovat (změnit název a rok nástupu) pomocí `ikony tužky` a odstranit pomocí `ikony koše`.   
+
+Otevřené okno po kliknutí na `ikonu tužky`.
 ![](images/class-editing.png)
 
 ### Sekce s uživatelskými daty
@@ -33,7 +34,8 @@ Pro výběr studentů zaškrtněte všechny preferované řádky a poté klikně
 
 
 #### Operace s učitelem
-Všechny ovládací prvky a práce s tabulkou je popsána zde: [Datová tabulka](cs/components/materialTable/)
+Všechny ovládací prvky a práce s tabulkou je popsána zde: 
+> [Datová tabulka](cs/components/materialTable/)
 
 Pro výběr třídního učitele klikněte na tlačítko `upravit`.
 ![](images/teacher-list.png)

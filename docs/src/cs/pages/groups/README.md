@@ -1,5 +1,5 @@
 # Skupiny
-Skupiny fungují jako jednotlivé útvary studentů, které poté lze přiřadit k různým předmětům s různými učiteli.   
+Skupiny jsou jednotlivé útvary studentů, které poté lze přiřadit k různým předmětům s různými učiteli.   
 Například pokud budete mít jeden nebo více předmětů, ve kterém se budete chtít, aby se nacházela pouze polovina třídy, např. rozdělena abecedně, vytvoříte pro ní skupinu. Skupiny lze tvořit také mezi různými třídami.
 
 Přiřazování skupin k předmětům je možné v kartě [Předměty](cs/pages/subjects/)
@@ -17,6 +17,7 @@ Otevře se dialog, do kterého je potřeba napsat pouze vaše pojmenování skup
 ![](images/groups.png)
 
 Každou skupinu lze přejmenovat pomocí `ikony tužky` a odstranit pomocí `ikony koše`. 
+
 ![](images/group-editing.png)
 
 ### Sekce s uživatelskými daty

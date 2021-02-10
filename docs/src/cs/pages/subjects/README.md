@@ -1,5 +1,5 @@
 # Předměty
-Stránka `Předměty` slouží k přiřazení jedné nebo více skupin k určitému předmětu.
+Stránka `Předměty` slouží k přiřazení jedné nebo více skupin či tříd k určitému předmětu.
 
 ## Rozdělení stránky
 Stránka je složená ze dvou sekcí. Z levé sekce "Typy předmětů" a pravé sekce s obsaženými daty o přiřazených skupinách a učiteli.
@@ -31,11 +31,12 @@ Přiřazení se skládá z 3 kroků. Pohybovat mezi nimi se můžete pomocí `ik
 
 ##### 1. krok - Skupina/Třída
 Máte možnost vybrat si zda chcete přiřadit k typu předmětu celou třídu, či pouze nějakou skupinu. Vybrání provedete kliknutím na `tlačítko +`.
+
 ![](images/assignments-editing-firststep.png)
 ![](images/assignments-editing-firststep2.png)
 
 ##### 2. krok - Učitel
-Zde vyberte učitele pro dříve vybranou třídu/skupinu. Opět pomocí kliknutí na `tlačítko +`.
+Zde vyberte učitele pro již vybranou třídu/skupinu. Opět pomocí kliknutí na `tlačítko +`.
 ![](images/assignments-editing-secondstep.png)
 
 ##### 3. krok - Shrnutí
