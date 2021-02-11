@@ -868,6 +868,11 @@ export interface ClassGroupsUsersQueryVariables {
 // GraphQL query operation: DashboardWrittenExamsQuery
 // ====================================================
 
+export interface DashboardWrittenExamsQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
 export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user {
   __typename: "User";
   id: string;
@@ -875,8 +880,9 @@ export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_
 
 export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node {
   __typename: "Point";
-  user: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user;
   points: number;
+  examWritten: boolean;
+  user: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user;
 }
 
 export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges {
@@ -895,6 +901,14 @@ export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem 
   points: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points | null;
 }
 
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
 export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subjectType {
   __typename: "SubjectType";
   id: string;
@@ -904,6 +918,7 @@ export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subj
 export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject {
   __typename: "Subject";
   evaluationSystem: string;
+  percentsToMarkConvert: DashboardWrittenExamsQuery_writtenExams_edges_node_subject_percentsToMarkConvert;
   subjectType: DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subjectType | null;
 }
 
@@ -926,6 +941,7 @@ export interface DashboardWrittenExamsQuery_writtenExams {
 }
 
 export interface DashboardWrittenExamsQuery {
+  meUser: DashboardWrittenExamsQuery_meUser | null;
   writtenExams: DashboardWrittenExamsQuery_writtenExams | null;
 }
 

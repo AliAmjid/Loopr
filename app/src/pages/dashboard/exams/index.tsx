@@ -16,14 +16,20 @@ const ExamsIndex: React.FC = () => {
   const { data: examsData, loading: examsLoading } = useQuery<
     DashboardWrittenExamsQuery,
     DashboardWrittenExamsQueryVariables
-  >(DASHBOARD_WRITTEN_EXAMS_QUERY, { variables: { first: 10 } });
+  >(DASHBOARD_WRITTEN_EXAMS_QUERY, { variables: { first: 6 } });
 
   const exams: ExamsType = [];
   examsData?.writtenExams?.edges?.forEach(edge => {
     if (edge?.node) exams.push(edge.node);
   });
 
-  return <Exams exams={exams} loading={examsLoading} />;
+  return (
+    <Exams
+      exams={exams}
+      loading={examsLoading}
+      user={examsData?.meUser || { id: '' }}
+    />
+  );
 };
 
 export default ExamsIndex;

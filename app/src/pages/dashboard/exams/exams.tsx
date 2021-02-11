@@ -19,7 +19,7 @@ const Exams: React.FC<ExamsProps> = props => {
             {props.exams.map(exam => {
               switch (exam.subject?.evaluationSystem || '') {
                 case 'POINTS':
-                  return <PointSystem exam={exam} />;
+                  return <PointSystem exam={exam} user={props.user} />;
                 default:
                   return <></>;
               }

@@ -2,6 +2,9 @@ import { gql } from '@apollo/client';
 
 const DASHBOARD_WRITTEN_EXAMS_QUERY = gql`
   query DashboardWrittenExamsQuery($first: Int!) {
+    meUser {
+      id
+    }
     writtenExams(first: $first, order: { writtenAt: "DESC" }) {
       edges {
         node {
@@ -12,16 +15,23 @@ const DASHBOARD_WRITTEN_EXAMS_QUERY = gql`
             points {
               edges {
                 node {
+                  points
+                  examWritten
                   user {
                     id
                   }
-                  points
                 }
               }
             }
           }
           subject {
             evaluationSystem
+            percentsToMarkConvert {
+              one
+              two
+              three
+              four
+            }
             subjectType {
               id
               name

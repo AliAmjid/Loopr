@@ -16,6 +16,7 @@ const DashboardIndex: React.FC = () => {
           <ExamsIndex />
         </Grid>
       </Grid>
+      <br />
       <Paper>
         <Typography variant="h1">ahoj1</Typography>
         <Typography variant="h2">ahoj2</Typography>
