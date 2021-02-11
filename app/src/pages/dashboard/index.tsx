@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography } from '@material-ui/core';
 import { compose } from 'recompose';
 
 import withPage from 'components/withPage';
 
+import ExamsIndex from './exams';
 import dashboardPageOptions from './pageOptions';
 
 const DashboardIndex: React.FC = () => {
   return (
     <>
+      <Grid container>
+        <Grid item xs={6}>
+          <ExamsIndex />
+        </Grid>
+      </Grid>
       <Paper>
         <Typography variant="h1">ahoj1</Typography>
         <Typography variant="h2">ahoj2</Typography>

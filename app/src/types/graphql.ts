@@ -865,6 +865,80 @@ export interface ClassGroupsUsersQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: DashboardWrittenExamsQuery
+// ====================================================
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  user: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user;
+  points: number;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  maxPoints: number;
+  points: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject {
+  __typename: "Subject";
+  evaluationSystem: string;
+  subjectType: DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subjectType | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node {
+  __typename: "Exam";
+  name: string;
+  writtenAt: string;
+  pointSystem: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem | null;
+  subject: DashboardWrittenExamsQuery_writtenExams_edges_node_subject | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges {
+  __typename: "ExamEdge";
+  node: DashboardWrittenExamsQuery_writtenExams_edges_node | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams {
+  __typename: "ExamConnection";
+  edges: (DashboardWrittenExamsQuery_writtenExams_edges | null)[] | null;
+}
+
+export interface DashboardWrittenExamsQuery {
+  writtenExams: DashboardWrittenExamsQuery_writtenExams | null;
+}
+
+export interface DashboardWrittenExamsQueryVariables {
+  first: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Errors502MeUserQuery
 // ====================================================
 
