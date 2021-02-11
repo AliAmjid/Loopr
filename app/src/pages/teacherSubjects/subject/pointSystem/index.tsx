@@ -17,6 +17,7 @@ import {
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
+import { formatDateToDay } from 'components/formatDate';
 import { getMark, getMarkColor, getPercents } from 'components/percentMark';
 import withPage from 'components/withPage';
 
@@ -136,7 +137,7 @@ const PointSystemIndex: React.FC = () => {
         id: examNode.id,
         name: examNode.name,
         maxPoints: examNode.pointSystem?.maxPoints || 0,
-        writtenAt: examNode.writtenAt,
+        writtenAt: formatDateToDay(examNode.writtenAt),
       });
 
       const examPoints: {

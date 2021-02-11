@@ -48,6 +48,7 @@
     "select": "Zvolit",
     "submit": "Potvrdit",
     "search": "Vyhledat",
-    "upload": "Nahrát"
+    "upload": "Nahrát",
+    "download": "Stáhnout"
   }
 }
