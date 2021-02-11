@@ -9,6 +9,7 @@ Stránka je složená ze dvou sekcí. Z levé sekce "Typy předmětů" a pravé 
 ### Sekce Typy předmětů
 Typy předmětů lze vytvořit pomocí `zeleného tlačítka +`.   
 Otevře se dialog, do kterého je potřeba napsat jeho název.
+
 ![](images/subject-adding.png)
 
 Každý předmět lze přejmenovat pomocí `ikony tužky` a odstranit pomocí `ikony koše`.
@@ -23,10 +24,12 @@ Všechny ovládací prvky a práce s tabulkou jsou popsány zde:
 > [Datová tabulka](cs/components/materialTable/)
 
 Pro nové přiřazení klikněte na tlačítko `přidat`
+
 ![](images/assignments.png)
 
 #### Princip nového přiřazení/úpravy přiřazení
 Přiřazení se skládá z 3 kroků. Pohybovat mezi nimi se můžete pomocí `ikon šipek` v hlavičce.
+
 ![](images/assignments-editing-header.png)
 
 ##### 1. krok - Skupina/Třída
@@ -37,8 +40,10 @@ Máte možnost vybrat si zda chcete přiřadit k typu předmětu celou třídu, 
 
 ##### 2. krok - Učitel
 Zde vyberte učitele pro již vybranou třídu/skupinu. Opět pomocí kliknutí na `tlačítko +`.
+
 ![](images/assignments-editing-secondstep.png)
 
 ##### 3. krok - Shrnutí
 Poslední krok slouží jako shrnutí vybraného přiřazení pro vaší kontrolu. Dokončit proces můžete pomocí `tlačítka přidat`, případně celý proces zrušit pomocí `tlačítka zrušit`.
+
 ![](images/assignments-editing-thirdstep.png)

@@ -11,11 +11,13 @@ Tato sekce funguje jako přehled vytvořených tříd.
 
 Třídy lze vytvořit pomocí `zeleného tlačítka +`.   
 Otevře se dialog, do kterého je potřeba napsat rok nástupu třídy a její název.
+
 ![](images/class-adding.png)
 
 Každou třídu lze přejmenovat (změnit název a rok nástupu) pomocí `ikony tužky` a odstranit pomocí `ikony koše`.   
 
 Otevřené okno po kliknutí na `ikonu tužky`.
+
 ![](images/class-editing.png)
 
 ### Sekce s uživatelskými daty

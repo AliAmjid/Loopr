@@ -14,6 +14,7 @@ Tato sekce funguje jako přehled vytvořených skupiny.
 
 Skupiny lze vytvořit pomocí `zeleného tlačítka +`.   
 Otevře se dialog, do kterého je potřeba napsat pouze vaše pojmenování skupiny.
+
 ![](images/groups.png)
 
 Každou skupinu lze přejmenovat pomocí `ikony tužky` a odstranit pomocí `ikony koše`. 
@@ -27,9 +28,11 @@ Všechny ovládací prvky a práce s tabulkou jsou popsány zde:
 > [Datová tabulka](cs/components/materialTable/)
 
 Pro úpravu studentů ve skupině klikněte na zelené tlačítko `upravit`.
+
 ![](images/students-list.png)
 
 Pro výběr studentů zaškrtněte všechny preferované řádky a poté klikněte na tlačítko `uložit`.
+
 ![](images/students-list-editing.png)
 
 

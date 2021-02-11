@@ -1,7 +1,8 @@
 # Bodový systém
 Stránka plní funkci přehledu a úpravy klasifikace žáků v daném předmětu.
 
-Na stránce se nachází horní lišta, která obsahuje název rozkliklého předmětu, filtr známkovacího období a tlačítko `přidat test` pro [vytvoření nového testu](#Testy).   
+Na stránce se nachází horní lišta, která obsahuje název rozkliklého předmětu, filtr známkovacího období a tlačítko `přidat test` pro [vytvoření nového testu](#Testy).
+
 ![](images/header.png)
 
 Pod ní je tabulka rozdělena do 3 částí.
@@ -13,7 +14,8 @@ Test lze upravit pomocí `ikony tužky` v jeho hlavičce, kde se také nachází
 ### Celkové hodnocení
 Shrnutí výsledků ze všech testů, rozdělené do třech sloupců - celkový počet bodů, procenta a výsledná známka odpovídající hodnotě nastavené v [převodníku bodů](#Převodník).   
 [Převodník bodů](#Převodník) lze otevřít pomocí `ikony tužky` pod textem `výsledná známka`.  
-Ve sloupci `výsledná známka` se nachází pro každý stupěň známky jedna barva, pro větší přehlednost.  
+Ve sloupci `výsledná známka` se nachází pro každý stupěň známky jedna barva, pro větší přehlednost.
+
 ![](images/grading-colors.png)
 
 ![](images/grading.png)
