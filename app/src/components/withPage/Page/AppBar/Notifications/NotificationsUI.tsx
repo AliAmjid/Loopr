@@ -2,23 +2,19 @@ import React from 'react';
 
 import {
   Badge,
-  Button,
   IconButton,
   List,
-  ListItem as ListItemPrefab,
-  ListSubheader,
   makeStyles,
   Popover,
   Tooltip,
 } from '@material-ui/core';
-import ChatBubble from '@material-ui/icons/ChatBubble';
 import GradeIcon from '@material-ui/icons/Grade';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import ListItem from './ListItem';
+import Notification from './notification';
 import { NotificationsUIProps } from './types';
 
 const listWidth = 300;
@@ -26,6 +22,7 @@ const listWidth = 300;
 const useStyles = makeStyles({
   list: {
     width: listWidth,
+    maxHeight: 400,
   },
 });
 
@@ -55,23 +52,18 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
           horizontal: 'right',
         }}
       >
-        <List
-          className={classes.list}
-          subheader={<ListSubheader>Upozornění</ListSubheader>}
-        >
-          <ListItem
-            icon={<GradeIcon />}
-            primaryText="Nová známka"
-            secondaryText="Matematika"
-          />
-          <ListItem
-            icon={<ChatBubble />}
-            primaryText="Nová zpráva"
-            secondaryText="Radko Sáblík"
-          />
-          <ListItemPrefab>
-            <Button fullWidth>Odstranit vše</Button>
-          </ListItemPrefab>
+        <List className={classes.list}>
+          {props.notifications.map((notification, index) => (
+            <Notification
+              key={notification.id}
+              notification={notification}
+              fetchMore={
+                index !== props.notifications.length - 1
+                  ? undefined
+                  : props.onFetchMore
+              }
+            />
+          ))}
         </List>
       </Popover>
     </>

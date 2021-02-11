@@ -1,0 +1,17 @@
+{
+  "errors": {
+    "commonError": "Nastala chyba",
+    "unexpectedError": "Nastala neočekávané chyba",
+    "unauthorized": "K této akci nemáte práva",
+    "noInternet": "Nejste připojeni k internetu",
+    "invalidRoleConfig": "Konfigurace rolí je špatně",
+    "userNotFound": "Přihlašovací údaje se neshodují",
+    "duplicateValue": "Pokusili jste se vytytvořit záznam s duplicitními hodnotami",
+    "oldPasswordIsWrong": "Staré heslo není správné",
+    "userIsNotTeacher": "Uživatel není učitel",
+    "emptyGroupClassGroup": "Třída nebo skupina je prázná",
+    "checkAccess": "Nemáte přístup k některým informacím",
+    "schoolPeriodValidationError": "Konfigurace známkovacích období není validní",
+    "noSchoolPeriodActive": "Momentálně není aktivní žádné známkovací období"
+  }
+}

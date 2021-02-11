@@ -10,7 +10,7 @@ import {
 import withPage from 'components/withPage';
 
 import STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY from './queries/learnedSubjects';
-import studentSubjectPageOptions from './pageOptions';
+import studentSubjectsPageOptions from './pageOptions';
 import StudentSubjects from './studentSubjects';
 import { SchoolPeriods, Subject, Subjects } from './types';
 
@@ -18,7 +18,10 @@ const StudentSubjectIndex: React.FC = () => {
   const [selectedSchoolPeriods, setSelectedSchoolPeriods] = useState<string[]>(
     [],
   );
-  const { data: learnedSubjectsData } = useQuery<
+  const {
+    data: learnedSubjectsData,
+    loading: learnedSubjectsLoading,
+  } = useQuery<
     StudentSubjectsLearnedSubjectsQuery,
     StudentSubjectsLearnedSubjectsQueryVariables
   >(STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY, {
@@ -93,6 +96,7 @@ const StudentSubjectIndex: React.FC = () => {
       maxExams={maxExams}
       schoolPeriods={schoolPeriods}
       selectedSchoolPeriods={selectedSchoolPeriods}
+      loading={learnedSubjectsLoading}
       onSchoolPeriodsChange={schoolPeriods => {
         setSelectedSchoolPeriods(schoolPeriods);
       }}
@@ -100,4 +104,4 @@ const StudentSubjectIndex: React.FC = () => {
   );
 };
 
-export default withPage(studentSubjectPageOptions)(StudentSubjectIndex);
+export default withPage(studentSubjectsPageOptions)(StudentSubjectIndex);

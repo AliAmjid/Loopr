@@ -25,7 +25,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
     'schoolPeriod.schoolYear' => 'exact'
 ])]
 #[ApiFilter(filterClass: OrderFilter::class, properties: ['writtenAt' => ['default_direction' => 'DESC'], 'createdAt'])]
-
 class Exam
 {
     use Tid;
@@ -140,7 +139,7 @@ class Exam
         return $this->schoolPeriod;
     }
 
-    #[InjectSchoolPeriod(["create"])]
+    #[InjectSchoolPeriod(operations: ["create", "edit", "update"], dateProperty: "writtenAt")]
     public function setSchoolPeriod(
         SchoolPeriod $schoolPeriod
     ): Exam {

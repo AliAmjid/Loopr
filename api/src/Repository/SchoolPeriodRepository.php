@@ -33,13 +33,19 @@ class SchoolPeriodRepository extends ServiceEntityRepository
 
     public function findActive(): ?SchoolPeriod
     {
+        return $this->findForDate(new \DateTime());
+    }
+
+
+    public function findForDate(\DateTime $date)
+    {
         try {
             return $this->getEntityManager()
                 ->createQueryBuilder()
                 ->select('sp')
                 ->from(SchoolPeriod::class, 'sp')
                 ->where('sp.from < :date AND sp.to > :date')
-                ->setParameter('date', new \DateTime())
+                ->setParameter('date', $date)
                 ->getQuery()
                 ->getSingleResult();
         } catch (\Throwable $e) {

@@ -4,18 +4,19 @@ import dayjsUtils from '@date-io/dayjs';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import dayjs from 'dayjs';
 import App, { AppContext } from 'next/app';
 import { AppType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 
+import { AccessContextProvider } from 'lib/apollo/accessContext';
 import getDayjsLocales from 'lib/dayjs/locale';
-import { appWithTranslation } from 'lib/i18n';
+import { appWithTranslation, useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';
 import ReactourProvider from 'lib/reactour/provider';
+
+import { UserContextProvider } from 'components/userContext';
 
 const MyApp: AppType = props => {
   const { Component, pageProps } = props;
@@ -43,7 +44,7 @@ const MyApp: AppType = props => {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <link rel="manifest" href="/static/manifest.json" />
+        <link rel="manifest" href={`/static/${i18n.language}.manifest.json`} />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
@@ -58,7 +59,11 @@ const MyApp: AppType = props => {
               utils={dayjsUtils}
               locale={getDayjsLocales(i18n.language, t)}
             >
-              <Component {...pageProps} />
+              <AccessContextProvider>
+                <UserContextProvider>
+                  <Component {...pageProps} />
+                </UserContextProvider>
+              </AccessContextProvider>
             </MuiPickersUtilsProvider>
           </ReactourProvider>
         </SnackbarProvider>

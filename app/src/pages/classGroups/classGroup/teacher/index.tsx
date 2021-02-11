@@ -126,10 +126,6 @@ const TeacherIndex: React.FC = () => {
           return true;
         })
         .catch(() => {
-          enqueueSnackbar(t('snackbars.teacherEdit.error'), {
-            variant: 'error',
-          });
-
           return false;
         });
     }

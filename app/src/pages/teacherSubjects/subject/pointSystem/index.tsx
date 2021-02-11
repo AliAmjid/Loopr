@@ -5,8 +5,6 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
-import recognizeError from 'lib/apollo/recognizeError';
-import errors from 'lib/apollo/recognizeError/errors';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
@@ -19,8 +17,7 @@ import {
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
 
-import { formatDateToDay } from 'components/formatDate';
-import { getMark, getPercents } from 'components/percents';
+import { getMark, getMarkColor, getPercents } from 'components/percentMark';
 import withPage from 'components/withPage';
 
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutation/addExam';
@@ -66,24 +63,11 @@ const PointSystemIndex: React.FC = () => {
           writtenAt: dayjs().toISOString(),
         },
       },
-    })
-      .then(() => {
-        enqueueSnackbar(t('snackbars.createExam.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(err => {
-        const recognizedError = recognizeError(err);
-        if (recognizedError === errors.looprError.noSchoolPeriodActive) {
-          enqueueSnackbar(t('snackbars.createExam.noSchoolPeriod'), {
-            variant: 'warning',
-          });
-        } else {
-          enqueueSnackbar(t('snackbars.createExam.error'), {
-            variant: 'error',
-          });
-        }
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.createExam.success'), {
+        variant: 'success',
       });
+    });
   };
 
   const exams: Exams = [];
@@ -101,6 +85,7 @@ const PointSystemIndex: React.FC = () => {
           totalPoints: 0,
           totalPercents: '',
           totalMark: 0,
+          totalColor: '',
         });
       }
     }
@@ -115,6 +100,7 @@ const PointSystemIndex: React.FC = () => {
           totalPoints: 0,
           totalPercents: '',
           totalMark: 0,
+          totalColor: '',
         });
       }
     }
@@ -122,8 +108,27 @@ const PointSystemIndex: React.FC = () => {
 
   let maxPoints = 0;
 
+  let sortedExams = subjectData?.subject?.exams?.edges;
+  if (subjectData?.subject?.exams?.edges) {
+    sortedExams = [...(subjectData?.subject?.exams?.edges || [])].sort(
+      (edge1, edge2) => {
+        const written1 = dayjs(edge1?.node?.writtenAt);
+        const written2 = dayjs(edge2?.node?.writtenAt);
+
+        if (written2.isBefore(written1)) {
+          return 1;
+        }
+        if (written1.isBefore(written2)) {
+          return -1;
+        }
+
+        return 0;
+      },
+    );
+  }
+
   // Set exams and studentExams
-  for (const exam of subjectData?.subject?.exams?.edges || []) {
+  for (const exam of sortedExams || []) {
     const examNode = exam?.node;
     if (examNode) {
       maxPoints += examNode.pointSystem?.maxPoints || 0;
@@ -150,11 +155,43 @@ const PointSystemIndex: React.FC = () => {
         const studentExam = examPoints.find(
           examPoint => examPoint.user.id === student.id,
         );
+        const maxPoints = examNode?.pointSystem?.maxPoints || 0;
+
+        let points = 'N';
+        let pointsNumber = 0;
+        let percents = 'N';
+        let color = '';
+        if (studentExam?.examWritten) {
+          pointsNumber = studentExam?.points || 0;
+          points = `${pointsNumber}`;
+          if (maxPoints === 0) {
+            percents = '-';
+          } else {
+            const percentsNumber = Math.round(
+              getPercents({
+                max: maxPoints,
+                value: studentExam.points,
+              }),
+            );
+            percents = `${percentsNumber}%`;
+            if (subjectData?.subject?.percentsToMarkConvert)
+              color = getMarkColor(
+                getMark({
+                  percents: percentsNumber,
+                  percentsToMarkConvert:
+                    subjectData?.subject.percentsToMarkConvert,
+                }),
+              );
+          }
+        }
+
         student.exams.push({
           id: examNode.id,
-          points: studentExam?.points || 0,
+          points,
+          percents,
+          color,
+          pointsNumber,
           examWritten: studentExam?.examWritten || false,
-          maxPoints: examNode?.pointSystem?.maxPoints || 0,
         });
       });
     }
@@ -165,7 +202,7 @@ const PointSystemIndex: React.FC = () => {
     let totalPoints = 0;
     student.exams.forEach(exam => {
       if (exam.examWritten) {
-        totalPoints += exam.points;
+        totalPoints += exam.pointsNumber;
       }
     });
 
@@ -182,8 +219,15 @@ const PointSystemIndex: React.FC = () => {
         percents: numberTotalPercents,
         percentsToMarkConvert: subjectData?.subject?.percentsToMarkConvert,
       });
+    const color = getMarkColor(totalMark);
 
-    return { ...student, totalPoints, totalPercents, totalMark };
+    return {
+      ...student,
+      totalPoints,
+      totalPercents,
+      totalMark,
+      totalColor: color,
+    };
   });
 
   let subjectTitle = `${subjectData?.subject?.subjectType?.name} - `;

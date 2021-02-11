@@ -5,12 +5,12 @@ export interface ClassGroupUser {
   email: string;
   firstname: string;
   lastname: string;
-}
-
-export interface User extends ClassGroupUser {
   classGroup?: {
     id: string;
   } | null;
+}
+
+export interface User extends ClassGroupUser {
   tableData?: {
     checked?: boolean;
   };
@@ -26,17 +26,15 @@ export interface GetUsersReturn {
   totalCount: number;
 }
 
-export interface SelectionChangeArgs {
-  id: string;
-  selected: boolean;
-}
-
 export interface StudentsProps {
   selectedClassGroup?: string;
+  loading: boolean;
+  classGroupsLookup: Record<string, string>;
   onGetClassGroupUsers: (
     query: Query<ClassGroupUser>,
   ) => Promise<GetUsersReturn>;
   onGetUsers: (query: Query<User>) => Promise<GetUsersReturn>;
-  onSelectionChange: (args: SelectionChangeArgs) => void;
+  onSelectionChange: (users: User[]) => void;
+  onSelectionClose: () => void;
   onSubmit: () => Promise<boolean>;
 }

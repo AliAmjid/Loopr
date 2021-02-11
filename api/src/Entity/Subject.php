@@ -4,11 +4,15 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
+use App\Annotation\InjectDateTime;
 use App\Entity\Attributes\Tid;
 use App\Enum\AclResourceEnum;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
@@ -19,6 +23,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiFilter(filterClass: ExistsFilter::class, properties: [
+    'archivedAt' => false
+])]
+#[ApiFilter(filterClass: DateFilter::class, properties: [
+
+])]
 class Subject
 {
     use Tid;
@@ -91,6 +101,15 @@ class Subject
      * @Groups({"read", "exposed"})
      */
     private ?PercentToMarkConvert $percentsToMarkConvert = null;
+
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read", "exposed"})
+     */
+    private ?\DateTime $archivedAt = null;
+
+    private \DateTime $createdAt;
 
     /**
      * subject constructor.
@@ -208,7 +227,7 @@ class Subject
     public function getPointSystemAverages(): float
     {
         $array = $this->getAnonymizedPointSystemResults();
-        return array_sum($array) / count($array);
+        return round(array_sum($array) / count($array));
     }
 
     /**
@@ -248,6 +267,30 @@ class Subject
     }
 
 
+    public function getArchivedAt(): ?\DateTime
+    {
+        return $this->archivedAt;
+    }
+
+    public function setArchivedAt(?\DateTime $archivedAt): Subject
+    {
+        $this->archivedAt = $archivedAt;
+        return $this;
+    }
+
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @InjectDateTime(operations={"create"})
+     */
+    public function setCreatedAt(\DateTime $createdAt): Subject
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
     /**
      * @ORM\PrePersist()
      */

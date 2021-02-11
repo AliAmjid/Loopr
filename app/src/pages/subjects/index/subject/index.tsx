@@ -106,8 +106,6 @@ const SubjectIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.delete.error'), { variant: 'error' });
-
         return false;
       });
   };

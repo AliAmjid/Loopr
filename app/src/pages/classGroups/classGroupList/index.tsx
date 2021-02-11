@@ -70,8 +70,6 @@ const ClassGroupListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.add.error'), { variant: 'error' });
-
         return false;
       });
   };
@@ -88,8 +86,6 @@ const ClassGroupListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.edit.error'), { variant: 'error' });
-
         return false;
       });
   };
@@ -102,8 +98,6 @@ const ClassGroupListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.delete.error'), { variant: 'error' });
-
         return false;
       });
   };

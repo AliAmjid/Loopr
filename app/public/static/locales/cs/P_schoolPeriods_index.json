@@ -3,16 +3,13 @@
   "editDialogTitle": "Upravit známkovacího období",
   "snackbars": {
     "delete": {
-      "success": "Známkovací období úspešně odstraněno",
-      "error": "Nepovedlo se upravit známkovací období"
+      "success": "Známkovací období úspešně odstraněno"
     },
     "add": {
-      "success": "Známkovací období úspěšně přidáno",
-      "error": "Nepovedlo se přidat známkovací období"
+      "success": "Známkovací období úspěšně přidáno"
     },
     "edit": {
-      "success": "Známkovací období úspěšně upraveno",
-      "error": "Nepovedlo se upravit známkovací období"
+      "success": "Známkovací období úspěšně upraveno"
     }
   }
 }

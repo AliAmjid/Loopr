@@ -1,5 +1,7 @@
 {
   "success": "Role úspěšně upravena",
-  "error": "Roli se nepovedlo upravit",
-  "name": "Název"
+  "deleteSuccess": "Role úspěšně odstraněna",
+  "name": "Název",
+  "deleteTitle": "Doopravdy chcete odstranit roli?",
+  "irreversibleAction": "Tato operace je nevratná"
 }

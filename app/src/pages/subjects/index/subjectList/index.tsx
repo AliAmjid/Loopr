@@ -81,8 +81,6 @@ const SubjectListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.typeAdd.error'), { variant: 'error' });
-
         return false;
       });
   };
@@ -97,8 +95,6 @@ const SubjectListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.typeEdit.error'), { variant: 'error' });
-
         return false;
       });
   };
@@ -113,8 +109,6 @@ const SubjectListIndex: React.FC = () => {
         return true;
       })
       .catch(() => {
-        enqueueSnackbar(t('snackbars.typeDelete.error'), { variant: 'error' });
-
         return false;
       });
   };

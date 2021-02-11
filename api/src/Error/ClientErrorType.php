@@ -85,4 +85,24 @@ class ClientErrorType
         'code' => 'USER_NOT_EXAM_MEMBER',
         'msg' => 'User is not member of group of subject on which is exam created'
     ];
+
+    const CANNOT_BE_DE_ARCHIVED = [
+      'code' => 'CANNOT_BE_DE_ARCHIVED',
+      'msg' => 'Cant be de-archived'
+    ];
+
+    const CANT_BE_ARCHIVED = [
+        'code' => 'CANT_BE_ARCHIVED',
+        'msg' => 'Cant be archived'
+    ];
+
+    const ALREADY_ARCHIVED = [
+      'code' => 'ALREADY_ARCHIVED',
+      'msg' => 'Already archived'
+    ];
+    const ALREADY_ACTIVE = [
+        'code' => 'ALREADY_ACTIVE',
+        'msg' => 'Already archived'
+    ];
+
 }

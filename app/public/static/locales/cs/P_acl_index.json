@@ -3,7 +3,5 @@
   "resources": "Pravomoce",
   "edit": "Upravit roli",
   "add": "Přidat roli",
-  "failedToUpdate": "Nepovedlo se upravit roli",
-  "addSuccess": "Role úspěšně přidána",
-  "addError": "Roli se nepovedlo přidat"
+  "addSuccess": "Role úspěšně přidána"
 }

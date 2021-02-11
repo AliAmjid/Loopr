@@ -250,11 +250,13 @@ export interface UserImportTableAclRolesQuery {
 
 export interface WithPageMeUserQuery_meUser_role_resources {
   __typename: "AclResource";
+  id: string;
   name: string;
 }
 
 export interface WithPageMeUserQuery_meUser_role {
   __typename: "AclRole";
+  id: string;
   name: string;
   resources: (WithPageMeUserQuery_meUser_role_resources | null)[] | null;
 }
@@ -269,6 +271,77 @@ export interface WithPageMeUserQuery_meUser {
 
 export interface WithPageMeUserQuery {
   meUser: WithPageMeUserQuery_meUser | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: WithPageNotificationsQuery
+// ====================================================
+
+export interface WithPageNotificationsQuery_meUser_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  type: string;
+  parameters: any;
+}
+
+export interface WithPageNotificationsQuery_meUser_notifications_edges {
+  __typename: "NotificationEdge";
+  node: WithPageNotificationsQuery_meUser_notifications_edges_node | null;
+  cursor: string;
+}
+
+export interface WithPageNotificationsQuery_meUser_notifications {
+  __typename: "NotificationConnection";
+  edges: (WithPageNotificationsQuery_meUser_notifications_edges | null)[] | null;
+  totalCount: number;
+}
+
+export interface WithPageNotificationsQuery_meUser {
+  __typename: "User";
+  notifications: WithPageNotificationsQuery_meUser_notifications | null;
+}
+
+export interface WithPageNotificationsQuery {
+  meUser: WithPageNotificationsQuery_meUser | null;
+}
+
+export interface WithPageNotificationsQueryVariables {
+  first?: number | null;
+  last?: number | null;
+  before?: string | null;
+  after?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: AclEditRoleDeleteAclRoleMutation
+// ====================================================
+
+export interface AclEditRoleDeleteAclRoleMutation_deleteAclRole_aclRole {
+  __typename: "AclRole";
+  id: string;
+}
+
+export interface AclEditRoleDeleteAclRoleMutation_deleteAclRole {
+  __typename: "deleteAclRolePayload";
+  aclRole: AclEditRoleDeleteAclRoleMutation_deleteAclRole_aclRole | null;
+}
+
+export interface AclEditRoleDeleteAclRoleMutation {
+  deleteAclRole: AclEditRoleDeleteAclRoleMutation_deleteAclRole | null;
+}
+
+export interface AclEditRoleDeleteAclRoleMutationVariables {
+  input: deleteAclRoleInput;
 }
 
 /* tslint:disable */
@@ -610,12 +683,20 @@ export interface ClassGroupsClassGroupTeacherVariables {
 // GraphQL query operation: ClassGroupsClassGroupUsersQuery
 // ====================================================
 
+export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  section: string;
+  year: number;
+}
+
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node {
   __typename: "User";
   id: string;
   email: string;
   firstname: string;
   lastname: string;
+  classGroup: ClassGroupsClassGroupUsersQuery_classGroup_users_edges_node_classGroup | null;
 }
 
 export interface ClassGroupsClassGroupUsersQuery_classGroup_users_edges {
@@ -663,6 +744,8 @@ export interface ClassGroupsClassGroupUsersQueryVariables {
 export interface ClassGroupsUsersQuery_users_edges_node_classGroup {
   __typename: "ClassGroup";
   id: string;
+  section: string;
+  year: number;
 }
 
 export interface ClassGroupsUsersQuery_users_edges_node {
@@ -700,6 +783,25 @@ export interface ClassGroupsUsersQueryVariables {
   firstname?: string | null;
   lastname?: string | null;
   isInClassGroup?: boolean | null;
+  classGroups?: string[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: Errors502MeUserQuery
+// ====================================================
+
+export interface Errors502MeUserQuery_meUser {
+  __typename: "User";
+  id: string;
+}
+
+export interface Errors502MeUserQuery {
+  meUser: Errors502MeUserQuery_meUser | null;
 }
 
 /* tslint:disable */
@@ -2011,6 +2113,25 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: UsersRolesQuery
+// ====================================================
+
+export interface UsersRolesQuery_aclRoles {
+  __typename: "AclRole";
+  id: string;
+  name: string;
+}
+
+export interface UsersRolesQuery {
+  aclRoles: (UsersRolesQuery_aclRoles | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: UsersUsersQuery
 // ====================================================
 
@@ -2240,6 +2361,11 @@ export interface createUserInput {
   firstname: string;
   classGroup?: string | null;
   rawPassword?: string | null;
+  clientMutationId?: string | null;
+}
+
+export interface deleteAclRoleInput {
+  id: string;
   clientMutationId?: string | null;
 }
 

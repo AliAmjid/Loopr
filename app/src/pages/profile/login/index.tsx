@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import { SubmitValues } from 'pages/profile/login/types';
 
 import {
@@ -21,6 +24,7 @@ const LoginIndex: React.FC = () => {
   >(PROFILE_CHANGE_PASSWORD);
   const [notMatch, setNotMatch] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.profile.index);
 
   const submitHandler = (values: SubmitValues): void => {
     if (values.newPassword1 !== values.newPassword2) {
@@ -33,13 +37,11 @@ const LoginIndex: React.FC = () => {
             newPassword: values.newPassword1,
           },
         },
-      })
-        .then(() => {
-          enqueueSnackbar('S', { variant: 'success' });
-        })
-        .catch(() => {
-          enqueueSnackbar('E', { variant: 'error' });
+      }).then(() => {
+        enqueueSnackbar(t('snackbars.changePassword'), {
+          variant: 'success',
         });
+      });
     }
   };
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Box, Button } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done';
+import EditIcon from '@material-ui/icons/Edit';
 import { Query } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -8,6 +10,10 @@ import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import { ClassGroupUser, StudentsProps } from './types';
+
+const Edit = (): JSX.Element => <EditIcon color="primary" />;
+const Done = (): JSX.Element => <DoneIcon color="primary" />;
+const Close = (): JSX.Element => <CloseIcon color="error" />;
 
 const Students: React.FC<StudentsProps> = props => {
   const { t } = useTranslation(namespaces.pages.classGroups.index);
@@ -20,7 +26,7 @@ const Students: React.FC<StudentsProps> = props => {
       <MaterialTable
         key={`${props.selectedClassGroup}-${editing}`}
         uniqueName="pages/classGroups/classGroup/students"
-        isLoading={loading}
+        isLoading={loading || props.loading}
         title={t('students')}
         data={(query: Query<ClassGroupUser>) =>
           editing
@@ -39,13 +45,8 @@ const Students: React.FC<StudentsProps> = props => {
                 data: res.users,
               }))
         }
-        onSelectionChange={(data, row) => {
-          if (row) {
-            props.onSelectionChange({
-              id: row?.id,
-              selected: row?.tableData?.checked || false,
-            });
-          }
+        onSelectionChange={data => {
+          props.onSelectionChange(data);
         }}
         columns={[]}
         defaultActions={{
@@ -61,44 +62,49 @@ const Students: React.FC<StudentsProps> = props => {
                 title: t('common:gqlObjects.user.lastname'),
                 field: 'lastname',
               },
+              {
+                title: t('common:gqlObjects.user.classGroup'),
+                field: 'classGroup.id',
+                lookup: props.classGroupsLookup,
+              },
             ],
             defaultColumns: ['firstname', 'lastname'],
           },
         }}
+        actions={[
+          {
+            tooltip: t('common:actions.edit'),
+            icon: Edit,
+            onClick: () => setEditing(true),
+            position: 'toolbar',
+            hidden: editing,
+          },
+          {
+            tooltip: t('common:actions.cancel'),
+            icon: Close,
+            onClick: () => {
+              setEditing(false);
+              props.onSelectionClose();
+            },
+            hidden: !editing,
+            isFreeAction: true,
+          },
+          {
+            tooltip: t('common:actions.save'),
+            icon: Done,
+            onClick: () => {
+              setLoading(true);
+              props.onSubmit().then(success => {
+                setLoading(false);
+                if (success) setEditing(false);
+              });
+            },
+            hidden: !editing,
+            isFreeAction: true,
+          },
+        ]}
         options={{ selection: editing, exportButton: !editing }}
       />
-      <Box pt={2} display="flex" justifyContent="flex-end">
-        {editing ? (
-          <>
-            <Box pr={2}>
-              <Button color="primary" onClick={() => setEditing(false)}>
-                {t('common:actions.cancel')}
-              </Button>
-            </Box>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={() => {
-                setLoading(true);
-                props.onSubmit().then(success => {
-                  setLoading(false);
-                  if (success) setEditing(false);
-                });
-              }}
-            >
-              {t('common:actions.save')}
-            </Button>
-          </>
-        ) : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setEditing(true)}
-          >
-            {t('common:actions.edit')}
-          </Button>
-        )}
-      </Box>
     </>
   );
 };

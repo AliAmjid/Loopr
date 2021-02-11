@@ -5,11 +5,14 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\PersistentCollection;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -21,19 +24,31 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="`user`")
- * @ApiFilter(SearchFilter::class, properties={
- *     "id": "exact",
- *     "firstname": "ipartial",
- *     "lastname": "ipartial",
- *     "email": "ipartial",
- *     "role.resources.name": "exact",
- *     "role.resources.id": "exact",
- *     "classGroup.id": "exact",
- *     "groups.id": "exact"
- * })
- * @ApiFilter(DateFilter::class, properties={"createdAt"})
  */
-#[ApiFilter(filterClass: ExistsFilter::class, properties: ['classGroup'])]
+#[ApiFilter(filterClass: ExistsFilter::class, properties: [
+    'classGroup',
+    'archivedAt' => false
+])]
+#[ApiFilter(filterClass: DateFilter::class, properties: [
+    'createdAt',
+    'archivedAt'
+])]
+#[ApiFilter(filterClass: SearchFilter::class, properties: [
+    'id' => 'exact',
+    'firstname' => 'ipartial',
+    'lastname' => 'ipartial',
+    'role.resources.name' => 'exact',
+    'role.resources.id' => 'exact',
+    'classGroup.id' => 'exact',
+    'group.id' => 'exact',
+    'role.id' => 'exact',
+    'role.name' => 'exact',
+    'email' => 'ipartial'
+])]
+#[ApiFilter(filterClass: OrderFilter::class, properties: [
+    'email',
+    'lastname'
+])]
 class User implements UserInterface
 {
     use Tid;
@@ -59,7 +74,6 @@ class User implements UserInterface
      * @Groups({"user:password"})
      */
     private string $password;
-
 
     /**
      * @var string|null
@@ -89,16 +103,16 @@ class User implements UserInterface
 
     /**
      * @var ClassGroup|null
-     * @Groups({"read:owner","read:GROUP_SHOW_ALL", "user:write", "exposed"})
+     * @Groups({"read:always", "exposed"})
      * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
      * @ORM\JoinColumn(name="class_group_id", referencedColumnName="id")
      */
     private ?ClassGroup $classGroup = null;
 
     /**
-     * @var Collection|Groups[]
+     * @var Collection|Group[]
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Groups({"read:owner","read:USER_SHOW_ALL", "user:write", "exposed"})
+     * @Groups({"read:always", "exposed"})
      */
     private $groups;
 
@@ -111,11 +125,11 @@ class User implements UserInterface
     private $privateData;
 
     /**
-     * @var Collection|Notification[]
+     * @var Collection|Notification[]|PersistentCollection
      * @ORM\OneToMany(targetEntity="Notification", mappedBy="user")
      * @Groups({"read:owner", "exposed"})
      */
-    private Collection|array $notifications;
+    private Collection|array|PersistentCollection $notifications;
 
     /**
      * @var Collection|Subject[]
@@ -130,6 +144,13 @@ class User implements UserInterface
      */
     private Collection|array $wepPushSubscribes;
 
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read", "exposed"})
+     */
+    private ?\DateTime $archivedAt;
+
     #[Pure]
     public function __construct()
     {
@@ -142,7 +163,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Groups[]
+     * @return Collection|Group[]
      */
     public function getGroups(): Collection
     {
@@ -291,5 +312,26 @@ class User implements UserInterface
     public function getTaughtSubjects(): Collection|array
     {
         return $this->taughtSubjects;
+    }
+
+    public function getArchivedAt(): ?\DateTime
+    {
+        return $this->archivedAt;
+    }
+
+    public function setArchivedAt(?\DateTime $archivedAt): User
+    {
+        $this->archivedAt = $archivedAt;
+        return $this;
+    }
+
+    /**
+     * @Groups({"exposed", "read:owner"})
+     */
+    public function getNotificationViewAtNullCount(): int
+    {
+        $c = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('viewAt', null));
+        return $this->notifications->matching($c)->count();
     }
 }

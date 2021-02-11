@@ -20,10 +20,17 @@ import { EditRoleProps } from 'pages/acl/editRole/types';
 import addRolePrefix from 'components/addRolePrefix';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import SimpleDialog from 'components/SimpleDialog';
 import stripRolePrefix from 'components/stripRolePrefix';
 
-const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
+const EditRole: React.FC<EditRoleProps> = ({
+  role,
+  loading,
+  onSubmit,
+  onDelete,
+}) => {
   const [values, setValues] = useState({ name: { value: '', error: false } });
+  const [deleting, setDeleting] = useState(false);
   const { t } = useTranslation(namespaces.pages.acl.editRole);
 
   useEffect(() => {
@@ -58,38 +65,74 @@ const EditRole: React.FC<EditRoleProps> = ({ role, loading, onSubmit }) => {
     }));
   };
 
-  return (
-    <Paper>
-      <OverlayLoadingContainer>
-        <OverlayLoading loading={loading} />
-        <form onSubmit={submitHandler}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="h5">Role</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                label={t('name')}
-                value={values.name.value}
-                onChange={nameChangeHandler}
-              />
-            </Grid>
-            <Grid item container justify="flex-end" xs={12}>
-              <Box mr={2}>
-                <Link href={routes.acl.index}>
-                  <Button color="primary">{t('common:actions.cancel')}</Button>
-                </Link>
-              </Box>
+  const deleteHandler = (): void => {
+    onDelete().then(() => {
+      setDeleting(false);
+    });
+  };
 
-              <Button color="primary" variant="contained" type="submit">
-                {t('common:actions.save')}
-              </Button>
+  return (
+    <>
+      <Paper>
+        <OverlayLoadingContainer>
+          <OverlayLoading loading={loading} />
+          <form onSubmit={submitHandler}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h5">Role</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t('name')}
+                  value={values.name.value}
+                  onChange={nameChangeHandler}
+                />
+              </Grid>
+              <Grid item container justify="flex-end" xs={12}>
+                <Box mr={2}>
+                  <Link href={routes.acl.index}>
+                    <Button color="primary">
+                      {t('common:actions.cancel')}
+                    </Button>
+                  </Link>
+                </Box>
+                <Box mr={2}>
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setDeleting(true)}
+                  >
+                    {t('common:actions.delete')}
+                  </Button>
+                </Box>
+                <Button color="primary" variant="contained" type="submit">
+                  {t('common:actions.save')}
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </OverlayLoadingContainer>
-    </Paper>
+          </form>
+        </OverlayLoadingContainer>
+      </Paper>
+      <SimpleDialog
+        open={deleting}
+        title={t('deleteTitle')}
+        content={<Typography>{t('irreversibleAction')}</Typography>}
+        actions={[
+          <Button key={0} color="primary" onClick={() => setDeleting(false)}>
+            {t('common:actions.cancel')}
+          </Button>,
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={deleteHandler}
+          >
+            {t('common:actions.delete')}
+          </Button>,
+        ]}
+      />
+    </>
   );
 };
 

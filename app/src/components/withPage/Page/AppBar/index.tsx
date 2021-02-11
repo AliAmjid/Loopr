@@ -120,7 +120,10 @@ const AppBar: React.FC<AppBarProps> = props => {
           >
             {props.helpPath && <Help path={props.helpPath} color="inherit" />}
             <LanguageSelect color="inherit" />
-            <Notifications />
+            <Notifications
+              user={props.user}
+              onFetchMore={props.onFetchMoreNotifications}
+            />
             <LogOut onLogOut={props.onLogOut} />
             <User user={props.user} />
           </Grid>

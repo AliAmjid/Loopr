@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getMark, getPercents } from 'components/percents';
+import { getMark, getMarkColor, getPercents } from 'components/percentMark';
 
 import PointSystem from './pointSystem';
 import { Exams, PointSystemIndexProps } from './types';
@@ -29,6 +29,16 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
     totalPoints += exam.pointSystem?.points || 0;
     totalMaxPoints += maxPoints;
 
+    let color = '';
+    if (props.subject.percentsToMarkConvert && percents !== '-') {
+      color = getMarkColor(
+        getMark({
+          percents: numberPercents,
+          percentsToMarkConvert: props.subject.percentsToMarkConvert,
+        }),
+      );
+    }
+
     return {
       id: exam.id,
       name: exam.name,
@@ -37,6 +47,7 @@ const PointSystemIndex: React.FC<PointSystemIndexProps> = props => {
       percents,
       writtenAt: exam.writtenAt,
       examWritten: exam.pointSystem?.examWritten || false,
+      color,
     };
   });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -20,6 +20,7 @@ import EditableListItem from 'components/EditableListItem';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import { rightShadow } from 'components/shadows';
+import { getSideListMaxHeight } from 'components/SideList/grid';
 
 import { SideListProps } from './types';
 
@@ -51,6 +52,10 @@ const SideList: React.FC<SideListProps> = props => {
   const [selected, setSelected] = useState<number | string | undefined>(
     undefined,
   );
+  const [height, setHeight] = useState(100);
+  useEffect(() => {
+    setHeight(getSideListMaxHeight());
+  }, []);
 
   const mappedItems = props.items.map(item => {
     const itemSelected = item.id === selected;
@@ -86,19 +91,14 @@ const SideList: React.FC<SideListProps> = props => {
     );
   });
 
-  let style = {};
-
-  if (process.browser) {
-    const toolbarHeight = 64;
-    style = { maxHeight: window.innerHeight - toolbarHeight * 3 };
-  }
-
   return (
-    <div className={classes.container} style={style}>
+    <div className={classes.container} style={{ height }}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading || false} />
         <div className={classes.header}>
-          <Typography variant="h6">{props.title}</Typography>
+          <Box pl={2}>
+            <Typography variant="h2">{props.title}</Typography>
+          </Box>
           {props.filter !== undefined && (
             <TextField
               label={t('actions.search')}

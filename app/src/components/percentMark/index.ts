@@ -28,3 +28,15 @@ export const getMark = ({
 
   return 5;
 };
+
+export const getMarkColor = (mark: number): string => {
+  const colors: Record<number, string> = {
+    1: '#08C62E',
+    2: '#7DFE3E',
+    3: '#FFF600',
+    4: '#FF6F00',
+    5: '#FF0F0F',
+  };
+
+  return colors[mark] || '';
+};

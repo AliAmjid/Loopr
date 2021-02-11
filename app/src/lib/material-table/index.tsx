@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { fade, makeStyles, Theme, useTheme } from '@material-ui/core';
 import MaterialTablePrefab, {
   Column,
   MTableEditRow,
   MTableGroupbar,
+  MTableToolbar,
 } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -20,7 +21,7 @@ import ColumnFilteringDialog from './actions/columnFiltering/ColumnFilteringDial
 import useColumnFilteringState from './actions/columnFiltering/state';
 import groupingAction from './actions/grouping';
 import materialTableIcons from './icons';
-import { MaterialTableCustomProps } from './types';
+import { Actions, MaterialTableCustomProps } from './types';
 
 const exportPDFFunction = exportPDF;
 
@@ -35,6 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderRadius: theme.shape.borderRadius,
       },
     },
+  },
+  toolbar: {
+    backgroundColor: fade(theme.palette.primary.main, 0.3),
+  },
+  toolbarTitleGreen: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -103,13 +110,43 @@ const MaterialTable = <RowD extends {}>(
     );
   }
 
-  const actions = [];
+  const actions = useMemo<Actions<any>>((): Actions<any> => {
+    const actions: Actions<any> = [];
 
-  if (props.defaultActions?.columnFiltering?.active)
-    actions.push(columnFilteringAction(t));
-  if (props.defaultActions?.grouping?.active) {
-    actions.push(groupingAction(t));
-  }
+    if (props.defaultActions?.columnFiltering?.active)
+      actions.push(columnFilteringAction(t));
+    if (props.defaultActions?.grouping?.active) {
+      actions.push(groupingAction(t));
+    }
+    if (props.actions) actions.push(...props.actions);
+
+    const mappedActions: Actions<any> = [];
+
+    actions.forEach(action => {
+      if (typeof action === 'object') {
+        mappedActions.push(action);
+
+        if (action.isFreeAction && props.options?.selection) {
+          mappedActions.push({
+            ...action,
+            hidden: action.hidden || !props.options?.selection,
+            position: undefined,
+            isFreeAction: undefined,
+          });
+        }
+      } else {
+        mappedActions.push(action);
+      }
+    });
+
+    return mappedActions;
+  }, [
+    props.defaultActions?.columnFiltering?.active,
+    props.defaultActions?.grouping?.active,
+    props.actions && !props.options?.selection,
+    props.actions,
+    props.options?.selection,
+  ]);
 
   let pageSizeOptions = [50, 100, 200, 400];
   if (props.totalCount && props.totalCount > 400) {
@@ -124,6 +161,7 @@ const MaterialTable = <RowD extends {}>(
           props.defaultActions?.columnFiltering?.defaultColumns || []
         }
       />
+
       <OverlayLoadingContainer>
         <MaterialTablePrefab
           key={rowsPerPage}
@@ -134,6 +172,18 @@ const MaterialTable = <RowD extends {}>(
           localization={materialTableLocalization(t)}
           components={{
             Container,
+            // eslint-disable-next-line react/display-name
+            Toolbar: (toolbarProps: any): JSX.Element => (
+              <MTableToolbar
+                {...toolbarProps}
+                classes={{
+                  root: props.options?.selection ? classes.toolbar : undefined,
+                  title: `${
+                    props.options?.selection && classes.toolbarTitleGreen
+                  }`,
+                }}
+              />
+            ),
             // eslint-disable-next-line react/display-name
             Groupbar: p => {
               return (
@@ -184,7 +234,7 @@ const MaterialTable = <RowD extends {}>(
 
             exportPdf: exportPDFFunction,
           }}
-          actions={[...actions, ...(props.actions || [])]}
+          actions={actions}
         />
       </OverlayLoadingContainer>
     </>

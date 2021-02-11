@@ -26,10 +26,12 @@ Lze přepínat mezi tabulkou se studenty a tabulkou s třídním učitelem.
 Všechny ovládací prvky a práce s tabulkou jsou popsány zde: 
 > [Datová tabulka](cs/components/materialTable/)
 
-Pro úpravu studentů ve třídě klikněte na zelené tlačítko `upravit`.
+Pro úpravu studentů ve třídě klikněte na zelené tlačítko `upravit`.  
+
 ![](images/students-list.png)
 
 Pro výběr studentů zaškrtněte všechny preferované řádky a poté klikněte na tlačítko `uložit`.
+
 ![](images/students-list-editing.png)
 
 
@@ -38,9 +40,11 @@ Všechny ovládací prvky a práce s tabulkou je popsána zde:
 > [Datová tabulka](cs/components/materialTable/)
 
 Pro výběr třídního učitele klikněte na tlačítko `upravit`.
+
 ![](images/teacher-list.png)
 
 Pro volbu učitele klikněte na `+` vámi preferovaného řádku.
+
 ![](images/teacher-list-editing.png)
 
 

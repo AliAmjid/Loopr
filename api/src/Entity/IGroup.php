@@ -24,5 +24,9 @@ interface IGroup
 
     public function deleteUser(User $user): User;
 
-    public function isUserMember(User $user) : bool;
+    public function isUserMember(User $user): bool;
+
+    public function getArchivedAt(): ?\DateTime;
+
+    public function setArchivedAt(?\DateTime $dateTime): self;
 }

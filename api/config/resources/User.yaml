@@ -43,3 +43,26 @@ App\Entity\User:
         update:
             security: "is_granted('USER_EDIT')"
             security_message: "r: USER_EDIT"
+        
+        markReadNotification:
+            deserialize: false
+            write: false
+            read: false
+            mutation: App\Controller\NotificationController
+            args:
+                id:
+                    type: 'ID!'
+        markReadAllNotifications:
+            write: false
+            mutation: App\Controller\NotificationController
+            deserialize: false
+            read: false
+            args: {}
+        archive:
+            security: "is_granted('SUBJECT_EDIT')"
+            mutation: App\Controller\UserArchiveController
+            args:
+                id:
+                    type: 'ID!'
+                archive:
+                    type: 'Boolean!'

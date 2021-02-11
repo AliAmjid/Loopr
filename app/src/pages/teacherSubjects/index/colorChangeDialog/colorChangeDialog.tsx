@@ -12,6 +12,9 @@ import {
   Theme,
 } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
@@ -22,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     borderRadius: '100%',
     cursor: 'pointer',
-    border: `1px solid ${theme.palette.common.black}`,
   },
   selectedColorBox: {
     border: `4px solid ${theme.palette.primary.main}`,
@@ -35,6 +37,7 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
   const [selectedColor, setSelectedColor] = useState<string | undefined>(
     undefined,
   );
+  const { t } = useTranslation(namespaces.pages.teacherSubjects.index);
 
   useEffect(() => {
     setSelectedColor(props.defaultColor);
@@ -53,7 +56,7 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
     '#FF6F00',
     '#FFC917',
     '#FFF600',
-    '#26BF45',
+    '#08C62E',
     '#7DFE3E',
     '#6C57FF',
     '#0E76FF',
@@ -94,7 +97,7 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
 
-        <DialogTitle>Change color</DialogTitle>
+        <DialogTitle>{t('changeColorTitle')}</DialogTitle>
         <DialogContent>
           <Box display="flex" flexWrap="wrap">
             <Grid container spacing={2}>
@@ -105,14 +108,14 @@ const ColorChangeDialog: React.FC<ColorChangeDialogProps> = props => {
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={props.onCancel}>
-            Cancel
+            {t('common:actions.cancel')}
           </Button>
           <Button
             color="primary"
             variant="contained"
             onClick={() => props.onSubmit(`${selectedColor}`)}
           >
-            Save
+            {t('common:actions.save')}
           </Button>
         </DialogActions>
       </OverlayLoadingContainer>

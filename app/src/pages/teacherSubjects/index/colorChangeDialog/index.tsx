@@ -3,6 +3,9 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import {
   TeacherSubjectsUpdateColorSubjectMutation,
   TeacherSubjectsUpdateColorSubjectMutationVariables,
@@ -25,18 +28,15 @@ const ColorChangeDialogIndex: React.FC<ColorChangeDialogIndexProps> = props => {
     awaitRefetchQueries: true,
   });
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation(namespaces.pages.teacherSubjects.index);
 
   const submitHandler = (color: string): void => {
     updateColorSubject({
       variables: { input: { id: props.subjectId, teacherCardColor: color } },
-    })
-      .then(() => {
-        enqueueSnackbar('S', { variant: 'success' });
-        props.onClose();
-      })
-      .catch(() => {
-        enqueueSnackbar('E', { variant: 'error' });
-      });
+    }).then(() => {
+      enqueueSnackbar(t('snackbars.updateColor'), { variant: 'success' });
+      props.onClose();
+    });
   };
 
   return (

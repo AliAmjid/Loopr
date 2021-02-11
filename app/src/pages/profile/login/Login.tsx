@@ -3,13 +3,18 @@ import React from 'react';
 import { Box, Button, Divider, TextField, Typography } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import ThickDivider from 'components/thickDivider';
 
 import { LoginProps, SubmitValues } from './types';
 
 const Login: React.FC<LoginProps> = props => {
   const { register, handleSubmit } = useForm<SubmitValues>();
+  const { t } = useTranslation(namespaces.pages.profile.index);
 
   const submitHandler = (values: SubmitValues): void => {
     props.onSubmit(values);
@@ -19,13 +24,13 @@ const Login: React.FC<LoginProps> = props => {
     <OverlayLoadingContainer>
       <OverlayLoading loading={props.loading} />
       <Box pt={2}>
-        <Typography variant="h6">Změna hesla</Typography>
+        <Typography variant="h3">{t('passwordChange')}</Typography>
+        <ThickDivider />
         <form onSubmit={handleSubmit(submitHandler)}>
           <Box display="flex" alignItems="center" flexWrap="wrap">
             <Box pr={2} pt={2}>
               <TextField
-                variant="outlined"
-                label="currentPassword"
+                label={t('oldPassword')}
                 type="password"
                 name="oldPassword"
                 inputRef={register({ required: true })}
@@ -33,8 +38,7 @@ const Login: React.FC<LoginProps> = props => {
             </Box>
             <Box pr={2} pt={2}>
               <TextField
-                variant="outlined"
-                label="newPassword"
+                label={t('newPassword')}
                 type="password"
                 error={props.notMatch}
                 name="newPassword1"
@@ -43,8 +47,7 @@ const Login: React.FC<LoginProps> = props => {
             </Box>
             <Box pr={2} pt={2}>
               <TextField
-                variant="outlined"
-                label="newPasswordAgain"
+                label={t('newPasswordAgain')}
                 type="password"
                 error={props.notMatch}
                 name="newPassword2"

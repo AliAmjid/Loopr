@@ -1,0 +1,8 @@
+graphqlite:
+    namespace:
+        controllers: App\Controller\GraphQLite\
+        types:
+            - App\Types\
+            - App\Entity\
+    security:
+        enable_login: off

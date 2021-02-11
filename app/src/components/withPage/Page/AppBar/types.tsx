@@ -1,7 +1,8 @@
-import { User } from '../types';
+import { NullableUser } from '../types';
 
 export interface AppBarProps {
   onLogOut: () => void;
   helpPath?: string;
-  user: User;
+  user: NullableUser;
+  onFetchMoreNotifications: () => void;
 }

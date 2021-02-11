@@ -1,6 +1,6 @@
 const resources = {
   user: {
-    seeAll: 'USER_SEE_ALL',
+    showAll: 'USER_SHOW_ALL',
     edit: 'USER_EDIT',
     show: 'USER_SHOW',
     create: 'USER_CREATE',
@@ -11,6 +11,14 @@ const resources = {
   },
   group: {
     teacher: 'GROUP_TEACHER',
+    showAll: 'GROUP_SHOW_ALL',
+  },
+  subject: {
+    showAll: 'SUBJECT_SHOW_ALL',
+    teacher: 'SUBJECT_TEACHER',
+  },
+  schoolPeriod: {
+    edit: 'SCHOOL_PERIOD_EDIT',
   },
 };
 
