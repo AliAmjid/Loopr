@@ -3,18 +3,17 @@ import React, { useEffect } from 'react';
 import GradeIcon from '@material-ui/icons/Grade';
 import { useInView } from 'react-intersection-observer';
 
-import ListItem from 'components/withPage/Page/AppBar/Notifications/ListItem';
+import ListItem from './ListItem';
+import { NotificationsProps } from './types';
 
-import { NotificationProps } from './types';
-
-const Notification: React.FC<NotificationProps> = props => {
+const Notification: React.FC<NotificationsProps> = props => {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
 
   useEffect(() => {
-    if (inView && props.fetchMore) {
-      props.fetchMore();
+    if (inView && props.onFetchMore) {
+      props.onFetchMore();
     }
   }, [inView]);
 

@@ -8,26 +8,18 @@ import {
   Popover,
   Tooltip,
 } from '@material-ui/core';
-import GradeIcon from '@material-ui/icons/Grade';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import Notification from './notification';
-import { NotificationsUIProps } from './types';
+import NotificationsComponent from 'components/Notifications';
+
+import { NotificationsProps } from './types';
 
 const listWidth = 300;
 
-const useStyles = makeStyles({
-  list: {
-    width: listWidth,
-    maxHeight: 400,
-  },
-});
-
-const NotificationsUI: React.FC<NotificationsUIProps> = props => {
-  const classes = useStyles();
+const Notifications: React.FC<NotificationsProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
 
   return (
@@ -52,22 +44,13 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
           horizontal: 'right',
         }}
       >
-        <List className={classes.list}>
-          {props.notifications.map((notification, index) => (
-            <Notification
-              key={notification.id}
-              notification={notification}
-              fetchMore={
-                index !== props.notifications.length - 1
-                  ? undefined
-                  : props.onFetchMore
-              }
-            />
-          ))}
-        </List>
+        <NotificationsComponent
+          notifications={props.notifications}
+          onFetchMore={props.onFetchMore}
+        />
       </Popover>
     </>
   );
 };
 
-export default NotificationsUI;
+export default Notifications;

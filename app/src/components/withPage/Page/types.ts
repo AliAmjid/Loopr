@@ -1,12 +1,7 @@
 import { PropsWithChildren } from 'react';
 
+import { Notifications } from 'components/Notifications/types';
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
-
-export interface Notification {
-  id: string;
-  type: string;
-  parameters: Record<string, any>;
-}
 
 export interface User {
   firstname: string;
@@ -15,7 +10,7 @@ export interface User {
     name?: string;
     resources?: ({ name: string } | undefined | null)[] | null;
   } | null;
-  notifications: Notification[];
+  notifications: Notifications;
 }
 
 export type NullableUser = User | null | undefined;
