@@ -34,9 +34,11 @@ const Notifications: React.FC<NotificationsIndexProps> = props => {
                 ? undefined
                 : props.onFetchMore
             }
+            onRedirect={props.onRedirect}
           />
         ))}
       </OverlayLoadingContainer>
+      {props.bottomElement ? props.bottomElement : <></>}
     </List>
   );
 };

@@ -9,10 +9,10 @@ import {
 
 import WITH_PAGE_MARK_READ_ALL_NOTIFICATION_USER_MUTATION from '../../../mutations/markReadAllNotificationsUser';
 
-import NotificationsUI from './NotificationsUI';
+import Notifications from './notifications';
 import { NotificationsIndexProps } from './types';
 
-const Notifications: React.FC<NotificationsIndexProps> = props => {
+const NotificationsIndex: React.FC<NotificationsIndexProps> = props => {
   const [
     markReadAllNotifications,
     { loading: markReadAllNotificationsLoading },

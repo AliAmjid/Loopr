@@ -11,6 +11,7 @@ export interface User {
     resources?: ({ name: string } | undefined | null)[] | null;
   } | null;
   notifications: Notifications;
+  notificationViewAtNullCount: number;
 }
 
 export type NullableUser = User | null | undefined;

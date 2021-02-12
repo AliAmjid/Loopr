@@ -5,8 +5,6 @@ import {
   Box,
   Button,
   IconButton,
-  List,
-  makeStyles,
   Popover,
   Tooltip,
   Typography,
@@ -16,15 +14,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import NotificationsComponent from 'components/Notifications';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
-import Notification from './notification';
-import { NotificationsUIProps } from './types';
-
 import { NotificationsProps } from './types';
-
-const listWidth = 300;
 
 const Notifications: React.FC<NotificationsProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
@@ -58,25 +52,18 @@ const Notifications: React.FC<NotificationsProps> = props => {
               <Typography>{t('noNotifications')}</Typography>
             </Box>
           ) : (
-            <List className={classes.list}>
-              {props.notifications.map((notification, index) => (
-                <Notification
-                  key={notification.id}
-                  notification={notification}
-                  fetchMore={
-                    index !== props.notifications.length - 1
-                      ? undefined
-                      : props.onFetchMore
-                  }
-                  onClose={props.onClose}
-                />
-              ))}
-              <Box pt={0.5}>
-                <Button fullWidth color="primary" onClick={props.onReadAll}>
-                  {t('readAllNotifications')}
-                </Button>
-              </Box>
-            </List>
+            <NotificationsComponent
+              notifications={props.notifications}
+              bottomElement={(
+                <Box pt={0.5}>
+                  <Button fullWidth color="primary" onClick={props.onReadAll}>
+                    {t('readAllNotifications')}
+                  </Button>
+                </Box>
+              )}
+              onFetchMore={props.onFetchMore}
+              onRedirect={props.onClose}
+            />
           )}
         </OverlayLoadingContainer>
       </Popover>

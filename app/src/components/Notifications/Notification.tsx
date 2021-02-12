@@ -13,12 +13,11 @@ import {
   WithPageMarkReadNotificationsUserMutationVariables,
 } from 'types/graphql';
 
-import WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION from '../../../mutations/markReadNotificationUser';
-
+import WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION from './mutations/markReadNotificationUser';
 import ListItem from './ListItem';
-import { Href, NotificationProps } from './types';
+import { Href, NotificationsProps } from './types';
 
-const Notification: React.FC<NotificationProps> = props => {
+const Notification: React.FC<NotificationsProps> = props => {
   const [markAsRead] = useMutation<
     WithPageMarkReadNotificationsUserMutation,
     WithPageMarkReadNotificationsUserMutationVariables
@@ -61,7 +60,7 @@ const Notification: React.FC<NotificationProps> = props => {
       variables: { input: { id: props.notification.id } },
     }).then(() => {
       if (href) {
-        props.onClose();
+        if (props.onRedirect) props.onRedirect();
         router.push(href);
       }
     });
@@ -73,7 +72,6 @@ const Notification: React.FC<NotificationProps> = props => {
       icon={icon}
       primaryText={primary}
       secondaryText={secondary}
-      href={href}
       viewAt={props.notification.viewAt !== null}
       onClick={clickHandler}
     />
