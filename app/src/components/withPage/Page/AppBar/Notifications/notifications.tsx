@@ -22,17 +22,11 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import Notification from './notification';
 import { NotificationsUIProps } from './types';
 
+import { NotificationsProps } from './types';
+
 const listWidth = 300;
 
-const useStyles = makeStyles({
-  list: {
-    width: listWidth,
-    maxHeight: 400,
-  },
-});
-
-const NotificationsUI: React.FC<NotificationsUIProps> = props => {
-  const classes = useStyles();
+const Notifications: React.FC<NotificationsProps> = props => {
   const { t } = useTranslation(namespaces.components.withPage);
 
   return (
@@ -90,4 +84,4 @@ const NotificationsUI: React.FC<NotificationsUIProps> = props => {
   );
 };
 
-export default NotificationsUI;
+export default Notifications;

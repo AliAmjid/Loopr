@@ -4,7 +4,9 @@ import { UrlObject } from 'url';
 
 import { Notification, NullableUser } from '../../types';
 
-export interface NotificationsUIProps {
+import { NullableUser } from '../../types';
+
+export interface NotificationsProps {
   anchorEl: HTMLButtonElement | null;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose: () => void;

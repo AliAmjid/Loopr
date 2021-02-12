@@ -29,8 +29,8 @@ const Notification: React.FC<NotificationProps> = props => {
   const router = useRouter();
 
   useEffect(() => {
-    if (inView && props.fetchMore) {
-      props.fetchMore();
+    if (inView && props.onFetchMore) {
+      props.onFetchMore();
     }
   }, [inView]);
 

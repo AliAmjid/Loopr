@@ -41,7 +41,7 @@ const Notifications: React.FC<NotificationsIndexProps> = props => {
   };
 
   return (
-    <NotificationsUI
+    <Notifications
       anchorEl={anchorEl}
       onClick={clickHandler}
       onClose={closeHandler}
@@ -54,4 +54,4 @@ const Notifications: React.FC<NotificationsIndexProps> = props => {
   );
 };
 
-export default Notifications;
+export default NotificationsIndex;
