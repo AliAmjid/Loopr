@@ -9,6 +9,7 @@ const USERS_USERS_QUERY = gql`
     $email: String
     $firstName: String
     $lastName: String
+    $roles: [String!]
   ) {
     users(
       first: $first
@@ -18,6 +19,7 @@ const USERS_USERS_QUERY = gql`
       email: $email
       firstname: $firstName
       lastname: $lastName
+      role_id_list: $roles
     ) {
       edges {
         node {

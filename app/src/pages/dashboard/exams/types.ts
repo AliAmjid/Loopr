@@ -1,4 +1,4 @@
-export interface Exam {
+interface Exam {
   name: string;
   writtenAt: string;
   pointSystem: {
@@ -36,7 +36,7 @@ export interface Exam {
 
 export type Exams = Exam[];
 
-export interface User {
+interface User {
   id: string;
 }
 

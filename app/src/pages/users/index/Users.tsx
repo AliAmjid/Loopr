@@ -13,8 +13,6 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
-import stripRolePrefix from 'components/stripRolePrefix';
-
 import { User, UsersProps } from './types';
 
 const VisibilityIconWithDisplayName = (): JSX.Element => <VisibilityIcon />;

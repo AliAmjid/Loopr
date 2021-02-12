@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION = gql`
-  mutation WithPageMarkReadNotificationsUserMutation(
+const NOTIFICATIONS_MARK_READ_NOTIFICATIONS_USER_MUTATION = gql`
+  mutation NotificationsMarkReadNotificationsUserMutation(
     $input: markReadNotificationUserInput!
   ) {
     markReadNotificationUser(input: $input) {
@@ -20,4 +20,4 @@ const WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION = gql`
   }
 `;
 
-export default WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION;
+export default NOTIFICATIONS_MARK_READ_NOTIFICATIONS_USER_MUTATION;

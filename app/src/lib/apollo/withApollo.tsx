@@ -18,9 +18,7 @@ import { getDisplayName } from 'recompose';
 import routes from 'config/routes';
 
 import accessContext, {
-  BAD_GATEWAY,
   INVALID_COOKIE,
-  NO_INTERNET,
   UNAUTHORIZED,
 } from 'lib/apollo/accessContext';
 import recognizeError from 'lib/apollo/recognizeError';

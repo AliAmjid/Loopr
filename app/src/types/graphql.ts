@@ -199,6 +199,50 @@ export interface EditSubjectTeacherQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: NotificationsMarkReadNotificationsUserMutation
+// ====================================================
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  viewAt: string | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges {
+  __typename: "NotificationEdge";
+  node: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications {
+  __typename: "NotificationConnection";
+  edges: (NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges | null)[] | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user {
+  __typename: "User";
+  id: string;
+  notifications: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser {
+  __typename: "markReadNotificationUserPayload";
+  user: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation {
+  markReadNotificationUser: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutationVariables {
+  input: markReadNotificationUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UserImportTableCreateUserMutation
 // ====================================================
 
@@ -264,50 +308,6 @@ export interface WithPageMarkReadAllNotificationUserMutation {
 
 export interface WithPageMarkReadAllNotificationUserMutationVariables {
   input: markReadAllNotificationsUserInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: WithPageMarkReadNotificationsUserMutation
-// ====================================================
-
-export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node {
-  __typename: "Notification";
-  id: string;
-  viewAt: string | null;
-}
-
-export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges {
-  __typename: "NotificationEdge";
-  node: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node | null;
-}
-
-export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications {
-  __typename: "NotificationConnection";
-  edges: (WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges | null)[] | null;
-}
-
-export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user {
-  __typename: "User";
-  id: string;
-  notifications: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications | null;
-}
-
-export interface WithPageMarkReadNotificationsUserMutation_markReadNotificationUser {
-  __typename: "markReadNotificationUserPayload";
-  user: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser_user | null;
-}
-
-export interface WithPageMarkReadNotificationsUserMutation {
-  markReadNotificationUser: WithPageMarkReadNotificationsUserMutation_markReadNotificationUser | null;
-}
-
-export interface WithPageMarkReadNotificationsUserMutationVariables {
-  input: markReadNotificationUserInput;
 }
 
 /* tslint:disable */
@@ -2338,6 +2338,7 @@ export interface UsersUsersQueryVariables {
   email?: string | null;
   firstName?: string | null;
   lastName?: string | null;
+  roles?: string[] | null;
 }
 
 /* tslint:disable */

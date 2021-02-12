@@ -54,6 +54,7 @@ const Notifications: React.FC<NotificationsProps> = props => {
           ) : (
             <NotificationsComponent
               notifications={props.notifications}
+              // prettier-ignore
               bottomElement={(
                 <Box pt={0.5}>
                   <Button fullWidth color="primary" onClick={props.onReadAll}>

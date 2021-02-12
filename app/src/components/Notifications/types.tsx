@@ -1,6 +1,6 @@
 import { UrlObject } from 'url';
 
-export interface Notification {
+interface Notification {
   id: string;
   type: string;
   parameters: Record<string, any>;

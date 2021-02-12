@@ -28,7 +28,6 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import ColorDot from 'components/colorDot';
-import { formatDateToDay } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import { bottomShadow } from 'components/shadows';

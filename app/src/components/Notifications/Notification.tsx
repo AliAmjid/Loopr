@@ -9,19 +9,19 @@ import { useInView } from 'react-intersection-observer';
 import routes from 'config/routes';
 
 import {
-  WithPageMarkReadNotificationsUserMutation,
-  WithPageMarkReadNotificationsUserMutationVariables,
+  NotificationsMarkReadNotificationsUserMutation,
+  NotificationsMarkReadNotificationsUserMutationVariables,
 } from 'types/graphql';
 
-import WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION from './mutations/markReadNotificationUser';
+import NOTIFICATIONS_MARK_READ_NOTIFICATIONS_USER_MUTATION from './mutations/markReadNotificationUser';
 import ListItem from './ListItem';
 import { Href, NotificationsProps } from './types';
 
 const Notification: React.FC<NotificationsProps> = props => {
   const [markAsRead] = useMutation<
-    WithPageMarkReadNotificationsUserMutation,
-    WithPageMarkReadNotificationsUserMutationVariables
-  >(WITH_PAGE_MARK_READ_NOTIFICATIONS_USER_MUTATION);
+    NotificationsMarkReadNotificationsUserMutation,
+    NotificationsMarkReadNotificationsUserMutationVariables
+  >(NOTIFICATIONS_MARK_READ_NOTIFICATIONS_USER_MUTATION);
   const { ref, inView } = useInView({
     triggerOnce: true,
   });

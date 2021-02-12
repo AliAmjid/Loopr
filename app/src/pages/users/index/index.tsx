@@ -53,6 +53,7 @@ const UsersIndex: React.FC = () => {
           email: emailFilter,
           lastName: lastNameFilter,
           firstName: firstNameFilter,
+          roles: rolesFilter,
         },
       })
       .then(res => {
