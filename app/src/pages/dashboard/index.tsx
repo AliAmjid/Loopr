@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { compose } from 'recompose';
 
 import withPage from 'components/withPage';
@@ -20,8 +20,6 @@ const DashboardIndex: React.FC = () => {
           <NotificationsIndex />
         </Grid>
       </Grid>
-
-      <br />
     </>
   );
 };
