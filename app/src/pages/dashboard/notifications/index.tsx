@@ -10,6 +10,8 @@ import {
 
 import Notifications from 'components/Notifications';
 import { Notifications as NotificationsType } from 'components/Notifications/types';
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
 import DASHBOARD_NOTIFICATIONS_QUERY from '../queries/notifications';
 
@@ -27,11 +29,11 @@ const NotificationsIndex: React.FC = () => {
 
   return (
     <Paper>
+      <OverlayLoadingContainer>
+        <OverlayLoading loading={notificationsLoading} />
+      </OverlayLoadingContainer>
       <Typography variant="h6">latest notifications</Typography>
-      <Notifications
-        notifications={notifications}
-        loading={notificationsLoading}
-      />
+      <Notifications notifications={notifications} />
     </Paper>
   );
 };

@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Paper, Table, TableBody, Typography } from '@material-ui/core';
+import {
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  Typography,
+} from '@material-ui/core';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -8,9 +14,17 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import PointSystem from './pointSystem';
 import { ExamsProps } from './types';
 
+const useStyles = makeStyles({
+  paper: {
+    overflowX: 'auto',
+  },
+});
+
 const Exams: React.FC<ExamsProps> = props => {
+  const classes = useStyles();
+
   return (
-    <Paper>
+    <Paper className={classes.paper}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
         <Typography variant="h6">Nejnovější hodnocení</Typography>
