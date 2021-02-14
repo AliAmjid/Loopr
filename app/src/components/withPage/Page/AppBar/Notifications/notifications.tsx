@@ -62,6 +62,7 @@ const Notifications: React.FC<NotificationsProps> = props => {
                   </Button>
                 </Box>
               )}
+              listStyle={{ width: 300, maxHeight: 400 }}
               onFetchMore={props.onFetchMore}
               onRedirect={props.onClose}
             />

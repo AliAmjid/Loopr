@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List, makeStyles } from '@material-ui/core';
+import { List } from '@material-ui/core';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
@@ -8,20 +8,9 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import Notification from './Notification';
 import { NotificationsIndexProps } from './types';
 
-const listWidth = 300;
-
-const useStyles = makeStyles({
-  list: {
-    width: listWidth,
-    maxHeight: 400,
-  },
-});
-
 const Notifications: React.FC<NotificationsIndexProps> = props => {
-  const classes = useStyles();
-
   return (
-    <List className={classes.list}>
+    <List style={props.listStyle}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading || false} />
 

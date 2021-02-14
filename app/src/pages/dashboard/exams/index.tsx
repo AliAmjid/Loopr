@@ -16,7 +16,7 @@ const ExamsIndex: React.FC = () => {
   const { data: examsData, loading: examsLoading } = useQuery<
     DashboardWrittenExamsQuery,
     DashboardWrittenExamsQueryVariables
-  >(DASHBOARD_WRITTEN_EXAMS_QUERY, { variables: { first: 6 } });
+  >(DASHBOARD_WRITTEN_EXAMS_QUERY, { variables: { first: 7 } });
 
   const exams: ExamsType = [];
   examsData?.writtenExams?.edges?.forEach(edge => {

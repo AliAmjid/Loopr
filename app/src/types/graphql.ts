@@ -865,6 +865,46 @@ export interface ClassGroupsUsersQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: DashboardNotificationsQuery
+// ====================================================
+
+export interface DashboardNotificationsQuery_meUser_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  viewAt: string | null;
+  parameters: any;
+  type: string;
+}
+
+export interface DashboardNotificationsQuery_meUser_notifications_edges {
+  __typename: "NotificationEdge";
+  node: DashboardNotificationsQuery_meUser_notifications_edges_node | null;
+}
+
+export interface DashboardNotificationsQuery_meUser_notifications {
+  __typename: "NotificationConnection";
+  edges: (DashboardNotificationsQuery_meUser_notifications_edges | null)[] | null;
+}
+
+export interface DashboardNotificationsQuery_meUser {
+  __typename: "User";
+  notifications: DashboardNotificationsQuery_meUser_notifications | null;
+}
+
+export interface DashboardNotificationsQuery {
+  meUser: DashboardNotificationsQuery_meUser | null;
+}
+
+export interface DashboardNotificationsQueryVariables {
+  first: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: DashboardWrittenExamsQuery
 // ====================================================
 

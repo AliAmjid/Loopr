@@ -6,16 +6,21 @@ import { compose } from 'recompose';
 import withPage from 'components/withPage';
 
 import ExamsIndex from './exams';
+import NotificationsIndex from './notifications';
 import dashboardPageOptions from './pageOptions';
 
 const DashboardIndex: React.FC = () => {
   return (
     <>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={6}>
           <ExamsIndex />
         </Grid>
+        <Grid item xs={6}>
+          <NotificationsIndex />
+        </Grid>
       </Grid>
+
       <br />
       <Paper>
         <Typography variant="h1">ahoj1</Typography>

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { UrlObject } from 'url';
 
 interface Notification {
@@ -10,9 +12,10 @@ interface Notification {
 export type Notifications = Notification[];
 
 export interface NotificationsIndexProps {
+  listStyle?: React.CSSProperties;
   notifications: Notifications;
   loading?: boolean;
-  onFetchMore: () => void;
+  onFetchMore?: () => void;
   onRedirect?: () => void;
   bottomElement?: JSX.Element;
 }
