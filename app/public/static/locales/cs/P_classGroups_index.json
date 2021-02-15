@@ -8,6 +8,10 @@
   "sureDelete": "Doopravdy chcete třídu odstranit?",
   "irreversibleAction": "Nevratná operace",
   "noClassGroup": "Žádná",
+  "archiveDialog":{
+    "title":"Doopravdy chcete archivovat třídu?",
+    "content": "Automaticky se archivují všichni studenti ve třídě"
+  },
   "snackbars": {
     "edit": {
       "success": "Třída úspešně upravena"

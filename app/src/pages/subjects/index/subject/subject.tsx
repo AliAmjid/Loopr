@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Button, TextField, Typography } from '@material-ui/core';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Query } from 'material-table';
@@ -17,6 +18,7 @@ const Subject: React.FC<SubjectProps> = props => {
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
 
   if (!props.selectedSubjectType)
     return (
@@ -59,6 +61,32 @@ const Subject: React.FC<SubjectProps> = props => {
             }}
           >
             {t('common:actions.delete')}
+          </Button>,
+        ]}
+      />
+      <SimpleDialog
+        open={archiveId !== undefined}
+        title={t('archiveDialogTitle')}
+        // prettier-ignore
+        content={(
+          <>
+            <Typography>{t('common:phrases.irreversible')}</Typography>
+            <TextField
+              label={t('common:gqlObjects.subject.archiveYear')}
+              fullWidth
+            />
+          </>
+        )}
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setArchiveId(undefined)}
+          >
+            {t('common:actions.cancel')}
+          </Button>,
+          <Button key={1} color="primary" variant="contained">
+            {t('common:actions.archive')}
           </Button>,
         ]}
       />
@@ -106,6 +134,14 @@ const Subject: React.FC<SubjectProps> = props => {
             onClick: (_, row) => {
               row = row as SubjectT;
               props.onEdit(row.id);
+            },
+          },
+          {
+            icon: ArchiveIcon,
+            tooltip: t('common:actions.archive'),
+            onClick: (_, row) => {
+              row = row as SubjectT;
+              setArchiveId(row.id);
             },
           },
         ]}

@@ -9,6 +9,7 @@
     "title": "Doopravdy chcete odstranit předmět?",
     "description": "Tato operace je nevratná"
   },
+  "archiveDialogTitle": "Doopravdy chcete archivovat předmět?",
   "addDialogTitle": "Přidat typ předmětu",
   "subjects": "Předměty",
   "group": "Skupina",

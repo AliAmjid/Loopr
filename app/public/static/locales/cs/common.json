@@ -38,6 +38,9 @@
       "to": "Do",
       "quarter": "Čtvrtletí",
       "schoolYear": "Školní rok"
+    },
+    "subject": {
+      "archiveYear": "Rok archivace"
     }
   },
   "actions": {
@@ -50,10 +53,12 @@
     "submit": "Potvrdit",
     "search": "Vyhledat",
     "upload": "Nahrát",
-    "download": "Stáhnout"
+    "download": "Stáhnout",
+    "archive": "Archivovat"
   },
   "phrases": {
     "yes": "Ano",
-    "no": "Ne"
+    "no": "Ne",
+    "irreversible": "Tato operace je nevratná"
   }
 }

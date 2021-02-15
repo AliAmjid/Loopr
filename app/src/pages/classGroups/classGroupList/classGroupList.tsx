@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -20,6 +21,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
   const [editId, setEditId] = useState<string | undefined>(undefined);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
+  const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
 
   const editingClassGroup = props.classGroups.find(
     classGroup => classGroup.id === editId,
@@ -55,6 +57,23 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
             }}
           >
             {t('common:actions.delete')}
+          </Button>,
+        ]}
+      />
+      <SimpleDialog
+        open={archiveId !== undefined}
+        title={t('archiveDialog.title')}
+        content={<Typography>{t('archiveDialog.content')}</Typography>}
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setArchiveId(undefined)}
+          >
+            {t('common:actions.cancel')}
+          </Button>,
+          <Button key={0} color="primary" variant="contained">
+            {t('common:actions.archive')}
           </Button>,
         ]}
       />
@@ -118,6 +137,11 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
             <Tooltip key={1} title={`${t('common:actions.delete')}`}>
               <IconButton onClick={() => setDeleteId(classGroup.id)}>
                 <DeleteIcon />
+              </IconButton>
+            </Tooltip>,
+            <Tooltip key={2} title={`${t('common:actions.archive')}`}>
+              <IconButton onClick={() => setArchiveId(classGroup.id)}>
+                <ArchiveIcon />
               </IconButton>
             </Tooltip>,
           ],
