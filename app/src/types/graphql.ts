@@ -2351,6 +2351,7 @@ export interface UsersUsersQuery_users_edges_node {
   firstname: string;
   lastname: string;
   createdAt: string;
+  archivedAt: string | null;
   role: UsersUsersQuery_users_edges_node_role;
 }
 
@@ -2379,6 +2380,7 @@ export interface UsersUsersQueryVariables {
   firstName?: string | null;
   lastName?: string | null;
   roles?: string[] | null;
+  exists?: (UserFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -2492,6 +2494,11 @@ export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface UserFilter_exists {
+  classGroup?: boolean | null;
+  archivedAt?: boolean | null;
+}
 
 export interface changePasswordUserInput {
   oldPassword: string;

@@ -6,7 +6,8 @@
       "email": "Email",
       "role": "Role",
       "createdAt": "Registrován v",
-      "classGroup": "Třída"
+      "classGroup": "Třída",
+      "archived": "Archivován"
     },
     "classGroup": {
       "section": "Název",
@@ -50,5 +51,9 @@
     "search": "Vyhledat",
     "upload": "Nahrát",
     "download": "Stáhnout"
+  },
+  "phrases": {
+    "yes": "Ano",
+    "no": "Ne"
   }
 }

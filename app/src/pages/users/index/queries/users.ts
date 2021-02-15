@@ -10,6 +10,7 @@ const USERS_USERS_QUERY = gql`
     $firstName: String
     $lastName: String
     $roles: [String!]
+    $exists: [UserFilter_exists]
   ) {
     users(
       first: $first
@@ -20,6 +21,7 @@ const USERS_USERS_QUERY = gql`
       firstname: $firstName
       lastname: $lastName
       role_id_list: $roles
+      exists: $exists
     ) {
       edges {
         node {
@@ -28,6 +30,7 @@ const USERS_USERS_QUERY = gql`
           firstname
           lastname
           createdAt
+          archivedAt
           role {
             id
             name

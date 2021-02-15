@@ -43,6 +43,8 @@ const Users: React.FC<UsersProps> = props => {
                   data: (res.data.users.edges?.map(e => ({
                     ...e?.node,
                     createdAt: dayjs(e?.node?.createdAt).format('DD.MM. YYYY'),
+                    archivedAt: e?.node?.archivedAt,
+                    archived: e?.node?.archivedAt !== null,
                   })) || []) as User[],
                 });
               }
@@ -80,6 +82,15 @@ const Users: React.FC<UsersProps> = props => {
                 title: t('common:gqlObjects.user.role'),
                 field: 'role.id',
                 lookup: props.rolesLookup,
+              },
+              {
+                title: t('common:gqlObjects.user.archived'),
+                field: 'archived',
+                lookup: {
+                  true: t('common:phrases.yes'),
+                  false: t('common:phrases.no'),
+                },
+                defaultFilter: ['false'],
               },
             ],
           },
