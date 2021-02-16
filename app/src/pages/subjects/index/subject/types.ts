@@ -2,6 +2,7 @@ import { Query } from 'material-table';
 
 export interface Subject {
   id: string;
+  archivedAt?: string;
   group: {
     id: string;
     section: string;

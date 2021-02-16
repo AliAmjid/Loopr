@@ -40,7 +40,7 @@
       "schoolYear": "Školní rok"
     },
     "subject": {
-      "archiveYear": "Rok archivace"
+      "archivedAt": "Datum archivace"
     }
   },
   "actions": {

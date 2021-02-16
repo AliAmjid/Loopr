@@ -1915,6 +1915,7 @@ export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teache
 export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node {
   __typename: "Subject";
   id: string;
+  archivedAt: string | null;
   group: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_group | null;
   classGroup: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_classGroup | null;
   teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher;

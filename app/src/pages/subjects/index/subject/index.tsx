@@ -18,6 +18,7 @@ import {
   SubjectsSubjectTypeQueryVariables,
 } from 'types/graphql';
 
+import { formatDateToDay } from 'components/formatDate';
 import usePagination from 'components/usePagination';
 
 import SUBJECTS_ARCHIVE_SUBJECT_MUTATION from '../mutations/archiveSubject';
@@ -84,7 +85,10 @@ const SubjectIndex: React.FC = () => {
 
           edges?.forEach(subject => {
             if (subject?.node) {
-              subjects.push(subject.node);
+              subjects.push({
+                ...subject.node,
+                archivedAt: formatDateToDay(`${subject.node.archivedAt}`),
+              });
             }
           });
 

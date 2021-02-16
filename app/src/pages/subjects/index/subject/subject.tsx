@@ -44,6 +44,7 @@ const Subject: React.FC<SubjectProps> = props => {
     <Box p={2}>
       <Box display="flex" justifyContent="flex-end">
         <FormControlLabel
+          // prettier-ignore
           control={(
             <Switch
               color="primary"
@@ -89,13 +90,7 @@ const Subject: React.FC<SubjectProps> = props => {
         title={t('archiveDialogTitle')}
         // prettier-ignore
         content={(
-          <>
-            <Typography>{t('common:phrases.irreversible')}</Typography>
-            <TextField
-              label={t('common:gqlObjects.subject.archiveYear')}
-              fullWidth
-            />
-          </>
+          <Typography>{t('common:phrases.irreversible')}</Typography>
         )}
         actions={[
           <Button
@@ -111,7 +106,7 @@ const Subject: React.FC<SubjectProps> = props => {
             variant="contained"
             onClick={() => {
               setDialogLoading(true);
-              props.onArchive(archiveId).then(success => {
+              props.onArchive(`${archiveId}`).then(success => {
                 setDialogLoading(false);
                 if (success) {
                   setArchiveId(undefined);
@@ -142,6 +137,11 @@ const Subject: React.FC<SubjectProps> = props => {
             title: t('teacher'),
             render: (row: SubjectT) =>
               `${row.teacher?.firstname} ${row.teacher?.lastname}`,
+          },
+          {
+            title: t('common:gqlObjects.subject.archivedAt'),
+            field: 'archivedAt',
+            hidden: !props.showArchived,
           },
         ]}
         options={{ filtering: false, exportButton: true }}

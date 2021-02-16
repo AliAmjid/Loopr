@@ -21,6 +21,7 @@ const SUBJECTS_SUBJECT_TYPE_QUERY = gql`
         edges {
           node {
             id
+            archivedAt
             group {
               id
               section
