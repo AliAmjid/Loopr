@@ -20,4 +20,6 @@ export interface Subject {
 export interface TeacherSubjectsProps {
   subjects: Subject[];
   loading: boolean;
+  showArchived: boolean;
+  onShowArchivedChange: (showArchived: boolean) => void;
 }

@@ -6,13 +6,16 @@ import {
   Card,
   CardActions,
   CardContent,
+  FormControlLabel,
   Grid,
   makeStyles,
   Paper,
+  Switch,
   Theme,
   Typography,
   useTheme,
 } from '@material-ui/core';
+import { CheckBox } from '@material-ui/icons';
 import Link from 'next/link';
 
 import routes from 'config/routes';
@@ -134,11 +137,30 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
     );
   });
 
-  if (mappedSubjects.length === 0 && props.loading) {
+  const archivedCheckBox = (
+    <Box display="flex" justifyContent="flex-end">
+      <FormControlLabel
+        // prettier-ignore
+        control={(
+          <Switch
+            color="primary"
+            checked={props.showArchived}
+            onChange={e => props.onShowArchivedChange(e.target.checked)}
+          />
+        )}
+        label="Show archived "
+      />
+    </Box>
+  );
+
+  if (mappedSubjects.length === 0 && !props.loading) {
     return (
       <Paper>
+        {archivedCheckBox}
         <Box display="flex" justifyContent="center">
-          <Typography>{t('noSubjects')}</Typography>
+          <Typography>
+            {props.showArchived ? t('noArchivedSubjects') : t('noSubjects')}
+          </Typography>
         </Box>
       </Paper>
     );
@@ -155,6 +177,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
         onClose={() => setColorChange(undefined)}
       />
       <Paper>
+        {archivedCheckBox}
         <OverlayLoadingContainer>
           <OverlayLoading loading={props.loading} />
           {mappedSubjects}

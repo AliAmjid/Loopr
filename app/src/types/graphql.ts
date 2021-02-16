@@ -2036,6 +2036,10 @@ export interface TeacherSubjectsSubjectsQuery {
   meUser: TeacherSubjectsSubjectsQuery_meUser | null;
 }
 
+export interface TeacherSubjectsSubjectsQueryVariables {
+  exists?: (SubjectFilter_exists | null)[] | null;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated
@@ -2494,6 +2498,10 @@ export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface SubjectFilter_exists {
+  archivedAt?: boolean | null;
+}
 
 export interface UserFilter_exists {
   classGroup?: boolean | null;

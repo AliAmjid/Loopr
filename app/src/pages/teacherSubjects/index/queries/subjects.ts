@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 const TEACHER_SUBJECTS_SUBJECTS_QUERY = gql`
-  query TeacherSubjectsSubjectsQuery {
+  query TeacherSubjectsSubjectsQuery($exists: [SubjectFilter_exists]) {
     meUser {
-      taughtSubjects {
+      taughtSubjects(exists: $exists) {
         edges {
           node {
             id
