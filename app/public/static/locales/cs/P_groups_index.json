@@ -22,6 +22,9 @@
     },
     "studentsEdit": {
       "success": "Studenti byli úspěšně upraveni"
+    },
+    "archive": {
+      "success": "Skupina úspěšně archivována"
     }
   }
 }

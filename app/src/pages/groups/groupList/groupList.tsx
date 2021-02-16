@@ -61,6 +61,7 @@ const GroupList: React.FC<GroupListProps> = props => {
       />
       <SimpleDialog
         open={archiveId !== undefined}
+        loading={props.archiveLoading}
         title={t('archiveDialog.title')}
         actions={[
           <Button
@@ -70,7 +71,16 @@ const GroupList: React.FC<GroupListProps> = props => {
           >
             {t('common:actions.cancel')}
           </Button>,
-          <Button key={1} color="primary" variant="contained">
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              props.onArchive(`${archiveId}`).then(success => {
+                if (success) setArchiveId(undefined);
+              });
+            }}
+          >
             {t('common:actions.archive')}
           </Button>,
         ]}
@@ -114,6 +124,7 @@ const GroupList: React.FC<GroupListProps> = props => {
         items={props.groups.map(group => ({
           id: group.id,
           primary: group?.section,
+          secondary: props.showArchived ? group.archivedAt : '',
           onValueChange: (value: string) =>
             props.onUpdate({ id: group.id, section: value }),
           onClick: () => props.onSelectedGroupChange(group.id),

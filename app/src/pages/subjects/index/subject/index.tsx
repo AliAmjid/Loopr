@@ -122,7 +122,11 @@ const SubjectIndex: React.FC = () => {
     return archiveSubject({
       variables: { input: { id: subject, archive: true } },
     })
-      .then(() => true)
+      .then(() => {
+        enqueueSnackbar(t('snackbars.archive.success'), { variant: 'success' });
+
+        return true;
+      })
       .catch(() => false);
   };
 

@@ -10,6 +10,7 @@ export interface AddValues {
 export interface Group {
   id: string;
   section: string;
+  archivedAt: string;
 }
 
 type Groups = Group[];
@@ -24,6 +25,7 @@ export interface GroupListProps {
   groupsLoading: boolean;
   addGroupLoading: boolean;
   deleteLoading: boolean;
+  archiveLoading: boolean;
   filter: string;
   showArchived: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
@@ -32,6 +34,7 @@ export interface GroupListProps {
   onDelete: (group: string) => Promise<boolean>;
   onFilterChange: (filter: string) => void;
   onShowArchivedChange: (show: boolean) => void;
+  onArchive: (group: string) => Promise<boolean>;
 }
 
 export interface AddDialogProps {

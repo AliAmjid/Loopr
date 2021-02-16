@@ -995,16 +995,11 @@ export interface DashboardWrittenExamsQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: Errors502MeUserQuery
+// GraphQL query operation: Errors502PingQuery
 // ====================================================
 
-export interface Errors502MeUserQuery_meUser {
-  __typename: "User";
-  id: string;
-}
-
-export interface Errors502MeUserQuery {
-  meUser: Errors502MeUserQuery_meUser | null;
+export interface Errors502PingQuery {
+  ping: boolean;
 }
 
 /* tslint:disable */
@@ -1032,6 +1027,33 @@ export interface GroupsAddGroupMutation {
 
 export interface GroupsAddGroupMutationVariables {
   input: createGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: GroupsArchiveGroupMutation
+// ====================================================
+
+export interface GroupsArchiveGroupMutation_archiveGroup_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface GroupsArchiveGroupMutation_archiveGroup {
+  __typename: "archiveGroupPayload";
+  group: GroupsArchiveGroupMutation_archiveGroup_group | null;
+}
+
+export interface GroupsArchiveGroupMutation {
+  archiveGroup: GroupsArchiveGroupMutation_archiveGroup | null;
+}
+
+export interface GroupsArchiveGroupMutationVariables {
+  input: archiveGroupInput;
 }
 
 /* tslint:disable */
@@ -1218,6 +1240,7 @@ export interface GroupsGroupsQuery_groups_edges_node {
   __typename: "Group";
   id: string;
   section: string;
+  archivedAt: string | null;
 }
 
 export interface GroupsGroupsQuery_groups_edges {
@@ -1236,6 +1259,7 @@ export interface GroupsGroupsQuery {
 
 export interface GroupsGroupsQueryVariables {
   section?: string | null;
+  exists?: (GroupFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -2041,6 +2065,7 @@ export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node {
   id: string;
   teacherCardColor: string | null;
   evaluationSystem: string;
+  archivedAt: string | null;
   group: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group | null;
   classGroup: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup | null;
   subjectType: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType | null;
@@ -2528,6 +2553,10 @@ export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
 // START Enums and Input Objects
 //==============================================================
 
+export interface GroupFilter_exists {
+  archivedAt?: boolean | null;
+}
+
 export interface SubjectFilter_exists {
   archivedAt?: boolean | null;
 }
@@ -2535,6 +2564,12 @@ export interface SubjectFilter_exists {
 export interface UserFilter_exists {
   classGroup?: boolean | null;
   archivedAt?: boolean | null;
+}
+
+export interface archiveGroupInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
 }
 
 export interface archiveSubjectInput {

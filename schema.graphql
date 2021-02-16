@@ -13,6 +13,9 @@ type Query {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [GroupFilter_exists]
+        createdAt: [GroupFilter_createdAt]
+        archivedAt: [GroupFilter_archivedAt]
         id: String
         id_list: [String]
         section: String
@@ -33,6 +36,9 @@ type Query {
         # Returns the elements in the list that come after the specified cursor.
         after: String
         order: [ClassGroupFilter_order]
+        exists: [ClassGroupFilter_exists]
+        createdAt: [ClassGroupFilter_createdAt]
+        archivedAt: [ClassGroupFilter_archivedAt]
     ): ClassGroupConnection
     classGroup(id: ID!): ClassGroup
     aclResources: [AclResource]
@@ -227,6 +233,7 @@ type Group implements Node {
     ): UserConnection
     createdBy: User
     createdAt: String!
+    archivedAt: String
     _id: String!
 }
 
@@ -365,6 +372,8 @@ type ClassGroup implements Node {
 
     # Teacher needs to be user with resource GROUP_TEACHER
     teacher: User
+    createdAt: String!
+    archivedAt: String
     _id: String!
 }
 
@@ -421,6 +430,9 @@ type User implements Node {
 
         # Returns the elements in the list that come after the specified cursor.
         after: String
+        exists: [GroupFilter_exists]
+        createdAt: [GroupFilter_createdAt]
+        archivedAt: [GroupFilter_archivedAt]
         id: String
         id_list: [String]
         section: String
@@ -466,6 +478,24 @@ type User implements Node {
     ): SubjectConnection
     archivedAt: String
     notificationViewAtNullCount: Int!
+}
+
+input GroupFilter_exists {
+    archivedAt: Boolean
+}
+
+input GroupFilter_createdAt {
+    before: String
+    strictly_before: String
+    after: String
+    strictly_after: String
+}
+
+input GroupFilter_archivedAt {
+    before: String
+    strictly_before: String
+    after: String
+    strictly_after: String
 }
 
 # Connection for Group.
@@ -717,6 +747,24 @@ input ClassGroupFilter_order {
     section: String
 }
 
+input ClassGroupFilter_exists {
+    archivedAt: Boolean
+}
+
+input ClassGroupFilter_createdAt {
+    before: String
+    strictly_before: String
+    after: String
+    strictly_after: String
+}
+
+input ClassGroupFilter_archivedAt {
+    before: String
+    strictly_before: String
+    after: String
+    strictly_after: String
+}
+
 # Connection for ClassGroup.
 type ClassGroupConnection {
     edges: [ClassGroupEdge]
@@ -803,8 +851,16 @@ interface SymfonyUserInterface {
 }
 
 type Mutation {
-    # A placeholder query used by thecodingmachine/graphqlite when there are no declared mutations.
-    dummyMutation: String
+    #
+    #
+    applyPasswordResetUser(
+        email: String!
+        feRedirectPagePattern: String!
+    ): Boolean!
+
+    #
+    #
+    resetPasswordUser(key: String!, newPassword: String!): Boolean!
 
     # Creates a Group.
     createGroup(input: createGroupInput!): createGroupPayload

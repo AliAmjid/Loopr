@@ -27,6 +27,9 @@
     },
     "delete": {
       "success": "Předmět úspěšně odstraněn"
+    },
+    "archive": {
+      "success": "Předmět úspěšně archivován"
     }
   }
 }
