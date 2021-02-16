@@ -1780,6 +1780,33 @@ export interface SubjectsAddSubjectTypeMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsARchiveSubjectMutation
+// ====================================================
+
+export interface SubjectsARchiveSubjectMutation_archiveSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface SubjectsARchiveSubjectMutation_archiveSubject {
+  __typename: "archiveSubjectPayload";
+  subject: SubjectsARchiveSubjectMutation_archiveSubject_subject | null;
+}
+
+export interface SubjectsARchiveSubjectMutation {
+  archiveSubject: SubjectsARchiveSubjectMutation_archiveSubject | null;
+}
+
+export interface SubjectsARchiveSubjectMutationVariables {
+  input: archiveSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsDeleteSubjectMutation
 // ====================================================
 
@@ -1921,6 +1948,7 @@ export interface SubjectsSubjectTypeQueryVariables {
   subjectsLast?: number | null;
   subjectsAfter?: string | null;
   subjectsBefore?: string | null;
+  exists?: (SubjectFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -2506,6 +2534,12 @@ export interface SubjectFilter_exists {
 export interface UserFilter_exists {
   classGroup?: boolean | null;
   archivedAt?: boolean | null;
+}
+
+export interface archiveSubjectInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
 }
 
 export interface changePasswordUserInput {

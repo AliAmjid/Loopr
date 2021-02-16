@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useApolloClient, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
@@ -9,15 +9,9 @@ import routes from 'config/routes';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import SUBJECTS_DELETE_SUBJECT_MUTATION from 'pages/subjects/index/mutations/deleteSubject';
-import SUBJECTS_SUBJECT_TYPE_QUERY from 'pages/subjects/index/queries/subjectType';
 import {
-  GetSubjectsArgs,
-  GetSubjectsReturn,
-  Subjects,
-} from 'pages/subjects/index/subject/types';
-
-import {
+  SubjectsARchiveSubjectMutation,
+  SubjectsARchiveSubjectMutationVariables,
   SubjectsDeleteSubjectMutation,
   SubjectsDeleteSubjectMutationVariables,
   SubjectsSubjectTypeQuery,
@@ -26,9 +20,13 @@ import {
 
 import usePagination from 'components/usePagination';
 
+import SUBJECTS_ARCHIVE_SUBJECT_MUTATION from '../mutations/archiveSubject';
+import SUBJECTS_DELETE_SUBJECT_MUTATION from '../mutations/deleteSubject';
+import SUBJECTS_SUBJECT_TYPE_QUERY from '../queries/subjectType';
 import useSubjectsState from '../state';
 
 import Subject from './subject';
+import { GetSubjectsArgs, GetSubjectsReturn, Subjects } from './types';
 
 const SubjectIndex: React.FC = () => {
   const { selectedSubject } = useSubjectsState(state => ({
@@ -38,11 +36,16 @@ const SubjectIndex: React.FC = () => {
     SubjectsDeleteSubjectMutation,
     SubjectsDeleteSubjectMutationVariables
   >(SUBJECTS_DELETE_SUBJECT_MUTATION);
+  const [archiveSubject] = useMutation<
+    SubjectsARchiveSubjectMutation,
+    SubjectsARchiveSubjectMutationVariables
+  >(SUBJECTS_ARCHIVE_SUBJECT_MUTATION);
   const client = useApolloClient();
   const { getPagination, setPagination } = usePagination();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(namespaces.pages.subjects.index);
+  const [showArchived, setShowArchived] = useState(false);
 
   const addClickHandler = (): void => {
     router.push({
@@ -68,6 +71,7 @@ const SubjectIndex: React.FC = () => {
             subjectsLast: variables.last,
             subjectsBefore: variables.before,
             subjectsAfter: variables.after,
+            exists: [{ archivedAt: showArchived }],
           },
         })
         .then(res => {
@@ -110,13 +114,24 @@ const SubjectIndex: React.FC = () => {
       });
   };
 
+  const archiveHandler = (subject: string): Promise<boolean> => {
+    return archiveSubject({
+      variables: { input: { id: subject, archive: true } },
+    })
+      .then(() => true)
+      .catch(() => false);
+  };
+
   return (
     <Subject
       selectedSubjectType={selectedSubject}
+      showArchived={showArchived}
       onAddClick={addClickHandler}
       onGetSubjects={getSubjectsHandler}
       onDelete={deleteHandler}
       onEdit={editHandler}
+      onArchive={archiveHandler}
+      onShowArchivedChange={setShowArchived}
     />
   );
 };

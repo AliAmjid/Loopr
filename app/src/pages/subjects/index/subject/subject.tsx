@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-import { Box, Button, TextField, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -17,7 +24,7 @@ import { Subject as SubjectT, SubjectProps } from './types';
 const Subject: React.FC<SubjectProps> = props => {
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [dialogLoading, setDialogLoading] = useState(false);
   const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
 
   if (!props.selectedSubjectType)
@@ -35,8 +42,20 @@ const Subject: React.FC<SubjectProps> = props => {
 
   return (
     <Box p={2}>
+      <Box display="flex" justifyContent="flex-end">
+        <FormControlLabel
+          control={(
+            <Switch
+              color="primary"
+              checked={props.showArchived}
+              onChange={e => props.onShowArchivedChange(e.target.checked)}
+            />
+          )}
+          label="archived"
+        />
+      </Box>
       <SimpleDialog
-        loading={deleteLoading}
+        loading={dialogLoading}
         open={Boolean(deleteId)}
         title={t('deleteDialog.title')}
         content={<Typography>{t('deleteDialog.description')}</Typography>}
@@ -53,9 +72,9 @@ const Subject: React.FC<SubjectProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              setDeleteLoading(true);
+              setDialogLoading(true);
               props.onDelete(`${deleteId}`).then(successful => {
-                setDeleteLoading(false);
+                setDialogLoading(false);
                 if (successful) setDeleteId(undefined);
               });
             }}
@@ -66,6 +85,7 @@ const Subject: React.FC<SubjectProps> = props => {
       />
       <SimpleDialog
         open={archiveId !== undefined}
+        loading={dialogLoading}
         title={t('archiveDialogTitle')}
         // prettier-ignore
         content={(
@@ -85,13 +105,26 @@ const Subject: React.FC<SubjectProps> = props => {
           >
             {t('common:actions.cancel')}
           </Button>,
-          <Button key={1} color="primary" variant="contained">
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              setDialogLoading(true);
+              props.onArchive(archiveId).then(success => {
+                setDialogLoading(false);
+                if (success) {
+                  setArchiveId(undefined);
+                }
+              });
+            }}
+          >
             {t('common:actions.archive')}
           </Button>,
         ]}
       />
       <MaterialTable
-        key={`${props.selectedSubjectType}-${deleteLoading}`}
+        key={`${props.selectedSubjectType}-${dialogLoading}-${props.showArchived}`}
         title={t('subjects')}
         uniqueName="pages/subjects/subject/subject"
         columns={[
@@ -139,6 +172,7 @@ const Subject: React.FC<SubjectProps> = props => {
           {
             icon: ArchiveIcon,
             tooltip: t('common:actions.archive'),
+            hidden: props.showArchived,
             onClick: (_, row) => {
               row = row as SubjectT;
               setArchiveId(row.id);

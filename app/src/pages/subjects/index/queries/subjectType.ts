@@ -7,6 +7,7 @@ const SUBJECTS_SUBJECT_TYPE_QUERY = gql`
     $subjectsLast: Int
     $subjectsAfter: String
     $subjectsBefore: String
+    $exists: [SubjectFilter_exists]
   ) {
     subjectType(id: $id) {
       id
@@ -15,6 +16,7 @@ const SUBJECTS_SUBJECT_TYPE_QUERY = gql`
         last: $subjectsLast
         after: $subjectsAfter
         before: $subjectsBefore
+        exists: $exists
       ) {
         edges {
           node {
