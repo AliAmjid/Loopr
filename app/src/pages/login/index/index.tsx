@@ -14,7 +14,7 @@ import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import useTour from 'lib/reactour';
 
-import loginNamespaces from 'pages/login/namespaces';
+import loginNamespaces from 'pages/login/index/namespaces';
 
 import {
   LoginGetTokenQuery,

@@ -1,6 +1,7 @@
 const routes = {
   login: {
     index: '/login',
+    passwordResetRequest: '/login/passwordResetRequest',
   },
   dashboard: {
     index: '/dashboard',
