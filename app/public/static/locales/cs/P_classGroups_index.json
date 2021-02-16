@@ -9,9 +9,11 @@
   "irreversibleAction": "Nevratná operace",
   "noClassGroup": "Žádná",
   "archiveDialog":{
-    "title":"Doopravdy chcete archivovat třídu?",
+    "archiveTitle":"Doopravdy chcete archivovat třídu?",
+    "unarchiveTitle":"Doopravdy chcete zrušit archivování třídy?",
     "content": "Automaticky se archivují všichni studenti ve třídě"
   },
+  "showArchived": "Zobrazit archivované",
   "snackbars": {
     "edit": {
       "success": "Třída úspešně upravena"
