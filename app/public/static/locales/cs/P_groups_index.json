@@ -28,7 +28,7 @@
       "success": "Skupina úspěšně archivována"
     },
     "unarchive": {
-      "success": "Archiování skupiny úspěšně zrušeno"
+      "success": "Archivování skupiny úspěšně zrušeno"
     }
   }
 }

@@ -118,12 +118,22 @@ const SubjectIndex: React.FC = () => {
       });
   };
 
-  const archiveHandler = (subject: string): Promise<boolean> => {
+  const archiveHandler = (
+    subject: string,
+    archive: boolean,
+  ): Promise<boolean> => {
     return archiveSubject({
-      variables: { input: { id: subject, archive: true } },
+      variables: { input: { id: subject, archive } },
     })
       .then(() => {
-        enqueueSnackbar(t('snackbars.archive.success'), { variant: 'success' });
+        if (archive)
+          enqueueSnackbar(t('snackbars.archive.success'), {
+            variant: 'success',
+          });
+        else
+          enqueueSnackbar(t('snackbars.unarchive.success'), {
+            variant: 'success',
+          });
 
         return true;
       })

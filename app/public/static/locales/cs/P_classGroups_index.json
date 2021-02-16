@@ -27,6 +27,12 @@
     },
     "teacherEdit": {
       "success": "Učitel úspěšně upraven"
+    },
+    "archive": {
+      "success": "Třída úspěšně archivována"
+    },
+    "unarchive": {
+      "success": "Archivování třídy úspěšně zrušeno"
     }
   }
 }

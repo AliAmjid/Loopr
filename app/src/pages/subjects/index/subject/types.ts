@@ -35,6 +35,6 @@ export interface SubjectProps {
   onGetSubjects: (args: GetSubjectsArgs) => GetSubjectsReturn;
   onDelete: (subject: string) => Promise<boolean>;
   onEdit: (subject: string) => void;
-  onArchive: (subject: string) => Promise<boolean>;
+  onArchive: (subject: string, archive: boolean) => Promise<boolean>;
   onShowArchivedChange: (show: boolean) => void;
 }

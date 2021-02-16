@@ -28,10 +28,14 @@ export interface ClassGroupListProps {
   addClassGroupLoading: boolean;
   updateClassGroupLoading: boolean;
   deleteLoading: boolean;
+  showArchived: boolean;
+  archiveLoading: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedClassChange: (cl: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
   onDelete: (classGroup: string) => Promise<boolean>;
+  onShowArchivedChange: (show: boolean) => void;
+  onArchive: (classGroup: string, archive: boolean) => Promise<boolean>;
 }
 
 export interface ClassGroupDialogProps {

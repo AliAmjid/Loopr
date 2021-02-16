@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
+import {
+  Button,
+  FormControlLabel,
+  IconButton,
+  Switch,
+  Tooltip,
+  Typography,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -62,6 +69,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
       />
       <SimpleDialog
         open={archiveId !== undefined}
+        loading={props.archiveLoading}
         title={t('archiveDialog.title')}
         content={<Typography>{t('archiveDialog.content')}</Typography>}
         actions={[
@@ -72,7 +80,16 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
           >
             {t('common:actions.cancel')}
           </Button>,
-          <Button key={0} color="primary" variant="contained">
+          <Button
+            key={0}
+            color="primary"
+            variant="contained"
+            onClick={() =>
+              props.onArchive(`${archiveId}`, true).then(success => {
+                if (success) setArchiveId(undefined);
+              })
+            }
+          >
             {t('common:actions.archive')}
           </Button>,
         ]}
@@ -124,6 +141,18 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
           },
           tooltip: t('common:actions.add'),
         }}
+        topElement={(
+          <FormControlLabel
+            control={(
+              <Switch
+                color="primary"
+                checked={props.showArchived}
+                onChange={e => props.onShowArchivedChange(e.target.checked)}
+              />
+            )}
+            label="show archived"
+          />
+        )}
         items={props.classGroups.map(classGroup => ({
           id: classGroup.id,
           primary: classGroup?.section,

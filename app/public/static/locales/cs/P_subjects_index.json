@@ -10,11 +10,13 @@
     "description": "Tato operace je nevratná"
   },
   "archiveDialogTitle": "Doopravdy chcete archivovat předmět?",
+  "unarchiveDialogTitle": "Doopravdy chcete zrušit archivování předmětu?",
   "addDialogTitle": "Přidat typ předmětu",
   "subjects": "Předměty",
   "group": "Skupina",
   "classGroup": "Třída",
   "teacher": "Učitel",
+  "showArchived": "Zobrazit archivované",
   "snackbars": {
     "typeAdd": {
       "success": "Typ předmětu úspěšně přidán"
@@ -30,6 +32,9 @@
     },
     "archive": {
       "success": "Předmět úspěšně archivován"
+    },
+    "unarchive": {
+      "success": "Archivování předmětu úspěšně zrušeno"
     }
   }
 }

@@ -5,12 +5,12 @@ import {
   Button,
   FormControlLabel,
   Switch,
-  TextField,
   Typography,
 } from '@material-ui/core';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import { Query } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -52,7 +52,7 @@ const Subject: React.FC<SubjectProps> = props => {
               onChange={e => props.onShowArchivedChange(e.target.checked)}
             />
           )}
-          label="archived"
+          label={t('showArchived')}
         />
       </Box>
       <SimpleDialog
@@ -87,11 +87,11 @@ const Subject: React.FC<SubjectProps> = props => {
       <SimpleDialog
         open={archiveId !== undefined}
         loading={dialogLoading}
-        title={t('archiveDialogTitle')}
-        // prettier-ignore
-        content={(
-          <Typography>{t('common:phrases.irreversible')}</Typography>
-        )}
+        title={
+          props.showArchived
+            ? t('unarchiveDialogTitle')
+            : t('archiveDialogTitle')
+        }
         actions={[
           <Button
             key={0}
@@ -106,15 +106,19 @@ const Subject: React.FC<SubjectProps> = props => {
             variant="contained"
             onClick={() => {
               setDialogLoading(true);
-              props.onArchive(`${archiveId}`).then(success => {
-                setDialogLoading(false);
-                if (success) {
-                  setArchiveId(undefined);
-                }
-              });
+              props
+                .onArchive(`${archiveId}`, !props.showArchived)
+                .then(success => {
+                  setDialogLoading(false);
+                  if (success) {
+                    setArchiveId(undefined);
+                  }
+                });
             }}
           >
-            {t('common:actions.archive')}
+            {props.showArchived
+              ? t('common:actions.unarchive')
+              : t('common:actions.archive')}
           </Button>,
         ]}
       />
@@ -170,9 +174,10 @@ const Subject: React.FC<SubjectProps> = props => {
             },
           },
           {
-            icon: ArchiveIcon,
-            tooltip: t('common:actions.archive'),
-            hidden: props.showArchived,
+            icon: props.showArchived ? UnarchiveIcon : ArchiveIcon,
+            tooltip: props.showArchived
+              ? t('common:actions.unarchive')
+              : t('common:actions.archive'),
             onClick: (_, row) => {
               row = row as SubjectT;
               setArchiveId(row.id);

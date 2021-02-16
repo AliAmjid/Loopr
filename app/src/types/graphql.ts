@@ -601,6 +601,33 @@ export interface ClassGroupsAddClassGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ClassGroupsArchiveClassGroupMutation
+// ====================================================
+
+export interface ClassGroupsArchiveClassGroupMutation_archiveClassGroup_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface ClassGroupsArchiveClassGroupMutation_archiveClassGroup {
+  __typename: "archiveClassGroupPayload";
+  classGroup: ClassGroupsArchiveClassGroupMutation_archiveClassGroup_classGroup | null;
+}
+
+export interface ClassGroupsArchiveClassGroupMutation {
+  archiveClassGroup: ClassGroupsArchiveClassGroupMutation_archiveClassGroup | null;
+}
+
+export interface ClassGroupsArchiveClassGroupMutationVariables {
+  input: archiveClassGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ClassGroupsDeleteClassGroupMutation
 // ====================================================
 
@@ -715,6 +742,10 @@ export interface ClassGroupsClassGroupsQuery_classGroups {
 
 export interface ClassGroupsClassGroupsQuery {
   classGroups: ClassGroupsClassGroupsQuery_classGroups | null;
+}
+
+export interface ClassGroupsClassGroupsQueryVariables {
+  exists?: (ClassGroupFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -2553,6 +2584,10 @@ export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
 // START Enums and Input Objects
 //==============================================================
 
+export interface ClassGroupFilter_exists {
+  archivedAt?: boolean | null;
+}
+
 export interface GroupFilter_exists {
   archivedAt?: boolean | null;
 }
@@ -2564,6 +2599,12 @@ export interface SubjectFilter_exists {
 export interface UserFilter_exists {
   classGroup?: boolean | null;
   archivedAt?: boolean | null;
+}
+
+export interface archiveClassGroupInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
 }
 
 export interface archiveGroupInput {
