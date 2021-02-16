@@ -87,8 +87,8 @@ class ClientErrorType
     ];
 
     const CANNOT_BE_DE_ARCHIVED = [
-      'code' => 'CANNOT_BE_DE_ARCHIVED',
-      'msg' => 'Cant be de-archived'
+        'code' => 'CANNOT_BE_DE_ARCHIVED',
+        'msg' => 'Cant be de-archived'
     ];
 
     const CANT_BE_ARCHIVED = [
@@ -97,12 +97,26 @@ class ClientErrorType
     ];
 
     const ALREADY_ARCHIVED = [
-      'code' => 'ALREADY_ARCHIVED',
-      'msg' => 'Already archived'
+        'code' => 'ALREADY_ARCHIVED',
+        'msg' => 'Already archived'
     ];
     const ALREADY_ACTIVE = [
         'code' => 'ALREADY_ACTIVE',
         'msg' => 'Already archived'
     ];
 
+    const NO_USER_FOUND = [
+        'code' => 'NO_USER_FOUND',
+        'msg' => 'No user has been found with this email'
+    ];
+
+    const PASSWORD_TOO_SHORT = [
+        'code' => 'PASSWORD_TOO_SHORT',
+        'msg' => 'Password too short'
+    ];
+
+    const ALREADY_SENT_RESET = [
+        'code' => 'ALREADY_SENT_RESET',
+        'msg' => 'Already send reset'
+    ];
 }
