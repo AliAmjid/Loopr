@@ -161,6 +161,10 @@ type Query {
 
     #
     #
+    ping: Boolean!
+
+    #
+    #
     me: SymfonyUserInterface
 }
 

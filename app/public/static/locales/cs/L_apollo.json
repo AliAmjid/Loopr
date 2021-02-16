@@ -3,7 +3,6 @@
     "commonError": "Nastala chyba",
     "unexpectedError": "Nastala neočekávané chyba",
     "unauthorized": "K této akci nemáte práva",
-    "noInternet": "Nejste připojeni k internetu",
     "invalidRoleConfig": "Konfigurace rolí je špatně",
     "userNotFound": "Přihlašovací údaje se neshodují",
     "duplicateValue": "Pokusili jste se vytytvořit záznam s duplicitními hodnotami",
