@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useTranslation } from 'lib/i18n';
@@ -18,6 +19,7 @@ const GroupList: React.FC<GroupListProps> = props => {
   const { t } = useTranslation(namespaces.pages.groups.index);
   const [addOpen, setAddOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
+  const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
 
   return (
     <>
@@ -47,6 +49,22 @@ const GroupList: React.FC<GroupListProps> = props => {
             }}
           >
             {t('common:actions.delete')}
+          </Button>,
+        ]}
+      />
+      <SimpleDialog
+        open={archiveId !== undefined}
+        title={t('archiveDialog.title')}
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setArchiveId(undefined)}
+          >
+            {t('common:actions.cancel')}
+          </Button>,
+          <Button key={1} color="primary" variant="contained">
+            {t('common:actions.archive')}
           </Button>,
         ]}
       />
@@ -82,6 +100,11 @@ const GroupList: React.FC<GroupListProps> = props => {
             <Tooltip key={0} title={`${t('common:actions.delete')}`}>
               <IconButton onClick={() => setDeleteId(group.id)}>
                 <DeleteIcon />
+              </IconButton>
+            </Tooltip>,
+            <Tooltip key={2} title={`${t('common:actions.archive')}`}>
+              <IconButton onClick={() => setArchiveId(group.id)}>
+                <ArchiveIcon />
               </IconButton>
             </Tooltip>,
           ],

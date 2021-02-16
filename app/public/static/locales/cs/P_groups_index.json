@@ -7,6 +7,9 @@
     "title": "Opravdu chcete odstranit skupinu?",
     "description": "tato akce je nevratná"
   },
+  "archiveDialog": {
+    "title": "Doopravdy chcete archivovat skupinu?"
+  },
   "snackbars": {
     "add": {
       "success": "Skupina úspěšně přidána"
