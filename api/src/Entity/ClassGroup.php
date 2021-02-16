@@ -82,6 +82,7 @@ class ClassGroup implements IGroup
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
+     * @Groups({"read", "exposed"})
      */
     private \DateTime $createdAt;
 
@@ -94,6 +95,7 @@ class ClassGroup implements IGroup
 
     /** @var \DateTime|null
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read", "exposed"})
      */
     private ?\DateTime $archivedAt;
 

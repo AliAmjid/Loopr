@@ -65,7 +65,7 @@ class Group implements IGroup
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Groups({"read:GROUP_SHOW_ALL", "exposed"})
+     * @Groups({"read", "exposed"})
      */
     private \DateTime $createdAt;
 
