@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useQuery } from '@apollo/client';
 import { Paper, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
+import namespaces from 'lib/i18n/namespaces';
 
 import {
   DashboardNotificationsQuery,
@@ -16,6 +19,8 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import DASHBOARD_NOTIFICATIONS_QUERY from '../queries/notifications';
 
 const NotificationsIndex: React.FC = () => {
+  const { t } = useTranslation(namespaces.pages.dashboard.index);
+
   const { data: notificationsData, loading: notificationsLoading } = useQuery<
     DashboardNotificationsQuery,
     DashboardNotificationsQueryVariables
@@ -32,7 +37,7 @@ const NotificationsIndex: React.FC = () => {
       <OverlayLoadingContainer>
         <OverlayLoading loading={notificationsLoading} />
       </OverlayLoadingContainer>
-      <Typography variant="h6">latest notifications</Typography>
+      <Typography variant="h6">{t('latestNotifications')}</Typography>
       <Notifications notifications={notifications} />
     </Paper>
   );

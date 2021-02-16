@@ -1,6 +1,9 @@
 export default {
   pages: {
     login: 'P_login',
+    dashboard: {
+      index: 'P_dashboard_index',
+    },
     acl: {
       index: 'P_acl_index',
       editRole: 'P_acl_editRole',
@@ -45,6 +48,7 @@ export default {
     Stepper: 'C_Stepper',
     EditableListItem: 'C_EditableListItem',
     EditSubject: 'C_EditSubject',
+    Notifications: 'C_Notifications',
   },
   other: {
     pages: 'O_pages',

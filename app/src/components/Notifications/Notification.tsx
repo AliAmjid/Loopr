@@ -8,6 +8,9 @@ import { useInView } from 'react-intersection-observer';
 
 import routes from 'config/routes';
 
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+
 import {
   NotificationsMarkReadNotificationsUserMutation,
   NotificationsMarkReadNotificationsUserMutationVariables,
@@ -18,6 +21,7 @@ import ListItem from './ListItem';
 import { Href, NotificationsProps } from './types';
 
 const Notification: React.FC<NotificationsProps> = props => {
+  const { t } = useTranslation(namespaces.components.Notifications);
   const [markAsRead] = useMutation<
     NotificationsMarkReadNotificationsUserMutation,
     NotificationsMarkReadNotificationsUserMutationVariables
@@ -40,13 +44,13 @@ const Notification: React.FC<NotificationsProps> = props => {
 
   switch (props.notification.type) {
     case 'NEW_POINT':
-      primary = 'newPoints';
+      primary = t('newPoint');
       secondary = `${props.notification.parameters.subjectName} - ${props.notification.parameters.examName}`;
       icon = <AddIcon />;
       href = routes.studentSubjects.index;
       break;
     case 'POINT_CHANGED':
-      primary = 'pointChanged';
+      primary = t('pointChanged');
       secondary = `${props.notification.parameters.subjectName} - ${props.notification.parameters.examName}`;
       icon = <UpdateIcon />;
       href = routes.studentSubjects.index;

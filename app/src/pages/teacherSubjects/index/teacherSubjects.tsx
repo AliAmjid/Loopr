@@ -148,7 +148,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
             onChange={e => props.onShowArchivedChange(e.target.checked)}
           />
         )}
-        label="Show archived "
+        label={t('showArchived')}
       />
     </Box>
   );
