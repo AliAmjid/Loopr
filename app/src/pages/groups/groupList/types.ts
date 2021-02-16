@@ -25,11 +25,13 @@ export interface GroupListProps {
   addGroupLoading: boolean;
   deleteLoading: boolean;
   filter: string;
+  showArchived: boolean;
   onAdd: (values: AddValues) => Promise<boolean>;
   onSelectedGroupChange: (group: string) => void;
   onUpdate: (values: UpdateValues) => Promise<boolean>;
   onDelete: (group: string) => Promise<boolean>;
   onFilterChange: (filter: string) => void;
+  onShowArchivedChange: (show: boolean) => void;
 }
 
 export interface AddDialogProps {

@@ -31,6 +31,7 @@ const GroupListIndex: React.FC = () => {
   const { t } = useTranslation(namespaces.pages.groups.index);
 
   const [filter, setFilter] = useState('');
+  const [showArchived, setShowArchived] = useState(false);
   const { setSelectedGroup } = useGroupsState(state => ({
     setSelectedGroup: state.setSelectedGroup,
   }));
@@ -121,6 +122,7 @@ const GroupListIndex: React.FC = () => {
       groupsLoading={groupsLoading}
       deleteLoading={deleteGroupLoading}
       filter={filter}
+      showArchived={showArchived}
       addGroupLoading={addGroupLoading}
       onSelectedGroupChange={(group: string) => {
         setSelectedGroup(group);
@@ -128,6 +130,7 @@ const GroupListIndex: React.FC = () => {
       onUpdate={updateHandler}
       onDelete={deleteHandler}
       onFilterChange={filter => setFilter(filter)}
+      onShowArchivedChange={setShowArchived}
     />
   );
 };

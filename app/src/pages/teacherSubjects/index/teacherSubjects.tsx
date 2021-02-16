@@ -23,6 +23,7 @@ import routes from 'config/routes';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import { formatDateToDay } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import ThickDivider from 'components/thickDivider';
@@ -112,6 +113,13 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                         <Typography variant="subtitle1">
                           Třídy: až to Ali dodělá
                         </Typography>
+                        {props.showArchived && (
+                          <Typography variant="subtitle1">
+                            {`Datum archivace: ${formatDateToDay(
+                              `${subject.archivedAt}`,
+                            )}`}
+                          </Typography>
+                        )}
                       </CardContent>
                       <CardActions className={classes.cardActions}>
                         <Link

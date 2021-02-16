@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
+import {
+  Button,
+  FormControlLabel,
+  IconButton,
+  Switch,
+  Tooltip,
+  Typography,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -90,6 +97,20 @@ const GroupList: React.FC<GroupListProps> = props => {
             setAddOpen(true);
           },
         }}
+        // prettier-ignore
+        topElement={(
+          <FormControlLabel
+            // prettier-ignore
+            control={(
+              <Switch
+                color="primary"
+                checked={props.showArchived}
+                onChange={e => props.onShowArchivedChange(e.target.checked)}
+              />
+            )}
+            label="Archived"
+          />
+        )}
         items={props.groups.map(group => ({
           id: group.id,
           primary: group?.section,

@@ -9,6 +9,7 @@ const TEACHER_SUBJECTS_SUBJECTS_QUERY = gql`
             id
             teacherCardColor
             evaluationSystem
+            archivedAt
             group {
               id
               section
