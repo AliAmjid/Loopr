@@ -34,7 +34,7 @@ export interface GroupListProps {
   onDelete: (group: string) => Promise<boolean>;
   onFilterChange: (filter: string) => void;
   onShowArchivedChange: (show: boolean) => void;
-  onArchive: (group: string) => Promise<boolean>;
+  onArchive: (group: string, archive: boolean) => Promise<boolean>;
 }
 
 export interface AddDialogProps {

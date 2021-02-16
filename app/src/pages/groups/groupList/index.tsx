@@ -121,10 +121,20 @@ const GroupListIndex: React.FC = () => {
       });
   };
 
-  const archiveHandler = (group: string): Promise<boolean> => {
-    return archiveGroup({ variables: { input: { id: group, archive: true } } })
+  const archiveHandler = (
+    group: string,
+    archive: boolean,
+  ): Promise<boolean> => {
+    return archiveGroup({ variables: { input: { id: group, archive } } })
       .then(() => {
-        enqueueSnackbar(t('snackbars.archive.success'), { variant: 'success' });
+        if (archive)
+          enqueueSnackbar(t('snackbars.archive.success'), {
+            variant: 'success',
+          });
+        else
+          enqueueSnackbar(t('snackbars.unarchive.success'), {
+            variant: 'success',
+          });
 
         return true;
       })

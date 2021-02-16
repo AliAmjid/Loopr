@@ -54,7 +54,8 @@
     "search": "Vyhledat",
     "upload": "Nahrát",
     "download": "Stáhnout",
-    "archive": "Archivovat"
+    "archive": "Archivovat",
+    "unarchive": "Zrušit archivaci"
   },
   "phrases": {
     "yes": "Ano",

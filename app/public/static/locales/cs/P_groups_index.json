@@ -8,7 +8,8 @@
     "description": "tato akce je nevratná"
   },
   "archiveDialog": {
-    "title": "Doopravdy chcete archivovat skupinu?"
+    "archiveTitle": "Doopravdy chcete archivovat skupinu?",
+    "unarchiveTitle": "Doopravdy chcete zrušit archivování skupiny?"
   },
   "snackbars": {
     "add": {
@@ -25,6 +26,9 @@
     },
     "archive": {
       "success": "Skupina úspěšně archivována"
+    },
+    "unarchive": {
+      "success": "Archiování skupiny úspěšně zrušeno"
     }
   }
 }

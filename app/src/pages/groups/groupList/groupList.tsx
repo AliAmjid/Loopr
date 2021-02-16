@@ -11,6 +11,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -62,7 +63,11 @@ const GroupList: React.FC<GroupListProps> = props => {
       <SimpleDialog
         open={archiveId !== undefined}
         loading={props.archiveLoading}
-        title={t('archiveDialog.title')}
+        title={
+          props.showArchived
+            ? t('archiveDialog.unarchiveTitle')
+            : t('archiveDialog.archiveTitle')
+        }
         actions={[
           <Button
             key={0}
@@ -76,12 +81,16 @@ const GroupList: React.FC<GroupListProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              props.onArchive(`${archiveId}`).then(success => {
-                if (success) setArchiveId(undefined);
-              });
+              props
+                .onArchive(`${archiveId}`, !props.showArchived)
+                .then(success => {
+                  if (success) setArchiveId(undefined);
+                });
             }}
           >
-            {t('common:actions.archive')}
+            {props.showArchived
+              ? t('common:actions.unarchive')
+              : t('common:actions.archive')}
           </Button>,
         ]}
       />
@@ -134,11 +143,21 @@ const GroupList: React.FC<GroupListProps> = props => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>,
-            <Tooltip key={2} title={`${t('common:actions.archive')}`}>
-              <IconButton onClick={() => setArchiveId(group.id)}>
-                <ArchiveIcon />
-              </IconButton>
-            </Tooltip>,
+            <>
+              {props.showArchived ? (
+                <Tooltip key={2} title={`${t('common:actions.unarchive')}`}>
+                  <IconButton onClick={() => setArchiveId(group.id)}>
+                    <UnarchiveIcon />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Tooltip key={2} title={`${t('common:actions.archive')}`}>
+                  <IconButton onClick={() => setArchiveId(group.id)}>
+                    <ArchiveIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </>,
           ],
         }))}
         filter={props.filter}
