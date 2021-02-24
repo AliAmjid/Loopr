@@ -57,7 +57,7 @@ class HasUserExamInSubject extends AbstractContextAwareFilter
     public function getDescription(string $resourceClass): array
     {
         return [
-            "HasUserExamInSubject" => [
+            "hasUserExamInSchoolPeriod" => [
                 'property' => 'hasUserExamInSchoolPeriod',
                 'type' => 'array',
                 'required' => false
