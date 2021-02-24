@@ -58,7 +58,7 @@ class HasUserExamInSubject extends AbstractContextAwareFilter
     {
         return [
             "HasUserExamInSubject" => [
-                'property' => 'subjectStudentFilter',
+                'property' => 'hasUserExamInSchoolPeriod',
                 'type' => 'array',
                 'required' => false
             ]
