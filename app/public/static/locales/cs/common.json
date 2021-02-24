@@ -6,7 +6,8 @@
       "email": "Email",
       "role": "Role",
       "createdAt": "Registrován v",
-      "classGroup": "Třída"
+      "classGroup": "Třída",
+      "archived": "Archivován"
     },
     "classGroup": {
       "section": "Název",
@@ -37,6 +38,9 @@
       "to": "Do",
       "quarter": "Čtvrtletí",
       "schoolYear": "Školní rok"
+    },
+    "subject": {
+      "archivedAt": "Datum archivace"
     }
   },
   "actions": {
@@ -48,6 +52,14 @@
     "select": "Zvolit",
     "submit": "Potvrdit",
     "search": "Vyhledat",
-    "upload": "Nahrát"
+    "upload": "Nahrát",
+    "download": "Stáhnout",
+    "archive": "Archivovat",
+    "unarchive": "Zrušit archivaci"
+  },
+  "phrases": {
+    "yes": "Ano",
+    "no": "Ne",
+    "irreversible": "Tato operace je nevratná"
   }
 }

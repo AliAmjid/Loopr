@@ -1,12 +1,14 @@
 # Vyučované předměty
 Zde jsou zobrazeny všechny vyučované skupiny/třídy, rozděleny podle předmětů.
-Každý předmět obsahuje: 
+
+Každá sekce předmětu obsahuje vyučované skupiny/třídy. 
+Karta vyučovaného skupiny/třídy obsahuje: 
 * Název skupiny/třídy
-* Ikonu tužky pro změnu barvy horního pruhu buňky
-* Tlačítko `hodnocení` pro přesměrování do hodnocení předmětu  
+* Ikonu tužky pro změnu barvy horního pruhu
+* Tlačítko `hodnocení`, které slouží k přesměrování do [listu hodnocení této třídy](cs/pages/teacherSubjects/pointSystem/)
 
 ![](images/grading-overview.png)
 
-Pro změnu barvy horního pruhu buňky, klikněte na `ikonu tužku` nebo na barevný pruh.  
+Ukázka změny barvy horního pruhu vybrané karty skupiny/třídy, spuštěná kliknutím na `ikonu tužky`.
 
 ![](images/grading-overview-colors.png)

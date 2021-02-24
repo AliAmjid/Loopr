@@ -11,6 +11,7 @@ export interface SideListProps {
     onValueChange?: (value: string) => Promise<boolean>;
     additionalActions?: JSX.Element[];
   }[];
+  topElement?: JSX.Element;
   bottomAction?: {
     icon: JSX.Element;
     onClick: MouseEventHandler<HTMLElement>;

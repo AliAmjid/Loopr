@@ -4,6 +4,7 @@ import { ApolloQueryResult, useApolloClient, useQuery } from '@apollo/client';
 import { Query } from 'material-table';
 
 import {
+  UserFilter_exists,
   UsersRolesQuery,
   UsersUsersQuery,
   UsersUsersQueryVariables,
@@ -44,6 +45,13 @@ const UsersIndex: React.FC = () => {
     )?.value;
     const rolesFilter = query.filters.find(f => f.column.field === 'role.id')
       ?.value;
+    const archivedFilter: string[] =
+      query.filters.find(f => f.column.field === 'archived')?.value || [];
+
+    const exists: UserFilter_exists[] = [];
+    archivedFilter.forEach(archived =>
+      exists.push({ archivedAt: archived === 'true' }),
+    );
 
     return client
       .query<UsersUsersQuery, UsersUsersQueryVariables>({
@@ -53,6 +61,8 @@ const UsersIndex: React.FC = () => {
           email: emailFilter,
           lastName: lastNameFilter,
           firstName: firstNameFilter,
+          roles: rolesFilter,
+          exists,
         },
       })
       .then(res => {

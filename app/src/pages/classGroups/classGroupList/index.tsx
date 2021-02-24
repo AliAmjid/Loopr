@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { useSnackbar } from 'notistack';
@@ -6,12 +6,16 @@ import { useSnackbar } from 'notistack';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import CLASS_GROUPS_ARCHIVE_CLASS_GROUP_MUTATION from 'pages/classGroups/mutations/archiveClassGroup';
 import CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION from 'pages/classGroups/mutations/deleteClassGroup';
 
 import {
   ClassGroupsAddClassGroupMutation,
   ClassGroupsAddClassGroupMutationVariables,
+  ClassGroupsArchiveClassGroupMutation,
+  ClassGroupsArchiveClassGroupMutationVariables,
   ClassGroupsClassGroupsQuery,
+  ClassGroupsClassGroupsQueryVariables,
   ClassGroupsDeleteClassGroupMutation,
   ClassGroupsDeleteClassGroupMutationVariables,
   ClassGroupsUpdateClassGroupMutation,
@@ -31,9 +35,13 @@ const ClassGroupListIndex: React.FC = () => {
   const { setSelectedClassGroup } = useClassGroupsState(state => ({
     setSelectedClassGroup: state.setSelectedClassGroup,
   }));
+  const [showArchived, setShowArchived] = useState(false);
   const { data: classesData, loading: classGroupLoading } = useQuery<
-    ClassGroupsClassGroupsQuery
-  >(CLASS_GROUPS_CLASS_GROUPS_QUERY);
+    ClassGroupsClassGroupsQuery,
+    ClassGroupsClassGroupsQueryVariables
+  >(CLASS_GROUPS_CLASS_GROUPS_QUERY, {
+    variables: { exists: [{ archivedAt: showArchived }] },
+  });
   const [addClassGroup, { loading: addClassGroupLoading }] = useMutation<
     ClassGroupsAddClassGroupMutation,
     ClassGroupsAddClassGroupMutationVariables
@@ -45,7 +53,6 @@ const ClassGroupListIndex: React.FC = () => {
     ClassGroupsUpdateClassGroupMutation,
     ClassGroupsUpdateClassGroupMutationVariables
   >(CLASS_GROUPS_UPDATE_CLASS_GROUP_MUTATION, {
-    // TODO typename
     refetchQueries: ['ClassGroupsClassGroupsQuery'],
     awaitRefetchQueries: true,
   });
@@ -53,6 +60,13 @@ const ClassGroupListIndex: React.FC = () => {
     ClassGroupsDeleteClassGroupMutation,
     ClassGroupsDeleteClassGroupMutationVariables
   >(CLASS_GROUPS_DELETE_CLASS_GROUP_MUTATION, {
+    refetchQueries: ['ClassGroupsClassGroupsQuery'],
+    awaitRefetchQueries: true,
+  });
+  const [archiveClassGroup, { loading: archiveLoading }] = useMutation<
+    ClassGroupsArchiveClassGroupMutation,
+    ClassGroupsArchiveClassGroupMutationVariables
+  >(CLASS_GROUPS_ARCHIVE_CLASS_GROUP_MUTATION, {
     refetchQueries: ['ClassGroupsClassGroupsQuery'],
     awaitRefetchQueries: true,
   });
@@ -102,6 +116,26 @@ const ClassGroupListIndex: React.FC = () => {
       });
   };
 
+  const archiveHandler = (
+    classGroup: string,
+    archive: boolean,
+  ): Promise<boolean> => {
+    return archiveClassGroup({
+      variables: { input: { id: classGroup, archive } },
+    })
+      .then(() => {
+        enqueueSnackbar(
+          archive
+            ? t('snackbars.archive.success')
+            : t('snackbars.unarchive.success'),
+          { variant: 'success' },
+        );
+
+        return true;
+      })
+      .catch(() => false);
+  };
+
   const classGroups: ClassGroup[] = [];
   (classesData?.classGroups?.edges?.map(e => e?.node) || []).forEach(
     classGroup => {
@@ -118,12 +152,16 @@ const ClassGroupListIndex: React.FC = () => {
       classGroupsLoading={classGroupLoading}
       updateClassGroupLoading={updateClassGroupLoading}
       addClassGroupLoading={addClassGroupLoading}
+      showArchived={showArchived}
       deleteLoading={deleteClassGroupLoading}
+      archiveLoading={archiveLoading}
       onSelectedClassChange={(cl: string) => {
         setSelectedClassGroup(cl);
       }}
       onUpdate={updateHandler}
       onDelete={deleteHandler}
+      onShowArchivedChange={setShowArchived}
+      onArchive={archiveHandler}
     />
   );
 };

@@ -1,12 +1,7 @@
 import { PropsWithChildren } from 'react';
 
+import { Notifications } from 'components/Notifications/types';
 import { Breadcrumbs } from 'components/withPage/Page/AppBar/Breadcrumbs/types';
-
-export interface Notification {
-  id: string;
-  type: string;
-  parameters: Record<string, any>;
-}
 
 export interface User {
   firstname: string;
@@ -15,7 +10,8 @@ export interface User {
     name?: string;
     resources?: ({ name: string } | undefined | null)[] | null;
   } | null;
-  notifications: Notification[];
+  notifications: Notifications;
+  notificationViewAtNullCount: number;
 }
 
 export type NullableUser = User | null | undefined;
@@ -27,6 +23,7 @@ export type PageProps = PropsWithChildren<{
   helpPath?: string;
   user: NullableUser;
   onFetchMoreNotifications: () => void;
+  onResetFetchedMoreNotifications: () => void;
 }>;
 
 export interface PageState {

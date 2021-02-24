@@ -7,6 +7,10 @@
     "title": "Opravdu chcete odstranit skupinu?",
     "description": "tato akce je nevratná"
   },
+  "archiveDialog": {
+    "archiveTitle": "Doopravdy chcete archivovat skupinu?",
+    "unarchiveTitle": "Doopravdy chcete zrušit archivování skupiny?"
+  },
   "snackbars": {
     "add": {
       "success": "Skupina úspěšně přidána"
@@ -19,6 +23,12 @@
     },
     "studentsEdit": {
       "success": "Studenti byli úspěšně upraveni"
+    },
+    "archive": {
+      "success": "Skupina úspěšně archivována"
+    },
+    "unarchive": {
+      "success": "Archivování skupiny úspěšně zrušeno"
     }
   }
 }

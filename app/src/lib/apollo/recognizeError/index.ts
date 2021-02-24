@@ -30,13 +30,6 @@ const recognizeError = (
   message: string;
   variant: VariantType;
 } => {
-  const { networkError } = error;
-  if (networkError) {
-    if (networkError.message === FAILED_TO_FETCH) {
-      return { message: t('errors.noInternet'), variant: 'warning' };
-    }
-  }
-
   const hasErrorCode = (
     errors: ReadonlyArray<GraphqlErrorWithLooprError>,
     code: string,

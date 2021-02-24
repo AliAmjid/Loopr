@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Switch,
+  Typography,
+} from '@material-ui/core';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import { Query } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -16,7 +24,8 @@ import { Subject as SubjectT, SubjectProps } from './types';
 const Subject: React.FC<SubjectProps> = props => {
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [dialogLoading, setDialogLoading] = useState(false);
+  const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
 
   if (!props.selectedSubjectType)
     return (
@@ -33,8 +42,21 @@ const Subject: React.FC<SubjectProps> = props => {
 
   return (
     <Box p={2}>
+      <Box display="flex" justifyContent="flex-end">
+        <FormControlLabel
+          // prettier-ignore
+          control={(
+            <Switch
+              color="primary"
+              checked={props.showArchived}
+              onChange={e => props.onShowArchivedChange(e.target.checked)}
+            />
+          )}
+          label={t('showArchived')}
+        />
+      </Box>
       <SimpleDialog
-        loading={deleteLoading}
+        loading={dialogLoading}
         open={Boolean(deleteId)}
         title={t('deleteDialog.title')}
         content={<Typography>{t('deleteDialog.description')}</Typography>}
@@ -51,9 +73,9 @@ const Subject: React.FC<SubjectProps> = props => {
             color="primary"
             variant="contained"
             onClick={() => {
-              setDeleteLoading(true);
+              setDialogLoading(true);
               props.onDelete(`${deleteId}`).then(successful => {
-                setDeleteLoading(false);
+                setDialogLoading(false);
                 if (successful) setDeleteId(undefined);
               });
             }}
@@ -62,8 +84,46 @@ const Subject: React.FC<SubjectProps> = props => {
           </Button>,
         ]}
       />
+      <SimpleDialog
+        open={archiveId !== undefined}
+        loading={dialogLoading}
+        title={
+          props.showArchived
+            ? t('unarchiveDialogTitle')
+            : t('archiveDialogTitle')
+        }
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setArchiveId(undefined)}
+          >
+            {t('common:actions.cancel')}
+          </Button>,
+          <Button
+            key={1}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              setDialogLoading(true);
+              props
+                .onArchive(`${archiveId}`, !props.showArchived)
+                .then(success => {
+                  setDialogLoading(false);
+                  if (success) {
+                    setArchiveId(undefined);
+                  }
+                });
+            }}
+          >
+            {props.showArchived
+              ? t('common:actions.unarchive')
+              : t('common:actions.archive')}
+          </Button>,
+        ]}
+      />
       <MaterialTable
-        key={`${props.selectedSubjectType}-${deleteLoading}`}
+        key={`${props.selectedSubjectType}-${dialogLoading}-${props.showArchived}`}
         title={t('subjects')}
         uniqueName="pages/subjects/subject/subject"
         columns={[
@@ -81,6 +141,11 @@ const Subject: React.FC<SubjectProps> = props => {
             title: t('teacher'),
             render: (row: SubjectT) =>
               `${row.teacher?.firstname} ${row.teacher?.lastname}`,
+          },
+          {
+            title: t('common:gqlObjects.subject.archivedAt'),
+            field: 'archivedAt',
+            hidden: !props.showArchived,
           },
         ]}
         options={{ filtering: false, exportButton: true }}
@@ -106,6 +171,16 @@ const Subject: React.FC<SubjectProps> = props => {
             onClick: (_, row) => {
               row = row as SubjectT;
               props.onEdit(row.id);
+            },
+          },
+          {
+            icon: props.showArchived ? UnarchiveIcon : ArchiveIcon,
+            tooltip: props.showArchived
+              ? t('common:actions.unarchive')
+              : t('common:actions.archive'),
+            onClick: (_, row) => {
+              row = row as SubjectT;
+              setArchiveId(row.id);
             },
           },
         ]}

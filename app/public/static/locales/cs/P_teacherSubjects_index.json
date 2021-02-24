@@ -1,7 +1,9 @@
 {
   "evaluation": "Hodnocení",
   "noSubjects": "Nevyučujete žádné předměty",
+  "noArchivedSubjects": "Nemáte zádné archivované předměty",
   "changeColorTitle": "Změna barvy předmětu",
+  "showArchived": "Zobrazit arhivované předměty",
   "snackbars": {
     "updateColor": "Barva předmětu úspěšně upravena"
   }

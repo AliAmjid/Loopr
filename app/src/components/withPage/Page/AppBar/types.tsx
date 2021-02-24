@@ -5,4 +5,5 @@ export interface AppBarProps {
   helpPath?: string;
   user: NullableUser;
   onFetchMoreNotifications: () => void;
+  onResetFetchedMoreNotifications: () => void;
 }

@@ -18,6 +18,7 @@ const WITH_PAGE_NOTIFICATIONS_QUERY = gql`
           node {
             id
             type
+            viewAt
             parameters
           }
           cursor

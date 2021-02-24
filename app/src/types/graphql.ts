@@ -199,6 +199,50 @@ export interface EditSubjectTeacherQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: NotificationsMarkReadNotificationsUserMutation
+// ====================================================
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  viewAt: string | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges {
+  __typename: "NotificationEdge";
+  node: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges_node | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications {
+  __typename: "NotificationConnection";
+  edges: (NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications_edges | null)[] | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user {
+  __typename: "User";
+  id: string;
+  notifications: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user_notifications | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser {
+  __typename: "markReadNotificationUserPayload";
+  user: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser_user | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutation {
+  markReadNotificationUser: NotificationsMarkReadNotificationsUserMutation_markReadNotificationUser | null;
+}
+
+export interface NotificationsMarkReadNotificationsUserMutationVariables {
+  input: markReadNotificationUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UserImportTableCreateUserMutation
 // ====================================================
 
@@ -245,6 +289,33 @@ export interface UserImportTableAclRolesQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: WithPageMarkReadAllNotificationUserMutation
+// ====================================================
+
+export interface WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser {
+  __typename: "markReadAllNotificationsUserPayload";
+  user: WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser_user | null;
+}
+
+export interface WithPageMarkReadAllNotificationUserMutation {
+  markReadAllNotificationsUser: WithPageMarkReadAllNotificationUserMutation_markReadAllNotificationsUser | null;
+}
+
+export interface WithPageMarkReadAllNotificationUserMutationVariables {
+  input: markReadAllNotificationsUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: WithPageMeUserQuery
 // ====================================================
 
@@ -267,6 +338,7 @@ export interface WithPageMeUserQuery_meUser {
   firstname: string;
   lastname: string;
   role: WithPageMeUserQuery_meUser_role;
+  notificationViewAtNullCount: number;
 }
 
 export interface WithPageMeUserQuery {
@@ -286,6 +358,7 @@ export interface WithPageNotificationsQuery_meUser_notifications_edges_node {
   __typename: "Notification";
   id: string;
   type: string;
+  viewAt: string | null;
   parameters: any;
 }
 
@@ -528,6 +601,33 @@ export interface ClassGroupsAddClassGroupMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ClassGroupsArchiveClassGroupMutation
+// ====================================================
+
+export interface ClassGroupsArchiveClassGroupMutation_archiveClassGroup_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
+export interface ClassGroupsArchiveClassGroupMutation_archiveClassGroup {
+  __typename: "archiveClassGroupPayload";
+  classGroup: ClassGroupsArchiveClassGroupMutation_archiveClassGroup_classGroup | null;
+}
+
+export interface ClassGroupsArchiveClassGroupMutation {
+  archiveClassGroup: ClassGroupsArchiveClassGroupMutation_archiveClassGroup | null;
+}
+
+export interface ClassGroupsArchiveClassGroupMutationVariables {
+  input: archiveClassGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ClassGroupsDeleteClassGroupMutation
 // ====================================================
 
@@ -642,6 +742,10 @@ export interface ClassGroupsClassGroupsQuery_classGroups {
 
 export interface ClassGroupsClassGroupsQuery {
   classGroups: ClassGroupsClassGroupsQuery_classGroups | null;
+}
+
+export interface ClassGroupsClassGroupsQueryVariables {
+  exists?: (ClassGroupFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -792,16 +896,141 @@ export interface ClassGroupsUsersQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: Errors502MeUserQuery
+// GraphQL query operation: DashboardNotificationsQuery
 // ====================================================
 
-export interface Errors502MeUserQuery_meUser {
+export interface DashboardNotificationsQuery_meUser_notifications_edges_node {
+  __typename: "Notification";
+  id: string;
+  viewAt: string | null;
+  parameters: any;
+  type: string;
+}
+
+export interface DashboardNotificationsQuery_meUser_notifications_edges {
+  __typename: "NotificationEdge";
+  node: DashboardNotificationsQuery_meUser_notifications_edges_node | null;
+}
+
+export interface DashboardNotificationsQuery_meUser_notifications {
+  __typename: "NotificationConnection";
+  edges: (DashboardNotificationsQuery_meUser_notifications_edges | null)[] | null;
+}
+
+export interface DashboardNotificationsQuery_meUser {
+  __typename: "User";
+  notifications: DashboardNotificationsQuery_meUser_notifications | null;
+}
+
+export interface DashboardNotificationsQuery {
+  meUser: DashboardNotificationsQuery_meUser | null;
+}
+
+export interface DashboardNotificationsQueryVariables {
+  first: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: DashboardWrittenExamsQuery
+// ====================================================
+
+export interface DashboardWrittenExamsQuery_meUser {
   __typename: "User";
   id: string;
 }
 
-export interface Errors502MeUserQuery {
-  meUser: Errors502MeUserQuery_meUser | null;
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node {
+  __typename: "Point";
+  points: number;
+  examWritten: boolean;
+  user: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node_user;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges {
+  __typename: "PointEdge";
+  node: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges_node | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points {
+  __typename: "PointConnection";
+  edges: (DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points_edges | null)[] | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem {
+  __typename: "PointSystem";
+  maxPoints: number;
+  points: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem_points | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject_percentsToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subjectType {
+  __typename: "SubjectType";
+  id: string;
+  name: string;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node_subject {
+  __typename: "Subject";
+  evaluationSystem: string;
+  percentsToMarkConvert: DashboardWrittenExamsQuery_writtenExams_edges_node_subject_percentsToMarkConvert;
+  subjectType: DashboardWrittenExamsQuery_writtenExams_edges_node_subject_subjectType | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges_node {
+  __typename: "Exam";
+  name: string;
+  writtenAt: string;
+  pointSystem: DashboardWrittenExamsQuery_writtenExams_edges_node_pointSystem | null;
+  subject: DashboardWrittenExamsQuery_writtenExams_edges_node_subject | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams_edges {
+  __typename: "ExamEdge";
+  node: DashboardWrittenExamsQuery_writtenExams_edges_node | null;
+}
+
+export interface DashboardWrittenExamsQuery_writtenExams {
+  __typename: "ExamConnection";
+  edges: (DashboardWrittenExamsQuery_writtenExams_edges | null)[] | null;
+}
+
+export interface DashboardWrittenExamsQuery {
+  meUser: DashboardWrittenExamsQuery_meUser | null;
+  writtenExams: DashboardWrittenExamsQuery_writtenExams | null;
+}
+
+export interface DashboardWrittenExamsQueryVariables {
+  first: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: Errors502PingQuery
+// ====================================================
+
+export interface Errors502PingQuery {
+  ping: boolean;
 }
 
 /* tslint:disable */
@@ -829,6 +1058,33 @@ export interface GroupsAddGroupMutation {
 
 export interface GroupsAddGroupMutationVariables {
   input: createGroupInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: GroupsArchiveGroupMutation
+// ====================================================
+
+export interface GroupsArchiveGroupMutation_archiveGroup_group {
+  __typename: "Group";
+  id: string;
+}
+
+export interface GroupsArchiveGroupMutation_archiveGroup {
+  __typename: "archiveGroupPayload";
+  group: GroupsArchiveGroupMutation_archiveGroup_group | null;
+}
+
+export interface GroupsArchiveGroupMutation {
+  archiveGroup: GroupsArchiveGroupMutation_archiveGroup | null;
+}
+
+export interface GroupsArchiveGroupMutationVariables {
+  input: archiveGroupInput;
 }
 
 /* tslint:disable */
@@ -1015,6 +1271,7 @@ export interface GroupsGroupsQuery_groups_edges_node {
   __typename: "Group";
   id: string;
   section: string;
+  archivedAt: string | null;
 }
 
 export interface GroupsGroupsQuery_groups_edges {
@@ -1033,6 +1290,7 @@ export interface GroupsGroupsQuery {
 
 export interface GroupsGroupsQueryVariables {
   section?: string | null;
+  exists?: (GroupFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -1577,6 +1835,33 @@ export interface SubjectsAddSubjectTypeMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: SubjectsARchiveSubjectMutation
+// ====================================================
+
+export interface SubjectsARchiveSubjectMutation_archiveSubject_subject {
+  __typename: "Subject";
+  id: string;
+}
+
+export interface SubjectsARchiveSubjectMutation_archiveSubject {
+  __typename: "archiveSubjectPayload";
+  subject: SubjectsARchiveSubjectMutation_archiveSubject_subject | null;
+}
+
+export interface SubjectsARchiveSubjectMutation {
+  archiveSubject: SubjectsARchiveSubjectMutation_archiveSubject | null;
+}
+
+export interface SubjectsARchiveSubjectMutationVariables {
+  input: archiveSubjectInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SubjectsDeleteSubjectMutation
 // ====================================================
 
@@ -1685,6 +1970,7 @@ export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teache
 export interface SubjectsSubjectTypeQuery_subjectType_subjects_edges_node {
   __typename: "Subject";
   id: string;
+  archivedAt: string | null;
   group: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_group | null;
   classGroup: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_classGroup | null;
   teacher: SubjectsSubjectTypeQuery_subjectType_subjects_edges_node_teacher;
@@ -1718,6 +2004,7 @@ export interface SubjectsSubjectTypeQueryVariables {
   subjectsLast?: number | null;
   subjectsAfter?: string | null;
   subjectsBefore?: string | null;
+  exists?: (SubjectFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -1809,6 +2096,7 @@ export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node {
   id: string;
   teacherCardColor: string | null;
   evaluationSystem: string;
+  archivedAt: string | null;
   group: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_group | null;
   classGroup: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup | null;
   subjectType: TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_subjectType | null;
@@ -1831,6 +2119,10 @@ export interface TeacherSubjectsSubjectsQuery_meUser {
 
 export interface TeacherSubjectsSubjectsQuery {
   meUser: TeacherSubjectsSubjectsQuery_meUser | null;
+}
+
+export interface TeacherSubjectsSubjectsQueryVariables {
+  exists?: (SubjectFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -2148,6 +2440,7 @@ export interface UsersUsersQuery_users_edges_node {
   firstname: string;
   lastname: string;
   createdAt: string;
+  archivedAt: string | null;
   role: UsersUsersQuery_users_edges_node_role;
 }
 
@@ -2175,6 +2468,8 @@ export interface UsersUsersQueryVariables {
   email?: string | null;
   firstName?: string | null;
   lastName?: string | null;
+  roles?: string[] | null;
+  exists?: (UserFilter_exists | null)[] | null;
 }
 
 /* tslint:disable */
@@ -2289,6 +2584,41 @@ export interface TeacherSubjectsSubjectPointSystemSubectUserFragment {
 // START Enums and Input Objects
 //==============================================================
 
+export interface ClassGroupFilter_exists {
+  archivedAt?: boolean | null;
+}
+
+export interface GroupFilter_exists {
+  archivedAt?: boolean | null;
+}
+
+export interface SubjectFilter_exists {
+  archivedAt?: boolean | null;
+}
+
+export interface UserFilter_exists {
+  classGroup?: boolean | null;
+  archivedAt?: boolean | null;
+}
+
+export interface archiveClassGroupInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
+}
+
+export interface archiveGroupInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
+}
+
+export interface archiveSubjectInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
+}
+
 export interface changePasswordUserInput {
   oldPassword: string;
   newPassword: string;
@@ -2359,7 +2689,6 @@ export interface createUserInput {
   role: string;
   lastname: string;
   firstname: string;
-  classGroup?: string | null;
   rawPassword?: string | null;
   clientMutationId?: string | null;
 }
@@ -2395,6 +2724,15 @@ export interface deleteSubjectInput {
 }
 
 export interface deleteSubjectTypeInput {
+  id: string;
+  clientMutationId?: string | null;
+}
+
+export interface markReadAllNotificationsUserInput {
+  clientMutationId?: string | null;
+}
+
+export interface markReadNotificationUserInput {
   id: string;
   clientMutationId?: string | null;
 }
@@ -2472,7 +2810,6 @@ export interface updateUserInput {
   role?: string | null;
   lastname?: string | null;
   firstname?: string | null;
-  classGroup?: string | null;
   rawPassword?: string | null;
   clientMutationId?: string | null;
 }

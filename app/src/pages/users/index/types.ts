@@ -8,6 +8,8 @@ export interface User {
   name?: string;
   username?: string;
   createdAt?: string;
+  archivedAt?: string;
+  archived?: boolean;
   role?: {
     id: string;
     name: string;

@@ -14,18 +14,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TestCell: React.FC<
-  TableCellProps & { backgroundColor?: string }
-> = props => {
+const TestCell: React.FC<TableCellProps & { backgroundColor?: string }> = ({
+  backgroundColor,
+  children,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
-    <TableCell
-      className={classes.root}
-      style={{ backgroundColor: props.backgroundColor }}
-      {...props}
-    >
-      {props.children}
+    <TableCell className={classes.root} style={{ backgroundColor }} {...rest}>
+      {children}
     </TableCell>
   );
 };

@@ -148,9 +148,17 @@ const MaterialTable = <RowD extends {}>(
     props.options?.selection,
   ]);
 
-  let pageSizeOptions = [50, 100, 200, 400];
-  if (props.totalCount && props.totalCount > 400) {
-    pageSizeOptions = [...pageSizeOptions, props.totalCount];
+  const defaultPageSizeOptions = [50, 100, 200, 400];
+  const [pageSizeOptions, setPageSizeOptions] = useState(
+    defaultPageSizeOptions,
+  );
+
+  if (
+    props.totalCount &&
+    props.totalCount > 400 &&
+    pageSizeOptions[pageSizeOptions.length - 1] !== props.totalCount
+  ) {
+    setPageSizeOptions([...defaultPageSizeOptions, props.totalCount]);
   }
 
   return (

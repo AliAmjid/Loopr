@@ -18,9 +18,8 @@ import { getDisplayName } from 'recompose';
 import routes from 'config/routes';
 
 import accessContext, {
-  BAD_GATEWAY,
   INVALID_COOKIE,
-  NO_INTERNET,
+  OFFLINE,
   UNAUTHORIZED,
 } from 'lib/apollo/accessContext';
 import recognizeError from 'lib/apollo/recognizeError';
@@ -59,7 +58,16 @@ const withApollo = <ComponentProps extends {} = any>(
       error.networkError?.statusCode === 502 ||
       error.networkError?.message === FAILED_TO_FETCH
     ) {
-      router.push(routes.errors['5O2'].index);
+      if (access.value !== OFFLINE) {
+        access.set(OFFLINE);
+        router.push({
+          pathname: routes.errors['5O2'].index,
+          query: {
+            pathname: router.pathname,
+            ...router.query,
+          },
+        });
+      }
     } else if (
       error.graphQLErrors?.some(
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
