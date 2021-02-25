@@ -1741,6 +1741,7 @@ export interface StudentSubjectsLearnedSubjectsQuery {
 
 export interface StudentSubjectsLearnedSubjectsQueryVariables {
   schoolPeriods?: string[] | null;
+  schoolPeriodsIterable?: any | null;
 }
 
 /* tslint:disable */

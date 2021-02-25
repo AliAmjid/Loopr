@@ -1,8 +1,11 @@
 import { gql } from '@apollo/client';
 
 const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
-  query StudentSubjectsLearnedSubjectsQuery($schoolPeriods: [String!]) {
-    learnedSubjects {
+  query StudentSubjectsLearnedSubjectsQuery(
+    $schoolPeriods: [String!]
+    $schoolPeriodsIterable: Iterable
+  ) {
+    learnedSubjects(hasUserExamInSchoolPeriod: $schoolPeriodsIterable) {
       edges {
         node {
           id

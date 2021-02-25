@@ -28,6 +28,8 @@ const StudentSubjectIndex: React.FC = () => {
     variables: {
       schoolPeriods:
         selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
+      schoolPeriodsIterable:
+        selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
     },
   });
 
