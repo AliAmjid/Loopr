@@ -5,7 +5,6 @@ namespace App\Entity;
 
 
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use App\Annotation\InjectDateTime;
@@ -13,6 +12,7 @@ use App\Entity\Attributes\Tid;
 use App\Enum\AclResourceEnum;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
+use App\Filter\HasUserExamInSubject;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
@@ -29,6 +29,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(filterClass: DateFilter::class, properties: [
 
 ])]
+#[ApiFilter(filterClass: HasUserExamInSubject::class, properties: [
+    'group',
+    'classGroup'
+])]
+
 class Subject
 {
     use Tid;

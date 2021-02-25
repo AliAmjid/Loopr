@@ -27,9 +27,10 @@ class ResetPasswordController extends AbstractController
 
     #[Mutation]
     public function applyPasswordResetUser(
-        string $email,
-        string $feRedirectPagePattern
+        string $email
     ): bool {
+        $feRedirectPagePattern = $this->getParameter('passwordRecoveryUrl');
+
         $em = $this->getDoctrine()->getManager();
         /** @var User $user */
         $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
