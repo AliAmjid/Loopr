@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Box,
   makeStyles,
   Paper,
   Table,
@@ -32,7 +33,9 @@ const Exams: React.FC<ExamsProps> = props => {
     <Paper className={classes.paper}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
-        <Typography variant="h6">{t('latestEvaluation')}</Typography>
+        <Box pb={2}>
+          <Typography variant="h6">{t('latestEvaluation')}</Typography>
+        </Box>
         <Table size="small">
           <TableBody>
             {props.exams.map(exam => {

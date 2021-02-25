@@ -13,6 +13,7 @@ const WITH_PAGE_NOTIFICATIONS_QUERY = gql`
         last: $last
         before: $before
         after: $after
+        order: [{ createdAt: "DESC" }]
       ) {
         edges {
           node {

@@ -17,6 +17,7 @@ import namespaces from 'lib/i18n/namespaces';
 import NotificationsComponent from 'components/Notifications';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import { topShadow } from 'components/shadows';
 
 import { NotificationsProps } from './types';
 
@@ -56,7 +57,7 @@ const Notifications: React.FC<NotificationsProps> = props => {
               notifications={props.notifications}
               // prettier-ignore
               bottomElement={(
-                <Box pt={0.5}>
+                <Box pt={1.5} pb={1.5} style={{...topShadow(0.25)}}>
                   <Button fullWidth color="primary" onClick={props.onReadAll}>
                     {t('readAllNotifications')}
                   </Button>

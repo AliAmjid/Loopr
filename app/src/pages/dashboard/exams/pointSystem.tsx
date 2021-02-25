@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Hidden, IconButton, TableCell, TableRow } from '@material-ui/core';
+import {
+  Hidden,
+  IconButton,
+  TableCell,
+  TableRow,
+  Typography,
+} from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Link from 'next/link';
 
@@ -40,7 +46,9 @@ const PointSystem: React.FC<PointSystemProps> = props => {
     <TableRow>
       <TableCell>{formatDateToDay(props.exam.writtenAt)}</TableCell>
       <TableCell>{props.exam.subject?.subjectType?.name || ''}</TableCell>
-      <TableCell>{props.exam.name || ''}</TableCell>
+      <TableCell>
+        <b>{props.exam.name || ''}</b>
+      </TableCell>
       <Hidden xsDown>
         <TableCell>
           <span style={{ color }}>{percents}</span>
