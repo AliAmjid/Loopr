@@ -20,7 +20,7 @@ export type OnGetGroupsReturn = Promise<{
 
 export interface GroupTableProps {
   classGroup?: boolean;
-  selectedGroup: string;
+  selectedGroup?: string;
   onSelectedGroupChange: (group: string) => void;
   onGetGroups: (query: Query<Group>) => OnGetGroupsReturn;
 }

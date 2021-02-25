@@ -2,7 +2,7 @@ export interface Subject {
   id: string;
   teacherCardColor?: string | null;
   evaluationSystem: string;
-  archivedAt?: string;
+  archivedAt?: string | null;
   group?: {
     id: string;
     section: string;
