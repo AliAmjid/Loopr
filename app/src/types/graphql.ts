@@ -1411,6 +1411,41 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: LoginPasswordResetResetPasswordUserMutation
+// ====================================================
+
+export interface LoginPasswordResetResetPasswordUserMutation {
+  resetPasswordUser: boolean;
+}
+
+export interface LoginPasswordResetResetPasswordUserMutationVariables {
+  key: string;
+  newPassword: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: LoginPasswordResetRequestApplyPasswordResetUsetMutation
+// ====================================================
+
+export interface LoginPasswordResetRequestApplyPasswordResetUsetMutation {
+  applyPasswordResetUser: boolean;
+}
+
+export interface LoginPasswordResetRequestApplyPasswordResetUsetMutationVariables {
+  email: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ProfileChangePassword
 // ====================================================
 

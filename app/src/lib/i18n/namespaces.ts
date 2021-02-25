@@ -1,6 +1,10 @@
 export default {
   pages: {
-    login: 'P_login',
+    login: {
+      index: 'P_login',
+      passwordResetRequest: 'P_login_passwordResetRequest',
+      passwordReset: 'P_login_passwordReset',
+    },
     dashboard: {
       index: 'P_dashboard_index',
     },

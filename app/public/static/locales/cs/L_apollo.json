@@ -11,6 +11,9 @@
     "emptyGroupClassGroup": "Třída nebo skupina je prázná",
     "checkAccess": "Nemáte přístup k některým informacím",
     "schoolPeriodValidationError": "Konfigurace známkovacích období není validní",
-    "noSchoolPeriodActive": "Momentálně není aktivní žádné známkovací období"
+    "noSchoolPeriodActive": "Momentálně není aktivní žádné známkovací období",
+    "alreadySentReset": "Email byl již zaslán, zkontrolujte emailovou schránku",
+    "noUserFound": "Tento uživatel není evidován v systému",
+    "passwordTooShort": "Heslo je příliš krátké"
   }
 }

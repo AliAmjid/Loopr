@@ -1,39 +1,50 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
+import { compose } from 'recompose';
 
-const PasswordResetRequest: React.FC = () => {
-  return (
-    <Container maxWidth="xs">
-      <Box pt={10}>
-        <Paper>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
-                <Typography variant="h1">Password reset</Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField variant="outlined" label="email" fullWidth />
-            </Grid>
-            <Grid item xs={12}>
-              <Button color="primary" variant="contained" fullWidth>
-                Send
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Box>
-    </Container>
-  );
+import routes from 'config/routes';
+
+import withApollo from 'lib/apollo/withApollo';
+import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
+import withNamespaces from 'lib/i18n/withNamespaces';
+
+import {
+  LoginPasswordResetRequestApplyPasswordResetUsetMutation,
+  LoginPasswordResetRequestApplyPasswordResetUsetMutationVariables,
+} from 'types/graphql';
+
+import LOGIN_PASSWORD_RESET_REQUEST_APPLY_PASSWORD_RESET_USER_MUTATION from './mutations/applyPasswordResetUser';
+import PasswordResetRequest from './passwordResetRequest';
+
+const PasswordResetRequestIndex: React.FC = () => {
+  const [applyPasswordResetUser] = useMutation<
+    LoginPasswordResetRequestApplyPasswordResetUsetMutation,
+    LoginPasswordResetRequestApplyPasswordResetUsetMutationVariables
+  >(LOGIN_PASSWORD_RESET_REQUEST_APPLY_PASSWORD_RESET_USER_MUTATION);
+  const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
+  const { t } = useTranslation(namespaces.pages.login.passwordResetRequest);
+
+  const submitHandler = (email: string): Promise<boolean> => {
+    return applyPasswordResetUser({ variables: { email } })
+      .then(() => {
+        enqueueSnackbar(t('applyPasswordResetUser'), { variant: 'success' });
+
+        router.push(routes.login.index);
+
+        return true;
+      })
+      .catch(() => false);
+  };
+
+  return <PasswordResetRequest onSubmit={submitHandler} />;
 };
 
-export default PasswordResetRequest;
+export default compose(
+  withNamespaces([namespaces.pages.login.passwordResetRequest]),
+  withApollo,
+)(PasswordResetRequestIndex);

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Login: React.FC<LoginProps> = props => {
   const classes = useStyles();
   const { register, handleSubmit } = useForm<FormValues>();
-  const { t } = useTranslation(namespaces.pages.login);
+  const { t } = useTranslation(namespaces.pages.login.index);
 
   const submitHandler = (values: FormValues): void => {
     props.onSubmit(values.email, values.password);

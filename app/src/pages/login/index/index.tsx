@@ -50,10 +50,13 @@ const LoginIndex: React.FC = () => {
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
   const tour = useTour();
-  const { t } = useTranslation(namespaces.pages.login);
+  const { t } = useTranslation(namespaces.pages.login.index);
 
   useEffect(() => {
-    tour.start({ steps: loginTour, defaultNamespace: namespaces.pages.login });
+    tour.start({
+      steps: loginTour,
+      defaultNamespace: namespaces.pages.login.index,
+    });
   }, []);
 
   const submitHandler = (email: string, password: string): void => {

@@ -5,6 +5,7 @@ import { VariantType } from 'notistack';
 import { GraphqlErrorWithLooprError } from 'lib/apollo/recognizeError/types';
 
 import {
+  ALREADY_SENT_RESET,
   BAD_MARK_SYSTEM,
   CHECK_ACCESS,
   DUPLICATE_VALUE,
@@ -13,7 +14,9 @@ import {
   INVALID_IRI,
   INVALID_ROLE_CONFIG,
   NO_SCHOOL_PERIOD_ACTIVE,
+  NO_USER_FOUND,
   OLD_PASSWORD_IS_WRONG,
+  PASSWORD_TOO_SHORT,
   SCHOOL_PERIOD_VALIDATION_ERROR,
   UNEXPECTED_VALUE,
   USER_CAN_NOT_BE_TAUGHT,
@@ -73,6 +76,12 @@ const recognizeError = (
       return { message: t('errors.commonError'), variant: 'error' };
     if (hasErrorCode(graphqlErrors, USER_NOT_EXAM_MEMBER))
       return { message: t('errors.commonError'), variant: 'error' };
+    if (hasErrorCode(graphqlErrors, ALREADY_SENT_RESET))
+      return { message: t('errors.alreadySentReset'), variant: 'warning' };
+    if (hasErrorCode(graphqlErrors, NO_USER_FOUND))
+      return { message: t('errors.noUserFound'), variant: 'warning' };
+    if (hasErrorCode(graphqlErrors, PASSWORD_TOO_SHORT))
+      return { message: t('errors.passwordTooShort'), variant: 'warning' };
   }
 
   return { message: t('errors.unexpectedError'), variant: 'error' };

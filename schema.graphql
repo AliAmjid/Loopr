@@ -125,6 +125,7 @@ type Query {
         after: String
         exists: [SubjectFilter_exists]
         archivedAt: [SubjectFilter_archivedAt]
+        hasUserExamInSchoolPeriod: Iterable
     ): SubjectConnection
     learnedSubjects(
         # Returns the first n elements from the list.
@@ -140,6 +141,7 @@ type Query {
         after: String
         exists: [SubjectFilter_exists]
         archivedAt: [SubjectFilter_archivedAt]
+        hasUserExamInSchoolPeriod: Iterable
     ): SubjectConnection
     getToken(email: String!, password: String!): Token
     notification(id: ID!): Notification
@@ -197,6 +199,7 @@ type Group implements Node {
         after: String
         exists: [SubjectFilter_exists]
         archivedAt: [SubjectFilter_archivedAt]
+        hasUserExamInSchoolPeriod: Iterable
     ): SubjectConnection
     section: String!
     users(
@@ -247,6 +250,9 @@ input SubjectFilter_archivedAt {
     after: String
     strictly_after: String
 }
+
+# The `Iterable` scalar type represents an array or a Traversable with any kind of data.
+scalar Iterable
 
 # Connection for Subject.
 type SubjectConnection {
@@ -313,6 +319,7 @@ type SubjectType implements Node {
         after: String
         exists: [SubjectFilter_exists]
         archivedAt: [SubjectFilter_archivedAt]
+        hasUserExamInSchoolPeriod: Iterable
     ): SubjectConnection
     _id: String!
 }
@@ -334,6 +341,7 @@ type ClassGroup implements Node {
         after: String
         exists: [SubjectFilter_exists]
         archivedAt: [SubjectFilter_archivedAt]
+        hasUserExamInSchoolPeriod: Iterable
     ): SubjectConnection
     year: Int!
     section: String!
@@ -475,6 +483,7 @@ type User implements Node {
         after: String
         exists: [SubjectFilter_exists]
         archivedAt: [SubjectFilter_archivedAt]
+        hasUserExamInSchoolPeriod: Iterable
     ): SubjectConnection
     archivedAt: String
     notificationViewAtNullCount: Int!
@@ -595,9 +604,6 @@ type Notification implements Node {
     email: Boolean!
     _id: String!
 }
-
-# The `Iterable` scalar type represents an array or a Traversable with any kind of data.
-scalar Iterable
 
 # Information about the current page.
 type NotificationPageInfo {
@@ -853,10 +859,7 @@ interface SymfonyUserInterface {
 type Mutation {
     #
     #
-    applyPasswordResetUser(
-        email: String!
-        feRedirectPagePattern: String!
-    ): Boolean!
+    applyPasswordResetUser(email: String!): Boolean!
 
     #
     #

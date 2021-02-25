@@ -14,6 +14,7 @@ import dashboardPageOptions from './pageOptions';
 
 const DashboardIndex: React.FC = () => {
   const canStudy = useResources([[resources.user.canStudy]]);
+  console.log('canStudy', canStudy);
 
   return (
     <>
