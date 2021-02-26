@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useQuery } from '@apollo/client';
 
@@ -26,8 +26,6 @@ const StudentSubjectIndex: React.FC = () => {
     StudentSubjectsLearnedSubjectsQueryVariables
   >(STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY, {
     variables: {
-      schoolPeriods:
-        selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
       schoolPeriodsIterable:
         selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
     },
@@ -88,9 +86,23 @@ const StudentSubjectIndex: React.FC = () => {
   const schoolPeriods: SchoolPeriods = [];
   learnedSubjectsData?.schoolPeriods?.edges?.forEach(schoolPeriodEdge => {
     if (schoolPeriodEdge?.node) {
-      schoolPeriods.push({ ...schoolPeriodEdge?.node });
+      schoolPeriods.push({
+        ...schoolPeriodEdge.node,
+        id: schoolPeriodEdge.node._id,
+      });
     }
   });
+
+  useEffect(() => {
+    if (
+      learnedSubjectsData?.getCurrentSchoolPeriod &&
+      selectedSchoolPeriods.length === 0
+    ) {
+      setSelectedSchoolPeriods([
+        learnedSubjectsData?.getCurrentSchoolPeriod._id,
+      ]);
+    }
+  }, [selectedSchoolPeriods, learnedSubjectsData?.getCurrentSchoolPeriod]);
 
   return (
     <StudentSubjects

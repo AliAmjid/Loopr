@@ -28,7 +28,7 @@ export interface Subject {
 
 export type Subjects = Subject[];
 
-interface SchoolPeriod {
+export interface SchoolPeriod {
   id: string;
   quarter: number;
   schoolYear: number;
@@ -39,6 +39,7 @@ export interface StudentSubjectsProps {
   subjects: Subjects;
   maxExams: number;
   schoolPeriods: SchoolPeriods;
+
   selectedSchoolPeriods: string[];
   loading: boolean;
   onSchoolPeriodsChange: (schoolPeriods: string[]) => void;

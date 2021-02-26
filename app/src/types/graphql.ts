@@ -1713,7 +1713,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_learnedSubjects {
 
 export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges_node {
   __typename: "SchoolPeriod";
-  id: string;
+  _id: string;
   schoolYear: number;
   quarter: number;
 }
@@ -1728,6 +1728,13 @@ export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
   edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
 }
 
+export interface StudentSubjectsLearnedSubjectsQuery_getCurrentSchoolPeriod {
+  __typename: "SchoolPeriod";
+  _id: string;
+  quarter: number;
+  schoolYear: number;
+}
+
 export interface StudentSubjectsLearnedSubjectsQuery_meUser {
   __typename: "User";
   id: string;
@@ -1736,11 +1743,11 @@ export interface StudentSubjectsLearnedSubjectsQuery_meUser {
 export interface StudentSubjectsLearnedSubjectsQuery {
   learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
   schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
+  getCurrentSchoolPeriod: StudentSubjectsLearnedSubjectsQuery_getCurrentSchoolPeriod | null;
   meUser: StudentSubjectsLearnedSubjectsQuery_meUser | null;
 }
 
 export interface StudentSubjectsLearnedSubjectsQueryVariables {
-  schoolPeriods?: string[] | null;
   schoolPeriodsIterable?: any | null;
 }
 
