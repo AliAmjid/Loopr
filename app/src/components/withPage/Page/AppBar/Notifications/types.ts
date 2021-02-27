@@ -1,20 +1,23 @@
 import React from 'react';
 
-import { Notification, NullableUser } from '../../types';
+import { Notifications } from 'components/Notifications/types';
 
-export interface NotificationsUIProps {
+import { NullableUser } from '../../types';
+
+export interface NotificationsProps {
   anchorEl: HTMLButtonElement | null;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose: () => void;
-  notifications: Notification[];
-}
-
-export interface ListItemProps {
-  icon: JSX.Element;
-  primaryText: string;
-  secondaryText: string;
+  notifications: Notifications;
+  newNotifications: number;
+  loading: boolean;
+  onFetchMore: () => void;
+  onReadAll: () => void;
 }
 
 export interface NotificationsIndexProps {
   user: NullableUser;
+  bottomElement?: JSX.Element;
+  onFetchMore: () => void;
+  onResetFetched: () => void;
 }

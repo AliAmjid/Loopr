@@ -11,6 +11,14 @@ const resources = {
   },
   group: {
     teacher: 'GROUP_TEACHER',
+    showAll: 'GROUP_SHOW_ALL',
+  },
+  subject: {
+    showAll: 'SUBJECT_SHOW_ALL',
+    teacher: 'SUBJECT_TEACHER',
+  },
+  schoolPeriod: {
+    edit: 'SCHOOL_PERIOD_EDIT',
   },
 };
 

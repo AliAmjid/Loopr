@@ -1,10 +1,14 @@
 - [Úvod](cs/)
 - Stránky
     - [Přihlášení](cs/pages/login/)
+    - [Domovská stránka](cs/pages/homepage/)
     - [Uživatelé](cs/pages/users/) 
-    - [Třídy](cs/pages/classGroups/)
-    - [Skupiny](cs/pages/groups/)
-    - [Předměty](cs/pages/subjects/)
+        - [Detail uživatele](cs/pages/user-detail/)
+    - [Známkovací období](cs/pages/classification-period/) 
+    - Administrace
+        - [Třídy](cs/pages/classGroups/)
+        - [Skupiny](cs/pages/groups/)
+        - [Předměty](cs/pages/subjects/)
     - [Studované předměty](cs/pages/studentSubjects/)        
     - [Vyučované předměty](cs/pages/teacherSubjects/index/)
         - [Bodový systém](cs/pages/teacherSubjects/pointSystem/)

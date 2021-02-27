@@ -13,3 +13,6 @@ export const rightShadow: CSSProperties = {
 export const bottomShadow: CSSProperties = {
   boxShadow: `0px ${shadowSize}px 4px -1px rgba(0,0,0,0.2)`,
 };
+export const topShadow = (intensity: number): CSSProperties => ({
+  boxShadow: `0px -${shadowSize}px 4px -1px rgba(0,0,0,${0.2 * intensity})`,
+});

@@ -2,6 +2,7 @@ export interface Subject {
   id: string;
   teacherCardColor?: string | null;
   evaluationSystem: string;
+  archivedAt?: string | null;
   group?: {
     id: string;
     section: string;
@@ -20,4 +21,6 @@ export interface Subject {
 export interface TeacherSubjectsProps {
   subjects: Subject[];
   loading: boolean;
+  showArchived: boolean;
+  onShowArchivedChange: (showArchived: boolean) => void;
 }

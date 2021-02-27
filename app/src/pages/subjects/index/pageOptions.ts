@@ -1,4 +1,5 @@
 import helpPaths from 'config/helpPaths';
+import resources from 'config/resources';
 import routes from 'config/routes';
 
 import namespaces from 'lib/i18n/namespaces';
@@ -12,6 +13,8 @@ export const subjectsBreadcrumbs: Breadcrumbs = [
   { label: 'subjects.index', href: routes.subjects.index },
 ];
 
+export const subjectsResources: string[][] = [[resources.subject.showAll]];
+
 const subjectsPageOptions: PageOptions = {
   title: 'subjects.index',
   breadcrumbs: subjectsBreadcrumbs,
@@ -21,6 +24,7 @@ const subjectsPageOptions: PageOptions = {
     namespaces.pages.subjects.index,
   ],
   helpPath: helpPaths.subjects.index,
+  resources: subjectsResources,
 };
 
 export default subjectsPageOptions;

@@ -82,11 +82,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                 className={classes.periodSelect}
                 labelId="schoolPeriodSelectLabel"
                 multiple
-                value={
-                  props.selectedSchoolPeriods.length > 0
-                    ? props.selectedSchoolPeriods
-                    : ['all']
-                }
+                value={props.selectedSchoolPeriods}
                 onChange={e =>
                   props.onSchoolPeriodsChange(
                     (e.target.value as string[]).filter(i => i !== 'all'),
@@ -94,9 +90,6 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                 }
               >
                 {mappedSchoolPeriods}
-                {props.selectedSchoolPeriods.length === 0 && (
-                  <MenuItem value="all">{t('schoolPeriodsAll')}</MenuItem>
-                )}
               </Select>
             </FormControl>
           </Box>
@@ -112,6 +105,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                   if (subject.evaluationSystem === 'POINTS') {
                     return (
                       <PointSystemIndex
+                        key={subject.id}
                         subject={subject}
                         maxExams={props.maxExams}
                         color={color}
@@ -125,7 +119,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                     );
                   }
 
-                  return <></>;
+                  return <React.Fragment key={index} />;
                 })}
               </TableBody>
             </Table>

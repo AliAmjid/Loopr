@@ -39,6 +39,7 @@ export interface StudentSubjectsProps {
   subjects: Subjects;
   maxExams: number;
   schoolPeriods: SchoolPeriods;
+
   selectedSchoolPeriods: string[];
   loading: boolean;
   onSchoolPeriodsChange: (schoolPeriods: string[]) => void;

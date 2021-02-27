@@ -1,9 +1,14 @@
 # Studované předměty
-Stránka plní funkci přehledu klasifikace psaných testů.
+Stránka slouží jako přehled klasifikace psaných testů.
 
 ## Rozdělení stránky
-Obsah je rozdělen do levého sloupce, ve kterém se nachází předměty, horní lišty, která obsahuje tlačítko filtru zobrazení a části s hodnocením.  
-Hodnocení je rozděleno podle řádků, všechny buňky hodnocení v daném řádku patří pro odpovídající předmět v levém sloupci.
+
+### Horní lišta s filtrem zobrazení
+Ve filtru lze vybrat několik známkovacích období. Podle tohoto výběru se zobrazují jenom některé známky.
+
+![](images/filter.png)
+
+Pod lištou se nachází tabulka hodnocení. Každý řádek značí jeden předmět a jeho hodnocení.
 
 ### Levý sloupec s předměty
 Každá buňka předmětu obsahuje:
@@ -12,33 +17,30 @@ Každá buňka předmětu obsahuje:
 * Celkový počet získaných bodů převedený na procenta
 * Známka odpovídající nastavené převodní hodnotě v předmětu, zobrazená v její barvě
 
-### Horní lišta s filtrem zobrazení
-Ve filtru lze vybrat několik známkovacích období. POdle tohoto výběru se zobrazují jenom některé známky.
+![](images/subject.png)
 
 ### Část s hodnocením
 Každá buňka obsahuje:
 * Počet získaných bodů a jejich možné maximum
 * Počet získaných bodů převedený na procenta, barvou podle odpovídající známky
 * Datum uděleného hodnocení
-* Zelené tlačítko pro zobrazení detailu ohodnocení
+* Zelené tlačítko pro zobrazení [detailu ohodnocení](#Detail)
+
+![](images/grade.png)
 
 ![](images/grading.png)
 
-## Detail ohodnocení
+## Detail
 Po kliknutí na `zelené oko` v buňce hodnocení se otevře tato sekce.   
 
-V hlavičce se nachází: 
-* Předmět z něhož se ohodnocení nachází
-* Název klasifikace
-* Datum klasifikace
+V hlavičce je možné vidět `název testu`, `předmět` a `datum vytvoření testu`.
 
-Tělo sekce je rozděleno do dvou částí.   
-První s osobním hodnocením, kde se nachází:
+V sekci `Osobní hodnocení` se nachází:
 * Počet získaných bodů a jejich možné maximum
 * Počet získaných bodů převedený na procenta
 * Známka odpovídající převodní hodnotě v předmětu
 
-Druhá plní funkci porovnání žáka v rámci třídy a jsou zde obsažena pole:
+V sekci `Porovnání v rámci` se nachází:
 * Třídní bodový průměr
 * Percentil žáka
 * Počet lepších žáků

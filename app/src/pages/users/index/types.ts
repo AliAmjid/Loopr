@@ -8,6 +8,8 @@ export interface User {
   name?: string;
   username?: string;
   createdAt?: string;
+  archivedAt?: string;
+  archived?: boolean;
   role?: {
     id: string;
     name: string;
@@ -15,5 +17,7 @@ export interface User {
 }
 
 export interface UsersProps {
+  loading: boolean;
+  rolesLookup: Record<string, string>;
   getUsers: (query: Query<User>) => Promise<ApolloQueryResult<UsersUsersQuery>>;
 }

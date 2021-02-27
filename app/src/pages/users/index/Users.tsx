@@ -13,8 +13,6 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
-import stripRolePrefix from 'components/stripRolePrefix';
-
 import { User, UsersProps } from './types';
 
 const VisibilityIconWithDisplayName = (): JSX.Element => <VisibilityIcon />;
@@ -32,6 +30,7 @@ const Users: React.FC<UsersProps> = props => {
       <MaterialTable
         uniqueName="pages/users/index"
         title={t('tableTitle')}
+        isLoading={props.loading}
         columns={[]}
         data={(query: Query<User>) =>
           new Promise<QueryResult<User>>((resolve, reject) => {
@@ -43,8 +42,9 @@ const Users: React.FC<UsersProps> = props => {
                   totalCount: res.data.users.totalCount,
                   data: (res.data.users.edges?.map(e => ({
                     ...e?.node,
-                    role: { name: stripRolePrefix(e?.node?.role?.name || '') },
                     createdAt: dayjs(e?.node?.createdAt).format('DD.MM. YYYY'),
+                    archivedAt: e?.node?.archivedAt,
+                    archived: e?.node?.archivedAt !== null,
                   })) || []) as User[],
                 });
               }
@@ -80,8 +80,17 @@ const Users: React.FC<UsersProps> = props => {
               },
               {
                 title: t('common:gqlObjects.user.role'),
-                field: 'role.name',
-                filtering: false,
+                field: 'role.id',
+                lookup: props.rolesLookup,
+              },
+              {
+                title: t('common:gqlObjects.user.archived'),
+                field: 'archived',
+                lookup: {
+                  true: t('common:phrases.yes'),
+                  false: t('common:phrases.no'),
+                },
+                defaultFilter: ['false'],
               },
             ],
           },

@@ -49,7 +49,12 @@ const usePagination = (): UsePaginationReturn => {
   };
 
   const resetPagination = (): void => {
-    setState({ page: 0, firstCursor: '', lastCursor: '', totalCount: 0 });
+    setState({
+      page: 0,
+      firstCursor: '',
+      lastCursor: '',
+      totalCount: 0,
+    });
   };
 
   return { getPagination, setPagination, resetPagination };

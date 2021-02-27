@@ -6,9 +6,11 @@ import {
   Card,
   CardActions,
   CardContent,
+  FormControlLabel,
   Grid,
   makeStyles,
   Paper,
+  Switch,
   Theme,
   Typography,
   useTheme,
@@ -20,6 +22,7 @@ import routes from 'config/routes';
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
+import { formatDateToDay } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import ThickDivider from 'components/thickDivider';
@@ -109,6 +112,13 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                         <Typography variant="subtitle1">
                           Třídy: až to Ali dodělá
                         </Typography>
+                        {props.showArchived && (
+                          <Typography variant="subtitle1">
+                            {`Datum archivace: ${formatDateToDay(
+                              `${subject.archivedAt}`,
+                            )}`}
+                          </Typography>
+                        )}
                       </CardContent>
                       <CardActions className={classes.cardActions}>
                         <Link
@@ -134,11 +144,30 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
     );
   });
 
-  if (mappedSubjects.length === 0 && props.loading) {
+  const archivedCheckBox = (
+    <Box display="flex" justifyContent="flex-end">
+      <FormControlLabel
+        // prettier-ignore
+        control={(
+          <Switch
+            color="primary"
+            checked={props.showArchived}
+            onChange={e => props.onShowArchivedChange(e.target.checked)}
+          />
+        )}
+        label={t('showArchived')}
+      />
+    </Box>
+  );
+
+  if (mappedSubjects.length === 0 && !props.loading) {
     return (
       <Paper>
+        {archivedCheckBox}
         <Box display="flex" justifyContent="center">
-          <Typography>{t('noSubjects')}</Typography>
+          <Typography>
+            {props.showArchived ? t('noArchivedSubjects') : t('noSubjects')}
+          </Typography>
         </Box>
       </Paper>
     );
@@ -155,6 +184,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
         onClose={() => setColorChange(undefined)}
       />
       <Paper>
+        {archivedCheckBox}
         <OverlayLoadingContainer>
           <OverlayLoading loading={props.loading} />
           {mappedSubjects}

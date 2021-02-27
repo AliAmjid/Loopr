@@ -1,4 +1,3 @@
-import { fade } from '@material-ui/core';
 import { Overrides } from '@material-ui/core/styles/overrides';
 
 import palette from '../palette';
@@ -35,7 +34,7 @@ const typography: Overrides = {
     },
     h6: h2,
     subtitle1: {
-      color: fade(palette.common?.black || '#000000', 0.8),
+      fontWeight: 'bold',
     },
   },
 };

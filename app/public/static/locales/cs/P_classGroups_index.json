@@ -8,6 +8,12 @@
   "sureDelete": "Doopravdy chcete třídu odstranit?",
   "irreversibleAction": "Nevratná operace",
   "noClassGroup": "Žádná",
+  "archiveDialog":{
+    "archiveTitle":"Doopravdy chcete archivovat třídu?",
+    "unarchiveTitle":"Doopravdy chcete zrušit archivování třídy?",
+    "content": "Automaticky se archivují všichni studenti ve třídě"
+  },
+  "showArchived": "Zobrazit archivované",
   "snackbars": {
     "edit": {
       "success": "Třída úspešně upravena"
@@ -23,6 +29,12 @@
     },
     "teacherEdit": {
       "success": "Učitel úspěšně upraven"
+    },
+    "archive": {
+      "success": "Třída úspěšně archivována"
+    },
+    "unarchive": {
+      "success": "Archivování třídy úspěšně zrušeno"
     }
   }
 }

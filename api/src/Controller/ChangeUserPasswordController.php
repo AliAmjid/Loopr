@@ -21,7 +21,8 @@ class ChangeUserPasswordController extends AbstractController implements Mutatio
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function __invoke($item, array $context) {
+    public function __invoke($item, array $context)
+    {
         /** @var User $user */
         $user = $this->getUser();
         $args = $context['args']['input'];

@@ -16,6 +16,8 @@ import theme from 'lib/material-ui/theme';
 import SnackbarProvider from 'lib/notistack';
 import ReactourProvider from 'lib/reactour/provider';
 
+import { UserContextProvider } from 'components/userContext';
+
 const MyApp: AppType = props => {
   const { Component, pageProps } = props;
 
@@ -58,7 +60,9 @@ const MyApp: AppType = props => {
               locale={getDayjsLocales(i18n.language, t)}
             >
               <AccessContextProvider>
-                <Component {...pageProps} />
+                <UserContextProvider>
+                  <Component {...pageProps} />
+                </UserContextProvider>
               </AccessContextProvider>
             </MuiPickersUtilsProvider>
           </ReactourProvider>

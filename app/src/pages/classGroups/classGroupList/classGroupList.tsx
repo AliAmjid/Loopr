@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 
-import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
+import {
+  Button,
+  FormControlLabel,
+  IconButton,
+  Switch,
+  Tooltip,
+  Typography,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -20,6 +29,7 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
   const [addOpen, setAddOpen] = useState(false);
   const [editId, setEditId] = useState<string | undefined>(undefined);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
+  const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
 
   const editingClassGroup = props.classGroups.find(
     classGroup => classGroup.id === editId,
@@ -55,6 +65,45 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
             }}
           >
             {t('common:actions.delete')}
+          </Button>,
+        ]}
+      />
+      <SimpleDialog
+        open={archiveId !== undefined}
+        loading={props.archiveLoading}
+        title={
+          props.showArchived
+            ? t('archiveDialog.unarchiveTitle')
+            : t('archiveDialog.archiveTitle')
+        }
+        content={
+          props.showArchived ? undefined : (
+            <Typography>{t('archiveDialog.content')}</Typography>
+          )
+        }
+        actions={[
+          <Button
+            key={0}
+            color="primary"
+            onClick={() => setArchiveId(undefined)}
+          >
+            {t('common:actions.cancel')}
+          </Button>,
+          <Button
+            key={0}
+            color="primary"
+            variant="contained"
+            onClick={() =>
+              props
+                .onArchive(`${archiveId}`, !props.showArchived)
+                .then(success => {
+                  if (success) setArchiveId(undefined);
+                })
+            }
+          >
+            {props.showArchived
+              ? t('common:actions.unarchive')
+              : t('common:actions.archive')}
           </Button>,
         ]}
       />
@@ -105,6 +154,20 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
           },
           tooltip: t('common:actions.add'),
         }}
+        // prettier-ignore
+        topElement={(
+          <FormControlLabel
+            // prettier-ignore
+            control={(
+              <Switch
+                color="primary"
+                checked={props.showArchived}
+                onChange={e => props.onShowArchivedChange(e.target.checked)}
+              />
+            )}
+            label={t('showArchived')}
+          />
+        )}
         items={props.classGroups.map(classGroup => ({
           id: classGroup.id,
           primary: classGroup?.section,
@@ -120,6 +183,21 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>,
+            <>
+              {props.showArchived ? (
+                <Tooltip key={2} title={`${t('common:actions.unarchive')}`}>
+                  <IconButton onClick={() => setArchiveId(classGroup.id)}>
+                    <UnarchiveIcon />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Tooltip key={2} title={`${t('common:actions.archive')}`}>
+                  <IconButton onClick={() => setArchiveId(classGroup.id)}>
+                    <ArchiveIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </>,
           ],
           onClick: () => props.onSelectedClassChange(classGroup.id),
         }))}

@@ -1,9 +1,14 @@
 {
   "generalInformation": "Osobní informace",
+  "login": "Přihlašovací údaje",
   "firstname": "Jméno",
   "lastname": "Příjmení",
   "email": "Email",
   "role": "Role",
+  "passwordChange": "Změna hesla",
+  "oldPassword": "Staré heslo",
+  "newPassword": "Nové heslo",
+  "newPasswordAgain": "Nové heslo znovu",
   "snackbars": {
     "changePassword": "Heslo úspěšně upraveno"
   }

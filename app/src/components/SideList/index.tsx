@@ -99,16 +99,20 @@ const SideList: React.FC<SideListProps> = props => {
           <Box pl={2}>
             <Typography variant="h2">{props.title}</Typography>
           </Box>
-          {props.filter !== undefined && (
-            <TextField
-              label={t('actions.search')}
-              fullWidth
-              value={props.filter}
-              onChange={e => {
-                if (props.onFilterChange) props.onFilterChange(e.target.value);
-              }}
-            />
-          )}
+          <Box display="flex" alignItems="flex-end" justifyContent="flex-end">
+            {props.filter !== undefined && (
+              <TextField
+                label={t('actions.search')}
+                fullWidth
+                value={props.filter}
+                onChange={e => {
+                  if (props.onFilterChange)
+                    props.onFilterChange(e.target.value);
+                }}
+              />
+            )}
+            {props.topElement && <Box pl={2}>{props.topElement}</Box>}
+          </Box>
         </div>
         <List>{mappedItems}</List>
         <Box

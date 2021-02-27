@@ -1,6 +1,7 @@
 const routes = {
   login: {
     index: '/login',
+    passwordResetRequest: '/login/passwordResetRequest',
   },
   dashboard: {
     index: '/dashboard',
@@ -40,6 +41,11 @@ const routes = {
   },
   studentSubjects: {
     index: '/studentSubjects',
+  },
+  errors: {
+    '5O2': {
+      index: '/errors/502',
+    },
   },
 };
 

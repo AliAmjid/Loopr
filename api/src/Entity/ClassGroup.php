@@ -5,6 +5,8 @@ namespace App\Entity;
 
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
@@ -29,6 +31,13 @@ use Symfony\Component\Validator\Constraints as Assert;
         'default_direction' => 'DESC'
     ],
     'section'
+])]
+#[ApiFilter(filterClass: ExistsFilter::class, properties: [
+    'archivedAt' => false
+])]
+#[ApiFilter(filterClass: DateFilter::class, properties: [
+    'createdAt',
+    'archivedAt'
 ])]
 class ClassGroup implements IGroup
 {
@@ -73,6 +82,7 @@ class ClassGroup implements IGroup
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
+     * @Groups({"read", "exposed"})
      */
     private \DateTime $createdAt;
 
@@ -85,6 +95,7 @@ class ClassGroup implements IGroup
 
     /** @var \DateTime|null
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read", "exposed"})
      */
     private ?\DateTime $archivedAt;
 

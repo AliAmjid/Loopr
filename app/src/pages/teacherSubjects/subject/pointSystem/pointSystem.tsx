@@ -28,13 +28,12 @@ import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import ColorDot from 'components/colorDot';
-import { formatDateToDay } from 'components/formatDate';
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
-import { getPercents } from 'components/percentMark';
 import { bottomShadow } from 'components/shadows';
 import SideDialogContainer from 'components/SideDialog/SideDialogContainer';
 
+import CSVDownload from './csvDownload';
 import Edit from './edit';
 import { PointSystemProps } from './types';
 
@@ -191,6 +190,12 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                   </Select>
                 </FormControl>
               </Box>
+              <CSVDownload
+                students={props.students}
+                exams={props.exams}
+                subjectTitle={props.subjectTitle}
+                maxPoints={props.maxPoints}
+              />
               <Button color="primary" onClick={props.onExamCreate}>
                 {t('addTest')}
               </Button>
@@ -239,7 +244,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         )}`}
                       </Typography>
                       <Typography className={classes.date}>
-                        {formatDateToDay(exam.writtenAt)}
+                        {exam.writtenAt}
                       </Typography>
                       <IconButton
                         color="primary"

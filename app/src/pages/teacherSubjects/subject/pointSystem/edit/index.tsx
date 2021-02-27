@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { Button, Typography } from '@material-ui/core';
+import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 
 import { useTranslation } from 'lib/i18n';
@@ -38,6 +39,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
     name: '',
     maxPoints: 0,
     writtenAt: '',
+    writtenAtISO: dayjs().toISOString(),
   });
   const [examInfoDialog, setExamInfoDialog] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState(false);
@@ -190,7 +192,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
           examInput: {
             id: exam.id,
             name: exam.name,
-            writtenAt: exam.writtenAt,
+            writtenAt: exam.writtenAtISO,
           },
         },
       }).then(() => {

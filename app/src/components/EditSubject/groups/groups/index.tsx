@@ -16,7 +16,7 @@ import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const GroupsIndex: React.FC = () => {
-  const { setGroup } = useEditSubjectState(state => ({
+  const { group, setGroup } = useEditSubjectState(state => ({
     group: state.group,
     setGroup: state.setGroup,
   }));
@@ -63,6 +63,7 @@ const GroupsIndex: React.FC = () => {
 
   return (
     <GroupTable
+      selectedGroup={group}
       onSelectedGroupChange={(group: string) => setGroup(group)}
       onGetGroups={getGroupsHandler}
     />

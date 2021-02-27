@@ -8,9 +8,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Entity\Attributes\Tid;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\PersistentCollection;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -38,7 +40,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
     'role.resources.name' => 'exact',
     'role.resources.id' => 'exact',
     'classGroup.id' => 'exact',
-    'group.id' => 'exact'
+    'group.id' => 'exact',
+    'role.id' => 'exact',
+    'role.name' => 'exact',
+    'email' => 'ipartial'
 ])]
 #[ApiFilter(filterClass: OrderFilter::class, properties: [
     'email',
@@ -69,7 +74,6 @@ class User implements UserInterface
      * @Groups({"user:password"})
      */
     private string $password;
-
 
     /**
      * @var string|null
@@ -121,11 +125,11 @@ class User implements UserInterface
     private $privateData;
 
     /**
-     * @var Collection|Notification[]
+     * @var Collection|Notification[]|PersistentCollection
      * @ORM\OneToMany(targetEntity="Notification", mappedBy="user")
      * @Groups({"read:owner", "exposed"})
      */
-    private Collection|array $notifications;
+    private Collection|array|PersistentCollection $notifications;
 
     /**
      * @var Collection|Subject[]
@@ -319,5 +323,15 @@ class User implements UserInterface
     {
         $this->archivedAt = $archivedAt;
         return $this;
+    }
+
+    /**
+     * @Groups({"exposed", "read:owner"})
+     */
+    public function getNotificationViewAtNullCount(): int
+    {
+        $c = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('viewAt', null));
+        return $this->notifications->matching($c)->count();
     }
 }

@@ -12,6 +12,7 @@ class EmailService
 {
     const AFTER_REGISTRATION_EMAIL = 'd-2049ecc337664b2280f25ff3625c330d';
     const USER_WELCOME_EMAIL = 'd-c872ef0b4e764cf194e0ab3621795b40 ';
+    const PASSWORD_RESET_EMAIL = 'd-8658589e4e7e41eab6d3a76bb13582a6';
 
     private \SendGrid $sendGrid;
 
@@ -47,6 +48,17 @@ class EmailService
         );
     }
 
+    public function sendPasswordResetEmail(string $email, string $url)
+    {
+        $this->sendEmail(
+            self::PASSWORD_RESET_EMAIL,
+            $email,
+            [
+                'url' => $url
+            ]
+        );
+    }
+
     public function sendEmail(
         string $id,
         string $to,
@@ -62,4 +74,5 @@ class EmailService
             throw new \RuntimeException('Sendgrid reply to: ' . $response->statusCode());
         }
     }
+
 }

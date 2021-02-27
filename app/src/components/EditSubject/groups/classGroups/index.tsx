@@ -16,7 +16,7 @@ import GroupTable from '../groupTable';
 import { Group, Groups, OnGetGroupsReturn } from '../types';
 
 const ClassGroups: React.FC = () => {
-  const { setClassGroup } = useEditSubjectState(state => ({
+  const { classGroup, setClassGroup } = useEditSubjectState(state => ({
     classGroup: state.classGroup,
     setClassGroup: state.setClassGroup,
   }));
@@ -60,6 +60,7 @@ const ClassGroups: React.FC = () => {
   return (
     <GroupTable
       classGroup
+      selectedGroup={classGroup}
       onSelectedGroupChange={(classGroup: string) => {
         setClassGroup(classGroup);
       }}

@@ -14,11 +14,12 @@ import {
 import { useForm } from 'react-hook-form';
 
 import helpPaths from 'config/helpPaths';
+import routes from 'config/routes';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
-import { FormValues, LoginProps } from 'pages/login/types';
+import { FormValues, LoginProps } from 'pages/login/index/types';
 
 import Help from 'components/Help';
 import LanguageSelect from 'components/LanguageSelect';
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Login: React.FC<LoginProps> = props => {
   const classes = useStyles();
   const { register, handleSubmit } = useForm<FormValues>();
-  const { t } = useTranslation(namespaces.pages.login);
+  const { t } = useTranslation(namespaces.pages.login.index);
 
   const submitHandler = (values: FormValues): void => {
     props.onSubmit(values.email, values.password);
@@ -118,13 +119,10 @@ const Login: React.FC<LoginProps> = props => {
                     {t('logIn')}
                   </Button>
                 </Grid>
-                <Grid container item xs={12}>
-                  <Grid item xs={6}>
-                    <Link href="/index">{t('forgottenPassword')}</Link>
-                  </Grid>
-                  <Grid container item xs={6} justify="flex-end">
-                    <Link href="/index">{t('doNotHaveAccount')}</Link>
-                  </Grid>
+                <Grid item xs={12}>
+                  <Link href={routes.login.passwordResetRequest}>
+                    {t('forgottenPassword')}
+                  </Link>
                 </Grid>
                 <Grid item xs={6}>
                   <Help path={helpPaths.login} size="small" />

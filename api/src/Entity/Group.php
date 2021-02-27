@@ -7,6 +7,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use App\Annotation\InjectDateTime;
 use App\Annotation\InjectLoggedUser;
 use App\Entity\Attributes\Tid;
@@ -27,6 +29,13 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Table(name="`group`")
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "section":"partial"})
  */
+#[ApiFilter(filterClass: ExistsFilter::class, properties: [
+    'archivedAt' => false
+])]
+#[ApiFilter(filterClass: DateFilter::class, properties: [
+    'createdAt',
+    'archivedAt'
+])]
 class Group implements IGroup
 {
     use Tid;
@@ -56,7 +65,7 @@ class Group implements IGroup
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Groups({"read:GROUP_SHOW_ALL", "exposed"})
+     * @Groups({"read", "exposed"})
      */
     private \DateTime $createdAt;
 
@@ -70,6 +79,7 @@ class Group implements IGroup
     /**
      * @var \DateTime|null
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read", "exposed"})
      */
     private ?\DateTime $archivedAt;
 

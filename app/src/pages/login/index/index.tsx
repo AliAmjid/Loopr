@@ -14,7 +14,7 @@ import namespaces from 'lib/i18n/namespaces';
 import withNamespaces from 'lib/i18n/withNamespaces';
 import useTour from 'lib/reactour';
 
-import loginNamespaces from 'pages/login/namespaces';
+import loginNamespaces from 'pages/login/index/namespaces';
 
 import {
   LoginGetTokenQuery,
@@ -50,10 +50,13 @@ const LoginIndex: React.FC = () => {
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
   const tour = useTour();
-  const { t } = useTranslation(namespaces.pages.login);
+  const { t } = useTranslation(namespaces.pages.login.index);
 
   useEffect(() => {
-    tour.start({ steps: loginTour, defaultNamespace: namespaces.pages.login });
+    tour.start({
+      steps: loginTour,
+      defaultNamespace: namespaces.pages.login.index,
+    });
   }, []);
 
   const submitHandler = (email: string, password: string): void => {
