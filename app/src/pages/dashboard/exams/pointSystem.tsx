@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  Hidden,
-  IconButton,
-  TableCell,
-  TableRow,
-  Typography,
-} from '@material-ui/core';
+import { Hidden, IconButton, TableCell, TableRow } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Link from 'next/link';
 

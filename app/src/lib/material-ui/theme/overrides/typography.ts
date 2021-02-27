@@ -1,4 +1,3 @@
-import { fade } from '@material-ui/core';
 import { Overrides } from '@material-ui/core/styles/overrides';
 
 import palette from '../palette';

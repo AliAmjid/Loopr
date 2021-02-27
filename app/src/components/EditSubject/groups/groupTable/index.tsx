@@ -20,6 +20,7 @@ const GroupTable: React.FC<GroupTableProps> = props => {
     {
       title: t('common:gqlObjects.classGroup.section'),
       field: 'section',
+      // eslint-disable-next-line react/display-name
       render: (data: Group): JSX.Element => (
         <Box display="flex" alignItems="center">
           {data.id === props.selectedGroup ? (

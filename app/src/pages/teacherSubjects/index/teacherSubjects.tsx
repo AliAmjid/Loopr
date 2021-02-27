@@ -15,7 +15,6 @@ import {
   Typography,
   useTheme,
 } from '@material-ui/core';
-import { CheckBox } from '@material-ui/icons';
 import Link from 'next/link';
 
 import routes from 'config/routes';

@@ -24,6 +24,7 @@ const Teachers: React.FC<TeacherProps> = props => {
         {
           title: t('common:gqlObjects.user.email'),
           field: 'email',
+          // eslint-disable-next-line react/display-name
           render: (data: Teacher) => (
             <Box display="flex" alignItems="center">
               {data.id === props.selectedTeacher ? (
