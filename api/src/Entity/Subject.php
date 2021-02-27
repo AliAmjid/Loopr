@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiFilter(filterClass: ExistsFilter::class, properties: [
-    'archivedAt' => false
+    'archivedAt'
 ])]
 #[ApiFilter(filterClass: DateFilter::class, properties: [
 
