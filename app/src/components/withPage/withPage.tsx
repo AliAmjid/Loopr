@@ -82,14 +82,6 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
     });
   };
 
-  if (
-    unauthorized ||
-    access.value === INVALID_COOKIE ||
-    access.value === UNAUTHORIZED
-  ) {
-    return <Unauthorized />;
-  }
-
   const fetchMoreNotificationsHandler = (): void => {
     setFetchingNotifications(true);
     const paginationVariables = getPagination({
@@ -140,6 +132,14 @@ const WithPageInternal: React.FC<WithPageInternalProps> = props => {
       user.notifications.push({ ...node });
     }
   });
+
+  if (
+    unauthorized ||
+    access.value === INVALID_COOKIE ||
+    access.value === UNAUTHORIZED
+  ) {
+    return <Unauthorized />;
+  }
 
   return (
     <>
