@@ -38,11 +38,12 @@ class HasUserExamInSubject extends AbstractContextAwareFilter
         string $operationName = null
     ) {
 
-        if (!is_array($value) || count($value) === 0) {
+        if (!is_array($value) || count($value) === 0 || $property !== 'hasUserExamInSchoolPeriod') {
             return;
         }
-        $schoolYearsProp = $queryNameGenerator->generateParameterName($property . "_schoolYears");
-        $userProp = $queryNameGenerator->generateParameterName($property . "_user");
+
+        $schoolYearsProp = $queryNameGenerator->generateParameterName($property);
+        $userProp = $queryNameGenerator->generateParameterName($property);
 
         $queryBuilder
             ->innerJoin('o.exams', 'e')

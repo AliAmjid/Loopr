@@ -1,7 +1,10 @@
 - [Úvod](cs/)
 - Stránky
     - [Přihlášení](cs/pages/login/)
+    - [Domovská stránka](cs/pages/homepage/)
     - [Uživatelé](cs/pages/users/) 
+        - [Detail uživatele](cs/pages/user-detail/)
+    - [Známkovací období](cs/pages/classification-period/) 
     - Administrace
         - [Třídy](cs/pages/classGroups/)
         - [Skupiny](cs/pages/groups/)

@@ -134,7 +134,7 @@ class User implements UserInterface
     /**
      * @var Collection|Subject[]
      * @ORM\OneToMany(targetEntity="Subject", mappedBy="teacher")
-     * @Groups({"exposed", "read:owner", "read:USER_SHOW_ALL"})
+     * @Groups({"exposed", "read"})
      */
     private Collection|array $taughtSubjects;
 
