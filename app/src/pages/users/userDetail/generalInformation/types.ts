@@ -9,8 +9,9 @@ export interface OnChangeValues {
 
 export interface GeneralInformationProps {
   user: User;
-  onChange: (values: OnChangeValues) => Promise<boolean>;
   rolesLookup: Record<string, string>;
+  onChange: (values: OnChangeValues) => Promise<boolean>;
+  onArchive: (archive: boolean) => void;
 }
 
 export interface GeneralInformationIndexProps {

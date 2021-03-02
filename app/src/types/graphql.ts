@@ -2521,6 +2521,33 @@ export interface UsersUsersQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UsersUserDetailArchiveUserMutation
+// ====================================================
+
+export interface UsersUserDetailArchiveUserMutation_archiveUser_user {
+  __typename: "User";
+  id: string;
+}
+
+export interface UsersUserDetailArchiveUserMutation_archiveUser {
+  __typename: "archiveUserPayload";
+  user: UsersUserDetailArchiveUserMutation_archiveUser_user | null;
+}
+
+export interface UsersUserDetailArchiveUserMutation {
+  archiveUser: UsersUserDetailArchiveUserMutation_archiveUser | null;
+}
+
+export interface UsersUserDetailArchiveUserMutationVariables {
+  input: archiveUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UsersUserDetailUpdateUserMutation
 // ====================================================
 
@@ -2574,6 +2601,7 @@ export interface UsersUserDetailUserQuery_user {
   firstname: string;
   lastname: string;
   createdAt: string;
+  archivedAt: string | null;
   role: UsersUserDetailUserQuery_user_role;
 }
 
@@ -2657,6 +2685,12 @@ export interface archiveGroupInput {
 }
 
 export interface archiveSubjectInput {
+  id: string;
+  archive: boolean;
+  clientMutationId?: string | null;
+}
+
+export interface archiveUserInput {
   id: string;
   archive: boolean;
   clientMutationId?: string | null;

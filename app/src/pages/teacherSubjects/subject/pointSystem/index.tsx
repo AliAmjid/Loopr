@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useSnackbar } from 'notistack';
-
-import { useTranslation } from 'lib/i18n';
-import namespaces from 'lib/i18n/namespaces';
 
 import PercentsToMarkDialogIndex from 'pages/teacherSubjects/subject/pointSystem/percentsToMarkDialog';
 
 import {
-  TeacherSubejctsSubjectPointSystemCreateExamMutation,
-  TeacherSubejctsSubjectPointSystemCreateExamMutationVariables,
   TeacherSubjectsSubjectPointSystemSubjectQuery,
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
@@ -21,7 +15,6 @@ import { formatDateToDay } from 'components/formatDate';
 import { getMark, getMarkColor, getPercents } from 'components/percentMark';
 import withPage from 'components/withPage';
 
-import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutation/addExam';
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY from './queries/subject';
 import subjectPageOptions from './pageOptions';
 import PointSystem from './pointSystem';
@@ -44,10 +37,6 @@ const PointSystemIndex: React.FC = () => {
   });
 
   const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
-  const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation(
-    namespaces.pages.teacherSubjects.subject.pointSystem,
-  );
 
   const exams: Exams = [];
 

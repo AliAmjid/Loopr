@@ -8,6 +8,7 @@ const USERS_USER_DETAIL_USER_QUERY = gql`
       firstname
       lastname
       createdAt
+      archivedAt
       role {
         id
         name

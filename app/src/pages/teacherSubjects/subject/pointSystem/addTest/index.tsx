@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { useMutation } from '@apollo/client';
-import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import {
