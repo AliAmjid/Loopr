@@ -51,7 +51,7 @@ const EditRoleIndex: React.FC = () => {
     updateRole({
       variables: {
         id: router.query.id?.toString() || '',
-        name: values.name,
+        name: values.name.toUpperCase(),
       },
     }).then(() => {
       enqueueSnackbar(t('success'), { variant: 'success' });
