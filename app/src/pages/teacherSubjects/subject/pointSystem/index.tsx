@@ -42,34 +42,12 @@ const PointSystemIndex: React.FC = () => {
         selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
     },
   });
-  const [createExam, { loading: createExamLoading }] = useMutation<
-    TeacherSubejctsSubjectPointSystemCreateExamMutation,
-    TeacherSubejctsSubjectPointSystemCreateExamMutationVariables
-  >(TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION, {
-    refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
-    awaitRefetchQueries: true,
-  });
+
   const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation(
     namespaces.pages.teacherSubjects.subject.pointSystem,
   );
-
-  const examCreateHandler = (): void => {
-    createExam({
-      variables: {
-        input: {
-          name: t('newTest'),
-          subject: `${router.query.id}`,
-          writtenAt: dayjs().toISOString(),
-        },
-      },
-    }).then(() => {
-      enqueueSnackbar(t('snackbars.createExam.success'), {
-        variant: 'success',
-      });
-    });
-  };
 
   const exams: Exams = [];
 
@@ -232,7 +210,7 @@ const PointSystemIndex: React.FC = () => {
     };
   });
 
-  let subjectTitle = `${subjectData?.subject?.subjectType?.name} - `;
+  let subjectTitle = `${subjectData?.subject?.subjectType?.name || ''} - `;
   if (subjectData?.subject?.group) {
     subjectTitle += subjectData.subject.group.section;
   }
@@ -261,7 +239,7 @@ const PointSystemIndex: React.FC = () => {
         onClose={() => setPercentsToMarkOpen(false)}
       />
       <PointSystem
-        loading={subjectLoading || createExamLoading}
+        loading={subjectLoading}
         exams={exams}
         students={students}
         maxPoints={maxPoints}
@@ -271,7 +249,6 @@ const PointSystemIndex: React.FC = () => {
         onSchoolPeriodsChange={schoolPeriods =>
           setSelectedSchoolPeriods(schoolPeriods)
         }
-        onExamCreate={examCreateHandler}
         onPercentsToMarkEdit={() => setPercentsToMarkOpen(true)}
       />
     </>
