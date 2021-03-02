@@ -23,7 +23,7 @@ import { EditableListItemProps } from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   listItemText: {
-    paddingRight: `${theme.spacing(13)}px !important`,
+    paddingRight: `${theme.spacing(18)}px !important`,
   },
 }));
 
