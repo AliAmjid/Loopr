@@ -21,7 +21,7 @@ log
 
     # Explicitly list routes always handled by the API as well as
     # URLs with an extension corresponding to common formats supported by the API.
-    not path_regexp (?i)(?:^/docs|^/graphql|^/bundles/|^/_profiler|^/_wdt)
+    not path_regexp (?i)(?:^/docs|^/graphql|^/bundles/|^/_profiler|^/_wdt|^/loopr-docs)
 }
 
 route {

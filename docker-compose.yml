@@ -43,8 +43,7 @@ services:
   docs:
     container_name: loopr_docs
     build:
-      context: ./docs
-      dockerfile: ../docker/docs/Dockerfile
+      context: docs
     ports:
       - 3001:3001
     volumes:

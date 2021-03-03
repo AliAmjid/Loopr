@@ -12,12 +12,11 @@ use App\Helper\IriHelper;
 use App\Repository\SchoolPeriodRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class GetForSubjectSchoolPeriodController extends AbstractController implements QueryCollectionResolverInterface
+class GetCurrentHalfYearSchoolPeriodController extends AbstractController implements QueryCollectionResolverInterface
 {
 
     public function __invoke(iterable $collection, array $context): iterable
     {
-        $idSubject = IriHelper::getIdFromIri($collection['args']['idSubject']);
         $em = $this->getDoctrine()->getManager();
         /** @var SchoolPeriodRepository $schoolPeriodRepository */
         $schoolPeriodRepository = $em->getRepository(SchoolPeriod::class);

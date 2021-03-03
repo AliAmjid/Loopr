@@ -59,7 +59,7 @@ class SchoolPeriod
      */
     private int $schoolYear;
 
-    public function getQuarter(): string
+    public function getQuarter(): int
     {
         return $this->quarter;
     }

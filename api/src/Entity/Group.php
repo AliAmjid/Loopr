@@ -201,4 +201,19 @@ class Group implements IGroup
         $this->archivedAt = $archivedAt;
         return $this;
     }
+
+    /**
+     * @Groups({"read", "exposed"})
+     */
+    public function getClassParents(): array
+    {
+        $classes = [];
+        $this->users->map(function (User $e) use ($classes) {
+            if ($e->getClassGroup()) {
+                $classes[$e->getClassGroup()->getId()] = $e->getClassGroup();
+            }
+        });
+        return $classes;
+    }
+
 }

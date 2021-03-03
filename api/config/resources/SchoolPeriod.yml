@@ -25,3 +25,7 @@ App\Entity\SchoolPeriod:
             item_query: App\Controller\GetCurrentSchoolPeriodController
             args: [ ]
         collection_query:
+        getCurrentHalfYear:
+            collection_query: App\Controller\GetCurrentHalfYearSchoolPeriodController
+            pagination_enabled: false
+            read: false

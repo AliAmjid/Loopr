@@ -119,4 +119,9 @@ class ClientErrorType
         'code' => 'ALREADY_SENT_RESET',
         'msg' => 'Already send reset'
     ];
+
+    const DATA_INTEGRITY_VIOLATION = [
+        'code' => 'DATA_INTEGRITY_VIOLATION',
+        'msg' => 'Data you are trying to edit is required for integrity of system'
+    ];
 }

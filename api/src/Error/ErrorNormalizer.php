@@ -5,6 +5,7 @@ namespace App\Error;
 
 
 use ApiPlatform\Core\Bridge\Symfony\Validator\Exception\ValidationException;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use GraphQL\Error\ClientAware;
 use GraphQL\Error\InvariantViolation;
@@ -50,7 +51,8 @@ class ErrorNormalizer implements NormalizerInterface, NormalizerAwareInterface
             },
             UnexpectedValueException::class => ClientErrorType::UNEXPECTED_VALUE,
             UniqueConstraintViolationException::class => ClientErrorType::DUPLICATE_VALUE,
-            InvariantViolation::class => ClientErrorType::CHECK_ACCESS
+            InvariantViolation::class => ClientErrorType::CHECK_ACCESS,
+            ForeignKeyConstraintViolationException::class => ClientErrorType::DATA_INTEGRITY_VIOLATION
         ];
     }
 

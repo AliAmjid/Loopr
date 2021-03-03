@@ -104,7 +104,7 @@ class User implements UserInterface
     /**
      * @var ClassGroup|null
      * @Groups({"read:always", "exposed"})
-     * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="users", fetch="EAGER")
      * @ORM\JoinColumn(name="class_group_id", referencedColumnName="id")
      */
     private ?ClassGroup $classGroup = null;

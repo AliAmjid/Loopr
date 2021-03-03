@@ -37,5 +37,4 @@ services:
   docs:
     build:
       context: ../docs
-      dockerfile: ../docker/docs/Dockerfile
     image: ${DOCS_IMAGE}

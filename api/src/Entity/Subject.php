@@ -33,7 +33,6 @@ use Symfony\Component\Validator\Constraints as Assert;
     'group',
     'classGroup'
 ])]
-
 class Subject
 {
     use Tid;
@@ -296,6 +295,7 @@ class Subject
         $this->createdAt = $createdAt;
         return $this;
     }
+
     /**
      * @ORM\PrePersist()
      */

@@ -52,4 +52,21 @@ class SchoolPeriodRepository extends ServiceEntityRepository
             return null;
         }
     }
+
+    public function findByQuarterNYear(int $quarter, int $year)
+    {
+        try {
+            return $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('sp')
+                ->from(SchoolPeriod::class, 'sp')
+                ->where('sp.quarter = :quarter AND sp.year = :year')
+                ->setParameter('quarter', $quarter)
+                ->setParameter('year', $year)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
 }

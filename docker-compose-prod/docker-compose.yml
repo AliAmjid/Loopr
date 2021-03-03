@@ -78,7 +78,7 @@ services:
     ports:
       - 3001:3001
 volumes:
-  db-data: { }
+  db-data: {}
   caddy_data:
   caddy_config:
   php_socket: 

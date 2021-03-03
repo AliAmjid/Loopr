@@ -64,6 +64,11 @@ class AclResourceEnum
             self::USER_CAN_STUDY
         ],
 
+        'ROLE_TEACHER' => [
+            self::USER_LOGGED,
+            self::SUBJECT_TEACHER,
+        ],
+
         'ROLE_ADMIN' => [
             self::USER_LOGGED,
             self::ACL_ROLE_EDIT,
