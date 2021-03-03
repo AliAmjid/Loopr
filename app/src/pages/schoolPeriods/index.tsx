@@ -39,6 +39,13 @@ const SchoolPeriodsIndex: React.FC = () => {
   const getSchoolPeriods = (
     query: Query<SchoolPeriod>,
   ): Promise<GetSchoolPeriodsReturn> => {
+    const quarterFilter = query.filters.find(
+      filter => filter.column.field === 'quarter',
+    )?.value;
+    const schoolYearFilter = query.filters.find(
+      filter => filter.column.field === 'schoolYear',
+    )?.value;
+
     return client
       .query<
         SchollPeriodsSchollPeriodsQuery,
@@ -47,6 +54,8 @@ const SchoolPeriodsIndex: React.FC = () => {
         query: SCHOOL_PERIODS_SCHOOL_PERIODS_QUERY,
         variables: {
           ...getPagination({ page: query.page, pageSize: query.pageSize }),
+          quarter: +quarterFilter,
+          schoolYear: +schoolYearFilter,
         },
       })
       .then(res => {

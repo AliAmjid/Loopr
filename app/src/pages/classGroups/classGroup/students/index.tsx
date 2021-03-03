@@ -163,7 +163,10 @@ const StudentsIndex: React.FC = () => {
             email: emailFilter,
             firstname: firstnameFilter,
             lastname: lastnameFilter,
-            isInClassGroup: !isInClassGroupFilter,
+            isInClassGroup:
+              classGroupsFilter.length === 0
+                ? undefined
+                : !isInClassGroupFilter,
             classGroups: !isInClassGroupFilter ? classGroupsFilter : [],
           },
         })

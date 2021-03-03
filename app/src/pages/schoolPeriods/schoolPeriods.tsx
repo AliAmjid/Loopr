@@ -21,6 +21,20 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
   const [add, setAdd] = useState(false);
   const [editing, setEditing] = useState<SchoolPeriod | undefined>(undefined);
   const [deleting, setDeleting] = useState<string | undefined>(undefined);
+  const [columns] = useState([
+    {
+      title: 'From',
+      field: 'from',
+      render: (data: SchoolPeriod) => formatDateToDay(data.from),
+    },
+    {
+      title: 'to',
+      field: 'to',
+      render: (data: SchoolPeriod) => formatDateToDay(data.to),
+    },
+    { title: 'quarter', field: 'quarter' },
+    { title: 'schoolYear', field: 'schoolYear' },
+  ]);
 
   return (
     <Paper>
@@ -64,20 +78,7 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
           key={`${add} ${deleting}`}
           uniqueName="pages/schoolPeriods"
           title="schoolPeriods"
-          columns={[
-            {
-              title: 'From',
-              field: 'from',
-              render: (data: SchoolPeriod) => formatDateToDay(data.from),
-            },
-            {
-              title: 'to',
-              field: 'to',
-              render: (data: SchoolPeriod) => formatDateToDay(data.to),
-            },
-            { title: 'quarter', field: 'quarter' },
-            { title: 'schoolYear', field: 'schoolYear' },
-          ]}
+          columns={columns}
           data={(query: Query<SchoolPeriod>) =>
             new Promise<QueryResult<SchoolPeriod>>((resolve, reject) => {
               props

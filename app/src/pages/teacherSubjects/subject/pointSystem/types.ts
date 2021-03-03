@@ -45,6 +45,5 @@ export interface PointSystemProps {
   schoolPeriods: SchoolPeriods;
   selectedSchoolPeriods: string[];
   onSchoolPeriodsChange: (schoolPeriods: string[]) => void;
-  onExamCreate: () => void;
   onPercentsToMarkEdit: () => void;
 }

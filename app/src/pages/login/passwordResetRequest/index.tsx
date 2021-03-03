@@ -32,7 +32,9 @@ const PasswordResetRequestIndex: React.FC = () => {
   const submitHandler = (email: string): Promise<boolean> => {
     return applyPasswordResetUser({ variables: { email } })
       .then(() => {
-        enqueueSnackbar(t('applyPasswordResetUser'), { variant: 'success' });
+        enqueueSnackbar(t('snackbars.applyPasswordResetUser'), {
+          variant: 'success',
+        });
 
         router.push(routes.login.index);
 

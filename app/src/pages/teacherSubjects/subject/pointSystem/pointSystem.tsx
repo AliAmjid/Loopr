@@ -2,7 +2,6 @@ import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import {
   Box,
-  Button,
   fade,
   FormControl,
   Grid,
@@ -33,6 +32,7 @@ import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingCon
 import { bottomShadow } from 'components/shadows';
 import SideDialogContainer from 'components/SideDialog/SideDialogContainer';
 
+import AddTestIndex from './addTest';
 import CSVDownload from './csvDownload';
 import Edit from './edit';
 import { PointSystemProps } from './types';
@@ -196,9 +196,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                 subjectTitle={props.subjectTitle}
                 maxPoints={props.maxPoints}
               />
-              <Button color="primary" onClick={props.onExamCreate}>
-                {t('addTest')}
-              </Button>
+              <AddTestIndex />
             </Box>
           </Box>
           <TableContainer style={tableContainerStyle} ref={tableContainerRef}>

@@ -6,8 +6,17 @@ const SCHOOL_PERIODS_SCHOOL_PERIODS_QUERY = gql`
     $last: Int
     $before: String
     $after: String
+    $quarter: Int
+    $schoolYear: Int
   ) {
-    schoolPeriods(first: $first, last: $last, before: $before, after: $after) {
+    schoolPeriods(
+      first: $first
+      last: $last
+      before: $before
+      after: $after
+      quarter: $quarter
+      schoolYear: $schoolYear
+    ) {
       edges {
         node {
           id

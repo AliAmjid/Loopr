@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useSnackbar } from 'notistack';
-
-import { useTranslation } from 'lib/i18n';
-import namespaces from 'lib/i18n/namespaces';
 
 import PercentsToMarkDialogIndex from 'pages/teacherSubjects/subject/pointSystem/percentsToMarkDialog';
 
 import {
-  TeacherSubejctsSubjectPointSystemCreateExamMutation,
-  TeacherSubejctsSubjectPointSystemCreateExamMutationVariables,
   TeacherSubjectsSubjectPointSystemSubjectQuery,
   TeacherSubjectsSubjectPointSystemSubjectQueryVariables,
 } from 'types/graphql';
@@ -21,7 +15,6 @@ import { formatDateToDay } from 'components/formatDate';
 import { getMark, getMarkColor, getPercents } from 'components/percentMark';
 import withPage from 'components/withPage';
 
-import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION from './mutation/addExam';
 import TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY from './queries/subject';
 import subjectPageOptions from './pageOptions';
 import PointSystem from './pointSystem';
@@ -42,34 +35,8 @@ const PointSystemIndex: React.FC = () => {
         selectedSchoolPeriods.length > 0 ? selectedSchoolPeriods : undefined,
     },
   });
-  const [createExam, { loading: createExamLoading }] = useMutation<
-    TeacherSubejctsSubjectPointSystemCreateExamMutation,
-    TeacherSubejctsSubjectPointSystemCreateExamMutationVariables
-  >(TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_CREATE_EXAM_MUTATION, {
-    refetchQueries: ['TeacherSubjectsSubjectPointSystemSubjectQuery'],
-    awaitRefetchQueries: true,
-  });
-  const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
-  const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation(
-    namespaces.pages.teacherSubjects.subject.pointSystem,
-  );
 
-  const examCreateHandler = (): void => {
-    createExam({
-      variables: {
-        input: {
-          name: t('newTest'),
-          subject: `${router.query.id}`,
-          writtenAt: dayjs().toISOString(),
-        },
-      },
-    }).then(() => {
-      enqueueSnackbar(t('snackbars.createExam.success'), {
-        variant: 'success',
-      });
-    });
-  };
+  const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
 
   const exams: Exams = [];
 
@@ -232,7 +199,7 @@ const PointSystemIndex: React.FC = () => {
     };
   });
 
-  let subjectTitle = `${subjectData?.subject?.subjectType?.name} - `;
+  let subjectTitle = `${subjectData?.subject?.subjectType?.name || ''} - `;
   if (subjectData?.subject?.group) {
     subjectTitle += subjectData.subject.group.section;
   }
@@ -261,7 +228,7 @@ const PointSystemIndex: React.FC = () => {
         onClose={() => setPercentsToMarkOpen(false)}
       />
       <PointSystem
-        loading={subjectLoading || createExamLoading}
+        loading={subjectLoading}
         exams={exams}
         students={students}
         maxPoints={maxPoints}
@@ -271,7 +238,6 @@ const PointSystemIndex: React.FC = () => {
         onSchoolPeriodsChange={schoolPeriods =>
           setSelectedSchoolPeriods(schoolPeriods)
         }
-        onExamCreate={examCreateHandler}
         onPercentsToMarkEdit={() => setPercentsToMarkOpen(true)}
       />
     </>

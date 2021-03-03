@@ -2,9 +2,12 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 
+import USERS_USER_DETAIL_ARCHIVE_USER_MUTATION from 'pages/users/userDetail/mutations/archiveUser';
 import USERS_USER_DETAIL_UPDATE_USER_MUTATION from 'pages/users/userDetail/mutations/editUser';
 
 import {
+  UsersUserDetailArchiveUserMutation,
+  UsersUserDetailArchiveUserMutationVariables,
   UsersUserDetailUpdateUserMutation,
   UsersUserDetailUpdateUserMutationVariables,
 } from 'types/graphql';
@@ -24,6 +27,14 @@ const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props =>
     awaitRefetchQueries: true,
   });
 
+  const [archiveUser] = useMutation<
+    UsersUserDetailArchiveUserMutation,
+    UsersUserDetailArchiveUserMutationVariables
+  >(USERS_USER_DETAIL_ARCHIVE_USER_MUTATION, {
+    refetchQueries: ['UsersUserDetailUserQuery'],
+    awaitRefetchQueries: true,
+  });
+
   const changeHandler = (values: OnChangeValues): Promise<boolean> => {
     return updateUser({
       variables: { input: { id: props.user!.id, ...values } },
@@ -34,6 +45,10 @@ const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props =>
       .catch(() => {
         return false;
       });
+  };
+
+  const archiveHandler = (archive: boolean): void => {
+    archiveUser({ variables: { input: { id: props.user!.id, archive } } });
   };
 
   const rolesLookup: Record<string, string> = {};
@@ -48,6 +63,7 @@ const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props =>
       user={props.user}
       onChange={changeHandler}
       rolesLookup={rolesLookup}
+      onArchive={archiveHandler}
     />
   );
 };
