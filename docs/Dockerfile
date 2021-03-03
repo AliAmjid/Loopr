@@ -3,9 +3,9 @@ FROM node:12.18.3
 RUN mkdir /docs
 WORKDIR /docs
 
-COPY ./package.json ./
-COPY ./yarn.lock ./
-COPY ./src ./
+COPY package.json ./
+COPY yarn.lock ./
+COPY src ./
 
 RUN yarn
 
