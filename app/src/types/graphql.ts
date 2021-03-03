@@ -1615,6 +1615,8 @@ export interface SchollPeriodsSchollPeriodsQueryVariables {
   last?: number | null;
   before?: string | null;
   after?: string | null;
+  quarter?: number | null;
+  schoolYear?: number | null;
 }
 
 /* tslint:disable */
