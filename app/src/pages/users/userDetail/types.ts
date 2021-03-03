@@ -9,7 +9,7 @@ export type User =
         id: string;
         name: string;
       };
-      archivedAt?: string;
+      archivedAt?: string | null;
     }
   | null
   | undefined;

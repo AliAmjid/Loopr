@@ -47,7 +47,7 @@ const GeneralInformationIndex: React.FC<GeneralInformationIndexProps> = props =>
       });
   };
 
-  const archiveHandler = (archive: boolean) => {
+  const archiveHandler = (archive: boolean): void => {
     archiveUser({ variables: { input: { id: props.user!.id, archive } } });
   };
 
