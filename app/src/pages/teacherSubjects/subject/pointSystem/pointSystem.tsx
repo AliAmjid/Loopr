@@ -184,9 +184,6 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         {`${schoolPeriod.quarter}. ${schoolPeriod.schoolYear}`}
                       </MenuItem>
                     ))}
-                    {props.selectedSchoolPeriods.length === 0 && (
-                      <MenuItem value="all">{t('allSchoolPeriods')}</MenuItem>
-                    )}
                   </Select>
                 </FormControl>
               </Box>

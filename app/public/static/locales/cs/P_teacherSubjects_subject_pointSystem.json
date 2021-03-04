@@ -3,7 +3,6 @@
   "deleteExam": "Doopravdy chcete odstranit test?",
   "irreversible": "Tato operace je nevratná",
   "examEdit": "Úprava testu",
-  "allSchoolPeriods": "Všechna",
   "snackbars": {
     "createExam": {
       "success": "Nový test úspěšně přidán",

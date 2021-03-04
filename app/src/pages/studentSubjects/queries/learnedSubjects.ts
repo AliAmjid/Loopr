@@ -58,10 +58,9 @@ const STUDENT_SUBJECTS_LEARNED_SUBJECTS_QUERY = gql`
         }
       }
     }
-    getCurrentSchoolPeriod {
+
+    getCurrentHalfYearSchoolPeriods {
       _id
-      quarter
-      schoolYear
     }
     meUser {
       id

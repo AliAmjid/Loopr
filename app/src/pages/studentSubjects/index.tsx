@@ -95,14 +95,19 @@ const StudentSubjectIndex: React.FC = () => {
 
   useEffect(() => {
     if (
-      learnedSubjectsData?.getCurrentSchoolPeriod &&
+      learnedSubjectsData?.getCurrentHalfYearSchoolPeriods &&
       selectedSchoolPeriods.length === 0
     ) {
-      setSelectedSchoolPeriods([
-        learnedSubjectsData?.getCurrentSchoolPeriod._id,
-      ]);
+      setSelectedSchoolPeriods(
+        learnedSubjectsData?.getCurrentHalfYearSchoolPeriods
+          ?.filter(sp => sp?._id)
+          .map(sp => sp!._id),
+      );
     }
-  }, [selectedSchoolPeriods, learnedSubjectsData?.getCurrentSchoolPeriod]);
+  }, [
+    selectedSchoolPeriods,
+    learnedSubjectsData?.getCurrentHalfYearSchoolPeriods,
+  ]);
 
   return (
     <StudentSubjects

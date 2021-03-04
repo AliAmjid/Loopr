@@ -1772,11 +1772,9 @@ export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
   edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_getCurrentSchoolPeriod {
+export interface StudentSubjectsLearnedSubjectsQuery_getCurrentHalfYearSchoolPeriods {
   __typename: "SchoolPeriod";
   _id: string;
-  quarter: number;
-  schoolYear: number;
 }
 
 export interface StudentSubjectsLearnedSubjectsQuery_meUser {
@@ -1787,7 +1785,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_meUser {
 export interface StudentSubjectsLearnedSubjectsQuery {
   learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
   schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
-  getCurrentSchoolPeriod: StudentSubjectsLearnedSubjectsQuery_getCurrentSchoolPeriod | null;
+  getCurrentHalfYearSchoolPeriods: (StudentSubjectsLearnedSubjectsQuery_getCurrentHalfYearSchoolPeriods | null)[] | null;
   meUser: StudentSubjectsLearnedSubjectsQuery_meUser | null;
 }
 
@@ -2476,9 +2474,15 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods {
   edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges | null)[] | null;
 }
 
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_getCurrentHalfYearSchoolPeriods {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
   subject: TeacherSubjectsSubjectPointSystemSubjectQuery_subject | null;
   schoolPeriods: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods | null;
+  getCurrentHalfYearSchoolPeriods: (TeacherSubjectsSubjectPointSystemSubjectQuery_getCurrentHalfYearSchoolPeriods | null)[] | null;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
