@@ -62,8 +62,8 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <CustomCard>
-            <Typography>
-              {t('common:gqlObjects.point.points.nominative')}
+            <Typography variant="subtitle2">
+              {t('common:gqlObjects.point.points.nominative').toUpperCase()}
             </Typography>
             <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
               <Typography variant="h3">
@@ -79,7 +79,9 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
         </Grid>
         <Grid item xs={4}>
           <CustomCard>
-            <Typography>{t('common:gqlObjects.point.percents')}</Typography>
+            <Typography variant="subtitle2">
+              {t('common:gqlObjects.point.percents').toUpperCase()}
+            </Typography>
             <Box display="flex" justifyContent="flex-end">
               <Typography variant="h3">{percents}</Typography>
             </Box>
@@ -87,7 +89,9 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
         </Grid>
         <Grid item xs={4}>
           <CustomCard>
-            <Typography>{t('common:gqlObjects.point.mark')}</Typography>
+            <Typography variant="subtitle2">
+              {t('common:gqlObjects.point.mark').toUpperCase()}
+            </Typography>
             <Box display="flex" justifyContent="flex-end">
               <Typography variant="h3">{`${mark}`}</Typography>
             </Box>
@@ -104,7 +108,9 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <CustomCard>
-              <Typography>{t('pointSystem.classPointAverage')}</Typography>
+              <Typography variant="subtitle2">
+                {t('pointSystem.classPointAverage').toUpperCase()}
+              </Typography>
               <Box
                 display="flex"
                 justifyContent="flex-end"
@@ -123,7 +129,9 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
           </Grid>
           <Grid item xs={4}>
             <CustomCard>
-              <Typography>{t('common:gqlObjects.point.percentil')}</Typography>
+              <Typography variant="subtitle2">
+                {t('common:gqlObjects.point.percentil').toUpperCase()}
+              </Typography>
               <Box display="flex" justifyContent="flex-end">
                 <Typography variant="h3">{`${props.exam.pointSystem?.percentil}`}</Typography>
               </Box>
@@ -131,7 +139,9 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
           </Grid>
           <Grid item xs={4}>
             <CustomCard>
-              <Typography>{t('pointSystem.studentsBetterThanYou')}</Typography>
+              <Typography variant="subtitle2">
+                {t('pointSystem.studentsBetterThanYou').toUpperCase()}
+              </Typography>
               <Box display="flex" justifyContent="flex-end">
                 <Typography variant="h3">
                   {`${props.exam.pointSystem?.worstThan}`}
