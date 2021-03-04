@@ -29,6 +29,7 @@ class UserArchiveController extends AbstractController implements MutationResolv
                 if ($item->getClassGroup()->getArchivedAt() !== null) {
                     $item->setClassGroup(null);
                 }
+                $item->setArchivedAt(null);
                 foreach ($item->getGroups() as $group) {
                     if ($group->getArchivedAt() != null) {
                         $item->getGroups()->removeElement($group);
