@@ -99,7 +99,12 @@ const SideList: React.FC<SideListProps> = props => {
           <Box pl={2}>
             <Typography variant="h2">{props.title}</Typography>
           </Box>
-          <Box display="flex" alignItems="flex-end" justifyContent="flex-end">
+          <Box
+            display="flex"
+            alignItems="flex-end"
+            justifyContent="flex-end"
+            pl={2}
+          >
             {props.filter !== undefined && (
               <TextField
                 label={t('actions.search')}

@@ -109,7 +109,7 @@ const Edit: React.FC<EditProps> = props => {
           <TableHead>
             <TableRow>
               <TableCell width={250}>
-                {t('common:gqlObjects.user.firstname')}
+                <Box pl={1}>{t('common:gqlObjects.user.firstname')}</Box>
               </TableCell>
               <TableCell width={250}>
                 {t('common:gqlObjects.user.lastname')}
@@ -119,7 +119,7 @@ const Edit: React.FC<EditProps> = props => {
                 {t('common:gqlObjects.point.points.nominative')}
               </TableCell>
               <TableCell width={100}>
-                {t('common:gqlObjects.point.percents')}
+                <Box pr={1}>{t('common:gqlObjects.point.percents')}</Box>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -127,7 +127,9 @@ const Edit: React.FC<EditProps> = props => {
             {props.students?.map(student => {
               return (
                 <TableRow key={student.id}>
-                  <TableCell>{student.firstname}</TableCell>
+                  <TableCell>
+                    <Box pl={1}>{student.firstname}</Box>
+                  </TableCell>
                   <TableCell>{student.lastname}</TableCell>
                   <TableCell />
                   <TableCell>
@@ -144,18 +146,23 @@ const Edit: React.FC<EditProps> = props => {
                     />
                   </TableCell>
                   <TableCell>
-                    <TextField
-                      disabled={props.exam.maxPoints === 0}
-                      value={student.percentsValue}
-                      error={student.percentsError}
-                      color={student.percentsWarning ? 'secondary' : 'primary'}
-                      onChange={e =>
-                        props.onStudentExamChange({
-                          studentId: student.id,
-                          percents: e.target.value,
-                        })
-                      }
-                    />
+                    <Box pr={1} display="flex" alignItems="center">
+                      <TextField
+                        disabled={props.exam.maxPoints === 0}
+                        value={student.percentsValue}
+                        error={student.percentsError}
+                        color={
+                          student.percentsWarning ? 'secondary' : 'primary'
+                        }
+                        onChange={e =>
+                          props.onStudentExamChange({
+                            studentId: student.id,
+                            percents: e.target.value,
+                          })
+                        }
+                      />
+                      %
+                    </Box>
                   </TableCell>
                 </TableRow>
               );
