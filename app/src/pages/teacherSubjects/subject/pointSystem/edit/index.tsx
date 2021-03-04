@@ -221,7 +221,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
         defaultValues={{
           name: exam.name,
           maxPoints: exam.maxPoints,
-          writtenAt: exam.writtenAt,
+          writtenAt: exam.writtenAtISO,
         }}
         onSubmit={(values: ExamInfoDialogSubmitValues) => {
           setExamInfoDialog(false);

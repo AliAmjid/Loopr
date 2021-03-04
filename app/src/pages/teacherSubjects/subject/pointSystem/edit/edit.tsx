@@ -71,7 +71,9 @@ const Edit: React.FC<EditProps> = props => {
                   'common:gqlObjects.point.points.accusative',
                 )}`}
               </Typography>
-              <Typography>{formatDateToDay(props.exam.writtenAt)}</Typography>
+              <Typography>
+                {formatDateToDay(props.exam.writtenAtISO)}
+              </Typography>
             </Box>
             <Box pl={4} display="flex">
               <IconButton color="primary" onClick={props.onExamInfoEdit}>
