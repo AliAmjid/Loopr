@@ -1,15 +1,18 @@
 import React from 'react';
 
-import { Typography } from '@material-ui/core';
+import PercentsToMark from './percentToMark';
+import { PercentsToMarkIndexProps } from './types';
 
-const PercentsToMarkIndex: React.FC = () => {
+const PercentsToMarkIndex: React.FC<PercentsToMarkIndexProps> = props => {
   return (
-    <>
-      <Typography>
-        Tyto kritéria převodu se zkopírují do každého nově vytvořeného předmětu,
-        který vyučujete. V každém předmětu lze převod dále individuálně upravit
-      </Typography>
-    </>
+    <PercentsToMark
+      defaultPercents={{
+        one: `${props.percents?.one || ''}`,
+        two: `${props.percents?.two || ''}`,
+        three: `${props.percents?.three || ''}`,
+        four: `${props.percents?.four || ''}`,
+      }}
+    />
   );
 };
 

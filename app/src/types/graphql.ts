@@ -1473,6 +1473,33 @@ export interface ProfileChangePasswordVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ProfileUpdatePercentsToMarkConverterMutation
+// ====================================================
+
+export interface ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert_percentToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+}
+
+export interface ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert {
+  __typename: "updatePercentToMarkConvertPayload";
+  percentToMarkConvert: ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert_percentToMarkConvert | null;
+}
+
+export interface ProfileUpdatePercentsToMarkConverterMutation {
+  updatePercentToMarkConvert: ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert | null;
+}
+
+export interface ProfileUpdatePercentsToMarkConverterMutationVariables {
+  input: updatePercentToMarkConvertInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: ProfileUserQuery
 // ====================================================
 
@@ -1482,6 +1509,20 @@ export interface ProfileUserQuery_meUser_role {
   name: string;
 }
 
+export interface ProfileUserQuery_meUser_privateData_defaultPercentToMark {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface ProfileUserQuery_meUser_privateData {
+  __typename: "UserPrivateData";
+  defaultPercentToMark: ProfileUserQuery_meUser_privateData_defaultPercentToMark;
+}
+
 export interface ProfileUserQuery_meUser {
   __typename: "User";
   id: string;
@@ -1489,6 +1530,7 @@ export interface ProfileUserQuery_meUser {
   firstname: string;
   lastname: string;
   role: ProfileUserQuery_meUser_role;
+  privateData: ProfileUserQuery_meUser_privateData;
 }
 
 export interface ProfileUserQuery {

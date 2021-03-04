@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  makeStyles,
-  TextField,
-  Theme,
-  Typography,
 } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
