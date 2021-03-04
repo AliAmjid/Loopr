@@ -12,6 +12,7 @@ import Tabs from 'components/Tabs';
 
 import GeneralInformation from './generalInformation';
 import LoginIndex from './login';
+import PercentsToMarkIndex from './percentsToMark';
 import { ProfileProps } from './types';
 
 const Profile: React.FC<ProfileProps> = props => {
@@ -34,6 +35,11 @@ const Profile: React.FC<ProfileProps> = props => {
               panel: <GeneralInformation user={props.user} />,
             },
             { id: 1, label: t('login'), panel: <LoginIndex /> },
+            {
+              id: 2,
+              label: 'percentsToMark',
+              panel: <PercentsToMarkIndex />,
+            },
           ]}
         />
       </OverlayLoadingContainer>
