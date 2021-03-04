@@ -5,5 +5,8 @@
   "notifications": "Notifications",
   "back": "Back",
   "logOutDialogTitle": "Are you sure you want to log out?",
-  "profileSettings": "Profile settings"
+  "profileSettings": "Profile settings",
+  "logOutSuccess": "User logged out successfully",
+  "noNotifications": "No notifications",
+  "readAllNotifications": "Mark all as read"
 }

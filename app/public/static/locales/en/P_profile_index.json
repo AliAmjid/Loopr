@@ -1,7 +1,15 @@
 {
   "generalInformation": "Personal information",
+  "login": "Login",
   "firstname": "First name",
   "lastname": "Last name",
   "email": "Email",
-  "role": "Role"
+  "role": "Role",
+  "passwordChange": "Password change",
+  "oldPassword": "Old password",
+  "newPassword": "New password",
+  "newPasswordAgain": "New password again",
+  "snackbars": {
+    "changePassword": "Password changed successfully"
+  }
 }

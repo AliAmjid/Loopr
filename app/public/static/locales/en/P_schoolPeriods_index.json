@@ -1,0 +1,15 @@
+{
+  "addDialogTitle": "Add a marking period",
+  "editDialogTitle": "Edit the marking period",
+  "snackbars": {
+    "delete": {
+      "success": "Marking period removed successfully"
+    },
+    "add": {
+      "success": "Marking period added successfully"
+    },
+    "edit": {
+      "success": "Marking period edited successfully"
+    }
+  }
+}

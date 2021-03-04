@@ -7,22 +7,28 @@
     "title": "Are you sure you want to delete this group?",
     "description": "This operation is irreversible"
   },
+  "archiveDialog": {
+    "archiveTitle": "Are you sure you want to archive the group?",
+    "unarchiveTitle": "Are you sure you want to unarchive the group?"
+  },
   "snackbars": {
     "add": {
-      "success": "Group added successfully",
-      "error": "Failed to add group"
+      "success": "Group added successfully"
     },
     "edit": {
-      "success": "Group edited successfully",
-      "error": "Failed to edit group"
+      "success": "Group edited successfully"
     },
     "delete": {
-      "success": "Group deleted successfully",
-      "error": "Failed to delete group"
+      "success": "Group deleted successfully"
     },
     "studentsEdit": {
-      "success": "Students edited successfully",
-      "error": "Failed to edit students"
+      "success": "Students edited successfully"
+    },
+    "archive": {
+      "success": "Group successfully archived"
+    },
+    "unarchive": {
+      "success": "Group archiving successfully canceled"
     }
   }
 }

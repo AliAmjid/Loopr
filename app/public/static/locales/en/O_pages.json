@@ -25,5 +25,17 @@
     "index": "Subjects",
     "editSubject": "Edit the subject",
     "addSubject": "Add a subject"
+  },
+  "teacherSubjects": {
+    "index": "Taught subjects",
+    "subject": {
+      "index": "Taught subject"
+    }
+  },
+  "studentSubjects": {
+    "index": "Studied subjects"
+  },
+  "schoolPeriods": {
+    "index": "Marking period"
   }
 }

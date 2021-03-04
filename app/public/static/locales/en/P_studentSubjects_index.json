@@ -1,0 +1,9 @@
+{
+  "pointSystem": {
+    "personalEvaluation": "Personal evaluation",
+    "comparisonToClass": "Comparison within a class",
+    "studentsBetterThanYou": "Classmates better than you",
+    "classPointAverage": "Class point average"
+  },
+  "schoolPeriodsAll": "All"
+}
