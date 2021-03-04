@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
-import { Button, Typography } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 
+import { useTranslation } from 'lib/i18n/';
+import namespaces from 'lib/i18n/namespaces';
+
+import OverlayLoading from 'components/OverlayLoading';
+import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 import PercentsToMarkComponent from 'components/PercentsToMark';
 import {
   PercentsErrors,
@@ -11,10 +16,7 @@ import {
 import { PercentsToMarkProps } from './types';
 
 const PercentsToMark: React.FC<PercentsToMarkProps> = props => {
-  const [percents, setPercents] = useState<{
-    percents: PercentsValues;
-    errors: PercentsErrors;
-  }>({
+  const defaultState = {
     percents: {
       one: props.defaultPercents.one,
       two: props.defaultPercents.two,
@@ -27,23 +29,37 @@ const PercentsToMark: React.FC<PercentsToMarkProps> = props => {
       three: false,
       four: false,
     },
-  });
+  };
+
+  const [percents, setPercents] = useState<{
+    percents: PercentsValues;
+    errors: PercentsErrors;
+  }>(defaultState);
+
+  const { t } = useTranslation(namespaces.pages.profile.index);
 
   return (
-    <>
-      <Typography>
-        Tyto kritéria převodu se zkopírují do každého nově vytvořeného předmětu,
-        který vyučujete. V každém předmětu lze převod dále individuálně upravit
-      </Typography>
+    <OverlayLoadingContainer>
+      <OverlayLoading loading={props.loading} />
+
+      <Typography>{t('percentToMarkDetail')}</Typography>
       <PercentsToMarkComponent
         percents={percents.percents}
         onPercentsChange={setPercents}
       />
-      <Button color="primary">Reset</Button>
-      <Button color="primary" variant="contained">
-        Save
+      <Button color="primary" onClick={() => setPercents(defaultState)}>
+        {t('common:actions.reset')}
       </Button>
-    </>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={() => {
+          props.onSubmit(percents.percents);
+        }}
+      >
+        {t('common:actions.save')}
+      </Button>
+    </OverlayLoadingContainer>
   );
 };
 

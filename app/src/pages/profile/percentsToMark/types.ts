@@ -12,4 +12,6 @@ export interface PercentsToMarkIndexProps {
 
 export interface PercentsToMarkProps {
   defaultPercents: PercentsValues;
+  loading: boolean;
+  onSubmit: (percents: PercentsValues) => void;
 }

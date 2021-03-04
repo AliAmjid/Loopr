@@ -37,7 +37,7 @@ const Profile: React.FC<ProfileProps> = props => {
             { id: 1, label: t('login'), panel: <LoginIndex /> },
             {
               id: 2,
-              label: 'percentsToMark',
+              label: t('percentsToMark'),
               panel: (
                 <PercentsToMarkIndex
                   percents={props.user?.privateData?.defaultPercentToMark}

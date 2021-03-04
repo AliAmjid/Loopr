@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
+import namespaces from 'lib/i18n/namespaces';
 
 import { PercentsErrors, PercentsToMarkProps, PercentsValues } from './types';
 
@@ -21,14 +22,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cell: {
     textAlign: 'center',
-    paddingTop: theme.spacing(2),
+    padding: theme.spacing(1),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
 }));
 
 const PercentsToMark: React.FC<PercentsToMarkProps> = props => {
   const classes = useStyles();
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(namespaces.components.PercentsToMark);
 
   const { percents } = props;
 
@@ -78,7 +81,7 @@ const PercentsToMark: React.FC<PercentsToMarkProps> = props => {
   );
 
   return (
-    <table className={classes.table}>
+    <table className={props.fullWidth ? classes.table : ''}>
       <tr>
         <td className={classes.cell}>
           <Typography>{t('lowerLimit')}</Typography>

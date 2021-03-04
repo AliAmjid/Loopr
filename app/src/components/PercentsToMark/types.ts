@@ -14,6 +14,7 @@ export interface PercentsErrors {
 
 export interface PercentsToMarkProps {
   percents: PercentsValues;
+  fullWidth?: boolean;
   onPercentsChange: (values: {
     percents: PercentsValues;
     errors: PercentsErrors;

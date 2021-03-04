@@ -1,6 +1,7 @@
 {
   "generalInformation": "Osobní informace",
   "login": "Přihlašovací údaje",
+  "percentsToMark": "Převod procent",
   "firstname": "Jméno",
   "lastname": "Příjmení",
   "email": "Email",
@@ -9,7 +10,9 @@
   "oldPassword": "Staré heslo",
   "newPassword": "Nové heslo",
   "newPasswordAgain": "Nové heslo znovu",
+  "percentToMarkDetail": "Tyto kritéria převodu se zkopírují do každého nově vytvořeného předmětu, který vyučujete. V každém předmětu lze převod dále individuálně upravit.",
   "snackbars": {
-    "changePassword": "Heslo úspěšně upraveno"
+    "changePassword": "Heslo úspěšně upraveno",
+    "updatePercentToMarkConvert": "Převod na známky byl úspěšně upraven"
   }
 }

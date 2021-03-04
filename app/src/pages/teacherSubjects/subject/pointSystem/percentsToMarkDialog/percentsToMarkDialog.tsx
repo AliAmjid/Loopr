@@ -46,6 +46,7 @@ const PercentsToMarkDialog: React.FC<PercentsToMarkDialogProps> = props => {
         <DialogContent>
           <PercentsToMark
             percents={percents.percents}
+            fullWidth
             onPercentsChange={setPercents}
           />
         </DialogContent>
