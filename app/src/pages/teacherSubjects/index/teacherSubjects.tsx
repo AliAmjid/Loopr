@@ -8,13 +8,16 @@ import {
   CardContent,
   FormControlLabel,
   Grid,
+  IconButton,
   makeStyles,
   Paper,
+  Popover,
   Switch,
   Theme,
   Typography,
   useTheme,
 } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Link from 'next/link';
 
 import routes from 'config/routes';
@@ -58,6 +61,7 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [colorChange, setColorChange] = useState<string | undefined>(undefined);
+  const [popoverEl, setPopoverEl] = useState<any>(undefined);
   const { t } = useTranslation(namespaces.pages.teacherSubjects.index);
 
   const subjectTypes = new Map<string, Subject[]>();
@@ -145,18 +149,32 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
   });
 
   const archivedCheckBox = (
-    <Box display="flex" justifyContent="flex-end">
-      <FormControlLabel
-        // prettier-ignore
-        control={(
-          <Switch
-            color="primary"
-            checked={props.showArchived}
-            onChange={e => props.onShowArchivedChange(e.target.checked)}
-          />
+    <Box display="flex" justifyContent="flex-end" mb={-5}>
+      <IconButton
+        onClick={e => setPopoverEl(e.currentTarget)}
+        style={{ zIndex: 50 }}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      <Popover
+        open={popoverEl !== undefined}
+        anchorEl={popoverEl}
+        onClose={() => setPopoverEl(undefined)}
+      >
+        <Box p={2}>
+          <FormControlLabel
+            // prettier-ignore
+            control={(
+              <Switch
+                color="primary"
+                checked={props.showArchived}
+                onChange={e => props.onShowArchivedChange(e.target.checked)}
+              />
         )}
-        label={t('showArchived')}
-      />
+            label={t('showArchived')}
+          />
+        </Box>
+      </Popover>
     </Box>
   );
 
