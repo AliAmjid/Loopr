@@ -13,11 +13,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import { Query } from 'material-table';
 
+import resources from 'config/resources';
+
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import SimpleDialog from 'components/SimpleDialog';
+import useResources from 'components/useResources';
 
 import { Subject as SubjectT, SubjectProps } from './types';
 
@@ -26,6 +29,8 @@ const Subject: React.FC<SubjectProps> = props => {
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
   const [dialogLoading, setDialogLoading] = useState(false);
   const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
+
+  const canDelete = useResources([[resources.subject.delete]]);
 
   if (!props.selectedSubjectType)
     return (
@@ -164,6 +169,8 @@ const Subject: React.FC<SubjectProps> = props => {
               row = row as SubjectT;
               setDeleteId(row.id);
             },
+            hidden: !canDelete,
+            position: !canDelete ? 'toolbar' : 'row',
           },
           {
             icon: EditIcon,
