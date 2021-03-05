@@ -46,17 +46,24 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
           primary={t('gqlObjects.user.createdAt')}
           secondary={formatDateToMinute(props.user?.createdAt || '')}
         />
-        <SwitchableListItem
-          primary={t('gqlObjects.user.archived')}
-          checked={Boolean(props.user?.archivedAt)}
-          onChange={props.onArchive}
-        />
+
         <ListItemText
           primary={t('gqlObjects.user.classGroup')}
           secondary={`${props.user?.classGroup?.year || '-'} ${
             props.user?.classGroup?.section || ''
           }`}
         />
+        <></>
+        <></>
+      </HorizontalList>
+      <HorizontalList>
+        <SwitchableListItem
+          primary={t('gqlObjects.user.archived')}
+          checked={Boolean(props.user?.archivedAt)}
+          onChange={props.onArchive}
+        />
+        <></>
+        <></>
         <></>
       </HorizontalList>
     </>

@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = props => {
         <Typography variant="h3">{t('passwordChange')}</Typography>
         <ThickDivider />
         <form onSubmit={handleSubmit(submitHandler)}>
-          <Box display="flex" alignItems="center" flexWrap="wrap">
+          <Box display="flex" flexWrap="wrap" flexDirection="column" pl={2}>
             <Box pr={2} pt={2}>
               <TextField
                 label={t('oldPassword')}
@@ -55,9 +55,9 @@ const Login: React.FC<LoginProps> = props => {
               />
             </Box>
           </Box>
-          <Box pt={2} pb={2} display="flex" justifyContent="flex-end">
+          <Box pt={4} pb={2} pl={2}>
             <Button color="primary" variant="contained" type="submit">
-              Change
+              {t('common:actions.change')}
             </Button>
           </Box>
         </form>

@@ -45,53 +45,55 @@ const PasswordReset: React.FC<PasswordResetProps> = props => {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="sm">
       <Box pt={10}>
         <OverlayLoadingContainer>
           <OverlayLoading loading={props.loading} />
           <Paper>
-            <form onSubmit={handleSubmit(submitHandler)}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Box display="flex" justifyContent="center">
-                    <Typography variant="h1">{t('title')}</Typography>
-                  </Box>
+            <Box p={2}>
+              <form onSubmit={handleSubmit(submitHandler)}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Box display="flex" justifyContent="center" pt={2} pb={2}>
+                      <Typography variant="h4">{t('title')}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="password1"
+                      type="password"
+                      variant="outlined"
+                      label={t('newPassword')}
+                      fullWidth
+                      inputRef={register({ required: true })}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="password2"
+                      type="password"
+                      variant="outlined"
+                      label={t('newPasswordAgain')}
+                      fullWidth
+                      inputRef={register({ required: true })}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                    >
+                      {t('common:actions.submit')}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <LanguageSelect />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="password1"
-                    type="password"
-                    variant="outlined"
-                    label={t('newPassword')}
-                    fullWidth
-                    inputRef={register({ required: true })}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="password2"
-                    type="password"
-                    variant="outlined"
-                    label={t('newPasswordAgain')}
-                    fullWidth
-                    inputRef={register({ required: true })}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                  >
-                    {t('common:actions.submit')}
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <LanguageSelect />
-                </Grid>
-              </Grid>
-            </form>
+              </form>
+            </Box>
           </Paper>
         </OverlayLoadingContainer>
       </Box>

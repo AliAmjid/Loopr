@@ -43,6 +43,11 @@ const typography: Overrides = {
       wordSpacing: '0.1em',
     },
   },
+  MuiButton: {
+    label: {
+      letterSpacing: '0.05em',
+    },
+  },
 };
 
 export default typography;

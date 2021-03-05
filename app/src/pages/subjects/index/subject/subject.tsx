@@ -163,6 +163,14 @@ const Subject: React.FC<SubjectProps> = props => {
         }
         actions={[
           {
+            icon: EditIcon,
+            tooltip: t('common:actions.edit'),
+            onClick: (_, row) => {
+              row = row as SubjectT;
+              props.onEdit(row.id);
+            },
+          },
+          {
             icon: DeleteIcon,
             tooltip: t('common:actions.delete'),
             onClick: (_, row) => {
@@ -171,14 +179,6 @@ const Subject: React.FC<SubjectProps> = props => {
             },
             hidden: !canDelete,
             position: !canDelete ? 'toolbar' : 'row',
-          },
-          {
-            icon: EditIcon,
-            tooltip: t('common:actions.edit'),
-            onClick: (_, row) => {
-              row = row as SubjectT;
-              props.onEdit(row.id);
-            },
           },
           {
             icon: props.showArchived ? UnarchiveIcon : ArchiveIcon,

@@ -56,11 +56,12 @@
     "download": "Stáhnout",
     "archive": "Archivovat",
     "unarchive": "Zrušit archivaci",
-    "reset": "Resetovat"
+    "reset": "Resetovat",
+    "change": "Změnit"
   },
   "phrases": {
     "yes": "Ano",
     "no": "Ne",
-    "irreversible": "Tato operace je nevratná",
+    "irreversible": "Tato operace je nevratná"
   }
 }
