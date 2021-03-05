@@ -47,6 +47,9 @@ const UsersIndex: React.FC = () => {
       ?.value;
     const archivedFilter: string[] =
       query.filters.find(f => f.column.field === 'archived')?.value || [];
+    const classGroupsFilter = query.filters.find(
+      f => f.column.field === 'classGroup.id',
+    )?.value;
 
     const exists: UserFilter_exists[] = [];
     archivedFilter.forEach(archived =>
@@ -62,6 +65,7 @@ const UsersIndex: React.FC = () => {
           lastName: lastNameFilter,
           firstName: firstNameFilter,
           roles: rolesFilter,
+          classGroups: classGroupsFilter,
           exists,
         },
       })
@@ -81,10 +85,17 @@ const UsersIndex: React.FC = () => {
     if (role) rolesLookup[role.id] = stripRolePrefix(role.name);
   });
 
+  const classGroupLookup: Record<string, string> = {};
+  rolesData?.classGroups?.edges?.forEach(classGroupEdge => {
+    const node = classGroupEdge?.node;
+    if (node) classGroupLookup[node.id] = `${node.year} ${node.section}`;
+  });
+
   return (
     <Users
       loading={rolesLoading}
       rolesLookup={rolesLookup}
+      classGroupLookup={classGroupLookup}
       getUsers={getUsers}
     />
   );

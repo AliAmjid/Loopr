@@ -2505,8 +2505,26 @@ export interface UsersRolesQuery_aclRoles {
   name: string;
 }
 
+export interface UsersRolesQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface UsersRolesQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: UsersRolesQuery_classGroups_edges_node | null;
+}
+
+export interface UsersRolesQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (UsersRolesQuery_classGroups_edges | null)[] | null;
+}
+
 export interface UsersRolesQuery {
   aclRoles: (UsersRolesQuery_aclRoles | null)[] | null;
+  classGroups: UsersRolesQuery_classGroups | null;
 }
 
 /* tslint:disable */
@@ -2524,6 +2542,11 @@ export interface UsersUsersQuery_users_edges_node_role {
   name: string;
 }
 
+export interface UsersUsersQuery_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
 export interface UsersUsersQuery_users_edges_node {
   __typename: "User";
   id: string;
@@ -2533,6 +2556,7 @@ export interface UsersUsersQuery_users_edges_node {
   createdAt: string;
   archivedAt: string | null;
   role: UsersUsersQuery_users_edges_node_role;
+  classGroup: UsersUsersQuery_users_edges_node_classGroup | null;
 }
 
 export interface UsersUsersQuery_users_edges {
@@ -2561,6 +2585,7 @@ export interface UsersUsersQueryVariables {
   lastName?: string | null;
   roles?: string[] | null;
   exists?: (UserFilter_exists | null)[] | null;
+  classGroups?: string[] | null;
 }
 
 /* tslint:disable */
@@ -2642,6 +2667,13 @@ export interface UsersUserDetailUserQuery_user_role {
   name: string;
 }
 
+export interface UsersUserDetailUserQuery_user_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
 export interface UsersUserDetailUserQuery_user {
   __typename: "User";
   id: string;
@@ -2651,6 +2683,7 @@ export interface UsersUserDetailUserQuery_user {
   createdAt: string;
   archivedAt: string | null;
   role: UsersUserDetailUserQuery_user_role;
+  classGroup: UsersUserDetailUserQuery_user_classGroup | null;
 }
 
 export interface UsersUserDetailUserQuery_aclRoles {

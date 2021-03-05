@@ -229,7 +229,7 @@ const EditIndex: React.FC<EditIndexProps> = props => {
             ...prevState,
             name: values.name,
             maxPoints: +values.maxPoints,
-            writtenAt: values.writtenAt,
+            writtenAtISO: values.writtenAt,
           }));
         }}
         onClose={() => setExamInfoDialog(false)}

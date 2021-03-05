@@ -13,6 +13,11 @@ const USERS_USER_DETAIL_USER_QUERY = gql`
         id
         name
       }
+      classGroup {
+        id
+        year
+        section
+      }
     }
     aclRoles {
       id

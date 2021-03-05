@@ -51,7 +51,12 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
           checked={Boolean(props.user?.archivedAt)}
           onChange={props.onArchive}
         />
-        <></>
+        <ListItemText
+          primary={t('gqlObjects.user.classGroup')}
+          secondary={`${props.user?.classGroup?.year || '-'} ${
+            props.user?.classGroup?.section || ''
+          }`}
+        />
         <></>
       </HorizontalList>
     </>

@@ -92,6 +92,11 @@ const Users: React.FC<UsersProps> = props => {
                 },
                 defaultFilter: ['false'],
               },
+              {
+                title: t('gqlObjects.user.classGroup'),
+                field: 'classGroup.id',
+                lookup: props.classGroupLookup,
+              },
             ],
           },
           grouping: { active: true },
