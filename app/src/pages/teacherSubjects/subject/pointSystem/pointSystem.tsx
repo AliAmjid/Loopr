@@ -350,7 +350,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
 
                       {student.exams.map(exam => {
                         return (
-                          <>
+                          <React.Fragment key={exam.id}>
                             <TableCell
                               align="left"
                               className={backgroundColor}
@@ -374,7 +374,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                                 {exam.percents}
                               </Box>
                             </TableCell>
-                          </>
+                          </React.Fragment>
                         );
                       })}
                       <TableCell className={`${backgroundColor}`} />
