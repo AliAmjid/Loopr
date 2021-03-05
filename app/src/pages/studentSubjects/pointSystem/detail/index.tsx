@@ -66,7 +66,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
               {t('common:gqlObjects.point.points.nominative').toUpperCase()}
             </Typography>
             <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
-              <Typography variant="h3">
+              <Typography variant="h4">
                 {props.exam.pointSystem?.points}
               </Typography>
               <Box pb={0.4} pl={0.8}>
@@ -83,7 +83,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
               {t('common:gqlObjects.point.percents').toUpperCase()}
             </Typography>
             <Box display="flex" justifyContent="flex-end">
-              <Typography variant="h3">{percents}</Typography>
+              <Typography variant="h4">{percents}</Typography>
             </Box>
           </CustomCard>
         </Grid>
@@ -93,12 +93,12 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
               {t('common:gqlObjects.point.mark').toUpperCase()}
             </Typography>
             <Box display="flex" justifyContent="flex-end">
-              <Typography variant="h3">{`${mark}`}</Typography>
+              <Typography variant="h4">{`${mark}`}</Typography>
             </Box>
           </CustomCard>
         </Grid>
       </Grid>
-      <Box pt={2}>
+      <Box pt={4}>
         <Typography variant="h3">
           {t('pointSystem.comparisonToClass')}
         </Typography>
@@ -116,7 +116,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
                 justifyContent="flex-end"
                 alignItems="flex-end"
               >
-                <Typography variant="h3">
+                <Typography variant="h4">
                   {props.exam.pointSystem?.average}
                 </Typography>
                 <Box pb={0.4} pl={0.8}>
@@ -133,7 +133,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
                 {t('common:gqlObjects.point.percentil').toUpperCase()}
               </Typography>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h3">{`${props.exam.pointSystem?.percentil}`}</Typography>
+                <Typography variant="h4">{`${props.exam.pointSystem?.percentil}`}</Typography>
               </Box>
             </CustomCard>
           </Grid>
@@ -143,7 +143,7 @@ const PointSystemDetail: React.FC<PointSystemDetailProps> = props => {
                 {t('pointSystem.studentsBetterThanYou').toUpperCase()}
               </Typography>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h3">
+                <Typography variant="h4">
                   {`${props.exam.pointSystem?.worstThan}`}
                 </Typography>
               </Box>
