@@ -6,16 +6,19 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const exportPDF = (columns: Column<any>[], data: any[]): void => {
   const filteredColumns: {
-    field: string;
+    field?: string;
     title: string;
-    lookup: Record<any, any>;
+    lookup?: Record<any, any>;
+    render?: (row: any, type: 'row' | 'group') => any | undefined;
   }[] = [];
+
   columns.forEach(column => {
-    if (typeof column.field === 'string' && typeof column.title === 'string') {
+    if (typeof column.title === 'string' && !column.hidden) {
       filteredColumns.push({
-        field: column.field,
+        field: column.field as string | undefined,
         title: column.title,
         lookup: column.lookup,
+        render: column.render,
       });
     }
   });
@@ -35,15 +38,19 @@ const exportPDF = (columns: Column<any>[], data: any[]): void => {
                 const { field } = c;
 
                 let value: any = '';
-                const fieldSteps = field.split('.');
-                value = row;
-                fieldSteps.forEach(step => {
-                  console.log(value, step);
-                  if (value) value = value[step];
-                });
+                if (typeof field === 'string') {
+                  const fieldSteps = field.split('.');
+                  value = row;
+                  fieldSteps.forEach(step => {
+                    if (value) value = value[step];
+                  });
+                }
 
                 if (c.lookup) {
                   value = c.lookup[value];
+                }
+                if (c.render) {
+                  value = c.render(row, 'row');
                 }
 
                 return value || '';
