@@ -25,11 +25,13 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
     {
       title: 'From',
       field: 'from',
+      filtering: false,
       render: (data: SchoolPeriod) => formatDateToDay(data.from),
     },
     {
       title: 'to',
       field: 'to',
+      filtering: false,
       render: (data: SchoolPeriod) => formatDateToDay(data.to),
     },
     { title: 'quarter', field: 'quarter' },
