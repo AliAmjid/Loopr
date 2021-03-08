@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done';
+import EditIcon from '@material-ui/icons/Edit';
 import { Query } from 'material-table';
 
 import { useTranslation } from 'lib/i18n';
@@ -12,6 +14,9 @@ import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
 
 import { DetailClassGroupUser, TeacherProps } from './types';
+
+const Edit = (): JSX.Element => <EditIcon color="primary" />;
+const Close = (): JSX.Element => <CloseIcon color="error" />;
 
 const Teacher: React.FC<TeacherProps> = props => {
   const { t } = useTranslation(namespaces.pages.classGroups.index);
@@ -61,38 +66,37 @@ const Teacher: React.FC<TeacherProps> = props => {
         options={{
           exportButton: !editing,
         }}
-        actions={
-          editing
-            ? [
-                {
-                  icon: AddIcon,
-                  tooltip: t('common:actions.select'),
-                  onClick: (_, row) => {
-                    row = row as DetailClassGroupUser;
-                    props.onChange(row.id).then(successful => {
-                      if (successful) setEditing(false);
-                    });
-                  },
-                },
-              ]
-            : []
-        }
+        actions={[
+          {
+            icon: AddIcon,
+            tooltip: t('common:actions.select'),
+            onClick: (_, row) => {
+              row = row as DetailClassGroupUser;
+              props.onChange(row.id).then(successful => {
+                if (successful) setEditing(false);
+              });
+            },
+            hidden: !editing,
+          },
+
+          {
+            tooltip: t('common:actions.edit'),
+            icon: Edit,
+            onClick: () => setEditing(true),
+            position: 'toolbar',
+            hidden: editing,
+          },
+          {
+            tooltip: t('common:actions.cancel'),
+            icon: Close,
+            onClick: () => {
+              setEditing(false);
+            },
+            hidden: !editing,
+            isFreeAction: true,
+          },
+        ]}
       />
-      <Box pt={2} display="flex" justifyContent="flex-end">
-        {editing ? (
-          <Button color="primary" onClick={() => setEditing(false)}>
-            {t('common:actions.cancel')}
-          </Button>
-        ) : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setEditing(true)}
-          >
-            {t('common:actions.edit')}
-          </Button>
-        )}
-      </Box>
     </OverlayLoadingContainer>
   );
 };
