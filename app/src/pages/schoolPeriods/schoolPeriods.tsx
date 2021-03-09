@@ -4,7 +4,9 @@ import { Box, Button, Paper } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Query, QueryResult } from 'material-table';
+import { useTranslation } from 'react-i18next';
 
+import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 
 import EditDialogIndex from 'pages/schoolPeriods/editDialog';
@@ -21,21 +23,25 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
   const [add, setAdd] = useState(false);
   const [editing, setEditing] = useState<SchoolPeriod | undefined>(undefined);
   const [deleting, setDeleting] = useState<string | undefined>(undefined);
+  const { t } = useTranslation(namespaces.pages.schoolPeriods.index);
   const [columns] = useState([
     {
-      title: 'From',
+      title: t('common:gqlObjects.schoolPeriod.from'),
       field: 'from',
       filtering: false,
       render: (data: SchoolPeriod) => formatDateToDay(data.from),
     },
     {
-      title: 'to',
+      title: t('common:gqlObjects.schoolPeriod.to'),
       field: 'to',
       filtering: false,
       render: (data: SchoolPeriod) => formatDateToDay(data.to),
     },
-    { title: 'quarter', field: 'quarter' },
-    { title: 'schoolYear', field: 'schoolYear' },
+    { title: t('common:gqlObjects.schoolPeriod.quarter'), field: 'quarter' },
+    {
+      title: t('common:gqlObjects.schoolPeriod.schoolYear'),
+      field: 'schoolYear',
+    },
   ]);
 
   return (
@@ -51,14 +57,14 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
         />
         <SimpleDialog
           open={deleting !== undefined}
-          title="Sure?"
+          title={t('sure')}
           actions={[
             <Button
               key={0}
               color="primary"
               onClick={() => setDeleting(undefined)}
             >
-              Cancel
+              {t('common:actions.cancel')}
             </Button>,
             <Button
               key={1}
@@ -72,14 +78,14 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
                   .then(() => setDeleting(undefined));
               }}
             >
-              Delete
+              {t('common:actions.delete')}
             </Button>,
           ]}
         />
         <MaterialTable
           key={`${add} ${deleting}`}
           uniqueName="pages/schoolPeriods"
-          title="schoolPeriods"
+          title={t('title')}
           columns={columns}
           data={(query: Query<SchoolPeriod>) =>
             new Promise<QueryResult<SchoolPeriod>>((resolve, reject) => {
@@ -100,7 +106,7 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
           actions={[
             {
               icon: DeleteIcon,
-              tooltip: 'delete',
+              tooltip: t('common:actions.delete'),
               onClick: (_, row) => {
                 row = row as SchoolPeriod;
                 setDeleting(row.id);
@@ -108,7 +114,7 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
             },
             {
               icon: EditIcon,
-              tooltip: 'edit',
+              tooltip: t('common:actions.edit'),
               onClick: (_, row) => {
                 row = row as SchoolPeriod;
                 setEditing(row);
@@ -122,7 +128,7 @@ const SchoolPeriods: React.FC<SchoolPeriodsProps> = props => {
             variant="contained"
             onClick={() => setAdd(true)}
           >
-            Add
+            {t('common:actions.add')}
           </Button>
         </Box>
       </OverlayLoadingContainer>

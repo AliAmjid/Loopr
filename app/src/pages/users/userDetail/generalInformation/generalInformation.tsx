@@ -42,29 +42,6 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
           onSubmit={role => props.onChange({ role })}
           lookup={props.rolesLookup}
         />
-        <ListItemText
-          primary={t('gqlObjects.user.createdAt')}
-          secondary={formatDateToMinute(props.user?.createdAt || '')}
-        />
-
-        <ListItemText
-          primary={t('gqlObjects.user.classGroup')}
-          secondary={`${props.user?.classGroup?.year || '-'} ${
-            props.user?.classGroup?.section || ''
-          }`}
-        />
-        <></>
-        <></>
-      </HorizontalList>
-      <HorizontalList>
-        <SwitchableListItem
-          primary={t('gqlObjects.user.archived')}
-          checked={Boolean(props.user?.archivedAt)}
-          onChange={props.onArchive}
-        />
-        <></>
-        <></>
-        <></>
       </HorizontalList>
     </>
   );

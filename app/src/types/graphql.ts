@@ -1411,6 +1411,19 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: LoginPingQuery
+// ====================================================
+
+export interface LoginPingQuery {
+  ping: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: LoginPasswordResetResetPasswordUserMutation
 // ====================================================
 
