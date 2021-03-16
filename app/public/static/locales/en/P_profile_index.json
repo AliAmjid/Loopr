@@ -1,6 +1,7 @@
 {
   "generalInformation": "Personal information",
   "login": "Login",
+  "percentsToMark": "Percentage conversion",
   "firstname": "First name",
   "lastname": "Last name",
   "email": "Email",
@@ -9,7 +10,9 @@
   "oldPassword": "Old password",
   "newPassword": "New password",
   "newPasswordAgain": "New password again",
+  "percentToMarkDetail": "These conversion criteria are copied to each newly created subject you teach. In each subject, the transfer can be further individually adjusted.",
   "snackbars": {
-    "changePassword": "Password changed successfully"
+    "changePassword": "Password changed successfully",
+    "updatePercentToMarkConvert": "The grade conversion has been successfully changed"
   }
 }
