@@ -43,22 +43,28 @@ const PercentsToMark: React.FC<PercentsToMarkProps> = props => {
       <OverlayLoading loading={props.loading} />
       <Box pl={2} pt={2}>
         <Typography>{t('percentToMarkDetail')}</Typography>
-        <PercentsToMarkComponent
-          percents={percents.percents}
-          onPercentsChange={setPercents}
-        />
-        <Button color="primary" onClick={() => setPercents(defaultState)}>
-          {t('common:actions.reset')}
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            props.onSubmit(percents.percents);
-          }}
-        >
-          {t('common:actions.save')}
-        </Button>
+        <Box pt={2} pb={2}>
+          <PercentsToMarkComponent
+            percents={percents.percents}
+            onPercentsChange={setPercents}
+          />
+        </Box>
+        <Box display="flex">
+          <Button color="primary" onClick={() => setPercents(defaultState)}>
+            {t('common:actions.reset')}
+          </Button>
+          <Box pl={2}>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => {
+                props.onSubmit(percents.percents);
+              }}
+            >
+              {t('common:actions.save')}
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </OverlayLoadingContainer>
   );
