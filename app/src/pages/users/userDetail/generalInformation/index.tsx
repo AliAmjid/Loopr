@@ -2,12 +2,9 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 
-import USERS_USER_DETAIL_ARCHIVE_USER_MUTATION from 'pages/users/userDetail/mutations/archiveUser';
 import USERS_USER_DETAIL_UPDATE_USER_MUTATION from 'pages/users/userDetail/mutations/editUser';
 
 import {
-  UsersUserDetailArchiveUserMutation,
-  UsersUserDetailArchiveUserMutationVariables,
   UsersUserDetailUpdateUserMutation,
   UsersUserDetailUpdateUserMutationVariables,
 } from 'types/graphql';

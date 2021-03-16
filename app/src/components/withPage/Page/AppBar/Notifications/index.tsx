@@ -13,8 +13,6 @@ import Notifications from './notifications';
 import { NotificationsIndexProps } from './types';
 
 const NotificationsIndex: React.FC<NotificationsIndexProps> = props => {
-  const [resetCounter, setResetCounter] = useState(1);
-
   const [
     markReadAllNotifications,
     { loading: markReadAllNotificationsLoading },

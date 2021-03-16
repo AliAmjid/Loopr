@@ -4,8 +4,8 @@ import { Box, Button, Paper } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Query, QueryResult } from 'material-table';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 import MaterialTable from 'lib/material-table';
 

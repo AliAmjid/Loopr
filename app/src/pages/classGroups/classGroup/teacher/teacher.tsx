@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
 import { Query } from 'material-table';
 

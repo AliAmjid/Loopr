@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { ListItemText } from '@material-ui/core';
-
 import { useTranslation } from 'lib/i18n';
 
 import EditableListItem from 'components/EditableListItem';
-import { formatDateToMinute } from 'components/formatDate';
 import HorizontalList from 'components/HorizontalList';
-import SwitchableListItem from 'components/SwitchableListItem';
 
 import { GeneralInformationProps } from './types';
 
