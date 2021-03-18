@@ -8,16 +8,27 @@ use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
 use App\Entity\IGroup;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 
 class IGroupArchiveController extends AbstractController implements MutationResolverInterface
 {
+
+    public function __construct(
+        private Security $security
+    )
+    {
+    }
 
     /**
      * @var IGroup $item
      */
     public function __invoke($item, array $context)
     {
+        if (!$this->security->isGranted('GROUP_EDIT')) {
+            throw new ClientError(ClientErrorType::ACCESS_DENIED);
+        }
         $em = $this->getDoctrine()->getManager();
         $archive = $context['args']['input']['archive'] ?? false;
         if ($archive) {
