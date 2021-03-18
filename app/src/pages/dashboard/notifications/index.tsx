@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useQuery } from '@apollo/client';
-import { Paper, Typography } from '@material-ui/core';
+import { Box, Paper, Typography } from '@material-ui/core';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -37,7 +37,9 @@ const NotificationsIndex: React.FC = () => {
       <OverlayLoadingContainer>
         <OverlayLoading loading={notificationsLoading} />
       </OverlayLoadingContainer>
-      <Typography variant="h6">{t('latestNotifications')}</Typography>
+      <Box pl={2} pt={1}>
+        <Typography variant="h6">{t('latestNotifications')}</Typography>
+      </Box>
       <Notifications notifications={notifications} />
     </Paper>
   );

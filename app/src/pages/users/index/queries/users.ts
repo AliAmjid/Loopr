@@ -11,6 +11,7 @@ const USERS_USERS_QUERY = gql`
     $lastName: String
     $roles: [String!]
     $exists: [UserFilter_exists]
+    $classGroups: [String!]
   ) {
     users(
       first: $first
@@ -22,6 +23,7 @@ const USERS_USERS_QUERY = gql`
       lastname: $lastName
       role_id_list: $roles
       exists: $exists
+      classGroup_id_list: $classGroups
     ) {
       edges {
         node {
@@ -34,6 +36,9 @@ const USERS_USERS_QUERY = gql`
           role {
             id
             name
+          }
+          classGroup {
+            id
           }
         }
         cursor

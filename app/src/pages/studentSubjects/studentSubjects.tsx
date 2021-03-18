@@ -119,7 +119,7 @@ const StudentSubjects: React.FC<StudentSubjectsProps> = props => {
                     );
                   }
 
-                  return <React.Fragment key={index} />;
+                  return <React.Fragment key={subject.id} />;
                 })}
               </TableBody>
             </Table>

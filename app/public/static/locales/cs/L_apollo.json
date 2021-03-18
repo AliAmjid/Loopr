@@ -1,11 +1,11 @@
 {
   "errors": {
     "commonError": "Nastala chyba",
-    "unexpectedError": "Nastala neočekávané chyba",
+    "unexpectedError": "Nastala neočekávaná chyba",
     "unauthorized": "K této akci nemáte práva",
     "invalidRoleConfig": "Konfigurace rolí je špatně",
     "userNotFound": "Přihlašovací údaje se neshodují",
-    "duplicateValue": "Pokusili jste se vytytvořit záznam s duplicitními hodnotami",
+    "duplicateValue": "Pokusili jste se vytvořit záznam s duplicitními hodnotami",
     "oldPasswordIsWrong": "Staré heslo není správné",
     "userIsNotTeacher": "Uživatel není učitel",
     "emptyGroupClassGroup": "Třída nebo skupina je prázná",

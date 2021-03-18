@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 
-import { Box, Button, Menu, MenuItem, Paper } from '@material-ui/core';
+import {
+  Box,
+  Grid,
+  IconButton,
+  Menu,
+  MenuItem,
+  Paper,
+  Typography,
+} from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import dayjs from 'dayjs';
 import { Query, QueryResult } from 'material-table';
@@ -27,9 +36,26 @@ const Users: React.FC<UsersProps> = props => {
 
   return (
     <Paper>
+      <Box pr={1} pl={1}>
+        <Grid container>
+          <Grid item xs={6}>
+            <Box pt={1}>
+              <Typography variant="h6">{t('tableTitle')}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box display="flex" justifyContent="flex-end">
+              <IconButton onClick={e => setMenuAnchorEl(e.currentTarget)}>
+                <AddIcon color="primary" />
+              </IconButton>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
       <MaterialTable
         uniqueName="pages/users/index"
-        title={t('tableTitle')}
+        title=""
         isLoading={props.loading}
         columns={[]}
         data={(query: Query<User>) =>
@@ -92,6 +118,11 @@ const Users: React.FC<UsersProps> = props => {
                 },
                 defaultFilter: ['false'],
               },
+              {
+                title: t('gqlObjects.user.classGroup'),
+                field: 'classGroup.id',
+                lookup: props.classGroupLookup,
+              },
             ],
           },
           grouping: { active: true },
@@ -111,15 +142,6 @@ const Users: React.FC<UsersProps> = props => {
         ]}
       />
       <Box display="flex" justifyContent="flex-end" mt={2}>
-        <Button
-          aria-controls="users-addButton"
-          color="primary"
-          variant="contained"
-          onClick={e => setMenuAnchorEl(e.currentTarget)}
-        >
-          {t('addUsers.button')}
-        </Button>
-
         <Menu
           id="users-addButton"
           open={Boolean(menuAnchorEl)}
@@ -132,7 +154,7 @@ const Users: React.FC<UsersProps> = props => {
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'right',
           }}
         >
           <Link href={routes.users.addManual} passHref>

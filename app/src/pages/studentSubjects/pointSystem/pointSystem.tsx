@@ -39,11 +39,12 @@ const PointSystem: React.FC<PointSystemProps> = props => {
               {formatDateToDay(exam.writtenAt)}
             </Typography>
           </Box>
-          <Box display="flex" justifyContent="center">
+          <Box display="flex" justifyContent="center" pt={0.5}>
             <IconButton
               color="primary"
               onClick={() => props.onDetail(exam.id)}
               disabled={!exam.examWritten}
+              size="small"
             >
               <VisibilityIcon />
             </IconButton>

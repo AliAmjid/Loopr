@@ -1,0 +1,23 @@
+{
+  "addTest": "Add a test",
+  "deleteExam": "Are you sure you want to delete the test?",
+  "irreversible": "This operation is irreversible",
+  "examEdit": "Test edit",
+  "snackbars": {
+    "createExam": {
+      "success": "New test added successfully",
+      "noSchoolPeriod": "No marking period is active",
+      "error": "Failed to create new test"
+    },
+    "updatePercentToMarkConvert": {
+      "success": "Conversion values edited successfully"
+    },
+    "createOrUpdatePointSystem": {
+      "success": "Test successfully edited",
+      "invalid": "The entered values are not valid"
+    },
+    "deleteExam": {
+      "success": "Test removed successfully"
+    }
+  }
+}

@@ -6,6 +6,15 @@ const USERS_ROLES_QUERY = gql`
       id
       name
     }
+    classGroups {
+      edges {
+        node {
+          id
+          year
+          section
+        }
+      }
+    }
   }
 `;
 

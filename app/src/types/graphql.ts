@@ -1411,6 +1411,19 @@ export interface LoginMeUserQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: LoginPingQuery
+// ====================================================
+
+export interface LoginPingQuery {
+  ping: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: LoginPasswordResetResetPasswordUserMutation
 // ====================================================
 
@@ -1473,6 +1486,33 @@ export interface ProfileChangePasswordVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ProfileUpdatePercentsToMarkConverterMutation
+// ====================================================
+
+export interface ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert_percentToMarkConvert {
+  __typename: "PercentToMarkConvert";
+  id: string;
+}
+
+export interface ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert {
+  __typename: "updatePercentToMarkConvertPayload";
+  percentToMarkConvert: ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert_percentToMarkConvert | null;
+}
+
+export interface ProfileUpdatePercentsToMarkConverterMutation {
+  updatePercentToMarkConvert: ProfileUpdatePercentsToMarkConverterMutation_updatePercentToMarkConvert | null;
+}
+
+export interface ProfileUpdatePercentsToMarkConverterMutationVariables {
+  input: updatePercentToMarkConvertInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: ProfileUserQuery
 // ====================================================
 
@@ -1482,6 +1522,20 @@ export interface ProfileUserQuery_meUser_role {
   name: string;
 }
 
+export interface ProfileUserQuery_meUser_privateData_defaultPercentToMark {
+  __typename: "PercentToMarkConvert";
+  id: string;
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+}
+
+export interface ProfileUserQuery_meUser_privateData {
+  __typename: "UserPrivateData";
+  defaultPercentToMark: ProfileUserQuery_meUser_privateData_defaultPercentToMark;
+}
+
 export interface ProfileUserQuery_meUser {
   __typename: "User";
   id: string;
@@ -1489,6 +1543,7 @@ export interface ProfileUserQuery_meUser {
   firstname: string;
   lastname: string;
   role: ProfileUserQuery_meUser_role;
+  privateData: ProfileUserQuery_meUser_privateData;
 }
 
 export interface ProfileUserQuery {
@@ -1730,11 +1785,9 @@ export interface StudentSubjectsLearnedSubjectsQuery_schoolPeriods {
   edges: (StudentSubjectsLearnedSubjectsQuery_schoolPeriods_edges | null)[] | null;
 }
 
-export interface StudentSubjectsLearnedSubjectsQuery_getCurrentSchoolPeriod {
+export interface StudentSubjectsLearnedSubjectsQuery_getCurrentHalfYearSchoolPeriods {
   __typename: "SchoolPeriod";
   _id: string;
-  quarter: number;
-  schoolYear: number;
 }
 
 export interface StudentSubjectsLearnedSubjectsQuery_meUser {
@@ -1745,7 +1798,7 @@ export interface StudentSubjectsLearnedSubjectsQuery_meUser {
 export interface StudentSubjectsLearnedSubjectsQuery {
   learnedSubjects: StudentSubjectsLearnedSubjectsQuery_learnedSubjects | null;
   schoolPeriods: StudentSubjectsLearnedSubjectsQuery_schoolPeriods | null;
-  getCurrentSchoolPeriod: StudentSubjectsLearnedSubjectsQuery_getCurrentSchoolPeriod | null;
+  getCurrentHalfYearSchoolPeriods: (StudentSubjectsLearnedSubjectsQuery_getCurrentHalfYearSchoolPeriods | null)[] | null;
   meUser: StudentSubjectsLearnedSubjectsQuery_meUser | null;
 }
 
@@ -2434,9 +2487,15 @@ export interface TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods {
   edges: (TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods_edges | null)[] | null;
 }
 
+export interface TeacherSubjectsSubjectPointSystemSubjectQuery_getCurrentHalfYearSchoolPeriods {
+  __typename: "SchoolPeriod";
+  id: string;
+}
+
 export interface TeacherSubjectsSubjectPointSystemSubjectQuery {
   subject: TeacherSubjectsSubjectPointSystemSubjectQuery_subject | null;
   schoolPeriods: TeacherSubjectsSubjectPointSystemSubjectQuery_schoolPeriods | null;
+  getCurrentHalfYearSchoolPeriods: (TeacherSubjectsSubjectPointSystemSubjectQuery_getCurrentHalfYearSchoolPeriods | null)[] | null;
 }
 
 export interface TeacherSubjectsSubjectPointSystemSubjectQueryVariables {
@@ -2459,8 +2518,26 @@ export interface UsersRolesQuery_aclRoles {
   name: string;
 }
 
+export interface UsersRolesQuery_classGroups_edges_node {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
+export interface UsersRolesQuery_classGroups_edges {
+  __typename: "ClassGroupEdge";
+  node: UsersRolesQuery_classGroups_edges_node | null;
+}
+
+export interface UsersRolesQuery_classGroups {
+  __typename: "ClassGroupConnection";
+  edges: (UsersRolesQuery_classGroups_edges | null)[] | null;
+}
+
 export interface UsersRolesQuery {
   aclRoles: (UsersRolesQuery_aclRoles | null)[] | null;
+  classGroups: UsersRolesQuery_classGroups | null;
 }
 
 /* tslint:disable */
@@ -2478,6 +2555,11 @@ export interface UsersUsersQuery_users_edges_node_role {
   name: string;
 }
 
+export interface UsersUsersQuery_users_edges_node_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+}
+
 export interface UsersUsersQuery_users_edges_node {
   __typename: "User";
   id: string;
@@ -2487,6 +2569,7 @@ export interface UsersUsersQuery_users_edges_node {
   createdAt: string;
   archivedAt: string | null;
   role: UsersUsersQuery_users_edges_node_role;
+  classGroup: UsersUsersQuery_users_edges_node_classGroup | null;
 }
 
 export interface UsersUsersQuery_users_edges {
@@ -2515,6 +2598,7 @@ export interface UsersUsersQueryVariables {
   lastName?: string | null;
   roles?: string[] | null;
   exists?: (UserFilter_exists | null)[] | null;
+  classGroups?: string[] | null;
 }
 
 /* tslint:disable */
@@ -2596,6 +2680,13 @@ export interface UsersUserDetailUserQuery_user_role {
   name: string;
 }
 
+export interface UsersUserDetailUserQuery_user_classGroup {
+  __typename: "ClassGroup";
+  id: string;
+  year: number;
+  section: string;
+}
+
 export interface UsersUserDetailUserQuery_user {
   __typename: "User";
   id: string;
@@ -2605,6 +2696,7 @@ export interface UsersUserDetailUserQuery_user {
   createdAt: string;
   archivedAt: string | null;
   role: UsersUserDetailUserQuery_user_role;
+  classGroup: UsersUserDetailUserQuery_user_classGroup | null;
 }
 
 export interface UsersUserDetailUserQuery_aclRoles {

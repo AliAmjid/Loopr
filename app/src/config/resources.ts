@@ -12,10 +12,15 @@ const resources = {
   group: {
     teacher: 'GROUP_TEACHER',
     showAll: 'GROUP_SHOW_ALL',
+    delete: 'GROUP_DELETE',
   },
   subject: {
     showAll: 'SUBJECT_SHOW_ALL',
     teacher: 'SUBJECT_TEACHER',
+    delete: 'SUBJECT_DELETE',
+  },
+  subjectType: {
+    delete: 'SUBJECT_TYPE_DELETE',
   },
   schoolPeriod: {
     edit: 'SCHOOL_PERIOD_EDIT',

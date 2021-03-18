@@ -5,7 +5,9 @@
       "lastname": "Last name",
       "email": "Email",
       "role": "Role",
-      "createdAt": "Singed up at"
+      "createdAt": "Singed up at",
+      "classGroup": "Class",
+      "archived": "Archived"
     },
     "classGroup": {
       "section": "Name",
@@ -13,6 +15,32 @@
     },
     "subjectType": {
       "name": "Name"
+    },
+    "point": {
+      "points": {
+        "nominative": "Points",
+        "accusative": "Points"
+      },
+      "percents": "Percent",
+      "mark": "Mark",
+      "percentil": "Percentile"
+    },
+    "exam": {
+      "name": "Name",
+      "writtenAt": "Date"
+    },
+    "pointSystem": {
+      "maxPoints": "Maximum points"
+    },
+    "schoolPeriod": {
+      "name": "Marking period",
+      "from": "From",
+      "to": "To",
+      "quarter": "Quarter",
+      "schoolYear": "School year"
+    },
+    "subject": {
+      "archivedAt": "Archiving date"
     }
   },
   "actions": {
@@ -21,6 +49,19 @@
     "delete": "Delete",
     "cancel": "Cancel",
     "save": "Save",
-    "select": "Choose"
+    "select": "Choose",
+    "submit": "Confirm",
+    "search": "Find",
+    "upload": "Upload",
+    "download": "Download",
+    "archive": "Archive",
+    "unarchive": "Cancel archiving",
+    "reset": "Reset",
+    "change": "Change"
+  },
+  "phrases": {
+    "yes": "Yes",
+    "no": "No",
+    "irreversible": "This operation is irreversible"
   }
 }

@@ -14,11 +14,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import UnarchiveIcon from '@material-ui/icons/Unarchive';
 
+import resources from 'config/resources';
+
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import SideList from 'components/SideList';
 import SimpleDialog from 'components/SimpleDialog';
+import useResources from 'components/useResources';
 
 import ClassGroupDialog from './classGroupDialog';
 import { ClassGroupListProps } from './types';
@@ -30,6 +33,8 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
   const [editId, setEditId] = useState<string | undefined>(undefined);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
   const [archiveId, setArchiveId] = useState<string | undefined>(undefined);
+
+  const canDelete = useResources([[resources.group.delete]]);
 
   const editingClassGroup = props.classGroups.find(
     classGroup => classGroup.id === editId,
@@ -178,11 +183,15 @@ const ClassGroupList: React.FC<ClassGroupListProps> = props => {
                 <EditIcon />
               </IconButton>
             </Tooltip>,
-            <Tooltip key={1} title={`${t('common:actions.delete')}`}>
-              <IconButton onClick={() => setDeleteId(classGroup.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>,
+            <>
+              {canDelete && (
+                <Tooltip key={1} title={`${t('common:actions.delete')}`}>
+                  <IconButton onClick={() => setDeleteId(classGroup.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </>,
             <>
               {props.showArchived ? (
                 <Tooltip key={2} title={`${t('common:actions.unarchive')}`}>

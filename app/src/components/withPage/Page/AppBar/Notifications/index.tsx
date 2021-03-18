@@ -32,6 +32,10 @@ const NotificationsIndex: React.FC<NotificationsIndexProps> = props => {
   const closeHandler = (): void => {
     setAnchorEl(null);
   };
+  const readHandler = (): void => {
+    props.onResetFetched();
+    closeHandler();
+  };
 
   const readAllHandler = (): void => {
     markReadAllNotifications({ variables: { input: {} } }).then(() => {
@@ -45,6 +49,7 @@ const NotificationsIndex: React.FC<NotificationsIndexProps> = props => {
       anchorEl={anchorEl}
       onClick={clickHandler}
       onClose={closeHandler}
+      onRead={readHandler}
       notifications={props.user?.notifications || []}
       newNotifications={props.user?.notificationViewAtNullCount || 0}
       loading={markReadAllNotificationsLoading}

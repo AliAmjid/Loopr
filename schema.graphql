@@ -166,6 +166,15 @@ type Query {
         quarter_list: [Int]
         order: [SchoolPeriodFilter_order]
     ): SchoolPeriodConnection
+    getCurrentHalfYearSchoolPeriods(
+        id: String
+        id_list: [String]
+        schoolYear: Int
+        schoolYear_list: [Int]
+        quarter: Int
+        quarter_list: [Int]
+        order: [SchoolPeriodFilter_order]
+    ): [SchoolPeriod]
 
     #
     #
@@ -237,6 +246,7 @@ type Group implements Node {
     createdBy: User
     createdAt: String!
     archivedAt: String
+    classParents: Iterable!
     _id: String!
 }
 

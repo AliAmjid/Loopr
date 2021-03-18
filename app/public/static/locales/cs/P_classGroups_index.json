@@ -8,9 +8,9 @@
   "sureDelete": "Doopravdy chcete třídu odstranit?",
   "irreversibleAction": "Nevratná operace",
   "noClassGroup": "Žádná",
-  "archiveDialog":{
-    "archiveTitle":"Doopravdy chcete archivovat třídu?",
-    "unarchiveTitle":"Doopravdy chcete zrušit archivování třídy?",
+  "archiveDialog": {
+    "archiveTitle": "Doopravdy chcete archivovat třídu?",
+    "unarchiveTitle": "Doopravdy chcete zrušit archivování třídy?",
     "content": "Automaticky se archivují všichni studenti ve třídě"
   },
   "showArchived": "Zobrazit archivované",

@@ -31,18 +31,20 @@ const Tabs: React.FC<TabsProps> = props => {
 
   const [value, setValue] = useState(props.defaultTabsId ?? 0);
 
-  const mappedTabs = props.tabs.map(tab => (
-    <Tab
-      classes={{
-        root: `${classes.tabRoot} ${
-          value === tab.id ? classes.selectedTabRoot : ''
-        }`,
-      }}
-      key={tab.id}
-      value={tab.id}
-      label={tab.label}
-    />
-  ));
+  const mappedTabs = props.tabs
+    .filter(tab => !tab.hidden)
+    .map(tab => (
+      <Tab
+        classes={{
+          root: `${classes.tabRoot} ${
+            value === tab.id ? classes.selectedTabRoot : ''
+          }`,
+        }}
+        key={tab.id}
+        value={tab.id}
+        label={tab.label}
+      />
+    ));
 
   let Wrapper = DefaultWrapper;
   if (props.TabWrapper) {

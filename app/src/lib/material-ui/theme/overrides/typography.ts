@@ -36,6 +36,17 @@ const typography: Overrides = {
     subtitle1: {
       fontWeight: 'bold',
     },
+    subtitle2: {
+      fontSize: '1rem',
+      fontWeight: 400,
+      letterSpacing: '0.04em',
+      wordSpacing: '0.1em',
+    },
+  },
+  MuiButton: {
+    label: {
+      letterSpacing: '0.05em',
+    },
   },
 };
 

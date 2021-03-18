@@ -9,27 +9,32 @@
     "title": "Are you sure you want to delete this subject?",
     "description": "This operation is irreversible"
   },
+  "archiveDialogTitle": "Are you sure you want to archive the subject?",
+  "unarchiveDialogTitle": "Are you sure you want to unarchive the item?",
   "addDialogTitle": "Add a subject type",
   "subjects": "Subjects",
   "group": "Group",
   "classGroup": "Class",
   "teacher": "Teacher",
+  "showArchived": "Show archived",
   "snackbars": {
     "typeAdd": {
-      "success": "Subject type added successfully",
-      "error": "Failed to add subject type"
+      "success": "Subject type added successfully"
     },
     "typeEdit": {
-      "success": "Subject type changed successfully",
-      "error": "Failed to edit subject type"
+      "success": "Subject type changed successfully"
     },
     "typeDelete": {
-      "success": "Subject type deleted successfully",
-      "error": "Failed to delete subject type"
+      "success": "Subject type deleted successfully"
     },
     "delete": {
-      "success": "Subject deleted successfully",
-      "error": "Failed to delete subject"
+      "success": "Subject deleted successfully"
+    },
+    "archive": {
+      "success": "Subject successfully archived"
+    },
+    "unarchive": {
+      "success": "Subject archiving successfully canceled"
     }
   }
 }

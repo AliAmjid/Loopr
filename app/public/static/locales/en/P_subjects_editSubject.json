@@ -1,8 +1,7 @@
 {
   "snackbars": {
     "edit": {
-      "success": "Subject edited successfully",
-      "error": "Failed to edit subject"
+      "success": "Subject edited successfully"
     }
   }
 }

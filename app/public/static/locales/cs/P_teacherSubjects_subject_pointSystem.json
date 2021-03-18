@@ -1,11 +1,8 @@
 {
   "addTest": "Přidat test",
   "deleteExam": "Doopravdy chcete odstranit test?",
-  "irreversible":"Tato operace je nevratná",
+  "irreversible": "Tato operace je nevratná",
   "examEdit": "Úprava testu",
-  "allSchoolPeriods": "Všechna",
-  "lowerLimit":"Spodní hranice",
-  "correspondingMark": "Odpovídající známka",
   "snackbars": {
     "createExam": {
       "success": "Nový test úspěšně přidán",

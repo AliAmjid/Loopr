@@ -1,6 +1,8 @@
 {
   "addDialogTitle": "Přidat známkovacího období",
   "editDialogTitle": "Upravit známkovacího období",
+  "title": "Známkovací období",
+  "sure": "Doopravdy chcete odstranit známkovací období?",
   "snackbars": {
     "delete": {
       "success": "Známkovací období úspešně odstraněno"

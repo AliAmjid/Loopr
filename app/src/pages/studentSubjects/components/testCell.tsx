@@ -9,8 +9,10 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: theme.spacing(20),
+    minWidth: theme.spacing(14),
     borderRight: '1px solid #E0E0E0',
+    padding: theme.spacing(1),
+    paddingTop: theme.spacing(1.25),
   },
 }));
 

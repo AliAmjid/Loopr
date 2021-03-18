@@ -45,7 +45,14 @@ const PointSystem: React.FC<PointSystemProps> = props => {
       </TableCell>
       <Hidden xsDown>
         <TableCell>
-          <span style={{ color }}>{percents}</span>
+          <span
+            style={{
+              color,
+              ...(percents !== 'N' ? { fontWeight: 'bold' } : {}),
+            }}
+          >
+            {percents}
+          </span>
         </TableCell>
         <TableCell>
           {`${points}/${props.exam.pointSystem?.maxPoints || 0}b`}

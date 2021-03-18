@@ -5,7 +5,7 @@
   "students": "Studenti",
   "deleteModal": {
     "title": "Opravdu chcete odstranit skupinu?",
-    "description": "tato akce je nevratná"
+    "description": "Tato akce je nevratná"
   },
   "archiveDialog": {
     "archiveTitle": "Doopravdy chcete archivovat skupinu?",

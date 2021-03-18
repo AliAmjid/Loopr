@@ -11,6 +11,7 @@ import ProfileHeader from 'components/ProfileHeader';
 import Tabs from 'components/Tabs';
 
 import GeneralInformation from './generalInformation';
+import SystemSettingsIndex from './systemSettings';
 import { UserDetailProps } from './types';
 
 const UserDetail: React.FC<UserDetailProps> = props => {
@@ -33,6 +34,11 @@ const UserDetail: React.FC<UserDetailProps> = props => {
               panel: (
                 <GeneralInformation user={props.user} roles={props.roles} />
               ),
+            },
+            {
+              id: 1,
+              label: t('systemSettings'),
+              panel: <SystemSettingsIndex user={props.user} />,
             },
           ]}
         />

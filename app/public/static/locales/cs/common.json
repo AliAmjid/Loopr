@@ -55,7 +55,9 @@
     "upload": "Nahrát",
     "download": "Stáhnout",
     "archive": "Archivovat",
-    "unarchive": "Zrušit archivaci"
+    "unarchive": "Zrušit archivaci",
+    "reset": "Resetovat",
+    "change": "Změnit"
   },
   "phrases": {
     "yes": "Ano",

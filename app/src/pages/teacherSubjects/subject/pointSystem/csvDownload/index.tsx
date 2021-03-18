@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import { CSVDownloader } from 'react-papaparse';
+import { CSVDownloader, jsonToCSV } from 'react-papaparse';
 
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
@@ -43,10 +43,11 @@ const CSVDownload: React.FC<CSVDownloadIndexProps> = props => {
       `${student.totalMark}`,
     ]);
   });
+  const CSVData = jsonToCSV(jsonData, { delimiter: ';' });
 
   return (
     <CSVDownloader
-      data={jsonData}
+      data={CSVData}
       style={{ display: 'flex' }}
       filename={props.subjectTitle}
     >

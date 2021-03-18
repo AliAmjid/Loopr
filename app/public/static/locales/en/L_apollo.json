@@ -1,0 +1,19 @@
+{
+  "errors": {
+    "commonError": "An error occurred",
+    "unexpectedError": "An unexpected error occurred",
+    "unauthorized": "You do not have permission to perform this action",
+    "invalidRoleConfig": "Role configuration is incorrect",
+    "userNotFound": "User name and password do not match",
+    "duplicateValue": "You tried to create a record with duplicate values",
+    "oldPasswordIsWrong": "The old password is incorrect",
+    "userIsNotTeacher": "The user is not a teacher",
+    "emptyGroupClassGroup": "The class or group is empty",
+    "checkAccess": "You do not have access to some information",
+    "schoolPeriodValidationError": "The configuration of marking periods is not valid",
+    "noSchoolPeriodActive": "There is currently no active marking period",
+    "alreadySentReset": "Email has been already sent, check your email",
+    "noUserFound": "This user is not registered in the system",
+    "passwordTooShort": "Password is too short"
+  }
+}

@@ -12,7 +12,7 @@
   "exportPDFName": "Exportovat jako PDF",
   "groupingPlaceholder": "Pro seksupení přetáhněte položku ze záhlaví",
   "groupedBy": "Seskupeno podle",
-  "nRowsSelected": "řádků vybráno",
+  "nRowsSelected": "řádků na této stránce vybráno",
   "deleteText": "Opravdu chcete tento řádek odstranit?",
   "defaultActions": {
     "grouping": {
