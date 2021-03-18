@@ -7,26 +7,34 @@
   "editDialogTitle": "Edit the class",
   "sureDelete": "Are you sure you want to delete this class?",
   "irreversibleAction": "Irreversible operation",
+  "noClassGroup": "None",
+  "archiveDialog": {
+    "archiveTitle": "Are you sure you want to archive the class?",
+    "unarchiveTitle": "Are you sure you want to unarchive the class?",
+    "content": "All students in the class are automatically archived"
+  },
+  "showArchived": "Show archived",
   "snackbars": {
     "edit": {
-      "success": "Class edited successfully",
-      "error": "Failed to edit class"
+      "success": "Class edited successfully"
     },
     "delete": {
-      "success": "Class deleted been",
-      "error": "Failed to delete class"
+      "success": "Class deleted been"
     },
     "add": {
-      "success": "Class added successfully",
-      "error": "Failed to add class"
+      "success": "Class added successfully"
     },
     "studentsEdit": {
-      "success": "Students edited successfully",
-      "error": "Failed to edit students"
+      "success": "Students edited successfully"
     },
     "teacherEdit": {
-      "success": "Teacher changed successfully",
-      "error": "Failed to change the teacher"
+      "success": "Teacher changed successfully"
+    },
+    "archive": {
+      "success": "Class successfully archived"
+    },
+    "unarchive": {
+      "success": "Archiving of the class successfully canceled"
     }
   }
 }

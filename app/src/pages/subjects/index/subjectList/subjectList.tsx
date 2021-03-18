@@ -4,11 +4,14 @@ import { Button, IconButton, Tooltip, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import resources from 'config/resources';
+
 import { useTranslation } from 'lib/i18n';
 import namespaces from 'lib/i18n/namespaces';
 
 import SideList from 'components/SideList';
 import SimpleDialog from 'components/SimpleDialog';
+import useResources from 'components/useResources';
 
 import AddDialog from './addDialog';
 import { SubjectListProps } from './types';
@@ -17,6 +20,8 @@ const SubjectList: React.FC<SubjectListProps> = props => {
   const { t } = useTranslation(namespaces.pages.subjects.index);
   const [addOpen, setAddOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | undefined>(undefined);
+
+  const canDelete = useResources([[resources.subjectType.delete]]);
 
   return (
     <>
@@ -73,11 +78,15 @@ const SubjectList: React.FC<SubjectListProps> = props => {
             props.onSubjectUpdate({ id: subject.id, name: value }),
           onClick: () => props.onSelectedSubjectChange(subject.id),
           additionalActions: [
-            <Tooltip key={0} title={`${t('common:actions.delete')}`}>
-              <IconButton onClick={() => setDeleteId(subject.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>,
+            <>
+              {canDelete && (
+                <Tooltip key={0} title={`${t('common:actions.delete')}`}>
+                  <IconButton onClick={() => setDeleteId(subject.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </>,
           ],
         }))}
         bottomAction={{

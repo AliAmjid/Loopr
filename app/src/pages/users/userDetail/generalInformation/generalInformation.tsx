@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { ListItemText } from '@material-ui/core';
-
 import { useTranslation } from 'lib/i18n';
 
 import EditableListItem from 'components/EditableListItem';
-import { formatDateToMinute } from 'components/formatDate';
 import HorizontalList from 'components/HorizontalList';
-import SwitchableListItem from 'components/SwitchableListItem';
 
 import { GeneralInformationProps } from './types';
 
@@ -42,17 +38,6 @@ const GeneralInformation: React.FC<GeneralInformationProps> = props => {
           onSubmit={role => props.onChange({ role })}
           lookup={props.rolesLookup}
         />
-        <ListItemText
-          primary={t('gqlObjects.user.createdAt')}
-          secondary={formatDateToMinute(props.user?.createdAt || '')}
-        />
-        <SwitchableListItem
-          primary={t('gqlObjects.user.archived')}
-          checked={Boolean(props.user?.archivedAt)}
-          onChange={props.onArchive}
-        />
-        <></>
-        <></>
       </HorizontalList>
     </>
   );

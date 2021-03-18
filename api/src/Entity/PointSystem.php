@@ -39,7 +39,7 @@ class PointSystem extends MarkSystem
 
     /** @var Collection|array
      * @ORM\OneToMany(targetEntity="Point", mappedBy="pointSystem")
-     * @Groups({"read:always", "exposed"})
+     * @Groups({"read:always", "exposed", "read"})
      */
     private Collection|array $points;
 

@@ -33,47 +33,49 @@ const PasswordResetRequest: React.FC<PasswordResetRequestProps> = props => {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="sm">
       <Box pt={10}>
         <OverlayLoadingContainer>
           <OverlayLoading loading={loading} />
           <Paper>
-            <form onSubmit={handleSubmit(submitHandler)}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Box display="flex" justifyContent="center">
-                    <Typography variant="h1">{t('title')}</Typography>
-                  </Box>
+            <Box p={2}>
+              <form onSubmit={handleSubmit(submitHandler)}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Box display="flex" justifyContent="center" pt={2}>
+                      <Typography variant="h4">{t('title')}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box pb={1}>
+                      <Typography align="center">{t('description')}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      name="email"
+                      variant="outlined"
+                      label={t('common:gqlObjects.user.email')}
+                      fullWidth
+                      inputRef={register({ required: true })}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                    >
+                      {t('send')}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <LanguageSelect />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <Box p={1}>
-                    <Typography align="center">{t('description')}</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name="email"
-                    variant="outlined"
-                    label={t('common:gqlObjects.user.email')}
-                    fullWidth
-                    inputRef={register({ required: true })}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                  >
-                    {t('send')}
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <LanguageSelect />
-                </Grid>
-              </Grid>
-            </form>
+              </form>
+            </Box>
           </Paper>
         </OverlayLoadingContainer>
       </Box>

@@ -65,7 +65,7 @@ const Notifications: React.FC<NotificationsProps> = props => {
               )}
               listStyle={{ width: 300, maxHeight: 400 }}
               onFetchMore={props.onFetchMore}
-              onRedirect={props.onClose}
+              onRedirect={props.onRead}
             />
           )}
         </OverlayLoadingContainer>

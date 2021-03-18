@@ -208,11 +208,11 @@ class Group implements IGroup
     public function getClassParents(): array
     {
         $classes = [];
-        $this->users->map(function (User $e) use ($classes) {
-            if ($e->getClassGroup()) {
-                $classes[$e->getClassGroup()->getId()] = $e->getClassGroup();
+        foreach ($this->users as $user) {
+            if ($user->getClassGroup()) {
+                $classes[$user->getClassGroup()->getId()] = $user->getClassGroup();
             }
-        });
+        }
         return $classes;
     }
 

@@ -20,7 +20,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = props => {
   const classes = useStyles();
 
   return (
-    <Box display="flex" pb={2}>
+    <Box display="flex" pb={2} pl={1} pt={1}>
       <Avatar className={classes.avatar} variant="rounded">
         {getInitials(props.firstname || '', props.lastname || '')}
       </Avatar>

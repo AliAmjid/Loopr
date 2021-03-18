@@ -9,15 +9,19 @@ use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
 use App\Entity\Group;
 use App\Entity\IGroup;
 use App\Entity\User;
+use App\Error\ClientError;
+use App\Error\ClientErrorType;
 use App\Helper\IriHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 
 class ModifyUsersInGroupController extends AbstractController implements MutationResolverInterface
 {
     private IriConverterInterface $iriConvertor;
 
     public function __construct(
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        private Security $security
     ) {
         $this->iriConvertor = $iriConverter;
     }
@@ -28,6 +32,10 @@ class ModifyUsersInGroupController extends AbstractController implements Mutatio
      */
     public function __invoke($item, array $context): ?object
     {
+        if (!$this->security->isGranted('GROUP_EDIT')) {
+            throw new ClientError(ClientErrorType::ACCESS_DENIED);
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $args = $context['args']['input'];

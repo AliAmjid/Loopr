@@ -11,7 +11,6 @@ export interface GeneralInformationProps {
   user: User;
   rolesLookup: Record<string, string>;
   onChange: (values: OnChangeValues) => Promise<boolean>;
-  onArchive: (archive: boolean) => void;
 }
 
 export interface GeneralInformationIndexProps {

@@ -17,6 +17,7 @@
         "nette/utils": "^3.1",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sendgrid/sendgrid": "^7.8",
+        "sensio/framework-extra-bundle": "^6.1",
         "softonic/graphql-client": "^1.2",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
@@ -37,6 +37,19 @@ const PointSystemIndex: React.FC = () => {
   });
 
   const [percentsToMarkOpen, setPercentsToMarkOpen] = useState(false);
+
+  useEffect(() => {
+    if (
+      subjectData?.getCurrentHalfYearSchoolPeriods &&
+      selectedSchoolPeriods.length === 0
+    ) {
+      setSelectedSchoolPeriods(
+        subjectData?.getCurrentHalfYearSchoolPeriods
+          ?.filter(sp => sp?.id)
+          .map(sp => sp!.id),
+      );
+    }
+  }, [selectedSchoolPeriods, subjectData?.getCurrentHalfYearSchoolPeriods]);
 
   const exams: Exams = [];
 

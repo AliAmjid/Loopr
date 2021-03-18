@@ -1,11 +1,5 @@
 {
   "tableTitle": "New users",
-  "upload": "Add",
-  "finish": "Finish",
-  "firstName": "First name",
-  "lastName": "Last name",
-  "email": "Email",
-  "role": "Role",
   "success": "Users added successfully",
   "error": "Failed to add user"
 }

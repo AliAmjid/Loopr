@@ -11,6 +11,15 @@ const PROFILE_USER_QUERY = gql`
         id
         name
       }
+      privateData {
+        defaultPercentToMark {
+          id
+          one
+          two
+          three
+          four
+        }
+      }
     }
   }
 `;

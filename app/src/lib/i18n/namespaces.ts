@@ -53,6 +53,7 @@ export default {
     EditableListItem: 'C_EditableListItem',
     EditSubject: 'C_EditSubject',
     Notifications: 'C_Notifications',
+    PercentsToMark: 'C_PercentsToMark',
   },
   other: {
     pages: 'O_pages',

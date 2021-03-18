@@ -52,6 +52,7 @@ const Drawer: React.FC<DrawerProps> = props => {
           <Toolbar className={classes.logoToolbar}>
             <SVGLogo className={classes.logo} height="auto" />
           </Toolbar>
+
           <Divider />
           <Navigation user={props.user} />
         </DrawerPrefab>
@@ -63,9 +64,6 @@ const Drawer: React.FC<DrawerProps> = props => {
           onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
         >
-          <Toolbar>
-            <SVGLogo height="auto" />
-          </Toolbar>
           <Divider />
           <Navigation user={props.user} />
         </SwipeableDrawer>

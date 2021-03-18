@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   AppBar as AppBarPrefab,
+  Box,
   fade,
   Grid,
   Hidden,
@@ -126,7 +127,9 @@ const AppBar: React.FC<AppBarProps> = props => {
               onResetFetched={props.onResetFetchedMoreNotifications}
             />
             <LogOut onLogOut={props.onLogOut} />
-            <User user={props.user} />
+            <Box pl={2}>
+              <User user={props.user} />
+            </Box>
           </Grid>
         </Grid>
       </Toolbar>

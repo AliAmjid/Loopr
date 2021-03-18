@@ -232,6 +232,7 @@ const MaterialTable = <RowD extends {}>(
             pageSizeOptions,
             exportAllData: true,
             grouping: groupingActive,
+            sorting: false,
             ...props.options,
             exportButton: props.options?.exportButton && !groupingActive,
             actionsCellStyle: { color: theme.palette.common.black },

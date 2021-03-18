@@ -1,5 +1,7 @@
 {
   "success": "Role changed successfully",
-  "error": "Failed to change role",
-  "name": "Name"
+  "deleteSuccess": "Role deleted successfully",
+  "name": "Name",
+  "deleteTitle": "Are you sure you want to delete the role?",
+  "irreversibleAction": "This operation is irreversible"
 }

@@ -10,6 +10,11 @@ export type User =
         name: string;
       };
       archivedAt?: string | null;
+      classGroup?: {
+        id: string;
+        year: number;
+        section: string;
+      } | null;
     }
   | null
   | undefined;

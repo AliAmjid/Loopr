@@ -1,0 +1,10 @@
+{
+  "evaluation": "Evaluation",
+  "noSubjects": "You do not teach any subjects",
+  "noArchivedSubjects": "You have no archived items",
+  "changeColorTitle": "Change the color of the subject",
+  "showArchived": "View archived subjects",
+  "snackbars": {
+    "updateColor": "Color of the subject successfully edited"
+  }
+}

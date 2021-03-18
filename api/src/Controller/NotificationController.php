@@ -12,12 +12,23 @@ use App\Error\ClientErrorType;
 use App\Helper\IriHelper;
 use App\Repository\NotificationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 
 class NotificationController extends AbstractController implements MutationResolverInterface
 {
 
+    public function __construct(
+        private Security $security
+    )
+    {
+    }
+
     public function __invoke($item, array $context)
     {
+        if (!$this->security->isGranted('USER_LOGGED')) {
+            throw new ClientError(ClientErrorType::ACCESS_DENIED);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $args = $context['args'] ? $context['args']['input'] : [];
         /** @var User $user */

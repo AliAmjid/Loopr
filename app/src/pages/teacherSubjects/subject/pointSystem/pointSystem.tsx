@@ -184,9 +184,6 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                         {`${schoolPeriod.quarter}. ${schoolPeriod.schoolYear}`}
                       </MenuItem>
                     ))}
-                    {props.selectedSchoolPeriods.length === 0 && (
-                      <MenuItem value="all">{t('allSchoolPeriods')}</MenuItem>
-                    )}
                   </Select>
                 </FormControl>
               </Box>
@@ -353,7 +350,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
 
                       {student.exams.map(exam => {
                         return (
-                          <>
+                          <React.Fragment key={exam.id}>
                             <TableCell
                               align="left"
                               className={backgroundColor}
@@ -377,7 +374,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
                                 {exam.percents}
                               </Box>
                             </TableCell>
-                          </>
+                          </React.Fragment>
                         );
                       })}
                       <TableCell className={`${backgroundColor}`} />

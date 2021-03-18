@@ -20,14 +20,17 @@ import {
   LoginGetTokenQuery,
   LoginGetTokenQueryVariables,
   LoginMeUserQuery,
+  LoginPingQuery,
 } from 'types/graphql';
 
 import LOGIN_GET_TOKEN_QUERY from './queries/getToken';
 import LOGIN_ME_USER_QUERY from './queries/meUser';
+import LOGIN_PING_QUERY from './queries/ping';
 import Login from './Login';
 import loginTour from './tour';
 
 const LoginIndex: React.FC = () => {
+  useQuery<LoginPingQuery>(LOGIN_PING_QUERY);
   const [
     getToken,
     { data: getTokenData, loading: getTokenLoading },

@@ -10,6 +10,7 @@ import namespaces from 'lib/i18n/namespaces';
 
 import OverlayLoading from 'components/OverlayLoading';
 import OverlayLoadingContainer from 'components/OverlayLoading/OverlayLoadingContainer';
+import ThickDivider from 'components/thickDivider';
 
 import { SummaryProps } from './types';
 
@@ -22,13 +23,19 @@ const Summary: React.FC<SummaryProps> = props => {
       <Typography variant="h3">
         {props.classGroup ? t('classGroup') : t('group')}
       </Typography>
-      <Typography>
-        {`${props.group?.year || ''} ${props.group?.section}`}
-      </Typography>
+      <ThickDivider />
+      <Box pt={2} pb={4} pl={2}>
+        <Typography variant="h6">
+          {`${props.group?.year || ''} ${props.group?.section}`}
+        </Typography>
+      </Box>
       <Typography variant="h3">{t('teacher')}</Typography>
-      <Typography>
-        {`${props.teacher?.firstname || ''} ${props.teacher?.lastname}`}
-      </Typography>
+      <ThickDivider />
+      <Box pt={2} pl={2} pb={2}>
+        <Typography variant="h6">
+          {`${props.teacher?.firstname || ''} ${props.teacher?.lastname}`}
+        </Typography>
+      </Box>
       <Box display="flex" justifyContent="flex-end">
         <Box pr={2}>
           <Link href={routes.subjects.index} passHref>

@@ -10,19 +10,25 @@ use App\Error\ClientError;
 use App\Error\ClientErrorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 
 class ChangeUserPasswordController extends AbstractController implements MutationResolverInterface {
 
     private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        private Security $security
     ) {
         $this->passwordEncoder = $passwordEncoder;
     }
 
     public function __invoke($item, array $context)
     {
+        if (!$this->security->isGranted('USER_LOGGED')) {
+            throw new ClientError(ClientErrorType::ACCESS_DENIED);
+        }
+
         /** @var User $user */
         $user = $this->getUser();
         $args = $context['args']['input'];

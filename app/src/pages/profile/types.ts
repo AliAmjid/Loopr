@@ -7,6 +7,15 @@ export interface User {
     id: string;
     name: string;
   };
+  privateData?: {
+    defaultPercentToMark?: {
+      id: string;
+      one: number;
+      two: number;
+      three: number;
+      four: number;
+    };
+  };
 }
 
 export interface ProfileProps {

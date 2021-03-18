@@ -24,6 +24,7 @@ class PointSystemController extends AbstractController implements MutationResolv
 
     public function __invoke($item, array $context)
     {
+
         $points = $context['args']['input']['points'];
         $em = $this->getDoctrine()->getManager();
         $pointRepository = $this->getDoctrine()->getRepository(Point::class);

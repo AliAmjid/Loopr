@@ -2,5 +2,6 @@
   "csv": "CSV upload",
   "select": "Column assignment",
   "upload": "Users upload",
-  "csvDropzone": "To upload a file, click or drag the file to the bounding box"
+  "csvDropzone": "To upload a file, click or drag the file to the bounding box",
+  "notCSV": "The file is not CSV"
 }

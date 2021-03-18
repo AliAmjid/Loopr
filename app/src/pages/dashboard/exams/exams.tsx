@@ -33,7 +33,7 @@ const Exams: React.FC<ExamsProps> = props => {
     <Paper className={classes.paper}>
       <OverlayLoadingContainer>
         <OverlayLoading loading={props.loading} />
-        <Box pb={2}>
+        <Box pb={2} pl={2} pt={1}>
           <Typography variant="h6">{t('latestEvaluation')}</Typography>
         </Box>
         <Table size="small">
