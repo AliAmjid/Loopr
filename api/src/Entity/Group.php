@@ -204,16 +204,17 @@ class Group implements IGroup
 
     /**
      * @Groups({"read", "exposed"})
+     * @return string[]
      */
-    public function getClassParents(): array
+    public function getClassParentsNames(): array
     {
         $classes = [];
         foreach ($this->users as $user) {
             if ($user->getClassGroup()) {
-                $classes[$user->getClassGroup()->getId()] = $user->getClassGroup();
+                $classes[$user->getClassGroup()->getId()] = $user->getClassGroup()->getYear() .' - ' . $user->getClassGroup()->getSection();
             }
         }
-        return $classes;
+        return array_values($classes);
     }
 
 }
