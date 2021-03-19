@@ -40,16 +40,14 @@ const LoginIndex: React.FC = () => {
       fetchPolicy: 'no-cache',
     },
   );
-  const { data: meUserData } = useQuery<LoginMeUserQuery>(LOGIN_ME_USER_QUERY, {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'ignore',
-  });
-  const { data: meUserDataCached } = useQuery<LoginMeUserQuery>(
+  const { data: meUserData, error: meUserError } = useQuery<LoginMeUserQuery>(
     LOGIN_ME_USER_QUERY,
     {
-      fetchPolicy: 'cache-first',
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
     },
   );
+
   const [automaticallyLogged, setAutomaticallyLogged] = useState(false);
   const router = useRouter();
   const tour = useTour();
@@ -79,11 +77,7 @@ const LoginIndex: React.FC = () => {
     }
   };
 
-  if (meUserData) {
-    if (!automaticallyLogged) {
-      automaticallyLogIn();
-    }
-  } else if (meUserDataCached) {
+  if (meUserData && !meUserError) {
     automaticallyLogIn();
   }
 
