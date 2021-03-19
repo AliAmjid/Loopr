@@ -26,29 +26,6 @@ final class Version20210104160738 extends AbstractMigration implements Container
         return '';
     }
 
-    public function preUp(Schema $schema): void
-    {
-        /** @var EntityManager $em */
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        /** @var UserPrivateData $privateData */
-        foreach ($em->getRepository(UserPrivateData::class)->findAll() as $privateData) {
-            $privateData->setDefaultPercentToMark($this->createPercentsToMark());
-            $em->persist($privateData);
-        }
-        /** @var Subject $subject */
-        foreach ($em->getRepository(Subject::class)->findAll() as $subject) {
-            $subject->setPercentsToMarkConvert($this->createPercentsToMark());
-            $em->persist($subject);
-        }
-        $em->flush();
-    }
-
-    private function createPercentsToMark() {
-        $p = new PercentToMarkConvert();
-        $p->setId((string)Uuid::v4());
-        return $p;
-    }
-
 
     public function up(Schema $schema) : void
     {
