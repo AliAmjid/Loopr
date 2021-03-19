@@ -72,6 +72,12 @@ const SubjectListIndex: React.FC = () => {
         ...subject?.node,
       });
   });
+  subjects.sort((s1, s2) => {
+    if (s1.name > s2.name) return 1;
+    if (s1.name < s2.name) return -1;
+
+    return 0;
+  });
 
   const subjectAddHandler = (args: AddSubjectArgs): Promise<boolean> => {
     return addSubjectType({ variables: { input: args } })

@@ -133,7 +133,7 @@ const PointSystem: React.FC<PointSystemProps> = props => {
   useEffect(() => {
     if (process.browser) {
       setTimeout(() => {
-        tableContainerRef.current.scrollTo(1000000, 0);
+        tableContainerRef.current?.scrollTo(1000000, 0);
       }, 200);
 
       const toolbarHeight = 64;

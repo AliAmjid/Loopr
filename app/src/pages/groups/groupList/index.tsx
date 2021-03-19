@@ -150,6 +150,12 @@ const GroupListIndex: React.FC = () => {
       });
     }
   });
+  groups.sort((g1, g2) => {
+    if (g1.section > g2.section) return 1;
+    if (g1.section < g2.section) return -1;
+
+    return 0;
+  });
 
   return (
     <GroupList

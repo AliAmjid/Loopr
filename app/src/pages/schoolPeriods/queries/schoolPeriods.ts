@@ -16,6 +16,7 @@ const SCHOOL_PERIODS_SCHOOL_PERIODS_QUERY = gql`
       after: $after
       quarter: $quarter
       schoolYear: $schoolYear
+      order: { schoolYear: "DESC", quarter: "DESC" }
     ) {
       edges {
         node {

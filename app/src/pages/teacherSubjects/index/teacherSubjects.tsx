@@ -86,8 +86,10 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
           <Grid container spacing={2}>
             {subjectType.map(subject => {
               let name = '';
+              let classGroups: string | undefined;
               if (subject.group) {
                 name = subject.group.section;
+                classGroups = subject.group.classParentsNames.join(', ');
               }
               if (subject.classGroup) {
                 name = `${subject.classGroup.year} ${subject.classGroup.section}`;
@@ -113,9 +115,11 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                       <CardContent>
                         <Typography variant="h2">{name}</Typography>
 
-                        <Typography variant="subtitle1">
-                          Třídy: až to Ali dodělá
-                        </Typography>
+                        {classGroups && (
+                          <Typography variant="subtitle1">
+                            {`Třídy: ${classGroups}`}
+                          </Typography>
+                        )}
                         {props.showArchived && (
                           <Typography variant="subtitle1">
                             {`Datum archivace: ${formatDateToDay(

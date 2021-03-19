@@ -6,6 +6,7 @@ export interface Subject {
   group?: {
     id: string;
     section: string;
+    classParentsNames: string[];
   } | null;
   classGroup?: {
     id: string;

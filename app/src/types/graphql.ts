@@ -2174,6 +2174,7 @@ export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_g
   __typename: "Group";
   id: string;
   section: string;
+  classParentsNames: any;
 }
 
 export interface TeacherSubjectsSubjectsQuery_meUser_taughtSubjects_edges_node_classGroup {

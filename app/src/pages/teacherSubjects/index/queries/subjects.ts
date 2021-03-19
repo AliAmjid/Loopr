@@ -13,7 +13,7 @@ const TEACHER_SUBJECTS_SUBJECTS_QUERY = gql`
             group {
               id
               section
-              classParents
+              classParentsNames
             }
             classGroup {
               id

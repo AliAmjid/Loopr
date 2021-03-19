@@ -144,6 +144,14 @@ const ClassGroupListIndex: React.FC = () => {
       }
     },
   );
+  classGroups.sort((g1, g2) => {
+    if (g1.year > g2.year) return 1;
+    if (g1.year < g2.year) return -1;
+    if (g1.section > g2.section) return 1;
+    if (g1.section < g2.section) return -1;
+
+    return 0;
+  });
 
   return (
     <ClassGroupList

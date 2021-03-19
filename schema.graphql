@@ -246,7 +246,7 @@ type Group implements Node {
     createdBy: User
     createdAt: String!
     archivedAt: String
-    classParents: Iterable!
+    classParentsNames: Iterable!
     _id: String!
 }
 
