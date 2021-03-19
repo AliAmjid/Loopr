@@ -77,7 +77,7 @@ const LoginIndex: React.FC = () => {
     }
   };
 
-  if (meUserData && !meUserError) {
+  if (meUserData?.meUser && !meUserError) {
     automaticallyLogIn();
   }
 
