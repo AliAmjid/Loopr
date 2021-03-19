@@ -5,8 +5,7 @@ import { useRouter } from 'next/router';
 
 import routes from 'config/routes';
 
-import accessContext from 'lib/apollo/accessContext';
-import { FAILED_TO_FETCH } from 'lib/apollo/recognizeError/errors';
+import accessContext, { OFFLINE } from 'lib/apollo/accessContext';
 import withApollo from 'lib/apollo/withApollo';
 
 import BadGatewayError from 'pages/errors/502/502';
@@ -22,7 +21,7 @@ const BadGatewayErrorIndex: React.FC = () => {
 
   const [redirect, setRedirect] = useState(false);
 
-  if (access.value !== FAILED_TO_FETCH) {
+  if (access.value !== OFFLINE) {
     setTimeout(() => {
       setRedirect(true);
     }, 0);
