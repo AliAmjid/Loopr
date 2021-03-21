@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\SchoolPeriod;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class SchoolPeriodRepository extends ServiceEntityRepository
@@ -60,12 +61,12 @@ class SchoolPeriodRepository extends ServiceEntityRepository
                 ->createQueryBuilder()
                 ->select('sp')
                 ->from(SchoolPeriod::class, 'sp')
-                ->where('sp.quarter = :quarter AND sp.year = :year')
+                ->where('sp.quarter = :quarter AND sp.schoolYear = :year')
                 ->setParameter('quarter', $quarter)
                 ->setParameter('year', $year)
                 ->getQuery()
                 ->getSingleResult();
-        } catch (\Throwable $e) {
+        } catch (NoResultException $e) {
             return null;
         }
     }
