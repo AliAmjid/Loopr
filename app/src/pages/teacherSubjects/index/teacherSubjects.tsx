@@ -115,13 +115,12 @@ const TeacherSubjects: React.FC<TeacherSubjectsProps> = props => {
                       <CardContent>
                         <Typography variant="h2">{name}</Typography>
 
-                        {classGroups && (
-                          <Typography variant="subtitle1">
-                            {`Třídy: ${classGroups}`}
-                          </Typography>
-                        )}
+                        <Typography>
+                          {classGroups ? `Třídy: ${classGroups}` : ' '}
+                        </Typography>
+
                         {props.showArchived && (
-                          <Typography variant="subtitle1">
+                          <Typography>
                             {`Datum archivace: ${formatDateToDay(
                               `${subject.archivedAt}`,
                             )}`}

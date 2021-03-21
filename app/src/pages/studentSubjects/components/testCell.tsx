@@ -9,7 +9,7 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    minWidth: theme.spacing(14),
+    width: theme.spacing(18),
     borderRight: '1px solid #E0E0E0',
     padding: theme.spacing(1),
     paddingTop: theme.spacing(1.25),
@@ -24,7 +24,12 @@ const TestCell: React.FC<TableCellProps & { backgroundColor?: string }> = ({
   const classes = useStyles();
 
   return (
-    <TableCell className={classes.root} style={{ backgroundColor }} {...rest}>
+    <TableCell
+      padding="none"
+      className={classes.root}
+      style={{ backgroundColor }}
+      {...rest}
+    >
       {children}
     </TableCell>
   );
