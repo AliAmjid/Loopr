@@ -8,7 +8,6 @@ use ApiPlatform\Core\GraphQl\Resolver\QueryCollectionResolverInterface;
 use App\Entity\SchoolPeriod;
 use App\Error\ClientError;
 use App\Error\ClientErrorType;
-use App\Helper\IriHelper;
 use App\Repository\SchoolPeriodRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

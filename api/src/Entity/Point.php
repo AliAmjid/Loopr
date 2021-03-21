@@ -107,7 +107,7 @@ class Point
     public function getBetterThan(): int
     {
         return $this->getPointSystem()->getPointsOnlyWritten()->filter(function (Point $point) {
-            return ($point->getId() !== $this->id && $point->getPoints() <= $point->points);
+            return ($point->getId() !== $this->id && $point->getPoints() <= $this->points);
         })->count();
     }
 
@@ -118,7 +118,7 @@ class Point
     public function getWorstThan(): int
     {
         return $this->getPointSystem()->getPointsOnlyWritten()->filter(function (Point $point) {
-            return ($point->getId() !== $this->id && $point->getPoints() > $point->points);
+            return ($point->getId() !== $this->id && $point->getPoints() > $this->points);
         })->count();
     }
 
