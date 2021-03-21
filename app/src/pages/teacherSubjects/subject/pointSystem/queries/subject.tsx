@@ -64,7 +64,7 @@ const TEACHER_SUBJECTS_SUBJECT_POINT_SYSTEM_SUBJECT_QUERY = gql`
         four
       }
     }
-    schoolPeriods {
+    schoolPeriods(order: { schoolYear: "DESC", quarter: "DESC" }) {
       edges {
         node {
           id
