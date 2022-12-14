@@ -34,7 +34,7 @@
     "babel-plugin-react-remove-properties": "^0.3.0",
     "chalk": "^4.1.0",
     "dayjs": "^1.10.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "graphql": "^15.0.0",
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.2.1",
